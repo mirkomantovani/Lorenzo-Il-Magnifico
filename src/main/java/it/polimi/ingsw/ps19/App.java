@@ -1,8 +1,8 @@
-package it.polimi.ingsw.pcXX;
+package it.polimi.ingsw.ps19;
 
 /**
  * Hello world!
- *
+ *commit1
  */
 public class App 
 {
