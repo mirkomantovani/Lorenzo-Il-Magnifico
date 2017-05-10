@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19;
 import java.util.Random;
 
 public enum Dice {
-	
+	//could return an ActionValue instead of an int?
 	ORANGE_DICE(Color.ORANGE), BLACK_DICE(Color.BLACK), WHITE_DICE(Color.WHITE);
 	
 	private Color color;   //Vediamo come vogliamo modellare il colore, è un attributo
@@ -24,7 +24,7 @@ public enum Dice {
 		return this.displayedFace;
 	}
 	
-	public int getRandomFaceValue(){
+	public int getRandomFaceValue(){   
 		this.roll();
 		return this.getUpperFaceValue();
 	}
