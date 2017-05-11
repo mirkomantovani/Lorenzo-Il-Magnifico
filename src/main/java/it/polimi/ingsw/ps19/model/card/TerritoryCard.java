@@ -1,4 +1,7 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.card;
+
+import it.polimi.ingsw.ps19.Effect;
+import it.polimi.ingsw.ps19.Period;
 
 public class TerritoryCard extends DevelopmentCard {
     //this class should have something like HarvestEffect and not a permanentEffect, waiting for the Effect Generalization modeling

@@ -5,6 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.model.card.CardConstants;
+import it.polimi.ingsw.ps19.model.card.CharacterCard;
+import it.polimi.ingsw.ps19.model.card.TerritoryCard;
+import it.polimi.ingsw.ps19.model.card.VentureCard;
+
 public class DeckCreator {
 
 	private BufferedReader bufferedReader;
