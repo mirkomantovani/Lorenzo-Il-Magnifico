@@ -4,8 +4,25 @@ import it.polimi.ingsw.ps19.Effect;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.ResourceCost;
 
+/**
+ * The Class VentureCard.
+ */
+/**
+ * @author Mirko
+ *
+ */
 public class VentureCard extends DevelopmentCard {
 
+	/**
+	 * Instantiates a new venture card.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param period the period
+	 * @param cost the cost
+	 * @param immediateEffect the immediate effect
+	 * @param permanentEffect the permanent effect
+	 */
 	public VentureCard(int id, String name, Period period, ResourceCost cost, Effect immediateEffect,
 			Effect permanentEffect) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="it.polimi.ingsw.ps19.FamilyMember" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/FamilyMember.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="198" x="4393" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="it.polimi.ingsw.ps19.model.card.DevelopmentCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/DevelopmentCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="276" width="467" x="2976" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="it.polimi.ingsw.ps19.Wood" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Wood.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="4723" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="it.polimi.ingsw.ps19.model.card.CardConstants" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CardConstants.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="136" width="286" x="1681" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="it.polimi.ingsw.ps19.Color" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Color.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="171" x="4512" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="it.polimi.ingsw.ps19.Effect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Effect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="2134" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="7" language="java" name="it.polimi.ingsw.ps19.Dice" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Dice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="212" x="4631" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="8" language="java" name="it.polimi.ingsw.ps19.model.deck.DeckCreator" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/DeckCreator.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="216" width="398" x="2007" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="it.polimi.ingsw.ps19.ResourceCost" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/ResourceCost.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="148" x="2304" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="it.polimi.ingsw.ps19.model.card.CharacterCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CharacterCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="96" width="444" x="2492" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="it.polimi.ingsw.ps19.Servant" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Servant.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="4893" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="it.polimi.ingsw.ps19.Resource" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Resource.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="159" x="5233" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="13" language="java" name="it.polimi.ingsw.ps19.model.card" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="299" x="2445" y="1222"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="14" language="java" name="it.polimi.ingsw.ps19.Coin" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Coin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="5063" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="it.polimi.ingsw.ps19.model.card.VentureCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/VentureCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="96" width="428" x="2976" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="16" language="java" name="it.polimi.ingsw.ps19.Period" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Period.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="171" x="3444" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="17" language="java" name="it.polimi.ingsw.ps19.model.card.BuildingCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/BuildingCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="136" width="431" x="3655" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="it.polimi.ingsw.ps19.MilitaryPoint" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/MilitaryPoint.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="137" x="5233" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="it.polimi.ingsw.ps19.Stone" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Stone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="5410" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="it.polimi.ingsw.ps19.model.card.TerritoryCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/TerritoryCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="136" width="346" x="4126" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="it.polimi.ingsw.ps19.VictoryPoint" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/VictoryPoint.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="136" x="5580" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="it.polimi.ingsw.ps19.App" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/App.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="152" x="2784" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="it.polimi.ingsw.ps19.FaithPoint" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/FaithPoint.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="130" x="5756" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="24">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="26">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="27" name="permanentEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="31" name="color">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="34" name="cost">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="37">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="38" name="color">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="42">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="43" name="immediateEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="46">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="47" name="period">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
