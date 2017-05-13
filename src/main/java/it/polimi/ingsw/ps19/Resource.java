@@ -1,22 +1,22 @@
 package it.polimi.ingsw.ps19;
 
-public class Resource {
+public abstract class Resource {
 	
 	private int amount;
 	
-	private void setAmount(int amount){
+	public void setAmount(int amount){
 	
 		this.amount = amount;
 		
 	}
 
-	private int getAmount(){
+	public int getAmount(){
 		
 		return amount;
 		
 	}
 	
-	private boolean isZero(){
+	public boolean isZero(){
 		
 		return(amount==0);
 		
@@ -27,6 +27,20 @@ public class Resource {
 		this.amount = amount;
 		
 	}
+	
+	public void add(int amount){
+		
+		this.amount = this.amount + amount;
+		
+	}
+	
+	public void sub(int amount){
+		
+		this.amount = this.amount - amount;
+		
+	}
+	
+	
 	
 	
 	
