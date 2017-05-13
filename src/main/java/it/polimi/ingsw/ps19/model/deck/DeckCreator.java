@@ -111,7 +111,8 @@ public class DeckCreator {
 		lineRead = bufferedReader.readLine();
 		
 		while (lineRead!=null) {
-
+			
+			cardId++;
 		}
 		return deck;
 	}
