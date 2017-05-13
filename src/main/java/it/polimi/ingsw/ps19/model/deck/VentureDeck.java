@@ -6,8 +6,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 /**
  * The Class VentureDeck.
- */ 
-/**
+
  * @author Mirko
  *
  */

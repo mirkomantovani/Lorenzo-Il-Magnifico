@@ -15,6 +15,7 @@ public class ResourceChest {
 	Wood woods;
 
 	Stone stones;
+	
 
 	public ResourceChest() {
 
@@ -34,7 +35,7 @@ public class ResourceChest {
 
 	}
 
-	public ResourceChest(int vp, int mp, int fp, int coin, int serv, int wood, int stone) {
+	public ResourceChest(int coin, int wood, int stone, int serv, int fp, int vp, int mp) {
 
 		victoryPoint = new VictoryPoint(vp);
 
@@ -49,6 +50,7 @@ public class ResourceChest {
 		woods = new Wood(wood);
 
 		stones = new Stone(stone);
+		
 	}
 
 	public VictoryPoint getVictoryPoint() {

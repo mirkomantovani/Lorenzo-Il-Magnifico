@@ -67,5 +67,7 @@ public class ResourcesExchangeEffect extends Effect {
 	public void applyEffect() {
 		applyEffect(normalExchangeEffect);
 	}
+	
+//	private static Resource()
 
 }
