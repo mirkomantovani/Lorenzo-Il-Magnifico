@@ -42,6 +42,9 @@ public class DeckCreator {
 		bufferedReader = new BufferedReader(new FileReader(filePath));
 		lineRead = bufferedReader.readLine();    	//The lineRead variable stores the first line of a card and use it to check the while condition
 		while (lineRead!=null) {
+			lineRead = bufferedReader.readLine();  
+			lineRead = bufferedReader.readLine();  
+			lineRead = bufferedReader.readLine();  
 			
 		}
 		return deck;
