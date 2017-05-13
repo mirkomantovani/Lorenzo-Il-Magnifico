@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.ResourceCost;
 
 /**
- * @author Mirko
+ * @author Mirko and Jimmy
  *
  */
 public class DevelopmentCard {
@@ -24,6 +24,7 @@ public class DevelopmentCard {
 	 * @param immediateEffect
 	 * @param permanentEffect
 	 */
+	
 	public DevelopmentCard(int id,String name,Period period,ResourceCost cost,Effect immediateEffect,Effect permanentEffect){
 		this.id=id;
 		this.name=name;

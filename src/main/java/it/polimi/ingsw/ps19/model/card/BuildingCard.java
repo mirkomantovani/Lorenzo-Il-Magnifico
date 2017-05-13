@@ -25,10 +25,11 @@ public class BuildingCard extends DevelopmentCard {
 	 * @param immediateEffect the immediate effect
 	 * @param permanentEffect the permanent effect
 	 */
+	
 	public BuildingCard(int id, String name, Period period, ResourceCost cost, Effect immediateEffect,
-			Effect permanentEffect) {
+			Effect permanentEffect, int productionActivationCost) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);
-		this.productionActivationCost=productionActivationCost;
+		this.productionActivationCost = productionActivationCost;
 	}
 
 	/**

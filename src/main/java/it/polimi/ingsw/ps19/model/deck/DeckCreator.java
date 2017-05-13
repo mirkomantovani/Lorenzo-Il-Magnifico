@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
-import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
@@ -16,7 +15,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
  * The Class DeckCreator.
  */
 /**
- * @author Mirko
+ * @author Mirko, Jimmy, Matteo
  *
  */
 public class DeckCreator {
@@ -41,12 +40,9 @@ public class DeckCreator {
 		BuildingCard[] deck = new BuildingCard[deckLength];
 
 		bufferedReader = new BufferedReader(new FileReader(filePath));
+		lineRead = bufferedReader.readLine();    	//The lineRead variable stores the first line of a card and use it to check the while condition
 		while (lineRead!=null) {
-			for (int line = 0; line < CardConstants.BUILDINGCARD_FILE_ENTRIES; line++) {
-				//code to instance a card
-			}
-			lineRead=bufferedReader.readLine();
-			cardId++;
+			
 		}
 		return deck;
 	}
@@ -67,12 +63,11 @@ public class DeckCreator {
 		TerritoryCard[] deck = new TerritoryCard[deckLength];
 
 		bufferedReader = new BufferedReader(new FileReader(filePath));
+		lineRead = bufferedReader.readLine();
+		
+		
 		while (lineRead!=null) {
-			for (int line = 0; line < CardConstants.BUILDINGCARD_FILE_ENTRIES; line++) {
-				//code to instance a card
-			}
-			lineRead=bufferedReader.readLine();
-			cardId++;
+
 		}
 		return deck;
 	}
@@ -91,12 +86,10 @@ public class DeckCreator {
 		VentureCard[] deck = new VentureCard[deckLength];
 
 		bufferedReader = new BufferedReader(new FileReader(filePath));
+		lineRead = bufferedReader.readLine();
+		
 		while (lineRead!=null) {
-			for (int line = 0; line < CardConstants.BUILDINGCARD_FILE_ENTRIES; line++) {
-				//code to instance a card
-			}
-			lineRead=bufferedReader.readLine();
-			cardId++;
+			
 		}
 		return deck;
 	}
@@ -115,12 +108,10 @@ public class DeckCreator {
 		CharacterCard[] deck = new CharacterCard[deckLength];
 
 		bufferedReader = new BufferedReader(new FileReader(filePath));
+		lineRead = bufferedReader.readLine();
+		
 		while (lineRead!=null) {
-			for (int line = 0; line < CardConstants.BUILDINGCARD_FILE_ENTRIES; line++) {
-				//code to instance a card
-			}
-			lineRead=bufferedReader.readLine();
-			cardId++;
+
 		}
 		return deck;
 	}
