@@ -6,11 +6,11 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
 
 /**
  * The Class BuildingDeck.
- */
-/**
- * @author Mirko
- *
- */
+
+*
+* @author Mirko
+*
+*/
 public class BuildingDeck extends Deck<BuildingCard> {
 
 	/** The cards. */

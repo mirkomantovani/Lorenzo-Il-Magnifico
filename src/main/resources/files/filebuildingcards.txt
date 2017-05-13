@@ -36,7 +36,6 @@ Zecca
 0
 0
 0
-#
 26
 Esattoria
 1
@@ -75,7 +74,6 @@ Esattoria
 0
 0
 0
-#
 27
 Arco di Trionfo
 1
@@ -114,7 +112,6 @@ Arco di Trionfo
 0
 0
 0
-#
 28
 Teatro
 1
@@ -153,7 +150,6 @@ Teatro
 0
 0
 0
-#
 29
 Falegnameria
 1
@@ -192,7 +188,6 @@ Falegnameria
 1
 0
 0
-#
 30
 Tagliapietre
 1
@@ -231,7 +226,6 @@ Tagliapietre
 1
 0
 0
-#
 31
 Cappella
 1
@@ -270,7 +264,6 @@ Cappella
 0
 0
 0
-#
 32
 Residenza
 1
@@ -309,7 +302,6 @@ Residenza
 0
 0
 0
-#
 33
 Mercato
 2
@@ -348,7 +340,6 @@ Mercato
 0
 0
 0
-#
 34
 Tesoreria
 2
@@ -387,7 +378,6 @@ Tesoreria
 6
 0
 0
-#
 35
 Gilda dei Pittori
 2
@@ -426,7 +416,6 @@ Gilda dei Pittori
 6
 0
 0
-#
 36
 Gilda degli Scultori
 2
@@ -465,7 +454,6 @@ Gilda degli Scultori
 6
 0
 0
-#
 37
 Gilda dei Costruttori
 2
@@ -504,7 +492,6 @@ Gilda dei Costruttori
 0
 0
 0
-#
 38
 Battistero
 2
@@ -543,7 +530,6 @@ Battistero
 0
 0
 0
-#
 39
 Caserma
 2
@@ -582,7 +568,6 @@ Caserma
 0
 0
 0
-#
 40
 Fortezza
 2
@@ -621,7 +606,6 @@ Fortezza
 0
 0
 0
-#
 41
 Banca
 3
@@ -660,7 +644,6 @@ Banca
 0
 0
 0
-#
 42
 Fiera
 3
@@ -699,7 +682,6 @@ Fiera
 0
 0
 0
-#
 43
 Giardino
 3
@@ -738,7 +720,6 @@ Giardino
 0
 0
 0
-#
 44
 Castelletto
 3
@@ -777,7 +758,6 @@ Castelletto
 0
 0
 0
-#
 45
 Palazzo
 3
@@ -816,7 +796,6 @@ Palazzo
 0
 0
 0
-#
 46
 Basilica
 3
@@ -855,7 +834,6 @@ Basilica
 5
 0
 0
-#
 47
 Accademia Militare
 3
@@ -894,7 +872,6 @@ Accademia Militare
 0
 0
 0
-#
 48
 Cattedrale
 3

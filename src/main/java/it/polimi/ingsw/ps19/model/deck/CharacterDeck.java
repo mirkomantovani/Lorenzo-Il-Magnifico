@@ -6,8 +6,8 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
 
 /**
  * The Class CharacterDeck.
- */
-/**
+ 
+ *
  * @author Mirko
  *
  */
