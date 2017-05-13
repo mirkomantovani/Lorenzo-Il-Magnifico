@@ -1,8 +1,9 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.Effect;
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.ResourceCost;
+import it.polimi.ingsw.ps19.ResourceChest;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+
 
 /**
  * The Class VentureCard.
@@ -23,7 +24,7 @@ public class VentureCard extends DevelopmentCard {
 	 * @param immediateEffect the immediate effect
 	 * @param permanentEffect the permanent effect
 	 */
-	public VentureCard(int id, String name, Period period, ResourceCost cost, Effect immediateEffect,
+	public VentureCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
 			Effect permanentEffect) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);
 	}

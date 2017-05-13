@@ -1,28 +1,27 @@
 package it.polimi.ingsw.ps19;
 
+import it.polimi.ingsw.ps19.Dice;
+
 public class FamilyMember {
 	
-	private Color color; 
+	private Dice dice; 
 	
-	private int value; 
+	public FamilyMember(Dice d){
+		
+		this.dice = d;
+	}	
 	
-	private void setValue(int value){
+	public Dice getDice(){
 		
-		this.value = value; 
-		
+		return this.dice;
 	}
 	
-	private int getValue(){
-		
-		return(value);
-	}
 	
-	public FamilyMember(int value, Color color){
-		
-		this.value = value;
-		
-		this.color = color; 
-	}
+	
 	
 
+	
 }
+
+
+

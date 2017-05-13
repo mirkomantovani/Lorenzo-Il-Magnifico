@@ -1,18 +1,18 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.Effect;
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.ResourceCost;
+import it.polimi.ingsw.ps19.ResourceChest;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author Mirko and Jimmy
  *
  */
-public class DevelopmentCard {
+public abstract class DevelopmentCard {
 	 //attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
 	private int id;   
 	private Period period;
-	private ResourceCost cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
+	private ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
 	private String name;
 	private Effect immediateEffect,permanentEffect;
 	
@@ -24,8 +24,8 @@ public class DevelopmentCard {
 	 * @param immediateEffect
 	 * @param permanentEffect
 	 */
-	
-	public DevelopmentCard(int id,String name,Period period,ResourceCost cost,Effect immediateEffect,Effect permanentEffect){
+
+	public DevelopmentCard(int id,String name,Period period,ResourceChest cost,Effect immediateEffect,Effect permanentEffect){
 		this.id=id;
 		this.name=name;
 		this.period=period;
@@ -37,7 +37,7 @@ public class DevelopmentCard {
 	/**
 	 * @return
 	 */
-	public ResourceCost getCost() {
+	public ResourceChest getCost() {
 		return cost;
 	}
 
@@ -47,7 +47,7 @@ public class DevelopmentCard {
 	/**
 	 * @param cost
 	 */
-	public void setCost(ResourceCost cost) {
+	public void setCost(ResourceChest cost) {
 		this.cost = cost;
 	}
 

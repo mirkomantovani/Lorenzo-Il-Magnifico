@@ -1,5 +1,5 @@
 package it.polimi.ingsw.ps19;
 
-public class ResourceCost {
+public class PersonalBonusTile {
 
 }

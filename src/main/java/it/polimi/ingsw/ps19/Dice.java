@@ -4,7 +4,7 @@ import java.util.Random;
 
 public enum Dice {
 	//could return an ActionValue instead of an int?
-	ORANGE_DICE(Color.ORANGE), BLACK_DICE(Color.BLACK), WHITE_DICE(Color.WHITE);
+	ORANGE_DICE(Color.ORANGE), BLACK_DICE(Color.BLACK), WHITE_DICE(Color.WHITE), NEUTRAL_DICE(Color.NEUTRAL);
 	
 	private Color color;   //Vediamo come vogliamo modellare il colore, è un attributo
 						   //o basta il nome? io provo così

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.Effect;
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * The Class TerritoryCard.

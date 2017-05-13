@@ -15,7 +15,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
  * The Class DeckCreator.
  */
 /**
- * @author Mirko, Jimmy, Matteo
+ * @author Matteo, Jimmy, Mirko
  *
  */
 public class DeckCreator {
