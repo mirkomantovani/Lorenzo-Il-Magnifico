@@ -1,14 +1,14 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.Effect;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.ResourceChest;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author Mirko
  *
  */
-public class DevelopmentCard {
+public abstract class DevelopmentCard {
 	 //attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
 	private int id;   
 	private Period period;
