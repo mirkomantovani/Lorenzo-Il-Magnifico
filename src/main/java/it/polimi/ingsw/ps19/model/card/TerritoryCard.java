@@ -12,6 +12,7 @@ public class TerritoryCard extends DevelopmentCard {
     
     /** The harvest activation cost. */
     //this class should have something like HarvestEffect and not a permanentEffect, waiting for the Effect Generalization modeling
+	//solved: the name will we permanentEffect anyway, but the dynamic type of the object passed to it will be HarvestEffect
 	private int harvestActivationCost;
 	
 	/**
@@ -31,10 +32,10 @@ public class TerritoryCard extends DevelopmentCard {
 	}
 
     /**
-     * Can activate harvest with.
+     * Can activate harvest with a certain production value
      *
      * @param harvestValue the harvest value
-     * @return true, if successful
+     * @return true, if the harvest effect of this card can be activated with the given production Value
      */
     public boolean canActivateHarvestWith(int harvestValue){
     	return harvestValue>harvestActivationCost;

@@ -34,10 +34,10 @@ public class BuildingCard extends DevelopmentCard {
 	}
 
 	/**
-	 * Can activate production with.
+	 * Can activate production with a certain production value
 	 *
 	 * @param productionValue the production value
-	 * @return true, if successful
+	 * @return true, if the production effect of this card can be activated with the given production Value
 	 */
 	public boolean canActivateProductionWith(int productionValue){
     	return productionValue>productionActivationCost;
