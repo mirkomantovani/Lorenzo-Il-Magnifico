@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
@@ -8,11 +9,11 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  */
 public class TakeCardEffect extends Effect{
 	
-	private DevelopmentCard cardType;
+	private CardType cardType;
 	
 	private int cardCost;
 	
-	public TakeCardEffect(DevelopmentCard card, int cost){
+	public TakeCardEffect(CardType card, int cost){
 		
 		super();
 		cardType = card;

@@ -6,9 +6,9 @@ package it.polimi.ingsw.ps19;
  */
 public class ResourceChest {
 
-	private VictoryPoint victoryPoint;
-	private MilitaryPoint militaryPoint;
-	private FaithPoint faithPoint;
+	private VictoryPoint victoryPoints;
+	private MilitaryPoint militaryPoints;
+	private FaithPoint faithPoints;
 	private Coin coins;
 	private Servant servants;
 	private Wood woods;
@@ -16,9 +16,9 @@ public class ResourceChest {
 
 	public ResourceChest() {
 
-		victoryPoint = new VictoryPoint(0);
-		militaryPoint = new MilitaryPoint(0);
-		faithPoint = new FaithPoint(0);
+		victoryPoints = new VictoryPoint(0);
+		militaryPoints = new MilitaryPoint(0);
+		faithPoints = new FaithPoint(0);
 		coins = new Coin(0);
 		servants = new Servant(0);
 		woods = new Wood(0);
@@ -28,9 +28,9 @@ public class ResourceChest {
 
 	public ResourceChest(int coin, int wood, int stone, int serv, int fp, int vp, int mp) {
 
-		victoryPoint = new VictoryPoint(vp);
-		militaryPoint = new MilitaryPoint(mp);
-		faithPoint = new FaithPoint(fp);
+		victoryPoints = new VictoryPoint(vp);
+		militaryPoints = new MilitaryPoint(mp);
+		faithPoints = new FaithPoint(fp);
 		coins = new Coin(coin);
 		servants = new Servant(serv);
 		woods = new Wood(wood);
@@ -38,15 +38,15 @@ public class ResourceChest {
 	}
 
 	public VictoryPoint getVictoryPoint() {
-		return victoryPoint;
+		return victoryPoints;
 	}
 
 	public MilitaryPoint getMilitaryPoint() {
-		return militaryPoint;
+		return militaryPoints;
 	}
 
 	public FaithPoint getFaithPoint() {
-		return faithPoint;
+		return faithPoints;
 	}
 
 	public Coin getCoins() {
@@ -70,15 +70,15 @@ public class ResourceChest {
 	 * @param resourceChest
 	 */
 	public void pourInto(ResourceChest resourceChest){
-		resourceChest.getVictoryPoint().add(this.victoryPoint.getAmount());
-		resourceChest.getMilitaryPoint().add(this.militaryPoint.getAmount());
-		resourceChest.getFaithPoint().add(this.faithPoint.getAmount());
+		resourceChest.getVictoryPoint().add(this.victoryPoints.getAmount());
+		resourceChest.getMilitaryPoint().add(this.militaryPoints.getAmount());
+		resourceChest.getFaithPoint().add(this.faithPoints.getAmount());
 		resourceChest.getCoins().add(this.coins.getAmount());
 		resourceChest.getServants().add(this.servants.getAmount());
 		resourceChest.getWoods().add(this.woods.getAmount());
 		resourceChest.getStones().add(this.stones.getAmount());
 	}
-
+	
 
 	/**
 	 * this method was needed to apply the AtomicExchangeEffect
@@ -105,11 +105,11 @@ public class ResourceChest {
 	 * @author Mirko
 	 * @param resource
 	 */
-	private Resource getResourceInChest(Resource resource) {
+	public Resource getResourceInChest(Resource resource) {
 		
-		if(resource instanceof VictoryPoint)return victoryPoint;
-		if(resource instanceof MilitaryPoint)return militaryPoint;
-		if(resource instanceof FaithPoint)return faithPoint;
+		if(resource instanceof VictoryPoint)return victoryPoints;
+		if(resource instanceof MilitaryPoint)return militaryPoints;
+		if(resource instanceof FaithPoint)return faithPoints;
 		if(resource instanceof Coin)return coins;
 		if(resource instanceof Wood)return woods;
 		if(resource instanceof Stone)return stones;
@@ -117,6 +117,36 @@ public class ResourceChest {
 		return null;
 		
 	}
+
+	public void setVictoryPoint(VictoryPoint victoryPoint) {
+		this.victoryPoints = victoryPoint;
+	}
+
+	public void setMilitaryPoint(MilitaryPoint militaryPoint) {
+		this.militaryPoints = militaryPoint;
+	}
+
+	public void setFaithPoint(FaithPoint faithPoint) {
+		this.faithPoints = faithPoint;
+	}
+
+	public void setCoins(Coin coins) {
+		this.coins = coins;
+	}
+
+	public void setServants(Servant servants) {
+		this.servants = servants;
+	}
+
+	public void setWoods(Wood woods) {
+		this.woods = woods;
+	}
+
+	public void setStones(Stone stones) {
+		this.stones = stones;
+	}
+	
+	
 	
 	
 
