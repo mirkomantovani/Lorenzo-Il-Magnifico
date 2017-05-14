@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.DrawAddictionalCardEffect;
 
 /**
  * The Class DeckCreator.
@@ -82,6 +84,42 @@ public class DeckCreator {
 			cardIndex++;
 		}
 		return deck;
+	}
+	
+	private static Effect calculateDrawAddictionalCardEffectFromFile() throws IOException{
+		int cardCost;
+		int cardType;
+		
+		TerritoryCard territoryCard = null;
+		CharacterCard characterCard = null;
+		BuildingCard buildingCard = null;
+		VentureCard ventureCard = null;
+		DevelopmentCard developmentCard = null;
+		
+		
+		cardCost = Integer.parseInt(buffReader.readLine());
+		cardType = Integer.parseInt(buffReader.readLine());
+		
+		
+		if(cardType == 1) {
+			return new DrawAddictionalCardEffect(territoryCard,cardCost);
+		}else if(cardType == 2)
+			{
+			return new DrawAddictionalCardEffect(characterCard,cardCost);
+			}else if(cardType == 3)
+				{
+				return new DrawAddictionalCardEffect(buildingCard,cardCost);
+				}else if(cardType == 4)
+					{
+					return new DrawAddictionalCardEffect(ventureCard,cardCost);
+					}else if(cardType == 5)
+						{
+						return new DrawAddictionalCardEffect(developmentCard,cardCost);
+						}
+	
+			return null;
+		
+		
 	}
 	
 	
@@ -211,13 +249,25 @@ public class DeckCreator {
 	 */
 	public static VentureCard[] createVentureCardDeck(String filePath, int deckLength) throws IOException {
 
-		int cardId=0;
+		int id;
+		String name;
+		Period period; 
+		ResourceChest cost;
+		ResourceChest alternativeCost;
+		Effect immediateEffect;
+		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		int militaryPointRequired;
+		int militaryPointRequired2;
 		VentureCard[] deck = new VentureCard[deckLength];
 
 		buffReader = new BufferedReader(new FileReader(filePath));
 		lineRead = buffReader.readLine();
 		
 		while (lineRead!=null) {
+			
+			
+			
+			
 			
 		}
 		return deck;

@@ -65,4 +65,34 @@ public class ResourceChest {
 		return stones;
 	}
 
+	public void setVictoryPoint(VictoryPoint victoryPoint) {
+		this.victoryPoint = victoryPoint;
+	}
+
+	public void setMilitaryPoint(MilitaryPoint militaryPoint) {
+		this.militaryPoint = militaryPoint;
+	}
+
+	public void setFaithPoint(FaithPoint faithPoint) {
+		this.faithPoint = faithPoint;
+	}
+
+	public void setCoins(Coin coins) {
+		this.coins = coins;
+	}
+
+	public void setServants(Servant servants) {
+		this.servants = servants;
+	}
+
+	public void setWoods(Wood woods) {
+		this.woods = woods;
+	}
+
+	public void setStones(Stone stones) {
+		this.stones = stones;
+	}
+	
+	
+
 }
