@@ -28,14 +28,14 @@ import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
  */
 public class DeckCreator {
 
-	/** The buffered reader. */
+	/** The buffered reader used to read from file */
 	private static BufferedReader buffReader;
 	
-	/** The line read. */
+	/** The line read from file */
 	private static String lineRead;
 
 	/**
-	 * Creates the building card deck.
+	 * Creates the building card deck from the file, see template FileTemplateBuildingsCardV1.xlsx
 	 * 
 	 * @param filePath the file path
 	 * @param deckLength the deck length
@@ -123,6 +123,13 @@ public class DeckCreator {
 	
 	
 	
+	/**
+	 * Calculates the production effect from file. (It's only for building cards)
+	 *
+	 * @author Mirko
+	 * @return the effect
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static Effect calculateProductionEffectFromFile() throws IOException {
 		int privilege;
 		int mPoint;
@@ -169,6 +176,14 @@ public class DeckCreator {
 
 
 
+	/**
+	 * Calculates the atomic exchange effect from file. The atomic effect is needed to instantiate
+	 * the exchange effect. (only for building cards)
+	 *
+	 * @author Mirko
+	 * @return the atomic exchange effect
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static AtomicExchangeEffect calculateAtomicExchangeFromFile() throws IOException {
 		int numberOfResource;
 		

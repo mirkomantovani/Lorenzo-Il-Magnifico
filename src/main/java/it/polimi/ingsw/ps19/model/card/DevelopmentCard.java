@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.ResourceChest;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * @author Mirko and Jimmy
+ * This class represents the abstract class of a generic Development Card
+ * 
+ * @author Mirko 
  *
  */
 public abstract class DevelopmentCard {
@@ -15,6 +18,7 @@ public abstract class DevelopmentCard {
 	private ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
 	private String name;
 	private Effect immediateEffect,permanentEffect;
+	private Player player;
 	
 	/**
 	 * @param id
@@ -32,6 +36,10 @@ public abstract class DevelopmentCard {
 		this.cost=cost;
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
+		
+		
+		this.immediateEffect.setCard(this);  //this creates the association between an effect and its card
+		this.permanentEffect.setCard(this);
 	}
 
 	/**
@@ -41,9 +49,7 @@ public abstract class DevelopmentCard {
 		return cost;
 	}
 
-	/**
-	 * @param cost
-	 */
+	
 	/**
 	 * @param cost
 	 */
@@ -84,6 +90,17 @@ public abstract class DevelopmentCard {
 	 */
 	public Effect getPermanentEffect() {
 		return permanentEffect;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 	

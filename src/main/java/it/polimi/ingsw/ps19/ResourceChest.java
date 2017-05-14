@@ -65,6 +65,10 @@ public class ResourceChest {
 		return stones;
 	}
 	
+	/**
+	 * @author Jimmy
+	 * @param resourceChest
+	 */
 	public void pourInto(ResourceChest resourceChest){
 		resourceChest.getVictoryPoint().add(this.victoryPoint.getAmount());
 		resourceChest.getMilitaryPoint().add(this.militaryPoint.getAmount());
@@ -75,32 +79,43 @@ public class ResourceChest {
 		resourceChest.getStones().add(this.stones.getAmount());
 	}
 
-	public void setVictoryPoint(VictoryPoint victoryPoint) {
-		this.victoryPoint = victoryPoint;
-	}
 
-	public void setMilitaryPoint(MilitaryPoint militaryPoint) {
-		this.militaryPoint = militaryPoint;
+	/**
+	 * this method was needed to apply the AtomicExchangeEffect
+	 * @author Mirko
+	 * @param resource to subtract
+	 */
+	public void subResource(Resource resource) {
+		getResourceInChest(resource).sub(resource.getAmount());
 	}
-
-	public void setFaithPoint(FaithPoint faithPoint) {
-		this.faithPoint = faithPoint;
+	
+	
+	/**
+	 * this method was needed to apply the AtomicExchangeEffect
+	 * @author Mirko
+	 * @param resource to subtract
+	 */
+	public void addResource(Resource resource) {
+		getResourceInChest(resource).add(resource.getAmount());
 	}
+	
 
-	public void setCoins(Coin coins) {
-		this.coins = coins;
-	}
-
-	public void setServants(Servant servants) {
-		this.servants = servants;
-	}
-
-	public void setWoods(Wood woods) {
-		this.woods = woods;
-	}
-
-	public void setStones(Stone stones) {
-		this.stones = stones;
+	/**
+	 * this private method is used from subResource and addResource to find and return the dynamic type of the resource
+	 * @author Mirko
+	 * @param resource
+	 */
+	private Resource getResourceInChest(Resource resource) {
+		
+		if(resource instanceof VictoryPoint)return victoryPoint;
+		if(resource instanceof MilitaryPoint)return militaryPoint;
+		if(resource instanceof FaithPoint)return faithPoint;
+		if(resource instanceof Coin)return coins;
+		if(resource instanceof Wood)return woods;
+		if(resource instanceof Stone)return stones;
+		if(resource instanceof Servant)return servants;
+		return null;
+		
 	}
 	
 	

@@ -136,6 +136,15 @@ public class Player {
 	public void setExcommunicationStatusPeriod3(boolean excommunicationStatusPeriod3) {
 		this.excommunicationStatusPeriod3 = excommunicationStatusPeriod3;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public ResourceChest getResourceChest() {
+		
+		return this.resources;
+	}
 	
 	/*
 	
