@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps19;
 
+/**
+ * @author matteo
+ *
+ */
 public class ResourceChest {
 
 	private VictoryPoint victoryPoint;
@@ -9,9 +13,9 @@ public class ResourceChest {
 	private Servant servants;
 	private Wood woods;
 	private Stone stones;
-	
 
 	public ResourceChest() {
+
 		victoryPoint = new VictoryPoint(0);
 		militaryPoint = new MilitaryPoint(0);
 		faithPoint = new FaithPoint(0);
@@ -19,9 +23,11 @@ public class ResourceChest {
 		servants = new Servant(0);
 		woods = new Wood(0);
 		stones = new Stone(0);
+
 	}
 
-	public ResourceChest(int coin, int wood, int stone, int serv, int fp, int vp, int mp) {
+	public ResourceChest(int vp, int mp, int fp, int coin, int serv, int wood, int stone) {
+
 		victoryPoint = new VictoryPoint(vp);
 		militaryPoint = new MilitaryPoint(mp);
 		faithPoint = new FaithPoint(fp);
@@ -58,14 +64,5 @@ public class ResourceChest {
 	public Stone getStones() {
 		return stones;
 	}
-	
-	public void pourInto(ResourceChest resourceChest){
-		resourceChest.getVictoryPoint().add(this.victoryPoint.getAmount());
-		resourceChest.getMilitaryPoint().add(this.militaryPoint.getAmount());
-		resourceChest.getFaithPoint().add(this.faithPoint.getAmount());
-		resourceChest.getCoins().add(this.coins.getAmount());
-		resourceChest.getServants().add(this.servants.getAmount());
-		resourceChest.getWoods().add(this.woods.getAmount());
-		resourceChest.getStones().add(this.stones.getAmount());
-	}
+
 }

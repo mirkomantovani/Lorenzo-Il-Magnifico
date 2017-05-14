@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps19;
 
+/**
+ * @author matteo
+ *
+ */
 public abstract class Resource {
 	
 	private int amount;
@@ -9,6 +13,7 @@ public abstract class Resource {
 		this.amount = amount;
 		
 	}
+
 
 	public int getAmount(){
 		
@@ -39,5 +44,12 @@ public abstract class Resource {
 		this.amount = this.amount - amount;
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
