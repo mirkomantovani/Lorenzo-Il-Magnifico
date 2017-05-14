@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -17,12 +16,22 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
+
 
 /**
  * The Class DeckCreator.
  */
 /**
  * @author Matteo, Jimmy, Mirko
+ *
+ */
+/**
+ * @author matteo
+ *
+ */
+/**
+ * @author matteo
  *
  */
 public class DeckCreator {
@@ -83,7 +92,6 @@ public class DeckCreator {
 		}
 		return deck;
 	}
-	
 	
 	
 	/**
@@ -226,7 +234,29 @@ public class DeckCreator {
 	 */
 	public static VentureCard[] createVentureCardDeck(String filePath, int deckLength) throws IOException {
 
-		int cardId=0;
+		int id;
+		String name;
+		Period period;
+		
+		ResourceChest cost;
+		ResourceChest alternativeCost;
+		ResourcheChest addings;
+		
+		Effect immediateEffect;
+		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		
+		int militaryPointsRequired;
+		int militaryPointsRequired2;
+		int coins;
+		int faithPoints;
+		int victoryPoints;
+		int woods;
+		int stones;
+		int servants;
+		int militaryPoints;
+		int privilege;
+		int privilege2;
+		
 		VentureCard[] deck = new VentureCard[deckLength];
 
 		buffReader = new BufferedReader(new FileReader(filePath));
@@ -234,9 +264,94 @@ public class DeckCreator {
 		
 		while (lineRead!=null) {
 			
+		id = Integer.parseInt(buffReader.readLine());
+		
+		name = buffReader.readLine();
+		
+		period = Period.values()[Integer.parseInt(buffReader.readLine()) - 1];
+		
+		coins = Integer.parseInt(buffReader.readLine());
+		woods = Integer.parseInt(buffReader.readLine());
+		servants = Integer.parseInt(buffReader.readLine());
+		stones = Integer.parseInt(buffReader.readLine());
+		militaryPointsRequired = Integer.parseInt(buffReader.readLine());
+		militaryPoints = Integer.parseInt(buffReader.readLine());
+		cost = new ResourceChest(coins,woods,stones,servants,0,0,militaryPoints);
+		
+		coins = Integer.parseInt(buffReader.readLine());
+		servants = Integer.parseInt(buffReader.readLine());
+		stones = Integer.parseInt(buffReader.readLine());
+		woods = Integer.parseInt(buffReader.readLine());
+		militaryPoints = Integer.parseInt(buffReader.readLine());
+		militaryPointsRequired2 = Integer.parseInt(buffReader.readLine());
+		alternativeCost = new ResourceChest(coins,woods,stones,servants,0,0,militaryPoints);
+		
+		coins = Integer.parseInt(buffReader.readLine());
+		woods = Integer.parseInt(buffReader.readLine());
+		servants = Integer.parseInt(buffReader.readLine());
+		faithPoints = Integer.parseInt(buffReader.readLine());
+		victoryPoints = Integer.parseInt(buffReader.readLine());
+		militaryPoints = Integer.parseInt(buffReader.readLine());
+		privilege = Integer.parseInt(buffReader.readLine());
+		privilege2 = Integer.parseInt(buffReader.readLine());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+			
+			
 		}
 		return deck;
 	}
+	
+	/**
+	 * @author matteo
+	 * @return
+	 * @throws IOException
+	 */
+	private static Effect calculateTakeCardEffectFromFile() throws IOException{
+		int cardCost;
+		int cardType;
+		
+		TerritoryCard territoryCard = null;
+		CharacterCard characterCard = null;
+		BuildingCard buildingCard = null;
+		VentureCard ventureCard = null;
+		DevelopmentCard developmentCard = null;
+		
+		
+		cardCost = Integer.parseInt(buffReader.readLine());
+		cardType = Integer.parseInt(buffReader.readLine());
+		
+		
+		if(cardType == 1) {
+			return new TakeCardEffect(territoryCard,cardCost);
+		}else if(cardType == 2)
+			{
+			return new TakeCardEffect(characterCard,cardCost);
+			}else if(cardType == 3)
+				{
+				return new TakeCardEffect(buildingCard,cardCost);
+				}else if(cardType == 4)
+					{
+					return new TakeCardEffect(ventureCard,cardCost);
+					}else if(cardType == 5)
+						{
+						return new TakeCardEffect(developmentCard,cardCost);
+						}
+	
+			return null;
+		
+		
+	}
+	
 	
 	/**
 	 * Creates the character card deck.

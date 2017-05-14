@@ -6,6 +6,10 @@ import it.polimi.ingsw.ps19.Period;
 
 import java.util.Random;
 
+/**
+ * @author matteo
+ *
+ */
 public class ExcommunicationDeck {
 	
 	private ExcommunicationTile[] tiles; 

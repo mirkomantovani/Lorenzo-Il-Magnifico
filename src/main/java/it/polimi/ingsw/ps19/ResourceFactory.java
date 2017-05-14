@@ -36,8 +36,8 @@ public class ResourceFactory {
 			return new VictoryPoint(amount);
 		case MILITARY_POINT:
 			return new MilitaryPoint(amount);
-		case COUNCIL_PRIVILEGE:
-			return new CouncilPrivilege(amount);
+		/*case COUNCIL_PRIVILEGE:
+			return new CouncilPrivilege(amount);*/
 		case 0:
 			return null;
 

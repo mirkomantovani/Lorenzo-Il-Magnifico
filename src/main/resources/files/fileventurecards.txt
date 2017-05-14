@@ -26,7 +26,6 @@ Ingaggiare Reclute
 0
 0
 0
-#
 74
 Riparare la Chiesa
 1
@@ -55,7 +54,6 @@ Riparare la Chiesa
 0
 0
 0
-#
 75
 Costruire le Mura
 1
@@ -84,7 +82,6 @@ Costruire le Mura
 0
 0
 0
-#
 76
 Innalzare una Statua
 1
@@ -113,7 +110,6 @@ Innalzare una Statua
 0
 0
 0
-#
 77
 Campagna Militare
 1
@@ -142,7 +138,6 @@ Campagna Militare
 0
 0
 0
-#
 78
 Ospitare i Mendicanti
 1
@@ -171,7 +166,6 @@ Ospitare i Mendicanti
 0
 0
 0
-#
 79
 Combattere le Eresie
 1
@@ -200,7 +194,6 @@ Combattere le Eresie
 0
 0
 0
-#
 80
 Sostegno al Vescovo
 1
@@ -229,7 +222,6 @@ Sostegno al Vescovo
 0
 0
 0
-#
 81
 Ingaggiare Soldati
 2
@@ -258,7 +250,6 @@ Ingaggiare Soldati
 0
 0
 0
-#
 82
 Riparare l'Abbazia
 2
@@ -287,7 +278,6 @@ Riparare l'Abbazia
 0
 0
 0
-#
 83
 Costruire i Bastioni
 2
@@ -316,7 +306,6 @@ Costruire i Bastioni
 0
 0
 0
-#
 84
 Supporto al Re
 2
@@ -345,7 +334,6 @@ Supporto al Re
 0
 0
 0
-#
 85
 Scavare Canalizzazioni
 2
@@ -374,7 +362,6 @@ Scavare Canalizzazioni
 0
 0
 0
-#
 86
 Accogliere gli Stranieri
 2
@@ -403,7 +390,6 @@ Accogliere gli Stranieri
 0
 0
 0
-#
 87
 Crociata
 2
@@ -432,7 +418,6 @@ Crociata
 0
 0
 0
-#
 88
 Sostegno al Cardinale
 2
@@ -461,7 +446,6 @@ Sostegno al Cardinale
 0
 0
 0
-#
 89
 Ingaggiare Mercenari 
 3
@@ -490,7 +474,6 @@ Ingaggiare Mercenari
 0
 0
 0
-#
 90
 Riparare la Cattedrale
 3
@@ -519,7 +502,6 @@ Riparare la Cattedrale
 5
 7
 0
-#
 91
 Costruire le Torri
 3
@@ -548,7 +530,6 @@ Costruire le Torri
 0
 0
 0
-#
 92
 Commissionare Arte Sacra
 3
@@ -577,7 +558,6 @@ Commissionare Arte Sacra
 0
 0
 0
-#
 93
 Conquista Militare
 3
@@ -606,7 +586,6 @@ Conquista Militare
 0
 0
 3
-#
 94
 Migliorare le Strade
 3
@@ -635,7 +614,6 @@ Migliorare le Strade
 0
 0
 0
-#
 95
 Guerra Santa
 3
@@ -664,7 +642,6 @@ Guerra Santa
 0
 0
 0
-#
 96
 Sostegno al Papa
 3
