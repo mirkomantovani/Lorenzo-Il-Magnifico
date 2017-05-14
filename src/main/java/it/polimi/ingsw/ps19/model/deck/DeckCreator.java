@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
-
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -20,7 +17,7 @@ import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
-import it.polimi.ingsw.ps19.ResourceFactory;
+
 
 /**
  * The Class DeckCreator.
@@ -253,8 +250,7 @@ public class DeckCreator {
 
 		int id;
 		String name;
-		Period period; 
-		Resource flag;
+		Period period;
 		ResourceChest cost;
 		ResourceChest alternativeCost;
 		Effect immediateEffect;
@@ -271,7 +267,7 @@ public class DeckCreator {
 		id = Integer.parseInt(buffReader.readLine());
 		name = buffReader.readLine();
 		period = Period.valueOf(buffReader.readLine()); // non credo vada bene
-		cost.setCoins(getResource(1,Integer.parseInt(buffReader.readLine())));
+		cost.setCoins(ResourceFactory.getResource(1,Integer.parseInt(buffReader.readLine())));
 		
 		
 			
