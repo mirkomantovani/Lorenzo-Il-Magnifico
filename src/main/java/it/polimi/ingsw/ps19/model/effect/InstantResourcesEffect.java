@@ -4,11 +4,16 @@ import it.polimi.ingsw.ps19.ResourceChest;
 
 public class InstantResourcesEffect extends Effect {
 	
-	ResourceChest givenResourceChest;
+	private ResourceChest givenResourceChest;
+	private ResourceChest playersResourceChest;
+	
+	public InstantResourcesEffect(ResourceChest playersResourceChest, ResourceChest givenResourceChest){
+		this.givenResourceChest = givenResourceChest;
+		this.playersResourceChest = playersResourceChest;
+	}
+	
 	
 	public void applyEffect() {
-	
-		
+		givenResourceChest.pourInto(playersResourceChest);
 	}
-
 }

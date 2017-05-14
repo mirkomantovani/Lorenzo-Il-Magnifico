@@ -40,11 +40,4 @@ public abstract class Resource {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 }
