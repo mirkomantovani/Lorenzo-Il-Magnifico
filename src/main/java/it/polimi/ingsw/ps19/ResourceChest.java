@@ -26,7 +26,7 @@ public class ResourceChest {
 
 	}
 
-	public ResourceChest(int vp, int mp, int fp, int coin, int serv, int wood, int stone) {
+	public ResourceChest(int coin, int wood, int stone, int serv, int fp, int vp, int mp) {
 
 		victoryPoint = new VictoryPoint(vp);
 		militaryPoint = new MilitaryPoint(mp);
@@ -63,6 +63,16 @@ public class ResourceChest {
 
 	public Stone getStones() {
 		return stones;
+	}
+	
+	public void pourInto(ResourceChest resourceChest){
+		resourceChest.getVictoryPoint().add(this.victoryPoint.getAmount());
+		resourceChest.getMilitaryPoint().add(this.militaryPoint.getAmount());
+		resourceChest.getFaithPoint().add(this.faithPoint.getAmount());
+		resourceChest.getCoins().add(this.coins.getAmount());
+		resourceChest.getServants().add(this.servants.getAmount());
+		resourceChest.getWoods().add(this.woods.getAmount());
+		resourceChest.getStones().add(this.stones.getAmount());
 	}
 
 	public void setVictoryPoint(VictoryPoint victoryPoint) {
