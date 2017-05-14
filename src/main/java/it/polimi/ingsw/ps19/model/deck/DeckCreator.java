@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +19,8 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
-import it.polimi.ingsw.ps19.model.effect.DrawAddictionalCardEffect;
+import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
+import it.polimi.ingsw.ps19.ResourceFactory;
 
 /**
  * The Class DeckCreator.
@@ -86,7 +88,7 @@ public class DeckCreator {
 		return deck;
 	}
 	
-	private static Effect calculateDrawAddictionalCardEffectFromFile() throws IOException{
+	private static Effect calculateTakeCardEffectFromFile() throws IOException{
 		int cardCost;
 		int cardType;
 		
@@ -102,19 +104,19 @@ public class DeckCreator {
 		
 		
 		if(cardType == 1) {
-			return new DrawAddictionalCardEffect(territoryCard,cardCost);
+			return new TakeCardEffect(territoryCard,cardCost);
 		}else if(cardType == 2)
 			{
-			return new DrawAddictionalCardEffect(characterCard,cardCost);
+			return new TakeCardEffect(characterCard,cardCost);
 			}else if(cardType == 3)
 				{
-				return new DrawAddictionalCardEffect(buildingCard,cardCost);
+				return new TakeCardEffect(buildingCard,cardCost);
 				}else if(cardType == 4)
 					{
-					return new DrawAddictionalCardEffect(ventureCard,cardCost);
+					return new TakeCardEffect(ventureCard,cardCost);
 					}else if(cardType == 5)
 						{
-						return new DrawAddictionalCardEffect(developmentCard,cardCost);
+						return new TakeCardEffect(developmentCard,cardCost);
 						}
 	
 			return null;
@@ -252,6 +254,7 @@ public class DeckCreator {
 		int id;
 		String name;
 		Period period; 
+		Resource flag;
 		ResourceChest cost;
 		ResourceChest alternativeCost;
 		Effect immediateEffect;
@@ -265,7 +268,12 @@ public class DeckCreator {
 		
 		while (lineRead!=null) {
 			
-			
+		id = Integer.parseInt(buffReader.readLine());
+		name = buffReader.readLine();
+		period = Period.valueOf(buffReader.readLine()); // non credo vada bene
+		cost.setCoins(getResource(1,Integer.parseInt(buffReader.readLine())));
+		
+		
 			
 			
 			
