@@ -80,18 +80,14 @@ public class DeckCreator {
 		buffReader = new BufferedReader(new FileReader(filePath));
 		lineRead = buffReader.readLine();  //line 1  	//The lineRead variable stores the first line of a card and uses it to check the while condition
 		while (lineRead!=null) {
-<<<<<<< HEAD
-			id=Integer.parseInt(lineRead);
-			name= buffReader.readLine(); 
-			//period, use enum props
-=======
+
 			id=Integer.parseInt(lineRead);  
 			name= buffReader.readLine();    //line 2
 			
 			
 			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];  //line 3
 			
->>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
+
 			
 			
 			//lines 4-5-6-7
@@ -161,27 +157,22 @@ public class DeckCreator {
 					return new ResourcesExchangeEffect(atomicExchange1,atomicExchange2);
 				}
 				else {
-<<<<<<< HEAD
-					//avrò l'effetto di ricevere vPoint victory point per ogni carta di tipo cardType
-=======
+
 					cType=CardType.values()[cardType];
 					forEachEffect=new ForEachTypeCardEffect(new VictoryPoint(vPoint), cType);
 					for(int i=19;i<39;i++)buffReader.readLine();
 					return forEachEffect;
->>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
+
 				}
 				
 			}
 			else {
-<<<<<<< HEAD
-				//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType //serve CardFactory//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType
-				
-=======
+
 				cType=CardType.values()[cardType];
 				forEachEffect=new ForEachTypeCardEffect(new Coin(coin), cType);
 				for(int i=17;i<39;i++)buffReader.readLine();
 				return forEachEffect;
->>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
+
 			}
 		}
 		else {
@@ -369,30 +360,14 @@ public class DeckCreator {
 	 * @throws IOException
 	 */
 	private static Effect calculateTakeCardEffectFromFile() throws IOException{
-<<<<<<< HEAD
 
-		Effect e = null; //Da fare
-		return e; //
-=======
-		int cardCost;
-		int cardType;
-		
-		TerritoryCard territoryCard = null;
-		CharacterCard characterCard = null;
-		BuildingCard buildingCard = null;
-		VentureCard ventureCard = null;
-		DevelopmentCard developmentCard = null;
-		
-		
-		cardCost = Integer.parseInt(buffReader.readLine());
-		cardType = Integer.parseInt(buffReader.readLine());
 		
 		
 		
 	
 			return null;
 		
->>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
+
 		
 	}
 	
