@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps19;
 
-import it.polimi.ingsw.ps19.Dice;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import java.util.ArrayList;
-import it.polimi.ingsw.ps19.FamilyMember;
+
+import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.CharacterCard;
+import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
-import it.polimi.ingsw.ps19.model.card.CharacterCard;
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
 
 /**
  * @author matteo
@@ -95,6 +95,9 @@ public class Player {
 		return ventureDeck;
 	}
 
+	public ArrayList<BuildingCard> getBuildingDeck() {
+		return buildingDeck;
+	}
 	
 
 	public int getHarvestModification() {
@@ -159,6 +162,20 @@ public class Player {
 		//metodo che distribuisce le risorse bonus
 	} */
 	
+	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
+		switch(cardType){
+		case TERRITORY:
+			return this.getTerritoryDeck();
+		case BUILDING:
+			return this.getBuildingDeck();
+		case CHARACTER: 
+			return this.getCharacterDeck();
+		case VENTURE:
+			return this.getVentureDeck();
+		
+		}
+		return null;
+	}
 	
 	
 }

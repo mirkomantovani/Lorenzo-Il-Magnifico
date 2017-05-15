@@ -1,9 +1,9 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Resource;
-import it.polimi.ingsw.ps19.model.card.CardType;
 /**
- * This class implements the "Something"ForEachCard effect
+ * This class implements the "Something"ForEachCard effect, this effect gives a specific
+ * resource to the associated player.
  * 
  * @author Jimmy
  *
@@ -11,10 +11,11 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 public class ForEachTypeCardEffect extends Effect {
 	
 	Resource resource;
-	CardType typeCard;
+	int typeCard;
 	
-	public ForEachTypeCardEffect(Resource resource, CardType typeCard){
-		
+	public ForEachTypeCardEffect(Resource resource, int typeCard){
+		this.resource = resource;
+		this.typeCard = typeCard;
 	}
 	
 	public void applyEffect() {
