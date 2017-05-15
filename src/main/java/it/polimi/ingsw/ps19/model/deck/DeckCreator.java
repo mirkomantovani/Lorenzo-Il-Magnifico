@@ -255,7 +255,6 @@ public class DeckCreator {
 		int servants;
 		int militaryPoints;
 		int privilege;
-		int privilege2;
 		
 		VentureCard[] deck = new VentureCard[deckLength];
 
@@ -293,8 +292,6 @@ public class DeckCreator {
 		victoryPoints = Integer.parseInt(buffReader.readLine());
 		militaryPoints = Integer.parseInt(buffReader.readLine());
 		privilege = Integer.parseInt(buffReader.readLine());
-		privilege2 = Integer.parseInt(buffReader.readLine());
-		
 		
 		
 		
