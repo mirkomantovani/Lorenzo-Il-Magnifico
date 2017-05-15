@@ -1,14 +1,14 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Coin;
-import it.polimi.ingsw.ps19.FaithPoint;
-import it.polimi.ingsw.ps19.MilitaryPoint;
-import it.polimi.ingsw.ps19.Resource;
-import it.polimi.ingsw.ps19.Servant;
-import it.polimi.ingsw.ps19.Stone;
-import it.polimi.ingsw.ps19.Wood;
-
 import java.util.Random;
+
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.FaithPoint;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
+import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.model.resource.Stone;
+import it.polimi.ingsw.ps19.model.resource.Wood;
 
 
 /**

@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.ResourceChest;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * This class represents the abstract class of a generic Development Card
@@ -12,7 +12,9 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  *
  */
 public abstract class DevelopmentCard {
-	 //attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
+	
+
+	//attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
 	private int id;   
 	private Period period;
 	private ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
@@ -102,6 +104,13 @@ public abstract class DevelopmentCard {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	 @Override
+		public String toString() {
+			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + player
+					+ "]";
+		}
 	
 	
 

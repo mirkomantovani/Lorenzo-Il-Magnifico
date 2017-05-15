@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
