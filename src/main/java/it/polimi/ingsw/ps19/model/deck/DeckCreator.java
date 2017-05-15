@@ -26,14 +26,7 @@ import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
  * @author Matteo, Jimmy, Mirko
  *
  */
-/**
- * @author matteo
- *
- */
-/**
- * @author matteo
- *
- */
+
 public class DeckCreator {
 
 	/** The buffered reader used to read from file */
@@ -71,7 +64,8 @@ public class DeckCreator {
 		while (lineRead!=null) {
 			id=Integer.parseInt(lineRead);
 			name= buffReader.readLine(); 
-			//period, use enum props
+			
+			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			
 			cost=new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
 					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),0,0,0);
@@ -127,12 +121,12 @@ public class DeckCreator {
 					
 					return new ResourcesExchangeEffect(atomicExchange1,atomicExchange2);
 				}
-				else {
+				else {//foreachcardtypeeffect
 					//avrò l'effetto di ricevere vPoint victory point per ogni carta di tipo cardType
 				}
 				
 			}
-			else {
+			else {//foreachcardtypeeffect
 				//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType //serve CardFactory//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType
 				
 			}

@@ -20,6 +20,11 @@ public class ResourceFactory {
 	private static final int COUNCIL_PRIVILEGE=8;
 	
 	
+	/**
+	 * @param id
+	 * @param amount
+	 * @return a Resource subtype or null if the id was 0
+	 */
 	public static Resource getResource(int id,int amount){
 		switch (id) {
 		case COIN:
