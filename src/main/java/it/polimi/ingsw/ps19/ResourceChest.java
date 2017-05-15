@@ -105,7 +105,7 @@ public class ResourceChest {
 	 * @author Mirko
 	 * @param resource
 	 */
-	public Resource getResourceInChest(Resource resource) {
+	private Resource getResourceInChest(Resource resource) {
 		
 		if(resource instanceof VictoryPoint)return victoryPoints;
 		if(resource instanceof MilitaryPoint)return militaryPoints;

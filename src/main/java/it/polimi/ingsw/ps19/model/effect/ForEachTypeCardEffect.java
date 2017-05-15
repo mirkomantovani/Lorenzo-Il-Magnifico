@@ -1,9 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Resource;
-import it.polimi.ingsw.ps19.ResourceChest;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-
+import it.polimi.ingsw.ps19.model.card.CardType;
 /**
  * This class implements the "Something"ForEachCard effect
  * 
@@ -12,8 +10,10 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  */
 public class ForEachTypeCardEffect extends Effect {
 	
+	Resource resource;
+	CardType typeCard;
 	
-	public ForEachTypeCardEffect(Resource resource, ResourceChest resourceChest, DevelopmentCard typeCard){
+	public ForEachTypeCardEffect(Resource resource, CardType typeCard){
 		
 	}
 	

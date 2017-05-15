@@ -240,7 +240,7 @@ public class DeckCreator {
 		
 		ResourceChest cost;
 		ResourceChest alternativeCost;
-		ResourcheChest addings;
+		ResourceChest addings;
 		
 		Effect immediateEffect;
 		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class

@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
@@ -29,6 +30,14 @@ public abstract class Effect {
 	 */
 	public void setCard(DevelopmentCard card) {
 		this.card = card;
+	}
+	
+	/**
+	 * @author Jimmy 
+	 * @return Player, the player associated with the card that has the specific effect, this method is created to make the "call chain" shorter.
+	 */
+	public Player getAssociatedPlayer(){
+		return card.getPlayer();
 	}
 	
 }
