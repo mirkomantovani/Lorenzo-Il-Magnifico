@@ -26,7 +26,14 @@ import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
  * @author Matteo, Jimmy, Mirko
  *
  */
-
+/**
+ * @author matteo
+ *
+ */
+/**
+ * @author matteo
+ *
+ */
 public class DeckCreator {
 
 	/** The buffered reader used to read from file */
@@ -64,8 +71,7 @@ public class DeckCreator {
 		while (lineRead!=null) {
 			id=Integer.parseInt(lineRead);
 			name= buffReader.readLine(); 
-			
-			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];
+			//period, use enum props
 			
 			cost=new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
 					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),0,0,0);
@@ -121,12 +127,12 @@ public class DeckCreator {
 					
 					return new ResourcesExchangeEffect(atomicExchange1,atomicExchange2);
 				}
-				else {//foreachcardtypeeffect
+				else {
 					//avrò l'effetto di ricevere vPoint victory point per ogni carta di tipo cardType
 				}
 				
 			}
-			else {//foreachcardtypeeffect
+			else {
 				//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType //serve CardFactory//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType
 				
 			}
@@ -308,38 +314,9 @@ public class DeckCreator {
 	 * @throws IOException
 	 */
 	private static Effect calculateTakeCardEffectFromFile() throws IOException{
-		int cardCost;
-		int cardType;
-		
-		TerritoryCard territoryCard = null;
-		CharacterCard characterCard = null;
-		BuildingCard buildingCard = null;
-		VentureCard ventureCard = null;
-		DevelopmentCard developmentCard = null;
-		
-		
-		cardCost = Integer.parseInt(buffReader.readLine());
-		cardType = Integer.parseInt(buffReader.readLine());
-		
-		
-		if(cardType == 1) {
-			return new TakeCardEffect(territoryCard,cardCost);
-		}else if(cardType == 2)
-			{
-			return new TakeCardEffect(characterCard,cardCost);
-			}else if(cardType == 3)
-				{
-				return new TakeCardEffect(buildingCard,cardCost);
-				}else if(cardType == 4)
-					{
-					return new TakeCardEffect(ventureCard,cardCost);
-					}else if(cardType == 5)
-						{
-						return new TakeCardEffect(developmentCard,cardCost);
-						}
-	
-			return null;
-		
+
+		Effect e = null; //Da fare
+		return e; //
 		
 	}
 	
