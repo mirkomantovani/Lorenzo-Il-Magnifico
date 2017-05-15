@@ -162,6 +162,15 @@ public class Player {
 		//metodo che distribuisce le risorse bonus
 	} */
 	
+	/**
+	 * @author Jimmy
+	 * This method returns the arrayList associated with the cardType
+	 * 
+	 * @param cardType
+	 * @return
+	 * 
+	 * 
+	 */
 	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
 		switch(cardType){
 		case TERRITORY:
@@ -172,9 +181,9 @@ public class Player {
 			return this.getCharacterDeck();
 		case VENTURE:
 			return this.getVentureDeck();
-		
+			default:
+				return null;
 		}
-		return null;
 	}
 	
 	
