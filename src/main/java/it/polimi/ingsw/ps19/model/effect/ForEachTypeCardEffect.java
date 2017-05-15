@@ -2,9 +2,9 @@ package it.polimi.ingsw.ps19.model.effect;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps19.Resource;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.Resource;
 /**
  * This class implements the "Something"ForEachCard effect, this effect gives a specific
  * resource to the associated player.

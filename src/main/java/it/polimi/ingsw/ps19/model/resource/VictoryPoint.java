@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.resource;
 
 /**
  * @author matteo
@@ -6,6 +6,11 @@ package it.polimi.ingsw.ps19;
  */
 public class VictoryPoint extends Resource {
 	
+	@Override
+	public String toString() {
+		return super.toString() + " Victory points";
+	}
+
 	public VictoryPoint(int amount){
 		
 		super(amount);

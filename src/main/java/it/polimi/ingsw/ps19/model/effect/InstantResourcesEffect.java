@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * This class implements the InstantResourceEffect that gives a certain amount
@@ -19,6 +19,10 @@ public class InstantResourcesEffect extends Effect {
 	 *                            result of the effect.  
 	 */
 	public InstantResourcesEffect(ResourceChest effectResourceChest){
+		this.effectResourceChest = effectResourceChest;
+	}	
+	
+	public InstantResourcesEffect(ResourceChest effectResourceChest,CouncilPrivilegeEffect councilPrivilegeEffect){
 		this.effectResourceChest = effectResourceChest;
 	}	
 	

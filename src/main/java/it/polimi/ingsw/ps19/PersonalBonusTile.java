@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19;
 
+import it.polimi.ingsw.ps19.model.resource.Resource;
+
 /**
  * @author matteo
  *

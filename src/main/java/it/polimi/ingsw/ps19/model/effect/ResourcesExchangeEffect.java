@@ -67,7 +67,14 @@ public class ResourcesExchangeEffect extends Effect {
 	public void applyEffect() {
 		applyEffect(normalExchangeEffect);
 	}
+
+	@Override
+	public String toString() {
+		
+		return normalExchangeEffect.toString()+" or"+alternativeExchangeEffect.toString();
+		
+	}
 	
-//	private static Resource()
+
 
 }

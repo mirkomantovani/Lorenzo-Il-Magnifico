@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Resource;
-import it.polimi.ingsw.ps19.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class AtomicExchangeEffect is strictly related to the ResourcesExchangeEffect
@@ -16,9 +16,6 @@ public class AtomicExchangeEffect extends Effect {
 	Resource resourceIn1;
 	Resource resourceIn2;
 	
-
-	
-
 	public AtomicExchangeEffect(Resource resourceOut1, Resource resourceOut2, Resource resourceOut3,
 			Resource resourceIn1, Resource resourceIn2) {
 		this.resourceOut1 = resourceOut1;
@@ -27,21 +24,6 @@ public class AtomicExchangeEffect extends Effect {
 		this.resourceIn1 = resourceIn1;
 		this.resourceIn2 = resourceIn2;
 	}
-
-
-
-
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
-	 */
-	/**
-	 * @param resourceChest is the resource chest (probably of the player) that I have to add resources to
-	 */
-	
-//	public void applyEffect(ResourceChest resourceChest) {
-//		resourceChest.subResource(resourceOut1);  //no, essendo l'effetto relazionato a una carta e la carta relazionata
-//	al player possiamo benissimo prenderlo da queste relazione il chest a cui deve essere applicata
-//	}
 
 	@Override
 	public void applyEffect() {
@@ -56,6 +38,22 @@ public class AtomicExchangeEffect extends Effect {
 			this.card.getPlayer().getResourceChest().addResource(resourceOut1);
 		if(resourceOut1!=null)
 			this.card.getPlayer().getResourceChest().addResource(resourceOut1);
+		
+	}
+	
+	@Override
+	public String toString(){
+		
+		StringBuilder string=new StringBuilder(" Pay");
+		
+		string.append(resourceOut1.toString());
+		if(resourceOut2!=null)string.append(" and"+resourceOut2.toString());
+		if(resourceOut3!=null)string.append(" and"+resourceOut3.toString());
+		string.append(" and get");
+		string.append(resourceIn1.toString());
+		if(resourceIn2!=null)string.append(" and"+resourceIn2.toString());
+		
+		return string.toString();
 		
 	}
 

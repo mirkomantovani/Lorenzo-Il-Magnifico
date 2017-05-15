@@ -5,18 +5,25 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Resource;
-import it.polimi.ingsw.ps19.ResourceChest;
-import it.polimi.ingsw.ps19.ResourceFactory;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 
 /**
@@ -57,38 +64,60 @@ public class DeckCreator {
 		int id;
 		String name;
 		Period period; 
-		ResourceChest cost; 
+		ResourceChest cost;
+		ResourceChest instantChest;
 		Effect immediateEffect;
 		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		ProductionEffect productionEffect;
 		int productionActivationCost;
 		int cardIndex=0;
+		
+		
 		
 		
 		BuildingCard[] deck = new BuildingCard[deckLength];
 
 		buffReader = new BufferedReader(new FileReader(filePath));
-		lineRead = buffReader.readLine();    	//The lineRead variable stores the first line of a card and uses it to check the while condition
+		lineRead = buffReader.readLine();  //line 1  	//The lineRead variable stores the first line of a card and uses it to check the while condition
 		while (lineRead!=null) {
+<<<<<<< HEAD
 			id=Integer.parseInt(lineRead);
 			name= buffReader.readLine(); 
 			//period, use enum props
+=======
+			id=Integer.parseInt(lineRead);  
+			name= buffReader.readLine();    //line 2
 			
+			
+			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];  //line 3
+			
+>>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
+			
+			
+			//lines 4-5-6-7
 			cost=new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
 					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),0,0,0);
 			
-			//waiting for immediateEffect class creation, 2 lines to read
 			
-			productionActivationCost=Integer.parseInt(buffReader.readLine());
-			
-			permanentEffect=calculateProductionEffectFromFile();
+			instantChest=new ResourceChest(0,0,0,0,Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),0);  //lines 8-9
 			
 			
-			lineRead = buffReader.readLine(); 
-			lineRead = buffReader.readLine(); 
+			immediateEffect=new InstantResourcesEffect(instantChest);
+			
+			productionActivationCost=Integer.parseInt(buffReader.readLine());  //line 10
+			
+			permanentEffect=calculateProductionEffectFromFile();  //lines 11 to 38
+			
+			productionEffect=new ProductionEffect(permanentEffect);
 			
 			
-//			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,permanentEffect,productionActivationCost);
+			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,productionEffect,productionActivationCost);
 			cardIndex++;
+			
+			lineRead = buffReader.readLine();   //line 1
+			System.out.println("id: "+lineRead);
+			
 		}
 		return deck;
 	}
@@ -107,42 +136,66 @@ public class DeckCreator {
 		int vPoint;
 		int coin;
 		int cardType;
+		CardType cType;
+		ResourceChest instantChest;
+		CouncilPrivilegeEffect privilegeEffect;
+		ForEachTypeCardEffect forEachEffect;
 		
 		AtomicExchangeEffect atomicExchange1,atomicExchange2;
 		
-		privilege=Integer.parseInt(buffReader.readLine());
+		privilege=Integer.parseInt(buffReader.readLine());   //lines 11-12-13-14
 		mPoint=Integer.parseInt(buffReader.readLine());
 		vPoint=Integer.parseInt(buffReader.readLine());
 		coin=Integer.parseInt(buffReader.readLine());
 		
 		if(privilege==0&&mPoint==0&&vPoint==0&&coin==0){
-			coin=Integer.parseInt(buffReader.readLine());
+			coin=Integer.parseInt(buffReader.readLine());  //lines 15-16
 			cardType=Integer.parseInt(buffReader.readLine());
 			if(coin==0&&cardType==0){
-				vPoint=Integer.parseInt(buffReader.readLine());
+				vPoint=Integer.parseInt(buffReader.readLine());    //lines 17-18
 				cardType=Integer.parseInt(buffReader.readLine());
-				if(coin==0&&vPoint==0){  //avrò l'effetto di ResourceExchange
-					atomicExchange1=calculateAtomicExchangeFromFile();
-					atomicExchange2=calculateAtomicExchangeFromFile();
+				if(coin==0&&vPoint==0){  
+					atomicExchange1=calculateAtomicExchangeFromFile();   // lines 19 to 28
+					atomicExchange2=calculateAtomicExchangeFromFile();  //lines 29 to 38
 					
 					return new ResourcesExchangeEffect(atomicExchange1,atomicExchange2);
 				}
 				else {
+<<<<<<< HEAD
 					//avrò l'effetto di ricevere vPoint victory point per ogni carta di tipo cardType
+=======
+					cType=CardType.values()[cardType];
+					forEachEffect=new ForEachTypeCardEffect(new VictoryPoint(vPoint), cType);
+					for(int i=19;i<39;i++)buffReader.readLine();
+					return forEachEffect;
+>>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
 				}
 				
 			}
 			else {
+<<<<<<< HEAD
 				//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType //serve CardFactory//avrò l'effetto di ricevere coin soldi per ogni carta di tipo cardType
 				
+=======
+				cType=CardType.values()[cardType];
+				forEachEffect=new ForEachTypeCardEffect(new Coin(coin), cType);
+				for(int i=17;i<39;i++)buffReader.readLine();
+				return forEachEffect;
+>>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
 			}
 		}
 		else {
-			//avrò un instant effect come productionEffect, aspetto lo sviluppo di quella classe
+			
+			
+			privilegeEffect=new CouncilPrivilegeEffect();
+			
+			instantChest=new ResourceChest(coin,0,0,0,0,vPoint,mPoint); 
+			
+			for(int i=15;i<39;i++)buffReader.readLine();
+			
+			return new InstantResourcesEffect(instantChest,privilegeEffect);  //instant needs a constructor with the possibility to have a privilege effect
 		}
 		
-		
-		return null;
 	}
 
 
@@ -158,9 +211,9 @@ public class DeckCreator {
 	private static AtomicExchangeEffect calculateAtomicExchangeFromFile() throws IOException {
 		int numberOfResource;
 		
-		numberOfResource=Integer.parseInt(buffReader.readLine());
+		numberOfResource=Integer.parseInt(buffReader.readLine()); //19 or 29
 		if(numberOfResource==0){  //it means it has no atomicExchangeEffect
-			for(int i=0;i<9;i++)buffReader.readLine();
+			for(int i=0;i<9;i++)buffReader.readLine();  //line 20 to 28
 			return null;
 		}
 		else{ //it means it has an atomic exchange effect
@@ -169,27 +222,29 @@ public class DeckCreator {
 			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
 			Resource resourceIn1,resourceIn2;     //resources to get
 			
-			resourceId=Integer.parseInt(buffReader.readLine());
+			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
 			resourceOut1=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			numberOfResource=Integer.parseInt(buffReader.readLine());
-			resourceId=Integer.parseInt(buffReader.readLine());
+			numberOfResource=Integer.parseInt(buffReader.readLine());  //line 21
+			resourceId=Integer.parseInt(buffReader.readLine());  //line 22
 			
 			resourceOut2=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			numberOfResource=Integer.parseInt(buffReader.readLine());
-			resourceId=Integer.parseInt(buffReader.readLine());
+			numberOfResource=Integer.parseInt(buffReader.readLine());  // line 23
+			resourceId=Integer.parseInt(buffReader.readLine());   //line24
 			
 			resourceOut3=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			numberOfResource=Integer.parseInt(buffReader.readLine());
-			resourceId=Integer.parseInt(buffReader.readLine());
+			numberOfResource=Integer.parseInt(buffReader.readLine());  //line25
+			resourceId=Integer.parseInt(buffReader.readLine());     //line 26
 			
 			resourceIn1=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			numberOfResource=Integer.parseInt(buffReader.readLine());
-			resourceId=Integer.parseInt(buffReader.readLine());
+			//la linea 292 del file è un 8 non 5 ma ho messo 5 perchè non possiamo trattare la privilege come risorsa ancora
+			
+			numberOfResource=Integer.parseInt(buffReader.readLine());   //line 27
+			resourceId=Integer.parseInt(buffReader.readLine());   //line 28s
 			
 			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
 			
@@ -314,9 +369,30 @@ public class DeckCreator {
 	 * @throws IOException
 	 */
 	private static Effect calculateTakeCardEffectFromFile() throws IOException{
+<<<<<<< HEAD
 
 		Effect e = null; //Da fare
 		return e; //
+=======
+		int cardCost;
+		int cardType;
+		
+		TerritoryCard territoryCard = null;
+		CharacterCard characterCard = null;
+		BuildingCard buildingCard = null;
+		VentureCard ventureCard = null;
+		DevelopmentCard developmentCard = null;
+		
+		
+		cardCost = Integer.parseInt(buffReader.readLine());
+		cardType = Integer.parseInt(buffReader.readLine());
+		
+		
+		
+	
+			return null;
+		
+>>>>>>> 4f210bad814a4ab80a3cfc2d4dc961f4cf2f44a5
 		
 	}
 	

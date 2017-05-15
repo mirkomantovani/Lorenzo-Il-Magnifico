@@ -27,4 +27,9 @@ public class ProductionEffect extends Effect{
 		actualEffect.applyEffect();
 	}
 
+	@Override
+	public String toString() {
+		return "Production effect:"+actualEffect.toString();
+	}
+
 }

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.resource;
 
 /**
  * A factory for creating Resource objects based on a parameter.

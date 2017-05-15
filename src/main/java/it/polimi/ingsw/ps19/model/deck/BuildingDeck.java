@@ -34,6 +34,17 @@ public class BuildingDeck extends Deck<BuildingCard> {
 	public int length() {
 		return this.cards.length;
 	}
+	
+	public void printCardInfo(int i){
+		System.out.println(this.cards[i].getId());
+		
+	}
+	
+	public BuildingCard getCard(int i) {
+//		System.out.println(this.cards[i]);
+//		this.cards[i];
+		return this.cards[i];
+	}
 
 
 }

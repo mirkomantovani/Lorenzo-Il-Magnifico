@@ -45,12 +45,19 @@ public abstract class Deck<T extends DevelopmentCard> {
 		return this.cards.length;
 	}
 	
+	public void printCardInfo(int i){
+		System.out.println(this.cards[i].getId());
+		
+	}
+	
 	
 	/**
 	 * @param i
 	 * @return dynamic type T extends DevelopmentCard
 	 */
 	public T getCard(int i) {
+//		System.out.println(this.cards[i]);
+//		this.cards[i];
 		return this.cards[i];
 	}
 
