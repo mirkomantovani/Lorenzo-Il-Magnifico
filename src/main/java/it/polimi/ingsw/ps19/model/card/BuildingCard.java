@@ -43,5 +43,7 @@ public class BuildingCard extends DevelopmentCard {
     	return productionValue>productionActivationCost;
 
 	}
+	
+	
 
 }

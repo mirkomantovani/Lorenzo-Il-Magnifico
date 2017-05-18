@@ -3,18 +3,20 @@ package it.polimi.ingsw.ps19.model.deck;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
+import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
+import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
@@ -23,8 +25,8 @@ import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
-
 
 /**
  * The Class DeckCreator.
@@ -137,6 +139,8 @@ public class DeckCreator {
 		CouncilPrivilegeEffect privilegeEffect;
 		ForEachTypeCardEffect forEachEffect;
 		
+		ArrayList<Resource> choices;
+		
 		AtomicExchangeEffect atomicExchange1,atomicExchange2;
 		
 		privilege=Integer.parseInt(buffReader.readLine());   //lines 11-12-13-14
@@ -177,8 +181,13 @@ public class DeckCreator {
 		}
 		else {
 			
+			choices = new ArrayList<Resource>();
 			
-			privilegeEffect=new CouncilPrivilegeEffect();
+			for(int i = 0; i<privilege; i++){
+				choices.add(null);
+			}
+				
+			privilegeEffect=new CouncilPrivilegeEffect(choices);
 			
 			instantChest=new ResourceChest(coin,0,0,0,0,vPoint,mPoint); 
 			
@@ -285,14 +294,13 @@ public class DeckCreator {
 		Period period;
 		
 		ResourceChest cost;
-		ResourceChest alternativeCost;
 		ResourceChest addings;
+		ResourceChest victoryPointsChest;
 		
 		Effect immediateEffect;
 		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		
-		int militaryPointsRequired;
-		int militaryPointsRequired2;
+
 		int coins;
 		int faithPoints;
 		int victoryPoints;
@@ -301,6 +309,14 @@ public class DeckCreator {
 		int servants;
 		int militaryPoints;
 		int privilege;
+		int productionBonus;
+		int harvestBonus;
+		int takeCardType;
+		int takeCardCost;
+		
+		ArrayList<Resource> choices;
+		
+		int index = 0;
 		
 		VentureCard[] deck = new VentureCard[deckLength];
 
@@ -315,60 +331,51 @@ public class DeckCreator {
 		
 		period = Period.values()[Integer.parseInt(buffReader.readLine()) - 1];
 		
-		coins = Integer.parseInt(buffReader.readLine());
-		woods = Integer.parseInt(buffReader.readLine());
-		servants = Integer.parseInt(buffReader.readLine());
-		stones = Integer.parseInt(buffReader.readLine());
-		militaryPointsRequired = Integer.parseInt(buffReader.readLine());
-		militaryPoints = Integer.parseInt(buffReader.readLine());
-		cost = new ResourceChest(coins,woods,stones,servants,0,0,militaryPoints);
-		
-		coins = Integer.parseInt(buffReader.readLine());
-		servants = Integer.parseInt(buffReader.readLine());
-		stones = Integer.parseInt(buffReader.readLine());
-		woods = Integer.parseInt(buffReader.readLine());
-		militaryPoints = Integer.parseInt(buffReader.readLine());
-		militaryPointsRequired2 = Integer.parseInt(buffReader.readLine());
-		alternativeCost = new ResourceChest(coins,woods,stones,servants,0,0,militaryPoints);
+		cost = new VentureCostResourceChest(Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()),
+				Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()),
+				0,0,0,Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()));
+				
 		
 		coins = Integer.parseInt(buffReader.readLine());
 		woods = Integer.parseInt(buffReader.readLine());
+		stones = Integer.parseInt(buffReader.readLine());
 		servants = Integer.parseInt(buffReader.readLine());
 		faithPoints = Integer.parseInt(buffReader.readLine());
 		victoryPoints = Integer.parseInt(buffReader.readLine());
 		militaryPoints = Integer.parseInt(buffReader.readLine());
+		
+		addings = new ResourceChest(coins,woods,stones,servants,faithPoints,0,militaryPoints);
+		
 		privilege = Integer.parseInt(buffReader.readLine());
+		productionBonus = Integer.parseInt(buffReader.readLine());
+		harvestBonus = Integer.parseInt(buffReader.readLine());
+		takeCardType = Integer.parseInt(buffReader.readLine());
+		takeCardCost = Integer.parseInt(buffReader.readLine());
+
+		victoryPointsChest = new ResourceChest(0,0,0,0,0,victoryPoints,0);
 		
+		if(privilege != 0){
+			choices = new ArrayList<Resource>();
+			for(int i = 0; i<privilege;i++){
+				choices.add(null);
+			}
+			immediateEffect = new CouncilPrivilegeEffect(choices);
+		}else if (takeCardType != 0){
+			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost);
+		} else if (productionBonus != 0){
+			immediateEffect = new InstantProductionActionEffect(productionBonus);
+		}else if (harvestBonus != 0){
+			immediateEffect = new InstantHarvestActionEffect(harvestBonus);
+		}else {
+			immediateEffect = null;
+		}
 		
+		permanentEffect = new InstantResourcesEffect(victoryPointsChest);
 		
-		
-		
-		
-		
-		
-		
-			
-			
-			
+		deck[index] = new VentureCard(id,name,period,cost,immediateEffect,permanentEffect);
+		index++;
 		}
 		return deck;
-	}
-	
-	/**
-	 * @author matteo
-	 * @return
-	 * @throws IOException
-	 */
-	private static Effect calculateTakeCardEffectFromFile() throws IOException{
-
-		
-		
-		
-	
-			return null;
-		
-
-		
 	}
 	
 	

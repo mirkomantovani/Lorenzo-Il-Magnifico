@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 
 import it.polimi.ingsw.ps19.model.card.CardType;
+import java.util.ArrayList;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
@@ -11,25 +12,55 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  */
 public class Tower {
 	
-	Floor firstFloor;
-	Floor secondFloor;
-	Floor thirdFloor;
-	Floor fourthFloor;
+	ArrayList<Floor> floors;
 	
 	CardType cardType;
 	
 	DevelopmentCard[] deck;
 	
-	//todo
- 	public Tower(CardType cardType, DevelopmentCard[] deck, InstantResourcesEffect thirdFloorEffect, InstantResourcesEffect fourthFloorEffect ){ 
+	private static int currentCard = 0; // index of the card on the top of the deck
+	
+	
+ 	public Tower(CardType cardType, DevelopmentCard[] deck){ 
 			this.cardType = cardType;
 			this.deck = deck;
 			
-			firstFloor = new Floor(null,null,1,null);
-			secondFloor = new Floor(null,null,3,null);
-			thirdFloor = new Floor(null,null,5,thirdFloorEffect);
-			fourthFloor = new Floor(null,null,7,fourthFloorEffect);
+			for(int i = 0; i < deck.length / 6; i++){
+				floors.add(new Floor(deck[currentCard],this,0,null));
+				currentCard++;
+				
+			}
+	
 	
 	} 
-
+ 	
+ 	/**
+ 	 * This method places one Card in each floor, starting by the card currently on the top of it.
+ 	 * 
+ 	 */
+ 	public void setCards(){
+ 		for(int i=0; i < deck.length/6; i++){
+ 			Floor floor = new Floor(deck[currentCard],this,0,null);
+ 			floors.set(i,floor);
+ 			currentCard++;
+ 		}
+ 	}
+ 	
+ 	/**
+ 	 * @author matteo
+ 	 * This Method builds an Array with the cards in the tower and returns it
+ 	 * 
+ 	 * @return
+ 	 */
+ 	public ArrayList<DevelopmentCard> getCards(){
+ 		
+ 		ArrayList<DevelopmentCard> towerCards = new ArrayList<DevelopmentCard>();
+ 		
+ 		for(Floor f : floors){
+ 			towerCards.add(f.card);
+ 		}
+ 		
+ 		return towerCards;
+ 	}
+	
 }
