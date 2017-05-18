@@ -11,16 +11,16 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Mirko 
  *
  */
-public abstract class DevelopmentCard {
+public abstract class DevelopmentCard extends Card {
 	
 
 	//attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
 	private int id;   
 	private Period period;
 	private ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
-	private String name;
+	
 	private Effect immediateEffect,permanentEffect;
-	private Player player;
+	
 	
 	/**
 	 * @param id
@@ -32,8 +32,8 @@ public abstract class DevelopmentCard {
 	 */
 
 	public DevelopmentCard(int id,String name,Period period,ResourceChest cost,Effect immediateEffect,Effect permanentEffect){
+		super(name);
 		this.id=id;
-		this.name=name;
 		this.period=period;
 		this.cost=cost;
 		this.immediateEffect=immediateEffect;
@@ -73,12 +73,6 @@ public abstract class DevelopmentCard {
 		return period;
 	}
 
-	/**
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
 
 	/**
 	 * @return
@@ -94,21 +88,11 @@ public abstract class DevelopmentCard {
 		return permanentEffect;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	/**
-	 * @param player
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
 	
 	 @Override
 		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + player
+			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + super.getName()
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + super.getName()
 					+ "]";
 		}
 	
