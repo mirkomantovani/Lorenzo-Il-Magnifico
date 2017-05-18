@@ -54,5 +54,15 @@ public class CouncilPrivilegeEffect extends Effect {
 			     }
 			
 		}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You can take one of these: 2 coins, 1 stone & 1 wood, 2 servants, 1 faithPoints, 2 militaryPoints");
+		return builder.toString();
+	}
+		
+		
 		
 	}

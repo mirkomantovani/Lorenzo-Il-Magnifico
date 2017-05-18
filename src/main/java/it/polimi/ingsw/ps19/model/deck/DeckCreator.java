@@ -325,7 +325,9 @@ public class DeckCreator {
 		
 		while (lineRead!=null) {
 			
-		id = Integer.parseInt(buffReader.readLine());
+		id = Integer.parseInt(lineRead);
+		
+		System.out.println(id);
 		
 		name = buffReader.readLine();
 		
@@ -367,14 +369,19 @@ public class DeckCreator {
 		}else if (harvestBonus != 0){
 			immediateEffect = new InstantHarvestActionEffect(harvestBonus);
 		}else {
-			immediateEffect = null;
+			immediateEffect = new InstantResourcesEffect(addings) ;
 		}
 		
 		permanentEffect = new InstantResourcesEffect(victoryPointsChest);
 		
 		deck[index] = new VentureCard(id,name,period,cost,immediateEffect,permanentEffect);
+		System.out.println(deck[index].toString());
 		index++;
+		
+		lineRead = buffReader.readLine();   //line 1
+		System.out.println("id: "+lineRead);
 		}
+	
 		return deck;
 	}
 	

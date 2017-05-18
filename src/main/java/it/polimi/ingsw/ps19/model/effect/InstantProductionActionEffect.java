@@ -32,6 +32,17 @@ public class InstantProductionActionEffect extends Effect {
 		} */
 		
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You can activate a production with an action value of ");
+		builder.append(productionActionValue);
+		return builder.toString();
+	}
+	
+	
 	
 	
 	

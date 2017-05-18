@@ -37,4 +37,14 @@ public class InstantHarvestActionEffect extends Effect {
 	
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You can activate a harvest with an action value of ");
+		builder.append(harvestActionValue);
+		return builder.toString();
+	}
+	
+	
+
 }

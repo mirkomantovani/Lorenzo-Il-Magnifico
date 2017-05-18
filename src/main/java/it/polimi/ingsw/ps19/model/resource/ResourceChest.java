@@ -145,9 +145,27 @@ public class ResourceChest {
 	public void setStones(Stone stones) {
 		this.stones = stones;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+	
+		builder.append(victoryPoints);
+		
+		builder.append(militaryPoints);
+		
+		builder.append(faithPoints);
+		
+		builder.append(coins);
+		
+		builder.append(servants);
+		
+		builder.append(woods);
+		
+		builder.append(stones);
+		
+		return builder.toString();
+	}
+	
+	
 }

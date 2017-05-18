@@ -24,6 +24,7 @@ public class VentureDeck extends Deck<VentureCard> {
 	 */
 	public VentureDeck(String filePath, int deckLength) throws IOException {
 		cards=DeckCreator.createVentureCardDeck(filePath, deckLength);
+		
 	}
 
 	/* (non-Javadoc)
@@ -33,6 +34,17 @@ public class VentureDeck extends Deck<VentureCard> {
 	public int length() {
 		return this.cards.length;
 	}
+
+	public void printCardInfo(int i){
+		System.out.println(this.cards[i].getId());
+		
+	}
+	
+	 public VentureCard getCard(int i) {
+//		System.out.println(this.cards[i]);
+//		this.cards[i];
+		return this.cards[i];
+	} 
 
 
 }
