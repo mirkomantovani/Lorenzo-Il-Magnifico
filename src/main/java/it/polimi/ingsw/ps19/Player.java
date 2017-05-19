@@ -99,21 +99,6 @@ public class Player {
 	}
 	
 
-	public int getHarvestModification() {
-		return harvestModification;
-	}
-
-	public void setHarvestModification(int harvestModification) {
-		this.harvestModification = harvestModification;
-	}
-
-	public int getProductionModification() {
-		return productionModification;
-	}
-
-	public void setProductionModification(int productionModification) {
-		this.productionModification = productionModification;
-	}
 
 	public boolean isExcommunicationStatusPeriod1() {
 		return excommunicationStatusPeriod1;
