@@ -14,8 +14,6 @@ import it.polimi.ingsw.ps19.model.card.TerritoryCard;
  */
 public class TerritoryDeck extends Deck<TerritoryCard> {
 
-	/** The cards. */
-	private TerritoryCard[] cards;
 
 	/**
 	 * Instantiates a new territory deck.

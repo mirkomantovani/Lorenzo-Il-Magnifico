@@ -32,8 +32,7 @@ public class Player {
 	ArrayList<CharacterCard> characterDeck;
 	ArrayList<VentureCard> ventureDeck;
 	
-	private int harvestModification; //it means the increase/decrease of the Harvest action value for the specific player
-	private int productionModification; 
+	Bonus bonuses;
 	
 	private boolean excommunicationStatusPeriod1; //true if the player is excommunicated for the first period
 	private boolean excommunicationStatusPeriod2;
@@ -51,8 +50,7 @@ public class Player {
 		characterDeck = new ArrayList<CharacterCard>();
 		ventureDeck = new ArrayList<VentureCard>();
 		
-		harvestModification = 0;
-		productionModification = 0;
+		Bonus bonuses;
 		
 		excommunicationStatusPeriod1 = false;
 		excommunicationStatusPeriod2 = false;
