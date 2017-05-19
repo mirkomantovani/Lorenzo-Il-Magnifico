@@ -1,6 +1,9 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.excommunicationtile;
 
 import java.util.List;
+
+import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * @author Mirko

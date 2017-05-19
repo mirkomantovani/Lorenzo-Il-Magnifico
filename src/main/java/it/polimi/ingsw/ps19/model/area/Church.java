@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.area;
 
-import it.polimi.ingsw.ps19.ExcommunicationTile;
+import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 
 /**
  * @author Mirko
@@ -22,6 +22,8 @@ public class Church {
 		this.excommunicationSecond = excommunicationSecond;
 		this.excommunicationThird = excommunicationThird;
 	}
+	
+	
 
 	
 }

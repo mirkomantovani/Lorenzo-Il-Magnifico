@@ -1,9 +1,10 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.excommunicationtile;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
