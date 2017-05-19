@@ -13,8 +13,7 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
  */
 public class CharacterDeck extends Deck<CharacterCard> {
 
-	/** The cards. */
-	private CharacterCard[] cards;
+	
 	
 	/**
 	 * Instantiates a new character deck.

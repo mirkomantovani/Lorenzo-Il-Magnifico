@@ -91,8 +91,8 @@ public abstract class DevelopmentCard extends Card {
 	
 	 @Override
 		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + super.getName()
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + super.getName()
+			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + player
 					+ "]";
 		}
 	
