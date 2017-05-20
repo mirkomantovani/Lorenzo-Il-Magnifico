@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19;
 
 import java.io.IOException;
+import java.lang.invoke.ConstantCallSite;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
@@ -26,21 +27,33 @@ public class EffectsTest {
 			System.out.println("There was a fucking Error");
 		}
 		
-		distributeResources(player1);
+		card=buildingDeck.getCard(2);
+		
+		System.out.println(player1.getResourceChest().toString());
+		distributeResources(player1,10);
+		System.out.println(player1.getResourceChest().toString());
+		
+		for(int i=0;i<CardConstants.DECK_LENGTH;i++){
+		card=buildingDeck.getCard(i);
 		buyCardAction(player1,card);
+		System.out.println(player1.getResourceChest().toString());
+		}
 	}
 	
 	private static void buyCardAction(Player player, DevelopmentCard card) {
+		//IMPORTANT the player.addCard(card); has to be the first thing to do, otherwise when the immediate
+		//effect is applied the associated player of the card is null and a NullPointerException would be thrown
+		player.addCard(card);
+		System.out.println("You bought the card"+card.toString());
 		player.getResourceChest().subChest(card.getCost());
 		card.getImmediateEffect().applyEffect();
-		player.
-		
+
 	
 	}
 
-	private static void distributeResources(Player player) {
-		ResourceChest resourceChest=new ResourceChest(10,10,10,10,10,10,10);
-		player.getResourceChest().pourInto(resourceChest);
+	private static void distributeResources(Player player,int m) {
+		ResourceChest resourceChest=new ResourceChest(10*m,10*m,10*m,10*m,10*m,10*m,10*m);
+		player.getResourceChest().addChest(resourceChest);
 		
 	}
 

@@ -67,15 +67,22 @@ public class Player {
 	 * @param card
 	 */
 	public void addCard(DevelopmentCard card){
+		card.setPlayer(this);
 		switch(card.getCardType()){
 		case BUILDING:
 			buildingDeck.add((BuildingCard) card);	
+			break;
 		case TERRITORY:
 			territoryDeck.add((TerritoryCard) card);
+			break;
 		case VENTURE:
 			ventureDeck.add((VentureCard) card);
+			break;
 		case CHARACTER:
 			characterDeck.add((CharacterCard) card);
+			break;
+		default:
+			new Exception("Invalid card type");
 		}
 		
 	}
