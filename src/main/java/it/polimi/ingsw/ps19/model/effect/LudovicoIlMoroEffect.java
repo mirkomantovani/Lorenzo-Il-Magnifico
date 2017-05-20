@@ -12,6 +12,15 @@ public class LudovicoIlMoroEffect extends Effect {
 		
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Your familiars, excepts for the neutral one, have an action value of 5."
+				+ "The related dice value is not relevant. You can also increase the action "
+				+ "value by spending servants or using character cards effects");
+		return builder.toString();
+	}
+
 	
 	
 }

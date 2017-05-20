@@ -12,6 +12,13 @@ public class CesareBorgiaEffect extends Effect {
 		
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You can pick territory cards without having the military points required");
+		return builder.toString();
+	}
+
 	
 	
 }

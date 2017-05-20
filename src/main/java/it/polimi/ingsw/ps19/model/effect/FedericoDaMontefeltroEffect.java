@@ -15,8 +15,8 @@ public class FedericoDaMontefeltroEffect extends Effect{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("One of your Familiar, between those linked with a dice, "
-				+ "has an action value of six, that could be increased by spending servants");
+		builder.append("Choose one familiar excepts for your neutral one and set its action value "
+				+ "to six");
 		return builder.toString();
 	}
 

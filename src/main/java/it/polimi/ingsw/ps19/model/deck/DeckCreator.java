@@ -552,9 +552,11 @@ public class DeckCreator {
 			}
 			
 			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
-			index++;
 			
-			System.out.println("Name: "+lineRead);
+			System.out.println(deck[index].toString());
+			
+			index++;
+
 			lineRead = buffReader.readLine();   //line 1
 	
 		}

@@ -76,8 +76,7 @@ try{
 		System.out.println("Time complexity: "+(end-start)+"ms");
 		
 		System.out.println("Leader Deck built successfully!");
-		leaderDeck.printCardInfo(0);
-		System.out.println(leaderDeck.getCard(2).toString());
+		
 	}
 
 }

@@ -68,7 +68,7 @@ public class LeaderCardRequirement {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("You must have: ");
+		builder.append("To activate the special effect you must have: ");
 		builder.append(resourcesRequired);
 		builder.append(", ");
 		builder.append(buildingCardRequired);
