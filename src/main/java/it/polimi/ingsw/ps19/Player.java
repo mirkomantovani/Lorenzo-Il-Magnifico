@@ -60,6 +60,25 @@ public class Player {
 			
 		
 	}
+	
+	/**
+	 * This method adds a cart of a generic Type to the correct Deck of the player
+	 * @author Mirko
+	 * @param card
+	 */
+	public void addCard(DevelopmentCard card){
+		switch(card.getCardType()){
+		case BUILDING:
+			buildingDeck.add((BuildingCard) card);	
+		case TERRITORY:
+			territoryDeck.add((TerritoryCard) card);
+		case VENTURE:
+			ventureDeck.add((VentureCard) card);
+		case CHARACTER:
+			characterDeck.add((CharacterCard) card);
+		}
+		
+	}
 
 	public String getName() {
 		return name;
@@ -133,7 +152,7 @@ public class Player {
 		this.excommunicationStatusPeriod2 = excommunicationStatusPeriod2;
 	}
 
-	public boolean isExcommunicationStatusPeriod3() {
+	public boolean isExcommunicationStatusPeriod3() {  //What does it mean Teo?
 		return excommunicationStatusPeriod3;
 	}
 
@@ -186,6 +205,8 @@ public class Player {
 				return null;
 		}
 	}
+	
+	
 	
 	
 }

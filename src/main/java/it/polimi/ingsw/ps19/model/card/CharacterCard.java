@@ -28,6 +28,7 @@ public class CharacterCard extends DevelopmentCard {
 	public CharacterCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
 			Effect permanentEffect) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);
+		this.cardType=CardType.CHARACTER;
 	}
 
 	
