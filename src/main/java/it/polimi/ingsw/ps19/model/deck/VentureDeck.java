@@ -12,8 +12,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
  */
 public class VentureDeck extends Deck<VentureCard> {
 
-	/** The cards. */
-	private VentureCard[] cards;
+
 	
 	/**
 	 * Instantiates a new venture deck.
@@ -24,6 +23,7 @@ public class VentureDeck extends Deck<VentureCard> {
 	 */
 	public VentureDeck(String filePath, int deckLength) throws IOException {
 		cards=DeckCreator.createVentureCardDeck(filePath, deckLength);
+		
 	}
 
 	/* (non-Javadoc)
@@ -32,6 +32,11 @@ public class VentureDeck extends Deck<VentureCard> {
 	@Override
 	public int length() {
 		return this.cards.length;
+	}
+
+	public void printCardInfo(int i){
+		System.out.println(this.cards[i].getId());
+		
 	}
 
 

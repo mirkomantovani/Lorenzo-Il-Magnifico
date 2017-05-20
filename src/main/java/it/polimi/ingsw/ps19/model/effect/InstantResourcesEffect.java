@@ -30,6 +30,23 @@ public class InstantResourcesEffect extends Effect {
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	public void applyEffect() {
-		effectResourceChest.pourInto(this.getAssociatedPlayer().getResourceChest());
+		effectResourceChest.pourInto(this.getAssociatedPlayer()
+				.getResourceChest());
 	}
+
+	/* 
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 * @author matteo
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You gain ");
+		builder.append(effectResourceChest.toString());
+		
+		return builder.toString();
+	}
+	
+	
 }

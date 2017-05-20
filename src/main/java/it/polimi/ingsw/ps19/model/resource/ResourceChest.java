@@ -79,24 +79,61 @@ public class ResourceChest {
 		resourceChest.getStones().add(this.stones.getAmount());
 	}
 	
+	
+	/**
+	 * This method subtracts every Resource of the Chest passed by parameter to the Chest it is called upon
+	 * @author Mirko
+	 * @param resourceChest
+	 */
+	public void subChest(ResourceChest resourceChest){
+		
+		this.victoryPoints.sub(resourceChest.victoryPoints);
+		this.militaryPoints.sub(resourceChest.militaryPoints);
+		this.faithPoints.sub(resourceChest.faithPoints);
+		this.coins.sub(resourceChest.coins);
+		this.servants.sub(resourceChest.servants);
+		this.woods.sub(resourceChest.woods);
+		this.stones.sub(resourceChest.stones);
+		
+	}
+	
+	/**
+	 * This method adds every Resource of the Chest passed by parameter to the Chest it is called upon
+	 * @author Mirko
+	 * @param resourceChest
+	 */
+	public void addChest(ResourceChest resourceChest){
+		
+		this.victoryPoints.add(resourceChest.victoryPoints);
+		this.militaryPoints.add(resourceChest.militaryPoints);
+		this.faithPoints.add(resourceChest.faithPoints);
+		this.coins.add(resourceChest.coins);
+		this.servants.add(resourceChest.servants);
+		this.woods.add(resourceChest.woods);
+		this.stones.add(resourceChest.stones);
+		
+	}
+	
 
 	/**
-	 * this method was needed to apply the AtomicExchangeEffect
+	 * This method subtracts the generic resource passed by parameter to the right resource field of the chest
+	 * (this method was needed to apply the AtomicExchangeEffect)
 	 * @author Mirko
 	 * @param resource to subtract
 	 */
 	public void subResource(Resource resource) {
-		getResourceInChest(resource).sub(resource.getAmount());
+		getResourceInChest(resource).sub(resource);
 	}
 	
 	
 	/**
-	 * this method was needed to apply the AtomicExchangeEffect
+	 * This method adds the generic resource passed by parameter to the right resource field of the chest
+	 *(this method was needed to apply the AtomicExchangeEffect)
 	 * @author Mirko
 	 * @param resource to subtract
 	 */
 	public void addResource(Resource resource) {
-		getResourceInChest(resource).add(resource.getAmount());
+		getResourceInChest(resource).add(resource);
 	}
 	
 
@@ -145,9 +182,27 @@ public class ResourceChest {
 	public void setStones(Stone stones) {
 		this.stones = stones;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+	
+		builder.append(victoryPoints);
+		
+		builder.append(militaryPoints);
+		
+		builder.append(faithPoints);
+		
+		builder.append(coins);
+		
+		builder.append(servants);
+		
+		builder.append(woods);
+		
+		builder.append(stones);
+		
+		return builder.toString();
+	}
+	
+	
 }

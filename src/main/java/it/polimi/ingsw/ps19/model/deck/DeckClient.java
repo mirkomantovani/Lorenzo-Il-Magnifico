@@ -2,8 +2,10 @@ package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.IOException;
 
+
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
+import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 
 //solo per prova, da cancellare
@@ -15,6 +17,7 @@ public class DeckClient {
 	
 
 	private static Deck<BuildingCard> buildingDeck;
+	private static Deck<VentureCard> ventureDeck;
 	
 	
 	/**
@@ -40,8 +43,25 @@ public class DeckClient {
 		
 		System.out.println("Building Deck built successfully");
 		buildingDeck.printCardInfo(0);
-		System.out.println(buildingDeck.getCard(4).toString());
+		System.out.println(buildingDeck.getCard(7).toString());
 //		buildingDeck.getCard(0).toString();
+		
+		start = System.currentTimeMillis();
+		
+		try{
+			
+			ventureDeck=new VentureDeck("src/main/resources/files/fileventurecards.txt", CardConstants.DECK_LENGTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("There was a fucking Error");
+		}
+		 end = System.currentTimeMillis();
+		
+		System.out.println("Time complexity: "+(end-start)+"ms");
+		
+		System.out.println("Venture Deck built successfully!");
+		ventureDeck.printCardInfo(0);
+		System.out.println(ventureDeck.getCard(2).toString());
 	}
 
 }

@@ -26,6 +26,18 @@ public class TakeCardEffect extends Effect{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Take a ");
+		builder.append(cardType.toString().toLowerCase());
+		builder.append(" card, from an action space with an action value of ");
+		builder.append(cardCost);
+		return builder.toString();
+	}
+	
+	
 	
 	
 

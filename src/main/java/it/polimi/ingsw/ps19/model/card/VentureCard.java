@@ -13,6 +13,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  *
  */
 public class VentureCard extends DevelopmentCard {
+	
+	
 
 	/**
 	 * Instantiates a new venture card.
@@ -27,6 +29,15 @@ public class VentureCard extends DevelopmentCard {
 	public VentureCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
 			Effect permanentEffect) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);
+		this.cardType=CardType.VENTURE;
+	}
+	
+	public ResourceChest selectCost(ResourceChest cost, ResourceChest alternativeCost, int choice){
+		switch(choice){
+		case 1: return cost;
+		case 2: return alternativeCost;
+		default: return cost;
+		}
 	}
 
 	

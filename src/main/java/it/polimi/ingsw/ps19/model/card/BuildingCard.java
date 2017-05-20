@@ -31,6 +31,7 @@ public class BuildingCard extends DevelopmentCard {
 
 		super(id, name, period, cost, immediateEffect, permanentEffect);
 		this.productionActivationCost = productionActivationCost;
+		this.cardType=CardType.BUILDING;
 	}
 
 	/**
@@ -43,5 +44,7 @@ public class BuildingCard extends DevelopmentCard {
     	return productionValue>productionActivationCost;
 
 	}
+	
+	
 
 }
