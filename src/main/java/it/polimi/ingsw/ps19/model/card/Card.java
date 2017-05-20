@@ -20,6 +20,7 @@ public abstract class Card {
 	public Card(String name) {
 		this.name = name;
 	}
+	
 	private Player player;
 	private String name;
 

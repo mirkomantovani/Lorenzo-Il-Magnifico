@@ -15,7 +15,6 @@ public class HarvestBonusEffect extends Effect {
 
 	@Override
 	public void applyEffect() {
-		card.getPlayer().setHarvestModification(value);
 		
 	}
 	

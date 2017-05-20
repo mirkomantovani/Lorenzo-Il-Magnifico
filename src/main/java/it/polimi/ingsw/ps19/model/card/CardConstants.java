@@ -13,4 +13,6 @@ public class CardConstants {
 	
 	/** The Constant DECK_LENGTH. */
 	public static final int DECK_LENGTH=38;
+	
+	public static final int LEADER_DECK_LENGTH = 20;
 }

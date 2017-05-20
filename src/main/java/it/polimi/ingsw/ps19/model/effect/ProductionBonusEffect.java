@@ -15,7 +15,6 @@ public class ProductionBonusEffect extends Effect {
 
 	@Override
 	public void applyEffect() {
-		card.getPlayer().setProductionModification(value);
 		
 	}
 	

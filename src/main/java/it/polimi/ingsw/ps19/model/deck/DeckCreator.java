@@ -5,21 +5,34 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.CesareBorgiaEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.FedericoDaMontefeltroEffect;
+import it.polimi.ingsw.ps19.model.effect.FilippoBrunelleschiEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.LorenzoDeMediciEffect;
+import it.polimi.ingsw.ps19.model.effect.LucreziaBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.LudovicoAriostoEffect;
+import it.polimi.ingsw.ps19.model.effect.LudovicoIlMoroEffect;
+import it.polimi.ingsw.ps19.model.effect.PicoDellaMirandolaEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.SantaRitaEffect;
+import it.polimi.ingsw.ps19.model.effect.SigismondoMalatestaEffect;
+import it.polimi.ingsw.ps19.model.effect.SistoIVEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.Resource;
@@ -411,8 +424,142 @@ public class DeckCreator {
 	
 	
 
-	// private Effect createEffect(){
-	//
-	// }
+	/**
+	 * @author matteo
+	 * @param filePath
+	 * @param deckLength
+	 * @return
+	 * @throws IOException
+	 */
+	public static LeaderCard[] createLeaderCardDeck(String filePath, int deckLength) throws IOException {
+		
+		int index = 0;
+		
+		String name;
+		
+		ResourceChest requirements;
+		int privilege;
+		ArrayList<Resource> choices;
+		
+		int territoryCardsRequired; // the content is the number of territory cards required 
+		int buildingCardsRequired;
+		int characterCardsRequired;
+		int ventureCardsRequired;
+		int anyCardsRequired;
+		
+		LeaderCardRequirement totalRequirements;
+		
+		ResourceChest addings;
+		
+		int harvestActionValue;
+		float productionActionValue;
+		
+		int ludovicoAriostoEffect;
+		int filippoBrunelleschiEffect;
+		int sigismondoMalatestaEffect;
+		int ludovicoIlMoroEffect;
+		int lorenzoDeMediciEffect;
+		int sistoIVEffect;
+		int cesareBorgiaEffect;
+		int santaRitaEffect;
+		int picoDellaMirandolaEffect;
+		int lucreziaBorgiaEffect;
+		int federicoDaMontefeltroEffect;
+		
+		Effect specialEffect;
+
+		
+		LeaderCard[] deck = new LeaderCard[deckLength];
+
+		buffReader = new BufferedReader(new FileReader(filePath));
+		lineRead = buffReader.readLine();
+		
+		while (lineRead!=null) {
+			
+			name = lineRead;
+			
+			requirements = new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()));
+			
+			territoryCardsRequired = Integer.parseInt(buffReader.readLine());
+			buildingCardsRequired = Integer.parseInt(buffReader.readLine());
+			characterCardsRequired = Integer.parseInt(buffReader.readLine());
+			ventureCardsRequired = Integer.parseInt(buffReader.readLine());
+			anyCardsRequired = Integer.parseInt(buffReader.readLine());
+			
+			totalRequirements = new LeaderCardRequirement(requirements,territoryCardsRequired,buildingCardsRequired,
+					characterCardsRequired,ventureCardsRequired,anyCardsRequired);
+			
+			addings = new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()));
+			
+			privilege = Integer.parseInt(buffReader.readLine());
+			
+			harvestActionValue = Integer.parseInt(buffReader.readLine());
+			productionActionValue = Float.parseFloat(buffReader.readLine());
+			
+			ludovicoAriostoEffect = Integer.parseInt(buffReader.readLine());
+			filippoBrunelleschiEffect = Integer.parseInt(buffReader.readLine());
+			sigismondoMalatestaEffect = Integer.parseInt(buffReader.readLine());
+			ludovicoIlMoroEffect = Integer.parseInt(buffReader.readLine());
+			lorenzoDeMediciEffect = Integer.parseInt(buffReader.readLine());
+			sistoIVEffect = Integer.parseInt(buffReader.readLine());
+			cesareBorgiaEffect = Integer.parseInt(buffReader.readLine());
+			santaRitaEffect = Integer.parseInt(buffReader.readLine());
+			picoDellaMirandolaEffect = Integer.parseInt(buffReader.readLine());
+			lucreziaBorgiaEffect = Integer.parseInt(buffReader.readLine());
+			federicoDaMontefeltroEffect = Integer.parseInt(buffReader.readLine());
+			
+			if(harvestActionValue != 0){
+			specialEffect = new InstantHarvestActionEffect(harvestActionValue);
+			} else if(productionActionValue != 0.0)
+			{
+				specialEffect = new InstantProductionActionEffect((int)productionActionValue);
+			}else if(ludovicoAriostoEffect == 1){
+				specialEffect = new LudovicoAriostoEffect();
+			}else if(filippoBrunelleschiEffect == 1){
+				specialEffect = new FilippoBrunelleschiEffect();
+			}else if(sigismondoMalatestaEffect == 1){
+				specialEffect = new SigismondoMalatestaEffect();
+			}else if(ludovicoIlMoroEffect == 1){
+				specialEffect = new LudovicoIlMoroEffect();
+			}else if(lorenzoDeMediciEffect == 1){
+				specialEffect = new LorenzoDeMediciEffect();
+			}else if(sistoIVEffect == 1){
+				specialEffect = new SistoIVEffect();
+			}else if(cesareBorgiaEffect == 1){
+				specialEffect = new CesareBorgiaEffect();
+			}else if(santaRitaEffect == 1){
+				specialEffect = new SantaRitaEffect();
+			}else if(picoDellaMirandolaEffect == 1){
+				specialEffect = new PicoDellaMirandolaEffect();
+			}else if(lucreziaBorgiaEffect == 1){
+				specialEffect = new LucreziaBorgiaEffect();
+			}else if(federicoDaMontefeltroEffect == 1){
+				specialEffect = new FedericoDaMontefeltroEffect();
+			}else if (privilege != 0){
+				choices = new ArrayList<Resource>();
+				for(int i = 0; i<privilege;i++){
+					choices.add(null);
+				}
+				specialEffect = new CouncilPrivilegeEffect(choices);
+			}else{
+				specialEffect = new InstantResourcesEffect(addings);
+			}
+			
+			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
+			index++;
+			
+			System.out.println("Name: "+lineRead);
+			lineRead = buffReader.readLine();   //line 1
+	
+		}
+		return deck;
+		
+	}
 
 }
