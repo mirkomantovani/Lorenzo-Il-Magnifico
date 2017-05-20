@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  */
 public abstract class Deck<T extends DevelopmentCard> {
 
-	private T[] cards;
+	protected T[] cards;
 
 	/**
 	 * This method shuffles the deck mantaining the Periods' order (FIRST Period
@@ -55,9 +55,8 @@ public abstract class Deck<T extends DevelopmentCard> {
 	 * @param i
 	 * @return dynamic type T extends DevelopmentCard
 	 */
-	public T getCard(int i) {  //perchè non va cazzo?
-//		System.out.println(this.cards[i]);
-//		this.cards[i];
+	public T getCard(int i) {  
+
 		return this.cards[i];
 	}
 	

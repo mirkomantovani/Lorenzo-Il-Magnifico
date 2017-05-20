@@ -60,6 +60,32 @@ public class Player {
 			
 		
 	}
+	
+	/**
+	 * This method adds a cart of a generic Type to the correct Deck of the player
+	 * @author Mirko
+	 * @param card
+	 */
+	public void addCard(DevelopmentCard card){
+		card.setPlayer(this);
+		switch(card.getCardType()){
+		case BUILDING:
+			buildingDeck.add((BuildingCard) card);	
+			break;
+		case TERRITORY:
+			territoryDeck.add((TerritoryCard) card);
+			break;
+		case VENTURE:
+			ventureDeck.add((VentureCard) card);
+			break;
+		case CHARACTER:
+			characterDeck.add((CharacterCard) card);
+			break;
+		default:
+			new Exception("Invalid card type");
+		}
+		
+	}
 
 	public String getName() {
 		return name;
@@ -133,7 +159,7 @@ public class Player {
 		this.excommunicationStatusPeriod2 = excommunicationStatusPeriod2;
 	}
 
-	public boolean isExcommunicationStatusPeriod3() {
+	public boolean isExcommunicationStatusPeriod3() {  //What does it mean Teo?
 		return excommunicationStatusPeriod3;
 	}
 
@@ -186,6 +212,8 @@ public class Player {
 				return null;
 		}
 	}
+	
+	
 	
 	
 }

@@ -12,5 +12,5 @@ public class CardConstants {
 	public static final int BUILDINGCARD_FILE_ENTRIES=38;
 	
 	/** The Constant DECK_LENGTH. */
-	public static final int DECK_LENGTH=38;
+	public static final int DECK_LENGTH=24;
 }
