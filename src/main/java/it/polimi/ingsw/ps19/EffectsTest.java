@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps19;
 
 import java.io.IOException;
-import java.lang.invoke.ConstantCallSite;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
+import it.polimi.ingsw.ps19.model.deck.VentureDeck;
+import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -15,26 +16,28 @@ public class EffectsTest {
 	private static Deck<BuildingCard> buildingDeck;
 	private static Player player1;
 	private static DevelopmentCard card;
+	private static Deck<VentureCard> ventureDeck;
 
 	public static void main(String[] args) {
 		
 		player1=new Player("Mirko", Color.RED);
 
+	
 		try {
-			buildingDeck=new BuildingDeck("src/main/resources/files/filebuildingcards.txt", CardConstants.DECK_LENGTH);
+			ventureDeck=new VentureDeck("src/main/resources/files/fileventurecards.txt", CardConstants.DECK_LENGTH);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("There was a fucking Error");
 		}
 		
-		card=buildingDeck.getCard(2);
+		card=ventureDeck.getCard(2);
 		
 		System.out.println(player1.getResourceChest().toString());
 		distributeResources(player1,10);
 		System.out.println(player1.getResourceChest().toString());
 		
 		for(int i=0;i<CardConstants.DECK_LENGTH;i++){
-		card=buildingDeck.getCard(i);
+		card=ventureDeck.getCard(i);
 		buyCardAction(player1,card);
 		System.out.println(player1.getResourceChest().toString());
 		}
