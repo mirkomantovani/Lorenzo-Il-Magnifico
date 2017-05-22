@@ -40,8 +40,8 @@ public class Tower {
  	 * 
  	 */
  	public void setCards(){
- 		for(int i=0; i < deck.length/6; i++){
- 			Floor floor = new Floor(deck[currentCard],this,0,null);
+ 		for(int i=0; i < deck.length()/6; i++){
+ 			Floor floor = new Floor(deck.getCard(currentCard),this,0,null);
  			floors.set(i,floor);
  			currentCard++;
  		}
