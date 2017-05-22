@@ -15,10 +15,17 @@ public class ProductionBonusEffect extends Effect {
 
 	@Override
 	public void applyEffect() {
-		card.getPlayer().setProductionModification(value);
+		card.getPlayer().getBonuses().setProductionVariation(value);
 		
 	}
 	
+	@Override
+	public String toString() {
+		if(value >= 0)
+			return "You gain a + " + value + " to your production value";
+		else
+			return "You gain a " + value + " to your production value";
+	}
 	
 
 }

@@ -15,10 +15,17 @@ public class HarvestBonusEffect extends Effect {
 
 	@Override
 	public void applyEffect() {
-		card.getPlayer().setHarvestModification(value);
+		card.getPlayer().getBonuses().setHarvestVariation(value);
 		
 	}
 	
+	@Override
+	public String toString() {
+		if(value >= 0)
+			return "You gain a + " + value + " to your harvest value";
+		else
+			return "You gain a " + value + " to your harvest value";
+	}
 	
 
 }

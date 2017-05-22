@@ -39,9 +39,10 @@ public abstract class DevelopmentCard {
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
 		
-		
-		this.immediateEffect.setCard(this);  //this creates the association between an effect and its card
-		this.permanentEffect.setCard(this);
+		if(immediateEffect!=null)
+			this.immediateEffect.setCard(this);  //this creates the association between an effect and its card
+		if(this.permanentEffect!=null)
+			this.permanentEffect.setCard(this);
 	}
 
 	/**
@@ -106,9 +107,21 @@ public abstract class DevelopmentCard {
 	}
 	
 	 @Override
-		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + player
+		public String toString() {			
+		 if(immediateEffect == null && permanentEffect != null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect !=null && permanentEffect == null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=     /     "  + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect == null && permanentEffect == null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=     /     " + " \npermanentEffect=      /     " + "\nplayer=" + player
+						+ "]";
+		 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
 					+ "]";
 		}
 	

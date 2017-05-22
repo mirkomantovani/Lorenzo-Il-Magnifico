@@ -45,6 +45,4 @@ public class VentureDeck extends Deck<VentureCard> {
 //		this.cards[i];
 		return this.cards[i];
 	} 
-
-
 }

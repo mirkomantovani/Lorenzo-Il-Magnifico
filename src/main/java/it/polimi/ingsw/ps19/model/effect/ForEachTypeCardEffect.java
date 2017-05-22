@@ -32,4 +32,9 @@ public class ForEachTypeCardEffect extends Effect {
 		this.getAssociatedPlayer().getResourceChest().addResource(this.resource);
 	}
 
+	@Override
+	public String toString() {
+		return resource.toString() + " for each " + typeCard.toString().toLowerCase() + " card";
+	}
+	
 }

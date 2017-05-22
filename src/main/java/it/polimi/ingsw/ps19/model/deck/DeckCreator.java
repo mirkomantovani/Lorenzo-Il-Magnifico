@@ -12,16 +12,24 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
+import it.polimi.ingsw.ps19.model.effect.NoFloorBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
+import it.polimi.ingsw.ps19.model.effect.RaiseHarvestValueEffect;
+import it.polimi.ingsw.ps19.model.effect.RaiseProductionValueEffect;
+import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
@@ -187,7 +195,7 @@ public class DeckCreator {
 				choices.add(null);
 			}
 				
-			privilegeEffect=new CouncilPrivilegeEffect(choices);
+			privilegeEffect=new CouncilPrivilegeEffect(1);  //TODO TEO DA MODIFICARE!!!
 			
 			instantChest=new ResourceChest(coin,0,0,0,0,vPoint,mPoint); 
 			
@@ -361,9 +369,9 @@ public class DeckCreator {
 			for(int i = 0; i<privilege;i++){
 				choices.add(null);
 			}
-			immediateEffect = new CouncilPrivilegeEffect(choices);
+			immediateEffect = new CouncilPrivilegeEffect(1); //TODO QUESTO TEO E' DA MODIFICARE!!!!!!!
 		}else if (takeCardType != 0){
-			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost);
+			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost, new ResourceChest());
 		} else if (productionBonus != 0){
 			immediateEffect = new InstantProductionActionEffect(productionBonus);
 		}else if (harvestBonus != 0){
@@ -396,18 +404,185 @@ public class DeckCreator {
 	 */
 	public static CharacterCard[] createCharacterCardDeck(String filePath, int deckLength) throws IOException {
 
-		int cardId=0;
+		int cardIndex=0;
+		
+		//CharacterCard parameter
+		int id;
+		String name;
+		Period period;
+		ResourceChest moneyCost;  //Character cards cost only coins
+		Effect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
+		Effect permanentEffect;
+		
+		
+		//local variable for support purpose, they will read and store the value from the file
+		//and then build the related object
+		int valueAmount;
+		CardType cardType;
+		int extraCardValue;
+		CardType extraCardType;
+		boolean buildingCardsBonus;
+		boolean characterCardsBonus;
+		int discountedCoin;
+		int discountedWood;
+		int discountedStone;
+		int discountedServant;
+		int givenMilitaryPoints;
+		int givenFaithPoints;
+		boolean noFloorBonus;
+		int raiseProductionValueAmount;
+		int raiseHarvestValueAmount;
+		int privilegeAmount; 
+		int victoryPerMilitaryPointsAmount;
+		int militaryPointsAmount;
+		int victoryPointsPerCardAmount;
+		CardType typeCard;
+		int harvestActionValue; 
+		int productionActionValue;
+		
+		ResourceChest discountChest;
+
+		
+		
+		
+		
 		CharacterCard[] deck = new CharacterCard[deckLength];
 
 		buffReader = new BufferedReader(new FileReader(filePath));
 		lineRead = buffReader.readLine();
 		
 		while (lineRead!=null) {
+			id = Integer.parseInt(lineRead); 
+			name = buffReader.readLine();
+			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
+			moneyCost = new ResourceChest(Integer.parseInt(buffReader.readLine()), 0, 0, 0, 0, 0, 0);
 			
-			cardId++;
+			//Initializing the support variables; this section reads all the parameters
+			//and saves them in local variables which are used to create the effect Objects later on
+			//This approach helps the readability. I want to avoid methods that directly have 
+			//other methods call as parameter making them hard to read
+			valueAmount = Integer.parseInt(buffReader.readLine()); 
+			cardType = CardType.values()[Integer.parseInt(buffReader.readLine())-1];
+			extraCardValue = Integer.parseInt(buffReader.readLine()); 
+			extraCardType = CardType.values()[Integer.parseInt(buffReader.readLine())-1]; 
+			buildingCardsBonus = Boolean.parseBoolean(buffReader.readLine());  
+			characterCardsBonus = Boolean.parseBoolean(buffReader.readLine());  
+			//prendi il valore di sconto per ogni risorsa scontata
+			discountedCoin = Integer.parseInt(buffReader.readLine());  		
+			discountedWood = Integer.parseInt(buffReader.readLine());  		
+			discountedStone = Integer.parseInt(buffReader.readLine()); 	
+			discountedServant = Integer.parseInt(buffReader.readLine()); 
+			//Fine assegnamenti sconti
+			givenMilitaryPoints = Integer.parseInt(buffReader.readLine());
+			givenFaithPoints = Integer.parseInt(buffReader.readLine());	 
+			noFloorBonus = Boolean.parseBoolean(buffReader.readLine());  
+			raiseProductionValueAmount = Integer.parseInt(buffReader.readLine());
+			raiseHarvestValueAmount = Integer.parseInt(buffReader.readLine());  
+			privilegeAmount = Integer.parseInt(buffReader.readLine());  
+			victoryPerMilitaryPointsAmount = Integer.parseInt(buffReader.readLine());
+			militaryPointsAmount = Integer.parseInt(buffReader.readLine());
+			victoryPointsPerCardAmount = Integer.parseInt(buffReader.readLine()); 
+			typeCard = CardType.values()[Integer.parseInt(buffReader.readLine())-1]; 
+			harvestActionValue = Integer.parseInt(buffReader.readLine()); 
+			productionActionValue = Integer.parseInt(buffReader.readLine()); 
+			
+			//The following instructions just check the correctness of the two boolean 
+			//depending on the type of card passed later on 
+			if(cardType == CardType.TERRITORY || cardType == CardType.VENTURE){
+				buildingCardsBonus = false;
+				characterCardsBonus = false;
+			}else if(cardType == CardType.CHARACTER){
+				buildingCardsBonus = false;
+			}else
+				characterCardsBonus = false;
+			
+			
+			
+			
+			//First I assign the permanent effect, there can't be more then one permanent effect per card
+			if(valueAmount != 0){
+				permanentEffect = new RaiseValueWithDiscountEffect(valueAmount, cardType, buildingCardsBonus, characterCardsBonus);	
+			}
+			else if(noFloorBonus == true){
+				permanentEffect = new NoFloorBonusEffect();
+			}else if(raiseProductionValueAmount != 0){
+				permanentEffect = new RaiseProductionValueEffect(raiseProductionValueAmount);
+			}else if(raiseHarvestValueAmount != 0){
+				permanentEffect = new RaiseHarvestValueEffect(raiseHarvestValueAmount);
+			}else
+				permanentEffect = null;
+			
+			
+			//Second, I assign the immediateEffect
+			//First I set the "discountedResourceChest"
+			discountChest = new ResourceChest(discountedCoin, discountedWood, discountedStone, discountedServant, 0, 0, 0);
+			
+			if(givenMilitaryPoints == 0){  					 //Se l'effetto non dà military points
+				if(givenFaithPoints == 0){     				 //Se l'effetto non dà faith points
+					if(privilegeAmount == 0){ 				 //Se l'effetto non dà pergamente
+						if(extraCardValue == 0){			 //Se l'effetto non dà una carta in più
+							if(victoryPerMilitaryPointsAmount == 0){  //Se l'effetto non mi da un tot di pv ogni tot pm
+								if(victoryPointsPerCardAmount == 0)   //E non  da nemmeno un tot di carte per ogni tipo di carta
+									immediateEffect = null;           //Allora non c'è l'effetto
+								else	
+									immediateEffect = new CharacterImmediateEffect(new ForEachTypeCardEffect(new VictoryPoint(victoryPointsPerCardAmount), typeCard));
+							}
+							else{     //altrimenti dà un tot di pv ogni tot pm
+								immediateEffect = new CharacterImmediateEffect(new ForEachResourceTypeEffect(new VictoryPoint(victoryPerMilitaryPointsAmount), new MilitaryPoint(militaryPointsAmount)));			
+							}
+						}
+						else{
+							//Può essere solo l'attivazione di una carta in più con una discountChest passata
+							immediateEffect = new CharacterImmediateEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest));
+						}
+					}
+					else{					//Se invece mi dà delle pergamene
+											
+						if(extraCardValue == 0){  //o mi dà le pergamene e basta
+							immediateEffect = new CharacterImmediateEffect(new CouncilPrivilegeEffect(privilegeAmount));
+						}
+						else{    				//o mi dà le pergamene e mi fa attivare una carta in più
+							immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new CouncilPrivilegeEffect(privilegeAmount)));
+						}
+					}	
+				}
+				else{                              //Se invece mi dà dei punti fede
+					if(extraCardValue == 0 && harvestActionValue == 0 && productionActionValue == 0){    //o mi dà solo punti fede
+						immediateEffect = new CharacterImmediateEffect(new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0)));
+					}
+					if(extraCardValue != 0 && harvestActionValue == 0 && productionActionValue == 0){    //o mi dà punti fede e mi fa attivare un'altra carta
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+					if(extraCardValue == 0 && harvestActionValue != 0 && productionActionValue == 0){    //o mi dà solo punti fede e mi fa attivare una raccolta
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new InstantHarvestActionEffect(harvestActionValue), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+					if(extraCardValue == 0 && harvestActionValue == 0 && productionActionValue != 0){    //o mi dà solo punti fede e mi fa attivare una produzione
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new InstantProductionActionEffect(productionActionValue), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+				}
+			}
+			else{				//Se mi dà dei punti militare allora 
+				if(extraCardValue == 0){  //o mi dà punti militari e basta
+					immediateEffect = new CharacterImmediateEffect(new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, 0, 0, givenMilitaryPoints)));
+				}
+				if(extraCardValue != 0){  //o mi dà punti militari e mi fa attivare una carta
+					immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, 0, 0, givenMilitaryPoints))));
+				}
+			}
+			
+			deck[cardIndex] = new CharacterCard(id,name,period,moneyCost,immediateEffect,permanentEffect);
+			if(immediateEffect != null)
+				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]); //Mi basta associare l'immediate, sarà esso poi ad occuparsi di chiamare il permanent
+			else if(permanentEffect != null){
+				deck[cardIndex].getPermanentEffect().setCard(deck[cardIndex]);
+			}
+			
+			lineRead = buffReader.readLine();
+			cardIndex++;
 		}
 		return deck;
 	}
+	
 	
 	
 

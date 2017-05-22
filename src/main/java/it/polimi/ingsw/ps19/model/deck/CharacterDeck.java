@@ -34,6 +34,17 @@ public class CharacterDeck extends Deck<CharacterCard> {
 	public int length() {
 		return this.cards.length;
 	}
+	
+	public void printCardInfo(int i){
+		System.out.println(this.cards[i].getId());
+		
+	}
+	
+	public CharacterCard getCard(int i) {
+//		System.out.println(this.cards[i]);
+//		this.cards[i];
+		return this.cards[i];
+	}
 
 
 }
