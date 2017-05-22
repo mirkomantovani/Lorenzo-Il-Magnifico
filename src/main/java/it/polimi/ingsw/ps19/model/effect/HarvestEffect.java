@@ -10,15 +10,16 @@ package it.polimi.ingsw.ps19.model.effect;
  */
 public class HarvestEffect extends Effect {
 	
-	InstantResourcesEffect instantEffect;
+	Effect instantEffect;
 	
 	/**
 	 * class constructor
 	 * 
 	 * @param effectResourceChest  the chest that contains the rewarded resources
 	 */
-	public HarvestEffect(InstantResourcesEffect instantEffect){
+	public HarvestEffect(Effect instantEffect){
 		this.instantEffect=instantEffect;
+		this.instantEffect.setCard(this.card);
 	}
 	
 	/* (non-Javadoc)

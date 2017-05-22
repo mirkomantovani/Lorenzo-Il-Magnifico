@@ -88,6 +88,7 @@ public class DeckClient {
 		
 		System.out.println("Character Deck built successfully!");
 		
+		start = System.currentTimeMillis();
 
 		try{
 			
@@ -102,5 +103,8 @@ public class DeckClient {
 		
 		System.out.println("Leader Deck built successfully!");
 	}
-
+	
+	
+	
+	
 }

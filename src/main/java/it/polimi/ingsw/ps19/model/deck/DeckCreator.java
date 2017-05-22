@@ -24,6 +24,7 @@ import it.polimi.ingsw.ps19.model.effect.FilippoBrunelleschiEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
+import it.polimi.ingsw.ps19.model.effect.HarvestEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
@@ -285,22 +286,89 @@ public class DeckCreator {
 	/**
 	 * Creates the territory card deck.
 	 *
+	 *@author Jimmy
 	 * @param filePath the file path
 	 * @param deckLength the deck length
 	 * @return the territory card[]
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws Exception 
 	 */
-	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws IOException {
+	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws Exception {
 
-		int cardId=0;
+		int cardIndex=0;
 		TerritoryCard[] deck = new TerritoryCard[deckLength];
+		
+		int id;
+		String name;
+		Period period;
+		Effect immediateEffect;
+		HarvestEffect harvestEffect;
+		int harvestActivationCost;
+		
+		ResourceChest immediateResourceChest;
+		ResourceChest harvestedResourceChest;
+		int immediatePrivilegeAmount;
+		int harvestedPrivilegeAmount;
 
-		buffReader = new BufferedReader(new FileReader(filePath));
+		buffReader = new BufferedReader(new FileReader(filePath));	
 		lineRead = buffReader.readLine();
 		
 		
 		while (lineRead!=null) {
-
+			
+			id = Integer.parseInt(lineRead);
+			name = buffReader.readLine();
+			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
+			
+			immediateResourceChest = new ResourceChest(Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Coins and wood
+													   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Stones and servants
+													   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Faith and victory
+													   Integer.parseInt(buffReader.readLine()));										 //Military
+			
+			immediatePrivilegeAmount = Integer.parseInt(buffReader.readLine());
+			harvestActivationCost = Integer.parseInt(buffReader.readLine());
+			
+			harvestedResourceChest = new ResourceChest(Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Coins and wood
+					                                   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Stones and servants
+					                                   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Faith and victory
+					                                   Integer.parseInt(buffReader.readLine()));										 //Military
+			harvestedPrivilegeAmount = Integer.parseInt(buffReader.readLine());
+			
+			//Immediate effect initialization
+			if(immediateResourceChest.isEmpty() == true){		//Se non dà delle risorse
+				if(immediatePrivilegeAmount == 0)				//Se non dà neanche privilegi
+					immediateEffect = null;						//Allora non c'è nulla
+				else{
+					immediateEffect = new CouncilPrivilegeEffect(immediatePrivilegeAmount); //altrimenti dà solo privilegi ATTENZIONE: nelle carte del gioco non c'è nessuna carta
+																							//che come effetto immediato ha solo la pergamena
+				}
+			}
+			else{												//Se dà delle risorse
+				if(immediatePrivilegeAmount == 0)				// e non dà privilegi
+					immediateEffect = new InstantResourcesEffect(immediateResourceChest);						//Allora sarà una instant
+				else{											//Altrimenti dà sia delle risorse sia delle pergamente
+					immediateEffect = new MultipleEffect(new InstantResourcesEffect(immediateResourceChest), new CouncilPrivilegeEffect(immediatePrivilegeAmount));
+				}
+			}
+			
+			//Permanent effect initialization; it will be a harvest effect
+			if(harvestedResourceChest.isEmpty() == true){
+				if(harvestedPrivilegeAmount !=0)
+					harvestEffect = new HarvestEffect(new CouncilPrivilegeEffect(harvestedPrivilegeAmount));
+				else
+					throw new Exception();   //It is impossible to have a territory card without a harvest effect
+			}
+			else{
+				if(harvestedPrivilegeAmount == 0)
+					harvestEffect = new HarvestEffect(new InstantResourcesEffect(harvestedResourceChest));
+				else
+					harvestEffect = new HarvestEffect(new MultipleEffect(new InstantResourcesEffect(harvestedResourceChest), new CouncilPrivilegeEffect(harvestedPrivilegeAmount)));
+			}
+			
+			
+		
+			
+			
+			cardIndex++;
 		}
 		return deck;
 	}

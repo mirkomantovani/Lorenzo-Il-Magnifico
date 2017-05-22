@@ -79,6 +79,16 @@ public class ResourceChest {
 		resourceChest.getStones().add(this.stones.getAmount());
 	}
 	
+	/**
+	 * @author Jimmy
+	 * @return boolean
+	 */
+	public boolean isEmpty(){
+		if(victoryPoints.getAmount() == 0 && militaryPoints.getAmount() == 0 && faithPoints.getAmount() == 0 && coins.getAmount() == 0 && servants.getAmount() == 0 && woods.getAmount() == 0 && stones.getAmount() == 0)
+			return true;
+		return false;
+	}
+	
 	
 	/**
 	 * This method subtracts every Resource of the Chest passed by parameter to the Chest it is called upon
