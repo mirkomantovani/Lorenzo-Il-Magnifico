@@ -134,7 +134,7 @@ public class DeckCreator {
 			
 			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,productionEffect,productionActivationCost);
 			
-			setCard(deck[cardIndex]);
+//			setCard(deck[cardIndex]);
 			
 			cardIndex++;
 			
@@ -147,10 +147,10 @@ public class DeckCreator {
 	}
 	
 	
-	private static void setCard(DevelopmentCard card) {
-		card.getImmediateEffect().setCard(card);
-		card.getPermanentEffect().setCard(card);
-	}
+//	private static void setCard(DevelopmentCard card) {
+//		card.getImmediateEffect().setCard(card);
+//		card.getPermanentEffect().setCard(card);
+//	}
 
 
 	/**
