@@ -21,12 +21,12 @@ public class Tower {
 
 	private CardType cardType;
 	
-	private DevelopmentCard[] deck;
+	private Deck<DevelopmentCard> deck;
 	
 	private static int currentCard = 0; // index of the card on the top of the deck
 	
 	
- 	public Tower(CardType cardType, DevelopmentCard[] deck){ 
+ 	public Tower(CardType cardType, Deck<DevelopmentCard> deck){ 
  			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;

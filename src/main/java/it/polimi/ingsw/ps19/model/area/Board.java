@@ -29,7 +29,7 @@ public class Board {
 		
 		church = new Church(null,null,null);
 		councilPalace = new CouncilPalace();
-		market = new Market();
+	//TODO	market = new Market(Match.getPlayers()); //this method should return the number of players in the match
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
 		

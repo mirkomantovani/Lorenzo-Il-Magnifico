@@ -104,10 +104,6 @@ public class Player {
 		this.color = color;
 	}
 
-	public ResourceChest getResources() {
-		return resources;
-	}
-
 
 	public List<TerritoryCard> getTerritoryDeck() {
 		return territoryDeck;
@@ -160,6 +156,7 @@ public class Player {
 		
 		return this.resources;
 	}
+	
 	
 	/*
 	

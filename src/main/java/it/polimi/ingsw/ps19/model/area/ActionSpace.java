@@ -2,12 +2,14 @@ package it.polimi.ingsw.ps19.model.area;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 
 /**
  * This class represents an action space Occupable by a FamilyMember
  * 
- * @author Mirko
+ * @author Mirko,Matteo
  *
  */
 public class ActionSpace implements Occupable {
@@ -15,16 +17,23 @@ public class ActionSpace implements Occupable {
 	private int actionValueRequired;
 
 
-	private InstantResourcesEffect instantResourceEffect;
+	private Effect effect;
 	private FamilyMember familyMember;
+
 	
-	public ActionSpace(int actionValueRequired, InstantResourcesEffect instantResourceEffect) {
+	public ActionSpace(int actionValueRequired, Effect effect) {
 		this.actionValueRequired = actionValueRequired;
-		this.instantResourceEffect = instantResourceEffect;
+		this.effect = effect;
 		this.familyMember=null;
 	}
 	
-	
+
+	public Effect getEffect() {
+		return effect;
+	}
+
+
+
 	@Override
 	public boolean isOccupied() {
 		return familyMember!=null;
@@ -60,6 +69,10 @@ public class ActionSpace implements Occupable {
 	public int getActionValueRequired() {
 		return actionValueRequired;
 	}
+
+
+	
+	
 
 	
 
