@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -22,7 +22,7 @@ public class ForEachTypeCardEffect extends Effect {
 		this.typeCard = typeCard;
 	}
 	
-	private int calculateAmount(ArrayList<? extends DevelopmentCard> playersArrayList){
+	private int calculateAmount(List<? extends DevelopmentCard> playersArrayList){
 		return resource.getAmount()*playersArrayList.size();
 	}
 	

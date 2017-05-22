@@ -4,6 +4,10 @@ package it.polimi.ingsw.ps19.model.area;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
+import java.util.ArrayList;
+import java.util.List;
+
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
 
@@ -13,16 +17,17 @@ import it.polimi.ingsw.ps19.model.deck.Deck;
  */
 public class Tower {
 	
-	ArrayList<Floor> floors;
+	private List<Floor> floors;
+
+	private CardType cardType;
 	
-	CardType cardType;
-	
-	Deck<DevelopmentCard> deck;
+	private DevelopmentCard[] deck;
 	
 	private static int currentCard = 0; // index of the card on the top of the deck
 	
 	
- 	public Tower(CardType cardType, Deck<DevelopmentCard> deck){ 
+ 	public Tower(CardType cardType, DevelopmentCard[] deck){ 
+ 			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;
 			
@@ -63,5 +68,9 @@ public class Tower {
  		
  		return towerCards;
  	}
+ 	
+ 	public List<Floor> getFloors() {
+		return floors;
+	}
 	
 }

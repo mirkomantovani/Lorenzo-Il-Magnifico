@@ -15,12 +15,9 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
-import it.polimi.ingsw.ps19.model.effect.CesareBorgiaEffect;
 import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
-import it.polimi.ingsw.ps19.model.effect.FedericoDaMontefeltroEffect;
-import it.polimi.ingsw.ps19.model.effect.FilippoBrunelleschiEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
@@ -28,21 +25,24 @@ import it.polimi.ingsw.ps19.model.effect.HarvestEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
-import it.polimi.ingsw.ps19.model.effect.LorenzoDeMediciEffect;
-import it.polimi.ingsw.ps19.model.effect.LucreziaBorgiaEffect;
-import it.polimi.ingsw.ps19.model.effect.LudovicoAriostoEffect;
-import it.polimi.ingsw.ps19.model.effect.LudovicoIlMoroEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
-import it.polimi.ingsw.ps19.model.effect.NoFloorBonusEffect;
-import it.polimi.ingsw.ps19.model.effect.PicoDellaMirandolaEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
-import it.polimi.ingsw.ps19.model.effect.SantaRitaEffect;
-import it.polimi.ingsw.ps19.model.effect.SigismondoMalatestaEffect;
-import it.polimi.ingsw.ps19.model.effect.SistoIVEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.CesareBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.FedericoDaMontefeltroEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.FilippoBrunelleschiEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LorenzoDeMediciEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LucreziaBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LudovicoAriostoEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LudovicoIlMoroEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.NoFloorBonusEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.PicoDellaMirandolaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SantaRitaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SigismondoMalatestaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SistoIVEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
@@ -135,7 +135,7 @@ public class DeckCreator {
 			
 			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,productionEffect,productionActivationCost);
 			
-			setCard(deck[cardIndex]);
+//			setCard(deck[cardIndex]);
 			
 			cardIndex++;
 			
@@ -148,10 +148,10 @@ public class DeckCreator {
 	}
 	
 	
-	private static void setCard(DevelopmentCard card) {
-		card.getImmediateEffect().setCard(card);
-		card.getPermanentEffect().setCard(card);
-	}
+//	private static void setCard(DevelopmentCard card) {
+//		card.getImmediateEffect().setCard(card);
+//		card.getPermanentEffect().setCard(card);
+//	}
 
 
 	/**

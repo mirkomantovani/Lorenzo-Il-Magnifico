@@ -4,7 +4,10 @@ public class Wood extends Resource {
 	
 	@Override
 	public String toString() {
-		return super.toString() + " Woods";
+		if (this.getAmount() == 1)
+			return super.toString() + " wood";
+		else
+			return super.toString() + " woods";
 	}
 
 	public Wood(int amount){

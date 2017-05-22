@@ -1,5 +1,6 @@
-package it.polimi.ingsw.ps19.model.effect;
+package it.polimi.ingsw.ps19.model.effect.leader;
 
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author matteo
