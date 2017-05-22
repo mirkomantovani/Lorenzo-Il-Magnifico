@@ -38,8 +38,6 @@ public class VentureDeck extends Deck<VentureCard> {
 		System.out.println(this.cards[i].getId());
 		
 	}
-	
-
 
 
 }

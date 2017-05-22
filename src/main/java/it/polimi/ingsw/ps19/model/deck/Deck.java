@@ -55,9 +55,8 @@ public abstract class Deck<T extends DevelopmentCard> {
 	 * @param i
 	 * @return dynamic type T extends DevelopmentCard
 	 */
-	public T getCard(int i) {  //perchè non va cazzo?
-//		System.out.println(this.cards[i]);
-//		this.cards[i];
+	public T getCard(int i) {  
+
 		return this.cards[i];
 	}
 	

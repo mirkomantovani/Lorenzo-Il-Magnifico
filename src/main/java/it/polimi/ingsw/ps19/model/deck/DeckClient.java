@@ -44,7 +44,7 @@ public class DeckClient {
 		
 		System.out.println("Building Deck built successfully");
 		buildingDeck.printCardInfo(0);
-		System.out.println(buildingDeck.getCard(4).toString());
+		System.out.println(buildingDeck.getCard(7).toString());
 //		buildingDeck.getCard(0).toString();
 		
 		start = System.currentTimeMillis();

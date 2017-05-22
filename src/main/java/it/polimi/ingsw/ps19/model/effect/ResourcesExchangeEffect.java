@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+
 /**
  * The Class ResourcesExchangeEffect represents a type of effect which can be found only in
  * a Building Card and can only be activated when the player activates a production
@@ -51,7 +53,7 @@ public class ResourcesExchangeEffect extends Effect {
 	 * 
 	 * 
 	 */
-	public void applyChosenEffect(int choice) {
+	public void applyEffect(int choice) {
 		if(choice==1)applyEffect(normalExchangeEffect);
 		else if(choice==2)applyEffect(alternativeExchangeEffect);
 		//else exception?, but it shouldn't be possible to has another value 
@@ -70,10 +72,20 @@ public class ResourcesExchangeEffect extends Effect {
 
 	@Override
 	public String toString() {
-		
-		return normalExchangeEffect.toString()+" or"+alternativeExchangeEffect.toString();
+		if(alternativeExchangeEffect!=null)
+		return normalExchangeEffect.toString()+
+				" or"+alternativeExchangeEffect.toString();
+		else return normalExchangeEffect.toString();
 		
 	}
+
+	@Override
+	public void setCard(DevelopmentCard card) {
+		super.setCard(card);
+		normalExchangeEffect.setCard(card);
+		if(alternativeExchangeEffect!=null)alternativeExchangeEffect.setCard(card);
+	}
+	
 	
 
 

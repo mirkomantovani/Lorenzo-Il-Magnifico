@@ -8,6 +8,9 @@ import it.polimi.ingsw.ps19.Player;
  */
 public abstract class Card {
 	
+	protected Player player;
+	protected String name;
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -21,7 +24,5 @@ public abstract class Card {
 		this.name = name;
 	}
 	
-	private Player player;
-	private String name;
 
 }

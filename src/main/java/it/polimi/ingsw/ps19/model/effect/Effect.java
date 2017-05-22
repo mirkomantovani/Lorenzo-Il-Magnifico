@@ -26,6 +26,7 @@ public abstract class Effect {
 //	}
 
 	/**
+	 * remember that we have to establish an association between effect and card at the moment of instantiating the cards, (from file)
 	 * @param card
 	 */
 	public void setCard(DevelopmentCard card) {

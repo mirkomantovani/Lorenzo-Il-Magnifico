@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
@@ -124,16 +126,26 @@ public class DeckCreator {
 			
 			
 			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,productionEffect,productionActivationCost);
+			
+			setCard(deck[cardIndex]);
+			
 			cardIndex++;
 			
+			
 			lineRead = buffReader.readLine();   //line 1
-			System.out.println("id: "+lineRead);
+//			System.out.println("id: "+lineRead);
 			
 		}
 		return deck;
 	}
 	
 	
+	private static void setCard(DevelopmentCard card) {
+		card.getImmediateEffect().setCard(card);
+		card.getPermanentEffect().setCard(card);
+	}
+
+
 	/**
 	 * Calculates the production effect from file. (It's only for building cards)
 	 *

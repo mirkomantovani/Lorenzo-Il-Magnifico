@@ -15,13 +15,15 @@ public abstract class DevelopmentCard extends Card {
 	
 
 	//attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
-	private int id;   
-	private Period period;
-	private ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
+	protected int id;   
+	protected Period period;
+	protected ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
 	
-	private Effect immediateEffect,permanentEffect;
+	protected Effect immediateEffect,permanentEffect;
+	protected CardType cardType;
 	
 	
+
 	/**
 	 * @param id
 	 * @param name
@@ -87,12 +89,18 @@ public abstract class DevelopmentCard extends Card {
 	public Effect getPermanentEffect() {
 		return permanentEffect;
 	}
+	
+	public CardType getCardType() {
+		return cardType;
+	}
 
 	
 	 @Override
 		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + super.getName()
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + ", player=" + super.getName()
+			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + 
+					", \npermanentEffect=" + permanentEffect.toString() + 
+					", player=" + player
 					+ "]";
 		}
 	

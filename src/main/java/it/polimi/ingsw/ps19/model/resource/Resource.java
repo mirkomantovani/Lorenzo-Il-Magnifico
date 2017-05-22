@@ -37,6 +37,24 @@ public abstract class Resource {
 		return " "+this.amount;
 	}
 	
+	/**
+	 * Overloaded the method to simplify its use
+	 * @author Mirko
+	 * @param resource
+	 */
+	public void add(Resource resource){
+		this.add(resource.amount);
+	}
+	
+	/**
+	 * Overloaded the method to simplify its use
+	 * @author Mirko
+	 * @param resource
+	 */
+	public void sub(Resource resource){
+		this.sub(resource.amount);
+	}
+	
 	
 
 }
