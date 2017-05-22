@@ -234,6 +234,7 @@ public class DeckCreator {
 	 * @author Mirko
 	 * @return the atomic exchange effect
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
 	 */
 	private static AtomicExchangeEffect calculateAtomicExchangeFromFile() throws IOException {
 		int numberOfResource;
@@ -290,7 +291,8 @@ public class DeckCreator {
 	 * @param filePath the file path
 	 * @param deckLength the deck length
 	 * @return the territory card[]
-	 * @throws Exception 
+	 * @throws Exception Signals that a territory card has no harvest effect
+	 * 
 	 */
 	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws Exception {
 
@@ -301,7 +303,7 @@ public class DeckCreator {
 		String name;
 		Period period;
 		Effect immediateEffect;
-		HarvestEffect harvestEffect;
+		HarvestEffect harvestEffect; //mai uguali a null..
 		int harvestActivationCost;
 		
 		ResourceChest immediateResourceChest;
@@ -364,10 +366,14 @@ public class DeckCreator {
 					harvestEffect = new HarvestEffect(new MultipleEffect(new InstantResourcesEffect(harvestedResourceChest), new CouncilPrivilegeEffect(harvestedPrivilegeAmount)));
 			}
 			
+			deck[cardIndex] = new TerritoryCard(id,name,period,immediateEffect,harvestEffect, harvestActivationCost);
 			
-		
+			if(immediateEffect != null)
+				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]);
 			
+			deck[cardIndex].getPermanentEffect().setCard(deck[cardIndex]);
 			
+			lineRead = buffReader.readLine();
 			cardIndex++;
 		}
 		return deck;
@@ -654,7 +660,7 @@ public class DeckCreator {
 			
 			deck[cardIndex] = new CharacterCard(id,name,period,moneyCost,immediateEffect,permanentEffect);
 			if(immediateEffect != null)
-				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]); //Mi basta associare l'immediate, sarà esso poi ad occuparsi di chiamare il permanent
+				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]);
 			else if(permanentEffect != null){
 				deck[cardIndex].getPermanentEffect().setCard(deck[cardIndex]);
 			}

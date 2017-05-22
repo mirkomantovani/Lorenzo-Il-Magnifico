@@ -15,7 +15,7 @@ public class HarvestEffect extends Effect {
 	/**
 	 * class constructor
 	 * 
-	 * @param effectResourceChest  the chest that contains the rewarded resources
+	 * @param effectResourceChest  the chest that contains the rewarded resources or the council privilege effect
 	 */
 	public HarvestEffect(Effect instantEffect){
 		this.instantEffect=instantEffect;
@@ -27,6 +27,11 @@ public class HarvestEffect extends Effect {
 	 */
 	public void applyEffect() {
 		instantEffect.applyEffect();
+	}
+	
+	@Override
+	public String toString() {
+		return "Harvest effect: " + instantEffect.toString();
 	}
 
 }
