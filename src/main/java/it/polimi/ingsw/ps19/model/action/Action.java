@@ -1,16 +1,20 @@
 package it.polimi.ingsw.ps19.model.action;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 
-public interface  Action {
+public abstract  class Action {
 	
-	private Player player;
+	protected Player player;
 	
-	public Action(Player player) {
+	protected FamilyMember familyMember;
+	
+	public Action(Player player, FamilyMember familyMember) {
 		this.player = player;
+		this.familyMember=familyMember;
 	}
 
-	public abstract void apply();
+	public abstract void apply() throws NotApplicableException;
 	
 	public abstract boolean isApplicable();
 	

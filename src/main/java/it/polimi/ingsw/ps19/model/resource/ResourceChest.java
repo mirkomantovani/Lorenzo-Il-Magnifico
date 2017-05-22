@@ -203,6 +203,24 @@ public class ResourceChest {
 		
 		return builder.toString();
 	}
+
+	/**
+	 * This method returns true if every resource contained in the chest has an amount greater
+	 * or equal to the corresponding resource in the chest passed by parameter
+	 * @author Mirko
+	 * @param cost
+	 * @return
+	 */
+	public boolean isGreaterEqualThan(ResourceChest resourceChest) {
+		if(this.victoryPoints.getAmount()<resourceChest.victoryPoints.getAmount())return false;
+		if(this.militaryPoints.getAmount()<resourceChest.militaryPoints.getAmount())return false;
+		if(this.faithPoints.getAmount()<resourceChest.faithPoints.getAmount())return false;
+		if(this.coins.getAmount()<resourceChest.coins.getAmount())return false;
+		if(this.servants.getAmount()<resourceChest.servants.getAmount())return false;
+		if(this.woods.getAmount()<resourceChest.woods.getAmount())return false;
+		if(this.stones.getAmount()<resourceChest.stones.getAmount())return false;
+		return true;
+	}
 	
 	
 }

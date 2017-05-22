@@ -44,7 +44,7 @@ public class EffectsTest {
 		//IMPORTANT the player.addCard(card); has to be the first thing to do, otherwise when the immediate
 		//effect is applied the associated player of the card is null and a NullPointerException would be thrown
 		player.addCard(card);
-		System.out.println("You bought the card"+card.toString());
+		System.out.println("\nYou bought the card:"+card.toString());
 		player.getResourceChest().subChest(card.getCost());
 		card.getImmediateEffect().applyEffect();
 

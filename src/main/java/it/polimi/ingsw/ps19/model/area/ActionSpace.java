@@ -13,6 +13,8 @@ import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 public class ActionSpace implements Occupable {
 
 	private int actionValueRequired;
+
+
 	private InstantResourcesEffect instantResourceEffect;
 	private FamilyMember familyMember;
 	
@@ -43,6 +45,10 @@ public class ActionSpace implements Occupable {
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;
+	}
+	
+	public int getActionValueRequired() {
+		return actionValueRequired;
 	}
 
 	
