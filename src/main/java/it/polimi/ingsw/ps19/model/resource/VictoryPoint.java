@@ -8,7 +8,10 @@ public class VictoryPoint extends Resource {
 	
 	@Override
 	public String toString() {
-		return super.toString() + " Victory points";
+		if (this.getAmount() == 1)
+			return super.toString() + " victory point";
+		else
+			return super.toString() + " victory points";
 	}
 
 	public VictoryPoint(int amount){

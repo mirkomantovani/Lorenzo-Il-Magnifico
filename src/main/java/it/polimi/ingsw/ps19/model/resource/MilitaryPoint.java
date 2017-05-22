@@ -8,7 +8,10 @@ public class MilitaryPoint extends Resource{
 
 	@Override
 	public String toString() {
-		return super.toString() + " Military points";
+		if (this.getAmount() == 1)
+			return super.toString() + " military point";
+		else
+			return super.toString() + " military points";
 	}
 
 	public MilitaryPoint(int amount){

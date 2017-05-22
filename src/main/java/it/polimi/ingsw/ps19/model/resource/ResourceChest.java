@@ -186,19 +186,26 @@ public class ResourceChest {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-	
+		
+	if(victoryPoints.getAmount()>0)
 		builder.append(victoryPoints);
 		
+	if(militaryPoints.getAmount()>0)
 		builder.append(militaryPoints);
 		
+	if(faithPoints.getAmount()>0)
 		builder.append(faithPoints);
 		
+	if(coins.getAmount()>0)
 		builder.append(coins);
 		
+	if(servants.getAmount()>0)
 		builder.append(servants);
 		
+	if(woods.getAmount()>0)
 		builder.append(woods);
 		
+	if(stones.getAmount()>0)
 		builder.append(stones);
 		
 		return builder.toString();
