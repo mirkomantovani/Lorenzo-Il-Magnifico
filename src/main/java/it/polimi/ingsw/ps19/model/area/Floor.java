@@ -10,10 +10,8 @@ import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
  */
 public class Floor {
 	
-	DevelopmentCard card;
-	
-	ActionSpace actionSpace;
-	
+	DevelopmentCard card;	
+	ActionSpace actionSpace;	
 	Tower tower;
 	
 	public Floor(DevelopmentCard card, Tower tower, int actionSpaceCost, InstantResourcesEffect instantResourcesEffect){
@@ -34,6 +32,4 @@ public class Floor {
 		return tower;
 	}
 	
-	
-
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -27,10 +28,10 @@ public class Player {
 	
 	ResourceChest resources;
 	
-	ArrayList<TerritoryCard> territoryDeck;
-	ArrayList<BuildingCard>  buildingDeck;
-	ArrayList<CharacterCard> characterDeck;
-	ArrayList<VentureCard> ventureDeck;
+	List<TerritoryCard> territoryDeck;
+	List<BuildingCard>  buildingDeck;
+	List<CharacterCard> characterDeck;
+	List<VentureCard> ventureDeck;
 	
 	private int harvestModification; //it means the increase/decrease of the Harvest action value for the specific player
 	private int productionModification; 
@@ -108,21 +109,21 @@ public class Player {
 	}
 
 
-	public ArrayList<TerritoryCard> getTerritoryDeck() {
+	public List<TerritoryCard> getTerritoryDeck() {
 		return territoryDeck;
 	}
 
 
-	public ArrayList<CharacterCard> getCharacterDeck() {
+	public List<CharacterCard> getCharacterDeck() {
 		return characterDeck;
 	}
 
 
-	public ArrayList<VentureCard> getVentureDeck() {
+	public List<VentureCard> getVentureDeck() {
 		return ventureDeck;
 	}
 
-	public ArrayList<BuildingCard> getBuildingDeck() {
+	public List<BuildingCard> getBuildingDeck() {
 		return buildingDeck;
 	}
 	
@@ -198,7 +199,7 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
+	public List<? extends DevelopmentCard> getRightArrayList(CardType cardType){
 		switch(cardType){
 		case TERRITORY:
 			return this.getTerritoryDeck();

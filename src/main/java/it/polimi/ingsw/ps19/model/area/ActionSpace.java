@@ -42,6 +42,16 @@ public class ActionSpace implements Occupable {
 	}
 
 
+	public FamilyMember getFamilyMember() {
+		return familyMember;
+	}
+
+
+	public void setFamilyMember(FamilyMember familyMember) {
+		this.familyMember = familyMember;
+	}
+
+
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;

@@ -1,6 +1,12 @@
 package it.polimi.ingsw.ps19.model.action;
 
+import java.util.List;
+
+import org.omg.Messaging.SyncScopeHelper;
+
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -58,10 +64,28 @@ public class TakeCardAction extends Action {
 	 * @return true if this.familymember can be placed in this.actionspace
 	 */
 	private boolean canBePlaced(){
-//		if(this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()&&controllo colori);
+		//I have to control the special effects e.g. ludovico ariosto
+		if(this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()
+				&&(familyMember.getDice().getColor()==Color.NEUTRAL
+					||this.noSamePlayerMembers(familyMember.getPlayer())));
 		return true;
 	}
 	
+	/**
+	 * @param player
+	 * @return true if there are no other family members of the specified player in the tower
+	 */
+	private boolean noSamePlayerMembers(Player player) {
+		List<Floor> floors;
+		floors=this.floor.getTower().getFloors();
+		for(Floor fl : floors){
+			if(fl!=this.floor)
+				if(fl.getActionSpace().getFamilyMember().getPlayer()==player)return false;
+		}
+		
+		return true;
+	}
+
 	/**
 	 * //controlling if the action value of the family member is enough to place it in this action space
 	 * @return
