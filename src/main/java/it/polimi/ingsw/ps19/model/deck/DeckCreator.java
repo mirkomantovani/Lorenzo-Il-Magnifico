@@ -188,14 +188,8 @@ public class DeckCreator {
 			}
 		}
 		else {
-			
-			choices = new ArrayList<Resource>();
-			
-			for(int i = 0; i<privilege; i++){
-				choices.add(null);
-			}
 				
-			privilegeEffect=new CouncilPrivilegeEffect(1);  //TODO TEO DA MODIFICARE!!!
+			privilegeEffect=new CouncilPrivilegeEffect(privilege);
 			
 			instantChest=new ResourceChest(coin,0,0,0,0,vPoint,mPoint); 
 			
@@ -365,11 +359,7 @@ public class DeckCreator {
 		victoryPointsChest = new ResourceChest(0,0,0,0,0,victoryPoints,0);
 		
 		if(privilege != 0){
-			choices = new ArrayList<Resource>();
-			for(int i = 0; i<privilege;i++){
-				choices.add(null);
-			}
-			immediateEffect = new CouncilPrivilegeEffect(1); //TODO QUESTO TEO E' DA MODIFICARE!!!!!!!
+			immediateEffect = new CouncilPrivilegeEffect(privilege);
 		}else if (takeCardType != 0){
 			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost, new ResourceChest());
 		} else if (productionBonus != 0){
