@@ -13,8 +13,6 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
  */
 public class CharacterDeck extends Deck<CharacterCard> {
 
-	/** The cards. */
-	private CharacterCard[] cards;
 	
 	/**
 	 * Instantiates a new character deck.
@@ -39,12 +37,5 @@ public class CharacterDeck extends Deck<CharacterCard> {
 		System.out.println(this.cards[i].getId());
 		
 	}
-	
-	public CharacterCard getCard(int i) {
-//		System.out.println(this.cards[i]);
-//		this.cards[i];
-		return this.cards[i];
-	}
-
 
 }

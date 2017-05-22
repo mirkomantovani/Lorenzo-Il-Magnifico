@@ -13,8 +13,7 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
 */
 public class BuildingDeck extends Deck<BuildingCard> {
 
-	/** The cards. */
-	private BuildingCard[] cards;
+	
 	
 	/**
 	 * Instantiates a new building deck.
@@ -38,12 +37,6 @@ public class BuildingDeck extends Deck<BuildingCard> {
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getId());
 		
-	}
-	
-	public BuildingCard getCard(int i) {
-//		System.out.println(this.cards[i]);
-//		this.cards[i];
-		return this.cards[i];
 	}
 
 

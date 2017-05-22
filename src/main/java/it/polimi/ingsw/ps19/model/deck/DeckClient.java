@@ -5,6 +5,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 
@@ -19,6 +20,7 @@ public class DeckClient {
 	private static Deck<BuildingCard> buildingDeck;
 	private static Deck<VentureCard> ventureDeck;
 	private static Deck<CharacterCard> characterDeck;
+	private static LeaderDeck leaderDeck;
 	
 	
 	/**
@@ -44,7 +46,7 @@ public class DeckClient {
 		
 		System.out.println("Building Deck built successfully");
 		buildingDeck.printCardInfo(0);
-		System.out.println(buildingDeck.getCard(4).toString());
+		System.out.println(buildingDeck.getCard(7).toString());
 //		buildingDeck.getCard(0).toString();
 		
 		start = System.currentTimeMillis();
@@ -64,6 +66,7 @@ public class DeckClient {
 		ventureDeck.printCardInfo(0);
 		System.out.println(ventureDeck.getCard(2).toString());
 		
+
 		
 		System.out.println("\n\nCharacters:\n");
 		start = System.nanoTime();
@@ -75,8 +78,8 @@ public class DeckClient {
 			e.printStackTrace();
 			System.out.println("There was a fucking Error");
 		}
-		 end = System.nanoTime();
-		
+		end = System.nanoTime();
+			
 			for(int i = 0; i< characterDeck.length(); i++ ){
 				System.out.println(characterDeck.getCard(i).toString());
 			}
@@ -85,8 +88,19 @@ public class DeckClient {
 		
 		System.out.println("Character Deck built successfully!");
 		
-	
-	
+
+		try{
+			
+			leaderDeck=new LeaderDeck("src/main/resources/files/fileleadercards.txt", CardConstants.LEADER_DECK_LENGTH);
+		}catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("There was a fucking Error");
+			}
+		end = System.currentTimeMillis();
+		
+		System.out.println("Time complexity: "+(end-start)+"ms");
+		
+		System.out.println("Leader Deck built successfully!");
 	}
 
 }

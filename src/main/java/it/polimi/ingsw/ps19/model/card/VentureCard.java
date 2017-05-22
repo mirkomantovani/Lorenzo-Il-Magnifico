@@ -29,6 +29,7 @@ public class VentureCard extends DevelopmentCard {
 	public VentureCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
 			Effect permanentEffect) {
 		super(id, name, period, cost, immediateEffect, permanentEffect);
+		this.cardType=CardType.VENTURE;
 	}
 	
 	public ResourceChest selectCost(ResourceChest cost, ResourceChest alternativeCost, int choice){

@@ -12,8 +12,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
  */
 public class VentureDeck extends Deck<VentureCard> {
 
-	/** The cards. */
-	private VentureCard[] cards;
+
 	
 	/**
 	 * Instantiates a new venture deck.
@@ -39,10 +38,5 @@ public class VentureDeck extends Deck<VentureCard> {
 		System.out.println(this.cards[i].getId());
 		
 	}
-	
-	 public VentureCard getCard(int i) {
-//		System.out.println(this.cards[i]);
-//		this.cards[i];
-		return this.cards[i];
-	} 
+
 }
