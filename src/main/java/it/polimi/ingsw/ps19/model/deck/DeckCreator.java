@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
@@ -73,7 +74,11 @@ public class DeckCreator {
 	
 	/** The line read from file */
 	private static String lineRead;
+	
 
+	private DeckCreator(){
+		
+	}
 	/**
 	 * Creates the building card deck from the file, see template FileTemplateBuildingsCardV1.xlsx
 	 * 
@@ -85,7 +90,7 @@ public class DeckCreator {
 	 * @author Mirko
 	 */
 	public static BuildingCard[] createBuildingCardDeck(String filePath, int deckLength) throws IOException {
-
+		
 		int id;
 		String name;
 		Period period; 
@@ -249,6 +254,8 @@ public class DeckCreator {
 			int resourceId;
 			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
 			Resource resourceIn1,resourceIn2;     //resources to get
+			ResourceChest resourcesOut=new ResourceChest(0,0,0,0,0,0,0);
+			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
@@ -276,8 +283,15 @@ public class DeckCreator {
 			
 			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			return new AtomicExchangeEffect(resourceOut1,resourceOut2,resourceOut3,resourceIn1,resourceIn2);
+			resourcesOut.addResource(resourceOut1);
+			resourcesOut.addResource(resourceOut2);
+			resourcesOut.addResource(resourceOut3);
 			
+			resourcesIn.addResource(resourceIn1);
+			resourcesIn.addResource(resourceIn2);
+			
+			
+			return new AtomicExchangeEffect(resourcesOut,resourcesIn);
 			
 		}
 	}

@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public abstract class CardEffect {
+public abstract class CardEffect extends Effect {
 	
 	/**
 	 * Every effect is associated to a card
