@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Jimmy
  *
  */
-public class ForEachTypeCardEffect extends Effect {
+public class ForEachTypeCardEffect extends CardEffect {
 	
 	Resource resource;
 	CardType typeCard;

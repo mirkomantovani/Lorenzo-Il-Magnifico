@@ -14,7 +14,7 @@ import it.polimi.ingsw.ps19.model.resource.Wood;
  * @author Jimmy
  *
  */
-public class ForEachResourceTypeEffect extends Effect{
+public class ForEachResourceTypeEffect extends CardEffect{
 	
 	Resource givenResource;
 	Resource toStringResource;  //This is used by the toString method to store a copy of the original givenResource that will be modified

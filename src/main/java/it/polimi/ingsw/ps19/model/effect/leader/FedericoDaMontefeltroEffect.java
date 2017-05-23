@@ -1,12 +1,12 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 
 /**
  * @author matteo
  *
  */
-public class FedericoDaMontefeltroEffect extends Effect{
+public class FedericoDaMontefeltroEffect extends CardEffect{
 
 	@Override
 	public void applyEffect() {

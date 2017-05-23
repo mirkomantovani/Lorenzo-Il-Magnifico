@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.area;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 
 /**
@@ -17,18 +17,18 @@ public class ActionSpace implements Occupable {
 	private int actionValueRequired;
 
 
-	private Effect effect;
+	private CardEffect effect;
 	private FamilyMember familyMember;
 
 	
-	public ActionSpace(int actionValueRequired, Effect effect) {
+	public ActionSpace(int actionValueRequired, CardEffect effect) {
 		this.actionValueRequired = actionValueRequired;
 		this.effect = effect;
 		this.familyMember=null;
 	}
 	
 
-	public Effect getEffect() {
+	public CardEffect getEffect() {
 		return effect;
 	}
 

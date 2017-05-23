@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
@@ -91,8 +91,8 @@ public class DeckCreator {
 		Period period; 
 		ResourceChest cost;
 		ResourceChest instantChest;
-		Effect immediateEffect;
-		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		CardEffect immediateEffect;
+		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		ProductionEffect productionEffect;
 		int productionActivationCost;
 		int cardIndex=0;
@@ -161,7 +161,7 @@ public class DeckCreator {
 	 * @return the effect
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private static Effect calculateProductionEffectFromFile() throws IOException {
+	private static CardEffect calculateProductionEffectFromFile() throws IOException {
 		int privilege;
 		int mPoint;
 		int vPoint;
@@ -302,7 +302,7 @@ public class DeckCreator {
 		int id;
 		String name;
 		Period period;
-		Effect immediateEffect;
+		CardEffect immediateEffect;
 		HarvestEffect harvestEffect; //mai uguali a null..
 		int harvestActivationCost;
 		
@@ -397,8 +397,8 @@ public class DeckCreator {
 		ResourceChest addings;
 		ResourceChest victoryPointsChest;
 		
-		Effect immediateEffect;
-		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		CardEffect immediateEffect;
+		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		
 
 		int coins;
@@ -499,8 +499,8 @@ public class DeckCreator {
 		String name;
 		Period period;
 		ResourceChest moneyCost;  //Character cards cost only coins
-		Effect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
-		Effect permanentEffect;
+		CardEffect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
+		CardEffect permanentEffect;
 		
 		
 		//local variable for support purpose, they will read and store the value from the file
@@ -716,7 +716,7 @@ public class DeckCreator {
 		int lucreziaBorgiaEffect;
 		int federicoDaMontefeltroEffect;
 		
-		Effect specialEffect;
+		CardEffect specialEffect;
 
 		
 		LeaderCard[] deck = new LeaderCard[deckLength];

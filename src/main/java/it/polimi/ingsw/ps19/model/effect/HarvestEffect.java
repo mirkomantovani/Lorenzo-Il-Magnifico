@@ -8,16 +8,16 @@ package it.polimi.ingsw.ps19.model.effect;
  * @author Jimmy
  *
  */
-public class HarvestEffect extends Effect {
+public class HarvestEffect extends CardEffect {
 	
-	Effect instantEffect;
+	CardEffect instantEffect;
 	
 	/**
 	 * class constructor
 	 * 
 	 * @param effectResourceChest  the chest that contains the rewarded resources or the council privilege effect
 	 */
-	public HarvestEffect(Effect instantEffect){
+	public HarvestEffect(CardEffect instantEffect){
 		this.instantEffect=instantEffect;
 		this.instantEffect.setCard(this.card);
 	}

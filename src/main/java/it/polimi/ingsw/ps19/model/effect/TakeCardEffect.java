@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Matteo, Jimmy
  *
  */
-public class TakeCardEffect extends Effect{
+public class TakeCardEffect extends CardEffect{
 	
 	private CardType cardType;
 	private int cardValue;

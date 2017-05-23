@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  * @author Mirko
  */
 
-public class ResourcesExchangeEffect extends Effect {
+public class ResourcesExchangeEffect extends CardEffect {
 
 
 	private AtomicExchangeEffect normalExchangeEffect;

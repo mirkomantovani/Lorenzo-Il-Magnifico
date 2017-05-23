@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 
@@ -9,9 +9,9 @@ public class LeaderCard extends Card{
 	
 	private LeaderCardRequirement requirement;
 	
-	private Effect specialEffect; 
+	private CardEffect specialEffect; 
 	
-	public LeaderCard(String name, LeaderCardRequirement requirement, Effect specialEffect){
+	public LeaderCard(String name, LeaderCardRequirement requirement, CardEffect specialEffect){
 		
 	
 		super(name);
@@ -28,11 +28,11 @@ public class LeaderCard extends Card{
 		this.requirement = requirement;
 	}
 
-	public Effect getSpecialEffect() {
+	public CardEffect getSpecialEffect() {
 		return specialEffect;
 	}
 
-	public void setSpecialEffect(Effect specialEffect) {
+	public void setSpecialEffect(CardEffect specialEffect) {
 		this.specialEffect = specialEffect;
 	}
 

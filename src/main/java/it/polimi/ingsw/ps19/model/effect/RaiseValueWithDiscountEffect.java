@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Jimmy
  *
  */
-public class RaiseValueWithDiscountEffect extends Effect{
+public class RaiseValueWithDiscountEffect extends CardEffect{
 	
 	private int raiseAmount;
 	private CardType cardType;

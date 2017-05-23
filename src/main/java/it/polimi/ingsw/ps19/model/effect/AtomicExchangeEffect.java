@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  *
  * @author Mirko
  */
-public class AtomicExchangeEffect extends Effect {
+public class AtomicExchangeEffect extends CardEffect {
 	
 	Resource resourceOut1;
 	Resource resourceOut2;
