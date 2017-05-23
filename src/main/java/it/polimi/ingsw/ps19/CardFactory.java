@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 public class CardFactory {              
@@ -15,7 +15,7 @@ public class CardFactory {
 	private static final int CHARACTER=3;
 	private static final int VENTURE=4;
 	
-	public static DevelopmentCard getCard(int code, int id,String name,Period period,ResourceChest cost,CardEffect immediateEffect,CardEffect permanentEffect, int harvestActivationCost, int productionActivationCost){
+	public static DevelopmentCard getCard(int code, int id,String name,Period period,ResourceChest cost,Effect immediateEffect,Effect permanentEffect, int harvestActivationCost, int productionActivationCost){
 		switch(code){
 		case TERRITORY:
 			return new TerritoryCard(id, name, period, immediateEffect, permanentEffect, harvestActivationCost);    

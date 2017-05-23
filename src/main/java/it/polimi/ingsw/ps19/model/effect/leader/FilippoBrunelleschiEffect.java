@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author matteo
  *
  */
-public class FilippoBrunelleschiEffect extends CardEffect {
+public class FilippoBrunelleschiEffect extends Effect {
 
 	@Override
 	public String toString() {
@@ -16,7 +17,7 @@ public class FilippoBrunelleschiEffect extends CardEffect {
 	}
 
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		// TODO Auto-generated method stub
 		
 	}

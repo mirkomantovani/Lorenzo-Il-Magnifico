@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author Jimmy
  *
  */
-public class RaiseValueWithDiscountEffect extends CardEffect{
+public class RaiseValueWithDiscountEffect extends Effect{
 	
 	private int raiseAmount;
 	private CardType cardType;
@@ -23,19 +23,19 @@ public class RaiseValueWithDiscountEffect extends CardEffect{
 	}
 
 
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 				switch(cardType){
 				case TERRITORY:
-					this.getAssociatedPlayer().getBonuses().setActionValueTerritoryVariation(raiseAmount);
+					p.getBonuses().setActionValueTerritoryVariation(raiseAmount);
 					break;
 				case BUILDING:
-					this.getAssociatedPlayer().getBonuses().setActionValueBuildingVariation(raiseAmount);
+					p.getBonuses().setActionValueBuildingVariation(raiseAmount);
 					break;
 				case CHARACTER:
-					this.getAssociatedPlayer().getBonuses().setActionValueCharacterVariation(raiseAmount);
+					p.getBonuses().setActionValueCharacterVariation(raiseAmount);
 					break;
 				case VENTURE:
-					this.getAssociatedPlayer().getBonuses().setActionValueVentureVariation(raiseAmount);
+					p.getBonuses().setActionValueVentureVariation(raiseAmount);
 					break;
 				case ANY:    //I think that isn't a real case cause there's no card that has it 
 					//TODO something
@@ -46,9 +46,9 @@ public class RaiseValueWithDiscountEffect extends CardEffect{
 				}
 				
 				if(buildingCardsBonus == true)
-					this.getAssociatedPlayer().getBonuses().setBuildingCardsDiscount(true);
+					p.getBonuses().setBuildingCardsDiscount(true);
 				else if(characterCardsBonus == true)
-					this.getAssociatedPlayer().getBonuses().setCharacterCardsDiscount(true);
+					p.getBonuses().setCharacterCardsDiscount(true);
 			    //Non è possibile che entrambi siano a true, ma è possibile che entrambi siano a false
 				//In tal caso il metodo termina senza fare nulla
 			

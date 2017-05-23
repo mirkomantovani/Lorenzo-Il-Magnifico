@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.FaithPoint;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
@@ -14,11 +15,11 @@ import it.polimi.ingsw.ps19.model.resource.Wood;
  * @author Jimmy
  *
  */
-public class ForEachResourceTypeEffect extends CardEffect{
+public class ForEachResourceTypeEffect extends Effect{
 	
-	Resource givenResource;
-	Resource toStringResource;  //This is used by the toString method to store a copy of the original givenResource that will be modified
-	Resource foreachResource;
+	private Resource givenResource;
+	private Resource toStringResource;  //This is used by the toString method to store a copy of the original givenResource that will be modified
+	private Resource foreachResource;
 	
 	public ForEachResourceTypeEffect(Resource givenResource, Resource foreachResource){
 		this.givenResource = givenResource;
@@ -36,9 +37,9 @@ public class ForEachResourceTypeEffect extends CardEffect{
 		//the resource held by the player and the amount of the passed resource
 		//I THINK WE SHOULD INTRODUCE AN ENUM RESOURCE TYPE AND ASSIGN THAT TO EACH RESOURCE TYPE
 		if(foreachResource instanceof Coin)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getCoins().getAmount() / foreachResource.getAmount();
+			rightFactor = player.getResourceChest().getCoins().getAmount() / foreachResource.getAmount();
 		if(foreachResource instanceof Wood)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getWoods().getAmount() / foreachResource.getAmount();
+			rightFactor = player.getResourceChest().getWoods().getAmount() / foreachResource.getAmount();
 		if(foreachResource instanceof Stone)
 			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getStones().getAmount() / foreachResource.getAmount();
 		if(foreachResource instanceof Servant)
@@ -55,8 +56,8 @@ public class ForEachResourceTypeEffect extends CardEffect{
 		this.givenResource.setAmount(leftFactor * rightFactor);
 		return givenResource;
 	}
-	public void applyEffect() {
-		this.getAssociatedPlayer().getResourceChest().addResource(givenResource);
+	public void applyEffect(Player player) {
+		player.getResourceChest().addResource(givenResource);
 	}
 	
 	@Override

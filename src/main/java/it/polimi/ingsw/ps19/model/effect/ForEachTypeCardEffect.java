@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.effect;
 
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.Resource;
@@ -12,7 +13,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Jimmy
  *
  */
-public class ForEachTypeCardEffect extends CardEffect {
+public class ForEachTypeCardEffect extends Effect {
 	
 	Resource resource;
 	CardType typeCard;
@@ -27,9 +28,9 @@ public class ForEachTypeCardEffect extends CardEffect {
 	}
 	
 
-	public void applyEffect() {
-		this.resource.setAmount(calculateAmount(this.getAssociatedPlayer().getRightArrayList(typeCard)));   //it sets the resource amount to: previous amount * cards in the player's deck
-		this.getAssociatedPlayer().getResourceChest().addResource(this.resource);
+	public void applyEffect(Player p) {
+		this.resource.setAmount(calculateAmount(p.getRightArrayList(typeCard)));   //it sets the resource amount to: previous amount * cards in the player's deck
+		p.getResourceChest().addResource(this.resource);
 	}
 
 	@Override

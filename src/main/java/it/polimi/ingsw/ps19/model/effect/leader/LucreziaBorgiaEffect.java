@@ -1,15 +1,16 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author matteo
  *
  */
-public class LucreziaBorgiaEffect extends CardEffect {
+public class LucreziaBorgiaEffect extends Effect {
 
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		// TODO Auto-generated method stub
 		
 	}

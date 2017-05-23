@@ -1,12 +1,12 @@
 	package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * @author matteo
  *
  */
-public class CouncilPrivilegeEffect extends CardEffect {
+public class CouncilPrivilegeEffect extends Effect {
 	
 	private final int PRIVILEGE_COIN = 2;
 	private final int PRIVILEGE_WOOD = 1;
@@ -23,15 +23,12 @@ public class CouncilPrivilegeEffect extends CardEffect {
 
 
 		
-	public void applyEffect(){
+	public void applyEffect(Player p){
 		//TODO
 	}
 	
-	public void applyEffect(FamilyMember familyMember){
-		//TODO
-	}
 	
-	public void applyEffect(int choice) {
+	public void applyEffect(int choice, Player p) {
 		//TODO
 	}
 

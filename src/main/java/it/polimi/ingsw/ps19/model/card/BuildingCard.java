@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -26,8 +26,8 @@ public class BuildingCard extends DevelopmentCard {
 	 * @param permanentEffect the permanent effect
 	 */
 	
-	public BuildingCard(int id, String name, Period period, ResourceChest cost, CardEffect immediateEffect,
-			CardEffect permanentEffect, int productionActivationCost) {
+	public BuildingCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
+			Effect permanentEffect, int productionActivationCost) {
 
 		super(id, name, period, cost, immediateEffect, permanentEffect);
 		this.productionActivationCost = productionActivationCost;
