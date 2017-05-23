@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
@@ -17,7 +18,7 @@ import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
@@ -73,7 +74,11 @@ public class DeckCreator {
 	
 	/** The line read from file */
 	private static String lineRead;
+	
 
+	private DeckCreator(){
+		
+	}
 	/**
 	 * Creates the building card deck from the file, see template FileTemplateBuildingsCardV1.xlsx
 	 * 
@@ -85,14 +90,14 @@ public class DeckCreator {
 	 * @author Mirko
 	 */
 	public static BuildingCard[] createBuildingCardDeck(String filePath, int deckLength) throws IOException {
-
+		
 		int id;
 		String name;
 		Period period; 
 		ResourceChest cost;
 		ResourceChest instantChest;
-		Effect immediateEffect;
-		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		CardEffect immediateEffect;
+		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		ProductionEffect productionEffect;
 		int productionActivationCost;
 		int cardIndex=0;
@@ -161,7 +166,7 @@ public class DeckCreator {
 	 * @return the effect
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private static Effect calculateProductionEffectFromFile() throws IOException {
+	private static CardEffect calculateProductionEffectFromFile() throws IOException {
 		int privilege;
 		int mPoint;
 		int vPoint;
@@ -249,6 +254,8 @@ public class DeckCreator {
 			int resourceId;
 			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
 			Resource resourceIn1,resourceIn2;     //resources to get
+			ResourceChest resourcesOut=new ResourceChest(0,0,0,0,0,0,0);
+			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
@@ -276,8 +283,15 @@ public class DeckCreator {
 			
 			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			return new AtomicExchangeEffect(resourceOut1,resourceOut2,resourceOut3,resourceIn1,resourceIn2);
+			resourcesOut.addResource(resourceOut1);
+			resourcesOut.addResource(resourceOut2);
+			resourcesOut.addResource(resourceOut3);
 			
+			resourcesIn.addResource(resourceIn1);
+			resourcesIn.addResource(resourceIn2);
+			
+			
+			return new AtomicExchangeEffect(resourcesOut,resourcesIn);
 			
 		}
 	}
@@ -302,7 +316,7 @@ public class DeckCreator {
 		int id;
 		String name;
 		Period period;
-		Effect immediateEffect;
+		CardEffect immediateEffect;
 		HarvestEffect harvestEffect; //mai uguali a null..
 		int harvestActivationCost;
 		
@@ -397,8 +411,8 @@ public class DeckCreator {
 		ResourceChest addings;
 		ResourceChest victoryPointsChest;
 		
-		Effect immediateEffect;
-		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		CardEffect immediateEffect;
+		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		
 
 		int coins;
@@ -499,8 +513,8 @@ public class DeckCreator {
 		String name;
 		Period period;
 		ResourceChest moneyCost;  //Character cards cost only coins
-		Effect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
-		Effect permanentEffect;
+		CardEffect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
+		CardEffect permanentEffect;
 		
 		
 		//local variable for support purpose, they will read and store the value from the file
@@ -716,7 +730,7 @@ public class DeckCreator {
 		int lucreziaBorgiaEffect;
 		int federicoDaMontefeltroEffect;
 		
-		Effect specialEffect;
+		CardEffect specialEffect;
 
 		
 		LeaderCard[] deck = new LeaderCard[deckLength];

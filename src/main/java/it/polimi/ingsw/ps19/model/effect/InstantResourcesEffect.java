@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Jimmy
  *
  */
-public class InstantResourcesEffect extends Effect {
+public class InstantResourcesEffect extends CardEffect {
 	   
 	private ResourceChest effectResourceChest;	
 	/**

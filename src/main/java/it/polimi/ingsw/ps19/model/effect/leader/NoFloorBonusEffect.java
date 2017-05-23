@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 
-public class NoFloorBonusEffect extends Effect{
+public class NoFloorBonusEffect extends CardEffect{
 
 	@Override
 	public void applyEffect() {

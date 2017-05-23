@@ -143,7 +143,9 @@ public class ResourceChest {
 	 * @param resource to subtract
 	 */
 	public void addResource(Resource resource) {
+		if(resource!=null){
 		getResourceInChest(resource).add(resource);
+		}
 	}
 	
 

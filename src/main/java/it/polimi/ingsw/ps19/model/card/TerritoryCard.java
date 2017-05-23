@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 
 /**
  * The Class TerritoryCard.
@@ -25,8 +25,8 @@ public class TerritoryCard extends DevelopmentCard {
 	 * @param permanentEffect the permanent effect
 	 * @param harvestActivationCost the harvest activation cost
 	 */
-	public TerritoryCard(int id, String name, Period period, Effect immediateEffect,
-			Effect permanentEffect,int harvestActivationCost) {
+	public TerritoryCard(int id, String name, Period period, CardEffect immediateEffect,
+			CardEffect permanentEffect,int harvestActivationCost) {
 		super(id, name, period, null, immediateEffect, permanentEffect);
 		this.cardType=CardType.TERRITORY;
 		this.harvestActivationCost=harvestActivationCost;

@@ -8,23 +8,23 @@ import it.polimi.ingsw.ps19.FamilyMember;
  * @author Jimmy
  *
  */
-public class MultipleEffect extends Effect {
+public class MultipleEffect extends CardEffect {
 
-	Effect firstEffect;
-	Effect secondEffect;
+	CardEffect firstEffect;
+	CardEffect secondEffect;
 	CouncilPrivilegeEffect secondEffectWithChoice;
 	
 	
 	//TODO DA TESTARE!!!!!!
 	
-	public MultipleEffect(Effect firstEffect, Effect secondEffect){
+	public MultipleEffect(CardEffect firstEffect, CardEffect secondEffect){
 		this.firstEffect = firstEffect;
 		this.secondEffect = secondEffect;	
 		firstEffect.setCard(this.card);
 		secondEffect.setCard(this.card);
 	}
 	
-	public MultipleEffect(Effect firstEffect, CouncilPrivilegeEffect secondEffectWithChoice){
+	public MultipleEffect(CardEffect firstEffect, CouncilPrivilegeEffect secondEffectWithChoice){
 		this.firstEffect = firstEffect;
 		this.secondEffectWithChoice = secondEffectWithChoice;
 		firstEffect.setCard(this.card);

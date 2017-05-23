@@ -1,22 +1,23 @@
+
 package it.polimi.ingsw.ps19.model.effect;
 
-<<<<<<< HEAD
-import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.Resource;
 
 /**
  * @author Mirko
  *
  */
-=======
->>>>>>> 60abc8b3ecf74a408486a3993b044d1cfe57681d
-public abstract class Effect {
+public abstract class CardEffect extends Effect {
+	
+	/**
+	 * Every effect is associated to a card
+	 * This needs to be protected in order to be visible for the subclasses of Effect.
+	 */
+	protected DevelopmentCard card;
 
 	public abstract void applyEffect();
-	
-<<<<<<< HEAD
-
 	
 
 	/**
@@ -43,6 +44,4 @@ public abstract class Effect {
 	}
 	
 
-=======
->>>>>>> 60abc8b3ecf74a408486a3993b044d1cfe57681d
 }

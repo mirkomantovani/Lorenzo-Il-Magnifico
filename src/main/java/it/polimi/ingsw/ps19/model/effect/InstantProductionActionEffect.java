@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
  * @author matteo
  *
  */
-public class InstantProductionActionEffect extends Effect {
+public class InstantProductionActionEffect extends CardEffect {
 	
 	int productionActionValue;
 

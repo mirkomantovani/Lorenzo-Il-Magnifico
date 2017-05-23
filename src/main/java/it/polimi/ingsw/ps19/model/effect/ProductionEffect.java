@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  * @author Mirko
  *
  */
-public class ProductionEffect extends Effect{
+public class ProductionEffect extends CardEffect{
 
 
 	/**
@@ -18,9 +18,9 @@ public class ProductionEffect extends Effect{
 	 * or ForEachCardTypeEffect
 	 * 
 	 */
-	private Effect actualEffect;
+	private CardEffect actualEffect;
 	
-	public ProductionEffect(Effect actualEffect) {
+	public ProductionEffect(CardEffect actualEffect) {
 		super();
 		this.actualEffect = actualEffect;
 	}

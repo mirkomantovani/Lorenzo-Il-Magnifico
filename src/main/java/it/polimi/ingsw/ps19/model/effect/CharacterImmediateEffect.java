@@ -8,14 +8,14 @@ package it.polimi.ingsw.ps19.model.effect;
  * @author Jimmy
  *
  */
-public class CharacterImmediateEffect extends Effect{
+public class CharacterImmediateEffect extends CardEffect{
 	
-	Effect immediateEffect;
+	CardEffect immediateEffect;
 	CouncilPrivilegeEffect immediateEffectWithChoice;
 	
 	
 	//TODO DA TESTARE!!!!!!!!!!
-	public CharacterImmediateEffect(Effect immediateEffect){
+	public CharacterImmediateEffect(CardEffect immediateEffect){
 		this.immediateEffect = immediateEffect;
 		immediateEffect.setCard(this.card);
 	}

@@ -1,12 +1,12 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.CardEffect;
 
 /**
  * @author matteo
  *
  */
-public class SantaRitaEffect extends Effect{
+public class SantaRitaEffect extends CardEffect{
 
 	@Override
 	public String toString() {

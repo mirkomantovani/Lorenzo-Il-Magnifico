@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
  * @author matteo
  *
  */
-public class CouncilPrivilegeEffect extends Effect {
+public class CouncilPrivilegeEffect extends CardEffect {
 	
 	private final int PRIVILEGE_COIN = 2;
 	private final int PRIVILEGE_WOOD = 1;

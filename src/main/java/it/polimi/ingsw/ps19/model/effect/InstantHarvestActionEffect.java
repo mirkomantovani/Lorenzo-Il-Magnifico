@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.card.TerritoryCard;
  * @author matteo
  *
  */
-public class InstantHarvestActionEffect extends Effect {
+public class InstantHarvestActionEffect extends CardEffect {
 	
 	int harvestActionValue;
 	

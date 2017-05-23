@@ -5,7 +5,7 @@ package it.polimi.ingsw.ps19.model.effect;
  * @author matteo
  *
  */
-public class ProductionBonusEffect extends Effect {
+public class ProductionBonusEffect extends CardEffect {
 	
 	int value;
 	
