@@ -10,7 +10,12 @@ public class FamilyMember {
 	
 	private Dice dice; 
 	private Player player;
+	private int actionValueVariation;
 	
+	public void setActionValueVariation(int actionValueVariation) {
+		this.actionValueVariation = actionValueVariation;
+	}
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -30,7 +35,7 @@ public class FamilyMember {
 	}
 	
 	public int getActionValue(){
-		return this.dice.getUpperFaceValue();
+		return this.dice.getUpperFaceValue()+actionValueVariation;
 	}
 	
 	
