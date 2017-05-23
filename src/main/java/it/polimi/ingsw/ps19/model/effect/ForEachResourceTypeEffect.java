@@ -28,7 +28,7 @@ public class ForEachResourceTypeEffect extends Effect{
 	}
 	
 	
-	private Resource calculateResource(){
+	private Resource calculateResource(Player player){
 		int leftFactor = givenResource.getAmount();
 		int rightFactor = 0;
 		
@@ -36,20 +36,8 @@ public class ForEachResourceTypeEffect extends Effect{
 		//factor to the "int casted" result of the division between the amount of
 		//the resource held by the player and the amount of the passed resource
 		//I THINK WE SHOULD INTRODUCE AN ENUM RESOURCE TYPE AND ASSIGN THAT TO EACH RESOURCE TYPE
-		if(foreachResource instanceof Coin)
-			rightFactor = player.getResourceChest().getCoins().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof Wood)
-			rightFactor = player.getResourceChest().getWoods().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof Stone)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getStones().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof Servant)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getServants().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof FaithPoint)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getFaithPoint().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof VictoryPoint)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getVictoryPoint().getAmount() / foreachResource.getAmount();
-		if(foreachResource instanceof MilitaryPoint)
-			rightFactor = (int)this.getAssociatedPlayer().getResourceChest().getMilitaryPoint().getAmount() / foreachResource.getAmount();
+		
+		rightFactor = (int) player.getResourceChest().getResourceInChest(foreachResource).getAmount() / foreachResource.getAmount();
 		//Non dovrebbe mai succedere che il foreach resource non sia uno di quei tipo
 
 		
