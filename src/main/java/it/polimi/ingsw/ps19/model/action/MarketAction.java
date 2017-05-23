@@ -13,8 +13,9 @@ public class MarketAction extends Action{
 	
 	private ActionSpace marketSpot;
 	
-	public MarketAction(Player player, FamilyMember familyMember, ActionSpace marketSpot){
-		super(player,familyMember);
+	
+	public MarketAction(FamilyMember familyMember, ActionSpace marketSpot){
+		super(familyMember);
 		this.marketSpot = marketSpot;
 		
 	}
@@ -22,7 +23,7 @@ public class MarketAction extends Action{
 	@Override
 	public void apply() throws NotApplicableException {
 		if(isApplicable()){
-			this.marketSpot.getEffect().applyEffect();
+			//this.marketSpot.getEffect().applyEffect(familyMember);
 			this.marketSpot.isOccupied();
 		}
 		

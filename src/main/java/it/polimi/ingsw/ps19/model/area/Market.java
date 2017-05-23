@@ -16,21 +16,16 @@ public class Market {
 	private ActionSpace thirdMarket;
 	private ActionSpace fourthMarket;
 	
- // this chest will be filled with the resources you can take in a  market spot
-	
-	
 	public Market(int playersInTheMatch){
 	
-		ResourceChest resources = new ResourceChest(5,0,0,0,0,0,0); // this chest will be filled with the resources you can take in a  market spot
+		ResourceChest resourceFirstMarket = new ResourceChest(5,0,0,0,0,0,0);
+		ResourceChest resourceSecondMarket = new ResourceChest(0,0,0,5,0,0,0);
+		ResourceChest resourceThirdMarket = new ResourceChest(2,0,0,0,0,0,3);
 		
-		firstMarket = new ActionSpace(1,new InstantResourcesEffect(resources));
-		resources.getCoins().setAmount(0);
-		resources.getServants().setAmount(5);
-		secondMarket = new ActionSpace(1, new InstantResourcesEffect(resources));
+		firstMarket = new ActionSpace(1,new InstantResourcesEffect(resourceFirstMarket));
+		secondMarket = new ActionSpace(1, new InstantResourcesEffect(resourceSecondMarket));
 		if(playersInTheMatch == 4){
-		resources.getCoins().setAmount(2);
-		resources.getMilitaryPoint().setAmount(3);
-		thirdMarket = new ActionSpace(1, new InstantResourcesEffect(resources));
+		thirdMarket = new ActionSpace(1, new InstantResourcesEffect(resourceThirdMarket));
 		fourthMarket = new ActionSpace(1, new CouncilPrivilegeEffect(2));
 		}
 	}

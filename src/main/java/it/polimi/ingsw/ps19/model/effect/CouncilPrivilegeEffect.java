@@ -1,5 +1,7 @@
 	package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.FamilyMember;
+
 /**
  * @author matteo
  *
@@ -22,6 +24,10 @@ public class CouncilPrivilegeEffect extends Effect {
 
 		
 	public void applyEffect(){
+		//TODO
+	}
+	
+	public void applyEffect(FamilyMember familyMember){
 		//TODO
 	}
 	

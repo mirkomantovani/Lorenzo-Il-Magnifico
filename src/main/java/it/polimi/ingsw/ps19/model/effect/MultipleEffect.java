@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.FamilyMember;
+
 /**
  * This effect takes two effects and apply them in a row
  * 
@@ -11,6 +13,7 @@ public class MultipleEffect extends Effect {
 	Effect firstEffect;
 	Effect secondEffect;
 	CouncilPrivilegeEffect secondEffectWithChoice;
+	
 	
 	//TODO DA TESTARE!!!!!!
 	
@@ -37,6 +40,15 @@ public class MultipleEffect extends Effect {
 		firstEffect.applyEffect();
 		secondEffectWithChoice.applyEffect(choice);
 	}
+	
+	
+	public void applyEffect(FamilyMember familyMember,int choice){
+		InstantResourcesEffect instantEffect=(InstantResourcesEffect)firstEffect;
+		instantEffect.applyEffect(familyMember);
+		secondEffectWithChoice.applyEffect(familyMember);
+	}
+	
+	
 	
 	@Override
 	public String toString() {

@@ -1,9 +1,9 @@
 
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-import it.polimi.ingsw.ps19.model.resource.Resource;
 
 /**
  * @author Mirko
@@ -18,6 +18,8 @@ public abstract class Effect {
 	protected DevelopmentCard card;
 
 	public abstract void applyEffect();
+	
+
 	
 
 	/**

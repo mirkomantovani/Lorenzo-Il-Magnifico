@@ -26,7 +26,7 @@ public class TakeCardAction extends Action {
 	private Floor floor;
 
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
-		super(familyMember.getPlayer(), familyMember);
+		super(familyMember);
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;

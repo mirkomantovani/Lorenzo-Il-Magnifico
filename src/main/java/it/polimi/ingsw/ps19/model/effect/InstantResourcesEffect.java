@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -32,6 +33,10 @@ public class InstantResourcesEffect extends Effect {
 	public void applyEffect() {
 		effectResourceChest.pourInto(this.getAssociatedPlayer()
 				.getResourceChest());
+	}
+	
+	public void applyEffect(FamilyMember familyMember){
+		effectResourceChest.pourInto(familyMember.getPlayer().getResourceChest());
 	}
 
 	/* 

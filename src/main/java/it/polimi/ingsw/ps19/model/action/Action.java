@@ -9,8 +9,8 @@ public abstract  class Action {
 	
 	protected FamilyMember familyMember;
 	
-	public Action(Player player, FamilyMember familyMember) {
-		this.player = player;
+	public Action(FamilyMember familyMember) {
+		this.player = familyMember.getPlayer();
 		this.familyMember=familyMember;
 	}
 
