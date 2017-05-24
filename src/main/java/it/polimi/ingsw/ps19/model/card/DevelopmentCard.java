@@ -18,7 +18,8 @@ public abstract class DevelopmentCard extends Card {
 	protected Period period;
 	protected ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
 	
-	protected Effect immediateEffect,permanentEffect;
+	protected Effect immediateEffect;
+	protected Effect permanentEffect;
 	protected CardType cardType;
 	
 	
@@ -93,38 +94,18 @@ public abstract class DevelopmentCard extends Card {
 
 	
 	 @Override
-		public String toString() {			
-		 if(immediateEffect == null && permanentEffect != null && cost != null)
-			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect !=null && permanentEffect == null && cost != null)
-			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=     /     "  + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect == null && permanentEffect == null && cost != null)
-			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-						+ ", \nimmediateEffect=     /     " + " \npermanentEffect=      /     " + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect ==null && permanentEffect == null && cost == null)
-			 return " [id=" + id + ", period=" + period + ", cost=     /     " + ", name=" + name
-						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=     /     " + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect !=null && permanentEffect == null && cost == null)
-			 return " [id=" + id + ", period=" + period + ", cost=     /     " + ", name=" + name
-						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=     /     "  + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect == null && permanentEffect != null && cost == null)
-			 return " [id=" + id + ", period=" + period + ", cost=     /     "+ ", name=" + name
-						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
-						+ "]";
-		 else if(immediateEffect != null && permanentEffect != null && cost == null)
-			 return " [id=" + id + ", period=" + period + ", cost=     /     "+ ", name=" + name
-						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
-						+ "]";
-		 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
-					+ "]";
+		public String toString() {
+		 	StringBuilder string = new StringBuilder();
+		 	
+		 	string.append("Name: " + name + "\nPeriod: " + period + "\nCost: ");
+		 	
+		 	if(this.cost!=null)
+		 		string.append(cost.toString());
+		 	string.append("\nImmediate effect: ");
+		 	if(this.immediateEffect!=null)
+		 		string.append(immediateEffect.toString());
+		 		
+		 	return string.toString();
 		}
 	
 	

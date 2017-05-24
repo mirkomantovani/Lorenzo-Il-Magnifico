@@ -175,9 +175,10 @@ public class DeckCreator {
 		CouncilPrivilegeEffect privilegeEffect;
 		ForEachTypeCardEffect forEachEffect;
 		
-		ArrayList<Resource> choices;
+	
 		
-		AtomicExchangeEffect atomicExchange1,atomicExchange2;
+		AtomicExchangeEffect atomicExchange1;
+		AtomicExchangeEffect atomicExchange2;
 		
 		privilege=Integer.parseInt(buffReader.readLine());   //lines 11-12-13-14
 		mPoint=Integer.parseInt(buffReader.readLine());
@@ -250,8 +251,11 @@ public class DeckCreator {
 		else{ //it means it has an atomic exchange effect
 
 			int resourceId;
-			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
-			Resource resourceIn1,resourceIn2;     //resources to get
+			Resource resourceOut1;
+			Resource resourceOut2;
+			Resource resourceOut3;  //resources to give
+			Resource resourceIn1;
+			Resource resourceIn2;     //resources to get
 			ResourceChest resourcesOut=new ResourceChest(0,0,0,0,0,0,0);
 			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
@@ -348,7 +352,7 @@ public class DeckCreator {
 			harvestedPrivilegeAmount = Integer.parseInt(buffReader.readLine());
 			
 			//Immediate effect initialization
-			if(immediateResourceChest.isEmpty() == true){		//Se non dà delle risorse
+			if(immediateResourceChest.isEmpty()){		//Se non dà delle risorse
 				if(immediatePrivilegeAmount == 0)				//Se non dà neanche privilegi
 					immediateEffect = null;						//Allora non c'è nulla
 				else{
@@ -365,7 +369,7 @@ public class DeckCreator {
 			}
 			
 			//Permanent effect initialization; it will be a harvest effect
-			if(harvestedResourceChest.isEmpty() == true){
+			if(harvestedResourceChest.isEmpty()){
 				if(harvestedPrivilegeAmount !=0)
 					harvestEffect = new HarvestEffect(new CouncilPrivilegeEffect(harvestedPrivilegeAmount));
 				else
@@ -421,7 +425,6 @@ public class DeckCreator {
 		int takeCardType;
 		int takeCardCost;
 		
-		ArrayList<Resource> choices;
 		
 		int index = 0;
 		
@@ -598,7 +601,7 @@ public class DeckCreator {
 			if(valueAmount != 0){
 				permanentEffect = new RaiseValueWithDiscountEffect(valueAmount, cardType, buildingCardsBonus, characterCardsBonus);	
 			}
-			else if(noFloorBonus == true){
+			else if(noFloorBonus){
 				permanentEffect = new NoFloorBonusEffect();
 			}else if(raiseProductionValueAmount != 0){
 				permanentEffect = new HarvestBonusEffect(raiseProductionValueAmount);
@@ -692,7 +695,7 @@ public class DeckCreator {
 		
 		ResourceChest requirements;
 		int privilege;
-		ArrayList<Resource> choices;
+		
 		
 		int territoryCardsRequired; // the content is the number of territory cards required 
 		int buildingCardsRequired;

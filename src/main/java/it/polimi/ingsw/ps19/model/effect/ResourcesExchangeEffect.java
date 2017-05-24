@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
  * The Class ResourcesExchangeEffect represents a type of effect which can be found only in
@@ -23,19 +22,18 @@ public class ResourcesExchangeEffect extends Effect {
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	
-	
-	
-	private void applyEffect(AtomicExchangeEffect chosenExchangeEffect,Player player){
-		chosenExchangeEffect.applyEffect(player);
-	}
-	
 	public ResourcesExchangeEffect(AtomicExchangeEffect normalExchangeEffect,
 			AtomicExchangeEffect alternativeExchangeEffect) {
 		super();
 		this.normalExchangeEffect = normalExchangeEffect;
 		this.alternativeExchangeEffect = alternativeExchangeEffect;
 	}
-
+	
+	private void applyEffect(AtomicExchangeEffect chosenExchangeEffect,Player player){
+		chosenExchangeEffect.applyEffect(player);
+	}
+	
+	
 	/**
 	 * @return true if the effect has a possible alternative Atomic exchange effect
 	 */
@@ -55,8 +53,10 @@ public class ResourcesExchangeEffect extends Effect {
 	 * 
 	 */
 	public void applyEffect(int choice, Player player) {
-		if(choice==1)applyEffect(normalExchangeEffect,player);
-		else if(choice==2)applyEffect(alternativeExchangeEffect,player);
+		if(choice==1)
+			applyEffect(normalExchangeEffect,player);
+		else if(choice==2)
+			applyEffect(alternativeExchangeEffect,player);
 		//else exception?, but it shouldn't be possible to has another value 
 	
 	}

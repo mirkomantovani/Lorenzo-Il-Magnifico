@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
  * This class represents the production effect of a building card, it differs from other effects because its actual effect
@@ -26,6 +25,7 @@ public class ProductionEffect extends Effect{
 		this.actualEffect = actualEffect;
 	}
 
+	@Override
 	public void applyEffect(Player p) {
 		actualEffect.applyEffect(p);
 	}
@@ -33,7 +33,7 @@ public class ProductionEffect extends Effect{
 
 	@Override
 	public String toString() {
-		return "Production effect:"+actualEffect.toString();
+		return actualEffect.toString();
 	}
 
 }

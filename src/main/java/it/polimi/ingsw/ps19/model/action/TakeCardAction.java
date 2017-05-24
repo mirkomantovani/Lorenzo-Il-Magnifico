@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.model.action;
 
 import java.util.List;
 
-
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
@@ -23,20 +22,27 @@ public class TakeCardAction extends Action {
 	private DevelopmentCard card;
 	private Servant paidServants;
 	private Floor floor;
+	private int actionValueVariation;
 
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
+		this.actionValueVariation=calculateActionValueVariation();
 
+	}
+
+	private int calculateActionValueVariation() {
+		return this.player.getBonuses().getCardTypeActionVariation(
+				this.card.getCardType());
+		
 	}
 
 	@Override
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
 			player.addCard(card);
-			System.out.println("\nYou bought the card:" + card.toString());
 			player.getResourceChest().subChest(card.getCost());
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 		} else
@@ -53,10 +59,8 @@ public class TakeCardAction extends Action {
 		if (player.getRightArrayList(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
 			return false;
 
-		if(!this.canBePlaced())return false;
-		
+		return this.canBePlaced();
 
-		return true;
 	}
 	
 	/**
@@ -64,10 +68,10 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean canBePlaced(){
 		//I have to control the special effects e.g. ludovico ariosto
-		if(this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()
+		return this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()
 				&&(familyMember.getDice().getColor()==Color.NEUTRAL
-					||this.noSamePlayerMembers(familyMember.getPlayer())));
-		return true;
+					||this.noSamePlayerMembers(familyMember.getPlayer()));
+		
 	}
 	
 	/**
@@ -78,8 +82,8 @@ public class TakeCardAction extends Action {
 		List<Floor> floors;
 		floors=this.floor.getTower().getFloors();
 		for(Floor fl : floors){
-			if(fl!=this.floor)
-				if(fl.getActionSpace().getFamilyMember().getPlayer()==player)return false;
+			if(fl!=this.floor
+				&&fl.getActionSpace().getFamilyMember().getPlayer()==player)return false;
 		}
 		
 		return true;
@@ -91,9 +95,9 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean isActionValueEnough(){
 		//personal bonuses to add
-		if(familyMember.getActionValue()+this.paidServants.getAmount()
-			<this.floor.getActionSpace().getActionValueRequired())return false;
-		return true;
+		return (familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation
+			>=this.floor.getActionSpace().getActionValueRequired());
+		
 	}
 
 }

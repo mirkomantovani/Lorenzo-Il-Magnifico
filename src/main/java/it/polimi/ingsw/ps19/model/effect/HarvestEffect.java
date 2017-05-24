@@ -33,7 +33,7 @@ public class HarvestEffect extends Effect {
 	
 	@Override
 	public String toString() {
-		return "Harvest effect: " + instantEffect.toString();
+		return instantEffect.toString();
 	}
 
 }

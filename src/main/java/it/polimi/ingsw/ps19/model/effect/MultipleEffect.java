@@ -15,8 +15,6 @@ public class MultipleEffect extends Effect {
 	CouncilPrivilegeEffect secondEffectWithChoice;
 	
 	
-	//TODO DA TESTARE!!!!!!
-	
 	public MultipleEffect(Effect firstEffect, Effect secondEffect){
 		this.firstEffect = firstEffect;
 		this.secondEffect = secondEffect;	
@@ -43,11 +41,11 @@ public class MultipleEffect extends Effect {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append(firstEffect.toString() + " and ");
+		string.append(firstEffect.toString() + "\n");
 		if(secondEffect != null)
-			string.append(secondEffect.toString());
+			string.append("\t\t  and " + secondEffect.toString());
 		else
-			string.append(secondEffectWithChoice.toString());
+			string.append("\t\t  and " + secondEffectWithChoice.toString());
 		return string.toString();
 	}
 

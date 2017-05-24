@@ -11,6 +11,10 @@ public abstract class Card {
 	protected Player player;
 	protected String name;
 	
+	public Card(String name) {
+		this.name = name;
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -20,9 +24,5 @@ public abstract class Card {
 	public String getName() {
 		return name;
 	}
-	public Card(String name) {
-		this.name = name;
-	}
-	
 
 }

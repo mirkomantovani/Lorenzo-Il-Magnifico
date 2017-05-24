@@ -10,6 +10,7 @@ public class Church {
 	
 	private ExcommunicationTile excommunicationFirst;	
 	private ExcommunicationTile excommunicationSecond;	
+	private ExcommunicationTile excommunicationThird;
 	public ExcommunicationTile getExcommunicationFirst() {
 		return excommunicationFirst;
 	}
@@ -48,12 +49,4 @@ public class Church {
 	}
 
 
-	private ExcommunicationTile excommunicationThird;
-
-	
-	
-	
-	
-
-	
 }
