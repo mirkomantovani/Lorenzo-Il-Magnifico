@@ -1,14 +1,14 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.Player;
 
 
 /**
  * @author matteo
  *
  */
-public class InstantProductionActionEffect extends CardEffect {
+public class InstantProductionActionEffect extends Effect {
 	
 	int productionActionValue;
 
@@ -22,7 +22,7 @@ public class InstantProductionActionEffect extends CardEffect {
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		//TODO
 		/*
 		for(BuildingCard c : card.getPlayer().getBuildingDeck()){

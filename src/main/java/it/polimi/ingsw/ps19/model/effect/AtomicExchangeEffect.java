@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  *
  * @author Mirko
  */
-public class AtomicExchangeEffect extends CardEffect {
+public class AtomicExchangeEffect extends Effect {
 	
 
 	ResourceChest resourcesOut;  
@@ -22,9 +22,9 @@ public class AtomicExchangeEffect extends CardEffect {
 
 	
 	@Override
-	public void applyEffect() {
-		this.card.getPlayer().getResourceChest().subChest(resourcesOut);
-		this.card.getPlayer().getResourceChest().addChest(resourcesIn);	
+	public void applyEffect(Player player) {
+		player.getResourceChest().subChest(resourcesOut);
+		player.getResourceChest().addChest(resourcesIn);	
 	}
 	
 	@Override

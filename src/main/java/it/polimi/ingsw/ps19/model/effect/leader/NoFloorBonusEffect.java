@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
-public class NoFloorBonusEffect extends CardEffect{
+public class NoFloorBonusEffect extends Effect{
 
 	@Override
-	public void applyEffect() {
-		this.getAssociatedPlayer().getBonuses().setNoFloorBonus(true);
+	public void applyEffect(Player p) {
+		p.getBonuses().setNoFloorBonus(true);
 	}
 	
 	@Override

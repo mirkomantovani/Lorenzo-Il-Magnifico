@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.model.action;
 
 import java.util.List;
 
-import org.omg.Messaging.SyncScopeHelper;
 
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
@@ -39,7 +38,7 @@ public class TakeCardAction extends Action {
 			player.addCard(card);
 			System.out.println("\nYou bought the card:" + card.toString());
 			player.getResourceChest().subChest(card.getCost());
-			card.getImmediateEffect().applyEffect();
+			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 		} else
 			throw new NotApplicableException();
 	}

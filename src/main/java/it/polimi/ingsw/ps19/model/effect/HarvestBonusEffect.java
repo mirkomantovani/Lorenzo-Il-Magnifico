@@ -1,11 +1,12 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * @author matteo
  *
  */
-public class HarvestBonusEffect extends CardEffect {
+public class HarvestBonusEffect extends Effect {
 	
 	int value;
 	
@@ -14,8 +15,8 @@ public class HarvestBonusEffect extends CardEffect {
 	}
 
 	@Override
-	public void applyEffect() {
-		card.getPlayer().getBonuses().setHarvestVariation(value);
+	public void applyEffect(Player p) {
+		p.getBonuses().setHarvestVariation(value);
 	}
 	
 	@Override

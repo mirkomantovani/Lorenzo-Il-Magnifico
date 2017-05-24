@@ -49,7 +49,7 @@ public class EffectsTest {
 		player.addCard(card);
 		System.out.println("\nYou bought the card:"+card.toString());
 		player.getResourceChest().subChest(card.getCost());
-		card.getImmediateEffect().applyEffect();
+		card.getImmediateEffect().applyEffect(player1);
 
 	
 	}

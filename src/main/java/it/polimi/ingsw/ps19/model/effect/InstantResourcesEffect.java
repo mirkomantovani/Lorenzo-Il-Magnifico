@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Jimmy
  *
  */
-public class InstantResourcesEffect extends CardEffect {
+public class InstantResourcesEffect extends Effect {
 	   
 	private ResourceChest effectResourceChest;	
 	/**
@@ -30,14 +30,10 @@ public class InstantResourcesEffect extends CardEffect {
 	/* (non-Javadoc)
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
-	public void applyEffect() {
-		effectResourceChest.pourInto(this.getAssociatedPlayer()
-				.getResourceChest());
+	public void applyEffect(Player p) {
+		effectResourceChest.pourInto(p.getResourceChest());
 	}
 	
-	public void applyEffect(FamilyMember familyMember){
-		effectResourceChest.pourInto(familyMember.getPlayer().getResourceChest());
-	}
 
 	/* 
 	 * (non-Javadoc)

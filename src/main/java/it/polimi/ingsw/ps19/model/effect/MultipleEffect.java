@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * This effect takes two effects and apply them in a row
@@ -8,44 +8,34 @@ import it.polimi.ingsw.ps19.FamilyMember;
  * @author Jimmy
  *
  */
-public class MultipleEffect extends CardEffect {
+public class MultipleEffect extends Effect {
 
-	CardEffect firstEffect;
-	CardEffect secondEffect;
+	Effect firstEffect;
+	Effect secondEffect;
 	CouncilPrivilegeEffect secondEffectWithChoice;
 	
 	
 	//TODO DA TESTARE!!!!!!
 	
-	public MultipleEffect(CardEffect firstEffect, CardEffect secondEffect){
+	public MultipleEffect(Effect firstEffect, Effect secondEffect){
 		this.firstEffect = firstEffect;
 		this.secondEffect = secondEffect;	
-		firstEffect.setCard(this.card);
-		secondEffect.setCard(this.card);
+
 	}
 	
-	public MultipleEffect(CardEffect firstEffect, CouncilPrivilegeEffect secondEffectWithChoice){
+	public MultipleEffect(Effect firstEffect, CouncilPrivilegeEffect secondEffectWithChoice){
 		this.firstEffect = firstEffect;
 		this.secondEffectWithChoice = secondEffectWithChoice;
-		firstEffect.setCard(this.card);
-		secondEffectWithChoice.setCard(this.card);
 	}
 
-	public void applyEffect() {
-		firstEffect.applyEffect();
-		secondEffect.applyEffect();
+	public void applyEffect(Player p) {
+		firstEffect.applyEffect(p);
+		secondEffect.applyEffect(p);
 	}
 	
-	public void applyEffect(int choice){
-		firstEffect.applyEffect();
-		secondEffectWithChoice.applyEffect(choice);
-	}
-	
-	
-	public void applyEffect(FamilyMember familyMember,int choice){
-		InstantResourcesEffect instantEffect=(InstantResourcesEffect)firstEffect;
-		instantEffect.applyEffect(familyMember);
-		secondEffectWithChoice.applyEffect(familyMember);
+	public void applyEffect(int choice,Player p){
+		firstEffect.applyEffect(p);
+		secondEffectWithChoice.applyEffect(choice,p);
 	}
 	
 	

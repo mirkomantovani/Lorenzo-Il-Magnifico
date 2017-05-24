@@ -1,16 +1,15 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
-import it.polimi.ingsw.ps19.model.card.TerritoryCard;
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * @author matteo
  *
  */
-public class InstantHarvestActionEffect extends CardEffect {
+public class InstantHarvestActionEffect extends Effect {
 	
-	int harvestActionValue;
+	private int harvestActionValue;
 	
 	public InstantHarvestActionEffect(int harvestActionValue) {
 		this.harvestActionValue = harvestActionValue;
@@ -22,7 +21,7 @@ public class InstantHarvestActionEffect extends CardEffect {
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		
 		//TODO
 		/*

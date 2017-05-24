@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -7,7 +8,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Matteo, Jimmy
  *
  */
-public class TakeCardEffect extends CardEffect{
+public class TakeCardEffect extends Effect{
 	
 	private CardType cardType;
 	private int cardValue;
@@ -26,7 +27,7 @@ public class TakeCardEffect extends CardEffect{
 	}
 
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		// TODO Auto-generated method stub
 		
 	}

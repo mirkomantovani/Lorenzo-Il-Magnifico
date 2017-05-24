@@ -4,21 +4,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
-import it.polimi.ingsw.ps19.model.effect.CardEffect;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
@@ -96,8 +94,8 @@ public class DeckCreator {
 		Period period; 
 		ResourceChest cost;
 		ResourceChest instantChest;
-		CardEffect immediateEffect;
-		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		Effect immediateEffect;
+		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		ProductionEffect productionEffect;
 		int productionActivationCost;
 		int cardIndex=0;
@@ -166,7 +164,7 @@ public class DeckCreator {
 	 * @return the effect
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private static CardEffect calculateProductionEffectFromFile() throws IOException {
+	private static Effect calculateProductionEffectFromFile() throws IOException {
 		int privilege;
 		int mPoint;
 		int vPoint;
@@ -316,7 +314,7 @@ public class DeckCreator {
 		int id;
 		String name;
 		Period period;
-		CardEffect immediateEffect;
+		Effect immediateEffect;
 		HarvestEffect harvestEffect; //mai uguali a null..
 		int harvestActivationCost;
 		
@@ -382,11 +380,6 @@ public class DeckCreator {
 			
 			deck[cardIndex] = new TerritoryCard(id,name,period,immediateEffect,harvestEffect, harvestActivationCost);
 			
-			if(immediateEffect != null)
-				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]);
-			
-			deck[cardIndex].getPermanentEffect().setCard(deck[cardIndex]);
-			
 			lineRead = buffReader.readLine();
 			cardIndex++;
 		}
@@ -411,8 +404,8 @@ public class DeckCreator {
 		ResourceChest addings;
 		ResourceChest victoryPointsChest;
 		
-		CardEffect immediateEffect;
-		CardEffect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
+		Effect immediateEffect;
+		Effect permanentEffect;  //this should be a ProductionEffect, but we still have to create the class
 		
 
 		int coins;
@@ -513,8 +506,8 @@ public class DeckCreator {
 		String name;
 		Period period;
 		ResourceChest moneyCost;  //Character cards cost only coins
-		CardEffect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
-		CardEffect permanentEffect;
+		Effect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
+		Effect permanentEffect;
 		
 		
 		//local variable for support purpose, they will read and store the value from the file
@@ -673,11 +666,7 @@ public class DeckCreator {
 			}
 			
 			deck[cardIndex] = new CharacterCard(id,name,period,moneyCost,immediateEffect,permanentEffect);
-			if(immediateEffect != null)
-				deck[cardIndex].getImmediateEffect().setCard(deck[cardIndex]);
-			else if(permanentEffect != null){
-				deck[cardIndex].getPermanentEffect().setCard(deck[cardIndex]);
-			}
+	
 			
 			lineRead = buffReader.readLine();
 			cardIndex++;
@@ -730,7 +719,7 @@ public class DeckCreator {
 		int lucreziaBorgiaEffect;
 		int federicoDaMontefeltroEffect;
 		
-		CardEffect specialEffect;
+		Effect specialEffect;
 
 		
 		LeaderCard[] deck = new LeaderCard[deckLength];

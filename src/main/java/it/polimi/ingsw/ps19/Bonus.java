@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps19;
 
+import java.util.List;
+
+import it.polimi.ingsw.ps19.model.resource.Resource;
+
 /**
  * @author Jimmy
  *
@@ -7,9 +11,9 @@ package it.polimi.ingsw.ps19;
 public class Bonus {
 	 
 	 int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
-	 int productionVariation; // "  "  "  " 
+	 int productionVariation; // "  "  "  "    //in production/harvest action
 	 
-	 int actionValueBuildingVariation;
+	 int actionValueBuildingVariation;   //in take card action
 	 int actionValueVentureVariation;
 	 int actionValueCharacterVariation;
 	 int actionValueTerritoryVariation;
@@ -17,6 +21,11 @@ public class Bonus {
 	 boolean noFloorBonus;
 	 boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
 	 boolean buildingCardsDiscount;  //This boolean is true if "COSTRUTTORE"'s effect is active.
+	 
+	 //excommunication
+	 List<Resource> resourceMalus;   //in instantresource
+	 
+	 
 	 
 	public int getHarvestVariation() {
 		return harvestVariation;

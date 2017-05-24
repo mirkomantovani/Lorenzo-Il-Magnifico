@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
+
 /**
  * This class implements the harvest effect that gives only resources,
  * hence a resource chest. The harvest effect is the same as an instantResourcesEffect
@@ -8,25 +10,25 @@ package it.polimi.ingsw.ps19.model.effect;
  * @author Jimmy
  *
  */
-public class HarvestEffect extends CardEffect {
+public class HarvestEffect extends Effect {
 	
-	CardEffect instantEffect;
+	Effect instantEffect;
 	
 	/**
 	 * class constructor
 	 * 
 	 * @param effectResourceChest  the chest that contains the rewarded resources or the council privilege effect
 	 */
-	public HarvestEffect(CardEffect instantEffect){
+	public HarvestEffect(Effect instantEffect){
 		this.instantEffect=instantEffect;
-		this.instantEffect.setCard(this.card);
+	
 	}
 	
 	/* (non-Javadoc)
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
-	public void applyEffect() {
-		instantEffect.applyEffect();
+	public void applyEffect(Player p) {
+		instantEffect.applyEffect(p);
 	}
 	
 	@Override
