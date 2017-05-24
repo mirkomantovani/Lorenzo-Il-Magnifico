@@ -30,14 +30,10 @@ public class ForEachResourceTypeEffect extends Effect{
 	
 	private Resource calculateResource(Player player){
 		int leftFactor = givenResource.getAmount();
-		int rightFactor = 0;
-		
 		//based on the dynamic type of the foreacheResource it will set the right
 		//factor to the "int casted" result of the division between the amount of
 		//the resource held by the player and the amount of the passed resource
-		//I THINK WE SHOULD INTRODUCE AN ENUM RESOURCE TYPE AND ASSIGN THAT TO EACH RESOURCE TYPE
-		
-		rightFactor = (int) player.getResourceChest().getResourceInChest(foreachResource).getAmount() / foreachResource.getAmount();
+		int rightFactor = (int) player.getResourceChest().getResourceInChest(foreachResource).getAmount() / foreachResource.getAmount();
 		//Non dovrebbe mai succedere che il foreach resource non sia uno di quei tipo
 
 		
@@ -45,6 +41,7 @@ public class ForEachResourceTypeEffect extends Effect{
 		return givenResource;
 	}
 	public void applyEffect(Player player) {
+		calculateResource(player);
 		player.getResourceChest().addResource(givenResource);
 	}
 	

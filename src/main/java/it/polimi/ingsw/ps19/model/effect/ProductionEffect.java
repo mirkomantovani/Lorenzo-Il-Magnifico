@@ -33,7 +33,7 @@ public class ProductionEffect extends Effect{
 
 	@Override
 	public String toString() {
-		return "Production effect:"+actualEffect.toString();
+		return actualEffect.toString();
 	}
 
 }

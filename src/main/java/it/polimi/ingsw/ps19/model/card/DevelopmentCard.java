@@ -93,7 +93,20 @@ public abstract class DevelopmentCard extends Card {
 
 	
 	 @Override
-		public String toString() {			
+		public String toString() {
+		 	StringBuilder string = new StringBuilder();
+		 	
+		 	string.append("Name: " + name + "\nPeriod: " + period + "\nCost: ");
+		 	
+		 	if(this.cost!=null)
+		 		string.append(cost.toString());
+		 	string.append("\nImmediate effect: ");
+		 	if(this.immediateEffect!=null)
+		 		string.append(immediateEffect.toString());
+		 		
+		 	return string.toString();
+		 	
+		 /*
 		 if(immediateEffect == null && permanentEffect != null && cost != null)
 			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
 						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
@@ -124,7 +137,7 @@ public abstract class DevelopmentCard extends Card {
 						+ "]";
 		 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
 					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
-					+ "]";
+					+ "]";*/
 		}
 	
 	

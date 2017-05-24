@@ -43,7 +43,7 @@ public class InstantResourcesEffect extends Effect {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("You gain");
+		builder.append("You gain:");
 		builder.append(effectResourceChest.toString());
 		
 		return builder.toString();
