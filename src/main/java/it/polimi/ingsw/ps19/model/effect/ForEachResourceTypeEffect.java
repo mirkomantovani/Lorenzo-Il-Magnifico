@@ -1,14 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.model.resource.Coin;
-import it.polimi.ingsw.ps19.model.resource.FaithPoint;
-import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
-import it.polimi.ingsw.ps19.model.resource.Servant;
-import it.polimi.ingsw.ps19.model.resource.Stone;
-import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
-import it.polimi.ingsw.ps19.model.resource.Wood;
 
 /**
  * This effect gives n resources for each m other resources

@@ -6,6 +6,10 @@ package it.polimi.ingsw.ps19.model.card;
  * @author Mirko
  */
 public class CardConstants {
+	
+	private CardConstants(){
+		
+	}
 
 	
 	/** The Constant BUILDINGCARD_FILE_ENTRIES. */

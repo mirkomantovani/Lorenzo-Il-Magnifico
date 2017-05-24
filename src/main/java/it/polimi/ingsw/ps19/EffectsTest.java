@@ -5,10 +5,9 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
-import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
+import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 public class EffectsTest {

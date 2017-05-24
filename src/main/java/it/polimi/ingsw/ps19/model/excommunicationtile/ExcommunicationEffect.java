@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
-import java.util.List;
-
 public class ExcommunicationEffect {
 
 	
