@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.model.card.TerritoryCard;
  */
 public class TerritoryDeck extends Deck<TerritoryCard> {
 
+
 	/**
 	 * Instantiates a new territory deck.
 	 *
@@ -21,11 +22,16 @@ public class TerritoryDeck extends Deck<TerritoryCard> {
 	 *            the file path
 	 * @param deckLength
 	 *            the deck length
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * 
 	 */
-	public TerritoryDeck(String filePath, int deckLength) throws IOException {
-		cards = DeckCreator.createTerritoryCardDeck(filePath, deckLength);
+	public TerritoryDeck(String filePath, int deckLength) {
+		
+		try {
+			cards = DeckCreator.createTerritoryCardDeck(filePath, deckLength);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("No territory cards without an harvest effect allowed");
+		}
 	}
 
 	/*

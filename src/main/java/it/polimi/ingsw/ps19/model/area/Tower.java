@@ -1,10 +1,15 @@
 package it.polimi.ingsw.ps19.model.area;
 
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps19.model.card.CardType;
 import java.util.ArrayList;
+import java.util.List;
+
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.deck.Deck;
 
 /**
  * @author matteo
@@ -12,21 +17,22 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  */
 public class Tower {
 	
-	ArrayList<Floor> floors;
+	private List<Floor> floors;
+
+	private CardType cardType;
 	
-	CardType cardType;
-	
-	DevelopmentCard[] deck;
+	private Deck<DevelopmentCard> deck;
 	
 	private static int currentCard = 0; // index of the card on the top of the deck
 	
 	
- 	public Tower(CardType cardType, DevelopmentCard[] deck){ 
+ 	public Tower(CardType cardType, Deck<DevelopmentCard> deck){ 
+ 			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;
 			
-			for(int i = 0; i < deck.length / 6; i++){
-				floors.add(new Floor(deck[currentCard],this,0,null));
+			for(int i = 0; i < deck.length() / 6; i++){
+				floors.add(new Floor(deck.getCard(currentCard),this,0,null));
 				currentCard++;
 				
 			}
@@ -39,15 +45,15 @@ public class Tower {
  	 * 
  	 */
  	public void setCards(){
- 		for(int i=0; i < deck.length/6; i++){
- 			Floor floor = new Floor(deck[currentCard],this,0,null);
+ 		for(int i=0; i < deck.length()/6; i++){
+ 			Floor floor = new Floor(deck.getCard(currentCard),this,0,null);
  			floors.set(i,floor);
  			currentCard++;
  		}
  	}
  	
  	/**
- 	 * @author matteo
+ 	 * 
  	 * This Method builds an Array with the cards in the tower and returns it
  	 * 
  	 * @return
@@ -62,5 +68,9 @@ public class Tower {
  		
  		return towerCards;
  	}
+ 	
+ 	public List<Floor> getFloors() {
+		return floors;
+	}
 	
 }

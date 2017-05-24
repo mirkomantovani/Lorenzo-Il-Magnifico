@@ -2,9 +2,10 @@ package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.IOException;
 
-
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
+import it.polimi.ingsw.ps19.model.card.CharacterCard;
+import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 
@@ -18,6 +19,10 @@ public class DeckClient {
 
 	private static Deck<BuildingCard> buildingDeck;
 	private static Deck<VentureCard> ventureDeck;
+	private static Deck<CharacterCard> characterDeck;
+	private static Deck<TerritoryCard> territoryDeck;
+
+	private static LeaderDeck leaderDeck;
 	
 	
 	/**
@@ -62,6 +67,66 @@ public class DeckClient {
 		System.out.println("Venture Deck built successfully!");
 		ventureDeck.printCardInfo(0);
 		System.out.println(ventureDeck.getCard(2).toString());
-	}
+		
 
+		
+		System.out.println("\n\nCharacters:\n");
+		start = System.nanoTime();
+		
+		try{
+			
+			characterDeck=new CharacterDeck("src/main/resources/files/filecharactercards.txt", CardConstants.DECK_LENGTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("There was a fucking Error");
+		}
+		end = System.nanoTime();
+			
+			for(int i = 0; i< characterDeck.length(); i++ ){
+				System.out.println(characterDeck.getCard(i).toString());
+			}
+		 
+		System.out.println("Time complexity: "+(end-start)+"ns");
+		
+		System.out.println("Character Deck built successfully!");
+		
+		start = System.currentTimeMillis();
+
+		try{
+			
+			leaderDeck=new LeaderDeck("src/main/resources/files/fileleadercards.txt", CardConstants.LEADER_DECK_LENGTH);
+		}catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("There was a fucking Error");
+			}
+		end = System.currentTimeMillis();
+		
+		System.out.println("Time complexity: "+(end-start)+"ms");
+		
+		System.out.println("Leader Deck built successfully!");
+		
+		System.out.println("\n\nTerritory cards: \n\n");
+		start = System.nanoTime();
+		
+		try{
+				territoryDeck=new TerritoryDeck("src/main/resources/files/fileterritorycards.txt", CardConstants.DECK_LENGTH);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("There was a fucking Error");
+		}
+		end = System.nanoTime();
+			
+			for(int i = 0; i< territoryDeck.length(); i++ ){
+				System.out.println(territoryDeck.getCard(i).toString());
+			}
+		 
+		System.out.println("Time complexity: "+(end-start)+"ns");
+		
+		System.out.println("Territory Deck built successfully!");
+		
+		
+		
+		
+	}
+	
 }

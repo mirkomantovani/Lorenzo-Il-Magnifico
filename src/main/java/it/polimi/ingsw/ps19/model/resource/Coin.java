@@ -10,9 +10,15 @@ public class Coin extends Resource {
 		super(amount);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.resource.Resource#toString()
+	 */
 	@Override
 	public String toString() {
-		return super.toString() + " Coins";
+		if (this.getAmount() == 1)
+			return super.toString() + " coin";
+		else
+			return super.toString() + " coins";
 	}
 
 	

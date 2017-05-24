@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
@@ -25,17 +26,10 @@ public class ProductionEffect extends Effect{
 		this.actualEffect = actualEffect;
 	}
 
-	public void applyEffect() {
-		actualEffect.applyEffect();
+	public void applyEffect(Player p) {
+		actualEffect.applyEffect(p);
 	}
 	
-	
-
-	@Override
-	public void setCard(DevelopmentCard card) {
-		super.setCard(card);
-		actualEffect.setCard(card);
-	}
 
 	@Override
 	public String toString() {

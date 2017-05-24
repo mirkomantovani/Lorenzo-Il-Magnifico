@@ -26,7 +26,7 @@ public class TerritoryCard extends DevelopmentCard {
 	 * @param harvestActivationCost the harvest activation cost
 	 */
 	public TerritoryCard(int id, String name, Period period, Effect immediateEffect,
-			Effect permanentEffect,int harvestActivationCost) {
+		Effect permanentEffect,int harvestActivationCost) {
 		super(id, name, period, null, immediateEffect, permanentEffect);
 		this.cardType=CardType.TERRITORY;
 		this.harvestActivationCost=harvestActivationCost;

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -41,9 +40,7 @@ public abstract class DevelopmentCard extends Card {
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
 		
-		
-		this.immediateEffect.setCard(this);  //this creates the association between an effect and its card
-		this.permanentEffect.setCard(this);
+
 	}
 
 	/**
@@ -96,11 +93,37 @@ public abstract class DevelopmentCard extends Card {
 
 	
 	 @Override
-		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + 
-					", \npermanentEffect=" + permanentEffect.toString() + 
-					", player=" + player
+		public String toString() {			
+		 if(immediateEffect == null && permanentEffect != null && cost != null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect !=null && permanentEffect == null && cost != null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=     /     "  + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect == null && permanentEffect == null && cost != null)
+			 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+						+ ", \nimmediateEffect=     /     " + " \npermanentEffect=      /     " + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect ==null && permanentEffect == null && cost == null)
+			 return " [id=" + id + ", period=" + period + ", cost=     /     " + ", name=" + name
+						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=     /     " + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect !=null && permanentEffect == null && cost == null)
+			 return " [id=" + id + ", period=" + period + ", cost=     /     " + ", name=" + name
+						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=     /     "  + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect == null && permanentEffect != null && cost == null)
+			 return " [id=" + id + ", period=" + period + ", cost=     /     "+ ", name=" + name
+						+ ", \nimmediateEffect=     /     " + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
+						+ "]";
+		 else if(immediateEffect != null && permanentEffect != null && cost == null)
+			 return " [id=" + id + ", period=" + period + ", cost=     /     "+ ", name=" + name
+						+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
+						+ "]";
+		 return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
+					+ ", \nimmediateEffect=" + immediateEffect.toString() + ", \npermanentEffect=" + permanentEffect.toString() + "\nplayer=" + player
 					+ "]";
 		}
 	

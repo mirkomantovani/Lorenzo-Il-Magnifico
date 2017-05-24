@@ -1,28 +1,33 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * @author matteo
+ * @author Matteo, Jimmy
  *
  */
 public class TakeCardEffect extends Effect{
 	
 	private CardType cardType;
+	private int cardValue;
+	private ResourceChest discountChest;
 	
-	private int cardCost;
 	
-	public TakeCardEffect(CardType card, int cost){
-		
-		super();
+	/**
+	 * @param card
+	 * @param value
+	 * @param discountChest this parameter can be an empty ResourceChest if there is no discount
+	 */
+	public TakeCardEffect(CardType card, int value, ResourceChest discountChest){
 		cardType = card;
-		cardCost = cost;
-		
+		cardValue = value;
+		this.discountChest = discountChest;
 	}
 
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -33,7 +38,8 @@ public class TakeCardEffect extends Effect{
 		builder.append("Take a ");
 		builder.append(cardType.toString().toLowerCase());
 		builder.append(" card, from an action space with an action value of ");
-		builder.append(cardCost);
+		builder.append(cardValue);
+		builder.append(" and you receive the following discount:" + discountChest.toString());
 		return builder.toString();
 	}
 	

@@ -13,7 +13,10 @@ public class FaithPoint extends Resource{
 
 	@Override
 	public String toString() {
-		return super.toString() + " Faith points";
+		if (this.getAmount() == 1)
+			return super.toString() + " faith point";
+		else
+			return super.toString() + " faith points";
 	}
 
 }

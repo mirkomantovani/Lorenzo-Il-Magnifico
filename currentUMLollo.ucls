@@ -1,708 +1,1317 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="it.polimi.ingsw.ps19.model.resource.ResourceChest" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/ResourceChest.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1894" y="1181"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="it.polimi.ingsw.ps19.model.resource.Wood" project="ProjectMJM" 
+  <class id="1" language="java" name="it.polimi.ingsw.ps19.model.resource.Wood" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Wood.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1634" y="1516"/>    
+    <position height="-1" width="-1" x="724" y="2912"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="it.polimi.ingsw.ps19.model.deck.Deck" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/Deck.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1815" y="234"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="it.polimi.ingsw.ps19.model.deck.VentureDeck" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/VentureDeck.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1054" y="420"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="5" language="java" name="it.polimi.ingsw.ps19.Color" project="ProjectMJM" 
+  <enumeration id="2" language="java" name="it.polimi.ingsw.ps19.Color" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Color.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2937" y="1445"/>    
+    <position height="-1" width="-1" x="4430" y="2228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="6" language="java" name="it.polimi.ingsw.ps19.Dice" project="ProjectMJM" 
+  <enumeration id="3" language="java" name="it.polimi.ingsw.ps19.Dice" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Dice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2875" y="1139"/>    
+    <position height="-1" width="-1" x="4469" y="1864"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="7" language="java" name="it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect" project="ProjectMJM" 
+  <class id="4" language="java" name="it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantResourcesEffect.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="133" y="754"/>    
+    <position height="-1" width="-1" x="2183" y="2097"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="it.polimi.ingsw.ps19.model.resource.Servant" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Servant.java" binary="false" 
+  <class id="5" language="java" name="it.polimi.ingsw.ps19.model.area.HarvestArea" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/HarvestArea.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1974" y="1516"/>    
+    <position height="-1" width="-1" x="1519" y="516"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="9" language="java" name="it.polimi.ingsw.ps19.model.card" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="111" width="335" x="1182" y="179"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  <class id="6" language="java" name="it.polimi.ingsw.ps19.model.resource.ResourceFactory" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/ResourceFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="386" y="2419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="7" language="java" name="it.polimi.ingsw.ps19.model.area" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2162" y="277"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="10" language="java" name="it.polimi.ingsw.ps19.model.resource.Coin" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Coin.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2320" y="1516"/>    
+  <package id="8" language="java" name="it.polimi.ingsw.ps19.model.card" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2724" y="994"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="9" language="java" name="it.polimi.ingsw.ps19.model.area.Occupable" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/Occupable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1674" y="906"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
+  </interface>  
+  <enumeration id="10" language="java" name="it.polimi.ingsw.ps19.model.card.CardType" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CardType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1588" y="2140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
   <class id="11" language="java" name="it.polimi.ingsw.ps19.model.deck.TerritoryDeck" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/TerritoryDeck.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1815" y="420"/>    
+    <position height="-1" width="-1" x="3887" y="1192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="it.polimi.ingsw.ps19.model.resource.VictoryPoint" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/VictoryPoint.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2147" y="1516"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="it.polimi.ingsw.ps19.model.deck.DeckCreator" project="ProjectMJM" 
+  <class id="12" language="java" name="it.polimi.ingsw.ps19.model.deck.DeckCreator" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/DeckCreator.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2312" y="156"/>    
+    <position height="-1" width="-1" x="3748" y="579"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="it.polimi.ingsw.ps19.FamilyMember" project="ProjectMJM" 
+  <class id="13" language="java" name="it.polimi.ingsw.ps19.model.area.CouncilPalace" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/CouncilPalace.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1771" y="506"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="it.polimi.ingsw.ps19.model.resource.VictoryPoint" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/VictoryPoint.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2084" y="2912"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/ForEachTypeCardEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1597" y="1794"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="it.polimi.ingsw.ps19.FamilyMember" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/FamilyMember.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2894" y="763"/>    
+    <position height="-1" width="-1" x="4458" y="1400"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="it.polimi.ingsw.ps19.model.card.DevelopmentCard" project="ProjectMJM" 
+  <class id="17" language="java" name="it.polimi.ingsw.ps19.model.card.DevelopmentCard" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/DevelopmentCard.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1434" y="500"/>    
+    <position height="-1" width="-1" x="2726" y="1302"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/AtomicExchangeEffect.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="671" y="1190"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="17" language="java" name="it.polimi.ingsw.ps19.model.card.CardConstants" project="ProjectMJM" 
+  <class id="18" language="java" name="it.polimi.ingsw.ps19.model.card.CardConstants" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CardConstants.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1175" y="972"/>    
+    <position height="-1" width="-1" x="2953" y="2075"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="it.polimi.ingsw.ps19.model.deck.CharacterDeck" project="ProjectMJM" 
+  <class id="19" language="java" name="it.polimi.ingsw.ps19.model.resource.ResourceChest" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/ResourceChest.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2125" y="2576"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="it.polimi.ingsw.ps19.model.deck.CharacterDeck" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/CharacterDeck.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2061" y="420"/>    
+    <position height="-1" width="-1" x="3107" y="1192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="it.polimi.ingsw.ps19.model.card.CharacterCard" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CharacterCard.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2020" y="726"/>    
+  <class id="21" language="java" name="it.polimi.ingsw.ps19.model.area.Floor" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/Floor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2654" y="536"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="it.polimi.ingsw.ps19.model.deck.BuildingDeck" project="ProjectMJM" 
+  <class id="22" language="java" name="it.polimi.ingsw.ps19.model.deck.BuildingDeck" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/BuildingDeck.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2361" y="420"/>    
+    <position height="-1" width="-1" x="3620" y="1212"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="21" language="java" name="it.polimi.ingsw.ps19.model.effect" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="80" width="386" x="122" y="363"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  <class id="23" language="java" name="it.polimi.ingsw.ps19.model.effect.ProductionEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/ProductionEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="317" y="1794"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/ResourcesExchangeEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1057" y="1824"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="it.polimi.ingsw.ps19.model.effect.HarvestEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/HarvestEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2242" y="1784"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="26" language="java" name="it.polimi.ingsw.ps19.model.resource" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1332" y="2419"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="22" language="java" name="it.polimi.ingsw.ps19.model.effect.Effect" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/Effect.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="388" y="530"/>    
+  <class id="27" language="java" name="it.polimi.ingsw.ps19.model.resource.Servant" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Servant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1268" y="2912"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="it.polimi.ingsw.ps19.model.resource.Resource" project="ProjectMJM" 
+  <class id="28" language="java" name="it.polimi.ingsw.ps19.model.deck.Deck" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/Deck.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3354" y="846"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="it.polimi.ingsw.ps19.model.deck.VentureDeck" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck/VentureDeck.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3353" y="1192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="it.polimi.ingsw.ps19.model.resource.Resource" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Resource.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2153" y="1161"/>    
+    <position height="-1" width="-1" x="996" y="2456"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="it.polimi.ingsw.ps19.Player" project="ProjectMJM" 
+  <class id="31" language="java" name="it.polimi.ingsw.ps19.model.area.ProductionArea" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/ProductionArea.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2035" y="516"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="it.polimi.ingsw.ps19.model.area.Tower" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/Tower.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2812" y="183"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="it.polimi.ingsw.ps19.model.area.ActionSpace" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/ActionSpace.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2123" y="913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/CouncilPrivilegeEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="605" y="1804"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="it.polimi.ingsw.ps19.model.resource.Stone" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Stone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1540" y="2912"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/AtomicExchangeEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1152" y="2110"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="it.polimi.ingsw.ps19.CardFactory" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/CardFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3005" y="1822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="it.polimi.ingsw.ps19.PersonalBonusTile" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/PersonalBonusTile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="711" y="2140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="it.polimi.ingsw.ps19.model.effect.TakeCardEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/TakeCardEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1942" y="1794"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="it.polimi.ingsw.ps19.model.resource.Coin" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Coin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2356" y="2912"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="it.polimi.ingsw.ps19.model.card.CharacterCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/CharacterCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2715" y="1558"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="42" language="java" name="it.polimi.ingsw.ps19.model.effect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1914" y="1435"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="43" language="java" name="it.polimi.ingsw.ps19.model.effect.CardEffect" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/CardEffect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1862" y="1588"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="it.polimi.ingsw.ps19.model.resource.ResourceIdException" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/ResourceIdException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="685" y="2492"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="it.polimi.ingsw.ps19.Player" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2606" y="570"/>    
+    <position height="-1" width="-1" x="4421" y="657"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="it.polimi.ingsw.ps19.model.card.VentureCard" project="ProjectMJM" 
+  <class id="46" language="java" name="it.polimi.ingsw.ps19.model.card.VentureCard" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/VentureCard.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1685" y="903"/>    
+    <position height="-1" width="-1" x="3199" y="1558"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="26" language="java" name="it.polimi.ingsw.ps19.Period" project="ProjectMJM" 
+  <enumeration id="47" language="java" name="it.polimi.ingsw.ps19.Period" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Period.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1282" y="756"/>    
+    <position height="-1" width="-1" x="1943" y="1181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="27" language="java" name="it.polimi.ingsw.ps19.model.card.BuildingCard" project="ProjectMJM" 
+  <class id="48" language="java" name="it.polimi.ingsw.ps19.model.card.BuildingCard" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/BuildingCard.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2165" y="891"/>    
+    <position height="-1" width="-1" x="3686" y="1578"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="it.polimi.ingsw.ps19.model.resource.MilitaryPoint" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/MilitaryPoint.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2493" y="1516"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="29" language="java" name="it.polimi.ingsw.ps19.model.resource.Stone" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/Stone.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1464" y="1516"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="30" language="java" name="it.polimi.ingsw.ps19.model.card.TerritoryCard" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/TerritoryCard.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1581" y="746"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="31" language="java" name="it.polimi.ingsw.ps19.model.deck" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1837" y="78"/>    
-    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="32" language="java" name="it.polimi.ingsw.ps19.model.resource.FaithPoint" project="ProjectMJM" 
+  <class id="49" language="java" name="it.polimi.ingsw.ps19.model.resource.FaithPoint" project="ProjectMJM" 
     file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/FaithPoint.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1804" y="1516"/>    
+    <position height="-1" width="-1" x="996" y="2912"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/effect/ResourcesExchangeEffect.java" binary="false" 
+  <class id="50" language="java" name="it.polimi.ingsw.ps19.model.card.TerritoryCard" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/card/TerritoryCard.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="246" width="368" x="121" y="838"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="4129" y="1578"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="23"/>  
+  <package id="51" language="java" name="it.polimi.ingsw.ps19.model.deck" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/deck" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3320" y="658"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="52" language="java" name="it.polimi.ingsw.ps19.CardIdException" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/CardIdException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3526" y="1825"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="it.polimi.ingsw.ps19.model.resource.MilitaryPoint" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/resource/MilitaryPoint.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1812" y="2912"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="it.polimi.ingsw.ps19.model.area.Market" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/area/Market.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2298" y="506"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="55">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="56" name="singleSlot">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="58">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="43"/>  
   </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="23"/>  
+  <association id="59">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="60" name="thirdMarket">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="63" name="card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="64" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="65">    
+    <bendpoint x="1357" y="1726"/>    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="43"/>  
   </generalization>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <generalization id="38">    
-    <bendpoint x="550" y="896"/>    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <association id="39">    
+  <association id="66">    
     <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="40" name="orangeMember">        
+      <attribute id="67" name="alternativeExchangeEffect">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
+      <multiplicity id="68" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="36" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="42">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="43" name="cards">        
+  <association id="69">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="70" name="secondMarket">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="44" minimum="0" maximum="2147483647">        
+      <multiplicity id="71" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
+    <end type="TARGET" refId="33" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="46" name="whiteMember">        
+  <generalization id="72">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="75">    
+    <bendpoint x="4372" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="76" name="blackMember">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="47" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="49" name="alternativeExchangeEffect">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
+      <multiplicity id="77" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="52">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <association id="53">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="54" name="territoryDeck">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="55" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <association id="57">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="58" name="buildingDeck">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="59" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="60">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="61" name="cards">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="62" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="63">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <association id="64">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="65" name="woods">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="67">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="68" name="ventureDeck">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="69" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="70">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="71" name="cost">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="72" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="73">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="74">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="75" name="neutralMember">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="76" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="77">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
   <association id="78">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="79" name="permanentEffect">        
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="79" name="immediateEffect">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="80" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="43" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="81">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="23"/>  
+  <association id="81">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="82" name="resourceOut1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <bendpoint x="4137" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="85" name="territoryDeck">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="86" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="88" name="instantEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="30"/>  
   </generalization>  
-  <association id="82">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="83" name="dice">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="84" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="85">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="86" name="cards">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="87" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="88">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="89" name="coins">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="90" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <generalization id="91">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="28"/>  
   </generalization>  
   <generalization id="92">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="28"/>  
   </generalization>  
-  <association id="93">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="94" name="cards">        
+  <generalization id="93">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <generalization id="94">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="95">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="96" name="multipleSlot">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="95" minimum="0" maximum="2147483647">        
+      <multiplicity id="97" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
+    <end type="TARGET" refId="33" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="96">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="3"/>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="43"/>  
   </generalization>  
-  <association id="97">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="98" name="stones">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="99" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <generalization id="99">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
   <association id="100">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="101" name="immediateEffect">        
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="101" name="multipleSlot">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="102" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="33" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="103">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="104" name="normalExchangeEffect">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="105" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="106">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="3"/>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="30"/>  
   </generalization>  
-  <association id="107">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="108" name="cards">        
+  <association id="104">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="105" name="woods">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="109" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="110">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="111" name="resources">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="112" minimum="0" maximum="1">        
+      <multiplicity id="106" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="108" name="dice">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="109" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="111" name="firstMarket">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="112" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="113">    
-    <bendpoint x="2650" y="734"/>    
-    <bendpoint x="2914" y="1032"/>    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="114" name="color">        
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="114" name="resourceOut2">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="115" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="116">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="117" name="servants">        
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="117" name="militaryPoints">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="118" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="53" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="119">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="120" name="period">        
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="120" name="resourceOut3">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="121" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="122">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="123" name="color">        
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="123" name="normalExchangeEffect">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="124" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="36" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="125">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="126" name="blackMember">        
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="126" name="stones">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="127" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="128">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <generalization id="129">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <association id="130">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="131" name="characterDeck">        
+  <association id="128">    
+    <bendpoint x="4414" y="1134"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="129" name="player">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="132" minimum="0" maximum="2147483647">        
+      <multiplicity id="130" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="132" name="resourceIn1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="133" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="135" name="cards">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="136" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="137">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <association id="138">    
+    <bendpoint x="4605" y="1134"/>    
+    <bendpoint x="4605" y="1510"/>    
+    <bendpoint x="4605" y="1726"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="139" name="color">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="140" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <bendpoint x="4020" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="142" name="buildingDeck">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="143" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="144">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="145" name="productionBonus2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="146" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="147">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="148">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="149" name="familyMember">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="152" name="servants">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="153" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="155" name="cardType">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="156" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="158" name="actionSpace">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="159" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="160">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="161">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <realization id="162">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="163">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="164" name="harvestBonus2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="165" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="166">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="167">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="168" name="fourthMarket">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="169" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="170">    
+    <bendpoint x="2416" y="1726"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="171">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="172" name="productionBonus1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="173" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="174">    
+    <bendpoint x="4393" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="175" name="orangeMember">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="176" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="177">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="178">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="179" name="card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="180" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="182" name="permanentEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="183" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <bendpoint x="4309" y="1134"/>    
+    <bendpoint x="4332" y="1510"/>    
+    <bendpoint x="4332" y="1726"/>    
+    <bendpoint x="4332" y="2042"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="185" name="resources">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="186" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="188" name="coins">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="189" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="191" name="effectResourceChest">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="192" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="194" name="harvestBonus1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="195" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="197" name="typeCard">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="198" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <bendpoint x="4351" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="200" name="whiteMember">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="201" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <bendpoint x="3753" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="203" name="ventureDeck">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="204" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="205">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="206">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <association id="207">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="208" name="resourceIn2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="209" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="211" name="actionSpace">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="212" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="213">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="214" name="tower">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="215" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="216">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="217" name="color">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="218" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="219">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="220" name="actualEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="221" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="222">    
+    <bendpoint x="2458" y="1510"/>    
+    <bendpoint x="2458" y="1726"/>    
+    <bendpoint x="2458" y="2042"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="223" name="cost">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="224" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="225">    
+    <bendpoint x="2897" y="458"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="226" name="deck">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="227" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="228">    
+    <bendpoint x="1455" y="2042"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="229" name="resource">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="230" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="231">    
+    <bendpoint x="3486" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="232" name="characterDeck">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="233" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="234">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="235" name="faithPoints">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="236" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="237">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="238" name="harvestBonus3">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="239" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="240">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="241" name="period">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="242" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="243">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="244" name="singleSlot">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="245" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="246">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="247">    
+    <bendpoint x="4330" y="1134"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="248" name="neutralMember">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="249" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="250">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="251" name="victoryPoints">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="252" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

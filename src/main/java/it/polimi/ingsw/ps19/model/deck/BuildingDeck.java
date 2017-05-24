@@ -38,8 +38,6 @@ public class BuildingDeck extends Deck<BuildingCard> {
 		System.out.println(this.cards[i].getId());
 		
 	}
-	
-
 
 
 }

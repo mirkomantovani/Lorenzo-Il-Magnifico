@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
@@ -24,8 +25,8 @@ public class ResourcesExchangeEffect extends Effect {
 	
 	
 	
-	private void applyEffect(AtomicExchangeEffect chosenExchangeEffect){
-		chosenExchangeEffect.applyEffect();
+	private void applyEffect(AtomicExchangeEffect chosenExchangeEffect,Player player){
+		chosenExchangeEffect.applyEffect(player);
 	}
 	
 	public ResourcesExchangeEffect(AtomicExchangeEffect normalExchangeEffect,
@@ -53,9 +54,9 @@ public class ResourcesExchangeEffect extends Effect {
 	 * 
 	 * 
 	 */
-	public void applyEffect(int choice) {
-		if(choice==1)applyEffect(normalExchangeEffect);
-		else if(choice==2)applyEffect(alternativeExchangeEffect);
+	public void applyEffect(int choice, Player player) {
+		if(choice==1)applyEffect(normalExchangeEffect,player);
+		else if(choice==2)applyEffect(alternativeExchangeEffect,player);
 		//else exception?, but it shouldn't be possible to has another value 
 	
 	}
@@ -66,8 +67,8 @@ public class ResourcesExchangeEffect extends Effect {
 	 * 
 	 */
 	@Override
-	public void applyEffect() {
-		applyEffect(normalExchangeEffect);
+	public void applyEffect(Player player) {
+		applyEffect(normalExchangeEffect,player);
 	}
 
 	@Override
@@ -79,12 +80,7 @@ public class ResourcesExchangeEffect extends Effect {
 		
 	}
 
-	@Override
-	public void setCard(DevelopmentCard card) {
-		super.setCard(card);
-		normalExchangeEffect.setCard(card);
-		if(alternativeExchangeEffect!=null)alternativeExchangeEffect.setCard(card);
-	}
+	
 	
 	
 

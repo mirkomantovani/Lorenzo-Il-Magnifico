@@ -5,24 +5,45 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.effect.AtomicExchangeEffect;
+import it.polimi.ingsw.ps19.model.effect.CharacterImmediateEffect;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.ForEachResourceTypeEffect;
 import it.polimi.ingsw.ps19.model.effect.ForEachTypeCardEffect;
+import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
+import it.polimi.ingsw.ps19.model.effect.HarvestEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
+import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
+import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.CesareBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.FedericoDaMontefeltroEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.FilippoBrunelleschiEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LorenzoDeMediciEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LucreziaBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LudovicoAriostoEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.LudovicoIlMoroEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.NoFloorBonusEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.PicoDellaMirandolaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SantaRitaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SigismondoMalatestaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.SistoIVEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
@@ -51,7 +72,11 @@ public class DeckCreator {
 	
 	/** The line read from file */
 	private static String lineRead;
+	
 
+	private DeckCreator(){
+		
+	}
 	/**
 	 * Creates the building card deck from the file, see template FileTemplateBuildingsCardV1.xlsx
 	 * 
@@ -63,7 +88,7 @@ public class DeckCreator {
 	 * @author Mirko
 	 */
 	public static BuildingCard[] createBuildingCardDeck(String filePath, int deckLength) throws IOException {
-
+		
 		int id;
 		String name;
 		Period period; 
@@ -113,7 +138,7 @@ public class DeckCreator {
 			
 			deck[cardIndex]=new BuildingCard(id,name,period,cost,immediateEffect,productionEffect,productionActivationCost);
 			
-			setCard(deck[cardIndex]);
+//			setCard(deck[cardIndex]);
 			
 			cardIndex++;
 			
@@ -126,10 +151,10 @@ public class DeckCreator {
 	}
 	
 	
-	private static void setCard(DevelopmentCard card) {
-		card.getImmediateEffect().setCard(card);
-		card.getPermanentEffect().setCard(card);
-	}
+//	private static void setCard(DevelopmentCard card) {
+//		card.getImmediateEffect().setCard(card);
+//		card.getPermanentEffect().setCard(card);
+//	}
 
 
 	/**
@@ -191,14 +216,8 @@ public class DeckCreator {
 			}
 		}
 		else {
-			
-			choices = new ArrayList<Resource>();
-			
-			for(int i = 0; i<privilege; i++){
-				choices.add(null);
-			}
 				
-			privilegeEffect=new CouncilPrivilegeEffect(choices);
+			privilegeEffect=new CouncilPrivilegeEffect(privilege);
 			
 			instantChest=new ResourceChest(coin,0,0,0,0,vPoint,mPoint); 
 			
@@ -218,6 +237,7 @@ public class DeckCreator {
 	 * @author Mirko
 	 * @return the atomic exchange effect
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
 	 */
 	private static AtomicExchangeEffect calculateAtomicExchangeFromFile() throws IOException {
 		int numberOfResource;
@@ -232,6 +252,8 @@ public class DeckCreator {
 			int resourceId;
 			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
 			Resource resourceIn1,resourceIn2;     //resources to get
+			ResourceChest resourcesOut=new ResourceChest(0,0,0,0,0,0,0);
+			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
@@ -259,8 +281,15 @@ public class DeckCreator {
 			
 			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
 			
-			return new AtomicExchangeEffect(resourceOut1,resourceOut2,resourceOut3,resourceIn1,resourceIn2);
+			resourcesOut.addResource(resourceOut1);
+			resourcesOut.addResource(resourceOut2);
+			resourcesOut.addResource(resourceOut3);
 			
+			resourcesIn.addResource(resourceIn1);
+			resourcesIn.addResource(resourceIn2);
+			
+			
+			return new AtomicExchangeEffect(resourcesOut,resourcesIn);
 			
 		}
 	}
@@ -270,22 +299,89 @@ public class DeckCreator {
 	/**
 	 * Creates the territory card deck.
 	 *
+	 *@author Jimmy
 	 * @param filePath the file path
 	 * @param deckLength the deck length
 	 * @return the territory card[]
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws Exception Signals that a territory card has no harvest effect
+	 * 
 	 */
-	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws IOException {
+	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws Exception {
 
-		int cardId=0;
+		int cardIndex=0;
 		TerritoryCard[] deck = new TerritoryCard[deckLength];
+		
+		int id;
+		String name;
+		Period period;
+		Effect immediateEffect;
+		HarvestEffect harvestEffect; //mai uguali a null..
+		int harvestActivationCost;
+		
+		ResourceChest immediateResourceChest;
+		ResourceChest harvestedResourceChest;
+		int immediatePrivilegeAmount;
+		int harvestedPrivilegeAmount;
 
-		buffReader = new BufferedReader(new FileReader(filePath));
+		buffReader = new BufferedReader(new FileReader(filePath));	
 		lineRead = buffReader.readLine();
 		
 		
 		while (lineRead!=null) {
-
+			
+			id = Integer.parseInt(lineRead);
+			name = buffReader.readLine();
+			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
+			
+			immediateResourceChest = new ResourceChest(Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Coins and wood
+													   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Stones and servants
+													   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Faith and victory
+													   Integer.parseInt(buffReader.readLine()));										 //Military
+			
+			immediatePrivilegeAmount = Integer.parseInt(buffReader.readLine());
+			harvestActivationCost = Integer.parseInt(buffReader.readLine());
+			
+			harvestedResourceChest = new ResourceChest(Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Coins and wood
+					                                   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Stones and servants
+					                                   Integer.parseInt(buffReader.readLine()), Integer.parseInt(buffReader.readLine()), //Faith and victory
+					                                   Integer.parseInt(buffReader.readLine()));										 //Military
+			harvestedPrivilegeAmount = Integer.parseInt(buffReader.readLine());
+			
+			//Immediate effect initialization
+			if(immediateResourceChest.isEmpty() == true){		//Se non dà delle risorse
+				if(immediatePrivilegeAmount == 0)				//Se non dà neanche privilegi
+					immediateEffect = null;						//Allora non c'è nulla
+				else{
+					immediateEffect = new CouncilPrivilegeEffect(immediatePrivilegeAmount); //altrimenti dà solo privilegi ATTENZIONE: nelle carte del gioco non c'è nessuna carta
+																							//che come effetto immediato ha solo la pergamena
+				}
+			}
+			else{												//Se dà delle risorse
+				if(immediatePrivilegeAmount == 0)				// e non dà privilegi
+					immediateEffect = new InstantResourcesEffect(immediateResourceChest);						//Allora sarà una instant
+				else{											//Altrimenti dà sia delle risorse sia delle pergamente
+					immediateEffect = new MultipleEffect(new InstantResourcesEffect(immediateResourceChest), new CouncilPrivilegeEffect(immediatePrivilegeAmount));
+				}
+			}
+			
+			//Permanent effect initialization; it will be a harvest effect
+			if(harvestedResourceChest.isEmpty() == true){
+				if(harvestedPrivilegeAmount !=0)
+					harvestEffect = new HarvestEffect(new CouncilPrivilegeEffect(harvestedPrivilegeAmount));
+				else
+					throw new Exception();   //It is impossible to have a territory card without a harvest effect
+			}
+			else{
+				if(harvestedPrivilegeAmount == 0)
+					harvestEffect = new HarvestEffect(new InstantResourcesEffect(harvestedResourceChest));
+				else
+					harvestEffect = new HarvestEffect(new MultipleEffect(new InstantResourcesEffect(harvestedResourceChest), new CouncilPrivilegeEffect(harvestedPrivilegeAmount)));
+			}
+			
+			deck[cardIndex] = new TerritoryCard(id,name,period,immediateEffect,harvestEffect, harvestActivationCost);
+			
+			lineRead = buffReader.readLine();
+			cardIndex++;
 		}
 		return deck;
 	}
@@ -368,13 +464,9 @@ public class DeckCreator {
 		victoryPointsChest = new ResourceChest(0,0,0,0,0,victoryPoints,0);
 		
 		if(privilege != 0){
-			choices = new ArrayList<Resource>();
-			for(int i = 0; i<privilege;i++){
-				choices.add(null);
-			}
-			immediateEffect = new CouncilPrivilegeEffect(choices);
+			immediateEffect = new CouncilPrivilegeEffect(privilege);
 		}else if (takeCardType != 0){
-			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost);
+			immediateEffect = new TakeCardEffect(CardType.convertCardType(takeCardType), takeCardCost, new ResourceChest());
 		} else if (productionBonus != 0){
 			immediateEffect = new InstantProductionActionEffect(productionBonus);
 		}else if (harvestBonus != 0){
@@ -407,23 +499,318 @@ public class DeckCreator {
 	 */
 	public static CharacterCard[] createCharacterCardDeck(String filePath, int deckLength) throws IOException {
 
-		int cardId=0;
+		int cardIndex=0;
+		
+		//CharacterCard parameter
+		int id;
+		String name;
+		Period period;
+		ResourceChest moneyCost;  //Character cards cost only coins
+		Effect immediateEffect = null;  //it should be impossible to have it still null after the immediateEffectAssignment
+		Effect permanentEffect;
+		
+		
+		//local variable for support purpose, they will read and store the value from the file
+		//and then build the related object
+		int valueAmount;
+		CardType cardType;
+		int extraCardValue;
+		CardType extraCardType;
+		boolean buildingCardsBonus;
+		boolean characterCardsBonus;
+		int discountedCoin;
+		int discountedWood;
+		int discountedStone;
+		int discountedServant;
+		int givenMilitaryPoints;
+		int givenFaithPoints;
+		boolean noFloorBonus;
+		int raiseProductionValueAmount;
+		int raiseHarvestValueAmount;
+		int privilegeAmount; 
+		int victoryPerMilitaryPointsAmount;
+		int militaryPointsAmount;
+		int victoryPointsPerCardAmount;
+		CardType typeCard;
+		int harvestActionValue; 
+		int productionActionValue;
+		
+		ResourceChest discountChest;
+
+		
+		
+		
+		
 		CharacterCard[] deck = new CharacterCard[deckLength];
 
 		buffReader = new BufferedReader(new FileReader(filePath));
 		lineRead = buffReader.readLine();
 		
 		while (lineRead!=null) {
+			id = Integer.parseInt(lineRead); 
+			name = buffReader.readLine();
+			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
+			moneyCost = new ResourceChest(Integer.parseInt(buffReader.readLine()), 0, 0, 0, 0, 0, 0);
 			
-			cardId++;
+			//Initializing the support variables; this section reads all the parameters
+			//and saves them in local variables which are used to create the effect Objects later on
+			//This approach helps the readability. I want to avoid methods that directly have 
+			//other methods call as parameter making them hard to read
+			valueAmount = Integer.parseInt(buffReader.readLine()); 
+			cardType = CardType.values()[Integer.parseInt(buffReader.readLine())-1];
+			extraCardValue = Integer.parseInt(buffReader.readLine()); 
+			extraCardType = CardType.values()[Integer.parseInt(buffReader.readLine())-1]; 
+			buildingCardsBonus = Boolean.parseBoolean(buffReader.readLine());  
+			characterCardsBonus = Boolean.parseBoolean(buffReader.readLine());  
+			//prendi il valore di sconto per ogni risorsa scontata
+			discountedCoin = Integer.parseInt(buffReader.readLine());  		
+			discountedWood = Integer.parseInt(buffReader.readLine());  		
+			discountedStone = Integer.parseInt(buffReader.readLine()); 	
+			discountedServant = Integer.parseInt(buffReader.readLine()); 
+			//Fine assegnamenti sconti
+			givenMilitaryPoints = Integer.parseInt(buffReader.readLine());
+			givenFaithPoints = Integer.parseInt(buffReader.readLine());	 
+			noFloorBonus = Boolean.parseBoolean(buffReader.readLine());  
+			raiseProductionValueAmount = Integer.parseInt(buffReader.readLine());
+			raiseHarvestValueAmount = Integer.parseInt(buffReader.readLine());  
+			privilegeAmount = Integer.parseInt(buffReader.readLine());  
+			victoryPerMilitaryPointsAmount = Integer.parseInt(buffReader.readLine());
+			militaryPointsAmount = Integer.parseInt(buffReader.readLine());
+			victoryPointsPerCardAmount = Integer.parseInt(buffReader.readLine()); 
+			typeCard = CardType.values()[Integer.parseInt(buffReader.readLine())-1]; 
+			harvestActionValue = Integer.parseInt(buffReader.readLine()); 
+			productionActionValue = Integer.parseInt(buffReader.readLine()); 
+			
+			//The following instructions just check the correctness of the two boolean 
+			//depending on the type of card passed later on 
+			if(cardType == CardType.TERRITORY || cardType == CardType.VENTURE){
+				buildingCardsBonus = false;
+				characterCardsBonus = false;
+			}else if(cardType == CardType.CHARACTER){
+				buildingCardsBonus = false;
+			}else
+				characterCardsBonus = false;
+			
+			
+			
+			
+			//First I assign the permanent effect, there can't be more then one permanent effect per card
+			if(valueAmount != 0){
+				permanentEffect = new RaiseValueWithDiscountEffect(valueAmount, cardType, buildingCardsBonus, characterCardsBonus);	
+			}
+			else if(noFloorBonus == true){
+				permanentEffect = new NoFloorBonusEffect();
+			}else if(raiseProductionValueAmount != 0){
+				permanentEffect = new HarvestBonusEffect(raiseProductionValueAmount);
+			}else if(raiseHarvestValueAmount != 0){
+				permanentEffect = new ProductionBonusEffect(raiseHarvestValueAmount);
+			}else
+				permanentEffect = null;
+			
+			
+			//Second, I assign the immediateEffect
+			//First I set the "discountedResourceChest"
+			discountChest = new ResourceChest(discountedCoin, discountedWood, discountedStone, discountedServant, 0, 0, 0);
+			
+			if(givenMilitaryPoints == 0){  					 //Se l'effetto non dà military points
+				if(givenFaithPoints == 0){     				 //Se l'effetto non dà faith points
+					if(privilegeAmount == 0){ 				 //Se l'effetto non dà pergamente
+						if(extraCardValue == 0){			 //Se l'effetto non dà una carta in più
+							if(victoryPerMilitaryPointsAmount == 0){  //Se l'effetto non mi da un tot di pv ogni tot pm
+								if(victoryPointsPerCardAmount == 0)   //E non  da nemmeno un tot di carte per ogni tipo di carta
+									immediateEffect = null;           //Allora non c'è l'effetto
+								else	
+									immediateEffect = new CharacterImmediateEffect(new ForEachTypeCardEffect(new VictoryPoint(victoryPointsPerCardAmount), typeCard));
+							}
+							else{     //altrimenti dà un tot di pv ogni tot pm
+								immediateEffect = new CharacterImmediateEffect(new ForEachResourceTypeEffect(new VictoryPoint(victoryPerMilitaryPointsAmount), new MilitaryPoint(militaryPointsAmount)));			
+							}
+						}
+						else{
+							//Può essere solo l'attivazione di una carta in più con una discountChest passata
+							immediateEffect = new CharacterImmediateEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest));
+						}
+					}
+					else{					//Se invece mi dà delle pergamene
+											
+						if(extraCardValue == 0){  //o mi dà le pergamene e basta
+							immediateEffect = new CharacterImmediateEffect(new CouncilPrivilegeEffect(privilegeAmount));
+						}
+						else{    				//o mi dà le pergamene e mi fa attivare una carta in più
+							immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new CouncilPrivilegeEffect(privilegeAmount)));
+						}
+					}	
+				}
+				else{                              //Se invece mi dà dei punti fede
+					if(extraCardValue == 0 && harvestActionValue == 0 && productionActionValue == 0){    //o mi dà solo punti fede
+						immediateEffect = new CharacterImmediateEffect(new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0)));
+					}
+					if(extraCardValue != 0 && harvestActionValue == 0 && productionActionValue == 0){    //o mi dà punti fede e mi fa attivare un'altra carta
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+					if(extraCardValue == 0 && harvestActionValue != 0 && productionActionValue == 0){    //o mi dà solo punti fede e mi fa attivare una raccolta
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new InstantHarvestActionEffect(harvestActionValue), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+					if(extraCardValue == 0 && harvestActionValue == 0 && productionActionValue != 0){    //o mi dà solo punti fede e mi fa attivare una produzione
+						immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new InstantProductionActionEffect(productionActionValue), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, givenFaithPoints, 0, 0))));
+					}
+				}
+			}
+			else{				//Se mi dà dei punti militare allora 
+				if(extraCardValue == 0){  //o mi dà punti militari e basta
+					immediateEffect = new CharacterImmediateEffect(new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, 0, 0, givenMilitaryPoints)));
+				}
+				if(extraCardValue != 0){  //o mi dà punti militari e mi fa attivare una carta
+					immediateEffect = new CharacterImmediateEffect(new MultipleEffect(new TakeCardEffect(extraCardType, extraCardValue, discountChest), new InstantResourcesEffect(new ResourceChest(0, 0, 0, 0, 0, 0, givenMilitaryPoints))));
+				}
+			}
+			
+			deck[cardIndex] = new CharacterCard(id,name,period,moneyCost,immediateEffect,permanentEffect);
+	
+			
+			lineRead = buffReader.readLine();
+			cardIndex++;
 		}
 		return deck;
 	}
 	
 	
+	
 
-	// private Effect createEffect(){
-	//
-	// }
+	/**
+	 * @author matteo
+	 * @param filePath
+	 * @param deckLength
+	 * @return
+	 * @throws IOException
+	 */
+	public static LeaderCard[] createLeaderCardDeck(String filePath, int deckLength) throws IOException {
+		
+		int index = 0;
+		
+		String name;
+		
+		ResourceChest requirements;
+		int privilege;
+		ArrayList<Resource> choices;
+		
+		int territoryCardsRequired; // the content is the number of territory cards required 
+		int buildingCardsRequired;
+		int characterCardsRequired;
+		int ventureCardsRequired;
+		int anyCardsRequired;
+		
+		LeaderCardRequirement totalRequirements;
+		
+		ResourceChest addings;
+		
+		int harvestActionValue;
+		float productionActionValue;
+		
+		int ludovicoAriostoEffect;
+		int filippoBrunelleschiEffect;
+		int sigismondoMalatestaEffect;
+		int ludovicoIlMoroEffect;
+		int lorenzoDeMediciEffect;
+		int sistoIVEffect;
+		int cesareBorgiaEffect;
+		int santaRitaEffect;
+		int picoDellaMirandolaEffect;
+		int lucreziaBorgiaEffect;
+		int federicoDaMontefeltroEffect;
+		
+		Effect specialEffect;
+
+		
+		LeaderCard[] deck = new LeaderCard[deckLength];
+
+		buffReader = new BufferedReader(new FileReader(filePath));
+		lineRead = buffReader.readLine();
+		
+		while (lineRead!=null) {
+			
+			name = lineRead;
+			
+			requirements = new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()));
+			
+			territoryCardsRequired = Integer.parseInt(buffReader.readLine());
+			buildingCardsRequired = Integer.parseInt(buffReader.readLine());
+			characterCardsRequired = Integer.parseInt(buffReader.readLine());
+			ventureCardsRequired = Integer.parseInt(buffReader.readLine());
+			anyCardsRequired = Integer.parseInt(buffReader.readLine());
+			
+			totalRequirements = new LeaderCardRequirement(requirements,territoryCardsRequired,buildingCardsRequired,
+					characterCardsRequired,ventureCardsRequired,anyCardsRequired);
+			
+			addings = new ResourceChest(Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()),Integer.parseInt(buffReader.readLine()),
+					Integer.parseInt(buffReader.readLine()));
+			
+			privilege = Integer.parseInt(buffReader.readLine());
+			
+			harvestActionValue = Integer.parseInt(buffReader.readLine());
+			productionActionValue = Float.parseFloat(buffReader.readLine());
+			
+			ludovicoAriostoEffect = Integer.parseInt(buffReader.readLine());
+			filippoBrunelleschiEffect = Integer.parseInt(buffReader.readLine());
+			sigismondoMalatestaEffect = Integer.parseInt(buffReader.readLine());
+			ludovicoIlMoroEffect = Integer.parseInt(buffReader.readLine());
+			lorenzoDeMediciEffect = Integer.parseInt(buffReader.readLine());
+			sistoIVEffect = Integer.parseInt(buffReader.readLine());
+			cesareBorgiaEffect = Integer.parseInt(buffReader.readLine());
+			santaRitaEffect = Integer.parseInt(buffReader.readLine());
+			picoDellaMirandolaEffect = Integer.parseInt(buffReader.readLine());
+			lucreziaBorgiaEffect = Integer.parseInt(buffReader.readLine());
+			federicoDaMontefeltroEffect = Integer.parseInt(buffReader.readLine());
+			
+			if(harvestActionValue != 0){
+			specialEffect = new InstantHarvestActionEffect(harvestActionValue);
+			} else if(productionActionValue != 0.0)
+			{
+				specialEffect = new InstantProductionActionEffect((int)productionActionValue);
+			}else if(ludovicoAriostoEffect == 1){
+				specialEffect = new LudovicoAriostoEffect();
+			}else if(filippoBrunelleschiEffect == 1){
+				specialEffect = new FilippoBrunelleschiEffect();
+			}else if(sigismondoMalatestaEffect == 1){
+				specialEffect = new SigismondoMalatestaEffect();
+			}else if(ludovicoIlMoroEffect == 1){
+				specialEffect = new LudovicoIlMoroEffect();
+			}else if(lorenzoDeMediciEffect == 1){
+				specialEffect = new LorenzoDeMediciEffect();
+			}else if(sistoIVEffect == 1){
+				specialEffect = new SistoIVEffect();
+			}else if(cesareBorgiaEffect == 1){
+				specialEffect = new CesareBorgiaEffect();
+			}else if(santaRitaEffect == 1){
+				specialEffect = new SantaRitaEffect();
+			}else if(picoDellaMirandolaEffect == 1){
+				specialEffect = new PicoDellaMirandolaEffect();
+			}else if(lucreziaBorgiaEffect == 1){
+				specialEffect = new LucreziaBorgiaEffect();
+			}else if(federicoDaMontefeltroEffect == 1){
+				specialEffect = new FedericoDaMontefeltroEffect();
+			}else if (privilege != 0){
+				specialEffect = new CouncilPrivilegeEffect(privilege);
+			}else{
+				specialEffect = new InstantResourcesEffect(addings);
+			}
+			
+			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
+			
+			System.out.println(deck[index].toString());
+			
+			index++;
+
+			lineRead = buffReader.readLine();   //line 1
+	
+		}
+		return deck;
+		
+	}
 
 }

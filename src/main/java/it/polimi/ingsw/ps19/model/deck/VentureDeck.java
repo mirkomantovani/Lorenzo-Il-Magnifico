@@ -39,5 +39,4 @@ public class VentureDeck extends Deck<VentureCard> {
 		
 	}
 
-
 }

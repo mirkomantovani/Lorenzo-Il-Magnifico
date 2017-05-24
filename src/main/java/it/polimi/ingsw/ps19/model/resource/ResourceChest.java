@@ -79,6 +79,16 @@ public class ResourceChest {
 		resourceChest.getStones().add(this.stones.getAmount());
 	}
 	
+	/**
+	 * @author Jimmy
+	 * @return boolean
+	 */
+	public boolean isEmpty(){
+		if(victoryPoints.getAmount() == 0 && militaryPoints.getAmount() == 0 && faithPoints.getAmount() == 0 && coins.getAmount() == 0 && servants.getAmount() == 0 && woods.getAmount() == 0 && stones.getAmount() == 0)
+			return true;
+		return false;
+	}
+	
 	
 	/**
 	 * This method subtracts every Resource of the Chest passed by parameter to the Chest it is called upon
@@ -133,7 +143,9 @@ public class ResourceChest {
 	 * @param resource to subtract
 	 */
 	public void addResource(Resource resource) {
+		if(resource!=null){
 		getResourceInChest(resource).add(resource);
+		}
 	}
 	
 
@@ -142,7 +154,7 @@ public class ResourceChest {
 	 * @author Mirko
 	 * @param resource
 	 */
-	private Resource getResourceInChest(Resource resource) {
+	public Resource getResourceInChest(Resource resource) {
 		
 		if(resource instanceof VictoryPoint)return victoryPoints;
 		if(resource instanceof MilitaryPoint)return militaryPoints;
@@ -186,22 +198,47 @@ public class ResourceChest {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-	
+		
+	if(victoryPoints.getAmount()>0)
 		builder.append(victoryPoints);
 		
+	if(militaryPoints.getAmount()>0)
 		builder.append(militaryPoints);
 		
+	if(faithPoints.getAmount()>0)
 		builder.append(faithPoints);
 		
+	if(coins.getAmount()>0)
 		builder.append(coins);
 		
+	if(servants.getAmount()>0)
 		builder.append(servants);
 		
+	if(woods.getAmount()>0)
 		builder.append(woods);
 		
+	if(stones.getAmount()>0)
 		builder.append(stones);
 		
 		return builder.toString();
+	}
+
+	/**
+	 * This method returns true if every resource contained in the chest has an amount greater
+	 * or equal to the corresponding resource in the chest passed by parameter
+	 * @author Mirko
+	 * @param cost
+	 * @return
+	 */
+	public boolean isGreaterEqualThan(ResourceChest resourceChest) {
+		if(this.victoryPoints.getAmount()<resourceChest.victoryPoints.getAmount())return false;
+		if(this.militaryPoints.getAmount()<resourceChest.militaryPoints.getAmount())return false;
+		if(this.faithPoints.getAmount()<resourceChest.faithPoints.getAmount())return false;
+		if(this.coins.getAmount()<resourceChest.coins.getAmount())return false;
+		if(this.servants.getAmount()<resourceChest.servants.getAmount())return false;
+		if(this.woods.getAmount()<resourceChest.woods.getAmount())return false;
+		if(this.stones.getAmount()<resourceChest.stones.getAmount())return false;
+		return true;
 	}
 	
 	
