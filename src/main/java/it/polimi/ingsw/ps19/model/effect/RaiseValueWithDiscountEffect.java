@@ -24,26 +24,8 @@ public class RaiseValueWithDiscountEffect extends Effect{
 
 
 	public void applyEffect(Player p) {
-				switch(cardType){
-				case TERRITORY:
-					p.getBonuses().setActionValueTerritoryVariation(raiseAmount);
-					break;
-				case BUILDING:
-					p.getBonuses().setActionValueBuildingVariation(raiseAmount);
-					break;
-				case CHARACTER:
-					p.getBonuses().setActionValueCharacterVariation(raiseAmount);
-					break;
-				case VENTURE:
-					p.getBonuses().setActionValueVentureVariation(raiseAmount);
-					break;
-				case ANY:    //I think that isn't a real case cause there's no card that has it 
-					//TODO something
-					break;
-					
-					default: 
-						throw new IllegalArgumentException();  //Still to decide this case
-				}
+				p.getBonuses().addCardTypeActionVariation(cardType, raiseAmount);
+		
 				
 				if(buildingCardsBonus == true)
 					p.getBonuses().setBuildingCardsDiscount(true);
