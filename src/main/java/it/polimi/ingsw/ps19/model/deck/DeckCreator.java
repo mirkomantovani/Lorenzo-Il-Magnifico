@@ -261,37 +261,40 @@ public class DeckCreator {
 			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
-			
-			resourceOut1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
+			if(resourceId!=0){
+			resourceOut1=ResourceFactory.getResource(ResourceType.values()[resourceId-1],numberOfResource);
+			resourcesOut.addResource(resourceOut1);}
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line 21
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 22
 			
-			resourceOut2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
+			if(resourceId!=0){
+			resourceOut2=ResourceFactory.getResource(ResourceType.values()[resourceId-1],numberOfResource);
+			resourcesOut.addResource(resourceOut2);}
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  // line 23
 			resourceId=Integer.parseInt(buffReader.readLine());   //line24
 			
-			resourceOut3=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
+			if(resourceId!=0){
+			resourceOut3=ResourceFactory.getResource(ResourceType.values()[resourceId-1],numberOfResource);
+			resourcesOut.addResource(resourceOut3);}
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line25
 			resourceId=Integer.parseInt(buffReader.readLine());     //line 26
 			
-			resourceIn1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
-			
+			if(resourceId!=0){
+			resourceIn1=ResourceFactory.getResource(ResourceType.values()[resourceId-1],numberOfResource);
+			resourcesIn.addResource(resourceIn1);}
 			//la linea 292 del file è un 8 non 5 ma ho messo 5 perchè non possiamo trattare la privilege come risorsa ancora
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());   //line 27
 			resourceId=Integer.parseInt(buffReader.readLine());   //line 28s
 			
-			resourceIn2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
+			if(resourceId!=0){
+			resourceIn2=ResourceFactory.getResource(ResourceType.values()[resourceId-1],numberOfResource);
+			resourcesIn.addResource(resourceIn2);}
 			
-			resourcesOut.addResource(resourceOut1);
-			resourcesOut.addResource(resourceOut2);
-			resourcesOut.addResource(resourceOut3);
-			
-			resourcesIn.addResource(resourceIn1);
-			resourcesIn.addResource(resourceIn2);
+		
 			
 			
 			return new AtomicExchangeEffect(resourcesOut,resourcesIn);

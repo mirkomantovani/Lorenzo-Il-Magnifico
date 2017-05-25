@@ -22,7 +22,8 @@ public abstract class Resource {
 	}
 	
 	public Resource(ResourceType resourceType,int amount){	
-		this.amount = amount;	
+		this.amount = amount;
+		this.resourceType=resourceType;
 	}
 	
 	public void add(int amount){	
@@ -57,7 +58,7 @@ public abstract class Resource {
 	}
 
 	public ResourceType getResourceType() {
-		return this.getResourceType();
+		return this.resourceType;
 	}
 
 	

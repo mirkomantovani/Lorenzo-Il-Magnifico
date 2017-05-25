@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class Player {
 	private boolean excommunicationStatusPeriod3; 
 	
 	public Player(String name, Color color){
+		familyMembers=new HashSet<>();
 		
 		for(int i=0;i<Dice.values().length;i++){
 		familyMembers.add(new FamilyMember(Dice.values()[i]));
