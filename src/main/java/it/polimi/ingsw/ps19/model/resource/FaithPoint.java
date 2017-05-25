@@ -6,8 +6,8 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class FaithPoint extends Resource{
 	
-	public FaithPoint(int amount){
-		super(amount);
+	public FaithPoint(ResourceType resourceType,int amount){
+		super(resourceType,amount);
 		
 	}
 
