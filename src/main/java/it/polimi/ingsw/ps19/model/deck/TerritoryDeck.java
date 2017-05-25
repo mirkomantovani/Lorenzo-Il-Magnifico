@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps19.model.deck;
 
-import java.io.IOException;
-
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 
 /**

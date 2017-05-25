@@ -6,6 +6,10 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class MilitaryPoint extends Resource{
 
+	public MilitaryPoint(int amount) {
+		super(ResourceType.MILITARYPOINT, amount);
+	}
+
 	@Override
 	public String toString() {
 		if (this.getAmount() == 1)
@@ -14,7 +18,5 @@ public class MilitaryPoint extends Resource{
 			return super.toString() + " military points";
 	}
 
-	public MilitaryPoint(int amount){
-		super(amount);
-	}
+	
 }

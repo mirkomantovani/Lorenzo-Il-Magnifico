@@ -42,9 +42,17 @@ public class BuildingCard extends DevelopmentCard {
 	 */
 	public boolean canActivateProductionWith(int productionValue){
     	return productionValue>productionActivationCost;
-
 	}
 	
-	
-
+	@Override
+	public String toString() {	
+    	StringBuilder string = new StringBuilder();
+    	string.append(super.toString() + "\nProduction cost: " + productionActivationCost + "\nProduction effect: ");
+    	if(this.permanentEffect!=null)
+    		string.append(permanentEffect.toString());
+    	string.append("\n");
+    	
+    	
+    	return string.toString();
+	}
 }

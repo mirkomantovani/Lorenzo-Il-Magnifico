@@ -42,6 +42,16 @@ public class TerritoryCard extends DevelopmentCard {
     	return harvestValue>harvestActivationCost;
 		
 	}
+    
+     @Override
+    public String toString() {
+    	StringBuilder string = new StringBuilder();
+    	string.append(super.toString() + "\nHarvest cost: " + harvestActivationCost + "\nHarvest effect: ");
+    	if(this.permanentEffect!=null)
+    		string.append(permanentEffect.toString());
+    	
+    	return string.toString();
+    }
 	
 
 }

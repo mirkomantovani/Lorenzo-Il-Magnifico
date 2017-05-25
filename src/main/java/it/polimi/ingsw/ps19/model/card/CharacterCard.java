@@ -31,6 +31,16 @@ public class CharacterCard extends DevelopmentCard {
 		this.cardType=CardType.CHARACTER;
 	}
 
+	@Override
+	public String toString() {
+		
+    	StringBuilder string = new StringBuilder();
+    	string.append(super.toString() + "\nPermanent effect: ");
+    	if(this.permanentEffect!=null)
+    		string.append(permanentEffect.toString());
+    	
+    	return string.toString();
+	}
 	
 
 }

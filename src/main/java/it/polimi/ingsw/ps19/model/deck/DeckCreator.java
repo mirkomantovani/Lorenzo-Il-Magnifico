@@ -47,6 +47,7 @@ import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
@@ -175,9 +176,10 @@ public class DeckCreator {
 		CouncilPrivilegeEffect privilegeEffect;
 		ForEachTypeCardEffect forEachEffect;
 		
-		ArrayList<Resource> choices;
+	
 		
-		AtomicExchangeEffect atomicExchange1,atomicExchange2;
+		AtomicExchangeEffect atomicExchange1;
+		AtomicExchangeEffect atomicExchange2;
 		
 		privilege=Integer.parseInt(buffReader.readLine());   //lines 11-12-13-14
 		mPoint=Integer.parseInt(buffReader.readLine());
@@ -250,36 +252,39 @@ public class DeckCreator {
 		else{ //it means it has an atomic exchange effect
 
 			int resourceId;
-			Resource resourceOut1,resourceOut2,resourceOut3;  //resources to give
-			Resource resourceIn1,resourceIn2;     //resources to get
+			Resource resourceOut1;
+			Resource resourceOut2;
+			Resource resourceOut3;  //resources to give
+			Resource resourceIn1;
+			Resource resourceIn2;     //resources to get
 			ResourceChest resourcesOut=new ResourceChest(0,0,0,0,0,0,0);
 			ResourceChest resourcesIn=new ResourceChest(0,0,0,0,0,0,0);
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
-			resourceOut1=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line 21
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 22
 			
-			resourceOut2=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  // line 23
 			resourceId=Integer.parseInt(buffReader.readLine());   //line24
 			
-			resourceOut3=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut3=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line25
 			resourceId=Integer.parseInt(buffReader.readLine());     //line 26
 			
-			resourceIn1=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceIn1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			//la linea 292 del file è un 8 non 5 ma ho messo 5 perchè non possiamo trattare la privilege come risorsa ancora
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());   //line 27
 			resourceId=Integer.parseInt(buffReader.readLine());   //line 28s
 			
-			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceIn2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			resourcesOut.addResource(resourceOut1);
 			resourcesOut.addResource(resourceOut2);
@@ -348,7 +353,7 @@ public class DeckCreator {
 			harvestedPrivilegeAmount = Integer.parseInt(buffReader.readLine());
 			
 			//Immediate effect initialization
-			if(immediateResourceChest.isEmpty() == true){		//Se non dà delle risorse
+			if(immediateResourceChest.isEmpty()){		//Se non dà delle risorse
 				if(immediatePrivilegeAmount == 0)				//Se non dà neanche privilegi
 					immediateEffect = null;						//Allora non c'è nulla
 				else{
@@ -365,7 +370,7 @@ public class DeckCreator {
 			}
 			
 			//Permanent effect initialization; it will be a harvest effect
-			if(harvestedResourceChest.isEmpty() == true){
+			if(harvestedResourceChest.isEmpty()){
 				if(harvestedPrivilegeAmount !=0)
 					harvestEffect = new HarvestEffect(new CouncilPrivilegeEffect(harvestedPrivilegeAmount));
 				else
@@ -421,7 +426,6 @@ public class DeckCreator {
 		int takeCardType;
 		int takeCardCost;
 		
-		ArrayList<Resource> choices;
 		
 		int index = 0;
 		
@@ -598,7 +602,7 @@ public class DeckCreator {
 			if(valueAmount != 0){
 				permanentEffect = new RaiseValueWithDiscountEffect(valueAmount, cardType, buildingCardsBonus, characterCardsBonus);	
 			}
-			else if(noFloorBonus == true){
+			else if(noFloorBonus){
 				permanentEffect = new NoFloorBonusEffect();
 			}else if(raiseProductionValueAmount != 0){
 				permanentEffect = new HarvestBonusEffect(raiseProductionValueAmount);
@@ -692,7 +696,7 @@ public class DeckCreator {
 		
 		ResourceChest requirements;
 		int privilege;
-		ArrayList<Resource> choices;
+		
 		
 		int territoryCardsRequired; // the content is the number of territory cards required 
 		int buildingCardsRequired;

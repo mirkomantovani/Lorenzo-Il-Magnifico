@@ -6,6 +6,10 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Stone extends Resource{
 	
+	public Stone(int amount) {
+		super(ResourceType.STONE, amount);
+	}
+
 	@Override
 	public String toString() {
 		if (this.getAmount() == 1)
@@ -14,8 +18,6 @@ public class Stone extends Resource{
 			return super.toString() + " stones";
 	}
 
-	public Stone(int amount){
-		super(amount);
-	}
+	
 
 }
