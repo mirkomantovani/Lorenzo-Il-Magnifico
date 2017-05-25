@@ -16,7 +16,7 @@ public class Bonus {
 	 int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
 	 int productionVariation; // "  "  "  "    //in production/harvest action
 	 
-	 private Map<CardType,Integer> actionValueVariation;
+	 private Map<CardType,Integer> cardActionValueVariation; 
 	 
 	 boolean noFloorBonus;
 	 boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
@@ -33,9 +33,9 @@ public class Bonus {
 	 * 
 	 */
 	public Bonus() {
-		actionValueVariation=new HashMap<>();
+		cardActionValueVariation=new HashMap<>();
 		for(int i=0;i<CardType.values().length;i++)
-			actionValueVariation.put(CardType.values()[i], 0);
+			cardActionValueVariation.put(CardType.values()[i], 0);
 		}
 	 
 	 /**
@@ -47,7 +47,7 @@ public class Bonus {
 	 * @return
 	 */
 	public int getCardTypeActionVariation(CardType cardType){  
-		 return this.actionValueVariation.get(cardType);
+		 return this.cardActionValueVariation.get(cardType);
 	 }
 	
 	/**
@@ -59,8 +59,8 @@ public class Bonus {
 	 * @return
 	 */
 	public void addCardTypeActionVariation(CardType cardType,int variation){
-		this.actionValueVariation.put(cardType,
-				this.actionValueVariation.get(cardType)+variation);
+		this.cardActionValueVariation.put(cardType,
+				this.cardActionValueVariation.get(cardType)+variation);
 	}
 
 

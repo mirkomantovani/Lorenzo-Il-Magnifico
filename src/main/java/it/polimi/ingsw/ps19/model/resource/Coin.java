@@ -6,8 +6,9 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Coin extends Resource {
 	
-	public Coin(int amount){
-		super(amount);
+
+	public Coin(ResourceType resourceType, int amount) {
+		super(resourceType, amount);
 	}
 
 	/* (non-Javadoc)
