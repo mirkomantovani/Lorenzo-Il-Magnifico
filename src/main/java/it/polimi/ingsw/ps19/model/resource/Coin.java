@@ -6,13 +6,20 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Coin extends Resource {
 	
-	public Coin(int amount){
-		super(amount);
+
+	public Coin(int amount) {
+		super(ResourceType.COIN, amount);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.resource.Resource#toString()
+	 */
 	@Override
 	public String toString() {
-		return super.toString() + " Coins";
+		if (this.getAmount() == 1)
+			return super.toString() + " coin";
+		else
+			return super.toString() + " coins";
 	}
 
 	

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -16,23 +18,20 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class Player {
 	
-	String name;
+	private String name;
 	
-	Color color;
+	private Color color;
 	
-	FamilyMember orangeMember;
-	FamilyMember blackMember;
-	FamilyMember whiteMember;
-	FamilyMember neutralMember;
+	private Set<FamilyMember> familyMembers;
 	
 	ResourceChest resources;
 	
-	ArrayList<TerritoryCard> territoryDeck;
-	ArrayList<BuildingCard>  buildingDeck;
-	ArrayList<CharacterCard> characterDeck;
-	ArrayList<VentureCard> ventureDeck;
+	List<TerritoryCard> territoryDeck;
+	List<BuildingCard>  buildingDeck;
+	List<CharacterCard> characterDeck;
+	List<VentureCard> ventureDeck;
 	
-	Bonus bonuses;
+	private Bonus bonuses;
 	
 	private boolean excommunicationStatusPeriod1; //true if the player is excommunicated for the first period
 	private boolean excommunicationStatusPeriod2;
@@ -40,22 +39,18 @@ public class Player {
 	
 	public Player(String name, Color color){
 		
+		for(int i=0;i<Dice.values().length;i++){
+		familyMembers.add(new FamilyMember(Dice.values()[i]));
+		}
+		
 		resources = new ResourceChest();
-		orangeMember = new FamilyMember(Dice.ORANGE_DICE);
-		blackMember = new FamilyMember(Dice.BLACK_DICE);
-		whiteMember = new FamilyMember(Dice.WHITE_DICE);
-		neutralMember = new FamilyMember(Dice.NEUTRAL_DICE);
 		territoryDeck = new ArrayList<TerritoryCard>();
 		buildingDeck = new ArrayList<BuildingCard>();
 		characterDeck = new ArrayList<CharacterCard>();
 		ventureDeck = new ArrayList<VentureCard>();
 		
-		Bonus bonuses;
-		
-		excommunicationStatusPeriod1 = false;
-		excommunicationStatusPeriod2 = false;
-		excommunicationStatusPeriod3 = false;
-			
+		this.name=name;
+		this.color=color;
 		
 	}
 	
@@ -101,29 +96,24 @@ public class Player {
 		this.color = color;
 	}
 
-	public ResourceChest getResources() {
-		return resources;
-	}
 
-
-	public ArrayList<TerritoryCard> getTerritoryDeck() {
+	public List<TerritoryCard> getTerritoryDeck() {
 		return territoryDeck;
 	}
 
 
-	public ArrayList<CharacterCard> getCharacterDeck() {
+	public List<CharacterCard> getCharacterDeck() {
 		return characterDeck;
 	}
 
 
-	public ArrayList<VentureCard> getVentureDeck() {
+	public List<VentureCard> getVentureDeck() {
 		return ventureDeck;
 	}
 
-	public ArrayList<BuildingCard> getBuildingDeck() {
+	public List<BuildingCard> getBuildingDeck() {
 		return buildingDeck;
 	}
-	
 
 
 	public boolean isExcommunicationStatusPeriod1() {
@@ -159,6 +149,7 @@ public class Player {
 		return this.resources;
 	}
 	
+	
 	/*
 	
 	private void harvestAction(FamilyMember f){
@@ -181,7 +172,7 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
+	public List<? extends DevelopmentCard> getRightArrayList(CardType cardType){
 		switch(cardType){
 		case TERRITORY:
 			return this.getTerritoryDeck();
@@ -196,10 +187,15 @@ public class Player {
 		}
 	}
 
-	
-	
-	
-	
+
+	public Bonus getBonuses() {
+		return bonuses;
+	}
+
+	public void setBonuses(Bonus bonuses) {
+		this.bonuses = bonuses;
+	}
+
 	
 	
 }

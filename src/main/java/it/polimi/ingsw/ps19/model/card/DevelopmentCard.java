@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -19,7 +18,8 @@ public abstract class DevelopmentCard extends Card {
 	protected Period period;
 	protected ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
 	
-	protected Effect immediateEffect,permanentEffect;
+	protected Effect immediateEffect;
+	protected Effect permanentEffect;
 	protected CardType cardType;
 	
 	
@@ -41,9 +41,7 @@ public abstract class DevelopmentCard extends Card {
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
 		
-		
-		this.immediateEffect.setCard(this);  //this creates the association between an effect and its card
-		this.permanentEffect.setCard(this);
+
 	}
 
 	/**
@@ -97,11 +95,17 @@ public abstract class DevelopmentCard extends Card {
 	
 	 @Override
 		public String toString() {
-			return " [id=" + id + ", period=" + period + ", cost=" + cost.toString() + ", name=" + name
-					+ ", \nimmediateEffect=" + immediateEffect.toString() + 
-					", \npermanentEffect=" + permanentEffect.toString() + 
-					", player=" + player
-					+ "]";
+		 	StringBuilder string = new StringBuilder();
+		 	
+		 	string.append("Name: " + name + "\nPeriod: " + period + "\nCost: ");
+		 	
+		 	if(this.cost!=null)
+		 		string.append(cost.toString());
+		 	string.append("\nImmediate effect: ");
+		 	if(this.immediateEffect!=null)
+		 		string.append(immediateEffect.toString());
+		 		
+		 	return string.toString();
 		}
 	
 	

@@ -7,13 +7,16 @@ package it.polimi.ingsw.ps19.model.resource;
 public class FaithPoint extends Resource{
 	
 	public FaithPoint(int amount){
-		super(amount);
+		super(ResourceType.FAITHPOINT,amount);
 		
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + " Faith points";
+		if (this.getAmount() == 1)
+			return super.toString() + " faith point";
+		else
+			return super.toString() + " faith points";
 	}
 
 }

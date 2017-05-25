@@ -1,8 +1,7 @@
 package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.model.effect.Effect;
-
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 public class LeaderCard extends Card{
 	

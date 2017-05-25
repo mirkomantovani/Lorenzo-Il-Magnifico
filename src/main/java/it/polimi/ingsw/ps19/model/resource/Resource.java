@@ -7,6 +7,7 @@ package it.polimi.ingsw.ps19.model.resource;
 public abstract class Resource {
 	
 	private int amount;
+	private ResourceType resourceType;
 	
 	public void setAmount(int amount){
 		this.amount = amount;
@@ -20,7 +21,7 @@ public abstract class Resource {
 		return(amount==0);	
 	}
 	
-	public Resource(int amount){	
+	public Resource(ResourceType resourceType,int amount){	
 		this.amount = amount;	
 	}
 	
@@ -54,6 +55,12 @@ public abstract class Resource {
 	public void sub(Resource resource){
 		this.sub(resource.amount);
 	}
+
+	public ResourceType getResourceType() {
+		return this.getResourceType();
+	}
+
+	
 	
 	
 

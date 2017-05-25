@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.Player;
 
 
 /**
@@ -22,7 +22,7 @@ public class InstantProductionActionEffect extends Effect {
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Player p) {
 		//TODO
 		/*
 		for(BuildingCard c : card.getPlayer().getBuildingDeck()){

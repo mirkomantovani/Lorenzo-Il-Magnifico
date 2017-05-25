@@ -5,14 +5,19 @@ package it.polimi.ingsw.ps19.model.resource;
  *
  */
 public class Servant extends Resource {
-	
-	@Override
-	public String toString() {
-		return super.toString() + " Servants";
+
+	public Servant(int amount) {
+		super(ResourceType.SERVANT, amount);
 	}
 
-	public Servant(int amount){
-		super(amount);
+	@Override
+	public String toString() {
+		if (this.getAmount() == 1)
+			return super.toString() + " servant";
+		else
+			return super.toString() + " servants";
 	}
+
+	
 
 }

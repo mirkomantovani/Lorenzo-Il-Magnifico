@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
+import it.polimi.ingsw.ps19.Player;
 
 /**
  * @author matteo
@@ -14,10 +15,17 @@ public class HarvestBonusEffect extends Effect {
 	}
 
 	@Override
-	public void applyEffect() {
-		
+	public void applyEffect(Player p) {
+		p.getBonuses().setHarvestVariation(value);
 	}
 	
+	@Override
+	public String toString() {
+		if(value >= 0)
+			return "You gain a + " + value + " to your harvest value";
+		else
+			return "You gain a " + value + " to your harvest value";
+	}
 	
 
 }
