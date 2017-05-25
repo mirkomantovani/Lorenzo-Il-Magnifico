@@ -6,8 +6,8 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Servant extends Resource {
 
-	public Servant(ResourceType resourceType, int amount) {
-		super(resourceType, amount);
+	public Servant(int amount) {
+		super(ResourceType.SERVANT, amount);
 	}
 
 	@Override

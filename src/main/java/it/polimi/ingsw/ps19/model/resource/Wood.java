@@ -2,8 +2,9 @@ package it.polimi.ingsw.ps19.model.resource;
 
 public class Wood extends Resource {
 	
-	public Wood(ResourceType resourceType, int amount) {
-		super(resourceType, amount);
+	
+	public Wood(int amount) {
+		super(ResourceType.WOOD, amount);
 	}
 
 	@Override

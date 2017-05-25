@@ -6,8 +6,8 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Stone extends Resource{
 	
-	public Stone(ResourceType resourceType, int amount) {
-		super(resourceType, amount);
+	public Stone(int amount) {
+		super(ResourceType.STONE, amount);
 	}
 
 	@Override

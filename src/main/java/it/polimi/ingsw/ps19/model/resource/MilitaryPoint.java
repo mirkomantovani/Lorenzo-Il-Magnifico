@@ -6,8 +6,8 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class MilitaryPoint extends Resource{
 
-	public MilitaryPoint(ResourceType resourceType, int amount) {
-		super(resourceType, amount);
+	public MilitaryPoint(int amount) {
+		super(ResourceType.MILITARYPOINT, amount);
 	}
 
 	@Override

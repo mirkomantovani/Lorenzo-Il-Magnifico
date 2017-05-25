@@ -14,19 +14,19 @@ public class ResourceFactory {
 	public static Resource getResource(ResourceType resourceType,int amount){
 		switch (resourceType) {
 		case COIN:
-			return new Coin(resourceType,amount);
+			return new Coin(amount);
 		case WOOD:
-			return new Wood(resourceType,amount);
+			return new Wood(amount);
 		case STONE:
-			return new Stone(resourceType,amount);
+			return new Stone(amount);
 		case SERVANT:
-			return new Servant(resourceType,amount);
+			return new Servant(amount);
 		case FAITHPOINT:
-			return new FaithPoint(resourceType,amount);
+			return new FaithPoint(amount);
 		case VICTORYPOINT:
-			return new VictoryPoint(resourceType,amount);
+			return new VictoryPoint(amount);
 		case MILITARYPOINT:
-			return new MilitaryPoint(resourceType,amount);
+			return new MilitaryPoint(amount);
 		
 		default:
 			throw new ResourceTypeException(); //we'll see if we have to introduce an exception
