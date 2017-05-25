@@ -13,17 +13,22 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  */
 public class Bonus {
 	 
-	 int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
-	 int productionVariation; // "  "  "  "    //in production/harvest action
+	 private int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
+	 private int productionVariation; // "  "  "  "    //in production/harvest action
+	 private int cardCostCoinDiscount; //This is the amount of a discount if the card you would take costs coins
+	 
 	 
 	 private Map<CardType,Integer> cardActionValueVariation; 
 	 
-	 boolean noFloorBonus;
-	 boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
-	 boolean buildingCardsDiscount;  //This boolean is true if "COSTRUTTORE"'s effect is active.
+	 private boolean noFloorBonus;
+	 private boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
+	 private boolean buildingCardsDiscount; //This boolean is true if "COSTRUTTORE"'s effect is active.
+	 private boolean discountOccupiedTower; // true if you haven't to pay the cost to place in an occupied tower
+	 private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
+	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
 	 
 	 //excommunication
-	 List<Resource> resourceMalus;   //in instantresource
+	 private List<Resource> resourceMalus;   //in instantresource
 	 
 	 
 	 /**
