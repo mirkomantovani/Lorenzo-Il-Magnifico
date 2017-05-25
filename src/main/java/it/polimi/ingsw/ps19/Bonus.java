@@ -13,17 +13,22 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  */
 public class Bonus {
 	 
-	 int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
-	 int productionVariation; // "  "  "  "    //in production/harvest action
+	 private int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
+	 private int productionVariation; // "  "  "  "    //in production/harvest action
+	 private int cardCostCoinDiscount; //This is the amount of a discount if the card you would take costs coins
 	 
-	 private Map<CardType,Integer> actionValueVariation;
 	 
-	 boolean noFloorBonus;
-	 boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
-	 boolean buildingCardsDiscount;  //This boolean is true if "COSTRUTTORE"'s effect is active.
+	 private Map<CardType,Integer> cardActionValueVariation; 
+	 
+	 private boolean noFloorBonus;
+	 private boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
+	 private boolean buildingCardsDiscount; //This boolean is true if "COSTRUTTORE"'s effect is active.
+	 private boolean discountOccupiedTower; // true if you haven't to pay the cost to place in an occupied tower
+	 private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
+	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
 	 
 	 //excommunication
-	 List<Resource> resourceMalus;   //in instantresource
+	 private List<Resource> resourceMalus;   //in instantresource
 	 
 	 
 	 /**
@@ -33,9 +38,9 @@ public class Bonus {
 	 * 
 	 */
 	public Bonus() {
-		actionValueVariation=new HashMap<>();
+		cardActionValueVariation=new HashMap<>();
 		for(int i=0;i<CardType.values().length;i++)
-			actionValueVariation.put(CardType.values()[i], 0);
+			cardActionValueVariation.put(CardType.values()[i], 0);
 		}
 	 
 	 /**
@@ -47,7 +52,7 @@ public class Bonus {
 	 * @return
 	 */
 	public int getCardTypeActionVariation(CardType cardType){  
-		 return this.actionValueVariation.get(cardType);
+		 return this.cardActionValueVariation.get(cardType);
 	 }
 	
 	/**
@@ -59,8 +64,8 @@ public class Bonus {
 	 * @return
 	 */
 	public void addCardTypeActionVariation(CardType cardType,int variation){
-		this.actionValueVariation.put(cardType,
-				this.actionValueVariation.get(cardType)+variation);
+		this.cardActionValueVariation.put(cardType,
+				this.cardActionValueVariation.get(cardType)+variation);
 	}
 
 

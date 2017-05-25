@@ -47,6 +47,7 @@ import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
@@ -261,29 +262,29 @@ public class DeckCreator {
 			
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 20 or 31
 			
-			resourceOut1=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line 21
 			resourceId=Integer.parseInt(buffReader.readLine());  //line 22
 			
-			resourceOut2=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  // line 23
 			resourceId=Integer.parseInt(buffReader.readLine());   //line24
 			
-			resourceOut3=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceOut3=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());  //line25
 			resourceId=Integer.parseInt(buffReader.readLine());     //line 26
 			
-			resourceIn1=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceIn1=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			//la linea 292 del file è un 8 non 5 ma ho messo 5 perchè non possiamo trattare la privilege come risorsa ancora
 			
 			numberOfResource=Integer.parseInt(buffReader.readLine());   //line 27
 			resourceId=Integer.parseInt(buffReader.readLine());   //line 28s
 			
-			resourceIn2=ResourceFactory.getResource(resourceId,numberOfResource);
+			resourceIn2=ResourceFactory.getResource(ResourceType.values()[resourceId],numberOfResource);
 			
 			resourcesOut.addResource(resourceOut1);
 			resourcesOut.addResource(resourceOut2);

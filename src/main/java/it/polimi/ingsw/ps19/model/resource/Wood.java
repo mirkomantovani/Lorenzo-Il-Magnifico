@@ -2,6 +2,11 @@ package it.polimi.ingsw.ps19.model.resource;
 
 public class Wood extends Resource {
 	
+	
+	public Wood(int amount) {
+		super(ResourceType.WOOD, amount);
+	}
+
 	@Override
 	public String toString() {
 		if (this.getAmount() == 1)
@@ -10,8 +15,6 @@ public class Wood extends Resource {
 			return super.toString() + " woods";
 	}
 
-	public Wood(int amount){
-		super(amount);
-	}
+
 
 }
