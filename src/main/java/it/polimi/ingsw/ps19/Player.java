@@ -1,8 +1,10 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
@@ -27,10 +29,13 @@ public class Player {
 	
 	ResourceChest resources;
 	
-	List<TerritoryCard> territoryDeck;
+	/*List<TerritoryCard> territoryDeck;
 	List<BuildingCard>  buildingDeck;
 	List<CharacterCard> characterDeck;
-	List<VentureCard> ventureDeck;
+	List<VentureCard> ventureDeck;*/
+	
+	private Map<CardType, ArrayList<? extends DevelopmentCard>> decks;
+
 	
 	private Bonus bonuses;
 	
@@ -40,16 +45,24 @@ public class Player {
 	
 	public Player(String name, Color color){
 		familyMembers=new HashSet<>();
+		decks = new HashMap<>();
 		
 		for(int i=0;i<Dice.values().length;i++){
 		familyMembers.add(new FamilyMember(Dice.values()[i]));
 		}
 		
 		resources = new ResourceChest();
+		/*
 		territoryDeck = new ArrayList<TerritoryCard>();
 		buildingDeck = new ArrayList<BuildingCard>();
 		characterDeck = new ArrayList<CharacterCard>();
 		ventureDeck = new ArrayList<VentureCard>();
+		*/
+		decks.put(CardType.TERRITORY, new ArrayList<TerritoryCard>());
+		decks.put(CardType.BUILDING, new ArrayList<BuildingCard>());
+		decks.put(CardType.VENTURE, new ArrayList<VentureCard>());
+		decks.put(CardType.CHARACTER, new ArrayList<CharacterCard>());
+
 		
 		this.name=name;
 		this.color=color;
@@ -58,28 +71,12 @@ public class Player {
 	
 	/**
 	 * This method adds a cart of a generic Type to the correct Deck of the player
-	 * @author Mirko
+	 * @author Jimmy
 	 * @param card
 	 */
 	public void addCard(DevelopmentCard card){
-		card.setPlayer(this);
-		switch(card.getCardType()){
-		case BUILDING:
-			buildingDeck.add((BuildingCard) card);	
-			break;
-		case TERRITORY:
-			territoryDeck.add((TerritoryCard) card);
-			break;
-		case VENTURE:
-			ventureDeck.add((VentureCard) card);
-			break;
-		case CHARACTER:
-			characterDeck.add((CharacterCard) card);
-			break;
-		default:
-			new Exception("Invalid card type");
-		}
-		
+
+		//TODO da rifare 		
 	}
 
 	public String getName() {
@@ -96,25 +93,6 @@ public class Player {
 
 	public void setColor(Color color) {
 		this.color = color;
-	}
-
-
-	public List<TerritoryCard> getTerritoryDeck() {
-		return territoryDeck;
-	}
-
-
-	public List<CharacterCard> getCharacterDeck() {
-		return characterDeck;
-	}
-
-
-	public List<VentureCard> getVentureDeck() {
-		return ventureDeck;
-	}
-
-	public List<BuildingCard> getBuildingDeck() {
-		return buildingDeck;
 	}
 
 
@@ -174,19 +152,9 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public List<? extends DevelopmentCard> getRightArrayList(CardType cardType){
-		switch(cardType){
-		case TERRITORY:
-			return this.getTerritoryDeck();
-		case BUILDING:
-			return this.getBuildingDeck();
-		case CHARACTER: 
-			return this.getCharacterDeck();
-		case VENTURE:
-			return this.getVentureDeck();
-			default:
-				return null;
-		}
+	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
+		return decks.get(cardType);
+		
 	}
 
 
