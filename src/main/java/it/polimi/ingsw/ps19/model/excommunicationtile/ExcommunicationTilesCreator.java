@@ -49,7 +49,6 @@ public class ExcommunicationTilesCreator {
 		lineRead = buffReader.readLine();  //line 1  	
 		while (lineRead!=null) {
 			
-			period=Period.values()[(int)index/7];
 			
 			
 			n1=Integer.parseInt(lineRead);   
@@ -169,6 +168,7 @@ public class ExcommunicationTilesCreator {
 				
 				for(int i=6;i<20;i++)buffReader.readLine();   //lines 6 to 19
 			}
+			index++;
 		}
 
 		return null;

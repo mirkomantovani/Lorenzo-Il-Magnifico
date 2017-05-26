@@ -27,7 +27,12 @@ public class Bonus {
 	 private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
 	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
 	 
-	 //excommunication
+	 private boolean skipRoundActive;
+	 private boolean noMarketActionActive;
+	 
+
+
+	//excommunication
 	 private List<Resource> resourceMalus;   //in instantresource
 	 
 	 
@@ -99,6 +104,22 @@ public class Bonus {
 	}
 	public void setBuildingCardsDiscount(boolean buildingCardsDiscount) {
 		this.buildingCardsDiscount = buildingCardsDiscount;
+	}
+	
+	public boolean isSkipRoundActive() {
+		return skipRoundActive;
+	}
+
+	public void setSkipRoundActive(boolean skipRound) {
+		this.skipRoundActive = skipRound;
+	}
+	
+	public boolean isNoMarketActionActive() {
+		return noMarketActionActive;
+	}
+
+	public void setNoMarketActionActive(boolean noMarketActionActive) {
+		this.noMarketActionActive = noMarketActionActive;
 	}
 	 
 	   
