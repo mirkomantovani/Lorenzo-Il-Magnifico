@@ -111,7 +111,8 @@ public class ResourceChest {
 	 */
 	public void addResource(Resource resource) {
 		if(resource!=null){
-		getResourceInChest(resource).add(resource);
+		getResourceInChest(resource)
+		.add(resource);
 		}
 	}
 	
