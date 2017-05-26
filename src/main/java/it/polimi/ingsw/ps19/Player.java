@@ -2,17 +2,12 @@ package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
-import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-import it.polimi.ingsw.ps19.model.card.TerritoryCard;
-import it.polimi.ingsw.ps19.model.card.VentureCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -25,9 +20,9 @@ public class Player {
 	
 	private Color color;
 	
-	private Set<FamilyMember> familyMembers;
+	private Map<Color,FamilyMember> familyMembers;
 	
-	ResourceChest resources;
+	private ResourceChest resources;
 	
 	/*List<TerritoryCard> territoryDeck;
 	List<BuildingCard>  buildingDeck;
@@ -48,11 +43,11 @@ public class Player {
 		
 		d.add(new BuildingCard(0, name, null, resources, null, null, 0));
 		
-		familyMembers=new HashSet<>();
+		familyMembers=new HashMap<>();
 		decks = new HashMap<>();
 		
-		for(int i=0;i<Dice.values().length;i++){
-		familyMembers.add(new FamilyMember(Dice.values()[i]));
+		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
+		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i]));
 		}
 		
 		resources = new ResourceChest();
