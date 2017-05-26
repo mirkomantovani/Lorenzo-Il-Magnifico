@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -28,18 +30,23 @@ public class ExcommunicationTilesCreator {
 	public static ExcommunicationTile[] createExcommunicationTiles(String filePath, int tiles) throws IOException{
 		
 		Period period; 
+		int index=0;
 		Resource r1;
 		Resource r2;
+		Effect effect;
 		int rt1;
 		int rt2;
 		int n1;
 		int t;
 		int n2;
 		CardType cardType;
+		ExcommunicationTile[] tilesArray=new ExcommunicationTile[tiles];
 		
 		buffReader = new BufferedReader(new FileReader(filePath));
 		lineRead = buffReader.readLine();  //line 1  	
 		while (lineRead!=null) {
+			
+			period=Period.values()[(int)index/7];
 			
 			
 			n1=Integer.parseInt(lineRead);   
@@ -62,7 +69,7 @@ public class ExcommunicationTilesCreator {
 						if(n1==0){
 							n1=Integer.parseInt(lineRead); //line 9
 							t=Integer.parseInt(lineRead); //line 10
-							cardType=CardType.values()[t];
+							cardType=CardType.values()[t-1];
 							if(n1==0){
 								n1=Integer.parseInt(lineRead); //line 11
 								if(n1==0){
@@ -71,14 +78,14 @@ public class ExcommunicationTilesCreator {
 										n1=Integer.parseInt(lineRead); //line 13
 										if(n1==0){
 											t=Integer.parseInt(lineRead); //line 14
-											cardType=CardType.values()[t];
+											cardType=CardType.values()[t-1];
 											if(t==0){
 												n1=Integer.parseInt(lineRead); //line 15
 												n2=Integer.parseInt(lineRead); //line 16
 												rt1=Integer.parseInt(lineRead); //line 17
 												if(n1==0){
 													t=Integer.parseInt(lineRead); //line 18
-													cardType=CardType.values()[t];
+													cardType=CardType.values()[t-1];
 													if(t==0){
 														n1=Integer.parseInt(lineRead); //line 19
 														
@@ -125,7 +132,9 @@ public class ExcommunicationTilesCreator {
 								}
 							}
 							else { //malus di n1 su valore azione per carte di tipo cardType
-
+//raise value with discount effect
+								effect=new RaiseValueWithDiscountEffect(n1, cardType, false, false);
+								tilesArray[index]=new ExcommunicationTile(period, null);
 								for(int i=11;i<20;i++)buffReader.readLine();  //lines 11 to 19
 							}
 							
