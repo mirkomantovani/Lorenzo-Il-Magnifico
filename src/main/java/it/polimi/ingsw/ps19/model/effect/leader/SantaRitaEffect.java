@@ -19,8 +19,12 @@ public class SantaRitaEffect extends Effect{
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
+		p.getBonuses().setDoubleResourcesFromCards(true);
 		
+	}
+	
+	public void disapplyEffect(Player p){
+		p.getBonuses().setDoubleResourcesFromCards(false);
 	}
 
 	

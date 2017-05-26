@@ -19,7 +19,7 @@ public class SistoIVEffect extends Effect{
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
+		p.getBonuses().setChurchSupportBonus(5);
 		
 	}
 

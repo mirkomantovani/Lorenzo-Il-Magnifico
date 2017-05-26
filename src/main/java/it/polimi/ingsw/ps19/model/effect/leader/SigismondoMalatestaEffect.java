@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
+import it.polimi.ingsw.ps19.Dice;
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
@@ -19,7 +21,20 @@ public class SigismondoMalatestaEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
+		for(FamilyMember member : p.getFamilyMembers()){
+			if(member.getDice() == Dice.NEUTRAL_DICE){
+				member.setActionValueVariation(3);
+			}
+		}
+		
+	}
+	
+	public void disapplyEffect(Player p){
+		for(FamilyMember member : p.getFamilyMembers()){
+			if(member.getDice() == Dice.NEUTRAL_DICE){
+				member.setActionValueVariation(0);
+			}
+		}
 		
 	}
 	

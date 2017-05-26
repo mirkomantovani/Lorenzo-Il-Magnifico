@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
-import java.util.Set;
 
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -22,14 +22,14 @@ public class Player {
 	
 	private Color color;
 	
-	private Set<FamilyMember> familyMembers;
+	private Map<Color,FamilyMember> familyMembers;
 	
-	ResourceChest resources;
+	private ResourceChest resources;
 	
-	List<TerritoryCard> territoryDeck;
-	List<BuildingCard>  buildingDeck;
-	List<CharacterCard> characterDeck;
-	List<VentureCard> ventureDeck;
+	private List<TerritoryCard> territoryDeck;
+	private List<BuildingCard>  buildingDeck;
+	private List<CharacterCard> characterDeck;
+	private List<VentureCard> ventureDeck;
 	
 	private Bonus bonuses;
 	
@@ -195,6 +195,24 @@ public class Player {
 	public void setBonuses(Bonus bonuses) {
 		this.bonuses = bonuses;
 	}
+
+	public Set<FamilyMember> getFamilyMembers() {
+		return familyMembers;
+	}
+
+	public void setFamilyMembers(Set<FamilyMember> familyMembers) {
+		this.familyMembers = familyMembers;
+	}
+
+	public ResourceChest getResources() {
+		return resources;
+	}
+
+	public void setResources(ResourceChest resources) {
+		this.resources = resources;
+	}
+	
+	
 
 	
 	

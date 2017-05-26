@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
@@ -11,8 +12,17 @@ public class FedericoDaMontefeltroEffect extends Effect{
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
-		
+
+			for(FamilyMember member : p.getFamilyMembers()){
+				member.setActionValueImposition(6);
+			}
+			
+	}
+	
+	public void disapplyEffect(Player p){
+		for(FamilyMember member : p.getFamilyMembers()){
+			member.setActionValueImposition(-1);
+		}
 	}
 
 	@Override

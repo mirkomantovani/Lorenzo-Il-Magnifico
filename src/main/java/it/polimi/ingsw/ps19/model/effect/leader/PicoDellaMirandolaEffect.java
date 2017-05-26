@@ -19,8 +19,11 @@ public class PicoDellaMirandolaEffect extends Effect{
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.getBonuses().setCardCostCoinDiscount(3);
+	}
+	
+	public void disapplyEffect(Player p){
+		p.getBonuses().setCardCostCoinDiscount(0);
 	}
 
 	
