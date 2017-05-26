@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
+/**
+ * @author matteo
+ *
+ */
 public class ResourceMalusEffect extends Effect{
 	
 	ArrayList<Resource> resources;

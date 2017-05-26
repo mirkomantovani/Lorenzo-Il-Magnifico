@@ -36,6 +36,10 @@ public class FamilyMember {
 		return this.dice.getUpperFaceValue()+actionValueVariation;
 	}
 	
+	public void addActionValueVariation(int value){
+		this.actionValueVariation = this.actionValueVariation + value;
+	}
+	
 	
 
 }

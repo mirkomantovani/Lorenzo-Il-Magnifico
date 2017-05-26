@@ -3,10 +3,13 @@ package it.polimi.ingsw.ps19.model.excommunicationtile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
+import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
@@ -56,7 +59,7 @@ public class ExcommunicationTilesCreator {
 			
 			n1=Integer.parseInt(buffReader.readLine()); //line 3
 			rt1=Integer.parseInt(buffReader.readLine());  //line 4
-			r1=ResourceFactory.getResource(ResourceType.values()[rt1-1],n1);
+			r2=ResourceFactory.getResource(ResourceType.values()[rt1-1],n1);
 			
 			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];  //line 5
 			
@@ -134,29 +137,35 @@ public class ExcommunicationTilesCreator {
 							else { //malus di n1 su valore azione per carte di tipo cardType
 //raise value with discount effect
 								effect=new RaiseValueWithDiscountEffect(n1, cardType, false, false);
-								tilesArray[index]=new ExcommunicationTile(period, null);
+								tilesArray[index]=new ExcommunicationTile(period, effect);
 								for(int i=11;i<20;i++)buffReader.readLine();  //lines 11 to 19
 							}
 							
 						}
-						else {
-							//malus valore familiari colorati
+						else {	effect = new ColoredFamiliarsVariationEffect(-n1);
+								tilesArray[index]=new ExcommunicationTile(period, effect);
+							
 							
 							for(int i=9;i<20;i++)buffReader.readLine();  //lines 9 to 19
 						}	
 					}
-					else {
-						//malus produzione di n1
+					else {	effect = new ProductionBonusEffect(-n1);
+						
 						
 						for(int i=8;i<20;i++)buffReader.readLine();  //lines 8 to 19
 					}	
 				}
-				else{ //malus raccolto di n1
+				else{ 	effect = new HarvestBonusEffect(-n1);
+						tilesArray[index]=new ExcommunicationTile(period, effect);
 					
 					for(int i=7;i<20;i++)buffReader.readLine();  //lines 7 to 19
 				}
 			}
-			else{ //effetto risorse in meno
+			else{ 	ArrayList<Resource> resource = new ArrayList<Resource>();
+					resource.add(r1);
+					resource.add(r2);
+					effect = new ResourceMalusEffect(resource);
+					tilesArray[index]=new ExcommunicationTile(period, effect);
 				
 				for(int i=6;i<20;i++)buffReader.readLine();   //lines 6 to 19
 			}
