@@ -34,8 +34,9 @@ public class Player {
 	List<CharacterCard> characterDeck;
 	List<VentureCard> ventureDeck;*/
 	
-	private Map<CardType, ArrayList<? extends DevelopmentCard>> decks;
+	private Map<CardType, List<DevelopmentCard>> decks;
 
+	ArrayList<DevelopmentCard> d;
 	
 	private Bonus bonuses;
 	
@@ -44,6 +45,9 @@ public class Player {
 	private boolean excommunicationStatusPeriod3; 
 	
 	public Player(String name, Color color){
+		
+		d.add(new BuildingCard(0, name, null, resources, null, null, 0));
+		
 		familyMembers=new HashSet<>();
 		decks = new HashMap<>();
 		
@@ -58,10 +62,11 @@ public class Player {
 		characterDeck = new ArrayList<CharacterCard>();
 		ventureDeck = new ArrayList<VentureCard>();
 		*/
-		decks.put(CardType.TERRITORY, new ArrayList<TerritoryCard>());
-		decks.put(CardType.BUILDING, new ArrayList<BuildingCard>());
-		decks.put(CardType.VENTURE, new ArrayList<VentureCard>());
-		decks.put(CardType.CHARACTER, new ArrayList<CharacterCard>());
+		decks.put(CardType.TERRITORY, new ArrayList<DevelopmentCard>());
+//		decks.put(CardType.BUILDING, new ArrayList<BuildingCard>());
+//		decks.put(CardType.VENTURE, new ArrayList<VentureCard>());
+//		decks.put(CardType.CHARACTER, new ArrayList<CharacterCard>());
+		
 
 		
 		this.name=name;
@@ -71,12 +76,11 @@ public class Player {
 	
 	/**
 	 * This method adds a cart of a generic Type to the correct Deck of the player
-	 * @author Jimmy
+	 * @author Mirko
 	 * @param card
 	 */
 	public void addCard(DevelopmentCard card){
-
-		//TODO da rifare 		
+		this.getRightArrayList(card.getCardType()).add(card);
 	}
 
 	public String getName() {
@@ -152,7 +156,7 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public ArrayList<? extends DevelopmentCard> getRightArrayList(CardType cardType){
+	public List<DevelopmentCard> getRightArrayList(CardType cardType){
 		return decks.get(cardType);
 		
 	}
