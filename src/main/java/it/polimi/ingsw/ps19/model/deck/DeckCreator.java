@@ -58,14 +58,6 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  * @author Matteo, Jimmy, Mirko
  *
  */
-/**
- * @author matteo
- *
- */
-/**
- * @author matteo
- *
- */
 public class DeckCreator {
 
 	/** The buffered reader used to read from file */
