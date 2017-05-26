@@ -31,7 +31,7 @@ public class Player {
 	
 	private Map<CardType, List<DevelopmentCard>> decks;
 
-	ArrayList<DevelopmentCard> d;
+	private ArrayList<DevelopmentCard> d;
 	
 	private Bonus bonuses;
 	
@@ -163,6 +163,14 @@ public class Player {
 
 	public void setBonuses(Bonus bonuses) {
 		this.bonuses = bonuses;
+	}
+
+	public Map<Color, FamilyMember> getFamilyMembers() {
+		return familyMembers;
+	}
+
+	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
+		this.familyMembers = familyMembers;
 	}
 
 	

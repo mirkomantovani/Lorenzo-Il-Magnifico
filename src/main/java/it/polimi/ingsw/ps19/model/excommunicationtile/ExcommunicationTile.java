@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class ExcommunicationTile {
 	
-	Period period;
+	private Period period;
 	
 	private ExcommunicationEffect effect;
 	
