@@ -6,6 +6,10 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class VictoryPoint extends Resource {
 	
+	public VictoryPoint(int amount) {
+		super(ResourceType.VICTORYPOINT, amount);
+	}
+
 	@Override
 	public String toString() {
 		if (this.getAmount() == 1)
@@ -14,9 +18,6 @@ public class VictoryPoint extends Resource {
 			return super.toString() + " victory points";
 	}
 
-	public VictoryPoint(int amount){
-		
-		super(amount);
-	}
+	
 
 }
