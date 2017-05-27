@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author Mirko
@@ -11,22 +12,18 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class ExcommunicationTile {
 	
-	Period period;
+	private Period period;
 	
-	private ExcommunicationEffect effect;
+	private Effect effect;
 	
-	private List<Player> excommunicatedPlayers;  //should we do it like this? (the association)
-	
-	
-
-	public ExcommunicationTile(Period period, ExcommunicationEffect effect) {
+	public ExcommunicationTile(Period period, Effect effect) {
 		this.period = period;
 		this.effect = effect;
 	}
 
 
 
-	public ExcommunicationEffect getEffect() {
+	public Effect getEffect() {
 		return effect;
 	}
 
@@ -35,16 +32,5 @@ public class ExcommunicationTile {
 		return period;
 	}
 
-
-
-	public List<Player> getExcommunicatedPlayers() {
-		return excommunicatedPlayers;
-	}
-
-
-
-	public void addExcommunicatedPlayer(Player player) {
-		excommunicatedPlayers.add(player);
-	}
 
 }
