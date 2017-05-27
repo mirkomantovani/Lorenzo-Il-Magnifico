@@ -24,13 +24,13 @@ public class MarketAction extends Action{
 		if(isApplicable()){
 			//this.marketSpot.getEffect().applyEffect(familyMember);
 			this.marketSpot.isOccupied();
-		}
+		} else throw new NotApplicableException();
 		
 	}
 
 	@Override
 	public boolean isApplicable() {
-		if(!this.canBePlaced()) {
+		if(!this.canBePlaced() || player.getBonuses().isNoMarketActionActive()) {
 			return false;
 		}
 		return true;
