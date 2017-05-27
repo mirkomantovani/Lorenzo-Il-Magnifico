@@ -18,30 +18,21 @@ public class Player {
 	
 	private String name;
 	
-	private Color color;
+	private String color;
 	
 	private Map<Color,FamilyMember> familyMembers;
 	
 	private ResourceChest resources;
 	
-	/*List<TerritoryCard> territoryDeck;
-	List<BuildingCard>  buildingDeck;
-	List<CharacterCard> characterDeck;
-	List<VentureCard> ventureDeck;*/
-	
 	private Map<CardType, List<DevelopmentCard>> decks;
 
-	private ArrayList<DevelopmentCard> d;
-	
+
+
 	private Bonus bonuses;
 	
-	private boolean excommunicationStatusPeriod1; //true if the player is excommunicated for the first period
-	private boolean excommunicationStatusPeriod2;
-	private boolean excommunicationStatusPeriod3; 
 	
-	public Player(String name, Color color){
+	public Player(String name, String color){
 		
-		d.add(new BuildingCard(0, name, null, resources, null, null, 0));
 		
 		familyMembers=new HashMap<>();
 		decks = new HashMap<>();
@@ -51,17 +42,10 @@ public class Player {
 		}
 		
 		resources = new ResourceChest();
-		/*
-		territoryDeck = new ArrayList<TerritoryCard>();
-		buildingDeck = new ArrayList<BuildingCard>();
-		characterDeck = new ArrayList<CharacterCard>();
-		ventureDeck = new ArrayList<VentureCard>();
-		*/
-		decks.put(CardType.TERRITORY, new ArrayList<DevelopmentCard>());
-//		decks.put(CardType.BUILDING, new ArrayList<BuildingCard>());
-//		decks.put(CardType.VENTURE, new ArrayList<VentureCard>());
-//		decks.put(CardType.CHARACTER, new ArrayList<CharacterCard>());
-		
+	
+		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
+			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
+			}
 
 		
 		this.name=name;
@@ -86,39 +70,16 @@ public class Player {
 		this.name = name;
 	}
 
-	public Color getColor() {
+	public String getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
 
 
-	public boolean isExcommunicationStatusPeriod1() {
-		return excommunicationStatusPeriod1;
-	}
-
-	public void setExcommunicationStatusPeriod1(boolean excommunicationStatusPeriod1) {
-		this.excommunicationStatusPeriod1 = excommunicationStatusPeriod1;
-	}
-
-	public boolean isExcommunicationStatusPeriod2() {
-		return excommunicationStatusPeriod2;
-	}
-
-	public void setExcommunicationStatusPeriod2(boolean excommunicationStatusPeriod2) {
-		this.excommunicationStatusPeriod2 = excommunicationStatusPeriod2;
-	}
-
-	public boolean isExcommunicationStatusPeriod3() {  //What does it mean Teo?
-		return excommunicationStatusPeriod3;
-	}
-
-	public void setExcommunicationStatusPeriod3(boolean excommunicationStatusPeriod3) {
-		this.excommunicationStatusPeriod3 = excommunicationStatusPeriod3;
-	}
-
+	
 	/**
 	 * 
 	 * @return
@@ -129,18 +90,7 @@ public class Player {
 	}
 	
 	
-	/*
 	
-	private void harvestAction(FamilyMember f){
-		int actionValue = harvestModification + f.getDice().getUpperFaceValue();
-		
-		for(TerritoryCard c : territoryDeck){
-			if(c.canActivateHarvestWith(actionValue)){
-				//metodo azione raccolto
-			}
-		}
-		//metodo che distribuisce le risorse bonus
-	} */
 	
 	/**
 	 * @author Jimmy
@@ -172,6 +122,7 @@ public class Player {
 	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
+
 
 	
 	

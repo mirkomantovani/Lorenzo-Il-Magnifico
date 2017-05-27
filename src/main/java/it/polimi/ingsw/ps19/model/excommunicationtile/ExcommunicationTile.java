@@ -16,10 +16,6 @@ public class ExcommunicationTile {
 	
 	private Effect effect;
 	
-	private List<Player> excommunicatedPlayers;  //should we do it like this? (the association)
-	
-	
-
 	public ExcommunicationTile(Period period, Effect effect) {
 		this.period = period;
 		this.effect = effect;
@@ -36,16 +32,5 @@ public class ExcommunicationTile {
 		return period;
 	}
 
-
-
-	public List<Player> getExcommunicatedPlayers() {
-		return excommunicatedPlayers;
-	}
-
-
-
-	public void addExcommunicatedPlayer(Player player) {
-		excommunicatedPlayers.add(player);
-	}
 
 }
