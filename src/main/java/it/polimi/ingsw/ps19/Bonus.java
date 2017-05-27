@@ -23,7 +23,65 @@ public class Bonus {
 	 private boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
 	 private boolean buildingCardsDiscount; //This boolean is true if "COSTRUTTORE"'s effect is active.
 	 private boolean discountOccupiedTower; // true if you haven't to pay the cost to place in an occupied tower
-	 
+	 private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
+	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
+	
+	 //Controlled in controller
+		 private boolean skipRoundActive;
+		 
+		 //Controlled in MarketAction
+		 private boolean noMarketActionActive;
+		 
+		 /**
+		 * If you have a variation for a certain card type whenever you buy a card of that card type
+		 * you instantly sum the cardActionValueVariation to your action value
+		 */
+		private Map<CardType,Integer> cardActionValueVariation; 
+		 
+		 /**
+		 * First 5 excommunication tiles, whenever you get resources from an action space effect
+		 * or a development card you have to subtract
+		 * Controlled in InstantResourceEffect
+		 */
+		private List<Resource> resourceMalus;   //in instantresource
+		
+		/**
+		 * Can only be for territory, venture or character, if you have this boolean set to true
+		 * you don't get the final victory points for that specific card type
+		 * Controlled in controller-Final Points Count?
+		 * 
+		 */
+		private Map<CardType,Boolean> NoCardTypeFinalPoints;
+		
+		/**
+		 * 13th excommunication tile, the effect sets the divider to be different than 1
+		 * (the original excomm tile would set it to 2 but can be customize
+		 * TODO problem: if servantsDivider is not equal to 1 the player should onyl be allowed to choose
+		 * a multiple of servantsDivider (it wouldn't have sense to waste servants)
+		 */
+		private int servantsDivider;
+		 
+		 
+
+		/**
+		  * The constructor has to be called at the creation of the player.
+		  * N.B. it also adds an entry for the ANY of CardType, can be useful 
+		  * @author Mirko
+		 * 
+		 */
+		public Bonus() {
+			
+			resourceMalus=new ArrayList<>();
+			NoCardTypeFinalPoints=new HashMap<>();
+			cardActionValueVariation=new HashMap<>();
+			this.servantsDivider=1;
+			
+			int i=0;
+			
+			for(i=0;i<CardType.values().length;i++)
+				cardActionValueVariation.put(CardType.values()[i], 0);
+				NoCardTypeFinalPoints.put(CardType.values()[i], false);
+			}
 	 
 	 
 	 public int setChurchSupportBonus(int amount) {
@@ -77,65 +135,7 @@ public class Bonus {
 	public void setResourceMalus(List<Resource> resourceMalus) {
 		this.resourceMalus = resourceMalus;
 	}
-	private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
-	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
-	 
-	 //Controlled in controller
-	 private boolean skipRoundActive;
-	 
-	 //Controlled in MarketAction
-	 private boolean noMarketActionActive;
-	 
-	 /**
-	 * If you have a variation for a certain card type whenever you buy a card of that card type
-	 * you instantly sum the cardActionValueVariation to your action value
-	 */
-	private Map<CardType,Integer> cardActionValueVariation; 
-	 
-	 /**
-	 * First 5 excommunication tiles, whenever you get resources from an action space effect
-	 * or a development card you have to subtract
-	 * Controlled in InstantResourceEffect
-	 */
-	private List<Resource> resourceMalus;   //in instantresource
 	
-	/**
-	 * Can only be for territory, venture or character, if you have this boolean set to true
-	 * you don't get the final victory points for that specific card type
-	 * Controlled in controller-Final Points Count?
-	 * 
-	 */
-	private Map<CardType,Boolean> NoCardTypeFinalPoints;
-	
-	/**
-	 * 13th excommunication tile, the effect sets the divider to be different than 1
-	 * (the original excomm tile would set it to 2 but can be customize
-	 * TODO problem: if servantsDivider is not equal to 1 the player should onyl be allowed to choose
-	 * a multiple of servantsDivider (it wouldn't have sense to waste servants)
-	 */
-	private int servantsDivider;
-	 
-	 
-
-	/**
-	  * The constructor has to be called at the creation of the player.
-	  * N.B. it also adds an entry for the ANY of CardType, can be useful 
-	  * @author Mirko
-	 * 
-	 */
-	public Bonus() {
-		
-		resourceMalus=new ArrayList<>();
-		NoCardTypeFinalPoints=new HashMap<>();
-		cardActionValueVariation=new HashMap<>();
-		this.servantsDivider=1;
-		
-		int i=0;
-		
-		for(i=0;i<CardType.values().length;i++)
-			cardActionValueVariation.put(CardType.values()[i], 0);
-			NoCardTypeFinalPoints.put(CardType.values()[i], false);
-		}
 	 
 	 /**
 	  *This method is the one used to access the HashMap containing the variations based 

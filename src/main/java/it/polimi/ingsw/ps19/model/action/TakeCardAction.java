@@ -8,6 +8,9 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
@@ -44,7 +47,12 @@ public class TakeCardAction extends Action {
 		if (this.isApplicable()) {
 			player.addCard(card);
 			player.getResourceChest().subChest(card.getCost());
+			//if the player has a discount given by a leader card
+			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			if(player.getBonuses().isDoubleResourcesFromCards())
+			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			//TODO actionspace bonus (if nofloorbonus is false) after jimmy completes it
 		} else
 			throw new NotApplicableException();
 	}
@@ -53,7 +61,29 @@ public class TakeCardAction extends Action {
 	public boolean isApplicable() {  //TODO: excommunicationeffect, bonus effects of the player
 		//family member in tower, floor.card, actionvalue of familymember must me greater than actionspace.actionvaluerequired
 		//controlling if the player can afford the price
-		if (!player.getResourceChest().isGreaterEqualThan(card.getCost()))
+		if(!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()){
+			//TODO model.getMilitaryRequiredForTerritories>player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
+			//return false;
+		}
+		
+		
+		//leader card discount (coin)
+		ResourceChest realCost;
+		if(player.getBonuses().getCardCostCoinDiscount()!=0){
+		
+			try {
+				realCost=(ResourceChest)card.getCost().clone();
+				realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+				realCost=new ResourceChest();
+			}
+			}
+			else {
+				realCost=card.getCost();
+				
+			}
+		if (!player.getResourceChest().isGreaterEqualThan(realCost))
 			return false;
 		//controlling if the player has space in the corresponding deck 
 		if (player.getRightArrayList(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
@@ -61,6 +91,7 @@ public class TakeCardAction extends Action {
 
 		return this.canBePlaced();
 
+		
 	}
 	
 	/**
