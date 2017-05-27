@@ -31,7 +31,7 @@ public class ResourceMalusEffect extends Effect{
 			chest.addResource(r);
 		}
 		
-		player.getResourceChest().subChest(chest);
+		player.getBonuses().setResourceMalus(resources);
 		
 	}
 	

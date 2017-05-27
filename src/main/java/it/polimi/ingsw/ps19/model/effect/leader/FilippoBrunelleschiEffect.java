@@ -18,8 +18,11 @@ public class FilippoBrunelleschiEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.getBonuses().setDiscountOccupiedTower(true);
+	}
+	
+	public void disapplyEffect(Player p){
+		p.getBonuses().setDiscountOccupiedTower(false);
 	}
 
 	

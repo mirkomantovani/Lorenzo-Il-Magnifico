@@ -1,10 +1,11 @@
 package it.polimi.ingsw.ps19;
 
 import java.util.ArrayList;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -23,6 +24,7 @@ public class Player {
 	private Map<Color,FamilyMember> familyMembers;
 	
 	private ResourceChest resources;
+
 	
 	private Map<CardType, List<DevelopmentCard>> decks;
 
@@ -115,6 +117,17 @@ public class Player {
 		this.bonuses = bonuses;
 	}
 
+
+
+	public ResourceChest getResources() {
+		return resources;
+	}
+
+	public void setResources(ResourceChest resources) {
+		this.resources = resources;
+	}
+	
+	
 	public Map<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}

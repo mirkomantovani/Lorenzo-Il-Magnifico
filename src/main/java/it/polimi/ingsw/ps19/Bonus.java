@@ -16,14 +16,68 @@ public class Bonus {
 	 
 	 private int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
 	 private int productionVariation; // "  "  "  "    //in production/harvest action
-	 private int cardCostCoinDiscount; //This is the amount of a discount if the card you would take costs coins
-	 
+	 private int cardCostCoinDiscount = 0; //This is the amount of a discount if the card you would take costs coins
+	 private int churchSupportBonus = -1;  //This is the amount of military Points you gain when you support the church (sisto IV effect)
 	 
 	 private boolean noFloorBonus;
 	 private boolean characterCardsDiscount; //This boolean is true if "DAMA"'s effect is active.
 	 private boolean buildingCardsDiscount; //This boolean is true if "COSTRUTTORE"'s effect is active.
 	 private boolean discountOccupiedTower; // true if you haven't to pay the cost to place in an occupied tower
-	 private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
+	 
+	 
+	 
+	 public int setChurchSupportBonus(int amount) {
+		return churchSupportBonus = amount;
+	}
+
+	public int getCardCostCoinDiscount() {
+		return cardCostCoinDiscount;
+	}
+
+	public void setCardCostCoinDiscount(int cardCostCoinDiscount) {
+		this.cardCostCoinDiscount = cardCostCoinDiscount;
+	}
+
+	public Map<CardType, Integer> getCardActionValueVariation() {
+		return cardActionValueVariation;
+	}
+
+	public void setCardActionValueVariation(Map<CardType, Integer> cardActionValueVariation) {
+		this.cardActionValueVariation = cardActionValueVariation;
+	}
+
+	public boolean isDiscountOccupiedTower() {
+		return discountOccupiedTower;
+	}
+
+	public void setDiscountOccupiedTower(boolean discountOccupiedTower) {
+		this.discountOccupiedTower = discountOccupiedTower;
+	}
+
+	public boolean isNoMilitaryPointsRequiredForTerritories() {
+		return noMilitaryPointsRequiredForTerritories;
+	}
+
+	public void setNoMilitaryPointsRequiredForTerritories(boolean noMilitaryPointsRequiredForTerritories) {
+		this.noMilitaryPointsRequiredForTerritories = noMilitaryPointsRequiredForTerritories;
+	}
+
+	public boolean isDoubleResourcesFromCards() {
+		return doubleResourcesFromCards;
+	}
+
+	public void setDoubleResourcesFromCards(boolean doubleResourcesFromCards) {
+		this.doubleResourcesFromCards = doubleResourcesFromCards;
+	}
+
+	public List<Resource> getResourceMalus() {
+		return resourceMalus;
+	}
+
+	public void setResourceMalus(List<Resource> resourceMalus) {
+		this.resourceMalus = resourceMalus;
+	}
+	private boolean noMilitaryPointsRequiredForTerritories; // if true you don't have military points required to take a territoryCard
 	 private boolean doubleResourcesFromCards; //True if you have to gain the resources taken from card twice
 	 
 	 //Controlled in controller
@@ -140,6 +194,7 @@ public class Bonus {
 	public void setBuildingCardsDiscount(boolean buildingCardsDiscount) {
 		this.buildingCardsDiscount = buildingCardsDiscount;
 	}
+
 	
 	public boolean isSkipRoundActive() {
 		return skipRoundActive;
@@ -187,8 +242,11 @@ public class Bonus {
 	 */
 	public void setServantsDivider(int servantsDivider) {
 		this.servantsDivider = servantsDivider;
+
 	}
 	 
+	
+	
 	   
 	 
 }

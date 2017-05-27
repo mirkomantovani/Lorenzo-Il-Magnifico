@@ -9,7 +9,18 @@ public class FamilyMember {
 	private Dice dice; 
 	private Player player;
 	private int actionValueVariation;
+	private int actionValueImposition;
 	
+	
+	
+	public int getActionValueImposition() {
+		return actionValueImposition;
+	}
+
+	public void setActionValueImposition(int actionValueImposition) {
+		this.actionValueImposition = actionValueImposition;
+	}
+
 	public void setActionValueVariation(int actionValueVariation) {
 		this.actionValueVariation = actionValueVariation;
 	}
