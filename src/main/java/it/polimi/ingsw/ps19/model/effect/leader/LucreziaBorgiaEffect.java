@@ -12,14 +12,14 @@ public class LucreziaBorgiaEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			member.setActionValueVariation(2);
 		}
 		
 	}
 	
 	public void disapplyEffect(Player p){
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			member.setActionValueVariation(0);
 		}
 	}

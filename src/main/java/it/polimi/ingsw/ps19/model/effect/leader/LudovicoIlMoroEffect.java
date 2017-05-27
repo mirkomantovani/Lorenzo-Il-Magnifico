@@ -13,7 +13,7 @@ public class LudovicoIlMoroEffect extends Effect {
 	@Override
 	public void applyEffect(Player p) {
 		
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			member.setActionValueImposition(5);
 		}
 		
@@ -21,7 +21,7 @@ public class LudovicoIlMoroEffect extends Effect {
 	
 	public void disapplyEffect(Player p){
 		
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			member.setActionValueImposition(0);
 		}
 	}

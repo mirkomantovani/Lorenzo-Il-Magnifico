@@ -21,7 +21,7 @@ public class SigismondoMalatestaEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			if(member.getDice() == Dice.NEUTRAL_DICE){
 				member.setActionValueVariation(3);
 			}
@@ -30,7 +30,7 @@ public class SigismondoMalatestaEffect extends Effect {
 	}
 	
 	public void disapplyEffect(Player p){
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			if(member.getDice() == Dice.NEUTRAL_DICE){
 				member.setActionValueVariation(0);
 			}

@@ -13,14 +13,14 @@ public class FedericoDaMontefeltroEffect extends Effect{
 	@Override
 	public void applyEffect(Player p) {
 
-			for(FamilyMember member : p.getFamilyMembers()){
+			for(FamilyMember member : p.getFamilyMembers().values()){
 				member.setActionValueImposition(6);
 			}
 			
 	}
 	
 	public void disapplyEffect(Player p){
-		for(FamilyMember member : p.getFamilyMembers()){
+		for(FamilyMember member : p.getFamilyMembers().values()){
 			member.setActionValueImposition(-1);
 		}
 	}
