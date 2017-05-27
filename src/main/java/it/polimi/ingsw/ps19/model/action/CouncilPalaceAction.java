@@ -19,7 +19,7 @@ public class CouncilPalaceAction extends Action {
 		if(isApplicable()){
 		councilPalace.getMembers().add(familyMember);
 		//councilPalace.getEffect().applyEffect(familyMember);
-		}
+		} else throw new NotApplicableException();
 		
 	}
 
