@@ -100,7 +100,17 @@ public class Bonus {
 	public void setBuildingCardsDiscount(boolean buildingCardsDiscount) {
 		this.buildingCardsDiscount = buildingCardsDiscount;
 	}
+
+	public List<Resource> getResourceMalus() {
+		return resourceMalus;
+	}
+
+	public void setResourceMalus(List<Resource> resourceMalus) {
+		this.resourceMalus = resourceMalus;
+	}
 	 
+	
+	
 	   
 	 
 }
