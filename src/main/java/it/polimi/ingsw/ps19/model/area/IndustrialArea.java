@@ -21,6 +21,6 @@ public abstract class IndustrialArea{
 		singleSlot = new SingleActionSpace(SLOT_COST, null);
 	}
 	
-	public abstract ArrayList<? extends DevelopmentCard> getPlayerCards(Player player);
+	public abstract List<DevelopmentCard> getPlayerCards(Player player);
 	
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.area;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -20,7 +21,7 @@ public class ProductionArea extends IndustrialArea{
 	}
 
 	@Override
-	public ArrayList<? extends DevelopmentCard> getPlayerCards(Player player) {
+	public List<DevelopmentCard> getPlayerCards(Player player) {
 		return player.getRightArrayList(CardType.BUILDING);
 	}
 	
