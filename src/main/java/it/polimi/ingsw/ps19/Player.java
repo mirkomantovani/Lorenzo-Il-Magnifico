@@ -40,7 +40,7 @@ public class Player {
 		decks = new HashMap<>();
 		
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
-		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i]));
+		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i],this));
 		}
 		
 		resources = new ResourceChest();
@@ -63,7 +63,9 @@ public class Player {
 	 * @param card
 	 */
 	public void addCard(DevelopmentCard card){
-		this.getRightArrayList(card.getCardType()).add(card);
+		
+		
+		this.getDeckOfType(card.getCardType()).add(card);
 	}
 
 	public String getName() {
@@ -105,7 +107,7 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public List<DevelopmentCard> getRightArrayList(CardType cardType){
+	public List<DevelopmentCard> getDeckOfType(CardType cardType){
 		return decks.get(cardType);
 		
 	}

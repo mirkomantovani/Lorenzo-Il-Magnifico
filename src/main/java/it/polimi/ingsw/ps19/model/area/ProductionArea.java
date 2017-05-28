@@ -22,7 +22,7 @@ public class ProductionArea extends IndustrialArea{
 
 	@Override
 	public List<DevelopmentCard> getPlayerCards(Player player) {
-		return player.getRightArrayList(CardType.BUILDING);
+		return player.getDeckOfType(CardType.BUILDING);
 	}
 	
 }

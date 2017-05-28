@@ -10,7 +10,6 @@ import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
-import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
@@ -29,6 +28,10 @@ public class TakeCardAction extends Action {
 
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
+		
+		if(familyMember==null)System.out.println("fm null");
+		if(player==null)System.out.println("player null");
+		
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
@@ -37,6 +40,13 @@ public class TakeCardAction extends Action {
 	}
 
 	private int calculateActionValueVariation() {
+		
+		if(player==null)System.out.println("player null");
+		if(player.getBonuses()==null)System.out.println("bonus null");
+		if(player.getBonuses().getCardActionValueVariation()==null)
+			System.out.println("actionvalue null");
+		
+//		if(player==null)System.out.println("player null");
 		return this.player.getBonuses().getCardTypeActionVariation(
 				this.card.getCardType());
 		
@@ -45,13 +55,16 @@ public class TakeCardAction extends Action {
 	@Override
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
+			
 			player.addCard(card);
+			floor.setCard(null);  //set to null when the player buys the card
 			player.getResourceChest().subChest(card.getCost());
 			//if the player has a discount given by a leader card
 			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			if(player.getBonuses().isDoubleResourcesFromCards())
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			this.floor.getActionSpace().setFamilyMember(familyMember);
 			//TODO actionspace bonus (if nofloorbonus is false) after jimmy completes it
 		} else
 			throw new NotApplicableException();
@@ -86,7 +99,7 @@ public class TakeCardAction extends Action {
 		if (!player.getResourceChest().isGreaterEqualThan(realCost))
 			return false;
 		//controlling if the player has space in the corresponding deck 
-		if (player.getRightArrayList(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
+		if (player.getDeckOfType(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
 			return false;
 
 		return this.canBePlaced();
@@ -113,7 +126,7 @@ public class TakeCardAction extends Action {
 		List<Floor> floors;
 		floors=this.floor.getTower().getFloors();
 		for(Floor fl : floors){
-			if(fl!=this.floor
+			if(fl.getActionSpace().isOccupied()&&fl!=this.floor
 				&&fl.getActionSpace().getFamilyMember().getPlayer()==player)return false;
 		}
 		

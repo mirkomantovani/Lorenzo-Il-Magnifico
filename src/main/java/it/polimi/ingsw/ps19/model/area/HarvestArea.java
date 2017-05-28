@@ -23,7 +23,7 @@ public class HarvestArea extends IndustrialArea{
 	@Override
 	public List<DevelopmentCard> getPlayerCards(Player player) {
 			
-		return player.getRightArrayList(CardType.TERRITORY);
+		return player.getDeckOfType(CardType.TERRITORY);
 	}
 	
 }

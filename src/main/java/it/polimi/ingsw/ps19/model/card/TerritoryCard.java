@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class TerritoryCard.
@@ -22,7 +23,7 @@ public class TerritoryCard extends DevelopmentCard {
 	 */
 	public TerritoryCard(int id, String name, Period period, Effect immediateEffect,
 		Effect permanentEffect,int harvestActivationCost) {
-		super(id, name, period, null, immediateEffect, permanentEffect);
+		super(id, name, period, new ResourceChest(), immediateEffect, permanentEffect);
 		this.cardType=CardType.TERRITORY;
 		this.harvestActivationCost=harvestActivationCost;
 	}

@@ -24,9 +24,9 @@ public class Board {
 		
 		towers = new ArrayList<Tower>();
 		
-		towers.add(new Tower(CardType.BUILDING, buildingCards));
 		towers.add(new Tower(CardType.TERRITORY, territoryCards));
 		towers.add(new Tower(CardType.CHARACTER, characterCards));
+		towers.add(new Tower(CardType.BUILDING, buildingCards));
 		towers.add(new Tower(CardType.VENTURE, ventureCards));
 		
 //		church = new Church(null,null,null);

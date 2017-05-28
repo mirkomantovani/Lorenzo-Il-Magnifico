@@ -7,6 +7,8 @@ import java.util.List;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
@@ -28,8 +30,11 @@ public class Tower {
 			this.cardType = cardType;
 			this.deck = deck;
 			
+			ResourceChest r=new ResourceChest(1,1,1,0,0,0,0);
+			
+			//TODO prendere da file ultimi 2 parametri
 			for(int i = 0; i < deck.length() / 6; i++){
-				floors.add(new Floor(deck.getCard(currentCard),this,0,null));
+				floors.add(new Floor(deck.getCard(currentCard),this,0,new InstantResourcesEffect(r)));
 				currentCard++;
 				
 			}
