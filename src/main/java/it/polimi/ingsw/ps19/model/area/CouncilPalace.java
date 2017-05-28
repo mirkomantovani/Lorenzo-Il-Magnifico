@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author matteo
  *
  */
-public class CouncilPalace extends ActionSpace {
+public class CouncilPalace extends SingleActionSpace {
 	
 	private List<FamilyMember> members; // this attribute saves the order of the Members placed 
 								//in the CouncilPalace to set the next turn playing order
@@ -27,15 +27,14 @@ public class CouncilPalace extends ActionSpace {
 		super(1,new MultipleEffect(new InstantResourcesEffect(new ResourceChest(1,0,0,0,0,0,0)), 
 				new CouncilPrivilegeEffect(1)));
 		this.members = new ArrayList<FamilyMember>();
-		
+	
 	}
 
 	public List<FamilyMember> getMembers() {
 		return members;
 	}
 	
-	private void resetPalace(){
-	
+	private void resetPalace(){	
 		this.members.removeAll(members);
 		
 	}
