@@ -20,6 +20,9 @@ public class SingleActionSpace extends ActionSpace{
 		return familyMember!=null;
 	}
 	
+	
+	//This method returns an arraylist with a single family member, in order to access the
+	//attribute use the getFamilyMember method
 	@Override
 	public ArrayList<FamilyMember> occupiedByMember() {
 		ArrayList<FamilyMember> forInterface = new ArrayList<FamilyMember>();

@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.action;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 
-public abstract  class Action {
+public abstract class Action {
 	
 	protected Player player;
 	
@@ -18,5 +18,8 @@ public abstract  class Action {
 	
 	public abstract boolean isApplicable();
 	
-
+	public Player getPlayer(){
+		return this.player;
+	}
+	
 }

@@ -16,7 +16,6 @@ public abstract class ActionSpace implements Occupable {
 
 	protected Effect effect;
 	
-	public abstract FamilyMember getFamilyMember();
 	
 	public abstract void setFamilyMember(FamilyMember familyMember);
 	

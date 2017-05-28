@@ -20,6 +20,8 @@ public abstract class DevelopmentCard extends Card {
 	
 	protected Effect immediateEffect;
 	protected Effect permanentEffect;
+	protected int harvestActivationCost;
+	protected int productionActivationCost;
 	protected CardType cardType;
 	
 	
@@ -40,7 +42,8 @@ public abstract class DevelopmentCard extends Card {
 		this.cost=cost;
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
-		
+		harvestActivationCost = Integer.MAX_VALUE;		//The harvest and production effect should not be applicable in characters and venture cards  
+		productionActivationCost = Integer.MAX_VALUE;	//        '        '         '    
 
 	}
 
@@ -108,6 +111,12 @@ public abstract class DevelopmentCard extends Card {
 		 	return string.toString();
 		}
 	
+	 public int getHarvestActivationCost(){
+		 return this.harvestActivationCost;
+	 }
 	
-
+	 public int getProductionActivationCost(){
+		 return this.productionActivationCost;
+	 }
+	 
 }

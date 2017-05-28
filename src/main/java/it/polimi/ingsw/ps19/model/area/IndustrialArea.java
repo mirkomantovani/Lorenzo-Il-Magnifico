@@ -1,8 +1,11 @@
 package it.polimi.ingsw.ps19.model.area;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 public abstract class IndustrialArea{
 	
@@ -13,9 +16,11 @@ public abstract class IndustrialArea{
 	protected SingleActionSpace singleSlot;
 	protected SingleActionSpace multipleSlot;
 	
-	public IndustrialArea(){
+	protected IndustrialArea(){
 		
 		singleSlot = new SingleActionSpace(SLOT_COST, null);
 	}
+	
+	public abstract ArrayList<? extends DevelopmentCard> getPlayerCards(Player player);
 	
 }

@@ -9,11 +9,6 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author Mirko
  */
 public class TerritoryCard extends DevelopmentCard {
-    
-    /** The harvest activation cost. */
-    //this class should have something like HarvestEffect and not a permanentEffect, waiting for the Effect Generalization modeling
-	//solved: the name will we permanentEffect anyway, but the dynamic type of the object passed to it will be HarvestEffect
-	private int harvestActivationCost;
 	
 	/**
 	 * Instantiates a new territory card.

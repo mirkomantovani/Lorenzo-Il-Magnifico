@@ -10,10 +10,6 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Mirko
  */
 public class BuildingCard extends DevelopmentCard {
-	  
-  	/** The production activation cost. */
-  	//this class should have something like ProductionEffect and not a permanentEffect, waiting for the Effect Generalization modeling
-	private int productionActivationCost;
 	
 	/**
 	 * Instantiates a new building card.

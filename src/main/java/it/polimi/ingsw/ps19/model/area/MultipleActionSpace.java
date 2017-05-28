@@ -49,13 +49,12 @@ public class MultipleActionSpace extends ActionSpace {
 	public boolean isOccupable(FamilyMember familyMember) {
 		return familyMember.getActionValue() > this.actionValueRequired && checkAvailability(familyMember);
 	}
-
-	@Override
+	
 	public ArrayList<FamilyMember> occupiedByMember() {	
 		return members;
 	}
 
-	@Override
+	
 	public HashSet<Player> occupiedByPlayer() {
 		
 		HashSet<Player> forInterface = new HashSet<Player>();
@@ -69,14 +68,11 @@ public class MultipleActionSpace extends ActionSpace {
 
 	@Override
 	public void setFamilyMember(FamilyMember familyMember) {
-		// TODO Auto-generated method stub
-		
+		this.members.add(familyMember);
 	}
 
-	@Override
-	public FamilyMember getFamilyMember() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<FamilyMember> getFamilyMember() {
+		return members;
 	}
 
 }

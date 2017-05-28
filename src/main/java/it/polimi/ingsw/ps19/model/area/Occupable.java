@@ -23,7 +23,9 @@ public interface Occupable {
 	public boolean isOccupable(FamilyMember familyMember);
 	
 	public ArrayList<FamilyMember> occupiedByMember();
+	//public FamilyMember occupiedByMember();
 	
 	public HashSet<Player> occupiedByPlayer();
+	//public Player occupiedByPlayer();
 	
 }
