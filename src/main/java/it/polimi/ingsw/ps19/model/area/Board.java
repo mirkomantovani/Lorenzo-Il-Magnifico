@@ -20,7 +20,9 @@ public class Board {
 	
 	private ProductionArea productionArea;
 	
-	public Board(Deck<DevelopmentCard> territoryCards, Deck<DevelopmentCard> buildingCards, Deck<DevelopmentCard> characterCards, Deck<DevelopmentCard> ventureCards){
+	public Board(Deck<? extends DevelopmentCard> territoryCards, Deck<? extends DevelopmentCard> buildingCards, Deck<? extends DevelopmentCard> characterCards, Deck<? extends DevelopmentCard> ventureCards){
+		
+		towers = new ArrayList<Tower>();
 		
 		towers.add(new Tower(CardType.BUILDING, buildingCards));
 		towers.add(new Tower(CardType.TERRITORY, territoryCards));

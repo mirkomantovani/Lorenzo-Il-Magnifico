@@ -103,6 +103,8 @@ public class DeckCreator {
 		while (lineRead!=null) {
 
 			id=Integer.parseInt(lineRead);  
+			
+			System.out.println(id);
 			name= buffReader.readLine();    //line 2
 			
 			
@@ -330,6 +332,8 @@ public class DeckCreator {
 		while (lineRead!=null) {
 			
 			id = Integer.parseInt(lineRead);
+			
+			System.out.println(id);
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			
@@ -477,11 +481,11 @@ public class DeckCreator {
 		permanentEffect = new InstantResourcesEffect(victoryPointsChest);
 		
 		deck[index] = new VentureCard(id,name,period,cost,immediateEffect,permanentEffect);
-		System.out.println(deck[index].toString());
+		//System.out.println(deck[index].toString());
 		index++;
 		
 		lineRead = buffReader.readLine();   //line 1
-		System.out.println("id: "+lineRead);
+		//System.out.println("id: "+lineRead);
 		}
 	
 		return deck;
@@ -547,6 +551,8 @@ public class DeckCreator {
 		
 		while (lineRead!=null) {
 			id = Integer.parseInt(lineRead); 
+			
+			System.out.println(id);
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			moneyCost = new ResourceChest(Integer.parseInt(buffReader.readLine()), 0, 0, 0, 0, 0, 0);
@@ -801,7 +807,7 @@ public class DeckCreator {
 			
 			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
 			
-			System.out.println(deck[index].toString());
+			//System.out.println(deck[index].toString());
 			
 			index++;
 

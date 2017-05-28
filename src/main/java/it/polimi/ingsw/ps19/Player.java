@@ -53,6 +53,8 @@ public class Player {
 		this.name=name;
 		this.color=color;
 		
+		this.bonuses = new Bonus();
+		
 	}
 	
 	/**

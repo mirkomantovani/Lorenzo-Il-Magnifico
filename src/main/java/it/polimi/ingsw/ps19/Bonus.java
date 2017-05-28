@@ -78,7 +78,7 @@ public class Bonus {
 			
 			int i=0;
 			
-			for(i=0;i<CardType.values().length;i++)
+			for(i=0;i<CardType.values().length - 1;i++)
 				cardActionValueVariation.put(CardType.values()[i], 0);
 				NoCardTypeFinalPoints.put(CardType.values()[i], false);
 			}
