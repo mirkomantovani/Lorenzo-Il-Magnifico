@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps19.model.area;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 
@@ -19,8 +22,8 @@ public interface Occupable {
 	 */
 	public boolean isOccupable(FamilyMember familyMember);
 	
-	public FamilyMember occupiedByMember();
+	public ArrayList<FamilyMember> occupiedByMember();
 	
-	public Player occupiedByPlayer();
+	public HashSet<Player> occupiedByPlayer();
 	
 }

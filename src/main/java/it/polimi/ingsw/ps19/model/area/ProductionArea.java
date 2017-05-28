@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps19.model.area;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 
-public class ProductionArea {
-	ActionSpace singleSlot;
-	ActionSpace multipleSlot;
+public class ProductionArea extends IndustrialArea{
 	
-	
-	public void activateProduction(Player player){ 
-		
+	public ProductionArea(){
+		super();
+		//The "MALUS" costant is defined in IndustrialArea
+		this.multipleSlot = new SingleActionSpace(SLOT_COST, new ProductionBonusEffect(MALUS));
 	}
+	
 }

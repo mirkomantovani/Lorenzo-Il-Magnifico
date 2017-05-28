@@ -1,15 +1,13 @@
 package it.polimi.ingsw.ps19.model.area;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
 
-public class HarvestArea {
-	ActionSpace singleSlot;
-	ActionSpace multipleSlot;
+public class HarvestArea extends IndustrialArea{
 	
-	
-	
-	public void activateHarvest(Player player){
-		
+	public HarvestArea(){
+		super();
+		//The "MALUS" costant is defined in IndustrialArea
+		this.multipleSlot = new SingleActionSpace(SLOT_COST, new HarvestBonusEffect(MALUS));
 	}
 	
 }

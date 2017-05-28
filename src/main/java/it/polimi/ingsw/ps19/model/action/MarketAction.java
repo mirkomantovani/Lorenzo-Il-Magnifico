@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.action;
 
 
 import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.model.area.ActionSpace;
+import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 
 /**
  * @author matteo
@@ -10,10 +10,10 @@ import it.polimi.ingsw.ps19.model.area.ActionSpace;
  */
 public class MarketAction extends Action{
 	
-	private ActionSpace marketSpot;
+	private SingleActionSpace marketSpot;
 	
 	
-	public MarketAction(FamilyMember familyMember, ActionSpace marketSpot){
+	public MarketAction(FamilyMember familyMember, SingleActionSpace marketSpot){
 		super(familyMember);
 		this.marketSpot = marketSpot;
 		

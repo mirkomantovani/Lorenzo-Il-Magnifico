@@ -67,7 +67,7 @@ public class Board {
 		this.market = market;
 	}
 
-	public HarvestArea getHarvestArea() {
+	public IndustrialArea getHarvestArea() {
 		return harvestArea;
 	}
 
@@ -82,6 +82,5 @@ public class Board {
 	public void setProductionArea(ProductionArea productionArea) {
 		this.productionArea = productionArea;
 	}
-
 	
 }
