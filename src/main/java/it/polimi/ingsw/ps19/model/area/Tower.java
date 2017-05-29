@@ -24,22 +24,41 @@ public class Tower {
 	
 	private static int currentCard = 0; // index of the card on the top of the deck
 	
+	private static int actionSpaceCost = 1;
 	
- 	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck){ 
+	private static int currentBonus = 0;
+	
+ 	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Integer> bonuses){ 
  			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;
 			
-			ResourceChest r=new ResourceChest(1,1,1,0,0,0,0);
+			ResourceChest r;
 			
-			//TODO prendere da file ultimi 2 parametri
+			switch (cardType){
+			case TERRITORY:
+				 r=new ResourceChest(0,bonuses.get(currentBonus),0,0,0,0,0);
+				 currentBonus++;
+			case BUILDING: 
+				 r=new ResourceChest(0,0,bonuses.get(currentBonus),0,0,0,0);
+				 currentBonus++;
+			case CHARACTER:
+				 r=new ResourceChest(0,0,0,0,0,0,bonuses.get(currentBonus));
+				 currentBonus++;
+			case VENTURE:
+				 r=new ResourceChest(bonuses.get(currentBonus),0,0,0,0,0,0);
+				 currentBonus++;
+			default :
+				r=new ResourceChest(0,0,bonuses.get(currentBonus),0,0,0,0);
+			}
+			
 			for(int i = 0; i < deck.length() / 6; i++){
-				floors.add(new Floor(deck.getCard(currentCard),this,0,new InstantResourcesEffect(r)));
+				floors.add(new Floor(deck.getCard(currentCard),this,actionSpaceCost,new InstantResourcesEffect(r)));
 				currentCard++;
-				
+				actionSpaceCost = actionSpaceCost + 2;
 			}
 	
-	
+			actionSpaceCost = 1;
 	} 
  	
  	/**

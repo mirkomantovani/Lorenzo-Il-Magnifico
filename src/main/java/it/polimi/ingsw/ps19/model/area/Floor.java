@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19.model.area;
 
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 
@@ -10,10 +12,10 @@ import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
  */
 public class Floor {
 	
-	DevelopmentCard card;	
-
+	DevelopmentCard card;
 	SingleActionSpace actionSpace;	
 	Tower tower;
+
 	
 	public Floor(DevelopmentCard card, Tower tower, int actionSpaceCost, InstantResourcesEffect instantResourcesEffect){
 		this.card = card;

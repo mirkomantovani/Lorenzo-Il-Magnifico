@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
+
+import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -25,15 +26,15 @@ public class Player {
 	
 	private ResourceChest resources;
 
-	
 	private Map<CardType, List<DevelopmentCard>> decks;
+	
 
 
 
 	private Bonus bonuses;
 	
 	
-	public Player(String name, String color){
+	public Player(String name, String color) throws FileNotFoundException, IOException{
 		
 		
 		familyMembers=new HashMap<>();
@@ -55,8 +56,8 @@ public class Player {
 		
 		this.bonuses = new Bonus();
 		
-	}
 	
+	}
 	/**
 	 * This method adds a cart of a generic Type to the correct Deck of the player
 	 * @author Mirko

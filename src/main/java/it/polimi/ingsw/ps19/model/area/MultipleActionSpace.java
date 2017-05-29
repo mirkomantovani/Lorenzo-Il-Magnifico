@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 public class MultipleActionSpace extends ActionSpace {
 
-	private ArrayList<FamilyMember> members;
+	protected ArrayList<FamilyMember> members;
 	
 	public MultipleActionSpace(int actionValueRequired, Effect effect) {
 		super(actionValueRequired, effect);
@@ -71,8 +71,14 @@ public class MultipleActionSpace extends ActionSpace {
 		this.members.add(familyMember);
 	}
 
-	public ArrayList<FamilyMember> getFamilyMember() {
+	public ArrayList<FamilyMember> getMembers() {
 		return members;
 	}
+
+	public void setMembers(ArrayList<FamilyMember> members) {
+		this.members = members;
+	}
+	
+	
 
 }

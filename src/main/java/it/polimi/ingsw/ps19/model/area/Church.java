@@ -11,9 +11,7 @@ public class Church {
 	private ExcommunicationTile excommunicationFirst;	
 	private ExcommunicationTile excommunicationSecond;	
 	private ExcommunicationTile excommunicationThird;
-	public ExcommunicationTile getExcommunicationFirst() {
-		return excommunicationFirst;
-	}
+	
 	
 	public Church(ExcommunicationTile excommunicationFirst, ExcommunicationTile excommunicationSecond,
 			ExcommunicationTile excommunicationThird) {
@@ -23,6 +21,9 @@ public class Church {
 		this.excommunicationThird = excommunicationThird;
 	}
 
+	public ExcommunicationTile getExcommunicationFirst() {
+		return excommunicationFirst;
+	}
 
 	public void setExcommunicationFirst(ExcommunicationTile excommunicationFirst) {
 		this.excommunicationFirst = excommunicationFirst;
