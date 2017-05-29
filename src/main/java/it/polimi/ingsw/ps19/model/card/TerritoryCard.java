@@ -45,7 +45,7 @@ public class TerritoryCard extends DevelopmentCard {
     	string.append(super.toString() + "\nHarvest cost: " + harvestActivationCost + "\nHarvest effect: ");
     	if(this.permanentEffect!=null)
     		string.append(permanentEffect.toString());
-    	
+    	string.append("\n\n");
     	return string.toString();
     }
 	

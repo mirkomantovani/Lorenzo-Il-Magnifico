@@ -16,8 +16,9 @@ public enum Dice {
 	}
 	
 	private void roll(){     					
-		Random random = new Random();
-		this.displayedFace = random.nextInt(6)+1;
+		Random random = new Random();	
+		if(this.color != Color.NEUTRAL)
+			this.displayedFace = random.nextInt(6)+1;
 	}
 	
 	public int getUpperFaceValue() {
