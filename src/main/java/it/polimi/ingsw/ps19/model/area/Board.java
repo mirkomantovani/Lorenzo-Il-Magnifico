@@ -35,7 +35,7 @@ public class Board {
 		towers.add(new Tower(CardType.CHARACTER, characterCards,bonuses));
 		towers.add(new Tower(CardType.VENTURE, ventureCards,bonuses));
 		
-//		church = new Church(null,null,null);
+		church = new Church();
 		councilPalace = new CouncilPalace();
 	//TODO	market = new Market(Match.getPlayers()); //this method should return the number of players in the match
 		harvestArea = new HarvestArea();
