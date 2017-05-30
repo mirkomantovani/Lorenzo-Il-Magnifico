@@ -101,7 +101,7 @@ public class TakeCardAction extends Action {
 		//controlling if the player has space in the corresponding deck 
 		if (player.getDeckOfType(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
 			return false;
-
+		System.out.println("ciao");
 		return this.canBePlaced();
 
 		
@@ -112,6 +112,7 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean canBePlaced(){
 		//I have to control the special effects e.g. ludovico ariosto
+		
 		return this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()
 				&&(familyMember.getDice().getColor()==Color.NEUTRAL
 					||this.noSamePlayerMembers(familyMember.getPlayer()));
@@ -139,6 +140,8 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean isActionValueEnough(){
 		//personal bonuses to add
+		System.out.println(familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation);
+		System.out.println(this.floor.getActionSpace().getActionValueRequired());
 		return (familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation
 			>=this.floor.getActionSpace().getActionValueRequired());
 		

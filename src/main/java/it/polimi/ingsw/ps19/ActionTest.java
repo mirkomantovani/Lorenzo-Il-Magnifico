@@ -45,7 +45,7 @@ public class ActionTest {
 //		Dice.NEUTRAL_DICE.getRandomFaceValue();
 		
 			Action action=new TakeCardAction(player1.getFamilyMembers().get(Color.ORANGE),
-					board.getTowers().get(0).getFloors().get(3),new Servant(0));
+					board.getTowers().get(0).getFloors().get(0),new Servant(0));
 			
 			try {
 				action.apply();
@@ -73,7 +73,7 @@ public class ActionTest {
 			
 			System.out.println("\n\n" + player1.getName() +  "'s cards:\n");
 			
-			player1.addCard(board.getTowers().get(0).getFloors().get(0).getCard());
+			player1.addCard(board.getTowers().get(0).getFloors().get(3).getCard());
 			player1.addCard(board.getTowers().get(0).getFloors().get(2).getCard());
 			player1.addCard(board.getTowers().get(0).getFloors().get(1).getCard());
 			

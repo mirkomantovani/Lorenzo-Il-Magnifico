@@ -25,8 +25,7 @@ public class CouncilPalace extends MultipleActionSpace {
 	public CouncilPalace() throws FileNotFoundException, IOException{
 		
 	
-		super(1,new MultipleEffect(getResourceEffect(), 
-				new CouncilPrivilegeEffect(1)));
+		super(1,BoardInitializer.councilPalaceBonuses());
 		members = new ArrayList<FamilyMember>();
 	}
 
@@ -36,10 +35,7 @@ public class CouncilPalace extends MultipleActionSpace {
 		
 	}
 	
-	private static InstantResourcesEffect getResourceEffect(){
-		
-		
-	}
+
 	
 	
 	

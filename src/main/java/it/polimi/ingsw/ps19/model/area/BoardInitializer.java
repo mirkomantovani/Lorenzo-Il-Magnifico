@@ -1,14 +1,20 @@
 package it.polimi.ingsw.ps19.model.area;
 
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import it.polimi.ingsw.ps19.model.effect.NoEffect;
 
 
 /**
@@ -34,11 +40,13 @@ public class BoardInitializer {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_TERRITORY_TOWER));
 		
-		while(reader.readLine() != null){
-		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		String lineRead = reader.readLine();
+		
+		while(lineRead != null){
+			
+		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead) - 1], Integer.parseInt(reader.readLine())));
+
+		lineRead = reader.readLine();
 		
 		}
 		
@@ -51,14 +59,15 @@ public class BoardInitializer {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_BUILDING_TOWER));
 		
-		while(reader.readLine() != null){
-			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			
-		}
+		String lineRead = reader.readLine();
 		
+		while(lineRead != null){
+			
+		buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead) - 1], Integer.parseInt(reader.readLine())));
+
+		lineRead = reader.readLine();
+		
+		}
 		return buildingBonuses;
 	}
 	
@@ -67,13 +76,14 @@ public class BoardInitializer {
 		ArrayList<Resource> characterBonuses = new ArrayList<Resource>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_CHARACTER_TOWER));
+		String lineRead = reader.readLine();
 		
-		while(reader.readLine() != null){
-			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		while(lineRead != null){
 			
+		characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead) - 1], Integer.parseInt(reader.readLine())));
+
+		lineRead = reader.readLine();
+		
 		}
 		
 		return characterBonuses;
@@ -85,28 +95,55 @@ public class BoardInitializer {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_VENTURE_TOWER));
 		
-		while(reader.readLine() != null){
-			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
-			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		String lineRead = reader.readLine();
+		
+		while(lineRead != null){
 			
+		ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead) - 1], Integer.parseInt(reader.readLine())));
+
+		lineRead = reader.readLine();
+		
 		}
 		
 		return ventureBonuses;
 	}
 	
-	public static ArrayList<Integer> councilPalaceBonuses() throws FileNotFoundException, IOException{
+	public static MultipleEffect councilPalaceBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> councilPalaceBonuses = new ArrayList<Integer>();
-		
+
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_COUNCIL_PALACE));
 		
-		while(reader.readLine() != null){
-		councilPalaceBonuses.add(Integer.parseInt(reader.readLine()));
-		}
+		String lineRead = reader.readLine();
 		
-		return councilPalaceBonuses;
+		while(lineRead != null){
+			if(Integer.parseInt(lineRead)== 8){
+				CouncilPrivilegeEffect council = new CouncilPrivilegeEffect(Integer.parseInt(reader.readLine()));
+				ResourceChest chest = new ResourceChest();
+				Resource resource = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())-1],Integer.parseInt(reader.readLine()));
+				chest.addResource(resource);
+				return new MultipleEffect(council,new InstantResourcesEffect(chest));
+			} else {
+				ResourceChest chest = new ResourceChest();
+				Resource resource = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead)-1],Integer.parseInt(reader.readLine()));
+				chest.addResource(resource);
+				if(Integer.parseInt(reader.readLine())==8){
+					CouncilPrivilegeEffect council = new CouncilPrivilegeEffect(Integer.parseInt(reader.readLine()));
+					return new MultipleEffect(new InstantResourcesEffect(chest),council);
+				} else {
+					ResourceChest chest2 = new ResourceChest();
+					Resource resource2 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())-1],Integer.parseInt(reader.readLine()));
+					chest.addResource(resource2);
+					return new MultipleEffect(new InstantResourcesEffect(chest), new InstantResourcesEffect(chest2));
+				}
+				
+				
+			}
+			
+			
+		
+		}
+			return new MultipleEffect(new NoEffect(),new NoEffect());
+		
 	}
 	
 	public static int[] churchBonuses() throws FileNotFoundException, IOException{
@@ -117,10 +154,12 @@ public class BoardInitializer {
 		
 		int i = 0;
 		
-		while(reader.readLine()!=null){
+		String lineRead = reader.readLine();
+		
+		while(lineRead !=null){
 			
 			bonuses[i] = Integer.parseInt(reader.readLine());
-			
+			lineRead = reader.readLine();
 		}
 		
 		return bonuses;
@@ -132,10 +171,12 @@ public class BoardInitializer {
 		
 		ArrayList<Integer> bonusesForTerritory = new ArrayList<Integer>();
 		
-		while (reader.readLine() != null){
+		String lineRead = reader.readLine();
+		
+		while (lineRead != null){
 			
 			bonusesForTerritory.add(Integer.parseInt(reader.readLine()));
-			
+			lineRead = reader.readLine();
 		}
 
 	return bonusesForTerritory;
@@ -146,11 +187,12 @@ public class BoardInitializer {
 		BufferedReader reader = new BufferedReader(new FileReader(CHARACTERCARD_PLAYER_BONUSES));
 		
 		ArrayList<Integer> bonusesForCharacter = new ArrayList<Integer>();
+		String lineRead = reader.readLine();
 		
-		while (reader.readLine() != null){
+		while (lineRead != null){
 			
 			bonusesForCharacter.add(Integer.parseInt(reader.readLine()));
-			
+			lineRead = reader.readLine();
 		}
 
 	return bonusesForCharacter;
@@ -161,11 +203,13 @@ public class BoardInitializer {
 		BufferedReader reader = new BufferedReader(new FileReader(TERRITORYCARD_PLAYER_REQUIREMENTS));
 		
 		ArrayList<Integer> requirementsForTerritory = new ArrayList<Integer>();
+		String lineRead = reader.readLine();
 		
-		while (reader.readLine() != null){
+		
+		while (lineRead != null){
 			
 			requirementsForTerritory.add(Integer.parseInt(reader.readLine()));
-			
+			lineRead = reader.readLine();
 		}
 
 	return requirementsForTerritory;
