@@ -1,20 +1,21 @@
 package it.polimi.ingsw.ps19.model.area;
 
 import java.io.BufferedReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.PersonalBonusTile;
+import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
+import it.polimi.ingsw.ps19.model.effect.NoEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
-import it.polimi.ingsw.ps19.model.effect.NoEffect;
 
 
 /**
@@ -32,6 +33,7 @@ public class BoardInitializer {
 	private final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/files/fileplayerboardrequirementsforterritory.txt";
 	private final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforcharacter.txt";
 	private final static String CHURCH_BONUSES = "src/main/resources/files/filefaithpointbonuses.txt";
+	private final static String PERSONAL_BONUS_TILES = "src/main/resources/files/filepersonalbonustiles.txt";
 	
 	
 	public static ArrayList<Resource> territoryBonuses() throws FileNotFoundException, IOException{
@@ -214,4 +216,54 @@ public class BoardInitializer {
 
 	return requirementsForTerritory;
 	}
+	
+	public static PersonalBonusTile[] createPersonalBonusTiles(int tilesNumber) throws NumberFormatException, IOException{
+		
+		BufferedReader reader = new BufferedReader(new FileReader(PERSONAL_BONUS_TILES));
+		PersonalBonusTile[] tiles = new PersonalBonusTile[tilesNumber];
+		InstantResourcesEffect productionEffect;
+		InstantResourcesEffect harvestEffect;
+		int index = 0;
+		
+		String lineRead = reader.readLine();
+		while(lineRead != null){
+			productionEffect = new InstantResourcesEffect(new ResourceChest(
+						Integer.parseInt(lineRead), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine())));
+		
+	        harvestEffect = new InstantResourcesEffect(new ResourceChest(
+						Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()),
+						Integer.parseInt(reader.readLine())));
+			
+			lineRead = reader.readLine();
+			tiles[index] = new PersonalBonusTile(productionEffect, harvestEffect);
+			index++;
+		}
+		return tiles;
+	}
+	
+	public static void main(String[] args){
+		
+		PersonalBonusTile[] tiles = null;
+		
+		try {
+			tiles = createPersonalBonusTiles(CardConstants.PERSONAL_BONUS_TILES);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < CardConstants.PERSONAL_BONUS_TILES; i++){
+			System.out.println(tiles[i]);
+		}
+		
+	}
+	
 }

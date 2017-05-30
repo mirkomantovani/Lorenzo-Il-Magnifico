@@ -1,41 +1,27 @@
 package it.polimi.ingsw.ps19;
 
-import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * @author matteo
+ * @author Jimmy
  *
  */
-public abstract class PersonalBonusTile {
+public class PersonalBonusTile {
+		
+	InstantResourcesEffect firstInstantResourceChest;
+	InstantResourcesEffect secondInstantResourceChest;
 	
-	Resource productionBonus1;
-	Resource productionBonus2;
-	
-	Resource harvestBonus1;
-	Resource harvestBonus2;
-	Resource harvestBonus3;
+	public PersonalBonusTile(InstantResourcesEffect firstEffect, InstantResourcesEffect secondEffect){
+		this.firstInstantResourceChest=firstEffect;
+		this.secondInstantResourceChest=secondEffect;
+	}	
 	
 	
-	public Resource getHarvestBonus1() {
-		return harvestBonus1;
-	}
-
-	public Resource getHarvestBonus2() {
-		return harvestBonus2;
-	}
-
-	public Resource getProductionBonus1() {
-		return productionBonus1;
-	}
-
-	public Resource getProductionBonus2() {
-		return productionBonus2;
-	}
-
-	public Resource getHarvestBonus3() {
-		return harvestBonus3;
+	@Override
+	public String toString() {
+		return firstInstantResourceChest.toString() + " everytime you activate a production and "
+				+ secondInstantResourceChest.toString() + " everytime you a activate a harvest" ;
 	}
 	
-	
-
 }
