@@ -8,7 +8,6 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
@@ -25,8 +24,9 @@ public class CouncilPalace extends MultipleActionSpace {
 	 */
 	public CouncilPalace() throws FileNotFoundException, IOException{
 		
-		super(1,new MultipleEffect(getCoinEffect(), 
-				getPrivilegeEffect()));
+	
+		super(1,new MultipleEffect(getResourceEffect(), 
+				new CouncilPrivilegeEffect(1)));
 		members = new ArrayList<FamilyMember>();
 	}
 
@@ -36,7 +36,11 @@ public class CouncilPalace extends MultipleActionSpace {
 		
 	}
 	
-
+	private static InstantResourcesEffect getResourceEffect(){
+		
+		
+	}
+	
 	
 	
 }

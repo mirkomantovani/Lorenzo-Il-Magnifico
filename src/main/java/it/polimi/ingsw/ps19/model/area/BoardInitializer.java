@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
+
 
 /**
  * @author matteo
@@ -13,80 +17,96 @@ import java.util.ArrayList;
  */
 public class BoardInitializer {
 	
-	private final static String BONUSES_TERRITORY_TOWER = "src/main/resources/fileboardterritorybonuses.txt";
-	private final static String BONUSES_BUILDING_TOWER = "src/main/resources/fileboardbuildingbonuses.txt";
-	private final static String BONUSES_CHARACTER_TOWER = "src/main/resources/fileboardcharacterbonuses.txt";
-	private final static String BONUSES_VENTURE_TOWER = "src/main/resources/fileboardventurebonuses.txt";
-	private final static String BONUSES_COUNCIL_PALACE = "src/main/resources/fileboardcouncilpalacebonuses.txt";
-	private final static String TERRITORYCARD_PLAYER_BONUSES = "src/main/resources/fileplayerboardbonusesforterritory.txt";
-	private final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/fileplayerboardrequirementsforterritory.txt";
-	private final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/fileplayerboardbonusesforcharacter.txt";
-	private final static String CHURCH_BONUSES = "src/main/resources/filefaithpointbonuses.txt";
+	private final static String BONUSES_TERRITORY_TOWER = "src/main/resources/files/fileboardterritorybonuses.txt";
+	private final static String BONUSES_BUILDING_TOWER = "src/main/resources/files/fileboardbuildingbonuses.txt";
+	private final static String BONUSES_CHARACTER_TOWER = "src/main/resources/files/fileboardcharacterbonuses.txt";
+	private final static String BONUSES_VENTURE_TOWER = "src/main/resources/files/fileboardventurebonuses.txt";
+	private final static String BONUSES_COUNCIL_PALACE = "src/main/resources/files/fileboardcouncilpalacebonuses.txt";
+	private final static String TERRITORYCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforterritory.txt";
+	private final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/files/fileplayerboardrequirementsforterritory.txt";
+	private final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforcharacter.txt";
+	private final static String CHURCH_BONUSES = "src/main/resources/files/filefaithpointbonuses.txt";
 	
 	
-	public static ArrayList<Integer> territoryBonuses() throws FileNotFoundException, IOException{
+	public static ArrayList<Resource> territoryBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> territoryBonuses = new ArrayList<Integer>();
+		ArrayList<Resource> territoryBonuses = new ArrayList<Resource>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_TERRITORY_TOWER));
 		
 		while(reader.readLine() != null){
-		territoryBonuses.add(Integer.parseInt(reader.readLine()));
+		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		territoryBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+		
 		}
 		
 		return territoryBonuses;
 	}
 	
-	public static ArrayList<Integer> buildingBonuses() throws FileNotFoundException, IOException{
+	public static ArrayList<Resource> buildingBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> buildingBonuses = new ArrayList<Integer>();
+		ArrayList<Resource> buildingBonuses = new ArrayList<Resource>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_BUILDING_TOWER));
 		
 		while(reader.readLine() != null){
-		buildingBonuses.add(Integer.parseInt(reader.readLine()));
+			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			buildingBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			
 		}
 		
 		return buildingBonuses;
 	}
 	
-	public static ArrayList<Integer> characterBonuses() throws FileNotFoundException, IOException{
+	public static ArrayList<Resource> characterBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> characterBonuses = new ArrayList<Integer>();
+		ArrayList<Resource> characterBonuses = new ArrayList<Resource>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_CHARACTER_TOWER));
 		
 		while(reader.readLine() != null){
-		characterBonuses.add(Integer.parseInt(reader.readLine()));
+			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			characterBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			
 		}
 		
 		return characterBonuses;
 	}
 	
-	public static ArrayList<Integer> ventureBonuses() throws FileNotFoundException, IOException{
+	public static ArrayList<Resource> ventureBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> ventureBonuses = new ArrayList<Integer>();
+		ArrayList<Resource> ventureBonuses = new ArrayList<Resource>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_VENTURE_TOWER));
 		
 		while(reader.readLine() != null){
-		ventureBonuses.add(Integer.parseInt(reader.readLine()));
+			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			ventureBonuses.add(ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine()) - 1], Integer.parseInt(reader.readLine())));
+			
 		}
 		
 		return ventureBonuses;
 	}
 	
-	public static ArrayList<Integer> privilegeBonuses() throws FileNotFoundException, IOException{
+	public static ArrayList<Integer> councilPalaceBonuses() throws FileNotFoundException, IOException{
 		
-		ArrayList<Integer> privilegeBonuses = new ArrayList<Integer>();
+		ArrayList<Integer> councilPalaceBonuses = new ArrayList<Integer>();
 		
 		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_COUNCIL_PALACE));
 		
 		while(reader.readLine() != null){
-		privilegeBonuses.add(Integer.parseInt(reader.readLine()));
+		councilPalaceBonuses.add(Integer.parseInt(reader.readLine()));
 		}
 		
-		return privilegeBonuses;
+		return councilPalaceBonuses;
 	}
 	
 	public static int[] churchBonuses() throws FileNotFoundException, IOException{
