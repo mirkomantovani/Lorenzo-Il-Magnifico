@@ -17,6 +17,8 @@ public class ResourceMalusEffect extends Effect{
 	
 	public ResourceMalusEffect(ArrayList<Resource> resources){
 		
+		resources=new ArrayList<>();
+		
 		for(Resource r: resources){
 			this.resources.add(r);
 		}

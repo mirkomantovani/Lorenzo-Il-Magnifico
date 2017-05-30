@@ -104,7 +104,6 @@ public class DeckCreator {
 
 			id=Integer.parseInt(lineRead);  
 			
-			System.out.println(id);
 			name= buffReader.readLine();    //line 2
 			
 			
@@ -333,7 +332,6 @@ public class DeckCreator {
 			
 			id = Integer.parseInt(lineRead);
 			
-			System.out.println(id);
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			
@@ -437,7 +435,6 @@ public class DeckCreator {
 			
 		id = Integer.parseInt(lineRead);
 		
-		System.out.println(id);
 		
 		name = buffReader.readLine();
 		
@@ -552,7 +549,6 @@ public class DeckCreator {
 		while (lineRead!=null) {
 			id = Integer.parseInt(lineRead); 
 			
-			System.out.println(id);
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			moneyCost = new ResourceChest(Integer.parseInt(buffReader.readLine()), 0, 0, 0, 0, 0, 0);

@@ -23,22 +23,21 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  */
 public class ExcommunicationTilesCreator {
 
-	
-	
-	
 	/** The buffered reader used to read from file */
 	private static BufferedReader buffReader;
 	
 	/** The line read from file */
 	private static String lineRead;
 	
-	public static ExcommunicationTile[] createExcommunicationTiles(String filePath, int tiles) throws IOException{
+	private static final String filePath="src/main/resources/files/fileexcommunicationtiles.txt";
+	
+	public static ExcommunicationTile[] createExcommunicationTiles(int tiles) throws IOException{
 		
 		Period period; 
 		String s;
 		int index=0;
-		Resource r1;
-		Resource r2;
+		Resource r1=null;
+		Resource r2=null;
 		Effect effect;
 		int rt1;
 		int rt2;
@@ -56,11 +55,12 @@ public class ExcommunicationTilesCreator {
 			
 			n1=Integer.parseInt(lineRead);   
 			rt1=Integer.parseInt(buffReader.readLine()); //line 2
+			if(rt1!=0)
 			r1=ResourceFactory.getResource(ResourceType.values()[rt1-1],n1);
-			
 			
 			n1=Integer.parseInt(buffReader.readLine()); //line 3
 			rt1=Integer.parseInt(buffReader.readLine());  //line 4
+			if(rt1!=0)
 			r2=ResourceFactory.getResource(ResourceType.values()[rt1-1],n1);
 			
 			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];  //line 5
@@ -197,15 +197,20 @@ public class ExcommunicationTilesCreator {
 					for(int i=7;i<20;i++)s=buffReader.readLine();  //lines 7 to 19
 				}
 			}
-			else{ 	ArrayList<Resource> resource = new ArrayList<Resource>();
+			else{ 	
+				
+				ArrayList<Resource> resource = new ArrayList<Resource>();
 					resource.add(r1);
+					if(r2!=null){
 					resource.add(r2);
+					}
 					effect = new ResourceMalusEffect(resource);
 					tilesArray[index]=new ExcommunicationTile(period, effect);
 				
 				for(int i=6;i<20;i++)s=buffReader.readLine();   //lines 6 to 19
 			}
 			index++;
+			lineRead = buffReader.readLine();
 		}
 
 		return tilesArray;
