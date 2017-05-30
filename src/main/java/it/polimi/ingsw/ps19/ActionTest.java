@@ -98,7 +98,13 @@ public class ActionTest {
 			player2.addCard(board.getTowers().get(1).getFloors().get(1).getCard());
 			player2.addCard(board.getTowers().get(1).getFloors().get(2).getCard());
 			
-Action action4 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getProductionArea());
+			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(0).toString());
+			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(1).toString());
+			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(2).toString());
+			
+//			player2.getDeckOfType(CardType.BUILDING).get(0).getPermanentEffect().applyEffect(player2);
+			
+Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea());
 			System.out.println("black dice value:"+player2.getFamilyMembers().get(Color.BLACK).getActionValue());
 			System.out.println("\n\nActivating production effect:\n");
 			try {
