@@ -3,14 +3,22 @@ package it.polimi.ingsw.ps19.model.area;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
+import it.polimi.ingsw.ps19.model.deck.CharacterDeck;
 import it.polimi.ingsw.ps19.model.deck.Deck;
+import it.polimi.ingsw.ps19.model.deck.TerritoryDeck;
+import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 
 public class Board {
 	
-	private ArrayList<Tower> towers;
+	private Map<CardType,Tower> towers;
 	
 	private Church church;
 	
@@ -22,14 +30,29 @@ public class Board {
 	
 	private ProductionArea productionArea;
 	
-	public Board(Deck<? extends DevelopmentCard> territoryCards, Deck<? extends DevelopmentCard> buildingCards, Deck<? extends DevelopmentCard> characterCards, Deck<? extends DevelopmentCard> ventureCards) throws FileNotFoundException, IOException{
+	private static List militaryRequirementsForTerritories;
+	
+	private Deck<? extends DevelopmentCard> territoryCards;
+	private Deck<? extends DevelopmentCard> buildingCards;
+	private Deck<? extends DevelopmentCard> characterCards;
+	private Deck<? extends DevelopmentCard> ventureCards;
+	
+
+	public Board() throws FileNotFoundException, IOException{
 		
-		towers = new ArrayList<Tower>();
+		towers = new HashMap<>();
+		
+		militaryRequirementsForTerritories=BoardInitializer.playerBoardRequirementsForTerritory();
+		
+		territoryCards=new TerritoryDeck("src/main/resources/files/fileterritorycards.txt",CardConstants.DECK_LENGTH);
+		buildingCards=new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH);
+		characterCards=new CharacterDeck("src/main/resources/files/filecharactercards.txt",CardConstants.DECK_LENGTH);
+		ventureCards=new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH);
 				
-		towers.add(new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
-		towers.add(new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
-		towers.add(new Tower(CardType.CHARACTER, characterCards,BoardInitializer.characterBonuses()));
-		towers.add(new Tower(CardType.VENTURE, ventureCards,BoardInitializer.ventureBonuses()));
+		towers.put(CardType.TERRITORY,new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
+		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
+		towers.put(CardType.CHARACTER,new Tower(CardType.CHARACTER, characterCards,BoardInitializer.characterBonuses()));
+		towers.put(CardType.VENTURE,new Tower(CardType.VENTURE, ventureCards,BoardInitializer.ventureBonuses()));
 		
 		church = new Church();
 		councilPalace = new CouncilPalace();
@@ -39,14 +62,12 @@ public class Board {
 		productionArea = new ProductionArea();
 		
 	}
-
-	public ArrayList<Tower> getTowers() {
-		return towers;
+	
+	public Tower getTower(CardType cardType){
+		return this.towers.get(cardType);
 	}
 
-	public void setTowers(ArrayList<Tower> towers) {
-		this.towers = towers;
-	}
+
 
 	public Church getChurch() {
 		return church;
@@ -86,6 +107,10 @@ public class Board {
 
 	public void setProductionArea(ProductionArea productionArea) {
 		this.productionArea = productionArea;
+	}
+	
+	public static List getMilitaryRequirementsForTerritories() {
+		return militaryRequirementsForTerritories;
 	}
 	
 }

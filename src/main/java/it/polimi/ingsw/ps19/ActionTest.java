@@ -30,10 +30,7 @@ public class ActionTest {
 		distributeResources(player1, 10);
 		distributeResources(player2, 10);
 
-		Board board = new Board(new TerritoryDeck("src/main/resources/files/fileterritorycards.txt",CardConstants.DECK_LENGTH),
-								new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH),
-								new CharacterDeck("src/main/resources/files/filecharactercards.txt",CardConstants.DECK_LENGTH),
-								new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH));
+		Board board = new Board();
 		
 		
 //		System.out.println("-press 1 to take a card \n-press 2 to do a market action");
@@ -48,7 +45,8 @@ public class ActionTest {
 //		Dice.NEUTRAL_DICE.getRandomFaceValue();
 		
 			Action action=new TakeCardAction(player2.getFamilyMembers().get(Color.ORANGE),
-					board.getTowers().get(0).getFloors().get(0),new Servant(0));
+					board.getTower(CardType.BUILDING).getFloors().get(3),new Servant(7));
+			//carta residenza non funziona, non paga il costo di 2 stone
 			
 			try {
 				action.apply();
@@ -57,12 +55,12 @@ public class ActionTest {
 				e.printStackTrace();
 			}
 			
-			System.out.println(player2.getDeckOfType(CardType.TERRITORY).get(0).toString());
+			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(0).toString());
 			System.out.println(player2.getResourceChest().toString());
 			
 //		}
 			Action action2=new TakeCardAction(player2.getFamilyMembers().get(Color.WHITE),
-					board.getTowers().get(0).getFloors().get(1),new Servant(0));
+					board.getTower(CardType.TERRITORY).getFloors().get(1),new Servant(0));
 			
 			try {
 				action2.apply();
@@ -76,9 +74,9 @@ public class ActionTest {
 			
 			System.out.println("\n\n" + player1.getName() +  "'s cards:\n");
 			
-			player1.addCard(board.getTowers().get(0).getFloors().get(3).getCard());
-			player1.addCard(board.getTowers().get(0).getFloors().get(2).getCard());
-			player1.addCard(board.getTowers().get(0).getFloors().get(1).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(3).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(2).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(1).getCard());
 			
 			for(DevelopmentCard card : player1.getDeckOfType(CardType.TERRITORY))
 				System.out.println(card);
@@ -116,13 +114,13 @@ public class ActionTest {
 			System.out.println(player1.getResourceChest().toString());
 			
 			//Testing production effects
-			player2.addCard(board.getTowers().get(1).getFloors().get(0).getCard());
-			player2.addCard(board.getTowers().get(1).getFloors().get(1).getCard());
-			player2.addCard(board.getTowers().get(1).getFloors().get(2).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(0).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(1).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(2).getCard());
 			
-			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(0).toString());
-			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(1).toString());
-			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(2).toString());
+//			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(0).toString());
+//			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(1).toString());
+//			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(2).toString());
 			
 //			player2.getDeckOfType(CardType.BUILDING).get(0).getPermanentEffect().applyEffect(player2);
 			

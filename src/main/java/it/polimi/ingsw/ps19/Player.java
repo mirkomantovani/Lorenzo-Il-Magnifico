@@ -28,13 +28,10 @@ public class Player {
 
 	private Map<CardType, List<DevelopmentCard>> decks;
 	
-
-
-
 	private Bonus bonuses;
 	
 	
-	public Player(String name, String color) throws FileNotFoundException, IOException{
+	public Player(String name, String color){
 		
 		
 		familyMembers=new HashMap<>();
