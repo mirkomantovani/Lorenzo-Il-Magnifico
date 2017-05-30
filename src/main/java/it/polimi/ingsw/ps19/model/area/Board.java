@@ -7,9 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
+import it.polimi.ingsw.ps19.model.deck.CharacterDeck;
 import it.polimi.ingsw.ps19.model.deck.Deck;
+import it.polimi.ingsw.ps19.model.deck.TerritoryDeck;
+import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 
 public class Board {
 	
@@ -27,13 +32,22 @@ public class Board {
 	
 	private static List militaryRequirementsForTerritories;
 	
+	private Deck<? extends DevelopmentCard> territoryCards;
+	private Deck<? extends DevelopmentCard> buildingCards;
+	private Deck<? extends DevelopmentCard> characterCards;
+	private Deck<? extends DevelopmentCard> ventureCards;
 	
 
-	public Board(Deck<? extends DevelopmentCard> territoryCards, Deck<? extends DevelopmentCard> buildingCards, Deck<? extends DevelopmentCard> characterCards, Deck<? extends DevelopmentCard> ventureCards) throws FileNotFoundException, IOException{
+	public Board() throws FileNotFoundException, IOException{
 		
 		towers = new HashMap<>();
 		
 		militaryRequirementsForTerritories=BoardInitializer.playerBoardRequirementsForTerritory();
+		
+		territoryCards=new TerritoryDeck("src/main/resources/files/fileterritorycards.txt",CardConstants.DECK_LENGTH);
+		buildingCards=new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH);
+		characterCards=new CharacterDeck("src/main/resources/files/filecharactercards.txt",CardConstants.DECK_LENGTH);
+		ventureCards=new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH);
 				
 		towers.put(CardType.TERRITORY,new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
 		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));

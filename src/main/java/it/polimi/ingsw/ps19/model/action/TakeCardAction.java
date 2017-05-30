@@ -19,6 +19,8 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
  * space of a tower and taking the corresponding card
  * 
  * @author Mirko
+ * 
+ *Should the actions be static?
  *
  */
 public class TakeCardAction extends Action {
