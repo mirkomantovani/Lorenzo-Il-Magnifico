@@ -36,25 +36,7 @@ public class CouncilPalace extends MultipleActionSpace {
 		
 	}
 	
-	private static InstantResourcesEffect getCoinEffect() throws FileNotFoundException, IOException{
-		
-		ArrayList<Integer> bonuses = BoardInitializer.actionSpacesBonuses("src/main/resources/files/fileboardactionspacebonuses.txt");
-		
-		ResourceChest r = new ResourceChest(bonuses.get(16),0,0,0,0,0,0); // 16 is the row
-		// as you can see in the file template, of the coin amount given from the council Palace
-	
-		return new InstantResourcesEffect(r);
-	}
-	
-	private static CouncilPrivilegeEffect getPrivilegeEffect() throws FileNotFoundException, IOException{
-		ArrayList<Integer> bonuses = BoardInitializer.actionSpacesBonuses("src/main/resources/files/fileboardactionspacebonuses.txt");
-		
-		CouncilPrivilegeEffect effect = new CouncilPrivilegeEffect(bonuses.get(16)); // 16 is the row
-		// as you can see in the file template, of the coin amount given from the council Palace
-	
-		return effect;
-	}
-	
+
 	
 	
 }

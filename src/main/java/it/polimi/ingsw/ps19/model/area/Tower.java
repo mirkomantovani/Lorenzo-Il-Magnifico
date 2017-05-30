@@ -26,7 +26,6 @@ public class Tower {
 	
 	private static int actionSpaceCost = 1;
 	
-	private static int currentBonus = 0;
 	
  	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Integer> bonuses){ 
  			floors=new ArrayList<Floor>();
@@ -34,25 +33,10 @@ public class Tower {
 			this.deck = deck;
 			
 			ResourceChest r;
-			
-			switch (cardType){
-			case TERRITORY:
-				 r=new ResourceChest(0,bonuses.get(currentBonus),0,0,0,0,0);
-				 currentBonus++;
-			case BUILDING: 
-				 r=new ResourceChest(0,0,bonuses.get(currentBonus),0,0,0,0);
-				 currentBonus++;
-			case CHARACTER:
-				 r=new ResourceChest(0,0,0,0,0,0,bonuses.get(currentBonus));
-				 currentBonus++;
-			case VENTURE:
-				 r=new ResourceChest(bonuses.get(currentBonus),0,0,0,0,0,0);
-				 currentBonus++;
-			default :
-				r=new ResourceChest(0,0,bonuses.get(currentBonus),0,0,0,0);
-			}
+
 			
 			for(int i = 0; i < deck.length() / 6; i++){
+				r = new ResourceChest(bonuses.get(i),0,0,0,0,0,0);
 				floors.add(new Floor(deck.getCard(currentCard),this,actionSpaceCost,new InstantResourcesEffect(r)));
 				currentCard++;
 				actionSpaceCost = actionSpaceCost + 2;

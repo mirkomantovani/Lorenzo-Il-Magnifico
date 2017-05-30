@@ -25,15 +25,11 @@ public class Board {
 	public Board(Deck<? extends DevelopmentCard> territoryCards, Deck<? extends DevelopmentCard> buildingCards, Deck<? extends DevelopmentCard> characterCards, Deck<? extends DevelopmentCard> ventureCards) throws FileNotFoundException, IOException{
 		
 		towers = new ArrayList<Tower>();
-		
-		ArrayList<Integer> bonuses = new ArrayList<Integer>();
-		
-		bonuses = BoardInitializer.actionSpacesBonuses("src/main/resources/files/fileboardactionspacebonuses.txt");
-		
-		towers.add(new Tower(CardType.TERRITORY, territoryCards,bonuses));
-		towers.add(new Tower(CardType.BUILDING, buildingCards,bonuses));
-		towers.add(new Tower(CardType.CHARACTER, characterCards,bonuses));
-		towers.add(new Tower(CardType.VENTURE, ventureCards,bonuses));
+				
+		towers.add(new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
+		towers.add(new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
+		towers.add(new Tower(CardType.CHARACTER, characterCards,BoardInitializer.characterBonuses()));
+		towers.add(new Tower(CardType.VENTURE, ventureCards,BoardInitializer.ventureBonuses()));
 		
 //		church = new Church(null,null,null);
 		councilPalace = new CouncilPalace();
