@@ -246,24 +246,5 @@ public class BoardInitializer {
 		return tiles;
 	}
 	
-	public static void main(String[] args){
-		
-		PersonalBonusTile[] tiles = null;
-		
-		try {
-			tiles = createPersonalBonusTiles(CardConstants.PERSONAL_BONUS_TILES);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		for(int i = 0; i < CardConstants.PERSONAL_BONUS_TILES; i++){
-			System.out.println(tiles[i]);
-		}
-		
-	}
 	
 }

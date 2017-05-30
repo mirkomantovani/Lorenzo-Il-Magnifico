@@ -22,7 +22,7 @@ public class MarketAction extends Action{
 	@Override
 	public void apply() throws NotApplicableException {
 		if(isApplicable()){
-			//this.marketSpot.getEffect().applyEffect(familyMember);
+			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
 			this.marketSpot.isOccupied();
 		} else throw new NotApplicableException();
 		

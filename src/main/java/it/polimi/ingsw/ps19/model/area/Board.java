@@ -33,7 +33,8 @@ public class Board {
 		
 		church = new Church();
 		councilPalace = new CouncilPalace();
-	//TODO	market = new Market(Match.getPlayers()); //this method should return the number of players in the match
+		market = new Market(4); //this method should return the number of players in the match
+		//TODO the market should take the number of players in the match, not the magic number 4
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
 		

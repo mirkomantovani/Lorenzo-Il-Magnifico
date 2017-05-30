@@ -18,7 +18,7 @@ public class CouncilPalaceAction extends Action {
 	public void apply() throws NotApplicableException {
 		if(isApplicable()){
 		councilPalace.getMembers().add(familyMember);
-		//councilPalace.getEffect().applyEffect(familyMember);
+		councilPalace.getEffect().applyEffect(familyMember.getPlayer());
 		} else throw new NotApplicableException();
 		
 	}
