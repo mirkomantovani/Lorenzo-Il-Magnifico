@@ -46,7 +46,7 @@ public class ActionTest {
 //		Dice.NEUTRAL_DICE.getRandomFaceValue();
 		
 			Action action=new TakeCardAction(player2.getFamilyMembers().get(Color.ORANGE),
-					board.getTowers().get(0).getFloors().get(0),new Servant(0));
+					board.getTower(CardType.TERRITORY).getFloors().get(0),new Servant(0));
 			
 			try {
 				action.apply();
@@ -60,7 +60,7 @@ public class ActionTest {
 			
 //		}
 			Action action2=new TakeCardAction(player2.getFamilyMembers().get(Color.WHITE),
-					board.getTowers().get(0).getFloors().get(1),new Servant(0));
+					board.getTower(CardType.TERRITORY).getFloors().get(1),new Servant(0));
 			
 			try {
 				action2.apply();
@@ -74,9 +74,9 @@ public class ActionTest {
 			
 			System.out.println("\n\n" + player1.getName() +  "'s cards:\n");
 			
-			player1.addCard(board.getTowers().get(0).getFloors().get(3).getCard());
-			player1.addCard(board.getTowers().get(0).getFloors().get(2).getCard());
-			player1.addCard(board.getTowers().get(0).getFloors().get(1).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(3).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(2).getCard());
+			player1.addCard(board.getTower(CardType.TERRITORY).getFloors().get(1).getCard());
 			
 			for(DevelopmentCard card : player1.getDeckOfType(CardType.TERRITORY))
 				System.out.println(card);
@@ -94,9 +94,9 @@ public class ActionTest {
 			System.out.println(player1.getResourceChest().toString());
 			
 			//Testing production effects
-			player2.addCard(board.getTowers().get(1).getFloors().get(0).getCard());
-			player2.addCard(board.getTowers().get(1).getFloors().get(1).getCard());
-			player2.addCard(board.getTowers().get(1).getFloors().get(2).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(0).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(1).getCard());
+			player2.addCard(board.getTower(CardType.BUILDING).getFloors().get(2).getCard());
 			
 			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(0).toString());
 			System.out.println(player2.getDeckOfType(CardType.BUILDING).get(1).toString());

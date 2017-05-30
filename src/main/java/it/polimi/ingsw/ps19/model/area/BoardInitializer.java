@@ -200,7 +200,7 @@ public class BoardInitializer {
 	return bonusesForCharacter;
 	}
 	
-	public static ArrayList<Integer> playerBoardRequirementsForTerritory(String playerBoardBonusesPath) throws FileNotFoundException, IOException{
+	public static ArrayList<Integer> playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(TERRITORYCARD_PLAYER_REQUIREMENTS));
 		

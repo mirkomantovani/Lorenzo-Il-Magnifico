@@ -5,11 +5,13 @@ import java.util.List;
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
@@ -65,18 +67,20 @@ public class TakeCardAction extends Action {
 			if(player.getBonuses().isDoubleResourcesFromCards())
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			this.floor.getActionSpace().setFamilyMember(familyMember);
-			//TODO actionspace bonus (if nofloorbonus is false) after jimmy completes it
+			
+			this.floor.getActionSpace().getEffect().applyEffect(player);
 		} else
 			throw new NotApplicableException();
 	}
 
 	@Override
-	public boolean isApplicable() {  //TODO: excommunicationeffect, bonus effects of the player
-		//family member in tower, floor.card, actionvalue of familymember must me greater than actionspace.actionvaluerequired
-		//controlling if the player can afford the price
+	public boolean isApplicable() {  
+		
 		if(!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()){
-			//TODO model.getMilitaryRequiredForTerritories>player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
-			//return false;
+			if((int)Board.getMilitaryRequirementsForTerritories().get(
+					player.getDeckOfType(card.getCardType()).size()+1)>
+			player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount())
+				return false;
 		}
 		
 		
@@ -101,7 +105,6 @@ public class TakeCardAction extends Action {
 		//controlling if the player has space in the corresponding deck 
 		if (player.getDeckOfType(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
 			return false;
-		System.out.println("ciao");
 		return this.canBePlaced();
 
 		
