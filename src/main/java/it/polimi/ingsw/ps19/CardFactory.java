@@ -28,7 +28,7 @@ public class CardFactory {
 		case 0:
 			return null;
 			default:
-				throw new CardIdException();
+				throw new CardTypeException();
 		}
 	}
 	

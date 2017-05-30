@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class BuildingCard extends DevelopmentCard {
 	
+	private int productionActivationCost;
+
 	/**
 	 * Instantiates a new building card.
 	 *
@@ -51,4 +53,11 @@ public class BuildingCard extends DevelopmentCard {
     	
     	return string.toString();
 	}
+
+	@Override
+	public int getActivationCost() {
+		return this.productionActivationCost;
+	}
+	
+	
 }

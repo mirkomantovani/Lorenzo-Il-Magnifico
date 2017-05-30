@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class TerritoryCard extends DevelopmentCard {
 	
+	private int harvestActivationCost;
+
 	/**
 	 * Instantiates a new territory card.
 	 *
@@ -48,6 +50,11 @@ public class TerritoryCard extends DevelopmentCard {
     	string.append("\n\n");
     	return string.toString();
     }
+
+	@Override
+	public int getActivationCost() {
+		return this.harvestActivationCost;
+	}
 	
 
 }

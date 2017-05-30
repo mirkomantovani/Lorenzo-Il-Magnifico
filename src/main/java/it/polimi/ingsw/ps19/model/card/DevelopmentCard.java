@@ -17,11 +17,8 @@ public abstract class DevelopmentCard extends Card {
 	protected int id;   
 	protected Period period;
 	protected ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
-	
 	protected Effect immediateEffect;
 	protected Effect permanentEffect;
-	protected int harvestActivationCost;
-	protected int productionActivationCost;
 	protected CardType cardType;
 	
 	
@@ -42,8 +39,6 @@ public abstract class DevelopmentCard extends Card {
 		this.cost=cost;
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
-		harvestActivationCost = Integer.MAX_VALUE;		//The harvest and production effect should not be applicable in characters and venture cards  
-		productionActivationCost = Integer.MAX_VALUE;	//        '        '         '    
 
 	}
 
@@ -110,13 +105,9 @@ public abstract class DevelopmentCard extends Card {
 		 		
 		 	return string.toString();
 		}
+	 
+	 public abstract int getActivationCost();
 	
-	 public int getHarvestActivationCost(){
-		 return this.harvestActivationCost;
-	 }
-	
-	 public int getProductionActivationCost(){
-		 return this.productionActivationCost;
-	 }
+
 	 
 }

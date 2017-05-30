@@ -41,6 +41,11 @@ public class CharacterCard extends DevelopmentCard {
     	
     	return string.toString();
 	}
+
+	@Override
+	public int getActivationCost() {
+		return -1;
+	}
 	
 
 }

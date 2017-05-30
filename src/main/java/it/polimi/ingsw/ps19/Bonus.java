@@ -244,6 +244,20 @@ public class Bonus {
 		this.servantsDivider = servantsDivider;
 
 	}
+	
+	/**
+	 * This returns production variation or harvest variation based on the cardType passed
+	 * @author Mirko
+	 */
+	public int getActivationVariation(CardType cardType){
+		if(cardType==CardType.BUILDING)
+			return this.productionVariation;
+			
+		if(cardType==CardType.TERRITORY)
+			return this.harvestVariation;
+		throw new CardTypeException();
+		
+	}
 	 
 	
 	

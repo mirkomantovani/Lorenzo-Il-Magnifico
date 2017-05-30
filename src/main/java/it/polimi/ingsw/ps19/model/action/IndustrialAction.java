@@ -34,7 +34,9 @@ public class IndustrialAction extends Action {
 	}
 	
 	public boolean isApplicable(DevelopmentCard card){
-		return this.familyMember.getActionValue() + this.getPlayer().getBonuses().getHarvestVariation() >= card.getHarvestActivationCost() || this.familyMember.getActionValue() + this.getPlayer().getBonuses().getProductionVariation() >= card.getProductionActivationCost();
+		return this.familyMember.getActionValue() + this.getPlayer().getBonuses()
+				.getActivationVariation(card.getCardType()) >= card.getActivationCost(); 
+				
 		
 	}	
 

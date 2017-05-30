@@ -26,6 +26,7 @@ public class ActionTest {
 		Player player3 = new Player("Jimmo","Verde");
 		Player player4 = new Player("Talete","Nero");
 		distributeResources(player1, 10);
+		distributeResources(player2, 10);
 
 		Board board = new Board(new TerritoryDeck("src/main/resources/files/fileterritorycards.txt",CardConstants.DECK_LENGTH),
 								new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH),
@@ -44,7 +45,7 @@ public class ActionTest {
 		Dice.BLACK_DICE.getRandomFaceValue();
 //		Dice.NEUTRAL_DICE.getRandomFaceValue();
 		
-			Action action=new TakeCardAction(player1.getFamilyMembers().get(Color.ORANGE),
+			Action action=new TakeCardAction(player2.getFamilyMembers().get(Color.ORANGE),
 					board.getTowers().get(0).getFloors().get(0),new Servant(0));
 			
 			try {
@@ -54,11 +55,11 @@ public class ActionTest {
 				e.printStackTrace();
 			}
 			
-			System.out.println(player1.getDeckOfType(CardType.TERRITORY).get(0).toString());
-			System.out.println(player1.getResourceChest().toString());
+			System.out.println(player2.getDeckOfType(CardType.TERRITORY).get(0).toString());
+			System.out.println(player2.getResourceChest().toString());
 			
 //		}
-			Action action2=new TakeCardAction(player1.getFamilyMembers().get(Color.WHITE),
+			Action action2=new TakeCardAction(player2.getFamilyMembers().get(Color.WHITE),
 					board.getTowers().get(0).getFloors().get(1),new Servant(0));
 			
 			try {
@@ -91,6 +92,25 @@ public class ActionTest {
 			}
 			
 			System.out.println(player1.getResourceChest().toString());
+			
+			//Testing production effects
+			player2.addCard(board.getTowers().get(1).getFloors().get(0).getCard());
+			player2.addCard(board.getTowers().get(1).getFloors().get(1).getCard());
+			player2.addCard(board.getTowers().get(1).getFloors().get(2).getCard());
+			
+Action action4 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getProductionArea());
+			System.out.println("black dice value:"+player2.getFamilyMembers().get(Color.BLACK).getActionValue());
+			System.out.println("\n\nActivating production effect:\n");
+			try {
+				action4.apply();
+			} catch (NotApplicableException e) {
+				System.out.println("Production action not applicable");
+				e.printStackTrace();
+				
+			}
+			
+			System.out.println(player2.getResourceChest().toString());
+			
 
 			
 	}
