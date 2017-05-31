@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.network;
 
+import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
 public class SocketInterface implements NetworkInterface {
 
