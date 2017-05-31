@@ -1,17 +1,20 @@
 package it.polimi.ingsw.ps19.model.action;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.CouncilPalace;
 
 public class CouncilPalaceAction extends Action {
 	
 	CouncilPalace councilPalace;
+	ArrayList<FamilyMember> memberOrder;
 	
 	public CouncilPalaceAction(FamilyMember familyMember, CouncilPalace councilPalace){
 		
 		super(familyMember);
 		this.councilPalace = councilPalace;
-
+        memberOrder.add(familyMember);
 	}
 
 	@Override
