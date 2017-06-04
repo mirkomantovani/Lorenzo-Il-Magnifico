@@ -13,18 +13,23 @@ public class ClientHandlerSocket extends ClientHandler{
 	private Socket socket;
 	private ObjectInputStream inSocket;
 	private ObjectOutputStream outSocket;
+	private int clientNumber;
+	private ServerInterface creator;
 	
-	public ClientHandlerSocket(Socket socket) {
-		
+	public ClientHandlerSocket(Socket socket, int number,
+			ServerInterface serverStarter) {
+//		allower = null;
+		clientNumber = number;
 		this.socket = socket;
-		System.out.println("ciao");
+//		code = hashCode();
+		creator = serverStarter;
+		closed = false;
 		try {
-//			inSocket = new ObjectInputStream(this.socket.getInputStream());
+			inSocket = new ObjectInputStream(this.socket.getInputStream());
 			outSocket = new ObjectOutputStream(this.socket.getOutputStream());
-			System.out.println("nel try");
 			outSocket.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			closedByServer();
 		}
 
 	}

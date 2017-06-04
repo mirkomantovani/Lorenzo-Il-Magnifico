@@ -15,7 +15,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Socket socket=new Socket(indirizzo, port);
-		clientHandler=new ClientHandlerSocket(socket);
+//		clientHandler=new ClientHandlerSocket(socket);
+		//doesn't work anymore
 		System.out.println("qui");
 		Servant s=new Servant(3);
 		

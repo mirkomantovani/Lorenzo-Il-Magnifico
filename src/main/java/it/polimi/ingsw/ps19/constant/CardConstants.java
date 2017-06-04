@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19.model.card;
+package it.polimi.ingsw.ps19.constant;
 
 /**
  * The Class CardConstants.

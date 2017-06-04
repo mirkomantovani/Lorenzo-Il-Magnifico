@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.model.card.CardConstants;
+import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreator;
 
