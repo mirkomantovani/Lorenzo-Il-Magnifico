@@ -18,4 +18,5 @@ public class ClientCommandHandler {
 		this.networkInterface = networkInterface;
 	}
 	
+	//TODO the applyCommand() for each Command from Server to Client we define	
 }

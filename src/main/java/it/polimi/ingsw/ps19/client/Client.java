@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps19.client;
 
+import it.polimi.ingsw.ps19.command.ProvaCommand;
+import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.network.ClientSocketInterface;
 
 /**
  * @author matteo
@@ -11,6 +14,16 @@ package it.polimi.ingsw.ps19.client;
 public class Client {
 	
 	public static void main(String[] args){
+		
+		Servant serv = new Servant(3);
+		
+		ClientSocketInterface clientSocket = new ClientSocketInterface();
+		
+		clientSocket.connect();
+		
+		clientSocket.sendCommand(new ProvaCommand(serv));
+		
+		System.out.println("ho inviato il comando sullo stream");
 		
 	}
 
