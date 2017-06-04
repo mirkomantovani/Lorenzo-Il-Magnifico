@@ -33,9 +33,6 @@ public class TakeCardAction extends Action {
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
 		
-		if(familyMember==null)System.out.println("fm null");
-		if(player==null)System.out.println("player null");
-		
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
@@ -45,12 +42,6 @@ public class TakeCardAction extends Action {
 
 	private int calculateActionValueVariation() {
 		
-		if(player==null)System.out.println("player null");
-		if(player.getBonuses()==null)System.out.println("bonus null");
-		if(player.getBonuses().getCardActionValueVariation()==null)
-			System.out.println("actionvalue null");
-		
-//		if(player==null)System.out.println("player null");
 		return this.player.getBonuses().getCardTypeActionVariation(
 				this.card.getCardType());
 		
@@ -67,7 +58,8 @@ public class TakeCardAction extends Action {
 			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			if(player.getBonuses().isDoubleResourcesFromCards())
-			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+				card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 			
 			this.floor.getActionSpace().getEffect().applyEffect(player);
@@ -145,8 +137,6 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean isActionValueEnough(){
 		//personal bonuses to add
-		System.out.println(familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation);
-		System.out.println(this.floor.getActionSpace().getActionValueRequired());
 		return (familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation
 			>=this.floor.getActionSpace().getActionValueRequired());
 		

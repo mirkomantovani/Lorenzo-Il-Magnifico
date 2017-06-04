@@ -51,7 +51,7 @@ public class Bonus {
 		 * Controlled in controller-Final Points Count?
 		 * 
 		 */
-		private Map<CardType,Boolean> NoCardTypeFinalPoints;
+		private Map<CardType,Boolean> noCardTypeFinalPoints;
 		
 		/**
 		 * 13th excommunication tile, the effect sets the divider to be different than 1
@@ -72,20 +72,21 @@ public class Bonus {
 		public Bonus() {
 			
 			resourceMalus=new ArrayList<>();
-			NoCardTypeFinalPoints=new HashMap<>();
+			noCardTypeFinalPoints=new HashMap<>();
 			cardActionValueVariation=new HashMap<>();
 			this.servantsDivider=1;
 			
 			int i=0;
 			
-			for(i=0;i<CardType.values().length - 1;i++)
+			for(i=0;i<CardType.values().length - 1;i++){
 				cardActionValueVariation.put(CardType.values()[i], 0);
-				NoCardTypeFinalPoints.put(CardType.values()[i], false);
+				noCardTypeFinalPoints.put(CardType.values()[i], false);
+			}
 			}
 	 
 	 
-	 public int setChurchSupportBonus(int amount) {
-		return churchSupportBonus = amount;
+	 public void setChurchSupportBonus(int amount) {
+		 churchSupportBonus = amount;
 	}
 
 	public int getCardCostCoinDiscount() {
@@ -217,11 +218,11 @@ public class Bonus {
 	 * @return the boolean variable of the specified card type
 	 */
 	public boolean getNoCardTypeFinalPoints(CardType cardType) {
-		return NoCardTypeFinalPoints.get(cardType);
+		return noCardTypeFinalPoints.get(cardType);
 	}
 
 	public void setNoCardTypeFinalPoints(CardType cardType) {
-		this.NoCardTypeFinalPoints.put(cardType, true);
+		this.noCardTypeFinalPoints.put(cardType, true);
 	}
 	
 	/**
