@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.card;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class TerritoryCard.
@@ -9,12 +10,9 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author Mirko
  */
 public class TerritoryCard extends DevelopmentCard {
-    
-    /** The harvest activation cost. */
-    //this class should have something like HarvestEffect and not a permanentEffect, waiting for the Effect Generalization modeling
-	//solved: the name will we permanentEffect anyway, but the dynamic type of the object passed to it will be HarvestEffect
-	private int harvestActivationCost;
 	
+	private int harvestActivationCost;
+
 	/**
 	 * Instantiates a new territory card.
 	 *
@@ -27,7 +25,7 @@ public class TerritoryCard extends DevelopmentCard {
 	 */
 	public TerritoryCard(int id, String name, Period period, Effect immediateEffect,
 		Effect permanentEffect,int harvestActivationCost) {
-		super(id, name, period, null, immediateEffect, permanentEffect);
+		super(id, name, period, new ResourceChest(), immediateEffect, permanentEffect);
 		this.cardType=CardType.TERRITORY;
 		this.harvestActivationCost=harvestActivationCost;
 	}
@@ -49,9 +47,14 @@ public class TerritoryCard extends DevelopmentCard {
     	string.append(super.toString() + "\nHarvest cost: " + harvestActivationCost + "\nHarvest effect: ");
     	if(this.permanentEffect!=null)
     		string.append(permanentEffect.toString());
-    	
+    	string.append("\n\n");
     	return string.toString();
     }
+
+	@Override
+	public int getActivationCost() {
+		return this.harvestActivationCost;
+	}
 	
 
 }

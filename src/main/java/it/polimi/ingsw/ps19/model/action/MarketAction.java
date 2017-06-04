@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.action;
 
 
 import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.model.area.ActionSpace;
+import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 
 /**
  * @author matteo
@@ -10,10 +10,10 @@ import it.polimi.ingsw.ps19.model.area.ActionSpace;
  */
 public class MarketAction extends Action{
 	
-	private ActionSpace marketSpot;
+	private SingleActionSpace marketSpot;
 	
 	
-	public MarketAction(FamilyMember familyMember, ActionSpace marketSpot){
+	public MarketAction(FamilyMember familyMember, SingleActionSpace marketSpot){
 		super(familyMember);
 		this.marketSpot = marketSpot;
 		
@@ -22,7 +22,7 @@ public class MarketAction extends Action{
 	@Override
 	public void apply() throws NotApplicableException {
 		if(isApplicable()){
-			//this.marketSpot.getEffect().applyEffect(familyMember);
+			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
 			this.marketSpot.isOccupied();
 		} else throw new NotApplicableException();
 		

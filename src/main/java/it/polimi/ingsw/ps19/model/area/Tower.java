@@ -7,6 +7,9 @@ import java.util.List;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
@@ -18,23 +21,30 @@ public class Tower {
 
 	private CardType cardType;
 	
-	private Deck<DevelopmentCard> deck;
+	private Deck<? extends DevelopmentCard> deck;
 	
 	private static int currentCard = 0; // index of the card on the top of the deck
 	
+	private static int actionSpaceCost = 1;
 	
- 	public Tower(CardType cardType, Deck<DevelopmentCard> deck){ 
+	
+ 	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Resource> bonuses){ 
  			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;
 			
+			ResourceChest r;
+
+			
 			for(int i = 0; i < deck.length() / 6; i++){
-				floors.add(new Floor(deck.getCard(currentCard),this,0,null));
+				r = new ResourceChest();
+				r.addResource(bonuses.get(i));
+				floors.add(new Floor(deck.getCard(currentCard),this,actionSpaceCost,new InstantResourcesEffect(r)));
 				currentCard++;
-				
+				actionSpaceCost = actionSpaceCost + 2;
 			}
 	
-	
+			actionSpaceCost = 1;
 	} 
  	
  	/**

@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps19.model.deck;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Period;
@@ -25,6 +24,8 @@ import it.polimi.ingsw.ps19.model.effect.InstantHarvestActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantProductionActionEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
+import it.polimi.ingsw.ps19.model.effect.NoEffect;
+import it.polimi.ingsw.ps19.model.effect.NoFloorBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
@@ -37,7 +38,6 @@ import it.polimi.ingsw.ps19.model.effect.leader.LorenzoDeMediciEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.LucreziaBorgiaEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.LudovicoAriostoEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.LudovicoIlMoroEffect;
-import it.polimi.ingsw.ps19.model.effect.leader.NoFloorBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.PicoDellaMirandolaEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.SantaRitaEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.SigismondoMalatestaEffect;
@@ -103,6 +103,7 @@ public class DeckCreator {
 		while (lineRead!=null) {
 
 			id=Integer.parseInt(lineRead);  
+			
 			name= buffReader.readLine();    //line 2
 			
 			
@@ -330,6 +331,7 @@ public class DeckCreator {
 		while (lineRead!=null) {
 			
 			id = Integer.parseInt(lineRead);
+			
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			
@@ -350,7 +352,7 @@ public class DeckCreator {
 			//Immediate effect initialization
 			if(immediateResourceChest.isEmpty()){		//Se non dà delle risorse
 				if(immediatePrivilegeAmount == 0)				//Se non dà neanche privilegi
-					immediateEffect = null;						//Allora non c'è nulla
+					immediateEffect = new NoEffect();						//Allora non c'è nulla
 				else{
 					immediateEffect = new CouncilPrivilegeEffect(immediatePrivilegeAmount); //altrimenti dà solo privilegi ATTENZIONE: nelle carte del gioco non c'è nessuna carta
 																							//che come effetto immediato ha solo la pergamena
@@ -433,7 +435,6 @@ public class DeckCreator {
 			
 		id = Integer.parseInt(lineRead);
 		
-		System.out.println(id);
 		
 		name = buffReader.readLine();
 		
@@ -477,11 +478,11 @@ public class DeckCreator {
 		permanentEffect = new InstantResourcesEffect(victoryPointsChest);
 		
 		deck[index] = new VentureCard(id,name,period,cost,immediateEffect,permanentEffect);
-		System.out.println(deck[index].toString());
+		//System.out.println(deck[index].toString());
 		index++;
 		
 		lineRead = buffReader.readLine();   //line 1
-		System.out.println("id: "+lineRead);
+		//System.out.println("id: "+lineRead);
 		}
 	
 		return deck;
@@ -547,6 +548,7 @@ public class DeckCreator {
 		
 		while (lineRead!=null) {
 			id = Integer.parseInt(lineRead); 
+			
 			name = buffReader.readLine();
 			period = Period.values()[Integer.parseInt(buffReader.readLine())-1];
 			moneyCost = new ResourceChest(Integer.parseInt(buffReader.readLine()), 0, 0, 0, 0, 0, 0);
@@ -604,7 +606,7 @@ public class DeckCreator {
 			}else if(raiseHarvestValueAmount != 0){
 				permanentEffect = new ProductionBonusEffect(raiseHarvestValueAmount);
 			}else
-				permanentEffect = null;
+				permanentEffect = new NoEffect();
 			
 			
 			//Second, I assign the immediateEffect
@@ -617,7 +619,7 @@ public class DeckCreator {
 						if(extraCardValue == 0){			 //Se l'effetto non dà una carta in più
 							if(victoryPerMilitaryPointsAmount == 0){  //Se l'effetto non mi da un tot di pv ogni tot pm
 								if(victoryPointsPerCardAmount == 0)   //E non  da nemmeno un tot di carte per ogni tipo di carta
-									immediateEffect = null;           //Allora non c'è l'effetto
+									immediateEffect = new NoEffect();           //Allora non c'è l'effetto
 								else	
 									immediateEffect = new CharacterImmediateEffect(new ForEachTypeCardEffect(new VictoryPoint(victoryPointsPerCardAmount), typeCard));
 							}
@@ -801,7 +803,7 @@ public class DeckCreator {
 			
 			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
 			
-			System.out.println(deck[index].toString());
+			//System.out.println(deck[index].toString());
 			
 			index++;
 

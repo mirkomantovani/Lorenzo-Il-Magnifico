@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
@@ -11,8 +12,16 @@ public class LucreziaBorgiaEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
+		for(FamilyMember member : p.getFamilyMembers().values()){
+			member.setActionValueVariation(2);
+		}
 		
+	}
+	
+	public void disapplyEffect(Player p){
+		for(FamilyMember member : p.getFamilyMembers().values()){
+			member.setActionValueVariation(0);
+		}
 	}
 
 	@Override

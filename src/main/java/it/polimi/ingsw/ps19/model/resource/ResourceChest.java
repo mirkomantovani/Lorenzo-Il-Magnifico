@@ -124,6 +124,12 @@ public class ResourceChest {
 		return this.resources.get(resource.getResourceType());
 
 	}
+	
+	public Resource getResourceInChest(ResourceType resourceType) {
+
+		return this.resources.get(resourceType);
+
+	}
 
 	@Override
 	public String toString() {
@@ -156,6 +162,13 @@ public class ResourceChest {
 		}
 		return true;
 
+	}
+	
+	
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	/**

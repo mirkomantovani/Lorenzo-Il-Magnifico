@@ -5,11 +5,26 @@ package it.polimi.ingsw.ps19;
  *
  */
 public class FamilyMember {
-	
-	private Dice dice; 
+
+	private Dice dice;
 	private Player player;
 	private int actionValueVariation;
-	
+	private int actionValueImposition;
+
+	public FamilyMember(Dice d,Player player) {
+		this.player=player;
+		this.dice = d;
+		this.actionValueVariation=0;
+	}
+
+	public int getActionValueImposition() {
+		return actionValueImposition;
+	}
+
+	public void setActionValueImposition(int actionValueImposition) {
+		this.actionValueImposition = actionValueImposition;
+	}
+
 	public void setActionValueVariation(int actionValueVariation) {
 		this.actionValueVariation = actionValueVariation;
 	}
@@ -22,27 +37,17 @@ public class FamilyMember {
 		this.player = player;
 	}
 
-	public FamilyMember(Dice d){
-		
-		this.dice = d;
-	}	
-	
-	public Dice getDice(){
-		
+	public Dice getDice() {
+
 		return this.dice;
 	}
-	
-	public int getActionValue(){
-		return this.dice.getUpperFaceValue()+actionValueVariation;
+
+	public int getActionValue() {
+		return this.dice.getUpperFaceValue() + actionValueVariation;
 	}
-	
-	public void addActionValueVariation(int value){
+
+	public void addActionValueVariation(int value) {
 		this.actionValueVariation = this.actionValueVariation + value;
 	}
-	
-	
 
 }
-
-
-

@@ -17,7 +17,6 @@ public abstract class DevelopmentCard extends Card {
 	protected int id;   
 	protected Period period;
 	protected ResourceChest cost;  //Territory cards are the only one without cost, they're going to have the attribute set to null
-	
 	protected Effect immediateEffect;
 	protected Effect permanentEffect;
 	protected CardType cardType;
@@ -40,7 +39,6 @@ public abstract class DevelopmentCard extends Card {
 		this.cost=cost;
 		this.immediateEffect=immediateEffect;
 		this.permanentEffect=permanentEffect;
-		
 
 	}
 
@@ -107,7 +105,9 @@ public abstract class DevelopmentCard extends Card {
 		 		
 		 	return string.toString();
 		}
-	
+	 
+	 public abstract int getActivationCost();
 	
 
+	 
 }

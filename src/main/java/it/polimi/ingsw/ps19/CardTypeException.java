@@ -4,7 +4,7 @@ package it.polimi.ingsw.ps19;
  * @author Jimmy
  *
  */
-public class CardIdException extends RuntimeException {
+public class CardTypeException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	

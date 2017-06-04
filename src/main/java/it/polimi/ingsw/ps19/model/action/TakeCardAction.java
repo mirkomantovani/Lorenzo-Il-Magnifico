@@ -5,9 +5,13 @@ import java.util.List;
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
@@ -15,6 +19,8 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
  * space of a tower and taking the corresponding card
  * 
  * @author Mirko
+ * 
+ *Should the actions be static?
  *
  */
 public class TakeCardAction extends Action {
@@ -26,6 +32,10 @@ public class TakeCardAction extends Action {
 
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
+		
+		if(familyMember==null)System.out.println("fm null");
+		if(player==null)System.out.println("player null");
+		
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
@@ -34,6 +44,13 @@ public class TakeCardAction extends Action {
 	}
 
 	private int calculateActionValueVariation() {
+		
+		if(player==null)System.out.println("player null");
+		if(player.getBonuses()==null)System.out.println("bonus null");
+		if(player.getBonuses().getCardActionValueVariation()==null)
+			System.out.println("actionvalue null");
+		
+//		if(player==null)System.out.println("player null");
 		return this.player.getBonuses().getCardTypeActionVariation(
 				this.card.getCardType());
 		
@@ -42,25 +59,57 @@ public class TakeCardAction extends Action {
 	@Override
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
+			
 			player.addCard(card);
+			floor.setCard(null);  //set to null when the player buys the card
 			player.getResourceChest().subChest(card.getCost());
+			//if the player has a discount given by a leader card
+			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			if(player.getBonuses().isDoubleResourcesFromCards())
+			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			this.floor.getActionSpace().setFamilyMember(familyMember);
+			
+			this.floor.getActionSpace().getEffect().applyEffect(player);
 		} else
 			throw new NotApplicableException();
 	}
 
 	@Override
-	public boolean isApplicable() {  //TODO: excommunicationeffect, bonus effects of the player
-		//family member in tower, floor.card, actionvalue of familymember must me greater than actionspace.actionvaluerequired
-		//controlling if the player can afford the price
-		if (!player.getResourceChest().isGreaterEqualThan(card.getCost()))
+	public boolean isApplicable() {  
+		
+		if(!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()){
+			if((int)Board.getMilitaryRequirementsForTerritories().get(
+					player.getDeckOfType(card.getCardType()).size()+1)>
+			player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount())
+				return false;
+		}
+		
+		
+		//leader card discount (coin)
+		ResourceChest realCost;
+		if(player.getBonuses().getCardCostCoinDiscount()!=0){
+		
+			try {
+				realCost=(ResourceChest)card.getCost().clone();
+				realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+				realCost=new ResourceChest();
+			}
+			}
+			else {
+				realCost=card.getCost();
+				
+			}
+		if (!player.getResourceChest().isGreaterEqualThan(realCost))
 			return false;
 		//controlling if the player has space in the corresponding deck 
-		if (player.getRightArrayList(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
+		if (player.getDeckOfType(card.getCardType()).size() >= CardConstants.MAX_PERSONAL_DECK_SIZE)
 			return false;
-
 		return this.canBePlaced();
 
+		
 	}
 	
 	/**
@@ -68,6 +117,7 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean canBePlaced(){
 		//I have to control the special effects e.g. ludovico ariosto
+		
 		return this.isActionValueEnough()&&!floor.getActionSpace().isOccupied()
 				&&(familyMember.getDice().getColor()==Color.NEUTRAL
 					||this.noSamePlayerMembers(familyMember.getPlayer()));
@@ -82,7 +132,7 @@ public class TakeCardAction extends Action {
 		List<Floor> floors;
 		floors=this.floor.getTower().getFloors();
 		for(Floor fl : floors){
-			if(fl!=this.floor
+			if(fl.getActionSpace().isOccupied()&&fl!=this.floor
 				&&fl.getActionSpace().getFamilyMember().getPlayer()==player)return false;
 		}
 		
@@ -95,6 +145,8 @@ public class TakeCardAction extends Action {
 	 */
 	private boolean isActionValueEnough(){
 		//personal bonuses to add
+		System.out.println(familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation);
+		System.out.println(this.floor.getActionSpace().getActionValueRequired());
 		return (familyMember.getActionValue()+this.paidServants.getAmount()+this.actionValueVariation
 			>=this.floor.getActionSpace().getActionValueRequired());
 		

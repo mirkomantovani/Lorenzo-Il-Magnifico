@@ -11,8 +11,12 @@ public class CesareBorgiaEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
+		p.getBonuses().setNoMilitaryPointsRequiredForTerritories(true);
 		
+	}
+	
+	public void disapplyEffect(Player p){
+		p.getBonuses().setNoMilitaryPointsRequiredForTerritories(false);
 	}
 
 	@Override

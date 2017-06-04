@@ -1,11 +1,13 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
+import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -23,11 +25,9 @@ public class Player {
 	private Map<Color,FamilyMember> familyMembers;
 	
 	private ResourceChest resources;
-	
+
 	private Map<CardType, List<DevelopmentCard>> decks;
-
-
-
+	
 	private Bonus bonuses;
 	
 	
@@ -38,7 +38,7 @@ public class Player {
 		decks = new HashMap<>();
 		
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
-		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i]));
+		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i],this));
 		}
 		
 		resources = new ResourceChest();
@@ -51,15 +51,19 @@ public class Player {
 		this.name=name;
 		this.color=color;
 		
-	}
+		this.bonuses = new Bonus();
+		
 	
+	}
 	/**
 	 * This method adds a cart of a generic Type to the correct Deck of the player
 	 * @author Mirko
 	 * @param card
 	 */
 	public void addCard(DevelopmentCard card){
-		this.getRightArrayList(card.getCardType()).add(card);
+		
+		
+		this.getDeckOfType(card.getCardType()).add(card);
 	}
 
 	public String getName() {
@@ -101,7 +105,7 @@ public class Player {
 	 * 
 	 * 
 	 */
-	public List<DevelopmentCard> getRightArrayList(CardType cardType){
+	public List<DevelopmentCard> getDeckOfType(CardType cardType){
 		return decks.get(cardType);
 		
 	}
@@ -115,6 +119,17 @@ public class Player {
 		this.bonuses = bonuses;
 	}
 
+
+
+	public ResourceChest getResources() {
+		return resources;
+	}
+
+	public void setResources(ResourceChest resources) {
+		this.resources = resources;
+	}
+	
+	
 	public Map<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
