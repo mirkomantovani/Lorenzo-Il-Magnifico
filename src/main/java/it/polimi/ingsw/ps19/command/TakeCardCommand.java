@@ -17,7 +17,7 @@ public class TakeCardCommand extends ClientToServerCommand{
 
 	@Override
 	public void processCommand(ServerCommandHandler serverCommandHandler) {
-		// TODO Auto-generated method stub
+		serverCommandHandler.applyCommand(this);
 		
 	}
 
