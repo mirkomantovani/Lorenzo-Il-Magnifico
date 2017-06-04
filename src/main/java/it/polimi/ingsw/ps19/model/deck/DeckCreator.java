@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -307,7 +308,7 @@ public class DeckCreator {
 	 * @throws Exception Signals that a territory card has no harvest effect
 	 * 
 	 */
-	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws Exception {
+	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws IOException {
 
 		int cardIndex=0;
 		TerritoryCard[] deck = new TerritoryCard[deckLength];
@@ -371,7 +372,7 @@ public class DeckCreator {
 				if(harvestedPrivilegeAmount !=0)
 					harvestEffect = new HarvestEffect(new CouncilPrivilegeEffect(harvestedPrivilegeAmount));
 				else
-					throw new Exception();   //It is impossible to have a territory card without a harvest effect
+					throw new IOException();   //It is impossible to have a territory card without a harvest effect
 			}
 			else{
 				if(harvestedPrivilegeAmount == 0)

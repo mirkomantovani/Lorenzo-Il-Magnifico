@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.PersonalBonusTile;
-import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
@@ -51,7 +50,7 @@ public class BoardInitializer {
 		lineRead = reader.readLine();
 		
 		}
-		
+		reader.close();
 		return territoryBonuses;
 	}
 	
@@ -70,6 +69,7 @@ public class BoardInitializer {
 		lineRead = reader.readLine();
 		
 		}
+		reader.close();
 		return buildingBonuses;
 	}
 	
@@ -87,7 +87,7 @@ public class BoardInitializer {
 		lineRead = reader.readLine();
 		
 		}
-		
+		reader.close();
 		return characterBonuses;
 	}
 	
@@ -106,7 +106,7 @@ public class BoardInitializer {
 		lineRead = reader.readLine();
 		
 		}
-		
+		reader.close();
 		return ventureBonuses;
 	}
 	
@@ -123,6 +123,7 @@ public class BoardInitializer {
 				ResourceChest chest = new ResourceChest();
 				Resource resource = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())-1],Integer.parseInt(reader.readLine()));
 				chest.addResource(resource);
+				reader.close();
 				return new MultipleEffect(council,new InstantResourcesEffect(chest));
 			} else {
 				ResourceChest chest = new ResourceChest();
@@ -130,11 +131,13 @@ public class BoardInitializer {
 				chest.addResource(resource);
 				if(Integer.parseInt(reader.readLine())==8){
 					CouncilPrivilegeEffect council = new CouncilPrivilegeEffect(Integer.parseInt(reader.readLine()));
+					reader.close();
 					return new MultipleEffect(new InstantResourcesEffect(chest),council);
 				} else {
 					ResourceChest chest2 = new ResourceChest();
 					Resource resource2 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())-1],Integer.parseInt(reader.readLine()));
 					chest.addResource(resource2);
+					reader.close();
 					return new MultipleEffect(new InstantResourcesEffect(chest), new InstantResourcesEffect(chest2));
 				}
 				
@@ -144,6 +147,7 @@ public class BoardInitializer {
 			
 		
 		}
+			reader.close();
 			return new MultipleEffect(new NoEffect(),new NoEffect());
 		
 	}
@@ -163,7 +167,7 @@ public class BoardInitializer {
 			bonuses[i] = Integer.parseInt(reader.readLine());
 			lineRead = reader.readLine();
 		}
-		
+		reader.close();
 		return bonuses;
 	}
 	
@@ -180,8 +184,8 @@ public class BoardInitializer {
 			bonusesForTerritory.add(Integer.parseInt(reader.readLine()));
 			lineRead = reader.readLine();
 		}
-
-	return bonusesForTerritory;
+		reader.close();
+		return bonusesForTerritory;
 	}
 	
 	public static ArrayList<Integer> playerBoardBonusesForCharacter() throws FileNotFoundException, IOException{
@@ -196,8 +200,8 @@ public class BoardInitializer {
 			bonusesForCharacter.add(Integer.parseInt(reader.readLine()));
 			lineRead = reader.readLine();
 		}
-
-	return bonusesForCharacter;
+		reader.close();
+		return bonusesForCharacter;
 	}
 	
 	public static ArrayList<Integer> playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
@@ -213,8 +217,8 @@ public class BoardInitializer {
 			requirementsForTerritory.add(Integer.parseInt(reader.readLine()));
 			lineRead = reader.readLine();
 		}
-
-	return requirementsForTerritory;
+		reader.close();
+		return requirementsForTerritory;
 	}
 	
 	public static PersonalBonusTile[] createPersonalBonusTiles(int tilesNumber) throws NumberFormatException, IOException{
@@ -243,6 +247,7 @@ public class BoardInitializer {
 			tiles[index] = new PersonalBonusTile(productionEffect, harvestEffect);
 			index++;
 		}
+		reader.close();
 		return tiles;
 	}
 	
