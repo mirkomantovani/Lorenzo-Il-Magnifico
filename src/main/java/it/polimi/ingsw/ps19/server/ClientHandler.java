@@ -6,7 +6,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
-public abstract class ClientHandler {
+public abstract class ClientHandler implements Runnable {
 
 	
 	protected Player player;
@@ -25,5 +25,5 @@ public abstract class ClientHandler {
 
 	public abstract boolean isClosed();
 	
-	public abstract void Close();
+	public abstract void close();
 }

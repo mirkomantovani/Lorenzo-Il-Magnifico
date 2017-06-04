@@ -13,7 +13,7 @@ public class NetworkInterfaceFactory {
 		
 		switch(choice){
 		case 1: return new ClientSocketInterface();
-		case 2: return new ClientRMIInterface();
+//		case 2: return new ClientRMIInterface();
 		default : return new ClientSocketInterface();
 		}
 	}

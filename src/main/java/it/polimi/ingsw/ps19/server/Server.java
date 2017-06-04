@@ -36,6 +36,7 @@ public class Server implements Runnable,ServerInterface {
 	private int port;
 	private static Server instance;
 	private Thread timer;
+	private boolean goOn=true;
 
 
 	private Server(int port) {
@@ -75,23 +76,23 @@ public class Server implements Runnable,ServerInterface {
 		socketListener = new ServerSocketListener(this, port);
 		executor.submit(socketListener);
 //		rmiListener = new ServerRMIListener(this);
-		executor.submit(rmiListener);
+//		executor.submit(rmiListener);
 		// the right procedure to close all that is on when closing the server
 //		goOn = true;
 //		LOGGER.warn("Press Q to exit the server");
-//		while (goOn) {
-//			String scelta = null;
-//			try {
-//				scelta = inKeyboard.readLine();
-//			} catch (IOException e) {
-//			}
-//
-//			if ("Q".equals(scelta) || "q".equals(scelta)) {
-//				goOn = false;
-//				suppress();
+		while (goOn) {
+			String scelta = null;
+			try {
+				scelta = inKeyboard.readLine();
+			} catch (IOException e) {
+			}
+
+			if ("Q".equals(scelta) || "q".equals(scelta)) {
+				goOn = false;
+				suppress();}}
 //			} else
 //				LOGGER.warn("command not recognized");
-//
+
 //		}
 	}
 
@@ -105,12 +106,14 @@ public class Server implements Runnable,ServerInterface {
 	 */
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
-		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
+		System.out.println("client aggiunto");
+//		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
 //			createTimer();
 		waitingClients.add(clientHandler);
-//		executor.submit(clientHandler);
+		executor.submit(clientHandler);
+		System.out.println(waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
-			timer.interrupt();
+//			timer.interrupt();
 			createMatch();
 		}
 	}
@@ -139,6 +142,7 @@ public class Server implements Runnable,ServerInterface {
 //	}
 
 	private synchronized void createMatch() {
+		System.out.println("creando il match");
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);

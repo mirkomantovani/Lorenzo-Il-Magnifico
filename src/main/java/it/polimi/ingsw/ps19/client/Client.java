@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.client;
 
+import java.util.Scanner;
+
 import it.polimi.ingsw.ps19.command.ProvaCommand;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 import it.polimi.ingsw.ps19.network.ClientSocketInterface;
@@ -12,8 +14,10 @@ import it.polimi.ingsw.ps19.network.ClientSocketInterface;
  *
  */
 public class Client {
-	
+	static Scanner  i;
 	public static void main(String[] args){
+		
+		i=new Scanner(System.in);
 		
 		Servant serv = new Servant(3);
 		
@@ -21,9 +25,12 @@ public class Client {
 		
 		clientSocket.connect();
 		
+		int num=i.nextInt();
+		if(num==1){
 		clientSocket.sendCommand(new ProvaCommand(serv));
 		
 		System.out.println("ho inviato il comando sullo stream");
+		}
 		
 	}
 
