@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19.network;
+package it.polimi.ingsw.ps19.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

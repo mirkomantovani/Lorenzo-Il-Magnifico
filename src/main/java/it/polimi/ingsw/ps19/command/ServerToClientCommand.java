@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps19.command;
 
 import java.io.Serializable;
 
+import it.polimi.ingsw.ps19.client.ClientCommandHandler;
+
 public abstract class ServerToClientCommand implements Serializable {
 
 	/**
