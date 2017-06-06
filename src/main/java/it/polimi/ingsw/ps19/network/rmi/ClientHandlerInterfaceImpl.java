@@ -56,7 +56,13 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	}
 
 	@Override
-	public void Close() {
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void close() {
 		// TODO Auto-generated method stub
 		
 	}

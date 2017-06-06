@@ -20,9 +20,9 @@ public class Main {
 		System.out.println("qui");
 		Servant s=new Servant(3);
 		
-		ServerToClientCommand command=new ProvaCommand(s);
+//		ServerToClientCommand command=new ProvaCommand(s);
 		System.out.println("provo a inviare oggetto");
-		clientHandler.sendCommand(command);
+//		clientHandler.sendCommand(command);
 		System.out.println("Sono il client e ho inviato l'oggetto "+s.toString());
 		
 	}

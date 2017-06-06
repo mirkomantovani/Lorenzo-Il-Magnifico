@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
+
+import it.polimi.ingsw.ps19.client.ClientSocketListener;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.constant.NetworkConstants;
 
 /**
  * @author matteo
@@ -23,7 +27,12 @@ public class ClientSocketInterface implements NetworkInterface {
 	
 
 	public void connect() {
-		socket = new Socket(/*TODO insert port and address*/);
+		try {
+			socket = new Socket("127.0.0.1", NetworkConstants.PORT);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try{
 			outSocket = new ObjectOutputStream(socket.getOutputStream());
 			outSocket.flush();
