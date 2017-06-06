@@ -5,6 +5,8 @@ import java.util.Scanner;
 import it.polimi.ingsw.ps19.command.ProvaCommand;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 import it.polimi.ingsw.ps19.network.ClientSocketInterface;
+import it.polimi.ingsw.ps19.network.NetworkInterface;
+import it.polimi.ingsw.ps19.network.NetworkInterfaceFactory;
 
 /**
  * @author matteo
@@ -21,13 +23,28 @@ public class Client {
 		
 		Servant serv = new Servant(3);
 		
-		ClientSocketInterface clientSocket = new ClientSocketInterface();
+		System.out.println("Select the Connection mode: \n1 - Socket\n2 - RMI ");
 		
-		clientSocket.connect();
+		int choice = i.nextInt();
+		
+		
+		NetworkInterface client = NetworkInterfaceFactory.getNetworkInterface(choice) ;
+		
+		try {
+			client.connect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		int num=i.nextInt();
 		if(num==1){
-		clientSocket.sendCommand(new ProvaCommand(serv));
+		try {
+			client.sendCommand(new ProvaCommand(serv));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("ho inviato il comando sullo stream");
 		}
