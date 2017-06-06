@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.network.rmi.ClientHandlerInterface;
 import it.polimi.ingsw.ps19.network.rmi.ClientHandlerInterfaceImpl;
 import it.polimi.ingsw.ps19.server.Server;
+import it.polimi.ingsw.ps19.server.ServerInterface;
 
 public class ServerRMIListener implements Runnable {
 
@@ -17,6 +18,7 @@ public class ServerRMIListener implements Runnable {
 	private ClientHandlerInterface clientHandler;
 	private Registry registry;
 	private String name;
+	private ServerInterface creator;
 	
 	public ServerRMIListener(Server server) {
 		name = "ClientHandler";
@@ -54,7 +56,8 @@ public class ServerRMIListener implements Runnable {
 	/**
 	 * This method adds a client once the registry is active so when the first one has already been instantiated
 	 */
-	public void addClient(){
+	public void addClient(ClientHandlerInterfaceImpl clientHandler){
+		creator.addClient(clientHandler);
 		//once the registry is created i do have to re-bind rather than bind 
 		try{
 			clientHandler = new ClientHandlerInterfaceImpl(this, id);

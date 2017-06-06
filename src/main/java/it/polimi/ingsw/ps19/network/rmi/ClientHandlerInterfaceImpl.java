@@ -37,7 +37,7 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 		try {
 			Registry registry = LocateRegistry.getRegistry(port);
 			client = (ClientInterface) registry.lookup("Client");
-			server.addClient();
+			server.addClient(this);
 		} catch (NotBoundException e) {
 			System.err.println("Failed to join a game");
 		}

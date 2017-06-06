@@ -19,7 +19,7 @@ import it.polimi.ingsw.ps19.network.NetworkInterface;
  * @author Jimmy
  *
  */
-public class RMIInterface implements ClientInterface, NetworkInterface{
+public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 
 	private String name;
 	private String secondName;
@@ -28,7 +28,7 @@ public class RMIInterface implements ClientInterface, NetworkInterface{
 	private ClientHandlerInterface clientHandler;
 	private ClientInterface client;
 	
-	public RMIInterface(){
+	public ClientRMIInterface(){
 		this.name = "ClientHandler";
 		this.secondName = "Client";
 		this.client = this;

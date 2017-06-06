@@ -75,8 +75,8 @@ public class Server implements Runnable,ServerInterface {
 		createdMatch = new ConcurrentLinkedDeque<MatchHandler>();
 		socketListener = new ServerSocketListener(this, port);
 		executor.submit(socketListener);
-//		rmiListener = new ServerRMIListener(this);
-//		executor.submit(rmiListener);
+		rmiListener = new ServerRMIListener(this);
+		executor.submit(rmiListener);
 		// the right procedure to close all that is on when closing the server
 //		goOn = true;
 //		LOGGER.warn("Press Q to exit the server");
