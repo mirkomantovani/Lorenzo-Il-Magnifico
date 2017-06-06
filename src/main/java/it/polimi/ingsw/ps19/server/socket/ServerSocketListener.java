@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.server.ClientHandlerSocket;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 
 
+/**
+ * @author Mirko
+ *
+ */
 public class ServerSocketListener implements Runnable {
 	private int port;
 	private ServerSocket server;

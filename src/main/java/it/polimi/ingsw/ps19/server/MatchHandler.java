@@ -42,18 +42,18 @@ public class MatchHandler implements Runnable {
 
 	@Override
 	public void run() {
-		initiazializeMatch();
+		initMatch();
 	}
 
-	private void initiazializeMatch() {
+	private void initMatch() {
 //		String map = createIdMap();
-//		match = new Match(map, clients.size());
+		match = new Match(clients.size());
 //		match.setNotifier(this);
 //		commandHandler = new ServerCommandHandlerImpl(this, match);
 //		setPlayers();
 //		notifyAllStartMatch();
-//		match.setInitialPlayer();
-//		startTurn();
+		match.setInitialPlayer();
+		startTurn();
 	}
 
 	private void sendCommand(ClientHandler client, ServerToClientCommand command) {
@@ -84,18 +84,18 @@ public class MatchHandler implements Runnable {
 	}
 
 	/**
-	 * set players and their client handler for start the match;
+	 * randomly shuffling clients 
 	 */
-//	private void setPlayers() {
-//		Collections.shuffle(clients);
-//		int i = 1;
-//		for (ClientHandler c : clients) {
+	private void setPlayers() {
+		Collections.shuffle(clients);
+		int i = 1;
+		for (ClientHandler c : clients) {
 //			c.addPlayer(match.setPlayer(i));
 //			c.addAllower(this);
 //			c.addCommandHandler(commandHandler);
-//			i++;
-//		}
-//	}
+			i++;
+		}
+	}
 
 	/**
 	 * method invoked at the end of a turn that checks if the game is end or set
