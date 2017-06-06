@@ -55,7 +55,7 @@ public class ClientSocketInterface implements NetworkInterface {
 
 
 	@Override
-	public void notifyNewCommand(ServerToClientCommand command) {
+	public void notifyClient(ServerToClientCommand command) {
 		// TODO Auto-generated method stub
 		
 	}

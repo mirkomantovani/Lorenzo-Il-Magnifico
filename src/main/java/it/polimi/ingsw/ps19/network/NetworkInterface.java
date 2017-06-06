@@ -6,13 +6,13 @@ import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 public interface NetworkInterface{
 
 	
-	void connect();
+	void connect() throws Exception;
 
 	
-	void sendCommand(ClientToServerCommand command);
+	void sendCommand(ClientToServerCommand command) throws Exception;
 
 
-	void notifyNewCommand(ServerToClientCommand command);
+	void notifyClient(ServerToClientCommand command);
 
 	
 	void closeConnection();

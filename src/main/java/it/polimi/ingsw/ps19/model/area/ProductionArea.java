@@ -17,7 +17,7 @@ public class ProductionArea extends IndustrialArea{
 	public ProductionArea(){
 		super();
 		//The "MALUS" costant is defined in IndustrialArea
-		this.multipleSlot = new SingleActionSpace(SLOT_COST, new ProductionBonusEffect(MALUS));
+		this.multipleSlot = new MultipleActionSpace(SLOT_COST, new ProductionBonusEffect(MALUS));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class SocketInterface implements NetworkInterface {
 	}
 
 	@Override
-	public void notifyNewCommand(ServerToClientCommand command) {
+	public void notifyClient(ServerToClientCommand command) {
 		
 	}
 

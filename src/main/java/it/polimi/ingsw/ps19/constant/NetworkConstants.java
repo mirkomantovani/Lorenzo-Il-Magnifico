@@ -11,9 +11,9 @@ public class NetworkConstants {
 	
 //	public final static String ADDRESS = "localhost";
 	
-//	public static final int RMICLIENTPORT = 3030;
+	public static final int RMICLIENTPORT = 1234;
 	
-//	public static final int RMICLIENTHANDLERPORT = 4040;
+	public static final int RMICLIENTHANDLERPORT = 4321;
 	
 	public static final int MAXPLAYERS = 8;
 	
