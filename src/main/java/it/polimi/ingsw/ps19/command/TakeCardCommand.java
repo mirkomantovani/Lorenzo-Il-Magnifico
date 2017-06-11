@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps19.command;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.Floor;
-import it.polimi.ingsw.ps19.model.card.Card;
 import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class TakeCardCommand extends ClientToServerCommand{
 
@@ -24,7 +24,7 @@ public class TakeCardCommand extends ClientToServerCommand{
 	}
 
 	@Override
-	public void processCommand(ServerCommandHandler serverCommandHandler) {
+	public void processCommand( serverCommandHandler) {
 		serverCommandHandler.applyCommand(this);
 
 	}

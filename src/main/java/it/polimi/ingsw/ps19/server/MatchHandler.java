@@ -8,12 +8,13 @@ import java.util.Set;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
 
 
 
-public class MatchHandler implements Runnable {
+public class MatchHandler implements Runnable, MatchHandlerObserver {
 
 	private List<ClientHandler> clients;
 	private List<ClientHandler> closedClients;
@@ -260,6 +261,18 @@ public class MatchHandler implements Runnable {
 //			}
 //		}
 //		ServerInterface.notifyClose(this);
+	}
+
+	@Override
+	public boolean isAllowed(ClientToServerCommand command, Player player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void removeClient(ClientHandler clientHandler) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

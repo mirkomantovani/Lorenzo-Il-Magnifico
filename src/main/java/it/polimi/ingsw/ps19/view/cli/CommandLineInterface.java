@@ -6,7 +6,7 @@ public class CommandLineInterface implements UserInterface {
 
 	private final String welcomeMessage= "Welcome to the Lorenzo il Magnifico board game"
 			+ " the game has just started";
-	private final String initialStatus= "The decks have been shuffled and the cards "
+	private final String initialStatus= "The decks have been shuffled and the cards on "
 			+ "the towers are as follows";
 	
 	

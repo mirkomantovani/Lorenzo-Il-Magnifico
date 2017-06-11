@@ -155,7 +155,7 @@ public class Server implements Runnable,ServerInterface {
 	}
 
 	/**
-	 * this method closed all
+	 * this method closes everything
 	 */
 	private void suppress() {
 		closeWaitingList();
