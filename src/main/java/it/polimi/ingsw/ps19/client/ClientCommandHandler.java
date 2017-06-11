@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.client;
 
-import it.polimi.ingsw.ps19.gui.UserInterface;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
+import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
  * @author matteo

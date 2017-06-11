@@ -15,9 +15,10 @@ import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 import it.polimi.ingsw.ps19.server.socket.ServerSocketListener;
 
 
-
-
-
+/**
+ * @author Mirko
+ *
+ */
 public class Server implements Runnable,ServerInterface {
 	
 	

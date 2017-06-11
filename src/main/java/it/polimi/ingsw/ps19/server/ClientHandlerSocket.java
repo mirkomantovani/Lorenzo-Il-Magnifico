@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ProvaCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
+/**
+ * @author Mirko
+ *
+ */
 public class ClientHandlerSocket extends ClientHandler {
 
 	private Socket socket;

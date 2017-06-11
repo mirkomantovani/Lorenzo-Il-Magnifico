@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps19.server;
 
+/**
+ * @author Mirko
+ *
+ */
 public class ServerLauncher {
 
 	private ServerLauncher() {

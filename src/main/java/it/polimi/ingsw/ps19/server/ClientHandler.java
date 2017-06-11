@@ -7,6 +7,10 @@ import java.rmi.RemoteException;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
+/**
+ * @author Mirko
+ *
+ */
 public abstract class ClientHandler implements Runnable {
 
 	

@@ -1,10 +1,6 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model.card;
 
-import it.polimi.ingsw.ps19.model.card.BuildingCard;
-import it.polimi.ingsw.ps19.model.card.CharacterCard;
-import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-import it.polimi.ingsw.ps19.model.card.TerritoryCard;
-import it.polimi.ingsw.ps19.model.card.VentureCard;
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
