@@ -8,6 +8,7 @@ import java.rmi.registry.Registry;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
 public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientHandlerInterface{
@@ -61,8 +62,12 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 		
 	}
 
+	
+
+
+
 	@Override
-	public void close() {
+	public void addObserver(MatchHandlerObserver matchObserver) {
 		// TODO Auto-generated method stub
 		
 	}

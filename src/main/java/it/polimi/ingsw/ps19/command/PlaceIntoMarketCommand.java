@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.command;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class PlaceIntoMarketCommand extends ClientToServerCommand{
 
