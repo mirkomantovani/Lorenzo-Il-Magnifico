@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 
+/**
+ * @author Mirko
+ *
+ */
 public class ServerCommandHandler {
 
 	private MatchHandler handler;
