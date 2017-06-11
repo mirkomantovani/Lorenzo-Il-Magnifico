@@ -10,10 +10,10 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	 */
 	private static final long serialVersionUID = 5666906861277528755L;
 	
-	FamilyMember familyMember;
-	SingleActionSpace actionSpace;
+	String familyMember;
+	String actionSpace;
 
-	public PlaceIntoMarketCommand(FamilyMember familyMember, SingleActionSpace actionSpace){
+	public PlaceIntoMarketCommand(String familyMember, String actionSpace){
 		this.familyMember = familyMember;
 		this.actionSpace = actionSpace;
 	}

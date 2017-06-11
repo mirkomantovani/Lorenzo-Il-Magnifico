@@ -12,12 +12,12 @@ public class TakeCardCommand extends ClientToServerCommand{
 	 */
 	private static final long serialVersionUID = -2549395717779803669L;
 	
-	FamilyMember familyMember;
-	Floor floor;
-	Servant paidServants;
+	String familyMember;
+	int floor;
+	int paidServants;
 	
 	
-	public TakeCardCommand(FamilyMember familyMember, Floor floor, Servant paidServants) {
+	public TakeCardCommand(String familyMember, int floor, int paidServants) {
 		this.familyMember = familyMember;
 		this.floor = floor;
 		this.paidServants = paidServants;

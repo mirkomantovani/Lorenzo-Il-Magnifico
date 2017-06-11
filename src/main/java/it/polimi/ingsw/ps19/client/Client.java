@@ -16,6 +16,8 @@ import it.polimi.ingsw.ps19.network.NetworkInterfaceFactory;
  *
  */
 public class Client {
+	
+
 	static Scanner  i;
 	public static void main(String[] args){
 		
@@ -50,5 +52,8 @@ public class Client {
 		}
 		
 	}
+
+	
+	
 
 }

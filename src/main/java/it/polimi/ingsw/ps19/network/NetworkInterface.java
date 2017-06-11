@@ -9,7 +9,7 @@ public interface NetworkInterface{
 	void connect() throws Exception;
 
 	
-	void sendCommand(ClientToServerCommand command) throws Exception;
+	void sendCommand( ClientToServerCommand command) throws Exception;
 
 
 	void notifyClient(ServerToClientCommand command);
