@@ -61,6 +61,7 @@ public class Server implements Runnable,ServerInterface {
 	 */
 	@Override
 	public void run() {
+		System.out.println("Starting the server");
 		startServer();
 
 	}
@@ -76,8 +77,11 @@ public class Server implements Runnable,ServerInterface {
 		createdMatch = new ConcurrentLinkedDeque<MatchHandler>();
 		socketListener = new ServerSocketListener(this, port);
 		executor.submit(socketListener);
-//		rmiListener = new ServerRMIListener(this);
-//		executor.submit(rmiListener);
+		System.out.println("Preparing RMI");
+		rmiListener = new ServerRMIListener(this);
+		System.out.println("RMI listener almost ready");
+		executor.submit(rmiListener);
+		System.out.println("It should be now ready");
 		// the right procedure to close all that is on when closing the server
 //		goOn = true;
 //		LOGGER.warn("Press Q to exit the server");
@@ -89,6 +93,7 @@ public class Server implements Runnable,ServerInterface {
 			}
 
 			if ("Q".equals(scelta) || "q".equals(scelta)) {
+				System.out.println("Pressed q!");
 				goOn = false;
 				suppress();}}
 //			} else
@@ -107,16 +112,19 @@ public class Server implements Runnable,ServerInterface {
 	 */
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
-		System.out.println("client aggiunto");
+		System.out.println("Entering the real add client where a client is enqueued in the waiting client list");
 //		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
 //			createTimer();
 		waitingClients.add(clientHandler);
-		executor.submit(clientHandler);
-		System.out.println(waitingClients.size());
+		System.out.println("Added in the deque the calling clientHandler");
+		executor.submit(clientHandler);   //useless
+		System.out.println("Should have printed that something is running, or just something like the JavaScript promises..");
+		System.out.println("Waiting clients: " + waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 //			timer.interrupt();
 			createMatch();
 		}
+		System.out.println("Client Successfully added, dajeeee");
 	}
 
 	/**
@@ -155,7 +163,7 @@ public class Server implements Runnable,ServerInterface {
 	}
 
 	/**
-	 * this method closed all
+	 * this method closes everything
 	 */
 	private void suppress() {
 		closeWaitingList();

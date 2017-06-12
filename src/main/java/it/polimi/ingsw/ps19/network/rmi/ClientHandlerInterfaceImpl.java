@@ -6,18 +6,28 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
 public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientHandlerInterface{
 
 	ServerRMIListener server;
 	ClientInterface client;
+	MatchHandlerObserver matchHandlerObserver;
+	ServerCommandHandler serverCommandHandler;
 	
-	public ClientHandlerInterfaceImpl(ServerRMIListener server, int code) {
+	
+	public ClientHandlerInterfaceImpl(ServerRMIListener server, int id) {
 		this.server = server;
-		closed = false;
+		this.code = id;
+		this.code = hashCode();
+		this.closed = false;
+		this.matchHandlerObserver = null;
 	}
 	
 	@Override
@@ -28,16 +38,28 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void closedByServer() throws RemoteException {
-		// TODO Auto-generated method stub		
+		if (!closed) {
+			try {
+				client.notifyClient(new CloseClientCommand());   //this command still has to be implemented
+			} catch (RemoteException e) {
+				closedByClient();
+			}
+		}
+		closed = true;		
 	}
 
 	@Override
 	public void addClient(int port) throws RemoteException {
-		
+		System.out.println("In ClientHandlerInterfaceImpl addClient function");
+
 		try {
+			System.out.println("Starting to add the client");
 			Registry registry = LocateRegistry.getRegistry(port);
+			System.out.println("Accessed the registry at port: " + NetworkConstants.RMICLIENTPORT);
 			client = (ClientInterface) registry.lookup("Client");
-			server.addClient();
+			System.out.println("Read from the registry");
+			server.addClient(this); 
+			System.out.println("Client has been successfully enqueued");   //Non sono proprio così sicuro che debba notificare il server
 		} catch (NotBoundException e) {
 			System.err.println("Failed to join a game");
 		}
@@ -51,20 +73,30 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void closedByClient() {
-		// TODO Auto-generated method stub
+		if (!closed) {
+			if (this.matchHandlerObserver != null)
+				this.matchHandlerObserver.removeClient(this);
+			else
+				server.removeWaitingClient(this);
+		}
+		closed = true;
 		
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("ClientHandleInterfaceImpl is running");
+	}
+
+
+	@Override
+	public void addObserver(MatchHandlerObserver matchObserver) {
+		this.matchHandlerObserver=matchObserver;
 	}
 
 	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
+	public void addCommandHandler(ServerCommandHandler commandHandler) {
+		this.serverCommandHandler = commandHandler;
 	}
 
 }

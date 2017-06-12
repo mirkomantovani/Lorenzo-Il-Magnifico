@@ -6,7 +6,6 @@ import java.net.Socket;
 
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.ClientHandler;
-import it.polimi.ingsw.ps19.server.ClientHandlerSocket;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 
 

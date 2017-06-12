@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.command;
 
 import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class ProvaCommand extends ClientToServerCommand {
 

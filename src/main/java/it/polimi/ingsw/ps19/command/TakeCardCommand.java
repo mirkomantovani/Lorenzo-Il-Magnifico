@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.command;
 
+
+
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class TakeCardCommand extends ClientToServerCommand{
@@ -20,13 +22,9 @@ public class TakeCardCommand extends ClientToServerCommand{
 		this.paidServants = paidServants;
 	}
 
+
 	@Override
-	public void processCommand(ServerCommandHandler serverCommandHandler) {
-		serverCommandHandler.applyCommand(this);
-
-	}
-
-	
-	
-
-}
+	public void processCommand(ServerCommandHandler serverHandlerCommand) {
+		serverHandlerCommand.applyCommand(this);
+		
+	}}

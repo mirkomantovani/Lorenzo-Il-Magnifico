@@ -33,12 +33,15 @@ public class Client {
 		NetworkInterface client = NetworkInterfaceFactory.getNetworkInterface(choice) ;
 		
 		try {
+			System.out.println("I'm trying to connect");
 			client.connect();
+			System.out.println("Client Connected");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.err.println("YOU SHOULD NOT BE HERE");
 			e.printStackTrace();
 		}
-		
+
 		int num=i.nextInt();
 		if(num==1){
 		try {
