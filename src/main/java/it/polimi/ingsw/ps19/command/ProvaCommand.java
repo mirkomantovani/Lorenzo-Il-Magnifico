@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command;
 
-import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 public class ProvaCommand extends ClientToServerCommand {
@@ -22,12 +21,12 @@ public class ProvaCommand extends ClientToServerCommand {
 //	public void processCommand(ClientCommandHandler clientCommandHandler) {
 //
 //	}
+public void processCommand(ServerCommandHandler serverHandlerCommand) {
+	// TODO Auto-generated method stub
+	
+}
 
-	@Override
-	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 

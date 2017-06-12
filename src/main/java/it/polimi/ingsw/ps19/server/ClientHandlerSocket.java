@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ProvaCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
@@ -88,7 +87,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void run() {
 		System.out.println("sono in run di clienthandlersocket");
-		ProvaCommand command;
+	     provaCommand command;
 		while (true) {
 			command = null;
 			try {

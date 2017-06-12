@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps19.command;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.model.area.Floor;
-import it.polimi.ingsw.ps19.model.card.Card;
-import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class TakeCardCommand extends ClientToServerCommand{
 
@@ -12,9 +9,9 @@ public class TakeCardCommand extends ClientToServerCommand{
 	 */
 	private static final long serialVersionUID = -2549395717779803669L;
 	
-	String familyMember;
-	int floor;
-	int paidServants;
+	private String familyMember;
+	private int floor;
+	private int paidServants;
 	
 	
 	public TakeCardCommand(String familyMember, int floor, int paidServants) {

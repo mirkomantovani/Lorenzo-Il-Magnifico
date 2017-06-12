@@ -1,13 +1,16 @@
 package it.polimi.ingsw.ps19.command;
 
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
+
 public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -364724017878574034L;
-	String familyMember;
-	String councilPalace;
+	
+	private String familyMember;
+	private String councilPalace;
 	
 	public PlaceIntoCouncilPalaceCommand(String familyMember,String councilPalace){
 		this.familyMember = familyMember;
