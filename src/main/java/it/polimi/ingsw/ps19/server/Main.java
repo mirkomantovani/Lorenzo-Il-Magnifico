@@ -14,6 +14,7 @@ public class Main {
 	private static String indirizzo="127.0.0.1";
 
 	public static void main(String[] args) throws IOException {
+		/*
 		Socket socket=new Socket(indirizzo, port);
 //		clientHandler=new ClientHandlerSocket(socket);
 		//doesn't work anymore
@@ -24,7 +25,10 @@ public class Main {
 		System.out.println("provo a inviare oggetto");
 //		clientHandler.sendCommand(command);
 		System.out.println("Sono il client e ho inviato l'oggetto "+s.toString());
+		*/
 		
+		Server server = Server.getInstance();
+		server.run();
 	}
 
 }

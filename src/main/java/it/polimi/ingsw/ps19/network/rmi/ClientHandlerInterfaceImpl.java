@@ -8,6 +8,7 @@ import java.rmi.registry.Registry;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
@@ -21,9 +22,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	ServerCommandHandler serverCommandHandler;
 	
 	
-	public ClientHandlerInterfaceImpl(ServerRMIListener server, int code) {
+	public ClientHandlerInterfaceImpl(ServerRMIListener server, int id) {
 		this.server = server;
-		this.code = code;
+		this.code = id;
 		this.code = hashCode();
 		this.closed = false;
 		this.matchHandlerObserver = null;
@@ -49,11 +50,16 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void addClient(int port) throws RemoteException {
-		
+		System.out.println("In ClientHandlerInterfaceImpl addClient function");
+
 		try {
+			System.out.println("Starting to add the client");
 			Registry registry = LocateRegistry.getRegistry(port);
+			System.out.println("Accessed the registry at port: " + NetworkConstants.RMICLIENTPORT);
 			client = (ClientInterface) registry.lookup("Client");
-			server.addClient(this);
+			System.out.println("Read from the registry");
+			server.addClient(this); 
+			System.out.println("Client has been successfully enqueued");   //Non sono proprio così sicuro che debba notificare il server
 		} catch (NotBoundException e) {
 			System.err.println("Failed to join a game");
 		}
@@ -79,7 +85,7 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void run() {
-//		System.out.println("ClientHandleInterfaceImpl is running");
+		System.out.println("ClientHandleInterfaceImpl is running");
 	}
 
 
