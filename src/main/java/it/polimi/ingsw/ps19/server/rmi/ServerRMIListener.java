@@ -9,6 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.network.rmi.ClientHandlerInterface;
 import it.polimi.ingsw.ps19.network.rmi.ClientHandlerInterfaceImpl;
+import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 
@@ -36,6 +37,7 @@ public class ServerRMIListener implements Runnable {
 			registry = LocateRegistry.createRegistry(NetworkConstants.RMICLIENTHANDLERPORT);
 			registry.bind(name, stub);
 			id++;
+			System.out.println("RMI Server listening");
 		} catch (Exception e) {
 			closeListener();
 		}
@@ -68,5 +70,8 @@ public class ServerRMIListener implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void removeWaitingClient(ClientHandler clientHandler) {
+		creator.removeClient(clientHandler);
+	}
 }

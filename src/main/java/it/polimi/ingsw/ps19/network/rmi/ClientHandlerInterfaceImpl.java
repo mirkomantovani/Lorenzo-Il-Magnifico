@@ -6,19 +6,27 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
 public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientHandlerInterface{
 
 	ServerRMIListener server;
 	ClientInterface client;
+	MatchHandlerObserver matchHandlerObserver;
+	ServerCommandHandler serverCommandHandler;
+	
 	
 	public ClientHandlerInterfaceImpl(ServerRMIListener server, int code) {
 		this.server = server;
-		closed = false;
+		this.code = code;
+		this.code = hashCode();
+		this.closed = false;
+		this.matchHandlerObserver = null;
 	}
 	
 	@Override
@@ -29,7 +37,14 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void closedByServer() throws RemoteException {
-		// TODO Auto-generated method stub		
+		if (!closed) {
+			try {
+				client.notifyClient(new CloseClientCommand());   //this command still has to be implemented
+			} catch (RemoteException e) {
+				closedByClient();
+			}
+		}
+		closed = true;		
 	}
 
 	@Override
@@ -52,24 +67,30 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void closedByClient() {
-		// TODO Auto-generated method stub
+		if (!closed) {
+			if (this.matchHandlerObserver != null)
+				this.matchHandlerObserver.removeClient(this);
+			else
+				server.removeWaitingClient(this);
+		}
+		closed = true;
 		
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+//		System.out.println("ClientHandleInterfaceImpl is running");
 	}
-
-	
-
 
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
-		// TODO Auto-generated method stub
-		
+		this.matchHandlerObserver=matchObserver;
+	}
+
+	@Override
+	public void addCommandHandler(ServerCommandHandler commandHandler) {
+		this.serverCommandHandler = commandHandler;
 	}
 
 }
