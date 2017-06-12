@@ -53,7 +53,7 @@ public class Match {
 	}
 
 	public Player getCurrentPlayer() {
-		return null;
+		return currentPlayer;
 	}
 
 }

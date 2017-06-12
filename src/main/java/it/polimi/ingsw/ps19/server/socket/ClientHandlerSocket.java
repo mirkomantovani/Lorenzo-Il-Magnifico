@@ -120,7 +120,7 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
-
+		this.matchObserver=matchObserver;
 	}
 	
 

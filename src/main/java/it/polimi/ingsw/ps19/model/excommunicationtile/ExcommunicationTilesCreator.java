@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.exception.IllegalCardTypeException;
 import it.polimi.ingsw.ps19.model.card.CardType;
-import it.polimi.ingsw.ps19.model.card.IllegalCardTypeException;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;

@@ -21,6 +21,14 @@ public abstract class ClientHandler implements Runnable {
 	protected int code;
 	protected boolean closed;
 	
+	public void addPlayer(Player player) {
+		this.player = player;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+	
 
 	public abstract void sendCommand(ServerToClientCommand command) throws IOException;
 

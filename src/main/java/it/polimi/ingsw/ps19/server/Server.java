@@ -155,9 +155,9 @@ public class Server implements Runnable,ServerInterface {
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);
-		MatchHandler mc = new MatchHandler(list, this);
-		executor.submit(mc);  //I think this is doing an implicit run on the matchHandler?
-		createdMatch.add(mc);
+		MatchHandler matchH = new MatchHandler(list, this);
+		executor.submit(matchH);  //I think this is doing an implicit run on the matchHandler?
+		createdMatch.add(matchH);
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
 
 	}
