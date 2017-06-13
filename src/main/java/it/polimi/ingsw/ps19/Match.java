@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.area.Floor;
+import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
  * @author Mirko
@@ -54,6 +56,10 @@ public class Match {
 
 	public Player getCurrentPlayer() {
 		return currentPlayer;
+	}
+	
+	public Floor getFloor(CardType cardType, int index){
+		return this.board.getFloor(cardType, index);
 	}
 
 }

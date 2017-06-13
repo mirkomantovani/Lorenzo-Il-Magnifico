@@ -79,5 +79,10 @@ public class Tower {
  	public List<Floor> getFloors() {
 		return floors;
 	}
+
+	public Floor getFloor(int index) {
+		return floors.get(index);
+	}
+ 	
 	
 }

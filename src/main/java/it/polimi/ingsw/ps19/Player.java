@@ -133,6 +133,27 @@ public class Player {
 	public Map<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
+	
+	/**
+	 * Just pass the color's String of the family member and get the right one
+	 * @author Mirko
+	 * @return
+	 */
+	public FamilyMember getFamilyMember(String color){
+		return this.familyMembers.get(Color.valueOf(Color.class, color.toUpperCase()));
+		
+	}
+	
+	/**
+	 * @author Mirko
+	 * @param color 
+	 *           :the Color of the familyMember you wanna get
+	 * @return
+	 */
+	public FamilyMember getFamilyMember(Color color){
+		return this.familyMembers.get(color);
+		
+	}
 
 	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;

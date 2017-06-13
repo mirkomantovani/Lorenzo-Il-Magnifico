@@ -113,4 +113,16 @@ public class Board {
 		return militaryRequirementsForTerritories;
 	}
 	
+	/**
+	 * Method needed for the TakeCard Action
+	 * @author Mirko
+	 * @param cardType
+	 * @param index
+	 * @return
+	 */
+	public Floor getFloor(CardType cardType, int index){
+		return towers.get(cardType).getFloor(index);
+		
+	}
+	
 }
