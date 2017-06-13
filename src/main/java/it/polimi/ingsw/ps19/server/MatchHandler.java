@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 
 
 
@@ -47,24 +48,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 	}
 
 	private void initMatch() {
-//		String map = createIdMap();
 		match = new Match(clients.size());
 //		match.setNotifier(this);
-//		commandHandler = new ServerCommandHandlerImpl(this, match);
-//		setPlayers();
+		commandHandler = new ServerCommandHandler(this, match);
+		setPlayers();
 //		notifyAllStartMatch();
 		match.setInitialPlayer();
 		startTurn();
 	}
 
-	private void sendCommand(ClientHandler client, ServerToClientCommand command) {
-		try {
-			client.sendCommand(command);
-		} catch (Exception e) {
-			closedClients.add(client);
-		}
-		checkDisconnection();
-	}
+
 
 
 
@@ -91,9 +84,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 		Collections.shuffle(clients);
 		int i = 1;
 		for (ClientHandler c : clients) {
-//			c.addPlayer(match.setPlayer(i));
-//			c.addAllower(this);
-//			c.addCommandHandler(commandHandler);
+			c.addPlayer(match.setPlayer(i));
+			c.addObserver(this);
+			c.addCommandHandler(commandHandler);
 			i++;
 		}
 	}
@@ -112,6 +105,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 	}
 
 	private void startTurn() {
+		sendToCurrentPlayer(new StartTurnCommand());
+//		notifyCurrentPlayer(new CommandAskMove());
+//		createTurnTimer();
 	}
 
 	// Method of notification
@@ -137,7 +133,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 	 * @param command
 	 *            to be notified
 	 */
-	public void notifyAllClients(ServerToClientCommand command) {
+	public void sendToAllPlayers(ServerToClientCommand command) {
 		for (ClientHandler client : clients) {
 			try {
 				client.sendCommand(command);
@@ -145,8 +141,34 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 				closedClients.add(client);
 			}
 		}
-		checkDisconnection();
+//		checkDisconnection();
 	}
+	
+	public void sendToPlayer(ServerToClientCommand command, Player player) {
+			ClientHandler client;
+			try {
+				client = getRightClientHandler(player);
+			} catch (WrongPlayerException e1) {
+				System.out.println(e1.getError());
+				e1.printStackTrace();
+				return;
+			}
+		
+			try {
+				client.sendCommand(command);
+			} catch (Exception e) {
+				closedClients.add(client);
+			}
+		
+//		checkDisconnection();
+	}
+	
+	public void sendToCurrrentPlayer(ServerToClientCommand command) {
+		sendToPlayer(command,match.getCurrentPlayer());
+//		checkDisconnection();
+	}
+	
+	
 
 
 
@@ -273,6 +295,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 	public void removeClient(ClientHandler clientHandler) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private ClientHandler getRightClientHandler(Player player) throws WrongPlayerException{
+		for (ClientHandler client : clients)
+			if (client.getPlayer().equals(player))
+				return client;
+		
+			 throw new WrongPlayerException();
 	}
 
 

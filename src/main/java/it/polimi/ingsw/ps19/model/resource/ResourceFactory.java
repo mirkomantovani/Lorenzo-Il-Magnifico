@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.resource;
 
+import it.polimi.ingsw.ps19.exception.ResourceTypeException;
+
 /**
  * A factory for creating Resource objects based on a parameter.
  * This class was created using the creational Factory Method design pattern

@@ -3,11 +3,11 @@ package it.polimi.ingsw.ps19;
 import java.io.IOException;
 
 import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.action.MarketAction;
-import it.polimi.ingsw.ps19.model.action.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;

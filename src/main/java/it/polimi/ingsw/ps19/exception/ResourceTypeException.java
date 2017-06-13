@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19.model.resource;
+package it.polimi.ingsw.ps19.exception;
 
 /**
  * @author Mirko

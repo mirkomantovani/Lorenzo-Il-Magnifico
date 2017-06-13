@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.action;
 
 
 import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 
 /**
