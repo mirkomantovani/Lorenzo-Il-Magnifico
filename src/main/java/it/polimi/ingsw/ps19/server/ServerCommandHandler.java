@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.server;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoMarketCommand;
@@ -28,6 +29,7 @@ public class ServerCommandHandler {
 
 	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) {
 		
+		
 	}
 	
 	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand){
@@ -43,6 +45,11 @@ public class ServerCommandHandler {
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
 		// TODO Auto-generated method stub
 		
 	}

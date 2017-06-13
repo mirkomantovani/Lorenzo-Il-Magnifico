@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.client;
 
+import it.polimi.ingsw.ps19.command.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.InvalidCommand;
@@ -38,6 +39,11 @@ public class ClientCommandHandler {
 	}
 
 	public void applyCommand(CloseClientCommand closeConnectionCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(AskPrivilegeChoiceCommand askPrivilegeChoiceCommand) {
 		// TODO Auto-generated method stub
 		
 	}

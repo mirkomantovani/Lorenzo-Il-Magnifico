@@ -12,6 +12,16 @@ public class PlaceIntoIndustrialAreaCommand extends ClientToServerCommand {
 	private String familyMember;
 	private String industrialArea;
 	
+	public String getFamilyMember() {
+		return familyMember;
+	}
+
+
+	public String getIndustrialArea() {
+		return industrialArea;
+	}
+
+
 	public PlaceIntoIndustrialAreaCommand(String familyMember, String industrialArea){
 		this.familyMember = familyMember;
 		this.industrialArea = industrialArea;

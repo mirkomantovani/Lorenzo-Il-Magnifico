@@ -23,4 +23,12 @@ public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 		
 	}
 
+	public String getFamilyMember() {
+		return familyMember;
+	}
+
+	public String getCouncilPalace() {
+		return councilPalace;
+	}
+
 }

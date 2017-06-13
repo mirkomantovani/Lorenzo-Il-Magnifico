@@ -23,6 +23,14 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 		serverCommandHandler.applyCommand(this);
 		
 	}
+
+	public String getFamilyMember() {
+		return familyMember;
+	}
+
+	public String getActionSpace() {
+		return actionSpace;
+	}
 	
 	
 	
