@@ -3,13 +3,12 @@ package it.polimi.ingsw.ps19.server;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.StartTurnCommand;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 
 
@@ -163,7 +162,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 //		checkDisconnection();
 	}
 	
-	public void sendToCurrrentPlayer(ServerToClientCommand command) {
+	public void sendToCurrentPlayer(ServerToClientCommand command) {
 		sendToPlayer(command,match.getCurrentPlayer());
 //		checkDisconnection();
 	}

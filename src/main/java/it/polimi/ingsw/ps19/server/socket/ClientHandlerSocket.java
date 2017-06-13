@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.InvalidCommand;
 import it.polimi.ingsw.ps19.command.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
@@ -55,7 +56,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void closedByServer() {
 		try {
-			outSocket.writeObject(new CloseConnectionToClientCommand());
+			outSocket.writeObject(new CloseClientCommand());
 		} catch (IOException e) {
 		}
 		close();
