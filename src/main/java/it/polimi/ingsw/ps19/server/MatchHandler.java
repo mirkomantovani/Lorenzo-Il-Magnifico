@@ -9,7 +9,9 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.StartTurnCommand;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
+import it.polimi.ingsw.ps19.model.action.Action;
 
 
 
@@ -286,8 +288,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 
 	@Override
 	public boolean isAllowed(ClientToServerCommand command, Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		if (getCurrentPlayer()==player)
+			return true;
+		else 
+			return false;
 	}
 
 	@Override
@@ -302,6 +306,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver {
 				return client;
 		
 			 throw new WrongPlayerException();
+	}
+
+	public void applyAction(Action action) throws NotApplicableException {
+		action.apply();
+		
 	}
 
 
