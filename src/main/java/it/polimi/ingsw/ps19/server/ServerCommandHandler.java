@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps19.command.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.TakeCardCommand;
 
 /**
+ * This class handles every command arriving from Client to Server, calling methods of MatchHandler
+ * The reference to Match is needed to get player objects from the match
  * @author Mirko
  *
  */
@@ -39,7 +41,7 @@ public class ServerCommandHandler {
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
-		
+		handler.
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
