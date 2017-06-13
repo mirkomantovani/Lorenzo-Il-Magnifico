@@ -42,6 +42,20 @@ public class Match {
 		addedPlayers++;
 	}
 	
+	
+	
+	public Board getBoard() {
+		return board;
+	}
+
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	public int getAddedPlayers() {
+		return addedPlayers;
+	}
+
 	public Player setPlayer(int id) {
 //		Player player = new Player();
 //		players.add(player);

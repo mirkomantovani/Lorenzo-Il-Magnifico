@@ -2,9 +2,12 @@ package it.polimi.ingsw.ps19.client;
 
 import it.polimi.ingsw.ps19.command.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.CloseClientCommand;
+import it.polimi.ingsw.ps19.command.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.InvalidCommand;
+import it.polimi.ingsw.ps19.command.LoseCommand;
 import it.polimi.ingsw.ps19.command.StartTurnCommand;
+import it.polimi.ingsw.ps19.command.WinCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -24,12 +27,12 @@ public class ClientCommandHandler {
 	}
 
 	public void applyCommand(InvalidActionCommand ActionNotValidCommand) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	public void applyCommand(InvalidCommand invalidCommand) {
-		// TODO Auto-generated method stub
+		userInterface.commandNotValid();
 		
 	}
 
@@ -39,12 +42,27 @@ public class ClientCommandHandler {
 	}
 
 	public void applyCommand(CloseClientCommand closeConnectionCommand) {
-		// TODO Auto-generated method stub
+		networkInterface.closeConnection();
 		
 	}
 
 	public void applyCommand(AskPrivilegeChoiceCommand askPrivilegeChoiceCommand) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(InitializeMatchCommand initializeMatchCommand) {
+		userInterface.initializeMatch();
+		
+	}
+
+	public void applyCommand(WinCommand winCommand) {
+		userInterface.win();
+		
+	}
+
+	public void applyCommand(LoseCommand loseCommand) {
+		userInterface.lose();
 		
 	}
 	

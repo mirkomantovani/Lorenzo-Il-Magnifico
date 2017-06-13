@@ -3,8 +3,8 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
+import it.polimi.ingsw.ps19.command.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoIndustrialAreaCommand;
@@ -13,6 +13,8 @@ import it.polimi.ingsw.ps19.command.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
+import it.polimi.ingsw.ps19.model.action.MarketAction;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.resource.Servant;
@@ -39,15 +41,56 @@ public class ServerCommandHandler {
 
 	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) {
 		
+		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
+		
+		switch(placeIntoMarketCommand.getActionSpace()){
+		case "first" : try {
+				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case "second" : try {
+				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getSecondMarket()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case "third" : try {
+				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getThirdMarket()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case "fourth" : try {
+				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
+		} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		default : try {
+			handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 		
 	}
+
 	
 	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand){
 		
 	}
 	
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
-		
+		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
+		try {
+			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace()));
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
@@ -74,7 +117,7 @@ public class ServerCommandHandler {
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
-		// TODO Auto-generated method stub
+		handler.closeMatch(); 
 		
 	}
 

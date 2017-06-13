@@ -10,8 +10,9 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	 */
 	private static final long serialVersionUID = 5666906861277528755L;
 	
-	private String familyMember;
-	private String actionSpace;
+	private String familyMember; // orange,black,white,neutral
+	private String actionSpace; // FIRST,SECOND,THIRD,FOURTH as the place of the marker spot from the left to the
+								// right on the board
 
 	public PlaceIntoMarketCommand(String familyMember, String actionSpace){
 		this.familyMember = familyMember;
