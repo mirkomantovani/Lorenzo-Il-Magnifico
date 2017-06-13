@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.TakeCardCommand;
 
 /**
@@ -38,6 +39,11 @@ public class ServerCommandHandler {
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
+		
+	}
+
+	public void applyCommand(RequestClosureCommand requestClosureCommand) {
+		// TODO Auto-generated method stub
 		
 	}
 	

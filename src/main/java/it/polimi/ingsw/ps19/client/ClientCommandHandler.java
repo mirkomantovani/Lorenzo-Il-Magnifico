@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.client;
 
-import it.polimi.ingsw.ps19.command.CloseConnectionCommand;
+import it.polimi.ingsw.ps19.command.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.InvalidCommand;
 import it.polimi.ingsw.ps19.command.StartTurnCommand;
@@ -37,7 +37,7 @@ public class ClientCommandHandler {
 		
 	}
 
-	public void applyCommand(CloseConnectionCommand closeConnectionCommand) {
+	public void applyCommand(CloseClientCommand closeConnectionCommand) {
 		// TODO Auto-generated method stub
 		
 	}

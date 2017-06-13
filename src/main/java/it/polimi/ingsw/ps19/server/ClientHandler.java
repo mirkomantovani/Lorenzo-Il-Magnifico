@@ -44,5 +44,11 @@ public abstract class ClientHandler implements Runnable {
 	
 	public abstract void addCommandHandler(ServerCommandHandler commandHandler);
 
+
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

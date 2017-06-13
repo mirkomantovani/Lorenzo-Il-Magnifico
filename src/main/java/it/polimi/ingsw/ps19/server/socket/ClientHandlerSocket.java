@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.InvalidCommand;
+import it.polimi.ingsw.ps19.command.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
@@ -74,7 +76,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	}
 
 	
-	private void close() {
+	public void close() {
 		if (!closed) {
 			try {
 				closed = true;
@@ -99,7 +101,7 @@ public class ClientHandlerSocket extends ClientHandler {
 				close();
 				break;
 			}
-			if (command instanceof CloseConnectionCommand)
+			if (command instanceof RequestClosureCommand)
 				closedByClient();
 			else if (matchObserver != null && matchObserver.isAllowed(command, player)) {
 				processCommand(command);

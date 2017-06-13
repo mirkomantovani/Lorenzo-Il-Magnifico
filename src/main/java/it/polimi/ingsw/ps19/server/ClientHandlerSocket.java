@@ -73,7 +73,6 @@ public class ClientHandlerSocket extends ClientHandler {
 	//
 	// }
 
-	@Override
 	public void close() {
 		try {
 			this.socket.close();
@@ -87,7 +86,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void run() {
 		System.out.println("sono in run di clienthandlersocket");
-	     provaCommand command;
+	     ProvaCommand command;
 		while (true) {
 			command = null;
 			try {
@@ -105,4 +104,16 @@ public class ClientHandlerSocket extends ClientHandler {
 	}
 
 }
+
+	@Override
+	public void addObserver(MatchHandlerObserver matchObserver) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCommandHandler(ServerCommandHandler commandHandler) {
+		// TODO Auto-generated method stub
+		
+	}
 }
