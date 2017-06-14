@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * @author matteo
@@ -19,16 +21,12 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public class Player {
 	
 	private String name;
-	
 	private String color;
-	
 	private Map<Color,FamilyMember> familyMembers;
-	
 	private ResourceChest resources;
-
 	private Map<CardType, List<DevelopmentCard>> decks;
-	
 	private Bonus bonuses;
+	private MatchObserver observer;
 	
 	
 	public Player(String name, String color){
@@ -120,11 +118,6 @@ public class Player {
 	}
 
 
-
-	public ResourceChest getResources() {
-		return resources;
-	}
-
 	public void setResources(ResourceChest resources) {
 		this.resources = resources;
 	}
@@ -163,7 +156,7 @@ public class Player {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append(super.toString() + "Player : " + this.getName() + "/n" + "Color : " + this.getColor() +
-						"/n" + "Status : " + this.getResources().toString() + "/n" + "Cards taken : /n/t Territory cards : "
+						"/n" + "Status : " + this.getResourceChest().toString() + "/n" + "Cards taken : /n/t Territory cards : "
 								+ this.getDeckOfType(CardType.TERRITORY).toString() + "/n/t Character cards : "
 								+ this.getDeckOfType(CardType.CHARACTER).toString() + "/n/t Building cards : " + 
 								this.getDeckOfType(CardType.BUILDING).toString() + "/n/t Venture cards : " +
@@ -171,7 +164,47 @@ public class Player {
 		return string.toString();
 	}
 	 
+
 	
+	/**
+	 * This clone method returns a visible to all players Player
+	 * @author Mirko
+	 * @return
+	 */
+	public Player maskedClone() {
+		
+		Player maskedPlayer=new Player(this.name, this.color);
+		ResourceChest maskedRC=new ResourceChest();
+		
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
+		
+		maskedPlayer.setResources(maskedRC);
+		
+		return maskedPlayer;
+		
+	}
+	/**
+	 * The observer is needed to notify to the virtual view any change in the player status
+	 * @author Mirko
+	 * @param observer
+	 */
+	public void addObserver(MatchObserver observer) {
+		this.observer=observer;
+	}
+	
+	public void addResources(ResourceChest resourceChest){
+		this.resources.addChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	public void subResources(ResourceChest resourceChest){
+		this.resources.subChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
 
 
 	

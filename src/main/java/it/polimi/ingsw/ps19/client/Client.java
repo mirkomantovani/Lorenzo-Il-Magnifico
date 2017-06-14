@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.client;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import it.polimi.ingsw.ps19.command.ProvaCommand;
@@ -41,18 +42,25 @@ public class Client {
 			System.err.println("YOU SHOULD NOT BE HERE");
 			e.printStackTrace();
 		}
-
-		int num=i.nextInt();
-		if(num==1){
-		try {
-			client.sendCommand(new ProvaCommand(serv));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		System.out.println("ho inviato il comando sullo stream");
-		}
+		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
+		
+		choice = i.nextInt();
+		
+		
+		
+
+//		int num=i.nextInt();
+//		if(num==1){
+//		try {
+//			client.sendCommand(new ProvaCommand(serv));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("ho inviato il comando sullo stream");
+//		}
 		
 	}
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
 
 /**
@@ -24,10 +25,10 @@ public class ClientSocketListener implements Runnable{
 	@Override
 	public void run() {
 		
-		ClientToServerCommand command;
+		ServerToClientCommand command;
 		while(true){
 			try {
-				command = (ClientToServerCommand)inSocket.readObject();
+				command = (ServerToClientCommand)inSocket.readObject();
 				//TODO send a notify!
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block

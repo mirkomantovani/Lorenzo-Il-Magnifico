@@ -23,6 +23,7 @@ public abstract class ClientHandler implements Runnable {
 	
 	public void addPlayer(Player player) {
 		this.player = player;
+		System.out.println("clienthandler: mi hanno assegnato il player di colore"+player.getColor());
 	}
 
 	public Player getPlayer() {
@@ -50,7 +51,7 @@ public abstract class ClientHandler implements Runnable {
 	public abstract void addObserver(MatchHandlerObserver matchObserver);
 	
 	
-	public abstract void addCommandHandler(ServerCommandHandler commandHandler);
+	public abstract void addCommandObserver(ServerCommandHandler commandHandler);
 
 
 	public void close() {

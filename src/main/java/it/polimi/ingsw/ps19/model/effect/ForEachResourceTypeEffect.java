@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * This effect gives n resources for each m other resources
@@ -35,7 +36,9 @@ public class ForEachResourceTypeEffect extends Effect{
 	}
 	public void applyEffect(Player player) {
 		calculateResource(player);
-		player.getResourceChest().addResource(givenResource);
+		ResourceChest rs=new ResourceChest();
+		rs.addResource(givenResource);
+		player.addResources(rs);
 	}
 	
 	@Override
