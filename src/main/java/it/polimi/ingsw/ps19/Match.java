@@ -8,6 +8,8 @@ import java.util.List;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.server.MatchHandler;
+import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * @author Mirko
@@ -20,8 +22,13 @@ public class Match {
 	private Player[] players;
 	private int addedPlayers;
 	private Player currentPlayer;
+	private MatchObserver observer;
+	private String[] playercolors= new String[4];
+	private int playerscreated;
+	
 
-	public Match(int numPlayers) {
+	public Match(int numPlayers, MatchHandler matchObserver) {
+		this.setMatchObserver(matchObserver);
 		try {
 			board = new Board();
 		} catch (FileNotFoundException e) {
@@ -31,15 +38,22 @@ public class Match {
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-
+		System.out.println("Match: sono stato creato e ho"+numPlayers+" giocatori");
+		playercolors[0]="verde";
+		playercolors[1]="rosso";
+		playercolors[2]="blu";
+		playercolors[3]="giallo";
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
+		
 		if (addedPlayers == players.length)
 			throw new MatchFullException();
-		else
+		else {
 			this.players[addedPlayers] = p;
-		addedPlayers++;
+			p.addObserver(this.observer);
+			addedPlayers++;
+		}
 	}
 	
 	
@@ -56,16 +70,20 @@ public class Match {
 		return addedPlayers;
 	}
 
-	public Player setPlayer(int id) {
-//		Player player = new Player();
-//		players.add(player);
+	public Player createAndReturnPlayer(int id) {
+		Player player = new Player("", playercolors[playerscreated]);
+		playerscreated++;
+		try {
+			this.addPlayer(player);
+		} catch (MatchFullException e) {
+			e.printStackTrace();
+		}
 //		addPlayerToBoard(player);
-//		return player;
-		return null;
+		return player;
 	}
 
 	public void setInitialPlayer() {
-//		currentPlayer = players.get(0);
+		currentPlayer = players[0];
 	}
 
 	public Player getCurrentPlayer() {
@@ -74,6 +92,10 @@ public class Match {
 	
 	public Floor getFloor(CardType cardType, int index){
 		return this.board.getFloor(cardType, index);
+	}
+	
+	public void setMatchObserver(MatchObserver observer){
+		this.observer=observer;
 	}
 
 }

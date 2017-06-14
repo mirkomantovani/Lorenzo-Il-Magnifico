@@ -23,8 +23,8 @@ public class AtomicExchangeEffect extends Effect {
 	
 	@Override
 	public void applyEffect(Player player) {
-		player.getResourceChest().subChest(resourcesOut);
-		player.getResourceChest().addChest(resourcesIn);	
+		player.addResources(resourcesIn);
+		player.subResources(resourcesOut);	
 	}
 	
 	@Override

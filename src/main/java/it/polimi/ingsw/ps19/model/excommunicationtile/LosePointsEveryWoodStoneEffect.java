@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
@@ -35,7 +36,9 @@ public class LosePointsEveryWoodStoneEffect extends Effect {
 			sum+=card.getCost().getWoodAmount();
 		}
 		this.victoryPoint.setAmount(victoryPoint.getAmount()*sum);
-		player.getResourceChest().subResource(victoryPoint);
+		ResourceChest rc=new ResourceChest();
+		rc.addResource(victoryPoint);
+		player.subResources(rc);
 	}
 
 }

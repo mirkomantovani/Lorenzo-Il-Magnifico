@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
+import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
  * @author Mirko
@@ -25,7 +26,8 @@ public class ClientHandlerSocket extends ClientHandler {
 	private ObjectInputStream inSocket;
 	private ObjectOutputStream outSocket;
 	private int clientNumber;
-	private ServerCommandHandler commandHandler;
+//	private ServerCommandHandler commandHandler;
+	private CommandObserver commandHandler;
 	private ServerInterface creator;
 	private MatchHandlerObserver matchObserver;
 
@@ -105,7 +107,8 @@ public class ClientHandlerSocket extends ClientHandler {
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
 			else if (matchObserver != null && matchObserver.isAllowed(command, player)) {
-				processCommand(command);
+//				processCommand(command);  //notify al controller (server command handler
+				commandHandler.notifyNewCommand(command);
 			} else if (!matchObserver.isAllowed(command, player) || matchObserver == null) {
 				try {
 					sendCommand(new InvalidCommand());
@@ -117,9 +120,9 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-	private void processCommand(ClientToServerCommand command) {
-		command.processCommand(commandHandler);
-	}
+//	private void processCommand(ClientToServerCommand command) {
+//		command.processCommand(commandHandler);
+//	}
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
@@ -128,7 +131,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	
 
 	@Override
-	public void addCommandHandler(ServerCommandHandler commandHandler) {
+	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.commandHandler = commandHandler;		
 	}
 

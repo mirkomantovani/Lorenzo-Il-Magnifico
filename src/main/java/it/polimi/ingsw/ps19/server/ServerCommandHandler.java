@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.ChosenPrivilegeCommand;
+import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.PlaceIntoIndustrialAreaCommand;
@@ -19,6 +20,7 @@ import it.polimi.ingsw.ps19.model.action.MarketAction;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
  * This class handles every command arriving from Client to Server, calling methods of MatchHandler
@@ -26,7 +28,7 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
  * @author Mirko
  *
  */
-public class ServerCommandHandler {
+public class ServerCommandHandler implements CommandObserver {
 
 	private MatchHandler handler;
 	private Match match;
@@ -34,6 +36,7 @@ public class ServerCommandHandler {
 	public ServerCommandHandler(MatchHandler matchHandler, Match match) {
 		this.handler = matchHandler;
 		this.match = match;
+		System.out.println("Server command handler: sono stato creato");
 	}
 
 	private Player getCurrentPlayer() {
@@ -148,6 +151,13 @@ public class ServerCommandHandler {
 
 		
 	}
+
+	@Override
+	public void notifyNewCommand(ClientToServerCommand command) {
+		command.processCommand(this);
+	}
+
+	
 	
 	//Others apply overloaded methods
 }

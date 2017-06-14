@@ -143,7 +143,7 @@ Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK
 	
 	private static void distributeResources(Player player,int m) {
 		ResourceChest resourceChest=new ResourceChest(10*m,10*m,10*m,10*m,10*m,10*m,10*m);
-		player.getResourceChest().addChest(resourceChest);
+//		player.getResourceChest().addChest(resourceChest);
 		
 	}
 }

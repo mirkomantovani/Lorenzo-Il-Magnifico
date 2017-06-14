@@ -35,7 +35,7 @@ public class TestAction {
 			e.printStackTrace();
 		}
 		mirko = new Player("Mirko","Nero");
-		mirko.getResourceChest().addChest(new ResourceChest(100,100,100,100,100,100,100));
+//		mirko.getResourceChest().addChest(new ResourceChest(100,100,100,100,100,100,100));
 		
 		Dice.ORANGE_DICE.getRandomFaceValue();
 		Dice.WHITE_DICE.getRandomFaceValue();

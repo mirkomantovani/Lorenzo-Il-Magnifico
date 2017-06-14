@@ -30,7 +30,7 @@ public abstract class IndustrialArea{
 	}
 	
 	public abstract List<DevelopmentCard> getPlayerCards(Player player);
-	
+
 	public SingleActionSpace getSingleActionSpace(){
 		return singleSlot;
 	}
@@ -38,6 +38,5 @@ public abstract class IndustrialArea{
 	public MultipleActionSpace getMultipleActionSpace(){
 		return multipleSlot;
 	}
-	
-	
+
 }
