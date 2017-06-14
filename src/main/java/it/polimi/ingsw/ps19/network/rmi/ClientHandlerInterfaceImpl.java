@@ -95,7 +95,7 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	}
 
 	@Override
-	public void addCommandHandler(ServerCommandHandler commandHandler) {
+	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.serverCommandHandler = commandHandler;
 	}
 

@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * @author matteo
@@ -19,16 +21,12 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public class Player {
 	
 	private String name;
-	
 	private String color;
-	
 	private Map<Color,FamilyMember> familyMembers;
-	
 	private ResourceChest resources;
-
 	private Map<CardType, List<DevelopmentCard>> decks;
-	
 	private Bonus bonuses;
+	private MatchObserver observer;
 	
 	
 	public Player(String name, String color){
@@ -157,6 +155,36 @@ public class Player {
 
 	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;
+	}
+	
+	
+	/**
+	 * This clone method returns a visible to all players Player
+	 * @author Mirko
+	 * @return
+	 */
+	public Player maskedClone() {
+		
+		Player maskedPlayer=new Player(this.name, this.color);
+		ResourceChest maskedRC=new ResourceChest();
+		
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
+		
+		maskedPlayer.setResources(maskedRC);
+		
+		return maskedPlayer;
+		
+	}
+	/**
+	 * The observer is needed to notify to the virtual view any change in the player status
+	 * @author Mirko
+	 * @param observer
+	 */
+	public void addObserver(MatchObserver observer) {
+		
+		
 	}
 
 

@@ -50,7 +50,7 @@ public abstract class ClientHandler implements Runnable {
 	public abstract void addObserver(MatchHandlerObserver matchObserver);
 	
 	
-	public abstract void addCommandHandler(ServerCommandHandler commandHandler);
+	public abstract void addCommandObserver(ServerCommandHandler commandHandler);
 
 
 	public void close() {

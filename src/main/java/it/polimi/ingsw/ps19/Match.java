@@ -8,6 +8,8 @@ import java.util.List;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.server.MatchHandler;
+import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * @author Mirko
@@ -20,8 +22,10 @@ public class Match {
 	private Player[] players;
 	private int addedPlayers;
 	private Player currentPlayer;
+	private MatchObserver observer;
 
-	public Match(int numPlayers) {
+	public Match(int numPlayers, MatchHandler matchObserver) {
+		this.setMatchObserver(matchObserver);
 		try {
 			board = new Board();
 		} catch (FileNotFoundException e) {
@@ -35,11 +39,14 @@ public class Match {
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
+		
 		if (addedPlayers == players.length)
 			throw new MatchFullException();
-		else
+		else {
 			this.players[addedPlayers] = p;
-		addedPlayers++;
+			p.addObserver(this.observer);
+			addedPlayers++;
+		}
 	}
 	
 	
@@ -65,7 +72,7 @@ public class Match {
 	}
 
 	public void setInitialPlayer() {
-//		currentPlayer = players.get(0);
+		currentPlayer = players[0];
 	}
 
 	public Player getCurrentPlayer() {
@@ -74,6 +81,10 @@ public class Match {
 	
 	public Floor getFloor(CardType cardType, int index){
 		return this.board.getFloor(cardType, index);
+	}
+	
+	public void setMatchObserver(MatchObserver observer){
+		this.observer=observer;
 	}
 
 }
