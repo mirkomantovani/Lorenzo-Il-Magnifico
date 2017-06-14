@@ -8,7 +8,8 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * this class represents both the harvest and the production area
+ * this class represents both the harvest and the production area, its multipleActionSpace will be initialized 
+ * by the heirs classes
  * 
  * @author Jimmy
  *
@@ -17,7 +18,6 @@ public abstract class IndustrialArea{
 	
 	protected final int SLOT_COST = 1;
 	protected final int MALUS = 3;
-	protected List<FamilyMember> members;
 	protected ResourceChest givenResources;
 
 	
@@ -30,5 +30,14 @@ public abstract class IndustrialArea{
 	}
 	
 	public abstract List<DevelopmentCard> getPlayerCards(Player player);
+	
+	public SingleActionSpace getSingleActionSpace(){
+		return singleSlot;
+	}
+	
+	public MultipleActionSpace getMultipleActionSpace(){
+		return multipleSlot;
+	}
+	
 	
 }

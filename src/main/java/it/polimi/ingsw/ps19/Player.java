@@ -45,7 +45,7 @@ public class Player {
 	
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
-			}
+		}
 
 		
 		this.name=name;
