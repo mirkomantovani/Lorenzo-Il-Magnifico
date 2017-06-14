@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.server.observers;
 
+import it.polimi.ingsw.ps19.Player;
+
 /**
  * This interface is implemented by the 
  * MatchHandler class. The only one that knows the state of the game and is able to determine
@@ -11,7 +13,7 @@ package it.polimi.ingsw.ps19.server.observers;
  */
 public interface MatchObserver {
 
-	public void notifyPlayerStatusChange();
+	public void notifyPlayerStatusChange(Player player);
 	
 //	public void notifyBoardChange();
 	

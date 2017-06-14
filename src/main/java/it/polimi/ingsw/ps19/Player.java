@@ -118,11 +118,6 @@ public class Player {
 	}
 
 
-
-	public ResourceChest getResources() {
-		return resources;
-	}
-
 	public void setResources(ResourceChest resources) {
 		this.resources = resources;
 	}
@@ -183,8 +178,19 @@ public class Player {
 	 * @param observer
 	 */
 	public void addObserver(MatchObserver observer) {
-		
-		
+		this.observer=observer;
+	}
+	
+	public void addResources(ResourceChest resourceChest){
+		this.resources.addChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	public void subResources(ResourceChest resourceChest){
+		this.resources.subChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
 	}
 
 

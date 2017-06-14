@@ -51,7 +51,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void initMatch() {
-		match = new Match(clients.size(),this);
+		match = new Match(clients.size(), this);
 		// match.setNotifier(this);
 		commandHandler = new ServerCommandHandler(this, match);
 		setPlayers();
@@ -312,10 +312,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	@Override
-	public void notifyPlayerStatusChange() {
-		Player player=match.getCurrentPlayer();
-		this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+	public void notifyPlayerStatusChange(Player player) {
+		Player currentPlayer = match.getCurrentPlayer();
+		if (player == currentPlayer) {
+			this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
+			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+		}
 	}
 
 	@Override
