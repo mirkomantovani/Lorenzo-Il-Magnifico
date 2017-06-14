@@ -31,4 +31,6 @@ public abstract class IndustrialArea{
 	
 	public abstract List<DevelopmentCard> getPlayerCards(Player player);
 	
+	
+	
 }

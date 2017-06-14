@@ -158,6 +158,20 @@ public class Player {
 	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append(super.toString() + "Player : " + this.getName() + "/n" + "Color : " + this.getColor() +
+						"/n" + "Status : " + this.getResources().toString() + "/n" + "Cards taken : /n/t Territory cards : "
+								+ this.getDeckOfType(CardType.TERRITORY).toString() + "/n/t Character cards : "
+								+ this.getDeckOfType(CardType.CHARACTER).toString() + "/n/t Building cards : " + 
+								this.getDeckOfType(CardType.BUILDING).toString() + "/n/t Venture cards : " +
+								this.getDeckOfType(CardType.VENTURE).toString() );
+		return string.toString();
+	}
+	 
+	
 
 
 	
