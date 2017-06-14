@@ -43,6 +43,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
+		System.out.println("match handler: sono stato creato");
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		Collections.shuffle(clients);
 		int i = 1;
 		for (ClientHandler c : clients) {
-			c.addPlayer(match.setPlayer(i));
+			c.addPlayer(match.createAndReturnPlayer(i));
 			c.addObserver(this);
 			c.addCommandObserver(commandHandler);
 			i++;
@@ -187,42 +188,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
-	// @Override
-	// public void genericNotifyToAll(String message) {
-	// this.notifyAllClients(new CommandNotification(message));
-	//
-	// }
 
-	/**
-	 * This method sends a new command to the current player
-	 * 
-	 * @param command
-	 */
-	// public void notifyCurrentPlayer(ServerToClientCommand command) {
-	// for (ClientHandler client : clients)
-	// if (client.getPlayer().equals(match.getCurrentPlayer())) {
-	// sendCommand(client, command);
-	// return;
-	// }
-	// }
 
-	/**
-	 * This method notifyies a generic player
-	 * 
-	 * @param command
-	 * @param player
-	 */
-	// public void notifyGenericPlayer(ServerToClientCommand command, Player
-	// player) {
-	// for (ClientHandler client : clients)
-	// if (client.getPlayer().equals(player))
-	// sendCommand(client, command);
-	// return;
-	// }
 
-	// public void notifyWinners(Map<Player, Boolean> winners) {
-	// notifyEndOfGame(winners);
-	// }
 
 	public void notifySetNext() {
 		setNext();

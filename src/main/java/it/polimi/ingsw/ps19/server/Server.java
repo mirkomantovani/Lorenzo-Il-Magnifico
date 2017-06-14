@@ -24,7 +24,10 @@ public class Server implements Runnable,ServerInterface {
 	
 	private Deque<ClientHandler> waitingClients;
 	
-	private Deque<MatchHandler> createdMatch;
+	/**
+	 * List of matches created
+	 */
+	private Deque<MatchHandler> createdMatches;
 	
 	private ServerSocketListener socketListener;
 	
@@ -74,7 +77,7 @@ public class Server implements Runnable,ServerInterface {
 	private void startServer() {
 		executor = Executors.newCachedThreadPool();
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
-		createdMatch = new ConcurrentLinkedDeque<MatchHandler>();
+		createdMatches = new ConcurrentLinkedDeque<MatchHandler>();
 		socketListener = new ServerSocketListener(this, port);
 		executor.submit(socketListener);
 		System.out.println("Preparing RMI");
@@ -151,13 +154,13 @@ public class Server implements Runnable,ServerInterface {
 //	}
 
 	private synchronized void createMatch() {
-		System.out.println("creando il match");
+		
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);
 		MatchHandler matchH = new MatchHandler(list, this);
 		executor.submit(matchH);  //I think this is doing an implicit run on the matchHandler?
-		createdMatch.add(matchH);
+		createdMatches.add(matchH);
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
 
 	}
@@ -202,7 +205,7 @@ public class Server implements Runnable,ServerInterface {
 	 */
 	private void closeMatches() {
 		List<MatchHandler> matchToClose = new ArrayList<MatchHandler>();
-		for (MatchHandler m : createdMatch)
+		for (MatchHandler m : createdMatches)
 			matchToClose.add(m);
 		for (MatchHandler m : matchToClose)
 			m.closeMatch();
@@ -213,7 +216,7 @@ public class Server implements Runnable,ServerInterface {
 
 	@Override
 	public synchronized void closeMatch(MatchHandler mh) {
-		createdMatch.remove(mh);
+		createdMatches.remove(mh);
 
 	}
 

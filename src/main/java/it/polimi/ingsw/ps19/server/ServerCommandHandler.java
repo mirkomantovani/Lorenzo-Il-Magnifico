@@ -36,6 +36,7 @@ public class ServerCommandHandler implements CommandObserver {
 	public ServerCommandHandler(MatchHandler matchHandler, Match match) {
 		this.handler = matchHandler;
 		this.match = match;
+		System.out.println("Server command handler: sono stato creato");
 	}
 
 	private Player getCurrentPlayer() {

@@ -23,6 +23,9 @@ public class Match {
 	private int addedPlayers;
 	private Player currentPlayer;
 	private MatchObserver observer;
+	private String[] playercolors= new String[4];
+	private int playerscreated;
+	
 
 	public Match(int numPlayers, MatchHandler matchObserver) {
 		this.setMatchObserver(matchObserver);
@@ -35,7 +38,11 @@ public class Match {
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-
+		System.out.println("Match: sono stato creato e ho"+numPlayers+" giocatori");
+		playercolors[0]="verde";
+		playercolors[1]="rosso";
+		playercolors[2]="blu";
+		playercolors[3]="giallo";
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
@@ -63,12 +70,16 @@ public class Match {
 		return addedPlayers;
 	}
 
-	public Player setPlayer(int id) {
-//		Player player = new Player();
-//		players.add(player);
+	public Player createAndReturnPlayer(int id) {
+		Player player = new Player("", playercolors[playerscreated]);
+		playerscreated++;
+		try {
+			this.addPlayer(player);
+		} catch (MatchFullException e) {
+			e.printStackTrace();
+		}
 //		addPlayerToBoard(player);
-//		return player;
-		return null;
+		return player;
 	}
 
 	public void setInitialPlayer() {
