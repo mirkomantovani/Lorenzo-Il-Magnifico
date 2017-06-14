@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.command.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
+import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.action.MarketAction;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
@@ -79,8 +80,30 @@ public class ServerCommandHandler {
 	}
 
 	
-	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand){
+	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand) {
+		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoIndustrialAreaCommand.getFamilyMember());
+		switch(placeIntoIndustrialAreaCommand.getIndustrialArea()){
+		case "bigHarvestArea": try {
+				handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
+		case "bigProductionArea" : try {
+			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea()));
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		default : try {
+			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea()));
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	}
 	
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
@@ -122,7 +145,7 @@ public class ServerCommandHandler {
 	}
 
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
-		// TODO Auto-generated method stub
+
 		
 	}
 	
