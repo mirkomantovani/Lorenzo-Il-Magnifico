@@ -32,6 +32,12 @@ public class ActionTest {
 
 		Board board = new Board();
 		
+		//teo errore non metti nella tower le carte giuste
+		System.out.println(board.getTower(CardType.TERRITORY).toString());
+		System.out.println(board.getTower(CardType.BUILDING).toString());
+		System.out.println(board.getTower(CardType.CHARACTER).toString());
+		System.out.println(board.getTower(CardType.VENTURE).toString());
+//		board.getTower(CardType.BUILDING).toString();
 		
 //		System.out.println("-press 1 to take a card \n-press 2 to do a market action");
 //		
@@ -143,7 +149,7 @@ Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK
 	
 	private static void distributeResources(Player player,int m) {
 		ResourceChest resourceChest=new ResourceChest(10*m,10*m,10*m,10*m,10*m,10*m,10*m);
-//		player.getResourceChest().addChest(resourceChest);
+		player.getResourceChest().addChest(resourceChest);
 		
 	}
 }

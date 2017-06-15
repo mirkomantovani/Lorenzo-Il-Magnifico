@@ -193,7 +193,7 @@ public class DeckCreator {
 				}
 				else {
 
-					cType=CardType.values()[cardType];
+					cType=CardType.values()[cardType-1];
 					forEachEffect=new ForEachTypeCardEffect(new VictoryPoint(vPoint), cType);
 					for(int i=19;i<39;i++)buffReader.readLine();
 					return forEachEffect;
@@ -203,7 +203,7 @@ public class DeckCreator {
 			}
 			else {
 
-				cType=CardType.values()[cardType];
+				cType=CardType.values()[cardType-1];
 				forEachEffect=new ForEachTypeCardEffect(new Coin(coin), cType);
 				for(int i=17;i<39;i++)buffReader.readLine();
 				return forEachEffect;
