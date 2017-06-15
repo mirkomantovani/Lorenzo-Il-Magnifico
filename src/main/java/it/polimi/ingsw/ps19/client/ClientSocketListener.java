@@ -17,6 +17,8 @@ public class ClientSocketListener implements Runnable{
 
 	private ObjectInputStream inSocket;
 	
+	private ServerToClientCommandObserver observer;
+	
 	public ClientSocketListener(ObjectInputStream inSocket) {
 		this.inSocket = inSocket;
 	}
@@ -29,12 +31,16 @@ public class ClientSocketListener implements Runnable{
 		while(true){
 			try {
 				command = (ServerToClientCommand)inSocket.readObject();
-				//TODO send a notify!
+				observer.notifyNewCommand(command);
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void addCommandObserver(ClientCommandHandler clientCommandHandler){
+		this.observer = clientCommandHandler;
 	}
 
 	

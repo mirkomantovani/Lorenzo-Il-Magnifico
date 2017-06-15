@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps19.command.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.InvalidCommand;
 import it.polimi.ingsw.ps19.command.LoseCommand;
+import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.WinCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
@@ -16,7 +17,7 @@ import it.polimi.ingsw.ps19.view.UserInterface;
  *
  *  this object modifies the view of the client by applying commands
  */
-public class ClientCommandHandler {
+public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	private UserInterface userInterface;
 	private NetworkInterface networkInterface;
@@ -63,6 +64,12 @@ public class ClientCommandHandler {
 
 	public void applyCommand(LoseCommand loseCommand) {
 		userInterface.lose();
+		
+	}
+
+	@Override
+	public void notifyNewCommand(ServerToClientCommand serverToClientCommand) {
+		serverToClientCommand.processCommand(this);
 		
 	}
 	

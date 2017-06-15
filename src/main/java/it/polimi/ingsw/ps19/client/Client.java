@@ -1,13 +1,11 @@
 package it.polimi.ingsw.ps19.client;
 
-import java.io.IOException;
 import java.util.Scanner;
 
-import it.polimi.ingsw.ps19.command.ProvaCommand;
-import it.polimi.ingsw.ps19.model.resource.Servant;
-import it.polimi.ingsw.ps19.network.ClientSocketInterface;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.network.NetworkInterfaceFactory;
+import it.polimi.ingsw.ps19.view.UserInterface;
+import it.polimi.ingsw.ps19.view.UserInterfaceFactory;
 
 /**
  * @author matteo
@@ -22,20 +20,22 @@ public class Client {
 	static Scanner  i;
 	public static void main(String[] args){
 		
+		NetworkInterface networkInterface;
+		UserInterface userInterface;
+		ClientCommandHandler handler;
+		ClientController controller;
+		
 		i=new Scanner(System.in);
-		
-		Servant serv = new Servant(3);
-		
+	
 		System.out.println("Select the Connection mode: \n1 - Socket\n2 - RMI ");
 		
 		int choice = i.nextInt();
-		
-		
-		NetworkInterface client = NetworkInterfaceFactory.getNetworkInterface(choice) ;
+			
+		networkInterface = NetworkInterfaceFactory.getNetworkInterface(choice) ;
 		
 		try {
 			System.out.println("I'm trying to connect");
-			client.connect();
+			networkInterface.connect();
 			System.out.println("Client Connected");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -46,6 +46,13 @@ public class Client {
 		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
 		
 		choice = i.nextInt();
+		
+		userInterface = UserInterfaceFactory.getUserInterface(choice);
+		
+		handler = new ClientCommandHandler(userInterface,networkInterface);
+		
+		//TODO we should istantiate a client controller to manage the view interactions
+		
 		
 		
 		
