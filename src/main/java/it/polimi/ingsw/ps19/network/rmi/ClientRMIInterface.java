@@ -6,6 +6,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import it.polimi.ingsw.ps19.client.ClientCommandHandler;
+import it.polimi.ingsw.ps19.client.ServerToClientCommandObserver;
 import it.polimi.ingsw.ps19.command.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
@@ -27,6 +29,7 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 	private Registry clientRegistry;
 	private ClientHandlerInterface clientHandler;
 	private ClientInterface client;   //to me, useless, but more readable?
+	private ServerToClientCommandObserver observer;
 	
 	public ClientRMIInterface(){
 		this.name = "ClientHandler";
@@ -74,7 +77,7 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 	//Questo metodo è implementato sia da clientInterface che da networkInterface chiedere info
 	@Override
 	public void notifyClient(ServerToClientCommand command){
-		//TODO this will have something like notifyObserver(command);
+		this.observer.notifyNewCommand(command);
 	}
 
 	@Override
@@ -90,5 +93,12 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 			e.printStackTrace();
 		} 
 	}
+
+	@Override
+	public void addCommandObserver(ClientCommandHandler handler) {
+		this.observer = handler;		
+	}
+	
+	
 
 }

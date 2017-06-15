@@ -51,6 +51,12 @@ public class Client {
 		
 		handler = new ClientCommandHandler(userInterface,networkInterface);
 		
+		System.out.println("client: addcommandobserver");
+		networkInterface.addCommandObserver(handler);
+		
+		
+		
+		
 		//TODO we should istantiate a client controller to manage the view interactions
 		
 		

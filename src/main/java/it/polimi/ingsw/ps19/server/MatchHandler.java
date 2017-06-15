@@ -52,6 +52,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void initMatch() {
+		try {
+		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
+		
 		match = new Match(clients.size(), this);
 		// match.setNotifier(this);
 		commandHandler = new ServerCommandHandler(this, match);
@@ -105,7 +111,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startTurn() {
-		sendToCurrentPlayer(new StartTurnCommand());
+//		sendToCurrentPlayer(new StartTurnCommand());
+		sendToAllPlayers(new StartTurnCommand());
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}

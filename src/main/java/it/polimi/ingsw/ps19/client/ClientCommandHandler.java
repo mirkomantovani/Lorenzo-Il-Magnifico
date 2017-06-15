@@ -38,8 +38,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(StartTurnCommand startTurnCommand) {
-		// TODO Auto-generated method stub
-		
+		userInterface.initializeMatch();
 	}
 
 	public void applyCommand(CloseClientCommand closeConnectionCommand) {

@@ -125,6 +125,7 @@ public class Server implements Runnable,ServerInterface {
 		System.out.println("Waiting clients: " + waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 //			timer.interrupt();
+		
 			createMatch();
 		}
 		System.out.println("Client Successfully added, dajeeee");
@@ -158,6 +159,9 @@ public class Server implements Runnable,ServerInterface {
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);
+		
+	
+		
 		MatchHandler matchH = new MatchHandler(list, this);
 		executor.submit(matchH);  //I think this is doing an implicit run on the matchHandler?
 		createdMatches.add(matchH);
