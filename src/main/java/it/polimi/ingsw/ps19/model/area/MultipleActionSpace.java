@@ -47,6 +47,8 @@ public class MultipleActionSpace extends ActionSpace {
 	
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
+		if(!checkAvailability(familyMember))
+			System.out.println("Non occupabile");
 		return familyMember.getActionValue() > this.actionValueRequired && checkAvailability(familyMember);
 	}
 	
@@ -68,7 +70,11 @@ public class MultipleActionSpace extends ActionSpace {
 
 	@Override
 	public void setFamilyMember(FamilyMember familyMember) {
-		this.members.add(familyMember);
+		if(isOccupable(familyMember)){
+			this.members.add(familyMember);
+			System.out.println("Successfully added");
+			
+		}
 	}
 
 	public ArrayList<FamilyMember> getMembers() {

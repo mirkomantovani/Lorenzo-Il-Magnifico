@@ -87,7 +87,7 @@ public class ActionTest {
 			for(DevelopmentCard card : player1.getDeckOfType(CardType.TERRITORY))
 				System.out.println(card);
 			
-			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea());
+			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea(), board.getHarvestArea().getSingleActionSpace());
 			
 			System.out.println("\n\nActivating harvest effect:\n");
 			try {
@@ -130,7 +130,7 @@ public class ActionTest {
 			
 //			player2.getDeckOfType(CardType.BUILDING).get(0).getPermanentEffect().applyEffect(player2);
 			
-Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea());
+Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea(), board.getProductionArea().getSingleActionSpace());
 			System.out.println("black dice value:"+player2.getFamilyMembers().get(Color.BLACK).getActionValue());
 			System.out.println("\n\nActivating production effect:\n");
 			try {

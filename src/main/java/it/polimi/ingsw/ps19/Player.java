@@ -1,13 +1,10 @@
 package it.polimi.ingsw.ps19;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -155,12 +152,12 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append(super.toString() + "Player : " + this.getName() + "/n" + "Color : " + this.getColor() +
-						"/n" + "Status : " + this.getResourceChest().toString() + "/n" + "Cards taken : /n/t Territory cards : "
-								+ this.getDeckOfType(CardType.TERRITORY).toString() + "/n/t Character cards : "
-								+ this.getDeckOfType(CardType.CHARACTER).toString() + "/n/t Building cards : " + 
-								this.getDeckOfType(CardType.BUILDING).toString() + "/n/t Venture cards : " +
-								this.getDeckOfType(CardType.VENTURE).toString() );
+		string.append("Player : " + this.getName() + "\n" + "Color : " + this.getColor() +
+						"\n" + "Status : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
+								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\n\t Character cards : "
+								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
+								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
+								+ this.getDeckOfType(CardType.VENTURE).toString() );
 		return string.toString();
 	}
 	 

@@ -54,24 +54,28 @@ public class ServerCommandHandler implements CommandObserver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
 		case "second" : try {
 				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getSecondMarket()));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
 		case "third" : try {
 				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getThirdMarket()));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
 		case "fourth" : try {
 				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
 		} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
+			break;
 		default : try {
 			handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
 		} catch (NotApplicableException e) {
@@ -84,27 +88,36 @@ public class ServerCommandHandler implements CommandObserver {
 
 	
 	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand) {
+		
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoIndustrialAreaCommand.getFamilyMember());
 		switch(placeIntoIndustrialAreaCommand.getIndustrialArea()){
-		case "bigHarvestArea": try {
-				handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea()));
-			} catch (NotApplicableException e) {
+		case "multipleHarvestArea": try {
+				handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea(), match.getBoard().getHarvestArea().getMultipleActionSpace()));
+		} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		
-		case "bigProductionArea" : try {
-			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea()));
+		}
+		break;
+		case "multipleProductionArea" : try {
+			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getProductionArea().getMultipleActionSpace()));
 		} catch (NotApplicableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		default : try {
-			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea()));
+		case "singleHarvestArea" : try {
+			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getHarvestArea().getSingleActionSpace()));
 		} catch (NotApplicableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		break;
+		case "singleProductionArea" : try {
+			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getProductionArea().getSingleActionSpace()));
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		break;
 	}
 	
 	}

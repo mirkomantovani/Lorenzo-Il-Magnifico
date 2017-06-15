@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public abstract class IndustrialArea{
 	
 	protected final int SLOT_COST = 1;
-	protected final int MALUS = 3;
+	protected final int MALUS = -3;
 	protected ResourceChest givenResources;
 
 	

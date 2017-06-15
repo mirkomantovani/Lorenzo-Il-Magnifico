@@ -46,6 +46,8 @@ public class SingleActionSpace extends ActionSpace{
 	public void setFamilyMember(FamilyMember familyMember) {
 		if(!isOccupied())
 			this.familyMember = familyMember;
+		else
+			System.out.println("Non occupabile!");
 	}
 
 

@@ -10,7 +10,7 @@ public class PlaceIntoIndustrialAreaCommand extends ClientToServerCommand {
 	private static final long serialVersionUID = -8748964103373380495L;
 	
 	private String familyMember;
-	private String industrialArea; // it should be bigHarvestArea - bigProductionArea - smallProductionArea - smallHarvestArea
+	private String industrialArea; // it should be multipleHarvestArea - multipleProductionArea - singleProductionArea - singleHarvestArea
 	
 	public String getFamilyMember() {
 		return familyMember;
