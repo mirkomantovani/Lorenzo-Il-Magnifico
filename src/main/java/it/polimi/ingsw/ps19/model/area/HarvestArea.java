@@ -19,8 +19,8 @@ public class HarvestArea extends IndustrialArea{
 	
 	public HarvestArea(){
 		super();
-		//The "MALUS" costant is defined in IndustrialArea
-		this.multipleSlot = new SingleActionSpace(SLOT_COST, new HarvestBonusEffect(MALUS));
+		//The "MALUS" constant is defined in IndustrialArea
+		this.multipleSlot = new MultipleActionSpace(SLOT_COST, new HarvestBonusEffect(MALUS));
 		
 		
 	}

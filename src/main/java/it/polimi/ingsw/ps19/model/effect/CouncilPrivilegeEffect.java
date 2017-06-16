@@ -1,6 +1,10 @@
 	package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.model.resource.Stone;
+import it.polimi.ingsw.ps19.model.resource.Wood;
 
 /**
  * @author matteo
@@ -24,13 +28,10 @@ public class CouncilPrivilegeEffect extends Effect {
 
 		
 	public void applyEffect(Player p){
-		//TODO
+		p.setCouncilPrivilege(privilegeAmount);
 	}
 	
-	
-	public void applyEffect(int choice, Player p) {
-		//TODO
-	}
+
 
 
 	@Override
@@ -42,4 +43,4 @@ public class CouncilPrivilegeEffect extends Effect {
 		
 		
 		
-	}
+	}	

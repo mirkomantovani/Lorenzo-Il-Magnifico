@@ -2,14 +2,14 @@ package it.polimi.ingsw.ps19;
 
 import java.io.IOException;
 
+import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.action.MarketAction;
-import it.polimi.ingsw.ps19.model.action.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Board;
-import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
@@ -32,6 +32,12 @@ public class ActionTest {
 
 		Board board = new Board();
 		
+		//teo errore non metti nella tower le carte giuste
+		System.out.println(board.getTower(CardType.TERRITORY).toString());
+		System.out.println(board.getTower(CardType.BUILDING).toString());
+		System.out.println(board.getTower(CardType.CHARACTER).toString());
+		System.out.println(board.getTower(CardType.VENTURE).toString());
+//		board.getTower(CardType.BUILDING).toString();
 		
 //		System.out.println("-press 1 to take a card \n-press 2 to do a market action");
 //		
@@ -81,7 +87,7 @@ public class ActionTest {
 			for(DevelopmentCard card : player1.getDeckOfType(CardType.TERRITORY))
 				System.out.println(card);
 			
-			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea());
+			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea(), board.getHarvestArea().getSingleActionSpace());
 			
 			System.out.println("\n\nActivating harvest effect:\n");
 			try {
@@ -124,7 +130,7 @@ public class ActionTest {
 			
 //			player2.getDeckOfType(CardType.BUILDING).get(0).getPermanentEffect().applyEffect(player2);
 			
-Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea());
+Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea(), board.getProductionArea().getSingleActionSpace());
 			System.out.println("black dice value:"+player2.getFamilyMembers().get(Color.BLACK).getActionValue());
 			System.out.println("\n\nActivating production effect:\n");
 			try {

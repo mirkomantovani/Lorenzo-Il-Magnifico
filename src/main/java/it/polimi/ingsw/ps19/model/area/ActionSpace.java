@@ -12,8 +12,8 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 public abstract class ActionSpace implements Occupable {
 
 	protected int actionValueRequired;
-
-
+	
+	
 	protected Effect effect;
 	
 	

@@ -5,9 +5,10 @@ import java.util.List;
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
-import it.polimi.ingsw.ps19.model.card.CardConstants;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -53,7 +54,7 @@ public class TakeCardAction extends Action {
 			
 			player.addCard(card);
 			floor.setCard(null);  //set to null when the player buys the card
-			player.getResourceChest().subChest(card.getCost());
+			player.subResources(card.getCost());
 			//if the player has a discount given by a leader card
 			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());

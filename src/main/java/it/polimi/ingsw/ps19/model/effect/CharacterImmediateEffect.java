@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps19.Player;
 public class CharacterImmediateEffect extends Effect{
 	
 	Effect immediateEffect;
-	CouncilPrivilegeEffect immediateEffectWithChoice;
+	CouncilPrivilegeEffect immediatePrivilegeEffect;
 	
 	
 	//TODO DA TESTARE!!!!!!!!!!
@@ -23,23 +23,19 @@ public class CharacterImmediateEffect extends Effect{
 	}
 	
 	public CharacterImmediateEffect(CouncilPrivilegeEffect immediateEffectWithChoice){
-		this.immediateEffectWithChoice = immediateEffectWithChoice;
+		this.immediatePrivilegeEffect = immediateEffectWithChoice;
 		
 	}
 	
 	@Override
 	public void applyEffect(Player p) {
 		immediateEffect.applyEffect(p);   
-		applyEffect(p); //This line activates the permanent effect
+		immediatePrivilegeEffect.applyEffect(p); //This line activates the permanent effect
 						//so that the related bonuses can be set
 						//and effect permanently the player's game 
 	}
 	
-	public void applyEffect(int choice, Player p){
-		immediateEffectWithChoice.applyEffect(choice,p);
-	//TODO 	if(this.getCard().getPermanentEffect() != null)
-	//TODO 		this.getCard().getPermanentEffect().applyEffect();
-	}
+
 
 	
 	@Override
@@ -47,6 +43,6 @@ public class CharacterImmediateEffect extends Effect{
 		if(immediateEffect!=null)
 			return immediateEffect.toString();
 		else
-			return immediateEffectWithChoice.toString();
+			return immediatePrivilegeEffect.toString();
 	}
 }

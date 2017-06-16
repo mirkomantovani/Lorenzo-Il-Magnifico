@@ -1,10 +1,17 @@
 package it.polimi.ingsw.ps19.model.resource;
 
+import java.io.Serializable;
+
 /**
  * @author matteo
  *
  */
-public abstract class Resource {
+public abstract class Resource implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2248805350205634404L;
 	
 	private int amount;
 	private ResourceType resourceType;

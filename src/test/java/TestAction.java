@@ -9,8 +9,8 @@ import org.junit.Test;
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
-import it.polimi.ingsw.ps19.model.action.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -35,7 +35,7 @@ public class TestAction {
 			e.printStackTrace();
 		}
 		mirko = new Player("Mirko","Nero");
-		mirko.getResourceChest().addChest(new ResourceChest(100,100,100,100,100,100,100));
+//		mirko.getResourceChest().addChest(new ResourceChest(100,100,100,100,100,100,100));
 		
 		Dice.ORANGE_DICE.getRandomFaceValue();
 		Dice.WHITE_DICE.getRandomFaceValue();

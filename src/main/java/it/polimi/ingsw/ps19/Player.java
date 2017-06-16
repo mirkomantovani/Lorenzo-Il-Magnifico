@@ -1,16 +1,16 @@
 package it.polimi.ingsw.ps19;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * @author matteo
@@ -19,16 +19,14 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public class Player {
 	
 	private String name;
-	
 	private String color;
-	
 	private Map<Color,FamilyMember> familyMembers;
-	
 	private ResourceChest resources;
-
 	private Map<CardType, List<DevelopmentCard>> decks;
-	
 	private Bonus bonuses;
+	private MatchObserver observer;
+	private int councilPrivilege;
+	private Map<String,LeaderCard> leaderCards;
 	
 	
 	public Player(String name, String color){
@@ -45,7 +43,7 @@ public class Player {
 	
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
-			}
+		}
 
 		
 		this.name=name;
@@ -120,11 +118,6 @@ public class Player {
 	}
 
 
-
-	public ResourceChest getResources() {
-		return resources;
-	}
-
 	public void setResources(ResourceChest resources) {
 		this.resources = resources;
 	}
@@ -133,10 +126,109 @@ public class Player {
 	public Map<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
+	
+	/**
+	 * Just pass the color's String of the family member and get the right one
+	 * @author Mirko
+	 * @return
+	 */
+	public FamilyMember getFamilyMember(String color){
+		return this.familyMembers.get(Color.valueOf(Color.class, color.toUpperCase()));
+		
+	}
+	
+	/**
+	 * @author Mirko
+	 * @param color 
+	 *           :the Color of the familyMember you wanna get
+	 * @return
+	 */
+	public FamilyMember getFamilyMember(Color color){
+		return this.familyMembers.get(color);
+		
+	}
 
 	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append("Player : " + this.getName() + "\n" + "Color : " + this.getColor() +
+						"\n" + "Status : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
+								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\n\t Character cards : "
+								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
+								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
+								+ this.getDeckOfType(CardType.VENTURE).toString() );
+		return string.toString();
+	}
+	 
+
+	
+	/**
+	 * This clone method returns a visible to all players Player
+	 * @author Mirko
+	 * @return
+	 */
+	public Player maskedClone() {
+		
+		Player maskedPlayer=new Player(this.name, this.color);
+		ResourceChest maskedRC=new ResourceChest();
+		
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
+		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
+		
+		maskedPlayer.setResources(maskedRC);
+		
+		return maskedPlayer;
+		
+	}
+	/**
+	 * The observer is needed to notify to the virtual view any change in the player status
+	 * @author Mirko
+	 * @param observer
+	 */
+	public void addObserver(MatchObserver observer) {
+		this.observer=observer;
+	}
+	
+	public void addResources(ResourceChest resourceChest){
+		this.resources.addChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	public void subResources(ResourceChest resourceChest){
+		this.resources.subChest(resourceChest);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	public int getCouncilPrivilege() {
+		return councilPrivilege;
+	}
+	public void setCouncilPrivilege(int councilPrivilege) {
+		this.councilPrivilege = councilPrivilege;
+	}
+	public Map<String,LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+	public void setLeaderCards(Map<String,LeaderCard> leaderCards) {
+		this.leaderCards = leaderCards;
+	}
+	public void removeLeaderCard(String leaderName) {
+		this.leaderCards.remove(leaderName);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	public void addLeaderCards(LeaderCard leaderCard){
+		this.leaderCards.put(leaderCard.getName(), leaderCard);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	
 
 
 	

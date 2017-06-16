@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.model.card.CardConstants;
+import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.BuildingDeck;
@@ -49,6 +49,9 @@ public class Board {
 		characterCards=new CharacterDeck("src/main/resources/files/filecharactercards.txt",CardConstants.DECK_LENGTH);
 		ventureCards=new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH);
 				
+		for(int i=0;i<CardConstants.DECK_LENGTH;i++)
+		System.out.println(buildingCards.getCard(i).toString());
+		
 		towers.put(CardType.TERRITORY,new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
 		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
 		towers.put(CardType.CHARACTER,new Tower(CardType.CHARACTER, characterCards,BoardInitializer.characterBonuses()));
@@ -111,6 +114,18 @@ public class Board {
 	
 	public static List getMilitaryRequirementsForTerritories() {
 		return militaryRequirementsForTerritories;
+	}
+	
+	/**
+	 * Method needed for the TakeCard Action
+	 * @author Mirko
+	 * @param cardType
+	 * @param index
+	 * @return
+	 */
+	public Floor getFloor(CardType cardType, int index){
+		return towers.get(cardType).getFloor(index);
+		
 	}
 	
 }

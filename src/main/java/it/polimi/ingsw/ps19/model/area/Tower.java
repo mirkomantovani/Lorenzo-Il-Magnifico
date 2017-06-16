@@ -23,9 +23,9 @@ public class Tower {
 	
 	private Deck<? extends DevelopmentCard> deck;
 	
-	private static int currentCard = 0; // index of the card on the top of the deck
+	private int currentCard = 0; // index of the card on the top of the deck
 	
-	private static int actionSpaceCost = 1;
+	private int actionSpaceCost = 1;
 	
 	
  	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Resource> bonuses){ 
@@ -45,6 +45,7 @@ public class Tower {
 			}
 	
 			actionSpaceCost = 1;
+			
 	} 
  	
  	/**
@@ -79,5 +80,25 @@ public class Tower {
  	public List<Floor> getFloors() {
 		return floors;
 	}
+
+	public Floor getFloor(int index) {
+		return floors.get(index);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		string.append( this.cardType.toString().toLowerCase() + " tower : "
+				+ " \n\t On the first floor the Dice value required is 1, and you can take the card : "  + 
+				 this.getFloor(0).getCard().toString() + "\n\t On the second floor the Dice value required is 3, "
+				 		+ "and you can take the card " + this.getFloor(1).getCard().toString() + 
+				 		"\n\t On the second floor the Dice value required is 5, "
+				 		+ "and you can take the card" + this.getFloor(2).getCard().toString() + 
+				 		"\n\t On the second floor the Dice value required is 7, "
+				 		+ "and you can take the card" + this.getFloor(3).getCard().toString());
+		return string.toString();
+	}
+ 	
+	
 	
 }

@@ -12,7 +12,7 @@ public class MultipleEffect extends Effect {
 
 	Effect firstEffect;
 	Effect secondEffect;
-	CouncilPrivilegeEffect secondEffectWithChoice;
+
 	
 	
 	public MultipleEffect(Effect firstEffect, Effect secondEffect){
@@ -21,20 +21,13 @@ public class MultipleEffect extends Effect {
 
 	}
 	
-	public MultipleEffect(Effect firstEffect, CouncilPrivilegeEffect secondEffectWithChoice){
-		this.firstEffect = firstEffect;
-		this.secondEffectWithChoice = secondEffectWithChoice;
-	}
+
 
 	public void applyEffect(Player p) {
 		firstEffect.applyEffect(p);
 		secondEffect.applyEffect(p);
 	}
 	
-	public void applyEffect(int choice,Player p){
-		firstEffect.applyEffect(p);
-		secondEffectWithChoice.applyEffect(choice,p);
-	}
 	
 	
 	
@@ -42,10 +35,7 @@ public class MultipleEffect extends Effect {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append(firstEffect.toString() + "\n");
-		if(secondEffect != null)
-			string.append("\t\t  and " + secondEffect.toString());
-		else
-			string.append("\t\t  and " + secondEffectWithChoice.toString());
+		string.append("\t\t  and " + secondEffect.toString());
 		return string.toString();
 	}
 
