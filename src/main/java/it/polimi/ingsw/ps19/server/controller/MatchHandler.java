@@ -52,8 +52,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
 		System.out.println("match handler: sono stato creato");
-		ArrayList<ArrayList<LeaderCard>> leaderSets = match.getLeaderCards()
-				.getStartingLeaderSets(match.getPlayers().length);
+//		leaderSets = match.getLeaderCards()
+//				.getStartingLeaderSets(match.getPlayers().length);
 	}
 
 	@Override
@@ -79,7 +79,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startLeaderDiscardPhase() {
-
+        leaderSets=match.getLeaderCards()
+		.getStartingLeaderSets(match.getPlayers().length);
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
 		}

@@ -86,8 +86,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(ChooseLeaderCardCommand chooseLeaderCardCommand) {
-		// TODO Auto-generated method stub
-		
+		userInterface.startDraft(chooseLeaderCardCommand.getPossibleChoices());
 	}
 
 	public void applyCommand(SolveExcommunicationCommand solveExcommunicationCommand) {

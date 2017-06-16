@@ -18,7 +18,7 @@ public class FileConstants {
 	public final static String TERRITORYCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforterritory.txt";
 	public final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/files/fileplayerboardrequirementsforterritory.txt";
 	public final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforcharacter.txt";
-	public final static String CHURCH_BONUSES = "src/main/resources/files/filefaithpointbonuses.txt";
+	public final static String CHURCH_BONUSES = "src/main/resources/files/fileboardfaithpointbonuses.txt";
 	public final static String PERSONAL_BONUS_TILES = "src/main/resources/files/filepersonalbonustiles.txt";
 	public final static String TERRITORYCARDS = "src/main/resources/files/fileterritorycards.txt";
 	public final static String BUILDINGCARDS  = "src/main/resources/files/filebuildingcards.txt";
