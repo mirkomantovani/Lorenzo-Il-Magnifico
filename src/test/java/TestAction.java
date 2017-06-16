@@ -26,7 +26,7 @@ public class TestAction {
 	@Before
 	public void setUp(){
 		try {
-			board = new Board();
+			board = new Board(4);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

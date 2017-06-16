@@ -1,7 +1,8 @@
-package it.polimi.ingsw.ps19.server;
+package it.polimi.ingsw.ps19.server.controller;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.server.ClientHandler;
 
 /**
  * This interface is used to implement the MVC pattern between the two ClientHandler 
@@ -22,7 +23,7 @@ public interface MatchHandlerObserver {
 	 *            : the player the will use the command
 	 * @return true if it is allowed false otherwise
 	 */
-	boolean isAllowed(ClientToServerCommand command, Player player);
+	boolean isAllowed(Player player);
 
 	/**
 	 * this method removes from the match the client handler "clientHandler" and

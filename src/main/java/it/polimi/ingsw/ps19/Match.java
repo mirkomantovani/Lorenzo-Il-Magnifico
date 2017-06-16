@@ -16,7 +16,7 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
-import it.polimi.ingsw.ps19.server.MatchHandler;
+import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**

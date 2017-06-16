@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19.server;
+package it.polimi.ingsw.ps19.server.controller;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
+import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
@@ -20,8 +21,12 @@ import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
+import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.ServerCommandHandler;
+import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
@@ -37,7 +42,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Match match;
 	private Thread roundTimer;
 
-	
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
@@ -51,15 +55,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void initMatch() {
-		
-		
+
 		match = new Match(clients.size(), this);
 		// match.setNotifier(this);
 		commandHandler = new ServerCommandHandler(this, match);
 		setPlayers();
 		// notifyAllStartMatch();
+
 		match.setInitialPlayer();
-		startMatch();
+
+		// startMatch(); non parte qui ma dopo aver scartato i familiari
 	}
 
 	/**
@@ -74,7 +79,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToAllPlayers(new InitializeMatchCommand());
 		startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
-//		 createTurnTimer();
+		// createTurnTimer();
 	}
 
 	/**
@@ -113,11 +118,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startTurn() {
-//		sendToCurrentPlayer(new StartTurnCommand());
+		// sendToCurrentPlayer(new StartTurnCommand());
 		sendToAllPlayers(new StartTurnCommand());
 		startRound();
 		// notifyCurrentPlayer(new CommandAskMove());
-//		 createTurnTimer();
+		// createTurnTimer();
 	}
 
 	// Method of notification
@@ -139,7 +144,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void startRound() {
 		sendToCurrentPlayer(new AskMoveCommand());
-		startRoundTimer();	
+		startRoundTimer();
 	}
 
 	/**
@@ -203,10 +208,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
-
-
-
-
 	public void notifySetNext() {
 		setNext();
 	}
@@ -232,25 +233,25 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	/**
 	 * method to make the ping timer start
 	 */
-	 public void startRoundTimer() {
-		 BufferedReader reader = null;
-			try {
-				reader = new BufferedReader(new FileReader(FileConstants.INITIAL_TIME));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+	public void startRoundTimer() {
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(FileConstants.INITIAL_TIME));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
-			int timeMillis = 0;
-			try {
-				timeMillis = Integer.parseInt(reader.readLine());
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	 roundTimer = new Thread(new RoundTimer(this, timeMillis));
-	 roundTimer.start();
-	 }
+		int timeMillis = 0;
+		try {
+			timeMillis = Integer.parseInt(reader.readLine());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		roundTimer = new Thread(new RoundTimer(this, timeMillis));
+		roundTimer.start();
+	}
 
 	/**
 	 * method to interrupt the turn timer if it is alive
@@ -282,11 +283,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	@Override
-	public boolean isAllowed(ClientToServerCommand command, Player player) {
-		if (getCurrentPlayer() == player)
-			return true;
-		else
-			return false;
+	public boolean isAllowed(Player player) {
+		if (getCurrentPlayer() != null) {
+			if (getCurrentPlayer() == player)
+				return true;
+			else
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -324,6 +328,34 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
+	}
+
+	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
+		// for now it's just setting the name of the user
+		try {
+			getRightPlayer(clientHandler).setName(username);
+		} catch (WrongClientHandlerException e) {
+			sendToClientHandler(new InvalidCommand(),clientHandler);
+
+		}
+
+	}
+
+	private void sendToClientHandler(ServerToClientCommand command, ClientHandler clientHandler) {
+		try {
+			clientHandler.sendCommand(command);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
+		for (ClientHandler c : clients) {
+			if(c==clientHandler)
+				return c.getPlayer();
+		}
+		throw new WrongClientHandlerException();
+		
 	}
 
 }
