@@ -18,7 +18,7 @@ public interface UserInterface {
 	
 	void askPassword();
 	
-	void initializeMatch(Board board, Player player);
+	void initializeMatch();
 	
 	void initializeTurn();
 	

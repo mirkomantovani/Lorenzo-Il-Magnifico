@@ -1,17 +1,54 @@
 package it.polimi.ingsw.ps19.client;
 
 
-import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
-import it.polimi.ingsw.ps19.model.card.Card;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
+import it.polimi.ingsw.ps19.view.InputObserver;
 import it.polimi.ingsw.ps19.view.UserInterface;
 /**
  * @author matteo
  *
  *  this is the game controller of the MVC pattern
  */
-public class ClientController {
+public class ClientController implements InputObserver{
+
+	private UserInterface userInterface;
+	private NetworkInterface networkInterface;
+	
+
+	
+	private void sendCommand(ClientToServerCommand command){
+		try {
+			networkInterface.sendCommand(command);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+
+	@Override
+	public void notifyName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void notifyPassword(String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void notifyChosenLeaderCard(String leaderCardName) {
+		sendCommand(new ChosenLeaderCardCommand(leaderCardName));
+	}
 	
 //	
 //	private UserInterface userInterface;

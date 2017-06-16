@@ -40,10 +40,10 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	
 	
 	@Override
-	public void initializeMatch(Board board, Player player) {
+	public void initializeMatch() {
 		print("A new game is about to start");
-		board.toString(); //o qualcosa di simile
-		player.toString();
+//		board.toString(); //o qualcosa di simile
+//		player.toString();
 	}
 
 	@Override
@@ -130,8 +130,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
-		// TODO Auto-generated method stub
-		
+		print("Select a leader card from the following: ");
+		for(int i = 0; i<leaderCards.size(); i++){
+			print("Number " + i + ":\n" + leaderCards.get(i).toString());
+		}
+		readerState = ClientConstants.SEND_CHOSEN_LEADERCARD;
 	}
 
 	
