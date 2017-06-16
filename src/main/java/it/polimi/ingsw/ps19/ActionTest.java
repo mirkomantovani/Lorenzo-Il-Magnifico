@@ -30,7 +30,7 @@ public class ActionTest {
 		distributeResources(player1, 10);
 		distributeResources(player2, 10);
 
-		Board board = new Board();
+		Board board = new Board(4);
 		
 		//teo errore non metti nella tower le carte giuste
 		System.out.println(board.getTower(CardType.TERRITORY).toString());
@@ -97,7 +97,7 @@ public class ActionTest {
 				
 			}
 			
-			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getFirstMarket());
+			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getMarktActionSpace("firstMarket"));
 			System.out.println("\n\nActivating market effect:\n");
 			try {
 				action6.apply();

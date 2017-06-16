@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.client;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
@@ -12,6 +13,7 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
 import it.polimi.ingsw.ps19.command.toserver.SolveExcommunicationCommand;
+import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -42,6 +44,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	public void applyCommand(StartTurnCommand startTurnCommand) {
 		// TODO Auto-generated method stub
+		userInterface.startTurn();
 		
 	}
 

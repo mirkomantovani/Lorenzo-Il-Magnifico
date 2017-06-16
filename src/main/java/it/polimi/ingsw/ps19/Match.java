@@ -55,11 +55,12 @@ public class Match {
 		playercolors[2] = "blu";
 		playercolors[3] = "giallo";
 		try {
-			DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
+			leaderCards = new LeaderDeck();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {

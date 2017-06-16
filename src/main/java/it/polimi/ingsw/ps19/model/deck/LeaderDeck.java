@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps19.model.deck;
 import java.io.IOException;
 import java.util.Random;
 
+import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 
 /**
@@ -13,8 +15,8 @@ public class LeaderDeck  {
 	
 	LeaderCard[] cards;
 	
-	public LeaderDeck(String filePath, int deckLength) throws IOException{
-		cards = DeckCreator.createLeaderCardDeck(filePath, deckLength);
+	public LeaderDeck() throws IOException{
+		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
 	}
 	
 	public void shuffleDeck() {
