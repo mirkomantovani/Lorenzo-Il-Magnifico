@@ -220,11 +220,23 @@ public class Player {
 	public void removeLeaderCard(String leaderName) {
 		this.leaderCards.remove(leaderName);
 		if(observer!=null)
-		this.observer.notifyPlayerStatusChange(this);
+			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
+			this.observer.notifyPlayerStatusChange(this);
+	}
+	public void activateLeaderCard(String name){
+		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);
+		if(observer!=null)
+			this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	public void payFaithPoint(){
+		ResourceChest rc = new ResourceChest();
+		rc.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
+		this.subResources(rc);
 		this.observer.notifyPlayerStatusChange(this);
 	}
 	

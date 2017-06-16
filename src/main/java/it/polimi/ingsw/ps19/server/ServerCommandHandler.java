@@ -3,14 +3,14 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
-import it.polimi.ingsw.ps19.command.toserver.ExcommunicationDecisionCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
@@ -52,41 +52,11 @@ public class ServerCommandHandler implements CommandObserver {
 		
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
 		
-		switch(placeIntoMarketCommand.getActionSpace()){
-		case "first" : try {
-				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
-			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case "second" : try {
-				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getSecondMarket()));
-			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case "third" : try {
-				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getThirdMarket()));
-			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case "fourth" : try {
-				handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
-		} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		}
-			break;
-		default : try {
-			handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getFirstMarket()));
-		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	try {
+		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace())));
+	} catch (NotApplicableException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 		
 	}
@@ -186,12 +156,19 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
-		// TODO Auto-generated method stub
+		handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());;
 		
 	}
 
-	public void applyCommand(ExcommunicationDecisionCommand excommunicationDecisionCommand) {
-		// TODO Auto-generated method stub
+	public void applyCommand(ChurchSupportCommand churchSupportCommand) {
+		if(churchSupportCommand.getDecision()){
+			handler.getCurrentPlayer().payFaithPoint();
+			ResourceChest rc = new ResourceChest();
+			rc.addResource(match.getChurchSupportPrizeInPeriod());
+			handler.getCurrentPlayer().addResources(rc);
+		} else {
+			handler.sendToCurrentPlayer(new NotifyExcommunicationCommand());
+		}
 		
 	}
 

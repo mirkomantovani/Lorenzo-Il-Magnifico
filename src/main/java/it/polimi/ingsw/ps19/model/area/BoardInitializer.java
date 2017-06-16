@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
 import it.polimi.ingsw.ps19.model.effect.NoEffect;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
@@ -140,7 +141,7 @@ public class BoardInitializer {
 		
 	}
 	
-	public static int[] churchBonuses() throws FileNotFoundException, IOException{
+	public static MilitaryPoint[] churchBonuses() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHURCH_BONUSES));
 		
@@ -156,7 +157,13 @@ public class BoardInitializer {
 			lineRead = reader.readLine();
 		}
 		
-		return bonuses;
+		MilitaryPoint[] military = new MilitaryPoint[15];
+		
+		for(int j = 0; j<bonuses.length; j++){
+			military[j] = new MilitaryPoint(bonuses[j]);
+		}
+		
+		return military;
 	}
 	
 	public static ArrayList<Integer> playerBoardBonusesForTerritory() throws FileNotFoundException, IOException{

@@ -37,8 +37,10 @@ public class Board {
 	private Deck<? extends DevelopmentCard> characterCards;
 	private Deck<? extends DevelopmentCard> ventureCards;
 	
+	private int numberOfPlayers;
+	
 
-	public Board() throws FileNotFoundException, IOException{
+	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
 		towers = new HashMap<>();
 		
@@ -59,11 +61,12 @@ public class Board {
 		
 		church = new Church();
 		councilPalace = new CouncilPalace();
-		market = new Market(4); //this method should return the number of players in the match
+		market = new Market(numberOfPlayers); //this method should return the number of players in the match
 		//TODO the market should take the number of players in the match, not the magic number 4
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
 		
+		this.numberOfPlayers = numberOfPlayers;
 	}
 	
 	public Tower getTower(CardType cardType){

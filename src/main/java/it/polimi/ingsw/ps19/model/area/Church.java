@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreator;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 
 /**
  * @author Mirko
@@ -17,6 +19,9 @@ public class Church {
 	private ExcommunicationTile excommunicationFirst;	
 	private ExcommunicationTile excommunicationSecond;	
 	private ExcommunicationTile excommunicationThird;
+	
+	private MilitaryPoint[] militaryPoints; //Those are the military points amount related to a specific 
+												 // amount of faithpoints (this values are taken from file);
 
 	
 	public Church() {
@@ -40,6 +45,14 @@ public class Church {
 						2*CardConstants.EXCOMMUNICATION_TILES/Period.values().length)];
 		//We're not gonna need the tiles anymore after choosing the 3 tiles of the match
 		tiles=null;
+		
+		militaryPoints = new MilitaryPoint[BoardConstants.CHURCHSLOTS];
+		try {
+			this.militaryPoints = BoardInitializer.churchBonuses();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public ExcommunicationTile getExcommunicationFirst() {
@@ -56,6 +69,12 @@ public class Church {
 		return excommunicationThird;
 	}
 
+	public MilitaryPoint[] getMilitaryPoints() {
+		return militaryPoints;
+	}
+	
+	
+	
 
 
 }
