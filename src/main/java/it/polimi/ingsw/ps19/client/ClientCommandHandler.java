@@ -29,7 +29,6 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	public void applyCommand(InvalidActionCommand ActionNotValidCommand) {
 		
-		
 	}
 
 	public void applyCommand(InvalidCommand invalidCommand) {

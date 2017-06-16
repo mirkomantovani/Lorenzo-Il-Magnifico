@@ -1,4 +1,6 @@
-package it.polimi.ingsw.ps19.server;
+package it.polimi.ingsw.ps19.launchers;
+
+import it.polimi.ingsw.ps19.server.Server;
 
 /**
  * @author Mirko

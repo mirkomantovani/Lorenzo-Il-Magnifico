@@ -1,7 +1,9 @@
-package it.polimi.ingsw.ps19.client;
+package it.polimi.ingsw.ps19.launchers;
 
 import java.util.Scanner;
 
+import it.polimi.ingsw.ps19.client.ClientCommandHandler;
+import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.network.NetworkInterfaceFactory;
 import it.polimi.ingsw.ps19.view.UserInterface;
@@ -14,7 +16,7 @@ import it.polimi.ingsw.ps19.view.UserInterfaceFactory;
  * connection and which UI he wants to use, and to set up the choice
  *
  */
-public class Client {
+public class ClientLauncher {
 	
 
 	static Scanner  i;
@@ -33,6 +35,16 @@ public class Client {
 			
 		networkInterface = NetworkInterfaceFactory.getNetworkInterface(choice) ;
 		
+		
+		
+		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
+		
+		choice = i.nextInt();
+		
+		userInterface = UserInterfaceFactory.getUserInterface(choice);
+		
+		handler = new ClientCommandHandler(userInterface,networkInterface);
+		
 		try {
 			System.out.println("I'm trying to connect");
 			networkInterface.connect();
@@ -43,18 +55,9 @@ public class Client {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
-		
-		choice = i.nextInt();
-		
-		userInterface = UserInterfaceFactory.getUserInterface(choice);
-		
-		handler = new ClientCommandHandler(userInterface,networkInterface);
-		
 		System.out.println("client: addcommandobserver");
 		networkInterface.addCommandObserver(handler);
-		
-		
+	
 		
 		
 		//TODO we should istantiate a client controller to manage the view interactions
