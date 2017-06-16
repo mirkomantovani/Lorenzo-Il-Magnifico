@@ -25,6 +25,8 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  */
 public class Match {
 
+	
+
 	private Board board;
 	// private List<Player> players;
 	private Player[] players;
@@ -153,5 +155,8 @@ public class Match {
 		return period;
 	}
 		
+	public LeaderDeck getLeaderCards() {
+		return leaderCards;
+	}
 
 }

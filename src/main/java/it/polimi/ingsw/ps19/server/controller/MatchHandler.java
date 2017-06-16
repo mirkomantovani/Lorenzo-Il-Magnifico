@@ -11,6 +11,7 @@ import java.util.List;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
+import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
@@ -24,6 +25,7 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
@@ -41,12 +43,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerInterface ServerInterface;
 	private Match match;
 	private Thread roundTimer;
+	private int leaderResponseCounter;
+	ArrayList<ArrayList<LeaderCard>> leaderSets;
+	private int cycle = 1;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
 		System.out.println("match handler: sono stato creato");
+		ArrayList<ArrayList<LeaderCard>> leaderSets = match.getLeaderCards()
+				.getStartingLeaderSets(match.getPlayers().length);
 	}
 
 	@Override
@@ -63,8 +70,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// notifyAllStartMatch();
 
 		match.setInitialPlayer();
+		// asking credentials to everyone ma se facciamo riconnessione alla
+		// partita deve essere
+		// chiesto ancora prima, dal server
+		startLeaderDiscardPhase();
 
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
+	}
+
+	private void startLeaderDiscardPhase() {
+
+		for (int i = 0; i < clients.size(); i++) {
+			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
+		}
+
+	}
+
+	public void sfws() {
+
 	}
 
 	/**
@@ -335,7 +358,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			getRightPlayer(clientHandler).setName(username);
 		} catch (WrongClientHandlerException e) {
-			sendToClientHandler(new InvalidCommand(),clientHandler);
+			sendToClientHandler(new InvalidCommand(), clientHandler);
 
 		}
 
@@ -351,11 +374,55 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
 		for (ClientHandler c : clients) {
-			if(c==clientHandler)
+			if (c == clientHandler)
 				return c.getPlayer();
 		}
 		throw new WrongClientHandlerException();
+
+	}
+
+	public void handleLeaderChoice(String name, ClientHandler clientHandler) {
+
+		try {
+			this.getRightPlayer(clientHandler).addLeaderCards(match.getLeaderCards().getCard(name));
+
+			removeLeaderFromSets(match.getLeaderCards().getCard(name));
+		} catch (WrongClientHandlerException e) {
+			e.printStackTrace();
+		}
+		leaderResponseCounter++;
+		if (leaderResponseCounter < match.getPlayers().length) {
+
+			leaderResponseCounter = 0;
+			for (int i = 0; i < clients.size(); i++) {
+				if (cycle == 3) {
+					try {
+						this.getRightPlayer(clients.get((i + cycle) % (match.getPlayers().length)))
+								.addLeaderCards(leaderSets.get(i).get(0));
+					} catch (WrongClientHandlerException e) {
+						e.printStackTrace();
+					}
+				} else {
+					if (i >= match.getPlayers().length - cycle) {
+						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)),
+								clients.get((i + cycle) % (match.getPlayers().length)));
+					} else {
+						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i + cycle));
+					}
+				}
+			}
+			cycle++;
+		}
 		
 	}
 
+	
+	private void removeLeaderFromSets(LeaderCard leaderCard) {
+		for (ArrayList<LeaderCard> set : leaderSets) {
+			for (LeaderCard card : set) {
+				if (leaderCard == card)
+					set.remove(card);
+			}
+		}
+	}
 }

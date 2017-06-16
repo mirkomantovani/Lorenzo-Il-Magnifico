@@ -189,14 +189,22 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	@Override
-	public void notifyNewCommand(SendCredentialsCommand command, ClientHandlerSocket clientHandlerSocket) {
-		command.processCommand(this,clientHandlerSocket);
+	public void notifyNewCommand(SendCredentialsCommand command, ClientHandler clientHandler) {
+		command.processCommand(this,clientHandler);
 	}
 
-	public void applyCommand(ChosenLeaderCardCommand chosenLeaderCardCommand) {
-		// TODO Auto-generated method stub
-		
+	
+
+	public void applyCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
+		handler.handleLeaderChoice(command.getName(),clientHandler);	
 	}
+
+	@Override
+	public void notifyNewCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
+		command.processCommand(this,clientHandler);
+	}
+	
+	
 
 	
 	

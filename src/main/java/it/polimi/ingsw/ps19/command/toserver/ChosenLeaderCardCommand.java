@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
+import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class ChosenLeaderCardCommand extends ClientToServerCommand {
@@ -17,8 +18,13 @@ public class ChosenLeaderCardCommand extends ClientToServerCommand {
 
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-		serverHandlerCommand.applyCommand(this);
+		System.out.println("SendCredentialCommand: you should not be here");
 		
+	}
+	
+	public void processCommand(ServerCommandHandler serverHandlerCommand,ClientHandler clientHandler) {
+		serverHandlerCommand.applyCommand(this,clientHandler);
+
 	}
 
 	public String getName() {

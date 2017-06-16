@@ -8,6 +8,7 @@ import java.net.Socket;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
@@ -120,8 +121,11 @@ public class ClientHandlerSocket extends ClientHandler {
 	private void notifyCommand(ClientToServerCommand command) {
 		if (command instanceof SendCredentialsCommand)
 			commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
-		else
+		else if (command instanceof ChosenLeaderCardCommand)
+			commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
+		else 
 			commandHandler.notifyNewCommand(command);
+			
 	}
 
 	@Override
