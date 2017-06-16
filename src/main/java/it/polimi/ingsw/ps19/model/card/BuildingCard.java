@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps19.model.card;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
+import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 
 /**
  * The Class BuildingCard.
@@ -57,6 +59,37 @@ public class BuildingCard extends DevelopmentCard {
 	@Override
 	public int getActivationCost() {
 		return this.productionActivationCost;
+	}
+	
+	public boolean hasProductionChoice(){
+		ProductionEffect productionEffect=
+		(ProductionEffect)this.getPermanentEffect();
+		if(productionEffect.isResourcesExchangeEffect()){
+			if(productionEffect.getResourcesExchangeEffect().hasAlternativeEffect())
+				return true;
+		}
+		return false;
+			
+	}
+	
+	
+	
+	public String[] getProductionChoice(){
+		String[] choices = null;
+		
+		ProductionEffect productionEffect=
+		(ProductionEffect)this.getPermanentEffect();
+		if(productionEffect.isResourcesExchangeEffect()){
+			ResourcesExchangeEffect resourcesExchangeEffect=productionEffect.getResourcesExchangeEffect();
+			choices=new String[2];
+			choices[0]=resourcesExchangeEffect.getNormalEffectToString();
+			choices[1]=resourcesExchangeEffect.getNormalEffectToString();
+//			
+		}
+
+		return choices;  //won't be equal to null if we check with method hasProductionChoice
+		//before calling this one
+			
 	}
 	
 	

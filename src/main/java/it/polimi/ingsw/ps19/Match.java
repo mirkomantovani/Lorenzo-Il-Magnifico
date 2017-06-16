@@ -2,12 +2,16 @@ package it.polimi.ingsw.ps19;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
+import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.server.MatchHandler;
@@ -25,10 +29,9 @@ public class Match {
 	private int addedPlayers;
 	private Player currentPlayer;
 	private MatchObserver observer;
-	private String[] playercolors= new String[4];
+	private String[] playercolors = new String[4];
 	private int playerscreated;
 	private LeaderDeck leaderCards;
-	
 
 	public Match(int numPlayers, MatchHandler matchObserver) {
 		this.setMatchObserver(matchObserver);
@@ -41,11 +44,11 @@ public class Match {
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-		System.out.println("Match: sono stato creato e ho"+numPlayers+" giocatori");
-		playercolors[0]="verde";
-		playercolors[1]="rosso";
-		playercolors[2]="blu";
-		playercolors[3]="giallo";
+		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
+		playercolors[0] = "verde";
+		playercolors[1] = "rosso";
+		playercolors[2] = "blu";
+		playercolors[3] = "giallo";
 		try {
 			DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
 		} catch (IOException e) {
@@ -55,7 +58,7 @@ public class Match {
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
-		
+
 		if (addedPlayers == players.length)
 			throw new MatchFullException();
 		else {
@@ -64,9 +67,7 @@ public class Match {
 			addedPlayers++;
 		}
 	}
-	
-	
-	
+
 	public Board getBoard() {
 		return board;
 	}
@@ -87,7 +88,7 @@ public class Match {
 		} catch (MatchFullException e) {
 			e.printStackTrace();
 		}
-//		addPlayerToBoard(player);
+		// addPlayerToBoard(player);
 		return player;
 	}
 
@@ -98,13 +99,27 @@ public class Match {
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
-	public Floor getFloor(CardType cardType, int index){
+
+	public Floor getFloor(CardType cardType, int index) {
 		return this.board.getFloor(cardType, index);
 	}
-	
-	public void setMatchObserver(MatchObserver observer){
-		this.observer=observer;
+
+	public void setMatchObserver(MatchObserver observer) {
+		this.observer = observer;
+	}
+
+	public List<String[]> getCurrentPlayerProductionChoices() {
+		List<String[]> choices = new ArrayList();
+		List<DevelopmentCard> buildingCards = this.getCurrentPlayer().getDeckOfType(CardType.BUILDING);
+		for (DevelopmentCard card : buildingCards) {
+
+			BuildingCard buildingCard = (BuildingCard) card;
+
+			if (buildingCard.hasProductionChoice()) {
+				choices.add(buildingCard.getProductionChoice());
+			}
+		}
+		return choices;
 	}
 
 }

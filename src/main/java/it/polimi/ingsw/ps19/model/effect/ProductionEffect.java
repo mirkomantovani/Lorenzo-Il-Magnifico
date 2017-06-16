@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.exception.NotAnExchangeEffectException;
 
 /**
  * This class represents the production effect of a building card, it differs from other effects because its actual effect
@@ -35,5 +36,18 @@ public class ProductionEffect extends Effect{
 	public String toString() {
 		return actualEffect.toString();
 	}
-
+	
+	public boolean isResourcesExchangeEffect(){
+		if(this.actualEffect instanceof ResourcesExchangeEffect)
+			return true;
+		else
+			return false;
+	}
+	
+	public ResourcesExchangeEffect getResourcesExchangeEffect(){
+		if(this.actualEffect instanceof ResourcesExchangeEffect)
+			return (ResourcesExchangeEffect)this.actualEffect;			
+		else throw new NotAnExchangeEffectException();
+	}
 }
+
