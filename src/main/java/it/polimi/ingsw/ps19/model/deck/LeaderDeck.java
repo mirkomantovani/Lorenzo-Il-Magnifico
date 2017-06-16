@@ -60,6 +60,15 @@ public class LeaderDeck  {
 		return this.cards[i];
 	}
 	
+	public LeaderCard getCard(String name){
+		for(LeaderCard c : this.cards){
+			if(c.getName().equals(name)){
+				return c;
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<ArrayList<LeaderCard>> getStartingLeaderSets(int numberOfPlayers){
 		this.shuffleDeck();
 	
