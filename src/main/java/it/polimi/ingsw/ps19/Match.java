@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
@@ -14,6 +15,7 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.server.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
@@ -32,11 +34,14 @@ public class Match {
 	private String[] playercolors = new String[4];
 	private int playerscreated;
 	private LeaderDeck leaderCards;
+	private Period period;
+	
+
 
 	public Match(int numPlayers, MatchHandler matchObserver) {
 		this.setMatchObserver(matchObserver);
 		try {
-			board = new Board();
+			board = new Board(numPlayers);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -121,5 +126,31 @@ public class Match {
 		}
 		return choices;
 	}
+	
+	public int getChurchSupportCostInPeriod(){
+		if(this.period == Period.FIRST){
+			return BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST;
+		} else if(this.period == Period.SECOND){
+			return BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST;
+		} else {
+			return BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST;
+		}
+	}
+		
+	public MilitaryPoint getChurchSupportPrizeInPeriod(){
+		
+		if(this.period == Period.FIRST){
+			return this.board.getChurch().getMilitaryPoints()[BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST];
+		} else if(this.period == Period.SECOND){
+			return this.board.getChurch().getMilitaryPoints()[BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST];
+		} else {
+			return this.board.getChurch().getMilitaryPoints()[BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST];
+		}
+	}
+	
+	public Period getPeriod(){
+		return period;
+	}
+		
 
 }

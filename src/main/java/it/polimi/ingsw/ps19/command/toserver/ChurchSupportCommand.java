@@ -7,21 +7,23 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
  * 
  * this class represent the client answer about the possible decision to pay to prevent excommunication
  *
+ *
+ * true if you want to support, false otherwise
  */
 /**
  * @author matteo
  *
  */
-public class ExcommunicationDecisionCommand extends ClientToServerCommand{
+public class ChurchSupportCommand extends ClientToServerCommand{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2379068517465682578L;
 	
-	private String decision;
+	private boolean decision;
 	
-	public ExcommunicationDecisionCommand(String decision){
+	public ChurchSupportCommand(boolean decision){
 		this.decision = decision;
 	}
 
@@ -30,7 +32,7 @@ public class ExcommunicationDecisionCommand extends ClientToServerCommand{
 		serverHandlerCommand.applyCommand(this);
 	}
 
-	public String getDecision() {
+	public boolean getDecision() {
 		return decision;
 	}
 	
