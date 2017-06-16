@@ -73,11 +73,8 @@ public class Server implements Runnable, ServerInterface {
 		createdMatches = new ConcurrentLinkedDeque<MatchHandler>();
 		socketListener = new ServerSocketListener(this, port);
 		executor.submit(socketListener);
-		System.out.println("Preparing RMI");
 		rmiListener = new ServerRMIListener(this);
-		System.out.println("RMI listener almost ready");
 		executor.submit(rmiListener);
-		System.out.println("It should be now ready");
 		while (!suppressServer) {
 			String scelta = null;
 			try {
@@ -86,7 +83,6 @@ public class Server implements Runnable, ServerInterface {
 			}
 
 			if ("Q".equals(scelta) || "q".equals(scelta)) {
-				System.out.println("Pressed q!");
 				suppressServer = true;
 				suppress();
 			}
@@ -104,14 +100,10 @@ public class Server implements Runnable, ServerInterface {
 	 */
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
-		System.out.println("Entering the real add client where a client is enqueued in the waiting client list");
 		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
 			startInitialTimer();
 		waitingClients.add(clientHandler);
-		System.out.println("Added in the deque the calling clientHandler");
 		executor.submit(clientHandler); // useless
-		System.out.println(
-				"Should have printed that something is running, or just something like the JavaScript promises..");
 		System.out.println("Waiting clients: " + waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 			timer.interrupt();

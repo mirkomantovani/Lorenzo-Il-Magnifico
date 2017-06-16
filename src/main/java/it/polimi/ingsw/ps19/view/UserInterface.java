@@ -1,13 +1,24 @@
 package it.polimi.ingsw.ps19.view;
 
+import java.util.List;
+
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
+
 /**
  * @author Mirko
  *
  */
 public interface UserInterface {
 
+	void askName();
 	
-	void initializeMatch();
+	void startDraft(List<LeaderCard> leaderCards);
+	
+	void askPassword();
+	
+	void initializeMatch(Board board, Player player);
 	
 	void initializeTurn();
 	
