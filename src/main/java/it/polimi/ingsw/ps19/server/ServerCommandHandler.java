@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsComm
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
@@ -190,6 +191,11 @@ public class ServerCommandHandler implements CommandObserver {
 	@Override
 	public void notifyNewCommand(SendCredentialsCommand command, ClientHandlerSocket clientHandlerSocket) {
 		command.processCommand(this,clientHandlerSocket);
+	}
+
+	public void applyCommand(ChosenLeaderCardCommand chosenLeaderCardCommand) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
