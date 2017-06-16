@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.constant.CardConstants;
@@ -13,7 +15,7 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
  */
 public class LeaderDeck  {
 	
-	LeaderCard[] cards;
+	private LeaderCard[] cards;
 	
 	public LeaderDeck() throws IOException{
 		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
@@ -56,6 +58,22 @@ public class LeaderDeck  {
 //		System.out.println(this.cards[i]);
 //		this.cards[i];
 		return this.cards[i];
+	}
+	
+	public ArrayList<ArrayList<LeaderCard>> getStartingLeaderSets(int numberOfPlayers){
+		this.shuffleDeck();
+	
+		List<ArrayList<LeaderCard>> box = new ArrayList<ArrayList<LeaderCard>>();
+		for(int j = 0; j<numberOfPlayers; j++){
+			List<LeaderCard> cards = new ArrayList<LeaderCard>();
+			for(int i = 0; i < 4; i++){
+				cards.add(this.getCard(i));
+			}
+			box.add((ArrayList<LeaderCard>) cards);
+			cards.clear();
+		}
+		
+		return (ArrayList<ArrayList<LeaderCard>>) box;
 	}
 
 }
