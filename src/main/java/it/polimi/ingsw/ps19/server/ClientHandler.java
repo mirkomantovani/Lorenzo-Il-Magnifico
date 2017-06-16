@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 
 /**
  * @author Mirko

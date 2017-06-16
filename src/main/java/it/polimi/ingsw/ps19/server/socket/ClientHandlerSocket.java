@@ -10,10 +10,11 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
-import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
+import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
@@ -74,7 +75,6 @@ public class ClientHandlerSocket extends ClientHandler {
 		return false;
 	}
 
-	
 	public void close() {
 		if (!closed) {
 			try {
@@ -86,7 +86,7 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		ClientToServerCommand command;
@@ -102,9 +102,11 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
-			else if (matchObserver != null && matchObserver.isAllowed(command, player)) {
-				commandHandler.notifyNewCommand(command);
-			} else if (!matchObserver.isAllowed(command, player) || matchObserver == null) {
+			else if (matchObserver != null && matchObserver.isAllowed(player)) {
+
+				notifyCommand(command);
+
+			} else if (!matchObserver.isAllowed(player) || matchObserver == null) {
 				try {
 					sendCommand(new InvalidCommand());
 				} catch (IOException e) {
@@ -115,16 +117,21 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
+	private void notifyCommand(ClientToServerCommand command) {
+		if (command instanceof SendCredentialsCommand)
+			commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
+		else
+			commandHandler.notifyNewCommand(command);
+	}
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
-		this.matchObserver=matchObserver;
+		this.matchObserver = matchObserver;
 	}
-	
 
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
-		this.commandHandler = commandHandler;		
+		this.commandHandler = commandHandler;
 	}
 
 }

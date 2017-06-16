@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,12 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  * @author matteo
  *
  */
-public class Player {
+public class Player implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7163473671124501218L;
 	
 	private String name;
 	private String color;

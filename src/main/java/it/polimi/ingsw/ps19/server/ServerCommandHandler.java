@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
@@ -27,7 +28,9 @@ import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
+import it.polimi.ingsw.ps19.server.socket.ClientHandlerSocket;
 
 /**
  * This class handles every command arriving from Client to Server, calling methods of MatchHandler
@@ -178,6 +181,15 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.sendToCurrentPlayer(new NotifyExcommunicationCommand());
 		}
 		
+	}
+
+	public void applyCommand(SendCredentialsCommand command, ClientHandler clientHandler) {
+		handler.handleCredentials(command.getUsername(),command.getPassword(),clientHandler);
+	}
+
+	@Override
+	public void notifyNewCommand(SendCredentialsCommand command, ClientHandlerSocket clientHandlerSocket) {
+		command.processCommand(this,clientHandlerSocket);
 	}
 
 	

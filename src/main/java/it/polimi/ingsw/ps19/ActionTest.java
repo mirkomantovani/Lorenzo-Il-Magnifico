@@ -97,6 +97,7 @@ public class ActionTest {
 				
 			}
 			
+
 			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getMarktActionSpace("firstMarket"));
 			System.out.println("\n\nActivating market effect:\n");
 			try {
@@ -105,7 +106,7 @@ public class ActionTest {
 				e.printStackTrace();
 				
 			}
-			
+
 			
 //			Action action5 = new CouncilPalaceAction(player1.getFamilyMembers().get(Color.ORANGE),board.getCouncilPalace());
 //			System.out.println("\n\nActivating council palace effect:\n");

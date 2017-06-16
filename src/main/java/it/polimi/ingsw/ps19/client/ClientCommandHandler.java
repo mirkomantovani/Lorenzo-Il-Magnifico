@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19.client;
 
+
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
@@ -90,6 +92,13 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(SolveExcommunicationCommand solveExcommunicationCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	public void applyCommand(AskAuthenticationCommand askAuthenticationCommand) {
 		// TODO Auto-generated method stub
 		
 	}
