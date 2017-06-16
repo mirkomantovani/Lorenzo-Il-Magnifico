@@ -42,6 +42,14 @@ public class ResourcesExchangeEffect extends Effect {
 		
 	}
 	
+	public String getNormalEffectToString(){
+		return this.normalExchangeEffect.toString();
+	}
+	
+	public String getAlternativeEffectToString(){
+		return this.alternativeExchangeEffect.toString();
+	}
+	
 	
 	/**
 	 * method to apply the chosen exchange alternative, if choice is 1,it applies the normal effect
@@ -79,10 +87,6 @@ public class ResourcesExchangeEffect extends Effect {
 		else return normalExchangeEffect.toString();
 		
 	}
-
-	
-	
-	
 
 
 }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
@@ -14,6 +15,7 @@ import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
@@ -119,6 +121,12 @@ public class ServerCommandHandler implements CommandObserver {
 			return;
 		}
 		
+	}
+	
+	public void applyCommand(ProductionCommand command){
+		handler.sendToCurrentPlayer(
+				new ChooseProductionExchangeEffectsCommand(
+						match.getCurrentPlayerProductionChoices()));
 	}
 
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) {
