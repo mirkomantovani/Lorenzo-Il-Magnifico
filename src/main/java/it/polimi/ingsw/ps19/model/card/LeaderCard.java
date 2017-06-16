@@ -1,9 +1,11 @@
 package it.polimi.ingsw.ps19.model.card;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
-public class LeaderCard extends Card{
+public class LeaderCard extends Card implements Serializable{
 	
 	
 	private LeaderCardRequirement requirement;
