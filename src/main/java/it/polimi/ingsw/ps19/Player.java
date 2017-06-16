@@ -222,8 +222,10 @@ public class Player {
 		if(observer!=null)
 		this.observer.notifyPlayerStatusChange(this);
 	}
-	public void addLeaderCards(String leaderName){
-		this.leaderCards.put(leaderName, value);
+	public void addLeaderCards(LeaderCard leaderCard){
+		this.leaderCards.put(leaderCard.getName(), leaderCard);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
 	}
 	
 	

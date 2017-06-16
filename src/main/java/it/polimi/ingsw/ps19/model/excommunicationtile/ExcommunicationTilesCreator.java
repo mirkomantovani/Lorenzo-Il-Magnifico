@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.IllegalCardTypeException;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
@@ -29,8 +30,6 @@ public class ExcommunicationTilesCreator {
 	/** The line read from file */
 	private static String lineRead;
 	
-	private static final String filePath="src/main/resources/files/fileexcommunicationtiles.txt";
-	
 	public static ExcommunicationTile[] createExcommunicationTiles(int tiles) throws IOException{
 		
 		Period period; 
@@ -47,7 +46,7 @@ public class ExcommunicationTilesCreator {
 		CardType cardType;
 		ExcommunicationTile[] tilesArray=new ExcommunicationTile[tiles];
 		
-		buffReader = new BufferedReader(new FileReader(filePath));
+		buffReader = new BufferedReader(new FileReader(FileConstants.EXCOMMUNICATIONTILES));
 		lineRead = buffReader.readLine();  //line 1  	
 		while (lineRead!=null) {
 			

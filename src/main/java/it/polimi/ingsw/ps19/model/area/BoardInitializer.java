@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
@@ -24,23 +25,14 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
  */
 public class BoardInitializer {
 	
-	private final static String BONUSES_TERRITORY_TOWER = "src/main/resources/files/fileboardterritorybonuses.txt";
-	private final static String BONUSES_BUILDING_TOWER = "src/main/resources/files/fileboardbuildingbonuses.txt";
-	private final static String BONUSES_CHARACTER_TOWER = "src/main/resources/files/fileboardcharacterbonuses.txt";
-	private final static String BONUSES_VENTURE_TOWER = "src/main/resources/files/fileboardventurebonuses.txt";
-	private final static String BONUSES_COUNCIL_PALACE = "src/main/resources/files/fileboardcouncilpalacebonuses.txt";
-	private final static String TERRITORYCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforterritory.txt";
-	private final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/files/fileplayerboardrequirementsforterritory.txt";
-	private final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforcharacter.txt";
-	private final static String CHURCH_BONUSES = "src/main/resources/files/filefaithpointbonuses.txt";
-	private final static String PERSONAL_BONUS_TILES = "src/main/resources/files/filepersonalbonustiles.txt";
+	
 	
 	
 	public static ArrayList<Resource> territoryBonuses() throws FileNotFoundException, IOException{
 		
 		ArrayList<Resource> territoryBonuses = new ArrayList<Resource>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_TERRITORY_TOWER));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.BONUSES_TERRITORY_TOWER));
 		
 		String lineRead = reader.readLine();
 		
@@ -59,7 +51,7 @@ public class BoardInitializer {
 		
 		ArrayList<Resource> buildingBonuses = new ArrayList<Resource>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_BUILDING_TOWER));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.BONUSES_BUILDING_TOWER));
 		
 		String lineRead = reader.readLine();
 		
@@ -77,7 +69,7 @@ public class BoardInitializer {
 		
 		ArrayList<Resource> characterBonuses = new ArrayList<Resource>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_CHARACTER_TOWER));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.BONUSES_CHARACTER_TOWER));
 		String lineRead = reader.readLine();
 		
 		while(lineRead != null){
@@ -95,7 +87,7 @@ public class BoardInitializer {
 		
 		ArrayList<Resource> ventureBonuses = new ArrayList<Resource>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_VENTURE_TOWER));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.BONUSES_VENTURE_TOWER));
 		
 		String lineRead = reader.readLine();
 		
@@ -113,7 +105,7 @@ public class BoardInitializer {
 	public static MultipleEffect councilPalaceBonuses() throws FileNotFoundException, IOException{
 		
 
-		BufferedReader reader = new BufferedReader(new FileReader(BONUSES_COUNCIL_PALACE));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.BONUSES_COUNCIL_PALACE));
 		
 		String lineRead = reader.readLine();
 		
@@ -150,7 +142,7 @@ public class BoardInitializer {
 	
 	public static int[] churchBonuses() throws FileNotFoundException, IOException{
 		
-		BufferedReader reader = new BufferedReader(new FileReader(CHURCH_BONUSES));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHURCH_BONUSES));
 		
 		int[] bonuses = new int[15];
 		
@@ -169,7 +161,7 @@ public class BoardInitializer {
 	
 	public static ArrayList<Integer> playerBoardBonusesForTerritory() throws FileNotFoundException, IOException{
 		
-		BufferedReader reader = new BufferedReader(new FileReader(TERRITORYCARD_PLAYER_BONUSES));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.TERRITORYCARD_PLAYER_BONUSES));
 		
 		ArrayList<Integer> bonusesForTerritory = new ArrayList<Integer>();
 		
@@ -186,7 +178,7 @@ public class BoardInitializer {
 	
 	public static ArrayList<Integer> playerBoardBonusesForCharacter() throws FileNotFoundException, IOException{
 		
-		BufferedReader reader = new BufferedReader(new FileReader(CHARACTERCARD_PLAYER_BONUSES));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHARACTERCARD_PLAYER_BONUSES));
 		
 		ArrayList<Integer> bonusesForCharacter = new ArrayList<Integer>();
 		String lineRead = reader.readLine();
@@ -202,7 +194,7 @@ public class BoardInitializer {
 	
 	public static ArrayList<Integer> playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
 		
-		BufferedReader reader = new BufferedReader(new FileReader(TERRITORYCARD_PLAYER_REQUIREMENTS));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.TERRITORYCARD_PLAYER_REQUIREMENTS));
 		
 		ArrayList<Integer> requirementsForTerritory = new ArrayList<Integer>();
 		String lineRead = reader.readLine();
@@ -219,7 +211,7 @@ public class BoardInitializer {
 	
 	public static PersonalBonusTile[] createPersonalBonusTiles(int tilesNumber) throws NumberFormatException, IOException{
 		
-		BufferedReader reader = new BufferedReader(new FileReader(PERSONAL_BONUS_TILES));
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.PERSONAL_BONUS_TILES));
 		PersonalBonusTile[] tiles = new PersonalBonusTile[tilesNumber];
 		InstantResourcesEffect productionEffect;
 		InstantResourcesEffect harvestEffect;

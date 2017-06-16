@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps19;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -44,7 +46,12 @@ public class Match {
 		playercolors[1]="rosso";
 		playercolors[2]="blu";
 		playercolors[3]="giallo";
-		DeckCreator.createLeaderCardDeck(DeckCreator., deckLength)
+		try {
+			DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
