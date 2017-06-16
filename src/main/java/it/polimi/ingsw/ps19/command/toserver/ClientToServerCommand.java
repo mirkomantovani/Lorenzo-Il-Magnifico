@@ -1,9 +1,14 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toserver;
 
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
+/**
+ * @author matteo
+ * this class represent a generic command that a client needs to submit to the server
+ *
+ */
 public abstract class ClientToServerCommand implements Serializable{
 
 	/**

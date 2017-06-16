@@ -7,6 +7,7 @@ import java.util.Map;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
@@ -24,6 +25,8 @@ public class Player {
 	private Map<CardType, List<DevelopmentCard>> decks;
 	private Bonus bonuses;
 	private MatchObserver observer;
+	private int councilPrivilege;
+	private Map<String,LeaderCard> leaderCards;
 	
 	
 	public Player(String name, String color){
@@ -202,6 +205,20 @@ public class Player {
 		if(observer!=null)
 		this.observer.notifyPlayerStatusChange(this);
 	}
+	public int getCouncilPrivilege() {
+		return councilPrivilege;
+	}
+	public void setCouncilPrivilege(int councilPrivilege) {
+		this.councilPrivilege = councilPrivilege;
+	}
+	public Map<String,LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+	public void setLeaderCards(Map<String,LeaderCard> leaderCards) {
+		this.leaderCards = leaderCards;
+	}
+	
+	
 
 
 	

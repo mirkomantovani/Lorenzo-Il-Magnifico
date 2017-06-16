@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.network;
 
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 
 public interface NetworkInterface{
 

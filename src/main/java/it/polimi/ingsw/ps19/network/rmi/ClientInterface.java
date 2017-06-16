@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.network.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 
 /**
  * RMI client interface

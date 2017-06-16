@@ -5,11 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.CloseClientCommand;
-import it.polimi.ingsw.ps19.command.InvalidCommand;
-import it.polimi.ingsw.ps19.command.RequestClosureCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;

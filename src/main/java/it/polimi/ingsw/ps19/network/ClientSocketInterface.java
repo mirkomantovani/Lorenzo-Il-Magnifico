@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import it.polimi.ingsw.ps19.client.ClientSocketListener;
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 
 /**

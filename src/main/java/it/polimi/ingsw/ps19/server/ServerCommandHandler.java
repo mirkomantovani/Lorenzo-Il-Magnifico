@@ -4,14 +4,18 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
-import it.polimi.ingsw.ps19.command.ChosenPrivilegeCommand;
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.InvalidActionCommand;
-import it.polimi.ingsw.ps19.command.PlaceIntoCouncilPalaceCommand;
-import it.polimi.ingsw.ps19.command.PlaceIntoIndustrialAreaCommand;
-import it.polimi.ingsw.ps19.command.PlaceIntoMarketCommand;
-import it.polimi.ingsw.ps19.command.RequestClosureCommand;
-import it.polimi.ingsw.ps19.command.TakeCardCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
+import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ExcommunicationDecisionCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
@@ -19,6 +23,7 @@ import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.action.MarketAction;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
@@ -161,13 +166,31 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
-
+		
+			for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
+				handler.getCurrentPlayer().addResources(rc);
+			}
 		
 	}
 
 	@Override
 	public void notifyNewCommand(ClientToServerCommand command) {
 		command.processCommand(this);
+	}
+
+	public void applyCommand(DiscardLeaderCardCommand discardLeaderCardCommand) {
+		handler.sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1));
+		
+	}
+
+	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(ExcommunicationDecisionCommand excommunicationDecisionCommand) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

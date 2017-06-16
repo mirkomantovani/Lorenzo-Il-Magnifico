@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.command;
 
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 
 public class AskMoveCommand extends ServerToClientCommand {
 

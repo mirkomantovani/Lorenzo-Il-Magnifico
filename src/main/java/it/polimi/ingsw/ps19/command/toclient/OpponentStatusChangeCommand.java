@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.command.toclient;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
 
 /**
  * @author Mirko

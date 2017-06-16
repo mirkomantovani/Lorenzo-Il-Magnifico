@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 
 /**
  * @author Mirko

@@ -1,9 +1,8 @@
 package it.polimi.ingsw.ps19.client;
 
 
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.model.card.Card;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;

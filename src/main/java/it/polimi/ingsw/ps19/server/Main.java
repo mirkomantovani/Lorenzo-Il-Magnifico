@@ -4,8 +4,7 @@ import java.io.IOException;
 
 import java.net.Socket;
 
-//import it.polimi.ingsw.ps19.command.ProvaCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 public class Main {

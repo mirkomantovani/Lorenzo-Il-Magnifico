@@ -1,7 +1,12 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toclient;
 
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
+/**
+ * @author matteo
+ * the command to notify the client that he sent a not valid command
+ *
+ */
 public class InvalidCommand extends ServerToClientCommand{
 
 	/**

@@ -1,8 +1,13 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toserver;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
+/**
+ * @author matteo
+ * the client uses this command to take a card from the game board and to place a pawn in the related floor
+ *
+ */
 public class TakeCardCommand extends ClientToServerCommand {
 
 	/**

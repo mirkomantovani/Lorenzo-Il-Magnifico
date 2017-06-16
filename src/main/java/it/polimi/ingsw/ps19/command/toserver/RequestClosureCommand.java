@@ -1,7 +1,12 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toserver;
 
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
+/**
+ * @author matteo
+ * the command to ask to the server to close the connection 
+ *
+ */
 public class RequestClosureCommand extends ClientToServerCommand {
 
 	/**

@@ -2,12 +2,11 @@ package it.polimi.ingsw.ps19;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.server.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
@@ -25,6 +24,7 @@ public class Match {
 	private MatchObserver observer;
 	private String[] playercolors= new String[4];
 	private int playerscreated;
+	private LeaderDeck leaderCards;
 	
 
 	public Match(int numPlayers, MatchHandler matchObserver) {

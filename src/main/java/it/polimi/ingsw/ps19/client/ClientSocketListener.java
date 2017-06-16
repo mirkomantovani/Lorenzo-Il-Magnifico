@@ -3,8 +3,8 @@ package it.polimi.ingsw.ps19.client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 
 
 /**

@@ -1,7 +1,13 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toserver;
 
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
+/**
+ * @author matteo
+ * 
+ * the client use this command to place a pawn in the council palace
+ *
+ */
 public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 	
 	/**

@@ -6,11 +6,11 @@ import java.util.List;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.ServerToClientCommand;
-import it.polimi.ingsw.ps19.command.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;

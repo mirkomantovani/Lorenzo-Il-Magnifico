@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.server;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 
 /**
  * This interface is used to implement the MVC pattern between the two ClientHandler 
