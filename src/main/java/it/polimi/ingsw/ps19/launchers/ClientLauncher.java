@@ -37,11 +37,12 @@ public class ClientLauncher {
 		
 		
 		
-		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
+		System.out.println("Choose user interface: \n1 - Command Line Interface\n2 - Graphic User Interface");
 		
+		controller = new ClientController();
 		choice = i.nextInt();
 		
-		userInterface = UserInterfaceFactory.getUserInterface(choice);
+		userInterface = UserInterfaceFactory.getUserInterface(choice, controller);
 		
 		handler = new ClientCommandHandler(userInterface,networkInterface);
 		

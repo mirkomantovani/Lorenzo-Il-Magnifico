@@ -1,11 +1,13 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
 
 	@Override
-	public void initializeMatch() {
+	public void initializeMatch(Board board, Player player) {
 		// TODO Auto-generated method stub
 		
 	}
