@@ -145,7 +145,7 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.applyAction(action);
 		} catch (NotApplicableException e) {
 			handler.sendToCurrentPlayer(new InvalidActionCommand());
-			handler.sendToCurrentPlayer(new AskMoveCommand());
+//			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
 		}
 		

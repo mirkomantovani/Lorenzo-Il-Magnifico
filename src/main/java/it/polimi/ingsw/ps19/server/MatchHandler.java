@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps19.server;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +19,7 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
+import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 
 /**
  * @author Mirko
@@ -27,18 +32,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerCommandHandler commandHandler;
 	private ServerInterface ServerInterface;
 	private Match match;
-	// private TurnTimer timer;
-	private Thread timerThread;
+	private Thread roundTimer;
 
-	/**
-	 * This constructor creates the clients and sets the observer to notify the
-	 * server
-	 * 
-	 * @param clients
-	 *            connected to the game
-	 * @param ServerInterface
-	 *            main server to which will be notified the end of the game
-	 */
+	
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
@@ -60,7 +56,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		setPlayers();
 		// notifyAllStartMatch();
 		match.setInitialPlayer();
-		startTurn();
+		startMatch();
 	}
 
 	/**
@@ -70,6 +66,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	// public int getCurrentIdPlayer() {
 	// return match.getCurrentPlayer().getPlayerId();
 	// }
+
+	private void startMatch() {
+		sendToAllPlayers(new InitializeMatchCommand());
+		startTurn();
+		// notifyCurrentPlayer(new CommandAskMove());
+//		 createTurnTimer();
+	}
 
 	/**
 	 * 
@@ -109,8 +112,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startTurn() {
 //		sendToCurrentPlayer(new StartTurnCommand());
 		sendToAllPlayers(new StartTurnCommand());
+		startRound();
 		// notifyCurrentPlayer(new CommandAskMove());
-		// createTurnTimer();
+//		 createTurnTimer();
 	}
 
 	// Method of notification
@@ -129,6 +133,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	// }
 	// checkDisconnection();
 	// }
+
+	private void startRound() {
+		sendToCurrentPlayer(new AskMoveCommand());
+		startRoundTimer();	
+	}
 
 	/**
 	 * notifying command in broadcast
@@ -220,11 +229,25 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	/**
 	 * method to make the ping timer start
 	 */
-	// public void createTurnTimer() {
-	// timer = new TurnTimer(this);
-	// timerThread = new Thread(timer);
-	// timerThread.start();
-	// }
+	 public void startRoundTimer() {
+		 BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader(FileConstants.INITIAL_TIME));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			int timeMillis = 0;
+			try {
+				timeMillis = Integer.parseInt(reader.readLine());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	 roundTimer = new Thread(new RoundTimer(this, timeMillis));
+	 roundTimer.start();
+	 }
 
 	/**
 	 * method to interrupt the turn timer if it is alive
@@ -296,8 +319,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	public void turnTimerExpired() {
-		
+	public void roundTimerExpired() {
+		sendToCurrentPlayer(new RoundTimerExpiredCommand());
 	}
 
 }

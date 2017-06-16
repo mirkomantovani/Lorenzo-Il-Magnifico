@@ -83,4 +83,12 @@ public class ServerRMIListener implements Runnable {
 	public void removeWaitingClient(ClientHandler clientHandler) {
 		creator.removeClient(clientHandler);
 	}
+
+	public void endListening() {
+		try {
+			registry.unbind(name);
+		} catch (RemoteException | NotBoundException e) {
+		}
+		registry = null;		
+	}
 }

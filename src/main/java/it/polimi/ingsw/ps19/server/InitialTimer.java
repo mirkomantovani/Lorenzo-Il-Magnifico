@@ -12,9 +12,7 @@ public class InitialTimer implements Runnable {
 		this.millis=millis;
 	}
 
-	/**
-	 * the effective timer
-	 */
+
 	@Override
 	public void run() {
 

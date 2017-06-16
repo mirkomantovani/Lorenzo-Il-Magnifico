@@ -26,16 +26,13 @@ public class ClientHandlerSocket extends ClientHandler {
 	private ObjectInputStream inSocket;
 	private ObjectOutputStream outSocket;
 	private int clientNumber;
-//	private ServerCommandHandler commandHandler;
 	private CommandObserver commandHandler;
 	private ServerInterface creator;
 	private MatchHandlerObserver matchObserver;
 
 	public ClientHandlerSocket(Socket socket, int number, ServerInterface serverStarter) {
-		// allower = null;
 		clientNumber = number;
 		this.socket = socket;
-		// code = hashCode();
 		creator = serverStarter;
 		closed = false;
 		try {
@@ -52,7 +49,6 @@ public class ClientHandlerSocket extends ClientHandler {
 	public void sendCommand(ServerToClientCommand command) throws IOException {
 		outSocket.writeObject(command);
 		outSocket.flush();
-//		outSocket.close(); non ci va
 	}
 
 	@Override
@@ -107,7 +103,6 @@ public class ClientHandlerSocket extends ClientHandler {
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
 			else if (matchObserver != null && matchObserver.isAllowed(command, player)) {
-//				processCommand(command);  //notify al controller (server command handler
 				commandHandler.notifyNewCommand(command);
 			} else if (!matchObserver.isAllowed(command, player) || matchObserver == null) {
 				try {
@@ -120,9 +115,6 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-//	private void processCommand(ClientToServerCommand command) {
-//		command.processCommand(commandHandler);
-//	}
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {

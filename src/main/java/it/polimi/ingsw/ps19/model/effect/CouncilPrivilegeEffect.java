@@ -43,4 +43,4 @@ public class CouncilPrivilegeEffect extends Effect {
 		
 		
 		
-	}
+	}	
