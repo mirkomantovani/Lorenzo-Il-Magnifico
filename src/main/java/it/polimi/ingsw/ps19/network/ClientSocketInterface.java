@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 import it.polimi.ingsw.ps19.client.ClientSocketListener;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
@@ -82,5 +83,13 @@ public class ClientSocketInterface implements NetworkInterface {
 			e.printStackTrace();
 		}
 	}
+
+
+	@Override
+	public void addCommandObserver(ClientCommandHandler handler) {
+		System.out.println("clientsocketinterface: addcommandobserver");
+		listener.addCommandObserver(handler);		
+	}
+
 
 }

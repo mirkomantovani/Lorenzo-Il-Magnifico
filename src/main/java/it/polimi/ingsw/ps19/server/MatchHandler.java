@@ -52,6 +52,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void initMatch() {
+		
+		
 		match = new Match(clients.size(), this);
 		// match.setNotifier(this);
 		commandHandler = new ServerCommandHandler(this, match);
@@ -105,7 +107,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startTurn() {
-		sendToCurrentPlayer(new StartTurnCommand());
+//		sendToCurrentPlayer(new StartTurnCommand());
+		sendToAllPlayers(new StartTurnCommand());
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -291,6 +294,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void notifyFamilyPlaced() {
 
+	}
+
+	public void turnTimerExpired() {
+		
 	}
 
 }

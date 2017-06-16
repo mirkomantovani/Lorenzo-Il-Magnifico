@@ -51,7 +51,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(AskPrivilegeChoiceCommand askPrivilegeChoiceCommand) {
-		// TODO Auto-generated method stub
+		userInterface.AskPrivilegeChoice(askPrivilegeChoiceCommand.getNumberOfPrivilege());
 		
 	}
 

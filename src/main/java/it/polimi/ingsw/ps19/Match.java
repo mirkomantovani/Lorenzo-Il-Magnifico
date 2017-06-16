@@ -6,6 +6,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.server.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
@@ -43,6 +44,7 @@ public class Match {
 		playercolors[1]="rosso";
 		playercolors[2]="blu";
 		playercolors[3]="giallo";
+		DeckCreator.createLeaderCardDeck(DeckCreator., deckLength)
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {

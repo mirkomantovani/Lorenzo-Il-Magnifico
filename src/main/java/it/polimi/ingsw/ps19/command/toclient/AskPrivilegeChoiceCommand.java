@@ -33,6 +33,6 @@ public class AskPrivilegeChoiceCommand extends ServerToClientCommand{
 		return numberOfPrivilege;
 	}
 	
-	
+	s
 
 }

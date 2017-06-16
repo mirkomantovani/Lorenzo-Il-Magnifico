@@ -217,6 +217,14 @@ public class Player {
 	public void setLeaderCards(Map<String,LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
+	public void removeLeaderCard(String leaderName) {
+		this.leaderCards.remove(leaderName);
+		if(observer!=null)
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	public void addLeaderCards(String leaderName){
+		this.leaderCards.put(leaderName, value);
+	}
 	
 	
 

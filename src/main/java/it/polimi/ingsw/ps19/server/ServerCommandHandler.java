@@ -180,6 +180,8 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(DiscardLeaderCardCommand discardLeaderCardCommand) {
 		handler.sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1));
+		handler.getCurrentPlayer().removeLeaderCard(discardLeaderCardCommand.getLeaderName());
+		
 		
 	}
 

@@ -58,4 +58,10 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
+	@Override
+	public void AskPrivilegeChoice(int numberOfPrivilege) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

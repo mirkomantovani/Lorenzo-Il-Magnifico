@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19.server;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 import it.polimi.ingsw.ps19.server.socket.ServerSocketListener;
@@ -116,8 +119,8 @@ public class Server implements Runnable,ServerInterface {
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
 		System.out.println("Entering the real add client where a client is enqueued in the waiting client list");
-//		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
-//			createTimer();
+		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
+			startInitialTimer();
 		waitingClients.add(clientHandler);
 		System.out.println("Added in the deque the calling clientHandler");
 		executor.submit(clientHandler);   //useless
@@ -125,10 +128,13 @@ public class Server implements Runnable,ServerInterface {
 		System.out.println("Waiting clients: " + waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 //			timer.interrupt();
+		
 			createMatch();
 		}
 		System.out.println("Client Successfully added, dajeeee");
 	}
+
+
 
 	/**
 	 * this method check if in the list there are the minimum number of players
@@ -148,16 +154,35 @@ public class Server implements Runnable,ServerInterface {
 			createMatch();
 	}
 
-//	private void createTimer() {
-//		timer = new Thread(new Timer(this));
-//		timer.start();
-//	}
+	private void startInitialTimer() {
+		BufferedReader reader=null;
+		try {
+			reader = new BufferedReader(
+					new FileReader(FileConstants.INITIAL_TIME));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		int timeMillis = 0;
+		try {
+			timeMillis = Integer.parseInt(reader.readLine());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+		timer = new Thread(new InitialTimer(this,timeMillis));
+		timer.start();
+	}
 
 	private synchronized void createMatch() {
 		
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);
+		
+	
+		
 		MatchHandler matchH = new MatchHandler(list, this);
 		executor.submit(matchH);  //I think this is doing an implicit run on the matchHandler?
 		createdMatches.add(matchH);

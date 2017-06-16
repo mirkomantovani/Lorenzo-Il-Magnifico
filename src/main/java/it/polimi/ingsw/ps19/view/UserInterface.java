@@ -30,4 +30,6 @@ public interface UserInterface {
 	void win();
 	
 	void lose();
+
+	void AskPrivilegeChoice(int numberOfPrivilege);
 }
