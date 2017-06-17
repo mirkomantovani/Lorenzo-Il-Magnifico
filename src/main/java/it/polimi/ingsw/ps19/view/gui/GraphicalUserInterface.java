@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
@@ -65,7 +68,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void AskPrivilegeChoice(int numberOfPrivilege) {
+	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -90,6 +93,18 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void askMove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void invalidInput() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
 		
 	}

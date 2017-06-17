@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
@@ -214,9 +215,9 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.finishRound();
 	}
 	
-	
-
-	
+	public void applyCommand(InvalidInputCommand invalidInputCommand){
+		
+	}
 	
 	//Others apply overloaded methods
 }
