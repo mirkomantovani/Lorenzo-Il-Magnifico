@@ -136,5 +136,30 @@ public class Board implements Serializable {
 		return towers.get(cardType).getFloor(index);
 		
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(">>>>>>>> The Board <<<<<<<< \n This is your world, let's try to impose your family "
+				+ "as the most powerful! \n There are : ");
+		
+		for(Tower t : towers.values()){
+		builder.append(t.toString());
+		builder.append("\n");
+		}
+		builder.append(church.toString());
+		builder.append("\n");
+		builder.append(councilPalace.toString());
+		builder.append("\n");
+		builder.append(market.toString());
+		builder.append("\n");
+		builder.append(harvestArea.toString());
+		builder.append("\n");
+		builder.append(productionArea.toString());
+
+		return builder.toString();
+	}
+	
+	
 	
 }

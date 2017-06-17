@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.Period;
@@ -77,6 +78,20 @@ public class Church implements Serializable {
 	public MilitaryPoint[] getMilitaryPoints() {
 		return militaryPoints;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("---- The Church ---- \n if you will be excommunicate in the first period you ");
+		builder.append(excommunicationFirst.toString());
+		builder.append(", \n instead in the second period you ");
+		builder.append(excommunicationSecond.toString());
+		builder.append(", \n finally in the third period you ");
+		builder.append(excommunicationThird.toString());
+		return builder.toString();
+	}
+	
+	
 	
 	
 	

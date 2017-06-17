@@ -26,7 +26,7 @@ public interface UserInterface {
 	
 	void commandNotValid();
 	
-	void playerStatusChange();
+	void playerStatusChange(Player p);
 	
 	/**
 	 * Notification of a generic player move

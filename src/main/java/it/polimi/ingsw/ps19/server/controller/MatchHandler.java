@@ -433,8 +433,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
 			for (LeaderCard card : set) {
-				if (leaderCard == card)
+				if (leaderCard == card){
 					set.remove(card);
+					return;
+				}
 			}
 		}
 	}

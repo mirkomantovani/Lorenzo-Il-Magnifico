@@ -60,7 +60,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void playerStatusChange() {
+	public void playerStatusChange(Player p) {
+		print("This is your status updated :\n");
+		p.toString();
 		
 	}
 

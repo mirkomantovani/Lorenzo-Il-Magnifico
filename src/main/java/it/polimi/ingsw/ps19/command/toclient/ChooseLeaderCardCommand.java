@@ -22,7 +22,7 @@ public class ChooseLeaderCardCommand extends ServerToClientCommand {
 	
 	public ChooseLeaderCardCommand(ArrayList<LeaderCard> possibleChoices){
 		
-		System.out.println("ciao");
+		
 		if(possibleChoices.size()==0)
 		System.out.println("size è a 0");
 //		System.out.println("chooseleadercardcommand: creato comando da inviare"+possibleChoices.get(0).toString());

@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
@@ -97,6 +98,11 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	
 	public void applyCommand(AskAuthenticationCommand askAuthenticationCommand) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(PlayerStatusChangeCommand playerStatusChangeCommand) {
+		userInterface.playerStatusChange(playerStatusChangeCommand.getPlayer());
 		
 	}
 
