@@ -1,8 +1,9 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public enum Dice {
+public enum Dice implements Serializable {
 	//could return an ActionValue instead of an int?
 	ORANGE_DICE(Color.ORANGE), BLACK_DICE(Color.BLACK), WHITE_DICE(Color.WHITE), NEUTRAL_DICE(Color.NEUTRAL);
 	
@@ -15,7 +16,7 @@ public enum Dice {
 		displayedFace = 0;
 	}
 	
-	private void roll(){     					
+	public void roll(){     					
 		Random random = new Random();	
 		if(this.color != Color.NEUTRAL)
 			this.displayedFace = random.nextInt(6)+1;

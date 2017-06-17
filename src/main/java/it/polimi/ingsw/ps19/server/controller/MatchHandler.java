@@ -147,6 +147,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void startTurn() {
 		// sendToCurrentPlayer(new StartTurnCommand());
+		match.handlePeriodsAndTurns();
+		match.rollDices();
+		
+		match.distributeRoundResources();
 		sendToAllPlayers(new StartTurnCommand());
 		startRound();
 		// notifyCurrentPlayer(new CommandAskMove());
@@ -387,26 +391,26 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	public synchronized void handleLeaderChoice(String name, ClientHandler clientHandler) {
-       System.out.println("matchhandler: sono in handleleaderchoice");
+	public void handleLeaderChoice(String name, ClientHandler clientHandler) {
+//       System.out.println("matchhandler: sono in handleleaderchoice");
        leaderResponseCounter++;
 		try {
-			System.out.println("matchhandler: cerco di aggiungere la carta di nome:");
+//			System.out.println("matchhandler: cerco di aggiungere la carta di nome:");
 			this.getRightPlayer(clientHandler).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("matchhandler: leaderresponsecounter="+leaderResponseCounter);
-		System.out.println("matchhandler: giocatori:="+match.getPlayers().length);
+//		System.out.println("matchhandler: leaderresponsecounter="+leaderResponseCounter);
+//		System.out.println("matchhandler: giocatori:="+match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
-			System.out.println("matchhandler: entro nell'if di quando tutti e quattro hanno scelto");
+//			System.out.println("matchhandler: entro nell'if di quando tutti e quattro hanno scelto");
 
 			leaderResponseCounter = 0;
 			for (int i = 0; i < clients.size(); i++) {
 				if (cycle == 3) {
-					System.out.println("matchhandler: sono nell'if perchè cycle ="+cycle);
+//					System.out.println("matchhandler: sono nell'if perchè cycle ="+cycle);
 					try {
 						this.getRightPlayer(clients.get((i + cycle) % (match.getPlayers().length)))
 								.addLeaderCards(leaderSets.get(i).get(0));
@@ -414,7 +418,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 						e.printStackTrace();
 					}
 				} else {
-					System.out.println("matchhandler: sono nell'else perchè cycle ="+cycle);
+//					System.out.println("matchhandler: sono nell'else perchè cycle ="+cycle);
 					if (i >= match.getPlayers().length - cycle) {
 						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)),
 								clients.get((i + cycle) % (match.getPlayers().length)));
@@ -424,13 +428,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				}
 			}
 			cycle++;
+			if(cycle==4)
+				startMatch();
 		}
 		
 	}
 
 	
-	private synchronized void removeLeaderFromSets(LeaderCard leaderCard) {
-		System.out.println("matchhandler: sono in remove leadercard");
+	private void removeLeaderFromSets(LeaderCard leaderCard) {
+//		System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
 			for (LeaderCard card : set) {
 				if (leaderCard == card){

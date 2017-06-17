@@ -11,6 +11,7 @@ public class BoardConstants {
 	public static final int THIRDPERIOD_CHURCHSUPPORTCOST = 5;
 	
 	public static final int CHURCHSLOTS = 15;
+	public static final int ROUND_COIN_FIRST_PLAYER = 5;
 	
 
 }

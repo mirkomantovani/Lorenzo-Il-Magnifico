@@ -50,6 +50,15 @@ public class ResourceChest implements Serializable{
 		}
 	}
 
+	public ResourceChest(ResourceChest InitialChest) {
+		resources = new HashMap<>();
+		for (int i = 0; i < ResourceType.values().length; i++) {
+			resources.put(ResourceType.values()[i], ResourceFactory.getResource
+					(ResourceType.values()[i],InitialChest.getResourceInChest
+							(ResourceType.values()[i]).getAmount()));
+		}
+	}
+
 	public boolean isEmpty() {
 		for (int i = 0; i < ResourceType.values().length; i++) {
 			if (this.resources.get(ResourceType.values()[i]).getAmount() != 0)

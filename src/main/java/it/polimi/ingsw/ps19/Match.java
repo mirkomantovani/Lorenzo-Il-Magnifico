@@ -16,6 +16,7 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
@@ -27,6 +28,7 @@ public class Match {
 
 	
 
+	private static final ResourceChest roundResourceSupply=new ResourceChest(0,2,2,3,0,0,0);
 	private Board board;
 	// private List<Player> players;
 	private Player[] players;
@@ -37,6 +39,7 @@ public class Match {
 	private int playerscreated;
 	private LeaderDeck leaderCards;
 	private Period period;
+	private int turn=0;
 	
 
 
@@ -157,8 +160,34 @@ public class Match {
 		return period;
 	}
 		
-	public synchronized LeaderDeck getLeaderCards() {
+	public LeaderDeck getLeaderCards() {
 		return leaderCards;
+	}
+
+	public void distributeRoundResources() {
+		for(int i=0;i<players.length;i++){
+			players[i].addResources(new ResourceChest(roundResourceSupply));
+		    players[i].addResources(new ResourceChest(
+		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0));
+		}
+		
+	}
+
+	public void rollDices() {
+		for(int i=0;i<Dice.values().length;i++)
+		Dice.values()[i].roll();
+	}
+
+	public void incrementTurn() {
+		this.turn++;
+	}
+
+	public void handlePeriodsAndTurns() {
+		incrementTurn();
+		if(this.turn==1)this.period=Period.FIRST;
+		else if(this.turn==3)period=Period.SECOND;
+		else if(this.turn==5)period=Period.THIRD;
+		
 	}
 
 }
