@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view.cli;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
@@ -27,6 +28,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	private ClientController gameController;
 	private Thread inputReaderThread;
 	private int readerState;
+	private int moveState;
+	private List<String> actionConstructor;
 	
 	
 	
@@ -125,6 +128,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:		
 			gameController.notifyChosenLeaderCard(input);
 			break;
+		case ClientConstants.SEND_MOVE:
+			
 		case ClientConstants.SEND_PASSWORD:
 			print("Command not recognized");
 			break;
@@ -162,6 +167,30 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_CHOSEN_LEADERCARD;
 	}
 
+
+	@Override
+	public void askMove() {
+		print("These are the available actions");
+		print("1- Take card");
+		print("2- Place into council palace");
+		print("3- Place into market place");
+		print("4- Activate harvest");
+		print("5- Activate production");
+			
+		readerState = ClientConstants.SEND_MOVE;
+	}	
+	
+	private void moveHandler(String string){
+		actionConstructor = new ArrayList<String>();
+		actionConstructor.add(string);
+		switch(string){
+		case "1": 
+		}
+	}
+	
+	private void changeMoveState(){
+		
+	}
 	
 
 }

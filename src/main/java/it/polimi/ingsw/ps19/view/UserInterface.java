@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
@@ -44,4 +45,6 @@ public interface UserInterface {
 	void lose();
 
 	void AskPrivilegeChoice(int numberOfPrivilege);
+
+	void askMove();
 }

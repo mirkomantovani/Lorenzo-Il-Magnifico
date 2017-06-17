@@ -88,4 +88,10 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
+	@Override
+	public void askMove() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
@@ -31,7 +32,6 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
-import it.polimi.ingsw.ps19.server.socket.ClientHandlerSocket;
 
 /**
  * This class handles every command arriving from Client to Server, calling methods of MatchHandler
@@ -203,6 +203,10 @@ public class ServerCommandHandler implements CommandObserver {
 	public void notifyNewCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
 		System.out.println("ServerCommandHandler: mi è arrivato un chosenleader command");
 		command.processCommand(this,clientHandler);
+	}
+
+	public void applyCommand(PlayerMoveCommand playerMoveCommand, ClientHandler clientHandler) {
+		handler.handlePlayerMove(playerMoveCommand.getMove(), clientHandler);
 	}
 	
 	

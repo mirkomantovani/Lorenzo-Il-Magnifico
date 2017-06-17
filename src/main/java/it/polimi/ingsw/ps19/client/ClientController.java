@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.client;
 
 
+import it.polimi.ingsw.ps19.command.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
@@ -55,6 +56,9 @@ public class ClientController implements InputObserver{
 		sendCommand(new ChosenLeaderCardCommand(leaderCardName));
 	}
 	
+	public void notifyMove(String move){
+		sendCommand(new PlayerMoveCommand(move));
+	}
 	
 	
 
