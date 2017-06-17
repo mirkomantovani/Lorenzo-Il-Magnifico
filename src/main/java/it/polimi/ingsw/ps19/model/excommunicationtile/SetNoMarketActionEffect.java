@@ -18,5 +18,10 @@ public class SetNoMarketActionEffect extends Effect {
 	public void applyEffect(Player player) {
 		player.getBonuses().setNoMarketActionActive(true);
 	}
+	
+	@Override
+	public String toString() {
+		return "You can't place family members in the market anymore";
+	}
 
 }

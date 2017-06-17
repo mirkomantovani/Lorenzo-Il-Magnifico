@@ -19,4 +19,11 @@ public class SetSkipRoundEffect extends Effect {
 		player.getBonuses().setSkipRoundActive(true);
 	}
 
+	@Override
+	public String toString() {
+		return "When it's your turn you skip the turn and play after everyone"; 
+	}
+	
+	
+
 }

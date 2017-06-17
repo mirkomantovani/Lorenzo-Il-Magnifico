@@ -161,7 +161,7 @@ public class Match {
 		return leaderCards;
 	}
 
-	public void distributeRoundResources() {
+	public void distributeTurnResources() {
 		for(int i=0;i<players.length;i++){
 			players[i].addResources(new ResourceChest(roundResourceSupply));
 		    players[i].addResources(new ResourceChest(
@@ -192,12 +192,15 @@ public class Match {
 	}
 
 	public void setNextPlayer() {
+		if(this.currentPlayer==players.length-1)
+			this.currentPlayer=0;
+		else
 		this.currentPlayer++;
 	}
 
 	public void setPlayerOrder() {
 		ArrayList<String> colors=new ArrayList<String>();
-		for(int i=0;i<playercolors.length;i++)
+		for(int i=0;i<players.length;i++)
 		colors.add(playercolors[i]);
 		this.board.setPlayerOrder(colors);
 	}

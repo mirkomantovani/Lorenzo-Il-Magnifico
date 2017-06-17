@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.view.cli;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
@@ -31,8 +30,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	private ClientController gameController;
 	private Thread inputReaderThread;
 	private int readerState;
-	private int moveState;
-	private List<String> actionConstructor;
 	
 	
 	
@@ -67,9 +64,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void playerStatusChange(Player p) {
-		print("This is your status updated :\n");
-		p.toString();
+	public void playerStatusChange() {
 		
 	}
 
@@ -80,17 +75,12 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void win() {
-		print("CONGRATULATIONS! You won the game!\nPress any key to exit the game");
-		readerState = ClientConstants.SEND_END_GAME;
+		
 	}
 
-	/* 
-	 * This is just provisional, we will adopt another mechanism 
-	 */
 	@Override
 	public void lose() {
-		print("OOPS, You lost. Try again, next time you will be luckier!\nPress any key to exit the game");
-		readerState = ClientConstants.SEND_END_GAME;
+		
 	}
 	
 	@Override
@@ -108,11 +98,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void initializeTurn(Board board, Period period, int turn) {
-		printImp("New turn");
-		print("Period: " + period.toString() + "\tTurn: " + turn);
-		print("Board status:");
-		print(board.toString());
+	public void initializeTurn() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -176,18 +164,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_CHOSEN_LEADERCARD;
 	}
 
-
-	@Override
-	public void askMove() {
-		print("These are the available actions");
-		print("1- Take card");
-		print("2- Place into council palace");
-		print("3- Place into market place");
-		print("4- Activate harvest");
-		print("5- Activate production");
-			
-		readerState = ClientConstants.SEND_MOVE;
-	}	
 	
 	private void moveHandler(String string){
 		actionConstructor = new ArrayList<String>();

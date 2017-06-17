@@ -31,5 +31,11 @@ public class LosePointsForEveryResourceEffect extends Effect {
 
 	}
 
+	
+	@Override
+	public String toString() {
+		return "You lose "+victoryPoint+" for every resource of"
+				+ " type: wood, stone, servants or coin you have at the end of the game";
+	}
 
 }
