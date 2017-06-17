@@ -94,13 +94,13 @@ public class Tower implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append( this.cardType.toString().toLowerCase() + " tower : "
-				+ " \n\t On the first floor the Dice value required is 1, and you can take the card : "  + 
-				 this.getFloor(0).getCard().toString() + "\n\t On the second floor the Dice value required is 3, "
+		string.append( this.cardType.toString().toUpperCase() + " tower : "
+				+ " \n On the first floor the Dice value required is 1, and you can take the card : "  + 
+				 this.getFloor(0).getCard().toString() + "\n On the second floor the Dice value required is 3, "
 				 		+ "and you can take the card " + this.getFloor(1).getCard().toString() + 
-				 		"\n\t On the second floor the Dice value required is 5, "
+				 		"\n On the second floor the Dice value required is 5, "
 				 		+ "and you can take the card" + this.getFloor(2).getCard().toString() + 
-				 		"\n\t On the second floor the Dice value required is 7, "
+				 		"\n On the second floor the Dice value required is 7, "
 				 		+ "and you can take the card" + this.getFloor(3).getCard().toString());
 		return string.toString();
 	}

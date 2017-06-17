@@ -48,7 +48,6 @@ public class Board implements Serializable {
 	
 	private int numberOfPlayers;
 	
-	private Map<Color,Dice> dices;
 	
 	private List<String> playerOrder;
 	
@@ -83,10 +82,6 @@ public class Board implements Serializable {
 		
 		this.playerOrder = new ArrayList<String>();
 		
-		dices = new HashMap<Color,Dice>();
-		for(Dice d : dices.values()){
-			dices.put(d.getColor(), d);
-		}
 		
 	}
 	
@@ -177,7 +172,7 @@ public class Board implements Serializable {
 		builder.append(harvestArea.toString());
 		builder.append("\n");
 		builder.append(productionArea.toString());
-		builder.append("\n The player order is :");
+		builder.append("\n The player order is : ");
 		for(String p : playerOrder){
 			builder.append(playerOrder.indexOf(p) + 1);
 			builder.append(" - ");
@@ -185,7 +180,7 @@ public class Board implements Serializable {
 			builder.append("\t");
 		}
 		builder.append("\n The dices are: \n");
-		for(Dice d : dices.values()){
+		for(Dice d : Dice.values()){
 			builder.append(d.getColor().toString().toLowerCase() + "dice, with a value of " + d.getUpperFaceValue());
 			builder.append("\n");
 		}
