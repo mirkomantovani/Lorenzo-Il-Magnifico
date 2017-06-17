@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
@@ -109,7 +110,9 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		userInterface.initializeTurn(initializeTurnCommand.getBoard(), initializeTurnCommand.getPeriod(), initializeTurnCommand.getTurn());
 	}
 	
-	
+	public void applyCommand(OpponentStatusChangeCommand opponentStatusChangeCommand){
+		
+	}
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	
 }
