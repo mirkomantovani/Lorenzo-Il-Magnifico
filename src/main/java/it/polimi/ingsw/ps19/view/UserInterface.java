@@ -53,4 +53,6 @@ public interface UserInterface {
 	void invalidInput();
 	
 	void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles);
+	
+	void displayOpponentsStatus(Player player);
 }

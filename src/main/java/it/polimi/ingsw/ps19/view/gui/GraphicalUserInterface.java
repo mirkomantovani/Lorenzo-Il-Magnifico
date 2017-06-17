@@ -109,4 +109,10 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
+	@Override
+	public void displayOpponentsStatus(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

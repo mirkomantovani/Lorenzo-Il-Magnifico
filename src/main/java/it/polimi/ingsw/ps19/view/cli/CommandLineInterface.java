@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps19.constant.ClientConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
@@ -211,6 +212,16 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void displayOpponentsStatus(Player player) {
+		print(player.getName() +" with color "+ player.getColor() +  " has changed his status: ");
+		print("Victory points: " + player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
+		print("Faith points: " + player.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
+		print("Military points: " + player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
+		print("");
 	}
 	
 
