@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view.cli;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Period;
@@ -21,19 +22,17 @@ import it.polimi.ingsw.ps19.view.UserInterface;
  */
 public class CommandLineInterface implements UserInterface, InputListener {
 
-	private final String welcomeMessage= "|------------------Welcome to Lorenzo il Magnifico, the board game!----------------|";
-	private final String initialStatus= "The decks have been shuffled and the cards on "
-			+ "the towers are as follows";	
-	
-	
+	private final String welcomeMessage = "|------------------Welcome to Lorenzo il Magnifico, the board game!----------------|";
+	private final String initialStatus = "The decks have been shuffled and the cards on " + "the towers are as follows";
+
 	private InputReader reader;
 	private ClientController gameController;
 	private Thread inputReaderThread;
 	private int readerState;
-	
-	
-	
-	public CommandLineInterface(ClientController clientController){
+	private int moveState;
+	private List<String> actionConstructor;
+
+	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
 		reader = new InputReader();
 		inputReaderThread = new Thread(reader);
@@ -41,22 +40,19 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		reader.addListener(this);
 		print(welcomeMessage);
 	}
-	
-	
+
 	@Override
 	public void initializeMatch() {
 		print("A new game is about to start");
-//		board.toString(); //o qualcosa di simile
-//		player.toString();
+		// board.toString(); //o qualcosa di simile
+		// player.toString();
 	}
 
 	@Override
 	public void startTurn() {
-			print("-------------------------------------------------------------");
-			print("\nIt is now your turn, what do you want to do next?");
+		print("-------------------------------------------------------------");
+		print("\nIt is now your turn, what do you want to do next?");
 	}
-	
-	
 
 	@Override
 	public void commandNotValid() {
@@ -64,55 +60,64 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void playerStatusChange() {
-		
+	public void playerStatusChange(Player p) {
+		print("This is your status updated :\n");
+		p.toString();
+
 	}
 
 	@Override
 	public void playerMove() {
-		
+
 	}
 
 	@Override
 	public void win() {
-		
+		print("CONGRATULATIONS! You won the game!\nPress any key to exit the game");
+		readerState = ClientConstants.SEND_END_GAME;
 	}
 
+	/*
+	 * This is just provisional, we will adopt another mechanism
+	 */
 	@Override
 	public void lose() {
-		
-	}
-	
-	@Override
-	public void playerTurn() {
-		
-	}
-	
-	private void print(String s){
-		System.out.println(s);
-		
-	}
-	
-    private void printImp(String s){
-		System.out.println("¤¤¤  "+s.toUpperCase()+"  ¤¤¤");
+		print("OOPS, You lost. Try again, next time you will be luckier!\nPress any key to exit the game");
+		readerState = ClientConstants.SEND_END_GAME;
 	}
 
 	@Override
-	public void initializeTurn() {
-		// TODO Auto-generated method stub
-		
+	public void playerTurn() {
+
+	}
+
+	private void print(String s) {
+		System.out.println(s);
+
+	}
+
+	private void printImp(String s) {
+		System.out.println("¤¤¤  " + s.toUpperCase() + "  ¤¤¤");
+	}
+
+	@Override
+	public void initializeTurn(Board board, Period period, int turn) {
+		printImp("New turn");
+		print("Period: " + period.toString() + "\tTurn: " + turn);
+		print("Board status:");
+		print(board.toString());
 	}
 
 	@Override
 	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
-		print("Choose " + numberOfPrivilege + " different resources from the following (Please enter the numbers associated with your choices separated by commas, e.g. x,y,z, if you have more than one privilege to choose):");
-		for(int i = 0; i<privilegeResources.size(); i++){
+		print("Choose " + numberOfPrivilege
+				+ " different resources from the following (Please enter the numbers associated with your choices separated by commas, e.g. x,y,z, if you have more than one privilege to choose):");
+		for (int i = 0; i < privilegeResources.size(); i++) {
 			print("Number " + i + ":\n" + privilegeResources.get(i).toString() + "\n");
 		}
 
 		readerState = ClientConstants.SEND_PRIVILEGE_CHOICES;
 	}
-
 
 	@Override
 	public void notify(String input) {
@@ -120,7 +125,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_NAME:
 			gameController.notifyName(input);
 			break;
-		case ClientConstants.SEND_CHOSEN_LEADERCARD:		
+		case ClientConstants.SEND_CHOSEN_LEADERCARD:
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
@@ -136,9 +141,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		}
 	}
 
-
-
-
 	@Override
 	public void askName() {
 		print("Insert your credentials: ");
@@ -146,59 +148,65 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_NAME;
 	}
 
-
 	@Override
 	public void askPassword() {
 		print("Password: ");
 		readerState = ClientConstants.SEND_PASSWORD;
 	}
 
-
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
 		print("Select a leader card from the following: ");
-		if(leaderCards.size()==0)System.out.println("leader cards è 0");
-		for(int i = 0; i<leaderCards.size(); i++){
+		if (leaderCards.size() == 0)
+			System.out.println("leader cards è 0");
+		for (int i = 0; i < leaderCards.size(); i++) {
 			print("Number " + i + ":\n" + leaderCards.get(i).toString());
 		}
 		readerState = ClientConstants.SEND_CHOSEN_LEADERCARD;
 	}
 
-	
-	private void moveHandler(String string){
-		actionConstructor = new ArrayList<String>();
-		actionConstructor.add(string);
-		switch(string){
-		case "1": 
-		}
-	}
-	
-	private void changeMoveState(){
-		
+	@Override
+	public void askMove() {
+		print("These are the available actions");
+		print("1- Take card");
+		print("2- Place into council palace");
+		print("3- Place into market place");
+		print("4- Activate harvest");
+		print("5- Activate production");
+
+		readerState = ClientConstants.SEND_MOVE;
 	}
 
+	private void moveHandler(String string) {
+		actionConstructor = new ArrayList<String>();
+		actionConstructor.add(string);
+		switch (string) {
+		case "1":
+		}
+	}
+
+	private void changeMoveState() {
+
+	}
 
 	@Override
 	public void invalidInput() {
 		printImp("Invalid Input");
 	}
 
-
 	@Override
 	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void displayOpponentsStatus(Player player) {
-		print(player.getName() +" with color "+ player.getColor() +  " has changed his status: ");
+		print(player.getName() + " with color " + player.getColor() + " has changed his status: ");
 		print("Victory points: " + player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
 		print("Faith points: " + player.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
 		print("Military points: " + player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
 		print("");
 	}
-	
 
 }
