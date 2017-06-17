@@ -1,11 +1,17 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.Serializable;
+
 /**
  * @author matteo
  *
  */
-public class FamilyMember {
+public class FamilyMember implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4026210740412805279L;
 	private Dice dice;
 	private Player player;
 	private int actionValueVariation;

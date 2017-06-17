@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +14,13 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public class Bonus {
+public class Bonus implements Serializable {
 	 
-	 private int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3821153835423383883L;
+	private int harvestVariation; //it means the increase/decrease of the Harvest action value for the specific player
 	 private int productionVariation; // "  "  "  "    //in production/harvest action
 	 private int cardCostCoinDiscount = 0; //This is the amount of a discount if the card you would take costs coins
 	 private int churchSupportBonus = -1;  //This is the amount of military Points you gain when you support the church (sisto IV effect)

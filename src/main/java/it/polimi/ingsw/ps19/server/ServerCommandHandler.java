@@ -201,6 +201,7 @@ public class ServerCommandHandler implements CommandObserver {
 
 	@Override
 	public void notifyNewCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
+		System.out.println("ServerCommandHandler: mi è arrivato un chosenleader command");
 		command.processCommand(this,clientHandler);
 	}
 	

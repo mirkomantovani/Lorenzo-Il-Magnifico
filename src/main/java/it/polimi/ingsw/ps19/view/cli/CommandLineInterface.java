@@ -108,9 +108,23 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void notify(String input) {
-		// TODO Auto-generated method stub
-		
+		switch (readerState) {
+		case ClientConstants.SEND_NAME:
+			gameController.notifyName(input);
+			break;
+		case ClientConstants.SEND_CHOSEN_LEADERCARD:		
+			gameController.notifyChosenLeaderCard(input);
+			break;
+		case ClientConstants.SEND_PASSWORD:
+			print("Command not recognized");
+			break;
+		default:
+			print("Command not recognized");
+			break;
+		}
 	}
+
+
 
 
 	@Override

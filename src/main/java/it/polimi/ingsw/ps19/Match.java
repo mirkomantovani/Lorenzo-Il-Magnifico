@@ -82,7 +82,7 @@ public class Match {
 		return board;
 	}
 
-	public Player[] getPlayers() {
+	public synchronized Player[] getPlayers() {
 		return players;
 	}
 
@@ -157,7 +157,7 @@ public class Match {
 		return period;
 	}
 		
-	public LeaderDeck getLeaderCards() {
+	public synchronized LeaderDeck getLeaderCards() {
 		return leaderCards;
 	}
 

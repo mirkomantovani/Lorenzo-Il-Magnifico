@@ -30,7 +30,7 @@ public class Player implements Serializable {
 	private ResourceChest resources;
 	private Map<CardType, List<DevelopmentCard>> decks;
 	private Bonus bonuses;
-	private MatchObserver observer;
+	private transient MatchObserver observer;
 	private int councilPrivilege;
 	private Map<String,LeaderCard> leaderCards;
 	
@@ -50,6 +50,8 @@ public class Player implements Serializable {
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
 		}
+		
+		leaderCards=new HashMap<String,LeaderCard>();
 
 		
 		this.name=name;
@@ -229,8 +231,11 @@ public class Player implements Serializable {
 			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
+		if(leaderCard==null)System.out.println("player: sto aggiungendo una carta null");
+		if(leaderCard.getName()==null)System.out.println("player: leadercardnaME NULL");
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
+			System.out.println("player: aggiunta leader, notifico cambio stato");
 			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void activateLeaderCard(String name){

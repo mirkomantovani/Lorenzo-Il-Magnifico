@@ -39,12 +39,17 @@ public class ClientLauncher {
 		
 		System.out.println("Choose user interface: \n1 - Command Line Interface\n2 - Graphic User Interface");
 		
-		controller = new ClientController();
+		
 		choice = i.nextInt();
+		
+		controller = new ClientController(networkInterface);
 		
 		userInterface = UserInterfaceFactory.getUserInterface(choice, controller);
 		
 		handler = new ClientCommandHandler(userInterface,networkInterface);
+		
+		controller.setUserInterface(userInterface);
+		controller.setCommandHandler(handler);
 		
 		try {
 			System.out.println("I'm trying to connect");

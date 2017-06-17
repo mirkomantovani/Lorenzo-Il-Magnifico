@@ -15,6 +15,11 @@ public class ClientController implements InputObserver{
 
 	private UserInterface userInterface;
 	private NetworkInterface networkInterface;
+	private ClientCommandHandler commandHandler;
+	
+	public ClientController(NetworkInterface networkInterface) {
+		this.networkInterface = networkInterface;
+	}
 	
 
 	
@@ -38,7 +43,7 @@ public class ClientController implements InputObserver{
 
 
 	@Override
-	public void notifyPassword(String password) {
+	public void notifyPassword(String password){
 		// TODO Auto-generated method stub
 		
 	}
@@ -50,23 +55,19 @@ public class ClientController implements InputObserver{
 		sendCommand(new ChosenLeaderCardCommand(leaderCardName));
 	}
 	
-//	
-//	private UserInterface userInterface;
-//	private NetworkInterface networkInterface;
-//	private ClientCommandHandler commandHandler;
-//
-//	public ClientController(NetworkInterface networkInterface) {
-//		this.networkInterface = networkInterface;
-//	}
-//
-//	public void setCommandHandler(ClientCommandHandler handler) {
-//		this.commandHandler = handler;
-//	}
-//
-//	public void setUserInterface(UserInterface userInterface) {
-//		this.userInterface = userInterface;
-//	}
-//
+	
+	
+
+	
+
+	public void setCommandHandler(ClientCommandHandler handler) {
+		this.commandHandler = handler;
+	}
+
+	public void setUserInterface(UserInterface userInterface) {
+		this.userInterface = userInterface;
+	}
+
 //	@Override
 //	public void notify(Coordinates coord) {
 //		sendCommand(new CommandSendCoordinates(coord));
@@ -101,7 +102,7 @@ public class ClientController implements InputObserver{
 //	public void notifyDiscardItem() {
 //		sendCommand(new CommandDiscardItem());
 //	}
-//
+
 //	private void sendCommand(ClientToServerCommand command) {
 //		try {
 //			networkInterface.sendCommand(command);
@@ -117,6 +118,6 @@ public class ClientController implements InputObserver{
 //		// TODO Auto-generated method stub
 //		
 //	}
-//	
+	
 
 }

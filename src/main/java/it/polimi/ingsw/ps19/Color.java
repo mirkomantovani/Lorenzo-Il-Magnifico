@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19;
 
-public enum Color {
+import java.io.Serializable;
+
+public enum Color implements Serializable  {
 
 	ORANGE, BLACK, WHITE, NEUTRAL;
 }

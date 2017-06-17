@@ -66,8 +66,10 @@ public class LeaderDeck implements Serializable  {
 		return this.cards[i];
 	}
 	
-	public LeaderCard getCard(String name){
+	public synchronized LeaderCard getCard(String name){
+		System.out.println("leaderdeck: getcard");
 		for(LeaderCard c : this.cards){
+			System.out.println("leaderdeck: cardname: "+c.getName()+"card nel deck:"+name);
 			if(c.getName().equals(name)){
 				return c;
 			}

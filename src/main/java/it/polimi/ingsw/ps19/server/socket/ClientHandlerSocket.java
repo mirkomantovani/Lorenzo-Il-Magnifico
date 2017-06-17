@@ -103,9 +103,14 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
+			else if (command instanceof SendCredentialsCommand)
+				commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
+			else if (command instanceof ChosenLeaderCardCommand)
+				commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
 
-				notifyCommand(command);
+				commandHandler.notifyNewCommand(command);
+//				notifyCommand(command);
 
 			} else if (!matchObserver.isAllowed(player) || matchObserver == null) {
 				try {
@@ -118,15 +123,15 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-	private void notifyCommand(ClientToServerCommand command) {
-		if (command instanceof SendCredentialsCommand)
-			commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
-		else if (command instanceof ChosenLeaderCardCommand)
-			commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
-		else 
-			commandHandler.notifyNewCommand(command);
-			
-	}
+//	private void notifyCommand(ClientToServerCommand command) {
+//		if (command instanceof SendCredentialsCommand)
+//			commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
+//		else if (command instanceof ChosenLeaderCardCommand)
+//			commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
+//		else 
+//			commandHandler.notifyNewCommand(command);
+//			
+//	}
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {

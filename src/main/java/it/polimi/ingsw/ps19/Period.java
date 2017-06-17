@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19;
 
-public enum Period {
+import java.io.Serializable;
+
+public enum Period implements Serializable  {
 
 	FIRST,SECOND,THIRD;
 	
