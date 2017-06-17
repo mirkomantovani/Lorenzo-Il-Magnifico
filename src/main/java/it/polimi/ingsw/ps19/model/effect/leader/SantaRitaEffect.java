@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SantaRitaEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3175571380689500083L;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

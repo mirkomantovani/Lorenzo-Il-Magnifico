@@ -11,6 +11,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public class AtomicExchangeEffect extends Effect {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6641224133172886151L;
 	ResourceChest resourcesOut;  
 	ResourceChest resourcesIn;
 

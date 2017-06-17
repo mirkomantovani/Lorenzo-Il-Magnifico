@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SetNoCardTypeFinalPointsEffect extends Effect {
  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3114860811278517273L;
 	private CardType cardType;
 	
 	public SetNoCardTypeFinalPointsEffect(CardType cardType) {

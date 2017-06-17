@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class FedericoDaMontefeltroEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8059701163863953144L;
+
 	@Override
 	public void applyEffect(Player p) {
 

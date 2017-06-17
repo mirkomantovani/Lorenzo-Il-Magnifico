@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.area;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.Period;
@@ -14,8 +15,12 @@ import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
  * @author Mirko
  *
  */
-public class Church {
+public class Church implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2245918610305460800L;
 	private ExcommunicationTile excommunicationFirst;	
 	private ExcommunicationTile excommunicationSecond;	
 	private ExcommunicationTile excommunicationThird;

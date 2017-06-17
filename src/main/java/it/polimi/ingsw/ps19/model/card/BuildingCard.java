@@ -13,6 +13,10 @@ import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
  */
 public class BuildingCard extends DevelopmentCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6226375170446454135L;
 	private int productionActivationCost;
 
 	/**

@@ -4,6 +4,11 @@ import it.polimi.ingsw.ps19.Player;
 
 public class NoFloorBonusEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6422690715195253118L;
+
 	@Override
 	public void applyEffect(Player p) {
 		p.getBonuses().setNoFloorBonus(true);

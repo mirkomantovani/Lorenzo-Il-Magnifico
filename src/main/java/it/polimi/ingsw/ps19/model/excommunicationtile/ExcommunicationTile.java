@@ -1,17 +1,21 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
-import java.util.List;
+import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * @author Mirko
  *
  */
-public class ExcommunicationTile {
+public class ExcommunicationTile implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4535401537979829418L;
+
 	private Period period;
 	
 	private Effect effect;

@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class MultipleEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7018409853938720869L;
 	Effect firstEffect;
 	Effect secondEffect;
 

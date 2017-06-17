@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class InstantProductionActionEffect extends Effect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3257137657687177488L;
 	int productionActionValue;
 
 	public InstantProductionActionEffect(int productionActionValue){

@@ -11,6 +11,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class ForEachResourceTypeEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4487719962938874499L;
 	private Resource givenResource;
 	private Resource toStringResource;  //This is used by the toString method to store a copy of the original givenResource that will be modified
 	private Resource foreachResource;

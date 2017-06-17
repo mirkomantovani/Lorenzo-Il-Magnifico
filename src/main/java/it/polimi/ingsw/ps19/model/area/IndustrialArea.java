@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps19.model.area;
 
+import java.io.Serializable;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -14,8 +14,12 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Jimmy
  *
  */
-public abstract class IndustrialArea{
+public abstract class IndustrialArea implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5514546243119979995L;
 	protected final int SLOT_COST = 1;
 	protected final int MALUS = -3;
 	protected ResourceChest givenResources;

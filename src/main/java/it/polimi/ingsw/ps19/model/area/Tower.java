@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.area;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,13 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author matteo
  *
  */
-public class Tower {
+public class Tower implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5976389942566908672L;
+
 	private List<Floor> floors;
 
 	private CardType cardType;

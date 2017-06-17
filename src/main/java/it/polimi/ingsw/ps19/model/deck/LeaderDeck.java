@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,8 +14,12 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
  * @author matteo
  *
  */
-public class LeaderDeck  {
+public class LeaderDeck implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6540351317616183197L;
 	private LeaderCard[] cards;
 	
 	public LeaderDeck() throws IOException{

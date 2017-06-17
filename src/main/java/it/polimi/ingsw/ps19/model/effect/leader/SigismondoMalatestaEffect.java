@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SigismondoMalatestaEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4556068502386357940L;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class LorenzoDeMediciEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6786349977460940485L;
+
 	@Override
 	public void applyEffect(Player p) {
 		// TODO Auto-generated method stub

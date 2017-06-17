@@ -13,6 +13,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class ResourceMalusEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2781912671942166597L;
 	ArrayList<Resource> resources;
 	
 	public ResourceMalusEffect(ArrayList<Resource> resources){

@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.model.resource.Wood;
  */
 public class CouncilPrivilegeEffect extends Effect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2209211330966096453L;
 	private final int PRIVILEGE_COIN = 2;
 	private final int PRIVILEGE_WOOD = 1;
 	private final int PRIVILEGE_STONE = 1;

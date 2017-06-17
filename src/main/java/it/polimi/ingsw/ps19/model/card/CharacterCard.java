@@ -16,6 +16,11 @@ public class CharacterCard extends DevelopmentCard {
 	//we have to pass some null values to immediate or permanent effect of some of these cards because some of them don't have both
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8075237121381367847L;
+
+	/**
 	 * Instantiates a new character card.
 	 *
 	 * @param id the id

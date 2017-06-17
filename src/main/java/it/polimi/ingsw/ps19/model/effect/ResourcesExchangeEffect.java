@@ -15,6 +15,10 @@ import it.polimi.ingsw.ps19.Player;
 public class ResourcesExchangeEffect extends Effect {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2825814236559993863L;
 	private AtomicExchangeEffect normalExchangeEffect;
 	private AtomicExchangeEffect alternativeExchangeEffect;
 	

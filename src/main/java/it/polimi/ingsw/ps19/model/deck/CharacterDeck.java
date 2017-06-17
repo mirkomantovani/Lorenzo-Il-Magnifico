@@ -15,6 +15,11 @@ public class CharacterDeck extends Deck<CharacterCard> {
 
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6919342650647211328L;
+
+	/**
 	 * Instantiates a new character deck.
 	 *
 	 * @param filePath the file path

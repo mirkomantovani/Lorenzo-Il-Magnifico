@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 public class MultipleActionSpace extends ActionSpace {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3421639191735530503L;
 	protected ArrayList<FamilyMember> members;
 	
 	public MultipleActionSpace(int actionValueRequired, Effect effect) {

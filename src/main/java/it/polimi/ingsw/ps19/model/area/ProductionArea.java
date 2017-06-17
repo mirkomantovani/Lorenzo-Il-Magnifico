@@ -14,6 +14,11 @@ import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
  */
 public class ProductionArea extends IndustrialArea{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3586015416509643408L;
+
 	public ProductionArea(){
 		super();
 		//The "MALUS" costant is defined in IndustrialArea

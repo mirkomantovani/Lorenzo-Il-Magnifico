@@ -13,6 +13,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public abstract class DevelopmentCard extends Card {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2067083051151226893L;
 	//attributes should be final, but I can't make them final since I'd have to specify the value now, but I'll have it just at runtime
 	protected int id;   
 	protected Period period;

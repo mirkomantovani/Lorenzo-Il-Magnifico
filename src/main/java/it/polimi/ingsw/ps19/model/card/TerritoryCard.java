@@ -11,6 +11,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class TerritoryCard extends DevelopmentCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1065227820762540803L;
 	private int harvestActivationCost;
 
 	/**

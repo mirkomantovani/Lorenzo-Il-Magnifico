@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +17,13 @@ import it.polimi.ingsw.ps19.model.deck.Deck;
 import it.polimi.ingsw.ps19.model.deck.TerritoryDeck;
 import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 
-public class Board {
+public class Board implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8471586996479354156L;
+
 	private Map<CardType,Tower> towers;
 	
 	private Church church;

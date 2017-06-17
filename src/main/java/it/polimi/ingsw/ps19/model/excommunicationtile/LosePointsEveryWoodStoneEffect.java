@@ -17,6 +17,10 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  */
 public class LosePointsEveryWoodStoneEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5082995786213243247L;
 	private VictoryPoint victoryPoint;
 	private CardType cardType;
 	

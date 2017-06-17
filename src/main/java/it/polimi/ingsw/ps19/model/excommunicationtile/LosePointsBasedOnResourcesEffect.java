@@ -13,6 +13,10 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  */
 public class LosePointsBasedOnResourcesEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7541480330001366752L;
 	private Resource resource;
 	private VictoryPoint victoryPoints;
 	

@@ -16,6 +16,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class ForEachTypeCardEffect extends Effect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7216711590979481951L;
 	Resource resource;
 	CardType typeCard;
 	

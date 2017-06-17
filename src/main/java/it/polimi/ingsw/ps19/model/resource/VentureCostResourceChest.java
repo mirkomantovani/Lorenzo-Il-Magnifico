@@ -4,6 +4,10 @@ package it.polimi.ingsw.ps19.model.resource;
 public class VentureCostResourceChest extends ResourceChest {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6427700276453722966L;
 	private int requiredMilitaryPoints;
 	private int militaryPointsCost;
 	

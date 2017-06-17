@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class HarvestEffect extends Effect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1643184690128815176L;
 	Effect instantEffect;
 	
 	/**

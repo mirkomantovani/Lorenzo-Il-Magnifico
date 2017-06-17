@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps19.model.area;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
@@ -9,7 +11,13 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author Jimmy
  *
  */
-public abstract class ActionSpace implements Occupable {
+public abstract class ActionSpace implements Occupable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3896782904317576765L;
+
 
 	protected int actionValueRequired;
 	

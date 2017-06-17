@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class LudovicoIlMoroEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2211372359567972605L;
+
 	@Override
 	public void applyEffect(Player p) {
 		

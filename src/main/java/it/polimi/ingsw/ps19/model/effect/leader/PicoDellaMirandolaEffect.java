@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class PicoDellaMirandolaEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6583399799257349121L;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

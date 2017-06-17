@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SetServantsDividerEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6964246372125181142L;
 	private int divider;
 	
 	public SetServantsDividerEffect(int divider) {
