@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.polimi.ingsw.ps19.Color;
+import it.polimi.ingsw.ps19.Dice;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -45,6 +48,10 @@ public class Board implements Serializable {
 	
 	private int numberOfPlayers;
 	
+	private Map<Color,Dice> dices;
+	
+	private List<String> playerOrder;
+	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
@@ -73,6 +80,14 @@ public class Board implements Serializable {
 		productionArea = new ProductionArea();
 		
 		this.numberOfPlayers = numberOfPlayers;
+		
+		this.playerOrder = new ArrayList<String>();
+		
+		dices = new HashMap<Color,Dice>();
+		for(Dice d : dices.values()){
+			dices.put(d.getColor(), d);
+		}
+		
 	}
 	
 	public Tower getTower(CardType cardType){
@@ -136,6 +151,12 @@ public class Board implements Serializable {
 		return towers.get(cardType).getFloor(index);
 		
 	}
+	
+	public void setPlayerOrder(ArrayList<String> playerOrder){
+		for(String p : playerOrder){
+			this.playerOrder.add(p);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -156,6 +177,19 @@ public class Board implements Serializable {
 		builder.append(harvestArea.toString());
 		builder.append("\n");
 		builder.append(productionArea.toString());
+		builder.append("\n The player order is :");
+		for(String p : playerOrder){
+			builder.append(playerOrder.indexOf(p) + 1);
+			builder.append(" - ");
+			builder.append(p);
+			builder.append("\t");
+		}
+		builder.append("\n The dices are: \n");
+		for(Dice d : dices.values()){
+			builder.append(d.getColor().toString().toLowerCase() + "dice, with a value of " + d.getUpperFaceValue());
+			builder.append("\n");
+		}
+		
 
 		return builder.toString();
 	}
