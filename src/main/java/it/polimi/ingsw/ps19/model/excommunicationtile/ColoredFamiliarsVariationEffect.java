@@ -36,6 +36,11 @@ public class ColoredFamiliarsVariationEffect extends Effect{
 		
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Your colored family members' action variation is decreased by"+variation;
+	}
 	
 
 }

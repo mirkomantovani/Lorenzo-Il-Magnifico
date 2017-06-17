@@ -34,6 +34,11 @@ public class HarvestArea extends IndustrialArea{
 			
 		return player.getDeckOfType(CardType.TERRITORY);
 	}
-
+	
+	
+	public String toString(){
+		return "-------------------- The harvest area --------------------" +
+				super.toString();
+	}
 
 }

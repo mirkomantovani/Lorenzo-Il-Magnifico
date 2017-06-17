@@ -35,6 +35,12 @@ public class LosePointsBasedOnResourcesEffect extends Effect {
 		player.getResourceChest().subResource(victoryPoints);
 
 	}
+	
+	@Override
+	public String toString() {
+		return "You lose "+ victoryPoints.toString()+ " for every "
+				+ resource.toString()+" you have at the end of the game";
+	}
 
 	
 

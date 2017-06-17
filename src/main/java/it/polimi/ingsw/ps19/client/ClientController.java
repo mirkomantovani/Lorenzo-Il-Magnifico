@@ -1,8 +1,13 @@
 package it.polimi.ingsw.ps19.client;
 
 
+import java.util.ArrayList;
+
+import it.polimi.ingsw.ps19.command.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.InputObserver;
 import it.polimi.ingsw.ps19.view.UserInterface;
@@ -55,8 +60,25 @@ public class ClientController implements InputObserver{
 		sendCommand(new ChosenLeaderCardCommand(leaderCardName));
 	}
 	
+	@Override
+	public void notifyMove(String move){
+		sendCommand(new PlayerMoveCommand(move));
+	}
 	
-	
+	@Override
+	public void notifyChosenPrivileges(String choices){
+		char[] charArray = choices.toCharArray();
+		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
+		for(int i = 0; i<charArray.length; i+=2){
+			if(Character.getNumericValue(charArray[i]) != -1)
+				commandConstructor.add(Character.getNumericValue(charArray[i]));
+			else
+				userInterface.invalidInput();
+				sendCommand(new InvalidInputCommand());
+				return;
+		}
+		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+	}
 
 	
 

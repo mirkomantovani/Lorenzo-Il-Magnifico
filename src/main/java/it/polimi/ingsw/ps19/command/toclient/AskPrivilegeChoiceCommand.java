@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps19.command.toclient;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
@@ -18,9 +21,11 @@ public class AskPrivilegeChoiceCommand extends ServerToClientCommand{
 	private static final long serialVersionUID = 7880502444669115290L;
 	
 	private int numberOfPrivilege;
+	private ArrayList<ResourceChest> privilegeResources;
 	
-	public AskPrivilegeChoiceCommand(int numberOfPrivilege){
+	public AskPrivilegeChoiceCommand(int numberOfPrivilege, ArrayList<ResourceChest> privilegeResources){
 		this.numberOfPrivilege = numberOfPrivilege;
+		this.privilegeResources = privilegeResources;
 	}
 
 	@Override
@@ -31,6 +36,10 @@ public class AskPrivilegeChoiceCommand extends ServerToClientCommand{
 
 	public int getNumberOfPrivilege() {
 		return numberOfPrivilege;
+	}
+	
+	public ArrayList<ResourceChest> getPrivilegeResources(){
+		return privilegeResources;
 	}
 	
 
