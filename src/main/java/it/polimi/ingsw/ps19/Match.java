@@ -161,7 +161,7 @@ public class Match {
 		return leaderCards;
 	}
 
-	public void distributeRoundResources() {
+	public void distributeTurnResources() {
 		for(int i=0;i<players.length;i++){
 			players[i].addResources(new ResourceChest(roundResourceSupply));
 		    players[i].addResources(new ResourceChest(

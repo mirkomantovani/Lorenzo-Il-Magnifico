@@ -26,6 +26,7 @@ import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
@@ -43,8 +44,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Match match;
 	private Thread roundTimer;
 	private int leaderResponseCounter=0;
-	ArrayList<ArrayList<LeaderCard>> leaderSets;
+	private ArrayList<ArrayList<LeaderCard>> leaderSets;
 	private int cycle = 1;
+	private int roundNumber=0;
+	private ServerToClientCommand lastCommandSent;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
@@ -139,7 +142,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// Map<Player, Boolean> winners = match.checkWinners();
 		// if (winners.isEmpty() && !clients.isEmpty()) {
 		 match.setNextPlayer();
-		 startRound();
+		
 		// } else if (!winners.isEmpty() && !clients.isEmpty())
 		// notifyEndOfGame(winners);
 	}
@@ -147,19 +150,30 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startTurn() {
 		// sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
+		if(match.getTurn()==7){
+			handleEndGame();
+		}
+		else{
+			
 		match.rollDices();
 		
-		match.distributeRoundResources();
+		match.distributeTurnResources();
+		match.changeBoardCards();
 		sendToAllPlayers(new InitializeTurnCommand(
 				match.getBoard(),match.getPeriod(),match.getTurn()));
+		roundNumber=0;
 		startRound();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
+		}
 	}
 
 
 
+	
+
 	private void startRound() {
+		roundNumber++;  
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
 	}
@@ -326,6 +340,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void applyAction(Action action) throws NotApplicableException {
 		action.apply();
+		//TODO verificare se l'azione gli ha dato delle privilege e mandare i comandi delle priv
+		//TODO MANDARE comando per scegliere terminare turno o scartare leadercards
 
 	}
 
@@ -347,6 +363,29 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
 		setNext();
+		nextStep();
+	}
+
+	private void nextStep() {
+		setNext();
+		if(roundNumber==match.getPlayers().length*4){
+			if(match.getTurn()%2==1)
+			startTurn();
+			else 
+			startExcommunicationPhase();
+		}
+		else startRound();
+			
+		
+	}
+
+	private void startExcommunicationPhase() {
+
+		
+		
+		
+		
+		startTurn();  
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -431,6 +470,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				}
 			}
 		}
+	}
+
+	public void finishRound() {
+		setNext();
+		
+	}
+	
+	private void handleEndGame() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
