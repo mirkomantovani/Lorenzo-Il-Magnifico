@@ -8,4 +8,7 @@ public interface InputObserver {
 	
 	public void notifyChosenLeaderCard(String LeaderCardName);
 	
+	public void notifyMove(String move);
+
+	public void notifyChosenPrivileges(String choices);
 }

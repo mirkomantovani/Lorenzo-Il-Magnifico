@@ -55,7 +55,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(AskPrivilegeChoiceCommand askPrivilegeChoiceCommand) {
-		userInterface.AskPrivilegeChoice(askPrivilegeChoiceCommand.getNumberOfPrivilege());
+		userInterface.AskPrivilegeChoice(askPrivilegeChoiceCommand.getNumberOfPrivilege(), askPrivilegeChoiceCommand.getPrivilegeResources());
 		
 	}
 
