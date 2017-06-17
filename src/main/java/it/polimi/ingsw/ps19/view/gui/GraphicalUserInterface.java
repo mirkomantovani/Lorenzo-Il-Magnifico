@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
@@ -28,7 +29,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void playerStatusChange() {
+	public void playerStatusChange(Player p) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -58,7 +59,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void initializeTurn() {
+	public void initializeTurn(Board board, Period period, int turn) {
 		// TODO Auto-generated method stub
 		
 	}

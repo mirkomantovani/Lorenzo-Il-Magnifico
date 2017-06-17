@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.view;
 
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
@@ -20,7 +21,7 @@ public interface UserInterface {
 	
 	void initializeMatch();
 	
-	void initializeTurn();
+	void initializeTurn(Board board, Period period, int turn);
 	
 	void startTurn();
 	

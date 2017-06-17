@@ -12,6 +12,7 @@ public class ClientConstants {
 	public static final int SEND_NAME = 0;
 	public static final int SEND_PASSWORD = 1;
 	public static final int SEND_CHOSEN_LEADERCARD = 2;
+	public static final int SEND_END_GAME = 3;
 	
 	private ClientConstants(){
 	}

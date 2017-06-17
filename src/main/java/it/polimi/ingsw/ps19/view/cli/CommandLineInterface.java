@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.view.cli;
 
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.constant.ClientConstants;
@@ -73,12 +74,17 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void win() {
-		
+		print("CONGRATULATIONS! You won the game!\nPress any key to exit the game");
+		readerState = ClientConstants.SEND_END_GAME;
 	}
 
+	/* 
+	 * This is just provisional, we will adopt another mechanism 
+	 */
 	@Override
 	public void lose() {
-		
+		print("OOPS, You lost. Try again, next time you will be luckier!\nPress any key to exit the game");
+		readerState = ClientConstants.SEND_END_GAME;
 	}
 	
 	@Override
@@ -96,9 +102,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void initializeTurn() {
-		// TODO Auto-generated method stub
-		
+	public void initializeTurn(Board board, Period period, int turn) {
+		printImp("New turn");
+		print("Period: " + period.toString() + "\tTurn: " + turn);
+		print("Board status:");
+		print(board.toString());
 	}
 
 	@Override
