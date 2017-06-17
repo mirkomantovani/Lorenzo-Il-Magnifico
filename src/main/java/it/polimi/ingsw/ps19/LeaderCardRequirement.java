@@ -1,9 +1,16 @@
 package it.polimi.ingsw.ps19;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
-public class LeaderCardRequirement {
+public class LeaderCardRequirement implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2973716369334411303L;
+
 	ResourceChest resourcesRequired;
 	
 	private int buildingCardRequired;
