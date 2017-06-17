@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.constant.BoardConstants;
-import it.polimi.ingsw.ps19.constant.CardConstants;
-import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
-import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -33,7 +30,7 @@ public class Match {
 	// private List<Player> players;
 	private Player[] players;
 	private int addedPlayers;
-	private Player currentPlayer;
+	private int currentPlayer=0;
 	private MatchObserver observer;
 	private String[] playercolors = new String[4];
 	private int playerscreated;
@@ -106,11 +103,11 @@ public class Match {
 	}
 
 	public void setInitialPlayer() {
-		currentPlayer = players[0];
+		currentPlayer = 0;
 	}
 
 	public Player getCurrentPlayer() {
-		return currentPlayer;
+		return this.players[this.currentPlayer];
 	}
 
 	public Floor getFloor(CardType cardType, int index) {
@@ -188,6 +185,21 @@ public class Match {
 		else if(this.turn==3)period=Period.SECOND;
 		else if(this.turn==5)period=Period.THIRD;
 		
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setNextPlayer() {
+		this.currentPlayer++;
+	}
+
+	public void setPlayerOrder() {
+		ArrayList<String> colors=new ArrayList<String>();
+		for(int i=0;i<playercolors.length;i++)
+		colors.add(playercolors[i]);
+		this.board.setPlayerOrder(colors);
 	}
 
 }

@@ -13,13 +13,12 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
+import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
-import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
-import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
@@ -130,6 +129,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			c.addCommandObserver(commandHandler);
 			i++;
 		}
+		
+		match.setPlayerOrder();
 	}
 
 	/**
@@ -139,8 +140,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void setNext() {
 		// Map<Player, Boolean> winners = match.checkWinners();
 		// if (winners.isEmpty() && !clients.isEmpty()) {
-		// match.setNextPlayer();
-		// startTurn();
+		 match.setNextPlayer();
+		 startRound();
 		// } else if (!winners.isEmpty() && !clients.isEmpty())
 		// notifyEndOfGame(winners);
 	}
@@ -151,7 +152,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		match.rollDices();
 		
 		match.distributeRoundResources();
-		sendToAllPlayers(new StartTurnCommand());
+		sendToAllPlayers(new InitializeTurnCommand(
+				match.getBoard(),match.getPeriod(),match.getTurn()));
 		startRound();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
@@ -361,6 +363,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
+		setNext();
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
