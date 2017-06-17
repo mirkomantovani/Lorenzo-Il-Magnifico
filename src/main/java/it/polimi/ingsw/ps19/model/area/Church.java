@@ -44,11 +44,11 @@ public class Church implements Serializable {
 		this.excommunicationFirst = 
 				tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES/Period.values().length)];
 		this.excommunicationSecond = 
-				tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES/Period.values().length+
-						CardConstants.EXCOMMUNICATION_TILES/Period.values().length)];
+				tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES/Period.values().length)+
+						CardConstants.EXCOMMUNICATION_TILES/Period.values().length];
 		this.excommunicationThird =
-				tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES/Period.values().length+
-						2*CardConstants.EXCOMMUNICATION_TILES/Period.values().length)];
+				tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES/Period.values().length)+
+						2*CardConstants.EXCOMMUNICATION_TILES/Period.values().length];
 		//We're not gonna need the tiles anymore after choosing the 3 tiles of the match
 		tiles=null;
 		
@@ -82,7 +82,7 @@ public class Church implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---- The Church ---- \n if you will be excommunicate in the first period you ");
+		builder.append("---- The Church ---- \n The church contains these Excommunication tiles:\n ");
 		builder.append(excommunicationFirst.toString());
 		builder.append(", \n instead in the second period you ");
 		builder.append(excommunicationSecond.toString());

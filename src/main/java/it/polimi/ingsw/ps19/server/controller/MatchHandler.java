@@ -158,7 +158,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		match.rollDices();
 		
 		match.distributeTurnResources();
-		match.changeBoardCards();
+//		match.changeBoardCards();
 		sendToAllPlayers(new InitializeTurnCommand(
 				match.getBoard(),match.getPeriod(),match.getTurn()));
 		roundNumber=0;
@@ -345,15 +345,28 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+//	@Override
+//	public void notifyPlayerStatusChange(Player player) {
+//		System.out.println("matchhandler: notifyplayer status change");
+//		
+//		Player currentPlayer = match.getCurrentPlayer();
+//		if (player == currentPlayer) {
+//			this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
+//			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+//		}
+//	}
+	
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
-		System.out.println("matchhandler: notifyplayer status change");
-		Player currentPlayer = match.getCurrentPlayer();
-		if (player == currentPlayer) {
-			this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+		try {
+			this.sendToClientHandler(new PlayerStatusChangeCommand(player), this.getRightClientHandler(player));
+		} catch (WrongPlayerException e) {
+			e.printStackTrace();
 		}
+			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
+	
+
 
 	@Override
 	public void notifyFamilyPlaced() {

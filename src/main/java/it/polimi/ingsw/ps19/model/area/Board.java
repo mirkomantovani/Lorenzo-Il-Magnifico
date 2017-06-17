@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.constant.CardConstants;
@@ -49,8 +50,14 @@ public class Board implements Serializable {
 	
 	private List<String> playerOrder;
 	
+	private Set<Dice> dices;
+	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
+		
+		dices.add(Dice.BLACK_DICE);
+		dices.add(Dice.ORANGE_DICE);
+		dices.add(Dice.WHITE_DICE);
 		
 		towers = new HashMap<>();
 		
@@ -178,8 +185,8 @@ public class Board implements Serializable {
 			builder.append("\t");
 		}
 		builder.append("\n The dices are: \n");
-		for(Dice d : Dice.values()){
-			builder.append(d.getColor().toString().toLowerCase() + "dice, with a value of " + d.getUpperFaceValue());
+		for(Dice d : dices){
+			builder.append(d.getColor().toString().toLowerCase() + " dice, with a value of " + d.getUpperFaceValue());
 			builder.append("\n");
 		}
 		

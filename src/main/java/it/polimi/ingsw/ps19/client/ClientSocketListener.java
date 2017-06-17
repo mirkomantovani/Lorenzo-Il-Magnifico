@@ -31,7 +31,7 @@ public class ClientSocketListener implements Runnable{
 		while(true){
 			try {
 				command = (ServerToClientCommand)inSocket.readObject();
-				System.out.println("clientsocketlistener: ho letto oggetto e ora lo notifico");
+//				System.out.println("clientsocketlistener: ho letto oggetto e ora lo notifico");
 				observer.notifyNewCommand(command);
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
