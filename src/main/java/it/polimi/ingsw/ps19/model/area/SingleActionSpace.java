@@ -59,5 +59,17 @@ public class SingleActionSpace extends ActionSpace{
 	public boolean isOccupable(FamilyMember familyMember) {
 		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("The area is occupied by the ");
+		builder.append(familyMember.toString());
+		builder.append(" family member of the ");
+		builder.append(familyMember.getPlayer().getColor());
+		builder.append(" player");
+		return builder.toString();
+	}
+	
 	
 }

@@ -49,6 +49,10 @@ public class CouncilPalace extends MultipleActionSpace implements Serializable {
 		builder.append(" and your position into this area establish the player order of the next turn. "
 				+ "\n Actually if you visit the CouncilPalace you ");
 		builder.append(effect.toString());
+		
+		if(!members.isEmpty()){
+			builder.append(super.toString());
+		}
 		return builder.toString();
 	}
 	

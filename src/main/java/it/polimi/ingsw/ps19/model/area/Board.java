@@ -51,6 +51,8 @@ public class Board implements Serializable {
 	
 	private List<String> playerOrder;
 	
+	private Map<Color,Dice> dices;
+	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
@@ -81,6 +83,11 @@ public class Board implements Serializable {
 		this.numberOfPlayers = numberOfPlayers;
 		
 		this.playerOrder = new ArrayList<String>();
+		
+		dices = new HashMap<Color,Dice>();
+		for(Dice d: Dice.values()){
+			dices.put(d.getColor(), d);
+		}
 		
 		
 	}
@@ -180,7 +187,7 @@ public class Board implements Serializable {
 			builder.append("\t");
 		}
 		builder.append("\n The dices are: \n");
-		for(Dice d : Dice.values()){
+		for(Dice d : dices.values()){
 			builder.append(d.getColor().toString().toLowerCase() + "dice, with a value of " + d.getUpperFaceValue());
 			builder.append("\n");
 		}

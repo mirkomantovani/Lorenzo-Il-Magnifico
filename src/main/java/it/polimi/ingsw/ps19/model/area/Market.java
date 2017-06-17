@@ -53,14 +53,22 @@ public class Market implements Serializable {
 				+ " and you'll gain "
 				+ "some resources: \n First market slot: ");
 		builder.append(market.get("firstMarket").getEffect().toString());
+		if(market.get("firstMarket").isOccupied())
+			builder.append(market.get("firstMarket").toString());
 		
 		builder.append("\n Second market slot: ");
 		builder.append(market.get("secondMarket").getEffect().toString());
+		if(market.get("secondMarket").isOccupied())
+			builder.append(market.get("secondMarket").toString());
 		if (playersInTheMatch == 4){
 			builder.append("\n Third market slot: ");
 			builder.append(market.get("thirdMarket").getEffect().toString());
+			if(market.get("thirdMarket").isOccupied())
+				builder.append(market.get("thirdMarket").toString());
 			builder.append("\n Fourth market slot: ");
 			builder.append(market.get("thirdMarket").getEffect().toString());
+			if(market.get("fourthMarket").isOccupied())
+				builder.append(market.get("fourthMarket").toString());
 		}
 		
 		

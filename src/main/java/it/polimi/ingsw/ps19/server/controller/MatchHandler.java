@@ -150,7 +150,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
 		match.rollDices();
-		
 		match.distributeRoundResources();
 		sendToAllPlayers(new InitializeTurnCommand(
 				match.getBoard(),match.getPeriod(),match.getTurn()));
