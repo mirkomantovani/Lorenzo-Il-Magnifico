@@ -44,5 +44,16 @@ public class LosePointsEveryWoodStoneEffect extends Effect {
 		rc.addResource(victoryPoint);
 		player.subResources(rc);
 	}
+	
+	@Override
+	public String toString() {
+		return "You Lose "+ victoryPoint.toString() + 
+				" for every wood or stone pictured in the costs of the "+
+				cardType.toString().toLowerCase()+" you own";
+				
+
+	}
+	
+	
 
 }

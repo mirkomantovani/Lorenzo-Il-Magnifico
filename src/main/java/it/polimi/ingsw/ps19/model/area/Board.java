@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;

@@ -37,4 +37,15 @@ public class ExcommunicationTile implements Serializable {
 	}
 
 
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("Period: "+period.toString().toLowerCase());
+		s.append("\nEffect: "+effect.toString());
+			
+		return s.toString();
+	}
+
+
 }

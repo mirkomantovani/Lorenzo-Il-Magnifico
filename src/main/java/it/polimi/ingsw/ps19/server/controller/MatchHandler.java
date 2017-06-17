@@ -6,9 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
@@ -26,7 +24,6 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
-import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
@@ -45,7 +42,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerInterface ServerInterface;
 	private Match match;
 	private Thread roundTimer;
-	private int leaderResponseCounter;
+	private int leaderResponseCounter=0;
 	ArrayList<ArrayList<LeaderCard>> leaderSets;
 	private int cycle = 1;
 
@@ -93,9 +90,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	public void sfws() {
 
-	}
 
 	/**
 	 * 
@@ -162,22 +157,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// createTurnTimer();
 	}
 
-	// Method of notification
-	/**
-	 * method invoked that notify the start of the match
-	 */
-	// private void notifyAllStartMatch() {
-	// for (ClientHandler client : clients)
-	// try {
-	// client.sendCommand(new CommandStartMatch(match.getBoard()
-	// .getBoard(), client.getPlayer(), match.getBoard()
-	// .getNameMap()));
-	// } catch (Exception e) {
-	// LOGGER.fatal(e);
-	// closedClients.add(client);
-	// }
-	// checkDisconnection();
-	// }
+
 
 	private void startRound() {
 		sendToCurrentPlayer(new AskMoveCommand());
@@ -408,8 +388,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		System.out.println("matchhandler: leaderresponsecounter="+leaderResponseCounter);
-//		System.out.println("matchhandler: giocatori:="+match.getPlayers().length);
+		System.out.println("matchhandler: leaderresponsecounter="+leaderResponseCounter);
+		System.out.println("matchhandler: giocatori:="+match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
 //			System.out.println("matchhandler: entro nell'if di quando tutti e quattro hanno scelto");
 

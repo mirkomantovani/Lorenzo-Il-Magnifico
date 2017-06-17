@@ -27,4 +27,11 @@ public class SetServantsDividerEffect extends Effect {
 	
 	}
 
+	@Override
+	public String toString() {
+		return "You have to spend 2 servants to raise the value of your action of 1";
+	}
+	
+	
+
 }

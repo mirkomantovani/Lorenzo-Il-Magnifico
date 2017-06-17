@@ -25,5 +25,10 @@ public class SetNoCardTypeFinalPointsEffect extends Effect {
 		player.getBonuses().setNoCardTypeFinalPoints(cardType);
 
 	}
+	
+	@Override
+	public String toString() {
+		return "You don't get the final points relative to the "+cardType.toString().toLowerCase()+" cards";
+	}
 
 }
