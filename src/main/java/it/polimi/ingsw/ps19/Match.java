@@ -58,6 +58,8 @@ public class Match {
 		playercolors[3] = "giallo";
 		try {
 			leaderCards = new LeaderDeck();
+			
+			System.out.println("match: creato oggetto leaderdeck");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

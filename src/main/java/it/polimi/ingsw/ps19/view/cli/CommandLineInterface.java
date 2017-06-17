@@ -131,6 +131,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
 		print("Select a leader card from the following: ");
+		if(leaderCards.size()==0)System.out.println("leader cards è 0");
 		for(int i = 0; i<leaderCards.size(); i++){
 			print("Number " + i + ":\n" + leaderCards.get(i).toString());
 		}

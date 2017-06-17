@@ -81,8 +81,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startLeaderDiscardPhase() {
         leaderSets=match.getLeaderCards()
 		.getStartingLeaderSets(match.getPlayers().length);
+        
+        System.out.println("matchhandler: lunghezza leadersets"+leaderSets.size());
+        
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
+//			System.out.println("matchHH : creato comando da inv"+leaderSets.get(i).get(0).toString());
 		}
 
 	}

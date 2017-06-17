@@ -19,6 +19,7 @@ public class LeaderDeck  {
 	
 	public LeaderDeck() throws IOException{
 		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
+		System.out.println("leaderdeck: creato deck tramite deck creator");
 	}
 	
 	public void shuffleDeck() {
@@ -71,16 +72,20 @@ public class LeaderDeck  {
 	
 	public ArrayList<ArrayList<LeaderCard>> getStartingLeaderSets(int numberOfPlayers){
 		this.shuffleDeck();
+		int a=1;
+		int i=0;
 	
 		List<ArrayList<LeaderCard>> box = new ArrayList<ArrayList<LeaderCard>>();
 		for(int j = 0; j<numberOfPlayers; j++){
 			List<LeaderCard> cards = new ArrayList<LeaderCard>();
-			for(int i = 0; i < 4; i++){
+			for(; i < 4*a; i++){
 				cards.add(this.getCard(i));
 			}
 			box.add((ArrayList<LeaderCard>) cards);
-			cards.clear();
+			a++;
 		}
+		
+		System.out.println("dio caneeeee"+box.get(0).get(0).toString());
 		
 		return (ArrayList<ArrayList<LeaderCard>>) box;
 	}

@@ -8,6 +8,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 public class LeaderCard extends Card implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -678840188923192984L;
+
 	private LeaderCardRequirement requirement;
 	
 	private Effect specialEffect; 
@@ -42,6 +47,7 @@ public class LeaderCard extends Card implements Serializable{
 		return "[name=" + super.getName()
 		+ ", \nRequirements=" + requirement.toString() + ", \nSpecialEffect=" + specialEffect.toString() +
 		", player=" + super.getPlayer() + "]";
+//		return "ciao";
 	}
 	
 	
