@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,6 +55,8 @@ public class Board implements Serializable {
 	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
+		
+		dices= new HashSet<Dice>();
 		
 		dices.add(Dice.BLACK_DICE);
 		dices.add(Dice.ORANGE_DICE);
