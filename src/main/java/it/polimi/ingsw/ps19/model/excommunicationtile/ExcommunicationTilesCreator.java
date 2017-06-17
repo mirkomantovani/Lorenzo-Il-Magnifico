@@ -43,13 +43,13 @@ public class ExcommunicationTilesCreator {
 		int n1;
 		int t;
 		int n2;
-		CardType cardType;
+		CardType cardType = null;
 		ExcommunicationTile[] tilesArray=new ExcommunicationTile[tiles];
 		
 		buffReader = new BufferedReader(new FileReader(FileConstants.EXCOMMUNICATIONTILES));
 		lineRead = buffReader.readLine();  //line 1  	
 		while (lineRead!=null) {
-			
+			r1=null;
 			
 			
 			n1=Integer.parseInt(lineRead);   
@@ -62,48 +62,56 @@ public class ExcommunicationTilesCreator {
 			if(rt1!=0)
 			r2=ResourceFactory.getResource(ResourceType.values()[rt1-1],n1);
 			
-			period=Period.values()[Integer.parseInt(buffReader.readLine())-1];  //line 5
+			lineRead=buffReader.readLine();
+			period=Period.values()[Integer.parseInt(lineRead)-1];  //line 5
+			
 			
 			if(r1==null){
-				n1=Integer.parseInt(lineRead);  //line 6
+				n1=Integer.parseInt(buffReader.readLine());  //line 6
 				if(n1==0){
-					n1=Integer.parseInt(lineRead); //line 7
+					n1=Integer.parseInt(buffReader.readLine()); //line 7
 					if(n1==0){
-						n1=Integer.parseInt(lineRead); //line 8
+						n1=Integer.parseInt(buffReader.readLine()); //line 8
 						if(n1==0){
-							n1=Integer.parseInt(lineRead); //line 9
-							t=Integer.parseInt(lineRead); //line 10
+							n1=Integer.parseInt(buffReader.readLine()); //line 9
+							t=Integer.parseInt(buffReader.readLine()); //line 10
+							if(t!=0){
 							try{
 							cardType=CardType.values()[t-1];
 							}catch(Exception e){
 								throw new IllegalCardTypeException();
 							}
+							}
 							if(n1==0){
-								n1=Integer.parseInt(lineRead); //line 11
+								n1=Integer.parseInt(buffReader.readLine()); //line 11
 								if(n1==0){
-									n1=Integer.parseInt(lineRead); //line 12
+									n1=Integer.parseInt(buffReader.readLine()); //line 12
 									if(n1==0){
-										n1=Integer.parseInt(lineRead); //line 13
+										n1=Integer.parseInt(buffReader.readLine()); //line 13
 										if(n1==0){
-											t=Integer.parseInt(lineRead); //line 14
-											try{
+											t=Integer.parseInt(buffReader.readLine()); //line 14
+											if(t!=0){
+												try{
 												cardType=CardType.values()[t-1];
 												}catch(Exception e){
 													throw new IllegalCardTypeException();
 												}
+												}
 											if(t==0){
-												n1=Integer.parseInt(lineRead); //line 15
-												n2=Integer.parseInt(lineRead); //line 16
-												rt1=Integer.parseInt(lineRead); //line 17
+												n1=Integer.parseInt(buffReader.readLine()); //line 15
+												n2=Integer.parseInt(buffReader.readLine()); //line 16
+												rt1=Integer.parseInt(buffReader.readLine()); //line 17
 												if(n1==0){
-													t=Integer.parseInt(lineRead); //line 18
-													try{
+													t=Integer.parseInt(buffReader.readLine()); //line 18
+													if(t!=0){
+														try{
 														cardType=CardType.values()[t-1];
 														}catch(Exception e){
 															throw new IllegalCardTypeException();
 														}
+														}
 													if(t==0){
-														n1=Integer.parseInt(lineRead); //line 19
+														n1=Integer.parseInt(buffReader.readLine()); //line 19
 														
 														//perdi n1 punti vittoria per ogni risorsa (legno, pietra servitori e monete) nella tua plancia
 														effect=new LosePointsForEveryResourceEffect(new VictoryPoint(n1));
@@ -111,13 +119,16 @@ public class ExcommunicationTilesCreator {
 		
 													}
 													else {//perdi un punto vittoria per ogni legno e pietra sulle carte di tipo t in tuo possesso
-														try{
+														if(t!=0){
+															try{
 															cardType=CardType.values()[t-1];
 															}catch(Exception e){
 																throw new IllegalCardTypeException();
 															}
+															
 														effect=new LosePointsEveryWoodStoneEffect(new VictoryPoint(1), cardType);
 														tilesArray[index]=new ExcommunicationTile(period, effect);
+														}
 														
 														s=buffReader.readLine();  //line 19
 													}
@@ -190,7 +201,8 @@ public class ExcommunicationTilesCreator {
 						for(int i=8;i<20;i++)s=buffReader.readLine();  //lines 8 to 19
 					}	
 				}
-				else{ 	effect = new HarvestBonusEffect(-n1);
+				else{ 
+					effect = new HarvestBonusEffect(-n1);
 						tilesArray[index]=new ExcommunicationTile(period, effect);
 					
 					for(int i=7;i<20;i++)s=buffReader.readLine();  //lines 7 to 19
@@ -210,6 +222,7 @@ public class ExcommunicationTilesCreator {
 			}
 			index++;
 			lineRead = buffReader.readLine();
+			
 		}
 
 		return tilesArray;

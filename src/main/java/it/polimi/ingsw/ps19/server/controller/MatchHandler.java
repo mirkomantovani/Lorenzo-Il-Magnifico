@@ -26,7 +26,6 @@ import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.server.ClientHandler;
-import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
