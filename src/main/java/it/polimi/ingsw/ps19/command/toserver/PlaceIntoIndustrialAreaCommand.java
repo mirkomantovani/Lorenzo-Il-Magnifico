@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
+import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
@@ -17,6 +18,7 @@ public class PlaceIntoIndustrialAreaCommand extends ClientToServerCommand {
 	
 	private String familyMember;
 	private String industrialArea; // it should be multipleHarvestArea - multipleProductionArea - singleProductionArea - singleHarvestArea
+	private String actionSpace;
 	
 	public String getFamilyMember() {
 		return familyMember;
@@ -28,7 +30,7 @@ public class PlaceIntoIndustrialAreaCommand extends ClientToServerCommand {
 	}
 
 
-	public PlaceIntoIndustrialAreaCommand(String familyMember, String industrialArea){
+	public PlaceIntoIndustrialAreaCommand(String familyMember, String industrialArea, ActionSpace actionSpace){
 		this.familyMember = familyMember;
 		this.industrialArea = industrialArea;
 	}
@@ -41,7 +43,9 @@ public class PlaceIntoIndustrialAreaCommand extends ClientToServerCommand {
 	}
 	
 	
-	
+	public String getActionSpace(){
+		return this.actionSpace;
+	}
 	
 
 }

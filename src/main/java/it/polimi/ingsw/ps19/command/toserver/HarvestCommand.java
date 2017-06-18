@@ -2,24 +2,18 @@ package it.polimi.ingsw.ps19.command.toserver;
 
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
-/**
- * This command was needed to treat in a different way the production and its relative
- * resource exchange choices
- * @author Mirko
- *
- */
-public class ProductionCommand extends ClientToServerCommand {
+public class HarvestCommand extends ClientToServerCommand {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1936330748404906687L;
-
+	private static final long serialVersionUID = 7415867579709431260L;
+	
 	private String familyMember;
 	private int paidServants;
 	private int actionSpace;
 	
-	public ProductionCommand(String familyMember, int paidServants, int actionSpace){
+	public HarvestCommand(String familyMember, int paidServants, int actionSpace){
 		this.familyMember = familyMember;
 		this.paidServants = paidServants;
 		this.actionSpace = actionSpace;
@@ -41,4 +35,7 @@ public class ProductionCommand extends ClientToServerCommand {
 	public int getActionSpace() {
 		return actionSpace;
 	}
+
+	
+	
 }
