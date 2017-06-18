@@ -57,4 +57,6 @@ public interface UserInterface {
 	void displayOpponentsStatus(Player player);
 	
 	void  refreshBoard(Board board);
+
+	void assignColor(String color);
 }

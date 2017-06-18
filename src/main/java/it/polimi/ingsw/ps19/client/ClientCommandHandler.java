@@ -116,8 +116,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(AssignColorCommand assignColorCommand) {
-		// TODO Auto-generated method stub
-		
+		userInterface.assignColor(assignColorCommand.getColor());
 	}
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	

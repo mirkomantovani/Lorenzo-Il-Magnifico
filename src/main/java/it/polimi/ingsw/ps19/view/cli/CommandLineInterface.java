@@ -298,4 +298,10 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		print("");
 	}
 
+	@Override
+	public void assignColor(String color) {
+		print("Ti è stato assegnato il colore: "+color);
+		gameController.setPlayerColor(color);
+	}
+
 }

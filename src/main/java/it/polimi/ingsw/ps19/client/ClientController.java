@@ -29,6 +29,7 @@ public class ClientController implements InputObserver{
 	private UserInterface userInterface;
 	private NetworkInterface networkInterface;
 	private ClientCommandHandler commandHandler;
+	private String playerColor;
 	
 	public ClientController(NetworkInterface networkInterface) {
 		this.networkInterface = networkInterface;
@@ -151,6 +152,12 @@ public class ClientController implements InputObserver{
 	public void notifyDiscardedLeaderCard(String discardedLeaderCard) {
 		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));
 		
+	}
+
+
+
+	public void setPlayerColor(String color) {
+		this.playerColor=color;
 	}
 
 }
