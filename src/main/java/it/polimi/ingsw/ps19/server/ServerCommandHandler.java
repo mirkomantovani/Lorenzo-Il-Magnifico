@@ -18,7 +18,6 @@ import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
 import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
 import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
-import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
@@ -73,41 +72,8 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	
-	public void applyCommand(PlaceIntoIndustrialAreaCommand placeIntoIndustrialAreaCommand) {
-		
-		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoIndustrialAreaCommand.getFamilyMember());
-		switch(placeIntoIndustrialAreaCommand.getIndustrialArea()){
-		case "multipleHarvestArea": try {
-				handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getHarvestArea(), match.getBoard().getHarvestArea().getMultipleActionSpace()));
-		} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		}
-		break; 
-		case "multipleProductionArea" : try {
-			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getProductionArea().getMultipleActionSpace()));
-		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		case "singleHarvestArea" : try {
-			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getHarvestArea().getSingleActionSpace()));
-		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		break;
-		case "singleProductionArea" : try {
-			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getProductionArea().getSingleActionSpace()));
-		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		break;
-	}
 	
-	}
-	
+
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
 		try {
@@ -224,12 +190,31 @@ public class ServerCommandHandler implements CommandObserver {
 		
 	}
 
-	public void applyCommand(HarvestCommand harvestCommand) {
-		// TODO Auto-generated method stub
+	public void applyCommand(HarvestCommand harvestCommand){
 		
-	}
-
-
-	
+		FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
+				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());
+		
+		member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
+		
+		if(harvestCommand.getActionSpace() == 1){
+			try {
+				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
+						match.getBoard().getHarvestArea().getSingleActionSpace()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
+						match.getBoard().getHarvestArea().getMultipleActionSpace()));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}	
 	//Others apply overloaded methods
 }

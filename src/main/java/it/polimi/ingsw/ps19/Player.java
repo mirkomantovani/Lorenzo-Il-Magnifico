@@ -172,6 +172,9 @@ public class Player implements Serializable {
 			}
 		} else 
 			string.append("\nThe player hasn't any leader card");
+		
+		string.append("\nThe player has the following family members:\n");
+		string.append(this.getFamilyMembers().values().toString());
 		return string.toString();
 	}
 	 
@@ -236,8 +239,7 @@ public class Player implements Serializable {
 			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
-		if(leaderCard==null)System.out.println("player: sto aggiungendo una carta null");
-		if(leaderCard.getName()==null)System.out.println("player: leadercardnaME NULL");
+	
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
 			System.out.println("player: aggiunta leader, notifico cambio stato");
