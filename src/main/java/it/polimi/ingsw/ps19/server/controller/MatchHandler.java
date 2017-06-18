@@ -444,14 +444,23 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		throw new WrongClientHandlerException();
 
 	}
+	
+	private Player getPlayerFromColor(String playerColor){
+		Player[] players=this.match.getPlayers();
+		for(int i=0;i<players.length;i++){
+			if(players[i].getColor()==playerColor)
+				return players[i];
+		}
+		return null;
+	}
 
-	public void handleLeaderChoice(String name, ClientHandler clientHandler) {
+	public void handleLeaderChoice(String name, String playerColor) {
 		// System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
 			// System.out.println("matchhandler: cerco di aggiungere la carta di
 			// nome:");
-			this.getRightPlayer(clientHandler).addLeaderCards(match.getLeaderCards().getCard(name));
+			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {

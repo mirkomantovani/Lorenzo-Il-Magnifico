@@ -14,6 +14,28 @@ public class ProductionCommand extends ClientToServerCommand {
 	 * 
 	 */
 	private static final long serialVersionUID = -1936330748404906687L;
+	private String familyMember;
+	private int servant;
+
+	
+	
+	public ProductionCommand(String familyMember, int servant) {
+		super();
+		this.familyMember = familyMember;
+		this.servant = servant;
+	}
+
+
+
+	public String getFamilyMember() {
+		return familyMember;
+	}
+
+
+	public int getServant() {
+		return servant;
+	}
+
 
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {

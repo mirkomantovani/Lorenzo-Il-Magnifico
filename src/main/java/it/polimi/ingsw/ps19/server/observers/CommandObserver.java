@@ -21,8 +21,4 @@ public interface CommandObserver {
 	 */
 	public void notifyNewCommand(ClientToServerCommand command);
 
-	public void notifyNewCommand(SendCredentialsCommand command, ClientHandler clientHandler);
-
-	public void notifyNewCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler);
-	
 }

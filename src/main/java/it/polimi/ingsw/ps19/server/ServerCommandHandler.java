@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsComm
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
@@ -19,6 +20,7 @@ import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
@@ -189,22 +191,12 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.handleCredentials(command.getUsername(),command.getPassword(),clientHandler);
 	}
 
-	@Override
-	public void notifyNewCommand(SendCredentialsCommand command, ClientHandler clientHandler) {
-		command.processCommand(this,clientHandler);
+	
+	public void applyCommand(ChosenLeaderCardCommand command) {
+		handler.handleLeaderChoice(command.getName(),command.getPlayerColor());	
 	}
 
 	
-
-	public void applyCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
-		handler.handleLeaderChoice(command.getName(),clientHandler);	
-	}
-
-	@Override
-	public void notifyNewCommand(ChosenLeaderCardCommand command, ClientHandler clientHandler) {
-		System.out.println("ServerCommandHandler: mi è arrivato un chosenleader command");
-		command.processCommand(this,clientHandler);
-	}
 
 	public void applyCommand(PlayerMoveCommand playerMoveCommand, ClientHandler clientHandler) {
 //		handler.handlePlayerMove(playerMoveCommand.getMove(), clientHandler);
@@ -217,6 +209,22 @@ public class ServerCommandHandler implements CommandObserver {
 	public void applyCommand(InvalidInputCommand invalidInputCommand){
 		handler.handleInvalidCommand();
 	}
+
+	public void applyCommand(ProductionActivationCommand productionActivationCommand) {
+		//TODO qui andrà creata una production action con le scelte
+	}
+
+	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(ChatMessageClientCommand chatMessageClientCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	//Others apply overloaded methods
 }
