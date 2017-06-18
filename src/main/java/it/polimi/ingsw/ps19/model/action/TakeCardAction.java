@@ -64,6 +64,7 @@ public class TakeCardAction extends Action {
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 			
 			this.floor.getActionSpace().getEffect().applyEffect(player);
+			//TODO rimuovere familyMember dal player!
 		} else
 			throw new NotApplicableException();
 	}

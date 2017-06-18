@@ -49,11 +49,32 @@ public class FamilyMember implements Serializable  {
 	}
 
 	public int getActionValue() {
-		return this.dice.getUpperFaceValue() + actionValueVariation;
+		if(actionValueImposition == 0)
+			return this.dice.getUpperFaceValue() + actionValueVariation;
+		else 
+			return actionValueImposition;
 	}
 
 	public void addActionValueVariation(int value) {
 		this.actionValueVariation = this.actionValueVariation + value;
 	}
+	
+	public Color getColor(){
+		return this.dice.getColor();
+	}
+
+	@Override
+	public String toString() {
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.getColor().toString());
+		builder.append(" family member, of the ");
+		builder.append(player.getColor());
+		builder.append(" player, with an action value of ");
+		builder.append(this.getActionValue());
+		return builder.toString();
+	}
+	
+	
 
 }

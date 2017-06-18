@@ -41,10 +41,6 @@ public class Player implements Serializable {
 		familyMembers=new HashMap<>();
 		decks = new HashMap<>();
 		
-		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
-		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i],this));
-		}
-		
 		resources = new ResourceChest();
 	
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
@@ -258,6 +254,17 @@ public class Player implements Serializable {
 		ResourceChest rc = new ResourceChest();
 		rc.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
 		this.subResources(rc);
+		this.observer.notifyPlayerStatusChange(this);
+	}
+	
+	public void addFamilyMembers(){
+		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
+		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i],this));
+		}
+	}
+	
+	public void removeFamilyMember(Color color){
+		this.familyMembers.remove(familyMembers.get(color));
 		this.observer.notifyPlayerStatusChange(this);
 	}
 	
