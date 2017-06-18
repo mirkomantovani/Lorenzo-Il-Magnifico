@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
-import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class ChosenLeaderCardCommand extends ClientToServerCommand {
