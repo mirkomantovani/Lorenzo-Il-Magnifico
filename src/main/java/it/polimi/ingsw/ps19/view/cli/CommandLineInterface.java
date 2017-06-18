@@ -134,12 +134,12 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input.equals("1"))
-				moveHandler(input);
-			else if (input.equals("2")){
+			if(input.equals("2")){
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
 			}
+			else
+				moveHandler(input);
 			break;
 		case ClientConstants.SEND_PASSWORD:
 			print("Command not recognized");
@@ -195,12 +195,19 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		switch(takeCardState){
 		case 0:
 			print("Select the tower:");
-			print("1 territory, 2 building, 3 character, 4 venture");
+			print("1 - Territory");
+			print("2 - Building");
+			print("3 - Character");
+			print("4 - Venture");
 			takeCardState=ClientConstants.SEND_TAKE_CARD_TOWER;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_TOWER:
 			actionConstructor.add(input);
-			print("inserisci floor, 1 - primo piano - 2 floor -3 ,4 ");
+			print("Select the floor:");
+			print("1 - First floor");
+			print("2 - Second floor");
+			print("3 - Third floor");
+			print("4 - Fourth floor");
 			takeCardState = ClientConstants.SEND_TAKE_CARD_FLOOR;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_FLOOR:
@@ -218,7 +225,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			break;
 		case "2":	
 			print("Select market slot:");
-			print("1 -first market 2-secondmarket ..");
+			print("1 - First marketplace slot");
+			print("2 - Second marketplace slot ");
+			print(".. And so on ..");
 			readerState = ClientConstants.SEND_MARKET_SLOT;
 			break;
 		case "3":
@@ -247,18 +256,23 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		actionConstructor.add(string);
 		
 		switch (moveState) {
-		case 0:
-			print("Family member disponibili");
+		case 0:  //First possible case
+			print("Select your available family member: ");
 			moveState=ClientConstants.SEND_FAMILY_MEMBER;
 			break;
 		case ClientConstants.SEND_FAMILY_MEMBER:
 			actionConstructor.add(string);
-			print("Servants");
+			print("How many servants do you want to pay to raise your selected family member action value?");
 			moveState=ClientConstants.SEND_PAID_SERVANTS;
 			break;
 		case ClientConstants.SEND_PAID_SERVANTS:
 			actionConstructor.add(string);
-			print("Acttions");
+			print("What action do you want to perform?");
+			print("3 - Take card");
+			print("4 - Place into Council Palace");
+			print("5 - Place into Marketplace slot");
+			print("6 - Harvest");
+			print("7 - Product");
 			moveState=ClientConstants.SEND_CHOSEN_ACTION;
 			break;
 		case ClientConstants.SEND_CHOSEN_ACTION:
