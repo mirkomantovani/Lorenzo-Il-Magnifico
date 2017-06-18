@@ -25,6 +25,7 @@ import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
@@ -74,9 +75,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-		startLeaderDiscardPhase();
-
+//		startLeaderDiscardPhase(); dovrebbe esserci questo
+//		provaPlayer();
+		startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
+	}
+
+	private void provaPlayer() {
+		match.getPlayers()[0].addResources(new ResourceChest(1,2,3,4,5,6,6));
+		System.out.println("matchhandler prova player:"+match.getPlayers()[0].toString());
+		
 	}
 
 	private void startLeaderDiscardPhase() {
@@ -154,6 +162,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 		else{
 			
+			
+		System.out.println("rollo i dadi");
 		match.rollDices();
 		
 		match.distributeTurnResources();
@@ -358,6 +368,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
 		try {
+			System.out.println("matchhandler: invio player:"+player.toString());
 			this.sendToClientHandler(new PlayerStatusChangeCommand(player), this.getRightClientHandler(player));
 		} catch (WrongPlayerException e) {
 			e.printStackTrace();
