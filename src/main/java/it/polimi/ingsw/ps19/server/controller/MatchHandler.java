@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
@@ -79,6 +80,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		setPlayers();
 		// notifyAllStartMatch();
 
+		communicateColors();
+		
 		match.setInitialPlayer();
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
@@ -87,6 +90,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// provaPlayer();
 		startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
+	}
+
+	private void communicateColors() {
+		for(ClientHandler c: clients){
+			String color=null;
+			try {
+				color = this.getRightPlayer(c).getColor();
+			} catch (WrongClientHandlerException e) {
+				e.printStackTrace();
+			}
+			sendToClientHandler(new AssignColorCommand(color), c);
+		}
+		
 	}
 
 	private void provaPlayer() {

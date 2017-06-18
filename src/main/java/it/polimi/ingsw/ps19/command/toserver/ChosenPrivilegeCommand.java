@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.command.toserver;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**

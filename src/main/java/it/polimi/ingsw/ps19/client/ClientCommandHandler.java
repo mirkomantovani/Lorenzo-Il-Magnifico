@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.client;
 
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
@@ -111,6 +112,11 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 	
 	public void applyCommand(OpponentStatusChangeCommand opponentStatusChangeCommand){
+		
+	}
+
+	public void applyCommand(AssignColorCommand assignColorCommand) {
+		// TODO Auto-generated method stub
 		
 	}
 	
