@@ -18,10 +18,12 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	private String familyMember; // orange,black,white,neutral
 	private String actionSpace; // FIRST,SECOND,THIRD,FOURTH as the place of the marker spot from the left to the
 								// right on the board
+	private int paidServants;
 
-	public PlaceIntoMarketCommand(String familyMember, String actionSpace){
+	public PlaceIntoMarketCommand(String familyMember, String actionSpace, int paidServants){
 		this.familyMember = familyMember;
 		this.actionSpace = actionSpace;
+		this.paidServants = paidServants;
 	}
 	
 	@Override

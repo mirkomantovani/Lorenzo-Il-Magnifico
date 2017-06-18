@@ -15,7 +15,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
- * Comand Line Interface play mode.
+ * Command Line Interface play mode.
  * 
  * @author Jimmy
  *
@@ -23,13 +23,13 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 public class CommandLineInterface implements UserInterface, InputListener {
 
 	private final String welcomeMessage = "|------------------Welcome to Lorenzo il Magnifico, the board game!----------------|";
-	private final String initialStatus = "The decks have been shuffled and the cards on " + "the towers are as follows";
 
 	private InputReader reader;
 	private ClientController gameController;
 	private Thread inputReaderThread;
 	private int readerState;
 	private int moveState;
+	private int takeCardState;
 	private List<String> actionConstructor;
 
 	public CommandLineInterface(ClientController clientController) {
@@ -101,9 +101,13 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void initializeTurn(Board board, Period period, int turn) {
+	public void initializeTurn(Period period, int turn) {
 		printImp("New turn");
 		print("Period: " + period.toString() + "\tTurn: " + turn);
+	}
+	
+	@Override
+	public void refreshBoard(Board board){
 		print("Board status:");
 		print(board.toString());
 	}
@@ -129,12 +133,33 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
+			if(input == "1")
+				moveHandler(input);
+			else if (input == "2"){
+				print("Select a leader card to discard (insert its name): ");
+				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
+			}
 			break;
 		case ClientConstants.SEND_PASSWORD:
 			print("Command not recognized");
 			break;
 		case ClientConstants.SEND_PRIVILEGE_CHOICES:
 			gameController.notifyChosenPrivileges(input);
+			break;
+		case ClientConstants.SEND_DISCARDED_LEADER_CARD:
+			gameController.notifyDiscardedLeaderCard(input);
+		case ClientConstants.SEND_MARKET_SLOT:
+			actionConstructor.add(input);
+			gameController.notifyMarket(actionConstructor);
+			break;
+		case ClientConstants.SEND_HARVEST_ACTION_SPACE:
+			actionConstructor.add(input);
+			gameController.notifyHarvest(actionConstructor);
+			break;
+		case ClientConstants.SEND_PRODUCTION_ACTION_SPACE:
+			actionConstructor.add(input);
+			gameController.notifyProduction(actionConstructor);
+			break;
 		default:
 			print("Command not recognized");
 			break;
@@ -167,27 +192,91 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askMove() {
-		print("These are the available actions");
-		print("1- Take card");
-		print("2- Place into council palace");
-		print("3- Place into market place");
-		print("4- Activate harvest");
-		print("5- Activate production");
-
+		moveState=0;
+		actionConstructor.clear();
+		print("Choose what you want to do:");
+		print("1- Action");
+		print("2- Discard leader card");
 		readerState = ClientConstants.SEND_MOVE;
+	}
+	
+	private void takeCardParams(String input){
+		switch(takeCardState){
+		case 0:
+			print("Select the tower:");
+			print("1 territory, 2 building, 3 character, 4 venture");
+			takeCardState=ClientConstants.SEND_TAKE_CARD_TOWER;
+			break;
+		case ClientConstants.SEND_TAKE_CARD_TOWER:
+			actionConstructor.add(input);
+			print("inserisci floor, 1 - primo piano - 2 floor -3 ,4 ");
+			takeCardState = ClientConstants.SEND_TAKE_CARD_FLOOR;
+			break;
+		case ClientConstants.SEND_TAKE_CARD_FLOOR:
+			actionConstructor.add(input);
+			gameController.notifyTakeCardAction(actionConstructor);
+			break;
+		}
+		
+	}
+	
+	private void distinguishAction(String string, String takecard){
+		switch(string){
+		case "1": 
+			takeCardParams(takecard);
+			break;
+		case "2":	
+			print("Select market slot:");
+			print("1 -first market 2-secondmarket ..");
+			readerState = ClientConstants.SEND_MARKET_SLOT;
+			break;
+		case "3":
+			gameController.notifyCouncilPalace(actionConstructor);
+			break;
+		case "4":
+			print("Select action space: ");
+			print("1 - Single action space");
+			print("2 - Multiple action space");
+			readerState  = ClientConstants.SEND_HARVEST_ACTION_SPACE;
+			break;
+		case "5": 
+			print("Select action space: ");
+			print("1 - Single action space");
+			print("2 - Multiple action space");
+			readerState = ClientConstants.SEND_PRODUCTION_ACTION_SPACE;
+			break;
+			default: 
+				gameController.notifyInvalidInput();
+			
+		}
 	}
 
 	private void moveHandler(String string) {
 		actionConstructor = new ArrayList<String>();
 		actionConstructor.add(string);
-		switch (string) {
-		case "1":
+		
+		switch (moveState) {
+		case 0:
+			print("Family member disponibili");
+			moveState=ClientConstants.SEND_FAMILY_MEMBER;
+			break;
+		case ClientConstants.SEND_FAMILY_MEMBER:
+			actionConstructor.add(string);
+			print("Servants");
+			moveState=ClientConstants.SEND_PAID_SERVANTS;
+			break;
+		case ClientConstants.SEND_PAID_SERVANTS:
+			actionConstructor.add(string);
+			print("Acttions");
+			moveState=ClientConstants.SEND_CHOSEN_ACTION;
+			break;
+		case ClientConstants.SEND_CHOSEN_ACTION:
+			actionConstructor.add(string);
+			distinguishAction(actionConstructor.get(2),string);
+			break;
 		}
 	}
 
-	private void changeMoveState() {
-
-	}
 
 	@Override
 	public void invalidInput() {

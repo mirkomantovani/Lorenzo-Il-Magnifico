@@ -15,7 +15,19 @@ public class ClientConstants {
 	public static final int SEND_END_GAME = 3;
 	public static final int SEND_MOVE = 4;
 	public static final int SEND_PRIVILEGE_CHOICES = 5;
-	
+	public static final int SEND_DISCARDED_LEADER_CARD = 6;
+	public static final int SEND_MARKET_SLOT = 7;
+	public static final int SEND_HARVEST_ACTION_SPACE = 8;
+	public static final int SEND_PRODUCTION_ACTION_SPACE = 9;
+	public static final int SEND_TAKE_CARD_TOWER = 10;
+	public static final int SEND_TAKE_CARD_FLOOR = 11;
+	public static final int SEND_FAMILY_MEMBER = 12;
+	public static final int SEND_PAID_SERVANTS = 13;
+	public static final int SEND_CHOSEN_ACTION = 14;
+
+
+
+
 	
 	private ClientConstants(){
 	}

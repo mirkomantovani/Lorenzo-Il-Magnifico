@@ -24,7 +24,7 @@ public interface UserInterface {
 	
 	void initializeMatch();
 	
-	void initializeTurn(Board board, Period period, int turn);
+	void initializeTurn(Period period, int turn);
 	
 	void startTurn();
 	
@@ -55,4 +55,6 @@ public interface UserInterface {
 	void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles);
 	
 	void displayOpponentsStatus(Player player);
+	
+	void  refreshBoard(Board board);
 }

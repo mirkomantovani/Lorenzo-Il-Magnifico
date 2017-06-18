@@ -62,7 +62,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void initializeTurn(Board board, Period period, int turn) {
+	public void initializeTurn(Period period, int turn) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -111,6 +111,12 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void displayOpponentsStatus(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void refreshBoard(Board board) {
 		// TODO Auto-generated method stub
 		
 	}

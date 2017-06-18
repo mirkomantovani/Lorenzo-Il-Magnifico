@@ -20,10 +20,11 @@ public class TakeCardCommand extends ClientToServerCommand {
 	private CardType cardType;
 	private int paidServants;
 
-	public TakeCardCommand(String familyMember, int floor, int paidServants) {
+	public TakeCardCommand(String familyMember, int floor, int paidServants, CardType cardType) {
 		this.familyMember = familyMember;
 		this.floor = floor;
 		this.paidServants = paidServants;
+		this.cardType = cardType;
 	}
 
 	@Override

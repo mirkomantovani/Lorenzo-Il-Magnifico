@@ -18,7 +18,7 @@ public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 	private String familyMember; //the color
 	
 	
-	public PlaceIntoCouncilPalaceCommand(String familyMember){
+	public PlaceIntoCouncilPalaceCommand(String familyMember, int paidServants){
 		this.familyMember = familyMember; 
 	}
 	
