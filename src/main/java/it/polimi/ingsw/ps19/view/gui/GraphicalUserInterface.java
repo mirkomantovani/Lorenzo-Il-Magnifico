@@ -73,11 +73,6 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
-	@Override
-	public void askName() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
@@ -85,11 +80,6 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
-	@Override
-	public void askPassword() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void askMove() {
@@ -117,6 +107,54 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void refreshBoard(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notApplicableAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyExcommunication() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void opponentStatusChanged(Player maskedPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void newChatMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askNameAndPassword() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askForProductionExchangeEffect(List<String[]> choices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyRoundTimerExpired() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askForExcommunicationPayment(String excommunicationEffect) {
 		// TODO Auto-generated method stub
 		
 	}

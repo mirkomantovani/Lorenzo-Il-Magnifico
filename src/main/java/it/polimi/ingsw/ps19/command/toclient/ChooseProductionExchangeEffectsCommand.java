@@ -30,7 +30,7 @@ public class ChooseProductionExchangeEffectsCommand extends ServerToClientComman
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-
+		clientCommandHandler.applyCommand(this);
 	}
 
 }
