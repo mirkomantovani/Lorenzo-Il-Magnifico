@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,13 @@ public class Player implements Serializable {
 	
 	private String name;
 	private String color;
-	private Map<Color,FamilyMember> familyMembers;
+	private HashMap<Color,FamilyMember> familyMembers;
 	private ResourceChest resources;
-	private Map<CardType, List<DevelopmentCard>> decks;
+	private HashMap<CardType, List<DevelopmentCard>> decks;
 	private Bonus bonuses;
 	private transient MatchObserver observer;
 	private int councilPrivilege;
-	private Map<String,LeaderCard> leaderCards;
+	private HashMap<String,LeaderCard> leaderCards;
 	
 	
 	public Player(String name, String color){
@@ -152,7 +153,7 @@ public class Player implements Serializable {
 		
 	}
 
-	public void setFamilyMembers(Map<Color, FamilyMember> familyMembers) {
+	public void setFamilyMembers(HashMap<Color, FamilyMember> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
 	
@@ -165,13 +166,21 @@ public class Player implements Serializable {
 								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
 								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
-		if(!leaderCards.isEmpty()){
-			string.append("Leader cards : \n");
-			for(LeaderCard l : leaderCards.values()){
-				string.append(l.toString());
-			}
-		} else 
-			string.append("\nThe player hasn't any leader card");
+//		if(!leaderCards.isEmpty()){
+//			string.append("Leader cards : \n");
+//			for(LeaderCard l : leaderCards.values()){
+//				string.append(l.toString());
+		 Iterator it = leaderCards.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry pair = (Map.Entry)it.next();
+		        string.append(pair.getValue());
+		        it.remove(); // avoids a ConcurrentModificationException
+		    }
+
+			
+
+//		} else 
+//			string.append("\nThe player hasn't any leader card");
 		return string.toString();
 	}
 	 
@@ -227,7 +236,7 @@ public class Player implements Serializable {
 	public Map<String,LeaderCard> getLeaderCards() {
 		return leaderCards;
 	}
-	public void setLeaderCards(Map<String,LeaderCard> leaderCards) {
+	public void setLeaderCards(HashMap<String,LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
 	public void removeLeaderCard(String leaderName) {

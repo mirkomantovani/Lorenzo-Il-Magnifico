@@ -4,7 +4,6 @@ package it.polimi.ingsw.ps19.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.command.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
@@ -13,6 +12,7 @@ import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
 import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.model.card.CardType;

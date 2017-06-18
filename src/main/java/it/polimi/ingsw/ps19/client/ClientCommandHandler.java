@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.client;
 
 
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
@@ -139,6 +140,12 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	public void applyCommand(AssignColorCommand assignColorCommand) {
 		userInterface.assignColor(assignColorCommand.getColor());
 	}
+
+	public void applyCommand(AskMoveCommand askMoveCommand) {
+		userInterface.askMove();
+	}
+	
+	
 
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	

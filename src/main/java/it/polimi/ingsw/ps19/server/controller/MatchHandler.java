@@ -10,7 +10,7 @@ import java.util.List;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.command.AskMoveCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
@@ -81,20 +81,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// notifyAllStartMatch();
 
 		communicateColors();
-		
+
 		match.setInitialPlayer();
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-		// startLeaderDiscardPhase(); dovrebbe esserci questo
+		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
-		startTurn();
+//		 startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 	}
 
 	private void communicateColors() {
-		for(ClientHandler c: clients){
-			String color=null;
+		for (ClientHandler c : clients) {
+			String color = null;
 			try {
 				color = this.getRightPlayer(c).getColor();
 			} catch (WrongClientHandlerException e) {
@@ -102,7 +102,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			sendToClientHandler(new AssignColorCommand(color), c);
 		}
-		
+
 	}
 
 	private void provaPlayer() {
@@ -181,15 +181,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
-		}
-		else{
-			
-			
-		System.out.println("rollo i dadi");
-		match.getBoard().rollDices();
-		match.distributeTurnResources();
+		} else {
 
-		}
+			System.out.println("rollo i dadi");
+			match.getBoard().rollDices();
+			match.distributeTurnResources();
 
 			// match.changeBoardCards();
 
@@ -201,7 +197,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
 			// createTurnTimer();
-	
+		}
+
 	}
 
 	private void startRound() {
@@ -300,7 +297,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void startRoundTimer() {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(FileConstants.INITIAL_TIME));
+			reader = new BufferedReader(new FileReader(FileConstants.ROUND_TIME));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -417,7 +414,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void nextStep() {
-		setNext();
 		if (roundNumber == match.getPlayers().length * 4) {
 			if (match.getTurn() % 2 == 1)
 				startTurn();
@@ -460,13 +456,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		throw new WrongClientHandlerException();
 
 	}
-	
-	private Player getPlayerFromColor(String playerColor){
-		Player[] players=this.match.getPlayers();
-		for(int i=0;i<players.length;i++){
-			if(players[i].getColor()==playerColor)
+
+	private Player getPlayerFromColor(String playerColor) {
+		Player[] players = this.match.getPlayers();
+		for (int i = 0; i < players.length; i++) {
+//			System.out.println("matchhandler: getplayerfromcolor: p" + "layer.getcolor:" + players[i].getColor()
+//					+ "playerColor:" + playerColor);
+			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
+//		System.out.println("matchhandler: getplayerfromcolor: sto ritornando null");
 		return null;
 	}
 
@@ -476,13 +475,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			// System.out.println("matchhandler: cerco di aggiungere la carta di
 			// nome:");
+//			System.out.println("matchhandler: handleleaderchoice: leadername:" + name + "playercolor: " + playerColor);
+
+			if (match.getLeaderCards() == null)
+//				System.out.println("match.getleadercards è nullll");
+				System.out.println(this.match.getLeaderCards().getCard(name).toString());
 			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("matchhandler: leaderresponsecounter=" + leaderResponseCounter);
+//		System.out.println("matchhandler: leaderresponsecounter=" + leaderResponseCounter);
 		System.out.println("matchhandler: giocatori:=" + match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
 			// System.out.println("matchhandler: entro nell'if di quando tutti e
@@ -695,9 +699,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			ResourceChest resourcesToGive=new ResourceChest();
-			
+
+			ResourceChest resourcesToGive = new ResourceChest();
+
 			for (int i = 0; i < choice.size(); i++) {
 				resourcesToGive.addChest(rc[choice.get(i)]);
 			}

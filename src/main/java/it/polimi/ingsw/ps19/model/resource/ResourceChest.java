@@ -15,7 +15,7 @@ public class ResourceChest implements Serializable{
 	 */
 	private static final long serialVersionUID = -768950657123798317L;
 	
-	private Map<ResourceType, Resource> resources;
+	private HashMap<ResourceType, Resource> resources;
 
 	public ResourceChest() {
 		resources = new HashMap<>();

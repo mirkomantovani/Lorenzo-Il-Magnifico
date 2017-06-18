@@ -1,6 +1,5 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toserver;
 
-import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 

@@ -1,7 +1,6 @@
-package it.polimi.ingsw.ps19.command;
+package it.polimi.ingsw.ps19.command.toclient;
 
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
-import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 
 public class AskMoveCommand extends ServerToClientCommand {
 
@@ -12,7 +11,7 @@ public class AskMoveCommand extends ServerToClientCommand {
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-
+		clientCommandHandler.applyCommand(this);
 	}
 
 }
