@@ -34,6 +34,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
+		actionConstructor=new ArrayList<String>();
 		reader = new InputReader();
 		inputReaderThread = new Thread(reader);
 		inputReaderThread.start();
@@ -133,9 +134,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input == "1")
+			if(input.equals("1"))
 				moveHandler(input);
-			else if (input == "2"){
+			else if (input.equals("2")){
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
 			}
@@ -148,6 +149,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			break;
 		case ClientConstants.SEND_DISCARDED_LEADER_CARD:
 			gameController.notifyDiscardedLeaderCard(input);
+			break;
 		case ClientConstants.SEND_MARKET_SLOT:
 			actionConstructor.add(input);
 			gameController.notifyMarket(actionConstructor);
@@ -181,6 +183,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void askMove() {
 		moveState=0;
+		takeCardState=0;
 		actionConstructor.clear();
 		print("Choose what you want to do:");
 		print("1- Action");
