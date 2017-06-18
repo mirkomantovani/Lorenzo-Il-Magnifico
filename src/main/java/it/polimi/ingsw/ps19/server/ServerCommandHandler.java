@@ -61,7 +61,8 @@ public class ServerCommandHandler implements CommandObserver {
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
 		
 	try {
-		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace())));
+		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
+				placeIntoMarketCommand.getPaidServants()));
 	} catch (NotApplicableException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -80,7 +81,7 @@ public class ServerCommandHandler implements CommandObserver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-		break;
+		break; 
 		case "multipleProductionArea" : try {
 			handler.applyAction(new IndustrialAction(familyMember,match.getBoard().getProductionArea(), match.getBoard().getProductionArea().getMultipleActionSpace()));
 		} catch (NotApplicableException e) {
@@ -108,7 +109,8 @@ public class ServerCommandHandler implements CommandObserver {
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
 		try {
-			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace()));
+			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
+					placeIntoCouncilPalaceCommand.getPaidServants()));
 		} catch (NotApplicableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,13 +9,15 @@ import it.polimi.ingsw.ps19.model.area.CouncilPalace;
 public class CouncilPalaceAction extends Action {
 	
 	CouncilPalace councilPalace;
+	int paidServants;
 	ArrayList<FamilyMember> memberOrder;
 	
-	public CouncilPalaceAction(FamilyMember familyMember, CouncilPalace councilPalace){
+	public CouncilPalaceAction(FamilyMember familyMember, CouncilPalace councilPalace, int paidServants){
 		
 		super(familyMember);
 		this.councilPalace = councilPalace;
         memberOrder.add(familyMember);
+        this.paidServants = paidServants;
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class CouncilPalaceAction extends Action {
 
 	@Override
 	public boolean isApplicable() {
-		if(!councilPalace.isOccupable(familyMember)){
+		if(!councilPalace.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.councilPalace.getActionValueRequired()){
 			return false;
 		}
 		return true;

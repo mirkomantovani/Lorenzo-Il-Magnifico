@@ -12,11 +12,13 @@ import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 public class MarketAction extends Action{
 	
 	private SingleActionSpace marketSpot;
+	private int paidServants;
 	
 	
-	public MarketAction(FamilyMember familyMember, SingleActionSpace marketSpot){
+	public MarketAction(FamilyMember familyMember, SingleActionSpace marketSpot, int paidServants){
 		super(familyMember);
 		this.marketSpot = marketSpot;
+		this.paidServants = paidServants;
 		
 	}
 
@@ -40,7 +42,7 @@ public class MarketAction extends Action{
 	
 	
 	private boolean canBePlaced(){
-		if(!marketSpot.isOccupable(familyMember)){
+		if(!marketSpot.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.marketSpot.getActionValueRequired()){
 			return false;
 		}
 		return true;

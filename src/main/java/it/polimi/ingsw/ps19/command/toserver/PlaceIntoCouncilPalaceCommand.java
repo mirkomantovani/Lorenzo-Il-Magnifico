@@ -32,5 +32,9 @@ public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 		return familyMember;
 	}
 
+	public int getPaidServants() {
+		return paidServants;
+	}
+
 
 }

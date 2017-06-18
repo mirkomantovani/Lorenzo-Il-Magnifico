@@ -165,13 +165,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
-		} else {
+		}
+		else{
+			
+			
+		System.out.println("rollo i dadi");
+		match.getBoard().rollDices();
+		match.distributeTurnResources();
 
-			// TODO addFamilyMembers a tutti
-
-			System.out.println("rollo i dadi");
-			match.rollDices();
-			match.distributeTurnResources();
+		}
 
 			// match.changeBoardCards();
 
@@ -183,7 +185,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
 			// createTurnTimer();
-		}
+	
 	}
 
 	private void startRound() {

@@ -48,6 +48,9 @@ public class Board implements Serializable {
 	private Deck<? extends DevelopmentCard> ventureCards;
 	
 	private int numberOfPlayers;
+	private int blackDice;
+	private int whiteDice;
+	private int orangeDice;
 	
 	
 	private List<String> playerOrder;
@@ -88,6 +91,10 @@ public class Board implements Serializable {
 		//TODO the market should take the number of players in the match, not the magic number 4
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
+		
+		 blackDice = Dice.BLACK_DICE.getUpperFaceValue();
+		 whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
+		 orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
 		
 		this.numberOfPlayers = numberOfPlayers;
 		
@@ -164,6 +171,16 @@ public class Board implements Serializable {
 			this.playerOrder.add(p);
 		}
 	}
+	
+	public void rollDices() {
+		for(int i=0;i<Dice.values().length;i++)
+		Dice.values()[i].roll();
+		
+		blackDice = Dice.BLACK_DICE.getUpperFaceValue();
+		whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
+		orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
+
+	}
 
 	@Override
 	public String toString() {
@@ -193,11 +210,13 @@ public class Board implements Serializable {
 		}
 		builder.append("\n The dices are: \n");
 
-		for(Dice d : dices){
-			builder.append(d.getColor().toString().toLowerCase() + " dice, with a value of " + d.getUpperFaceValue());
-
+		
+			builder.append("Black dice, with a value of " + blackDice);
 			builder.append("\n");
-		}
+			builder.append("White dice, with a value of " + whiteDice);
+			builder.append("\n");
+			builder.append("Orange dice, with a value of " + orangeDice);
+			builder.append("\n");
 		
 
 		return builder.toString();
