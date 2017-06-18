@@ -16,47 +16,61 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public interface UserInterface {
 
-	void askName();
 	
-	void startDraft(List<LeaderCard> leaderCards);
+	public void startDraft(List<LeaderCard> leaderCards);
 	
-	void askPassword();
+	public void initializeMatch();
 	
-	void initializeMatch();
+	public void initializeTurn(Period period, int turn);
 	
-	void initializeTurn(Period period, int turn);
+	public void startTurn();
 	
-	void startTurn();
+	public void commandNotValid();
 	
-	void commandNotValid();
-	
-	void playerStatusChange(Player p);
+	public void playerStatusChange(Player p);
 	
 	/**
 	 * Notification of a generic player move
 	 */
-	void playerMove();
+	public void playerMove();
 	
 	/**
 	 * It's <player> turn!
 	 */
-	void playerTurn();
+	public void playerTurn();
 	
-	void win();
+	public void win();
 	
-	void lose();
+	public void lose();
 
-	void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources);
+	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources);
 
-	void askMove();
+	public void askMove();
 	
-	void invalidInput();
+	public void invalidInput();
 	
-	void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles);
+	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles);
 	
-	void displayOpponentsStatus(Player player);
+	public void displayOpponentsStatus(Player player);
 	
-	void  refreshBoard(Board board);
+	public void assignColor(String color);
 
-	void assignColor(String color);
+	public void refreshBoard(Board board);
+
+	public void notApplicableAction();
+
+	public void notifyExcommunication();
+
+	public void newChatMessage(String message);
+
+	public void askNameAndPassword();
+
+	public void askForProductionExchangeEffect(List<String[]> choices);
+
+	public void notifyRoundTimerExpired();
+
+	public void askForExcommunicationPayment(String excommunicationEffect);
+
+	public void opponentStatusChanged(Player maskedPlayer);
+
 }

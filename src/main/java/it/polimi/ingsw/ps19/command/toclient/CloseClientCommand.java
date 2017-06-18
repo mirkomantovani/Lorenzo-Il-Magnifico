@@ -18,7 +18,7 @@ public class CloseClientCommand extends ServerToClientCommand {
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-		// TODO Auto-generated method stub
+		clientCommandHandler.applyCommand(this);
 		
 	}
 		

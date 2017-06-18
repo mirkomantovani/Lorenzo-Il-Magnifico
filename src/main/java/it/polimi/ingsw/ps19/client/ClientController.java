@@ -66,7 +66,7 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyChosenLeaderCard(String leaderCardName) {
-		sendCommand(new ChosenLeaderCardCommand(leaderCardName));
+		sendCommand(new ChosenLeaderCardCommand(leaderCardName, playerColor));
 	}
 	
 	@Override

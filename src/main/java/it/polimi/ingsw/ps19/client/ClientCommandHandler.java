@@ -4,7 +4,9 @@ package it.polimi.ingsw.ps19.client;
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
+import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
@@ -14,10 +16,12 @@ import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
+import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
-import it.polimi.ingsw.ps19.command.toserver.SolveExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.askForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -37,7 +41,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(InvalidActionCommand ActionNotValidCommand) {
-		
+		userInterface.notApplicableAction();
 	}
 
 	public void applyCommand(InvalidCommand invalidCommand) {
@@ -83,7 +87,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(NotifyExcommunicationCommand notifyExcommunicationCommand) {
-		// TODO Auto-generated method stub
+		userInterface.notifyExcommunication();
 		
 	}
 
@@ -91,20 +95,16 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		userInterface.startDraft(chooseLeaderCardCommand.getPossibleChoices());
 	}
 
-	public void applyCommand(SolveExcommunicationCommand solveExcommunicationCommand) {
-		// TODO Auto-generated method stub
-		
+	public void applyCommand(askForExcommunicationPaymentCommand solveExcommunicationCommand) {
+		userInterface.askForExcommunicationPayment(solveExcommunicationCommand.getExcommunicationEffect());
 	}
 
-	
 	public void applyCommand(AskAuthenticationCommand askAuthenticationCommand) {
-		// TODO Auto-generated method stub
-		
+		userInterface.askNameAndPassword();
 	}
 
 	public void applyCommand(PlayerStatusChangeCommand playerStatusChangeCommand) {
 		userInterface.playerStatusChange(playerStatusChangeCommand.getPlayer());
-		
 	}
 	
 	public void applyCommand(InitializeTurnCommand initializeTurnCommand){
@@ -112,12 +112,34 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 	
 	public void applyCommand(OpponentStatusChangeCommand opponentStatusChangeCommand){
+		userInterface.opponentStatusChanged(opponentStatusChangeCommand.getMaskedPlayer());
+	}
+
+	public void applyCommand(ChatMessageServerCommand chatMessageServerCommand) {
+		userInterface.newChatMessage(chatMessageServerCommand.getText());
 		
 	}
+
+	public void applyCommand(ChooseProductionExchangeEffectsCommand chooseProductionExchangeEffectsCommand) {
+		userInterface.askForProductionExchangeEffect(chooseProductionExchangeEffectsCommand.getChoices());
+		
+	}
+
+	public void applyCommand(RefreshBoardCommand refreshBoardCommand) {
+		userInterface.refreshBoard(refreshBoardCommand.getBoard());
+		
+	}
+
+	public void applyCommand(RoundTimerExpiredCommand roundTimerExpiredCommand) {
+		userInterface.notifyRoundTimerExpired();
+		
+	}
+	
 
 	public void applyCommand(AssignColorCommand assignColorCommand) {
 		userInterface.assignColor(assignColorCommand.getColor());
 	}
+
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	
 }

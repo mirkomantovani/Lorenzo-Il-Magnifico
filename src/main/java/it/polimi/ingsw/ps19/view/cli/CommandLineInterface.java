@@ -166,18 +166,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		}
 	}
 
-	@Override
-	public void askName() {
-		print("Insert your credentials: ");
-		print("Name: ");
-		readerState = ClientConstants.SEND_NAME;
-	}
-
-	@Override
-	public void askPassword() {
-		print("Password: ");
-		readerState = ClientConstants.SEND_PASSWORD;
-	}
 
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
@@ -302,6 +290,56 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void assignColor(String color) {
 		print("Ti è stato assegnato il colore: "+color);
 		gameController.setPlayerColor(color);
+	}
+
+	public void notApplicableAction() {
+		print("The action chosen is not applicable, please select another one!");
+		
+	}
+
+	@Override
+	public void notifyExcommunication() {
+		print("God seems very offended by your behaviour, he established your excommunication.");
+		
+	}
+
+	@Override
+	public void opponentStatusChanged(Player maskedPlayer) {
+		print("The ");
+		print(maskedPlayer.getColor());
+		print(" has changed his status :\nNew details: ");
+		print(maskedPlayer.getResourceChest().toString());
+		
+	}
+
+	@Override
+	public void newChatMessage(String message) {
+		print(message);
+		
+	}
+
+	@Override
+	public void askNameAndPassword() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askForProductionExchangeEffect(List<String[]> choices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyRoundTimerExpired() {
+		print("Your time to move is elapsed, you have lost the turn.");
+		
+	}
+
+	@Override
+	public void askForExcommunicationPayment(String excommunicationEffect) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
