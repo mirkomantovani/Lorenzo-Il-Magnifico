@@ -11,24 +11,19 @@ public class InitializeTurnCommand extends ServerToClientCommand {
 	 */
 	private static final long serialVersionUID = 1569847639899896757L;
 	
-	private Board board;
 	
 	private Period period;
 	
 	private int turn;
 
 	
-	public InitializeTurnCommand(Board board, Period period, int turn) {
-		this.board = board;
+	public InitializeTurnCommand(Period period, int turn) {
+	
 		this.period = period;
 		this.turn = turn;
 	}
 	
 	
-	public Board getBoard() {
-		return board;
-	}
-
 	public Period getPeriod() {
 		return period;
 	}
