@@ -15,31 +15,11 @@ public class ProductionCommand extends ClientToServerCommand {
 	 */
 	private static final long serialVersionUID = -1936330748404906687L;
 	private String familyMember;
-	private int servant;
-
-	
-	
-	public ProductionCommand(String familyMember, int servant) {
-		super();
-		this.familyMember = familyMember;
-		this.servant = servant;
-	}
-
-
-
-	public String getFamilyMember() {
-		return familyMember;
-	}
-
-
-	public int getServant() {
-		return servant;
-	}
-
-
-	private String familyMember;
 	private int paidServants;
 	private int actionSpace;
+	
+
+
 	
 	public ProductionCommand(String familyMember, int paidServants, int actionSpace){
 		this.familyMember = familyMember;
@@ -52,10 +32,10 @@ public class ProductionCommand extends ClientToServerCommand {
 		serverHandlerCommand.applyCommand(this);
 	}
 
-	public String getFamilyMember() {
+	public String getFamilyMember(){
 		return familyMember;
 	}
-
+	
 	public int getPaidServants() {
 		return paidServants;
 	}

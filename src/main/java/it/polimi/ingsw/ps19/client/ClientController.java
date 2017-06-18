@@ -149,7 +149,8 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyDiscardedLeaderCard(String discardedLeaderCard) {
-		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));		
+		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));
+		
 	}
 
 }
