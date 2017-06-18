@@ -8,6 +8,7 @@ import java.net.Socket;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
@@ -103,10 +104,14 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
-			else if (command instanceof SendCredentialsCommand)
-				commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
-			else if (command instanceof ChosenLeaderCardCommand)
-				commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
+			
+			//commands that can be sent in an asyncronous way from the clients and are always valid
+			//and managed by the ServerCommandHandler
+			else if(command instanceof SendCredentialsCommand || 
+					command instanceof ChosenLeaderCardCommand ||
+					command instanceof ChatMessageClientCommand)
+				commandHandler.notifyNewCommand(command);
+			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
 
 				commandHandler.notifyNewCommand(command);
@@ -123,15 +128,7 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-//	private void notifyCommand(ClientToServerCommand command) {
-//		if (command instanceof SendCredentialsCommand)
-//			commandHandler.notifyNewCommand((SendCredentialsCommand)command, this);
-//		else if (command instanceof ChosenLeaderCardCommand)
-//			commandHandler.notifyNewCommand((ChosenLeaderCardCommand)command, this);
-//		else 
-//			commandHandler.notifyNewCommand(command);
-//			
-//	}
+
 
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {

@@ -27,7 +27,7 @@ public class ProductionActivationCommand extends ClientToServerCommand {
 
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-
+		serverHandlerCommand.applyCommand(this);
 	}
 
 }
