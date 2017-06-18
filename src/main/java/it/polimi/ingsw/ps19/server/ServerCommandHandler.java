@@ -150,10 +150,10 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
-		
-			for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
-				handler.getCurrentPlayer().addResources(rc);
-			}
+		handler.addPrivilegeResources(chosenPrivilegeCommand.getChoice());
+//			for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
+//				handler.getCurrentPlayer().addResources(rc);
+//			}
 		
 	}
 
@@ -163,6 +163,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(DiscardLeaderCardCommand discardLeaderCardCommand) {
+		handler.discardLeaderCard(discardLeaderCardCommand.getLeaderName());
 		handler.sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1));
 		handler.getCurrentPlayer().removeLeaderCard(discardLeaderCardCommand.getLeaderName());
 		
@@ -216,7 +217,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 	
 	public void applyCommand(InvalidInputCommand invalidInputCommand){
-		
+		handler.handleInvalidCommand();
 	}
 	
 	//Others apply overloaded methods

@@ -11,6 +11,7 @@ import java.util.List;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
@@ -18,9 +19,11 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
+import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
@@ -48,10 +51,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerInterface ServerInterface;
 	private Match match;
 	private Thread roundTimer;
-	private int leaderResponseCounter=0;
+	private int leaderResponseCounter = 0;
 	private ArrayList<ArrayList<LeaderCard>> leaderSets;
 	private int cycle = 1;
-	private int roundNumber=0;
+	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
@@ -59,8 +62,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
 		System.out.println("match handler: sono stato creato");
-//		leaderSets = match.getLeaderCards()
-//				.getStartingLeaderSets(match.getPlayers().length);
+		// leaderSets = match.getLeaderCards()
+		// .getStartingLeaderSets(match.getPlayers().length);
 	}
 
 	@Override
@@ -80,32 +83,30 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-//		startLeaderDiscardPhase(); dovrebbe esserci questo
-//		provaPlayer();
+		// startLeaderDiscardPhase(); dovrebbe esserci questo
+		// provaPlayer();
 		startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 	}
 
 	private void provaPlayer() {
-		match.getPlayers()[0].addResources(new ResourceChest(1,2,3,4,5,6,6));
-		System.out.println("matchhandler prova player:"+match.getPlayers()[0].toString());
-		
+		match.getPlayers()[0].addResources(new ResourceChest(1, 2, 3, 4, 5, 6, 6));
+		System.out.println("matchhandler prova player:" + match.getPlayers()[0].toString());
+
 	}
 
 	private void startLeaderDiscardPhase() {
-        leaderSets=match.getLeaderCards()
-		.getStartingLeaderSets(match.getPlayers().length);
-        
-        System.out.println("matchhandler: lunghezza leadersets"+leaderSets.size());
-        
+		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
+
+		System.out.println("matchhandler: lunghezza leadersets" + leaderSets.size());
+
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
-//			System.out.println("matchHH : creato comando da inv"+leaderSets.get(i).get(0).toString());
+			// System.out.println("matchHH : creato comando da
+			// inv"+leaderSets.get(i).get(0).toString());
 		}
 
 	}
-
-
 
 	/**
 	 * 
@@ -142,7 +143,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			c.addCommandObserver(commandHandler);
 			i++;
 		}
-		
+
 		match.setPlayerOrder();
 	}
 
@@ -153,8 +154,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void setNext() {
 		// Map<Player, Boolean> winners = match.checkWinners();
 		// if (winners.isEmpty() && !clients.isEmpty()) {
-		 match.setNextPlayer();
-		
+		match.setNextPlayer();
+
 		// } else if (!winners.isEmpty() && !clients.isEmpty())
 		// notifyEndOfGame(winners);
 	}
@@ -162,34 +163,31 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startTurn() {
 		// sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
-		if(match.getTurn()==7){
+		if (match.getTurn() == 7) {
 			handleEndGame();
-		}
-		else{
-			
-			
-		System.out.println("rollo i dadi");
-		match.rollDices();
-		match.distributeTurnResources();
+		} else {
 
-		//match.changeBoardCards();
+			// TODO addFamilyMembers a tutti
 
+			System.out.println("rollo i dadi");
+			match.rollDices();
+			match.distributeTurnResources();
 
-		sendToAllPlayers(new InitializeTurnCommand(
-				match.getBoard(),match.getPeriod(),match.getTurn()));
-		roundNumber=0;
-		startRound();
-		// notifyCurrentPlayer(new CommandAskMove());
-		// createTurnTimer();
+			// match.changeBoardCards();
+
+			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
+
+			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
+
+			roundNumber = 0;
+			startRound();
+			// notifyCurrentPlayer(new CommandAskMove());
+			// createTurnTimer();
 		}
 	}
 
-
-
-	
-
 	private void startRound() {
-		roundNumber++;  
+		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
 	}
@@ -243,6 +241,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		try {
 			client.sendCommand(command);
+			lastCommandSent = command;
 		} catch (Exception e) {
 			closedClients.add(client);
 		}
@@ -356,34 +355,37 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void applyAction(Action action) throws NotApplicableException {
 		action.apply();
-		//TODO verificare se l'azione gli ha dato delle privilege e mandare i comandi delle priv
-		//TODO MANDARE comando per scegliere terminare turno o scartare leadercards
+		// TODO verificare se l'azione gli ha dato delle privilege e mandare i
+		// comandi delle priv
+		// TODO MANDARE comando per scegliere terminare turno o scartare
+		// leadercards
+
+		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
 	}
 
-//	@Override
-//	public void notifyPlayerStatusChange(Player player) {
-//		System.out.println("matchhandler: notifyplayer status change");
-//		
-//		Player currentPlayer = match.getCurrentPlayer();
-//		if (player == currentPlayer) {
-//			this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-//			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
-//		}
-//	}
-	
+	// @Override
+	// public void notifyPlayerStatusChange(Player player) {
+	// System.out.println("matchhandler: notifyplayer status change");
+	//
+	// Player currentPlayer = match.getCurrentPlayer();
+	// if (player == currentPlayer) {
+	// this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
+	// this.sendToAllPlayers(new
+	// OpponentStatusChangeCommand(player.maskedClone()));
+	// }
+	// }
+
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
 		try {
-			System.out.println("matchhandler: invio player:"+player.toString());
+			System.out.println("matchhandler: invio player:" + player.toString());
 			this.sendToClientHandler(new PlayerStatusChangeCommand(player), this.getRightClientHandler(player));
 		} catch (WrongPlayerException e) {
 			e.printStackTrace();
 		}
-			this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
-	
-
 
 	@Override
 	public void notifyFamilyPlaced() {
@@ -398,24 +400,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void nextStep() {
 		setNext();
-		if(roundNumber==match.getPlayers().length*4){
-			if(match.getTurn()%2==1)
-			startTurn();
-			else 
-			startExcommunicationPhase();
-		}
-		else startRound();
-			
-		
+		if (roundNumber == match.getPlayers().length * 4) {
+			if (match.getTurn() % 2 == 1)
+				startTurn();
+			else
+				startExcommunicationPhase();
+		} else
+			startRound();
+
 	}
 
 	private void startExcommunicationPhase() {
 
-		
-		
-		
-		
-		startTurn();  
+		startTurn();
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -447,25 +444,28 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleLeaderChoice(String name, ClientHandler clientHandler) {
-//       System.out.println("matchhandler: sono in handleleaderchoice");
-       leaderResponseCounter++;
+		// System.out.println("matchhandler: sono in handleleaderchoice");
+		leaderResponseCounter++;
 		try {
-//			System.out.println("matchhandler: cerco di aggiungere la carta di nome:");
+			// System.out.println("matchhandler: cerco di aggiungere la carta di
+			// nome:");
 			this.getRightPlayer(clientHandler).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("matchhandler: leaderresponsecounter="+leaderResponseCounter);
-		System.out.println("matchhandler: giocatori:="+match.getPlayers().length);
+		System.out.println("matchhandler: leaderresponsecounter=" + leaderResponseCounter);
+		System.out.println("matchhandler: giocatori:=" + match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
-//			System.out.println("matchhandler: entro nell'if di quando tutti e quattro hanno scelto");
+			// System.out.println("matchhandler: entro nell'if di quando tutti e
+			// quattro hanno scelto");
 
 			leaderResponseCounter = 0;
 			for (int i = 0; i < clients.size(); i++) {
 				if (cycle == 3) {
-//					System.out.println("matchhandler: sono nell'if perchè cycle ="+cycle);
+					// System.out.println("matchhandler: sono nell'if perchè
+					// cycle ="+cycle);
 					try {
 						this.getRightPlayer(clients.get((i + cycle) % (match.getPlayers().length)))
 								.addLeaderCards(leaderSets.get(i).get(0));
@@ -473,7 +473,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 						e.printStackTrace();
 					}
 				} else {
-//					System.out.println("matchhandler: sono nell'else perchè cycle ="+cycle);
+					// System.out.println("matchhandler: sono nell'else perchè
+					// cycle ="+cycle);
 					if (i >= match.getPlayers().length - cycle) {
 						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)),
 								clients.get((i + cycle) % (match.getPlayers().length)));
@@ -483,18 +484,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				}
 			}
 			cycle++;
-			if(cycle==4)
+			if (cycle == 4)
 				startMatch();
 		}
-		
+
 	}
 
-	
 	private void removeLeaderFromSets(LeaderCard leaderCard) {
-//		System.out.println("matchhandler: sono in remove leadercard");
+		// System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
 			for (LeaderCard card : set) {
-				if (leaderCard == card){
+				if (leaderCard == card) {
 					set.remove(card);
 					return;
 				}
@@ -504,37 +504,34 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void finishRound() {
 		setNext();
-		
+
 	}
-	
+
 	private void handleEndGame() {
 		Player[] rank = new Player[match.getPlayers().length];
 		Player prevPlayer;
-		for(int i = 0; i < match.getPlayers().length; i++){
+		for (int i = 0; i < match.getPlayers().length; i++) {
 			int val = calculatePlayerPoints(match.getPlayers()[i]);
 			rank[i] = match.getPlayers()[i];
-			if(val > calculatePlayerPoints(match.getPlayers()[i-1])
-					&& i > 0){
-				prevPlayer = rank[i-1];
-				rank[i-1] = match.getPlayers()[i];
+			if (val > calculatePlayerPoints(match.getPlayers()[i - 1]) && i > 0) {
+				prevPlayer = rank[i - 1];
+				rank[i - 1] = match.getPlayers()[i];
 				rank[i] = prevPlayer;
-			} 
-		}
-		sendToPlayer(new WinCommand(), rank[0]);
-		for(Player p : rank){
-			if(p != rank[0]){
-				sendToPlayer(new LoseCommand(),p);
 			}
 		}
-		
-		
-		
+		sendToPlayer(new WinCommand(), rank[0]);
+		for (Player p : rank) {
+			if (p != rank[0]) {
+				sendToPlayer(new LoseCommand(), p);
+			}
+		}
+
 	}
-	
-	private int calculatePlayerPoints(Player p){
+
+	private int calculatePlayerPoints(Player p) {
 		int points = 0;
-		for(Player player : match.getPlayers()){
-			if(player == p){
+		for (Player player : match.getPlayers()) {
+			if (player == p) {
 				points = points + p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
 				points = points + calculatePointsFromResources(player);
 				points = points + calculatePointsForTerritories(player);
@@ -548,22 +545,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			return points;
 		}
-		
-		
+
 		return points;
 	}
-	
-	private int calculatePointsFromResources(Player p){
+
+	private int calculatePointsFromResources(Player p) {
 		int ResourceSum = 0;
-		for(ResourceType r : ResourceType.values()){
-			if(r != ResourceType.VICTORYPOINT && r != ResourceType.FAITHPOINT && r != ResourceType.MILITARYPOINT){
+		for (ResourceType r : ResourceType.values()) {
+			if (r != ResourceType.VICTORYPOINT && r != ResourceType.FAITHPOINT && r != ResourceType.MILITARYPOINT) {
 				ResourceSum = ResourceSum + p.getResourceChest().getResourceInChest(r).getAmount();
 			}
 		}
-		return ResourceSum/5;
+		return ResourceSum / 5;
 	}
 
-	private int calculatePointsForTerritories(Player p){
+	private int calculatePointsForTerritories(Player p) {
 		int points = 0;
 		ArrayList<Integer> territoryBonuses = new ArrayList<Integer>();
 		try {
@@ -575,14 +571,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i = 0; i < p.getDeckOfType(CardType.TERRITORY).size();i++){
+		for (int i = 0; i < p.getDeckOfType(CardType.TERRITORY).size(); i++) {
 			points = points + territoryBonuses.get(i);
 		}
-		
+
 		return points;
 	}
-	
-	private int calculatePointsForCharacterCards(Player p){
+
+	private int calculatePointsForCharacterCards(Player p) {
 		int points = 0;
 		ArrayList<Integer> characterBonuses = new ArrayList<Integer>();
 		try {
@@ -594,44 +590,113 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i = 0; i < p.getDeckOfType(CardType.CHARACTER).size();i++){
+		for (int i = 0; i < p.getDeckOfType(CardType.CHARACTER).size(); i++) {
 			points = points + characterBonuses.get(i);
 		}
-		
+
 		return points;
 	}
-	
-	private int calculatePointsForMilitaryPoints(Player p) throws IOException{
+
+	private int calculatePointsForMilitaryPoints(Player p) throws IOException {
 		Player[] rank = new Player[match.getPlayers().length];
 		Player prevPlayer;
 		int points = 0;
-		for(int i = 0; i < match.getPlayers().length; i++){
-			int val = match.getPlayers()[i].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount();
+		for (int i = 0; i < match.getPlayers().length; i++) {
+			int val = match.getPlayers()[i].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
+					.getAmount();
 			rank[i] = match.getPlayers()[i];
-			if(val > match.getPlayers()[i-1].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()
-					&& i > 0){
-				prevPlayer = rank[i-1];
-				rank[i-1] = match.getPlayers()[i];
+			if (val > match.getPlayers()[i - 1].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
+					.getAmount() && i > 0) {
+				prevPlayer = rank[i - 1];
+				rank[i - 1] = match.getPlayers()[i];
 				rank[i] = prevPlayer;
-			} 
+			}
 		}
-		
+
 		BufferedReader reader;
-		
+
 		reader = new BufferedReader(new FileReader(FileConstants.VICTORYFORMILITARY));
-		
-		
+
 		int[] pointsFromFile = new int[match.getPlayers().length];
-		
-		for(int i = 0; i < pointsFromFile.length; i++){
+
+		for (int i = 0; i < pointsFromFile.length; i++) {
 			pointsFromFile[i] = Integer.parseInt(reader.readLine());
-			if(rank[i] == p ){
+			if (rank[i] == p) {
 				points = pointsFromFile[i];
 			}
 		}
-	
+
 		return points;
 	}
-	
-}
 
+	public void handleInvalidCommand() {
+		sendToCurrentPlayer(lastCommandSent);
+
+	}
+
+	public void discardLeaderCard(String leaderName) {
+		match.getCurrentPlayer().removeLeaderCard(leaderName);
+		ResourceChest[] rc = null;
+		try {
+			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ArrayList<ResourceChest> arrayListPrivilege = getArrayListPrivilegeFromArray(rc);
+
+		sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1, arrayListPrivilege));
+	}
+
+	private ArrayList<ResourceChest> getArrayListPrivilegeFromArray(ResourceChest[] rc) {
+		ArrayList<ResourceChest> arr = new ArrayList<ResourceChest>();
+		for (int i = 0; i < rc.length; i++) {
+			arr.add(rc[i]);
+		}
+		return arr;
+	}
+
+	public void addPrivilegeResources(ArrayList<Integer> choice) {
+
+		if (isPrivilegeCorrect(choice)) {
+			ResourceChest[] rc = null;
+			try {
+				rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			ResourceChest resourcesToGive=new ResourceChest();
+			
+			for (int i = 0; i < choice.size(); i++) {
+				resourcesToGive.addChest(rc[choice.get(i)]);
+			}
+			this.getCurrentPlayer().addResources(resourcesToGive);
+
+		}
+
+	}
+
+	private boolean isPrivilegeCorrect(ArrayList<Integer> choice) {
+		if (privilegeChoiceHasDuplicates(choice))
+			return false;
+		else
+			return true;
+	}
+
+	private boolean privilegeChoiceHasDuplicates(ArrayList<Integer> choice) {
+		for (int i = 0; i < choice.size(); i++) {
+			for (int j = 0; j < choice.size(); j++) {
+				if (i != j && choice.get(i) == choice.get(j)) {
+					return true;
+				}
+			}
+		}
+		return false;
+
+	}
+
+}

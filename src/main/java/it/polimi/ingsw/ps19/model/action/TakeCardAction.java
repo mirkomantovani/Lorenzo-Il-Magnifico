@@ -56,6 +56,7 @@ public class TakeCardAction extends Action {
 			floor.setCard(null);  //set to null when the player buys the card
 			player.subResources(card.getCost());
 			//if the player has a discount given by a leader card
+			player.removeFamilyMember(familyMember.getColor());
 			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			if(player.getBonuses().isDoubleResourcesFromCards())
