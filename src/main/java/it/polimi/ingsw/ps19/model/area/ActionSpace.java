@@ -41,4 +41,6 @@ public abstract class ActionSpace implements Occupable, Serializable {
 		return actionValueRequired;
 	}
 	
+	
+	
 }

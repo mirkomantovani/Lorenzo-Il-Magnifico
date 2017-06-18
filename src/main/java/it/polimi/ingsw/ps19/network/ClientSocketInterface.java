@@ -29,7 +29,7 @@ public class ClientSocketInterface implements NetworkInterface {
 
 	public void connect() {
 		try {
-			socket = new Socket("localhost", NetworkConstants.PORT);
+			socket = new Socket("127.0.0.1", NetworkConstants.PORT);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
