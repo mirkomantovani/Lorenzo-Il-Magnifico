@@ -107,7 +107,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 	
 	public void applyCommand(InitializeTurnCommand initializeTurnCommand){
-		userInterface.initializeTurn(initializeTurnCommand.getBoard(), initializeTurnCommand.getPeriod(), initializeTurnCommand.getTurn());
+		userInterface.initializeTurn( initializeTurnCommand.getPeriod(), initializeTurnCommand.getTurn());
 	}
 	
 	public void applyCommand(OpponentStatusChangeCommand opponentStatusChangeCommand){

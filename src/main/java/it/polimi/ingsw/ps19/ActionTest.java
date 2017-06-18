@@ -98,14 +98,14 @@ public class ActionTest {
 			}
 			
 
-			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getMarktActionSpace("firstMarket"));
-			System.out.println("\n\nActivating market effect:\n");
-			try {
-				action6.apply();
-			} catch (NotApplicableException e) {
-				e.printStackTrace();
-				
-			}
+//			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getMarktActionSpace("firstMarket"));
+//			System.out.println("\n\nActivating market effect:\n");
+//			try {
+//				//action6.apply();
+//			} catch (NotApplicableException e) {
+//				e.printStackTrace();
+//				
+//			}
 
 			
 //			Action action5 = new CouncilPalaceAction(player1.getFamilyMembers().get(Color.ORANGE),board.getCouncilPalace());

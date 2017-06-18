@@ -166,10 +166,6 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(DiscardLeaderCardCommand discardLeaderCardCommand) {
 		handler.discardLeaderCard(discardLeaderCardCommand.getLeaderName());
-		handler.sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1));
-		handler.getCurrentPlayer().removeLeaderCard(discardLeaderCardCommand.getLeaderName());
-		
-		
 	}
 
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
