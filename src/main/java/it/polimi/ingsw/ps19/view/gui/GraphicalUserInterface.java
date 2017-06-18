@@ -68,14 +68,14 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
+	public void AskPrivilegeChoice(int numberOfPrivilege, ArrayList<ResourceChest> privilegeResources) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void startDraft(List<LeaderCard> leaderCards) {
+	public void startDraft(ArrayList<LeaderCard> leaderCards) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -142,7 +142,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void askForProductionExchangeEffect(List<String[]> choices) {
+	public void askForProductionExchangeEffect(ArrayList<String[]> choices) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -30,7 +30,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	private int readerState;
 	private int moveState;
 	private int takeCardState;
-	private List<String> actionConstructor;
+	private ArrayList<String> actionConstructor;
 
 	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
@@ -114,7 +114,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
+	public void AskPrivilegeChoice(int numberOfPrivilege, ArrayList<ResourceChest> privilegeResources) {
 		print("Choose " + numberOfPrivilege
 				+ " different resources from the following (Please enter the numbers associated with your choices separated by commas, e.g. x,y,z, if you have more than one privilege to choose):");
 		for (int i = 0; i < privilegeResources.size(); i++) {
@@ -170,7 +170,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 
 	@Override
-	public void startDraft(List<LeaderCard> leaderCards) {
+	public void startDraft(ArrayList<LeaderCard> leaderCards) {
 		print("Select a leader card from the following: ");
 		if (leaderCards.size() == 0)
 			System.out.println("leader cards è 0");
@@ -328,7 +328,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void askForProductionExchangeEffect(List<String[]> choices) {
+	public void askForProductionExchangeEffect(ArrayList<String[]> choices) {
 		// TODO Auto-generated method stub
 		
 	}

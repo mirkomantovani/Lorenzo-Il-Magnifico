@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public interface UserInterface {
 
 	
-	public void startDraft(List<LeaderCard> leaderCards);
+	public void startDraft(ArrayList<LeaderCard> leaderCards);
 	
 	public void initializeMatch();
 	
@@ -43,7 +43,7 @@ public interface UserInterface {
 	
 	public void lose();
 
-	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources);
+	public void AskPrivilegeChoice(int numberOfPrivilege, ArrayList<ResourceChest> privilegeResources);
 
 	public void askMove();
 	
@@ -65,7 +65,7 @@ public interface UserInterface {
 
 	public void askNameAndPassword();
 
-	public void askForProductionExchangeEffect(List<String[]> choices);
+	public void askForProductionExchangeEffect(ArrayList<String[]> choices);
 
 	public void notifyRoundTimerExpired();
 

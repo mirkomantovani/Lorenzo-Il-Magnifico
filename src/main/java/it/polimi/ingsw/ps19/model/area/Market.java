@@ -19,7 +19,7 @@ public class Market implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5295807604863580003L;
-	private Map<String,SingleActionSpace> market; // the market slot are ordered from the left to the right 
+	private HashMap<String,SingleActionSpace> market; // the market slot are ordered from the left to the right 
 	private int playersInTheMatch;
 												 // as you can find them in the game board
 	public Market(int playersInTheMatch){

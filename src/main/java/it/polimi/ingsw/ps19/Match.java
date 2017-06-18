@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps19;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
@@ -118,9 +117,9 @@ public class Match {
 		this.observer = observer;
 	}
 
-	public List<String[]> getCurrentPlayerProductionChoices() {
-		List<String[]> choices = new ArrayList();
-		List<DevelopmentCard> buildingCards = this.getCurrentPlayer().getDeckOfType(CardType.BUILDING);
+	public ArrayList<String[]> getCurrentPlayerProductionChoices() {
+		ArrayList<String[]> choices = new ArrayList();
+		ArrayList<DevelopmentCard> buildingCards = (ArrayList<DevelopmentCard>) this.getCurrentPlayer().getDeckOfType(CardType.BUILDING);
 		for (DevelopmentCard card : buildingCards) {
 
 			BuildingCard buildingCard = (BuildingCard) card;

@@ -110,14 +110,14 @@ public class ClientController implements InputObserver{
 
 
 	@Override
-	public void notifyCouncilPalace(List<String> actionConstructor) {
+	public void notifyCouncilPalace(ArrayList<String> actionConstructor) {
 		sendCommand(new PlaceIntoCouncilPalaceCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1))));
 	}
 
 
 
 	@Override
-	public void notifyTakeCardAction(List<String> actionConstructor) {
+	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
 		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(2)), CardType.values()[Integer.parseInt(actionConstructor.get(4))-1]);
 		sendCommand(takeCardCommand);
 	}
@@ -125,7 +125,7 @@ public class ClientController implements InputObserver{
 
 
 	@Override
-	public void notifyMarket(List<String> actionConstructor) {
+	public void notifyMarket(ArrayList<String> actionConstructor) {
 		PlaceIntoMarketCommand placeIntoMarketCommand = new PlaceIntoMarketCommand(actionConstructor.get(0), actionConstructor.get(3), Integer.parseInt(actionConstructor.get(1)));
 		sendCommand(placeIntoMarketCommand);
 	}
@@ -133,7 +133,7 @@ public class ClientController implements InputObserver{
 
 
 	@Override
-	public void notifyHarvest(List<String> actionConstructor) {
+	public void notifyHarvest(ArrayList<String> actionConstructor) {
 		HarvestCommand harvestCommand = new HarvestCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 		sendCommand(harvestCommand);
 	}
@@ -141,7 +141,7 @@ public class ClientController implements InputObserver{
 
 
 	@Override
-	public void notifyProduction(List<String> actionConstructor) {
+	public void notifyProduction(ArrayList<String> actionConstructor) {
 		ProductionCommand productionCommand = new ProductionCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 		sendCommand(productionCommand);
 	}

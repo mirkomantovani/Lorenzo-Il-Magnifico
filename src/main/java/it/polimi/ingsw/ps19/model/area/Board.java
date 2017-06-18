@@ -28,7 +28,7 @@ public class Board implements Serializable {
 	 */
 	private static final long serialVersionUID = -8471586996479354156L;
 
-	private Map<CardType,Tower> towers;
+	private HashMap<CardType,Tower> towers;
 	
 	private Church church;
 	
@@ -40,7 +40,7 @@ public class Board implements Serializable {
 	
 	private ProductionArea productionArea;
 	
-	private static List militaryRequirementsForTerritories;
+	private static ArrayList militaryRequirementsForTerritories;
 	
 	private Deck<? extends DevelopmentCard> territoryCards;
 	private Deck<? extends DevelopmentCard> buildingCards;
@@ -53,10 +53,10 @@ public class Board implements Serializable {
 	private int orangeDice;
 	
 	
-	private List<String> playerOrder;
+	private ArrayList<String> playerOrder;
 	
 
-	private Set<Dice> dices;
+	private HashSet<Dice> dices;
 
 	
 
@@ -150,7 +150,7 @@ public class Board implements Serializable {
 		this.productionArea = productionArea;
 	}
 	
-	public static List getMilitaryRequirementsForTerritories() {
+	public static ArrayList getMilitaryRequirementsForTerritories() {
 		return militaryRequirementsForTerritories;
 	}
 	
@@ -176,9 +176,9 @@ public class Board implements Serializable {
 		for(int i=0;i<Dice.values().length;i++)
 		Dice.values()[i].roll();
 		
-		blackDice = Dice.BLACK_DICE.getUpperFaceValue();
-		whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
-		orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
+//		blackDice = Dice.BLACK_DICE.getUpperFaceValue();
+//		whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
+//		orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
 
 	}
 
@@ -210,13 +210,10 @@ public class Board implements Serializable {
 		}
 		builder.append("\n The dices are: \n");
 
-		
-			builder.append("Black dice, with a value of " + blackDice);
-			builder.append("\n");
-			builder.append("White dice, with a value of " + whiteDice);
-			builder.append("\n");
-			builder.append("Orange dice, with a value of " + orangeDice);
-			builder.append("\n");
+		for(Dice d : dices){
+			if(d!=Dice.NEUTRAL_DICE)
+				builder.append(d.getColor().toString() + " dice, with a value of " + d.getUpperFaceValue());
+		}
 		
 
 		return builder.toString();

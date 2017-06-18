@@ -46,8 +46,8 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  */
 public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserver {
 
-	private List<ClientHandler> clients;
-	private List<ClientHandler> closedClients;
+	private ArrayList<ClientHandler> clients;
+	private ArrayList<ClientHandler> closedClients;
 	private ServerCommandHandler commandHandler;
 	private ServerInterface ServerInterface;
 	private Match match;
@@ -58,7 +58,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
 
-	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
+	public MatchHandler(ArrayList<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
