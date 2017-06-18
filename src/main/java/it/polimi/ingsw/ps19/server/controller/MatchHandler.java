@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
@@ -79,6 +80,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		setPlayers();
 		// notifyAllStartMatch();
 
+		communicateColors();
+		
 		match.setInitialPlayer();
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
@@ -87,6 +90,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// provaPlayer();
 		startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
+	}
+
+	private void communicateColors() {
+		for(ClientHandler c: clients){
+			String color=null;
+			try {
+				color = this.getRightPlayer(c).getColor();
+			} catch (WrongClientHandlerException e) {
+				e.printStackTrace();
+			}
+			sendToClientHandler(new AssignColorCommand(color), c);
+		}
+		
 	}
 
 	private void provaPlayer() {
@@ -444,14 +460,23 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		throw new WrongClientHandlerException();
 
 	}
+	
+	private Player getPlayerFromColor(String playerColor){
+		Player[] players=this.match.getPlayers();
+		for(int i=0;i<players.length;i++){
+			if(players[i].getColor()==playerColor)
+				return players[i];
+		}
+		return null;
+	}
 
-	public void handleLeaderChoice(String name, ClientHandler clientHandler) {
+	public void handleLeaderChoice(String name, String playerColor) {
 		// System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
 			// System.out.println("matchhandler: cerco di aggiungere la carta di
 			// nome:");
-			this.getRightPlayer(clientHandler).addLeaderCards(match.getLeaderCards().getCard(name));
+			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {

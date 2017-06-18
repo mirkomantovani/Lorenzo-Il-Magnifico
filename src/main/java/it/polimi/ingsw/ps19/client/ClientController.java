@@ -8,9 +8,12 @@ import it.polimi.ingsw.ps19.command.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
 import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
@@ -130,23 +133,23 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyHarvest(List<String> actionConstructor) {
-		// TODO Auto-generated method stub
-		
+		HarvestCommand harvestCommand = new HarvestCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
+		sendCommand(harvestCommand);
 	}
 
 
 
 	@Override
 	public void notifyProduction(List<String> actionConstructor) {
-		// TODO Auto-generated method stub
-		
+		ProductionCommand productionCommand = new ProductionCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
+		sendCommand(productionCommand);
 	}
 
 
 
 	@Override
-	public void notifyDiscardedLeaderCard(String dicardedLeaderCard) {
-		// TODO Auto-generated method stub
+	public void notifyDiscardedLeaderCard(String discardedLeaderCard) {
+		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));
 		
 	}
 

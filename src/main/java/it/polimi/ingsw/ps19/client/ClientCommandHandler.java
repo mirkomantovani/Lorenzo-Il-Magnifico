@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.client;
 
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
@@ -18,9 +19,9 @@ import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
-import it.polimi.ingsw.ps19.command.toclient.askForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
+import it.polimi.ingsw.ps19.command.toclient.askForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -134,7 +135,12 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		
 	}
 	
-	
+
+	public void applyCommand(AssignColorCommand assignColorCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	
 }

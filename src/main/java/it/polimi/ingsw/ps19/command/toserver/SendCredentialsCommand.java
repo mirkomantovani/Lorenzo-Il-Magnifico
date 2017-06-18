@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
-import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 public class SendCredentialsCommand extends ClientToServerCommand {
@@ -12,6 +11,16 @@ public class SendCredentialsCommand extends ClientToServerCommand {
 	
 	private String username;
 	private String password;
+	
+	private String playerColor;
+
+	
+	
+	public SendCredentialsCommand(String username, String password, String playerColor) {
+		this.username = username;
+		this.password = password;
+		this.playerColor = playerColor;
+	}
 
 	public String getUsername() {
 		return username;
@@ -22,14 +31,14 @@ public class SendCredentialsCommand extends ClientToServerCommand {
 	}
 
 	
-	public void processCommand(ServerCommandHandler serverHandlerCommand,ClientHandler clientHandler) {
-		serverHandlerCommand.applyCommand(this,clientHandler);
-
+	
+	public String getPlayerColor() {
+		return playerColor;
 	}
 
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-		System.out.println("SendCredentialCommand: you should not be here");
+		serverHandlerCommand.applyCommand(this);
 	}
 
 }
