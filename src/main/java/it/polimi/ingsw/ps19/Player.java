@@ -169,6 +169,13 @@ public class Player implements Serializable {
 								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
 								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
+		if(!leaderCards.isEmpty()){
+			string.append("Leader cards : \n");
+			for(LeaderCard l : leaderCards.values()){
+				string.append(l.toString());
+			}
+		} else 
+			string.append("\nThe player hasn't any leader card");
 		return string.toString();
 	}
 	 

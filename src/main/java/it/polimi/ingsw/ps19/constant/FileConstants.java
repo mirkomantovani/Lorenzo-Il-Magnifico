@@ -27,4 +27,5 @@ public class FileConstants {
 	public final static String LEADERCARDS = "src/main/resources/files/fileleadercards.txt";
 	public static final String EXCOMMUNICATIONTILES="src/main/resources/files/fileexcommunicationtiles.txt";
 	public static final String PRIVILEGE_RESOURCES  = "src/main/resources/files/fileprivilegeresources.txt";
+	public static final String VICTORYFORMILITARY = "src/main/resources/files/filevictorypointsformilitarypoints.txt";
 }

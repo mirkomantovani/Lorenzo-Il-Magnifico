@@ -15,17 +15,22 @@ import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
+import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toclient.WinCommand;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.model.area.BoardInitializer;
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
@@ -503,8 +508,130 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 	
 	private void handleEndGame() {
-		// TODO Auto-generated method stub
+		Player[] rank = new Player[match.getPlayers().length];
+		Player prevPlayer;
+		for(int i = 0; i < match.getPlayers().length; i++){
+			int val = calculatePlayerPoints(match.getPlayers()[i]);
+			rank[i] = match.getPlayers()[i];
+			if(val > calculatePlayerPoints(match.getPlayers()[i-1])
+					&& i > 0){
+				prevPlayer = rank[i-1];
+				rank[i-1] = match.getPlayers()[i];
+				rank[i] = prevPlayer;
+			} 
+		}
+		sendToPlayer(new WinCommand(), rank[0]);
+		for(Player p : rank){
+			if(p != rank[0]){
+				sendToPlayer(new LoseCommand(),p);
+			}
+		}
+		
+		
 		
 	}
+	
+	private int calculatePlayerPoints(Player p){
+		int points = 0;
+		for(Player player : match.getPlayers()){
+			if(player == p){
+				points = points + p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
+				points = points + calculatePointsFromResources(player);
+				points = points + calculatePointsForTerritories(player);
+				points = points + calculatePointsForCharacterCards(player);
+				try {
+					points = points + calculatePointsForMilitaryPoints(player);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return points;
+		}
+		
+		
+		return points;
+	}
+	
+	private int calculatePointsFromResources(Player p){
+		int ResourceSum = 0;
+		for(ResourceType r : ResourceType.values()){
+			if(r != ResourceType.VICTORYPOINT && r != ResourceType.FAITHPOINT && r != ResourceType.MILITARYPOINT){
+				ResourceSum = ResourceSum + p.getResourceChest().getResourceInChest(r).getAmount();
+			}
+		}
+		return ResourceSum/5;
+	}
 
+	private int calculatePointsForTerritories(Player p){
+		int points = 0;
+		ArrayList<Integer> territoryBonuses = new ArrayList<Integer>();
+		try {
+			territoryBonuses = BoardInitializer.playerBoardBonusesForTerritory();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0; i < p.getDeckOfType(CardType.TERRITORY).size();i++){
+			points = points + territoryBonuses.get(i);
+		}
+		
+		return points;
+	}
+	
+	private int calculatePointsForCharacterCards(Player p){
+		int points = 0;
+		ArrayList<Integer> characterBonuses = new ArrayList<Integer>();
+		try {
+			characterBonuses = BoardInitializer.playerBoardBonusesForCharacter();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0; i < p.getDeckOfType(CardType.CHARACTER).size();i++){
+			points = points + characterBonuses.get(i);
+		}
+		
+		return points;
+	}
+	
+	private int calculatePointsForMilitaryPoints(Player p) throws IOException{
+		Player[] rank = new Player[match.getPlayers().length];
+		Player prevPlayer;
+		int points = 0;
+		for(int i = 0; i < match.getPlayers().length; i++){
+			int val = match.getPlayers()[i].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount();
+			rank[i] = match.getPlayers()[i];
+			if(val > match.getPlayers()[i-1].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()
+					&& i > 0){
+				prevPlayer = rank[i-1];
+				rank[i-1] = match.getPlayers()[i];
+				rank[i] = prevPlayer;
+			} 
+		}
+		
+		BufferedReader reader;
+		
+		reader = new BufferedReader(new FileReader(FileConstants.VICTORYFORMILITARY));
+		
+		
+		int[] pointsFromFile = new int[match.getPlayers().length];
+		
+		for(int i = 0; i < pointsFromFile.length; i++){
+			pointsFromFile[i] = Integer.parseInt(reader.readLine());
+			if(rank[i] == p ){
+				points = pointsFromFile[i];
+			}
+		}
+	
+		return points;
+	}
+	
 }
+
