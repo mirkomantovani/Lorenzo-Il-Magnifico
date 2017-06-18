@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
@@ -50,10 +52,18 @@ public class Board implements Serializable {
 	
 	private List<String> playerOrder;
 	
-	private Map<Color,Dice> dices;
+
+	private Set<Dice> dices;
+
 	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
+		
+		dices= new HashSet<Dice>();
+		
+		dices.add(Dice.BLACK_DICE);
+		dices.add(Dice.ORANGE_DICE);
+		dices.add(Dice.WHITE_DICE);
 		
 		towers = new HashMap<>();
 		
@@ -83,11 +93,7 @@ public class Board implements Serializable {
 		
 		this.playerOrder = new ArrayList<String>();
 		
-		dices = new HashMap<Color,Dice>();
-		for(Dice d: Dice.values()){
-			dices.put(d.getColor(), d);
-		}
-		
+
 		
 	}
 	
@@ -186,8 +192,10 @@ public class Board implements Serializable {
 			builder.append("\t");
 		}
 		builder.append("\n The dices are: \n");
-		for(Dice d : dices.values()){
-			builder.append(d.getColor().toString().toLowerCase() + "dice, with a value of " + d.getUpperFaceValue());
+
+		for(Dice d : dices){
+			builder.append(d.getColor().toString().toLowerCase() + " dice, with a value of " + d.getUpperFaceValue());
+
 			builder.append("\n");
 		}
 		

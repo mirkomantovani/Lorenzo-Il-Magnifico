@@ -255,5 +255,38 @@ public class BoardInitializer {
 		return tiles;
 	}
 	
+	public static ResourceChest[] createPrivilegeResources(int resourcesNumber) throws FileNotFoundException, IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.PRIVILEGE_RESOURCES));
+		ResourceChest[] privilegeResources = new ResourceChest[resourcesNumber];
+		int index = 0;
+		
+		String lineRead = reader.readLine();
+		while(lineRead!=null){
+			Resource rt1 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead)], Integer.parseInt(reader.readLine()));
+			Resource rt2 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())], Integer.parseInt(reader.readLine()));
+			ResourceChest resourceChest = new ResourceChest();
+			resourceChest.addResource(rt1);
+			resourceChest.addResource(rt2);
+			privilegeResources[index] = resourceChest;
+			index++;
+			lineRead = reader.readLine();
+		}
+		
+		return privilegeResources;
+	}
+	
+	public static void main(String[] args){
+		ResourceChest[] rc = null;
+		try {
+			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i< rc.length; i++){
+			System.out.println(rc[i]);
+		}
+	}
 	
 }

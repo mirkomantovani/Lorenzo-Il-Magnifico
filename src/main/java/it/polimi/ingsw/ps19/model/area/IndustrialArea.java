@@ -50,30 +50,31 @@ public abstract class IndustrialArea implements Serializable{
 	public String toString(){
 		StringBuilder string = null;
 		Set<String> playerColors = new HashSet<String>();
+		return "ciao";
 		
-		string.append("Single action space value required: " + this.getSingleActionSpace().getActionValueRequired());
+//		string.append("Single action space value required: " + this.getSingleActionSpace().getActionValueRequired());
 		
-		if(this.getSingleActionSpace().isOccupied() == true)
-			string.append("The single action space is empty");
-		else
-			string.append("The single action space is occupied by player with color " + this.getSingleActionSpace().getFamilyMember().getPlayer().getColor());
-		
-		string.append("\nMultiple action space value required: " + this.getMultipleActionSpace().getActionValueRequired() +
-						"Multiple action space gives a : " + MALUS + " malus to your family member action value");
-		
-		if(this.getMultipleActionSpace().isOccupied() == true)
-			string.append("The multiple action space is empty");
-		else{
-			string.append("The multiple action space is occupied by players with color: ");
-			for(FamilyMember member : this.getMultipleActionSpace().getMembers()){
-				playerColors.add(member.getPlayer().getColor());
-			}
-		}
-		
-		for(String color : playerColors)
-			string.append(color + " ");
-		
-		return 	string.toString();
+//		if(this.getSingleActionSpace().isOccupied() == true)
+//			string.append("The single action space is empty");
+//		else
+//			string.append("The single action space is occupied by player with color " + this.getSingleActionSpace().getFamilyMember().getPlayer().getColor());
+//		
+//		string.append("\nMultiple action space value required: " + this.getMultipleActionSpace().getActionValueRequired() +
+//						"Multiple action space gives a : " + MALUS + " malus to your family member action value");
+//		
+//		if(this.getMultipleActionSpace().isOccupied() == true)
+//			string.append("The multiple action space is empty");
+//		else{
+//			string.append("The multiple action space is occupied by players with color: ");
+//			for(FamilyMember member : this.getMultipleActionSpace().getMembers()){
+//				playerColors.add(member.getPlayer().getColor());
+//			}
+//		}
+//		
+//		for(String color : playerColors)
+//			string.append(color + " ");
+//		
+//		return 	string.toString();
 		
 	}
 

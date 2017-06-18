@@ -22,11 +22,8 @@ public class ResourceMalusEffect extends Effect{
 	
 	public ResourceMalusEffect(ArrayList<Resource> resources){
 		
-		resources=new ArrayList<>();
+		this.resources=resources;
 		
-		for(Resource r: resources){
-			this.resources.add(r);
-		}
 	}
 
 	@Override
@@ -46,20 +43,20 @@ public class ResourceMalusEffect extends Effect{
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		Iterator<Resource> iterator= resources.iterator();
-		s.append("Every time you get");
+		s.append("Every time you get ");
 		
 		while(iterator.hasNext()){
 			s.append(iterator.next().getResourceType().toString().toLowerCase());
 		if(iterator.hasNext())s.append(" or");
 		}
 	
-		s.append(" from an action space or a development card you get");
+		s.append(" from an action space or a development card you get ");
 		iterator=resources.iterator();
 		while(iterator.hasNext()){
 			s.append(iterator.next().toString());
-		if(iterator.hasNext())s.append(" and");
+		if(iterator.hasNext())s.append(" and ");
 		}
-		s.append("less");
+		s.append(" less");
 		
 		return s.toString();
 	}

@@ -18,4 +18,5 @@ public class CardConstants {
 	
 	public static final int EXCOMMUNICATION_TILES=21;
 	public static final int PERSONAL_BONUS_TILES = 4;
+	public static final int PRIVILEGE_RESOURCES = 5;
 }
