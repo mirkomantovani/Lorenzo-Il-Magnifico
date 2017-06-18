@@ -159,4 +159,10 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
+	@Override
+	public void assignColor(String color) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

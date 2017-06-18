@@ -15,6 +15,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
+import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
 import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoIndustrialAreaCommand;
@@ -219,6 +220,11 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ChatMessageClientCommand chatMessageClientCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void applyCommand(HarvestCommand harvestCommand) {
 		// TODO Auto-generated method stub
 		
 	}
