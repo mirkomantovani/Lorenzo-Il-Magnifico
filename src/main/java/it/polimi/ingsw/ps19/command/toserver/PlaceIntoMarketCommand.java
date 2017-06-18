@@ -37,6 +37,10 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	public String getActionSpace() {
 		return actionSpace;
 	}
+
+	public int getPaidServants() {
+		return paidServants;
+	}
 	
 	
 	

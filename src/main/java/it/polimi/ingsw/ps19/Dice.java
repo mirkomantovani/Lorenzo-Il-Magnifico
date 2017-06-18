@@ -5,15 +5,15 @@ import java.util.Random;
 
 public enum Dice implements Serializable {
 	//could return an ActionValue instead of an int?
-	ORANGE_DICE(Color.ORANGE), BLACK_DICE(Color.BLACK), WHITE_DICE(Color.WHITE), NEUTRAL_DICE(Color.NEUTRAL);
+	ORANGE_DICE(Color.ORANGE,0), BLACK_DICE(Color.BLACK,0), WHITE_DICE(Color.WHITE,0), NEUTRAL_DICE(Color.NEUTRAL,0);
 	
 	private Color color;   //Vediamo come vogliamo modellare il colore, è un attributo
 						   //o basta il nome? io provo così
 	private int displayedFace;
 	
-	private Dice(Color color){
+	private Dice(Color color, int val){
 		this.color = color;
-		displayedFace = 0;
+		this.displayedFace = val;
 	}
 	
 	public void roll(){     					
@@ -23,7 +23,7 @@ public enum Dice implements Serializable {
 	}
 	
 	public int getUpperFaceValue() {
-		return this.displayedFace;
+		return displayedFace;
 	}
 	
 	public int getRandomFaceValue(){   

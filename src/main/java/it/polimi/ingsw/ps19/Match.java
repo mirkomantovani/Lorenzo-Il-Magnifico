@@ -172,12 +172,7 @@ public class Match {
 		
 	}
 
-	public void rollDices() {
-		for(int i=0;i<Dice.values().length;i++)
-		Dice.values()[i].roll();
-		
-		System.out.println("match: dices:"+ Dice.BLACK_DICE.getUpperFaceValue());
-	}
+
 
 	public void incrementTurn() {
 		this.turn++;
