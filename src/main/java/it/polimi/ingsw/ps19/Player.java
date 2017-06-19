@@ -34,6 +34,7 @@ public class Player implements Serializable {
 	private transient MatchObserver observer;
 	private int councilPrivilege;
 	private HashMap<String,LeaderCard> leaderCards;
+	private ArrayList<LeaderCard> leaders;
 	
 	
 	public Player(String name, String color){
@@ -43,7 +44,9 @@ public class Player implements Serializable {
 		decks = new HashMap<>();
 		
 		resources = new ResourceChest();
-	
+		
+		leaders = new ArrayList<LeaderCard>();
+		
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
 		}
@@ -168,23 +171,31 @@ public class Player implements Serializable {
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
 
 		string.append("\nThe player has the following family members:\n");
-		string.append(this.getFamilyMembers().values().toString());
-//		if(!leaderCards.isEmpty()){
-//			string.append("Leader cards : \n");
-//			for(LeaderCard l : leaderCards.values()){
-//				string.append(l.toString());
-		 Iterator it = leaderCards.entrySet().iterator();
-		    while (it.hasNext()) {
-		        Map.Entry pair = (Map.Entry)it.next();
-		        string.append(pair.getValue());
-		        it.remove(); // avoids a ConcurrentModificationException
-		    }
+		string.append(this.getFamilyMembers().values().toArray().toString());
+		if(!leaderCards.isEmpty()){
+			string.append("Leader cards : \n");
+			for(int i = 0; i < this.leaderCards.values().toArray().length; i++){
+				string.append(leaderCards.values().toArray()[i].toString());
+				
+//		 Iterator it = leaderCards.entrySet().iterator();
+//		    while (it.hasNext()) {
+//		        Map.Entry pair = (Map.Entry)it.next();
+//		        string.append(pair.getValue());
+//		        it.remove(); // avoids a ConcurrentModificationException
+	    }
+		}
 
+		string.append(leaderCards.size() + "questo è il size");
 			
 
 //		} else 
 //			string.append("\nThe player hasn't any leader card");
-
+		for(int j=0; j<leaders.size(); j++){
+			
+		string.append(leaders.get(j).toString());
+		}
+		
+		
 		return string.toString();
 	}
 	 
@@ -240,6 +251,11 @@ public class Player implements Serializable {
 	public Map<String,LeaderCard> getLeaderCards() {
 		return leaderCards;
 	}
+	
+	public ArrayList<LeaderCard> getLeaderArray(){
+		return this.leaders;
+	}
+	
 	public void setLeaderCards(HashMap<String,LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
@@ -250,11 +266,13 @@ public class Player implements Serializable {
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
 	
+		this.leaders.add(leaderCard);
+		
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
 			System.out.println("player: aggiunta leader, notifico cambio stato");
 			System.out.println(this.toString());
-			this.observer.notifyPlayerStatusChange(this);
+//			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void activateLeaderCard(String name){
 		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);

@@ -72,6 +72,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		initMatch();
 	}
 
+
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
@@ -86,10 +87,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-		startLeaderDiscardPhase(); // dovrebbe esserci questo
+//		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
 //		 startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
+		
+		provaLeaderPlayer();
+	}
+
+	private void provaLeaderPlayer() {
+		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
+		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
+		try {
+			this.sendToClientHandler(new PlayerStatusChangeCommand(match.getPlayers()[0]),
+					this.getRightClientHandler(match.getPlayers()[0]));
+		} catch (WrongPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void communicateColors() {

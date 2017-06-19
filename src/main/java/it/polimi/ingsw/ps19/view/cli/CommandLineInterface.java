@@ -63,6 +63,14 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void playerStatusChange(Player p) {
 		print("This is your status updated :\n");
+		System.out.println("\nCLI: lunghezza arrayList leadercards: "+p.getLeaderArray().size());
+		System.out.println("\nCLI: lunghezza hashmap leadercards: "+p.getLeaderCards().size());
+		
+		for(int i=0;i<p.getLeaderArray().size();i++){
+			System.out.println("leaders:"+p.getLeaderArray().get(i).toString());
+		}
+		
+		System.out.println("stampo player to string:");
 		print(p.toString());
 
 	}
