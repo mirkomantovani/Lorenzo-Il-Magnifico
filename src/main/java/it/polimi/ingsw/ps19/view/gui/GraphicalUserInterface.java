@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;
@@ -76,7 +80,23 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
-		// TODO Auto-generated method stub
+		JFrame leaderFrame = new JFrame("Select a Leader Card :");
+		List<JPanel> panels;
+		
+		panels = new ArrayList<JPanel>();
+		List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+		
+		for(int i = 0; i<leaderCards.size(); i++){
+			panels.add(new JPanel());
+			leaderFrame.add(panels.get(i));
+			checkBoxes.add(new JCheckBox());
+			panels.get(i).add(checkBoxes.get(i));
+			checkBoxes.get(i).setVisible(true);
+			panels.get(i).setVisible(true);
+			leaderFrame.setVisible(true);
+			checkBoxes.get(i).setSelected(false);
+			
+		}
 		
 	}
 
