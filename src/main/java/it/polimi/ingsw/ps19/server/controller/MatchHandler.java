@@ -87,12 +87,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-//		startLeaderDiscardPhase(); // dovrebbe esserci questo
-		// provaPlayer();
+		startLeaderDiscardPhase(); // dovrebbe esserci questo
+//		 provaPlayer();
 //		 startTurn();
-		// startMatch(); non parte qui ma dopo aver scartato i familiari
+//		 startMatch(); //non parte qui ma dopo aver scartato i familiari
 		
-		provaLeaderPlayer();
+	//	provaLeaderPlayer();
 	}
 
 	private void provaLeaderPlayer() {
@@ -394,17 +394,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	// @Override
-	// public void notifyPlayerStatusChange(Player player) {
-	// System.out.println("matchhandler: notifyplayer status change");
-	//
-	// Player currentPlayer = match.getCurrentPlayer();
-	// if (player == currentPlayer) {
-	// this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-	// this.sendToAllPlayers(new
-	// OpponentStatusChangeCommand(player.maskedClone()));
-	// }
-	// }
+//	 @Override
+//	 public void notifyPlayerStatusChange(Player player) {
+//	 System.out.println("matchhandler: notifyplayer status change");
+//	
+//	 Player currentPlayer = match.getCurrentPlayer();
+//	 if (player == currentPlayer) {
+//	 this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
+//	 this.sendToAllPlayers(new
+//	 OpponentStatusChangeCommand(player.maskedClone()));
+//	 }
+//	 }
 
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
@@ -414,7 +414,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (WrongPlayerException e) {
 			e.printStackTrace();
 		}
-		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
+		this.sendToAllPlayersExceptCurrent(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
 
 	@Override

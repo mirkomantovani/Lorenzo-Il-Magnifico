@@ -260,7 +260,7 @@ public class Player implements Serializable {
 		this.leaderCards = leaderCards;
 	}
 	public void removeLeaderCard(String leaderName) {
-		this.leaderCards.remove(leaderName);
+		this.leaderCards.remove((String)leaderName);
 		if(observer!=null)
 			this.observer.notifyPlayerStatusChange(this);
 	}
@@ -272,7 +272,7 @@ public class Player implements Serializable {
 		if(observer!=null)
 			System.out.println("player: aggiunta leader, notifico cambio stato");
 			System.out.println(this.toString());
-//			this.observer.notifyPlayerStatusChange(this);
+     		this.observer.notifyPlayerStatusChange(this);
 	}
 	public void activateLeaderCard(String name){
 		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);

@@ -1,9 +1,11 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -80,23 +82,25 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void startDraft(List<LeaderCard> leaderCards) {
-		JFrame leaderFrame = new JFrame("Select a Leader Card :");
-		List<JPanel> panels;
+		List<ImageButton> buttons;
+		JDialog leaderFrame = new JDialog();
 		
-		panels = new ArrayList<JPanel>();
-		List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+		leaderFrame.setResizable(false);
+		leaderFrame.setTitle("Choose one leader card from the following:");
+		buttons = new ArrayList<ImageButton>();
 		
+		leaderFrame.setVisible(true);
+		leaderFrame.setContentPane(new Container());
+	
 		for(int i = 0; i<leaderCards.size(); i++){
-			panels.add(new JPanel());
-			leaderFrame.add(panels.get(i));
-			checkBoxes.add(new JCheckBox());
-			panels.get(i).add(checkBoxes.get(i));
-			checkBoxes.get(i).setVisible(true);
-			panels.get(i).setVisible(true);
-			leaderFrame.setVisible(true);
-			checkBoxes.get(i).setSelected(false);
-			
+		
+		buttons.add(new ImageButton("src/main/resources/leaders_f_c_01.jpg"));
+		leaderFrame.getContentPane().add(buttons.get(i), buttons.get(i).getUI());
+		buttons.get(i).setLocation(((i)*300), 0);
 		}
+		
+		leaderFrame.setResizable(true);
+		leaderFrame.setBounds(0, 0, 300*4, 555);
 		
 	}
 
