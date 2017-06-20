@@ -44,9 +44,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void initializeMatch() {
-		print("A new game is about to start");
-		// board.toString(); //o qualcosa di simile
-		// player.toString();
+		print("A new game is about to start!");
 	}
 
 	@Override
@@ -128,7 +126,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void notify(String input) {
 		switch (readerState) {
 		case ClientConstants.SEND_NAME:
-			gameController.notifyName(input);
+			actionConstructor.add(input);
+			print("Insert your password: ");
+			readerState=ClientConstants.SEND_PASSWORD;
 			break;
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:
 			gameController.notifyChosenLeaderCard(input);
@@ -142,7 +142,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 				moveHandler(input);
 			break;
 		case ClientConstants.SEND_PASSWORD:
-			print("Command not recognized");
+			actionConstructor.add(input);
+			gameController.notifyCredentials(actionConstructor);
 			break;
 		case ClientConstants.SEND_PRIVILEGE_CHOICES:
 			gameController.notifyChosenPrivileges(input);
@@ -338,8 +339,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askNameAndPassword() {
-		// TODO Auto-generated method stub
-		
+		print("Insert your name: ");
+		readerState = ClientConstants.SEND_NAME;
 	}
 
 	@Override
