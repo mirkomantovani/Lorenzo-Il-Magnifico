@@ -10,6 +10,7 @@ import java.util.List;
 
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
@@ -198,10 +199,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			match.addFamilyMembersToPlayers();
 			match.distributeTurnResources();
 			
-			// match.changeBoardCards();
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
+			this.match.getBoard().changeCardInTowers();
+			
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
 			roundNumber = 0;
@@ -280,9 +282,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
-	public void notifySetNext() {
-		setNext();
-	}
 
 	/**
 	 * method invoked by the ping timer to check if the current player is always
@@ -382,8 +381,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void applyAction(Action action) throws NotApplicableException {
 		System.out.println("matchhandler: applyaction");
 		action.apply();
-		// TODO verificare se l'azione gli ha dato delle privilege e mandare i
-		// comandi delle priv
+		
+		if(match.getCurrentPlayer().getCouncilPrivilege()!=0)
+			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
+		
+		match.getCurrentPlayer().resetPrivileges();
+		
+		sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		// TODO MANDARE comando per scegliere terminare turno o scartare
 		// leadercards
 
@@ -545,7 +549,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void finishRound() {
 		setNext();
-
+		nextStep();
 	}
 
 	private void handleEndGame() {
@@ -674,9 +678,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToCurrentPlayer(lastCommandSent);
 
 	}
-
-	public void discardLeaderCard(String leaderName) {
-		match.getCurrentPlayer().removeLeaderCard(leaderName);
+	
+	public void sendPrivilegeToCurrentPlayer(int numberOfPrivilege){
 		ResourceChest[] rc = null;
 		try {
 			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
@@ -687,7 +690,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 		ArrayList<ResourceChest> arrayListPrivilege = getArrayListPrivilegeFromArray(rc);
 
-		sendToCurrentPlayer(new AskPrivilegeChoiceCommand(1, arrayListPrivilege));
+		sendToCurrentPlayer(new AskPrivilegeChoiceCommand(numberOfPrivilege, arrayListPrivilege));
+		
+	}
+
+	public void discardLeaderCard(String leaderName) {
+		match.getCurrentPlayer().removeLeaderCard(leaderName);
+		sendPrivilegeToCurrentPlayer(1);
 	}
 
 	private ArrayList<ResourceChest> getArrayListPrivilegeFromArray(ResourceChest[] rc) {

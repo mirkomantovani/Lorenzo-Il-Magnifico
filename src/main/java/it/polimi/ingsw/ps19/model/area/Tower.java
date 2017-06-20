@@ -57,6 +57,7 @@ public class Tower implements Serializable {
  	 * 
  	 */
  	public void changeCards(){
+ 		System.out.println("tower: change cards");
  		for(int i=0; i < deck.length()/6; i++){
  			floors.get(i).setCard(deck.getCard(currentCard)); 
  			currentCard++;
@@ -98,7 +99,11 @@ public class Tower implements Serializable {
 					this.getFloor(i).getActionSpace().getActionValueRequired()
 						+ ".\nYou can take the card : "  + 
 				 this.getFloor(i).getCard().toString());
+
 					} else string.append("\n" + i + "floor: ");
+
+					
+
 				}
 		return string.toString();
 	}
