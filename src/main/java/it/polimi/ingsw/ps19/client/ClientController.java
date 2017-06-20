@@ -118,7 +118,7 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
-		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(2)), CardType.values()[Integer.parseInt(actionConstructor.get(4))-1]);
+		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(1)), CardType.values()[Integer.parseInt(actionConstructor.get(3))-1]);
 		sendCommand(takeCardCommand);
 	}
 

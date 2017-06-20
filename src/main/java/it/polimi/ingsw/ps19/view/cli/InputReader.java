@@ -31,7 +31,7 @@ public class InputReader implements Runnable{
 			try {
 				input = reader.readLine();
 				System.out.println("InputReader: ho letto input: "+ input);
-				notifyListeners(input);	
+				notifyListeners(input.toLowerCase());	
 			} catch (IOException e) {
 				System.out.println("Unable to read the input");
 				e.printStackTrace();
