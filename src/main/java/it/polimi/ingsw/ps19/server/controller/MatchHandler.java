@@ -86,9 +86,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-		startLeaderDiscardPhase(); // dovrebbe esserci questo
+//		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
-//		 startTurn();
+		 startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 	}
 

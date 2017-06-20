@@ -103,6 +103,7 @@ public class ClientController implements InputObserver{
 	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
 		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(1)), CardType.values()[Integer.parseInt(actionConstructor.get(3))-1]);
 		sendCommand(takeCardCommand);
+		System.out.println("clientcontroller: sending takecard comand");
 	}
 
 

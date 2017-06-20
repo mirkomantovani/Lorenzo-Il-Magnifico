@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
@@ -88,12 +89,13 @@ public class ServerCommandHandler implements CommandObserver {
 	public void applyCommand(TakeCardCommand takeCardCommand){
 		
 		Action action=calculateTakeCardAction(takeCardCommand);
-		
+		System.out.println("servercmdhandler: ricevuta azione takecard");
 		try {
 			handler.applyAction(action);
 		} catch (NotApplicableException e) {
+		
 			handler.sendToCurrentPlayer(new InvalidActionCommand());
-//			handler.sendToCurrentPlayer(new AskMoveCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
 		}
 		
