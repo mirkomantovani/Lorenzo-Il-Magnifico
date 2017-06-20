@@ -164,17 +164,15 @@ public class Match {
 	public void distributeTurnResources() {
 		for(int i=0;i<players.length;i++){
 			
-			ResourceChest rs=new ResourceChest(
-		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
-			rs.addChest(roundResourceSupply);
+//			ResourceChest rs=new ResourceChest(
+//		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
+//			rs.addChest(roundResourceSupply);
 			
 			//per prova aggiungiamone tante
-			rs.addChest(new ResourceChest(100,100,100,100,100,100,100));
+			ResourceChest rs=new ResourceChest(100,100,100,100,100,100,100);
 			
 		    players[i].addResources(rs);
 		    		
-			//prova
-//			players[i].addResources(new ResourceChest(1,2,3,4,5,6,6));
 		}
 		
 	}

@@ -120,11 +120,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	private void provaPlayer() {
-		match.getPlayers()[0].addResources(new ResourceChest(1, 2, 3, 4, 5, 6, 6));
-//		System.out.println("matchhandler prova player:" + match.getPlayers()[0].toString());
-
-	}
 
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);

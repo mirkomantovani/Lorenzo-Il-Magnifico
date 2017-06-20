@@ -54,11 +54,13 @@ public class Tower implements Serializable {
 			
 	} 
  	
+ 	
+ 
  	/**
  	 * This method places one Card in each floor, starting by the card currently on the top of it.
  	 * 
  	 */
- 	public void setCards(){
+ 	public void changeCards(){
  		for(int i=0; i < deck.length()/6; i++){
  			Floor floor = new Floor(deck.getCard(currentCard),this,0,null);
  			floors.set(i,floor);

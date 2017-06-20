@@ -95,7 +95,7 @@ public class ServerCommandHandler implements CommandObserver {
 		} catch (NotApplicableException e) {
 			
 			System.out.println("takecard not applicable");
-			handler.sendToCurrentPlayer(new InvalidActionCommand());
+			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
 //			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
 		}
@@ -109,10 +109,12 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) {
+		System.out.println("calculating takecardaction");
 		Player player=match.getCurrentPlayer();
 		FamilyMember familyMember=
 				player.getFamilyMember(takeCardCommand.getFamilyMember());
 		Floor floor=match.getFloor(takeCardCommand.getCardType(),takeCardCommand.getFloor());
+		System.out.println("creating new take card action");
 		return new TakeCardAction(familyMember,floor,
 				new Servant(takeCardCommand.getPaidServants()));
 	}

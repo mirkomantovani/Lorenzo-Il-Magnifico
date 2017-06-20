@@ -28,7 +28,7 @@ public class MarketAction extends Action{
 			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
 			this.marketSpot.isOccupied();
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
-		} else throw new NotApplicableException();
+		} else throw new NotApplicableException("");
 		
 	}
 

@@ -26,7 +26,7 @@ public class CouncilPalaceAction extends Action {
 		councilPalace.getMembers().add(familyMember);
 		councilPalace.getEffect().applyEffect(familyMember.getPlayer());
 		familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
-		} else throw new NotApplicableException();
+		} else throw new NotApplicableException("");
 		
 	}
 
