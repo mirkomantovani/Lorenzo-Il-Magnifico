@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
@@ -96,7 +97,7 @@ public class ServerCommandHandler implements CommandObserver {
 			
 			System.out.println("takecard not applicable");
 			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
-//			handler.sendToCurrentPlayer(new AskMoveCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
 		}
 		

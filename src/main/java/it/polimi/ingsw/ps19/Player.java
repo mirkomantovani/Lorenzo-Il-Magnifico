@@ -291,6 +291,9 @@ public class Player implements Serializable {
 		this.familyMembers.remove(familyMembers.get(color));
 		this.observer.notifyPlayerStatusChange(this);
 	}
+	public void resetPrivileges() {
+this.councilPrivilege=0;		
+	}
 
 	
 	
