@@ -30,9 +30,10 @@ public class ClientSocketListener implements Runnable{
 		ServerToClientCommand command;
 		while(true){
 			try {
-				command = (ServerToClientCommand)inSocket.readObject();
+				command = (ServerToClientCommand)inSocket.readUnshared();
+				
 				//System.out.println("clientsocketlistener: ho letto oggetto e ora lo notifico");
-
+			
 				observer.notifyNewCommand(command);
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block

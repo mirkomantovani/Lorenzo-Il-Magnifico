@@ -54,8 +54,9 @@ public class ClientSocketInterface implements NetworkInterface {
 	public void sendCommand(ClientToServerCommand command) {
 		// TODO Auto-generated method stub
 		try {
-			outSocket.writeObject(command);
+			outSocket.writeUnshared(command);
 			outSocket.flush();
+			outSocket.reset();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

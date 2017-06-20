@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Container;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
@@ -19,6 +19,8 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
 
+	private CatchMouseEvent listener;
+	
 	@Override
 	public void initializeMatch() {
 		// TODO Auto-generated method stub
@@ -92,15 +94,29 @@ public class GraphicalUserInterface implements UserInterface{
 		leaderFrame.setVisible(true);
 		leaderFrame.setContentPane(new Container());
 	
-		for(int i = 0; i<leaderCards.size(); i++){
-		
-		buttons.add(new ImageButton("src/main/resources/leaders_f_c_01.jpg"));
+		for(LeaderCard l : leaderCards){
+		int i = 0;
+		buttons.add(new ImageButton("src/main/resources/leadercardimages/" + l.getName() + ".jpg"));
 		leaderFrame.getContentPane().add(buttons.get(i), buttons.get(i).getUI());
 		buttons.get(i).setLocation(((i)*300), 0);
+		i++;
 		}
 		
-		leaderFrame.setResizable(true);
+		leaderFrame.setResizable(false);
 		leaderFrame.setBounds(0, 0, 300*4, 555);
+		
+		Map<String,ImageButton> leaders = new HashMap<String,ImageButton>();
+		
+		for(ImageButton b : buttons){
+		
+			b.getMouseListener().
+	
+			
+				
+			
+		}
+		
+		
 		
 	}
 

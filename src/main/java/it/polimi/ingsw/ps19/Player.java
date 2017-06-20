@@ -34,7 +34,6 @@ public class Player implements Serializable {
 	private transient MatchObserver observer;
 	private int councilPrivilege;
 	private HashMap<String,LeaderCard> leaderCards;
-	private ArrayList<LeaderCard> leaders;
 	
 	
 	public Player(String name, String color){
@@ -44,8 +43,6 @@ public class Player implements Serializable {
 		decks = new HashMap<>();
 		
 		resources = new ResourceChest();
-		
-		leaders = new ArrayList<LeaderCard>();
 		
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
@@ -164,18 +161,23 @@ public class Player implements Serializable {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append("Player : " + this.getName() + "\n" + "Color : " + this.getColor() +
-						"\n" + "Status : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
+						"\n" + "Resources : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
 								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\n\t Character cards : "
 								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
 								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
 
-		string.append("\nThe player has the following family members:\n");
-		string.append(this.getFamilyMembers().values().toArray().toString());
+		string.append("\nFamily members:\n");
+		for(FamilyMember mem : this.getFamilyMembers().values()){
+			string.append(mem.toString());
+		}
+		
 		if(!leaderCards.isEmpty()){
 			string.append("Leader cards : \n");
 			for(int i = 0; i < this.leaderCards.values().toArray().length; i++){
 				string.append(leaderCards.values().toArray()[i].toString());
+				
+		
 				
 //		 Iterator it = leaderCards.entrySet().iterator();
 //		    while (it.hasNext()) {
@@ -190,11 +192,7 @@ public class Player implements Serializable {
 
 //		} else 
 //			string.append("\nThe player hasn't any leader card");
-		for(int j=0; j<leaders.size(); j++){
-			
-		string.append(leaders.get(j).toString());
-		}
-		
+	
 		
 		return string.toString();
 	}
@@ -252,10 +250,6 @@ public class Player implements Serializable {
 		return leaderCards;
 	}
 	
-	public ArrayList<LeaderCard> getLeaderArray(){
-		return this.leaders;
-	}
-	
 	public void setLeaderCards(HashMap<String,LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
@@ -266,7 +260,6 @@ public class Player implements Serializable {
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
 	
-		this.leaders.add(leaderCard);
 		
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)

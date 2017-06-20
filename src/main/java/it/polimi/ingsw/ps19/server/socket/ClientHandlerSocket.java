@@ -52,6 +52,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	public void sendCommand(ServerToClientCommand command) throws IOException {
 		outSocket.writeObject(command);
 		outSocket.flush();
+		outSocket.reset();
 	}
 
 	@Override
