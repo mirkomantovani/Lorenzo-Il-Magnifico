@@ -52,13 +52,14 @@ public class ClientSocketInterface implements NetworkInterface {
 
 	@Override
 	public void sendCommand(ClientToServerCommand command) {
-		// TODO Auto-generated method stub
 		try {
 			outSocket.writeUnshared(command);
 			outSocket.flush();
 			outSocket.reset();
+
+			System.out.println("clientsocketinterface: mando comando");
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

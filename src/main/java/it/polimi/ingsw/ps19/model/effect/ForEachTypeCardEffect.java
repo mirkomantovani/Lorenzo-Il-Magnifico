@@ -34,7 +34,7 @@ public class ForEachTypeCardEffect extends Effect {
 	
 
 	public void applyEffect(Player p) {
-		this.resource.setAmount(calculateAmount(p.getDeckOfType(typeCard)));   //it sets the resource amount to: previous amount * cards in the player's deck
+		this.resource.setAmount(calculateAmount((ArrayList<? extends DevelopmentCard>) p.getDeckOfType(typeCard)));   //it sets the resource amount to: previous amount * cards in the player's deck
 		ResourceChest rs=new ResourceChest();
 		rs.addResource(resource);
 		p.addResources(rs);

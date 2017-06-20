@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
+import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
@@ -98,7 +99,9 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
-
+				System.out.println("clienthandlersocket:mi è arrivato comando");
+				if(command instanceof TakeCardCommand)
+				System.out.println("clienthandlersocket:mi è arrivato takecardcommand");
 			} catch (ClassNotFoundException | IOException e) {
 				close();
 				break;

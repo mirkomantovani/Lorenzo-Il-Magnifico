@@ -27,7 +27,7 @@ public class ProductionArea extends IndustrialArea{
 
 	@Override
 	public ArrayList<DevelopmentCard> getPlayerCards(Player player) {
-		return player.getDeckOfType(CardType.BUILDING);
+		return (ArrayList<DevelopmentCard>) player.getDeckOfType(CardType.BUILDING);
 	}
 	public String toString(){
 		return "-------------------- The production area --------------------" +

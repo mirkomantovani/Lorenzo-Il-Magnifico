@@ -31,7 +31,7 @@ public class HarvestArea extends IndustrialArea{
 	@Override
 	public ArrayList<DevelopmentCard> getPlayerCards(Player player) {
 			
-		return player.getDeckOfType(CardType.TERRITORY);
+		return (ArrayList<DevelopmentCard>) player.getDeckOfType(CardType.TERRITORY);
 	}
 	
 	

@@ -34,7 +34,7 @@ public class LosePointsEveryWoodStoneEffect extends Effect {
 
 		int sum=0;
 		ArrayList<DevelopmentCard> deck;
-		deck=player.getDeckOfType(cardType);
+		deck=(ArrayList<DevelopmentCard>) player.getDeckOfType(cardType);
 		for(DevelopmentCard card:deck){
 			sum+=card.getCost().getStoneAmount();
 			sum+=card.getCost().getWoodAmount();
