@@ -5,10 +5,6 @@ import java.util.List;
 
 public interface InputObserver {
 	
-	public void notifyName(String name);
-	
-	public void notifyPassword(String password);
-	
 	public void notifyChosenLeaderCard(String LeaderCardName);
 	
 	public void notifyMove(String move);
@@ -28,4 +24,6 @@ public interface InputObserver {
 	public void notifyHarvest(ArrayList<String> actionConstructor);
 	
 	public void notifyProduction(ArrayList<String> actionConstructor);
+	
+	public void notifyCredentials(ArrayList<String> actionConstructor);
 }
