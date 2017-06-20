@@ -29,7 +29,7 @@ public class Player implements Serializable {
 	private String color;
 	private HashMap<Color,FamilyMember> familyMembers;
 	private ResourceChest resources;
-	private HashMap<CardType, ArrayList<DevelopmentCard>> decks;
+	private HashMap<CardType, List<DevelopmentCard>> decks;
 	private Bonus bonuses;
 	private transient MatchObserver observer;
 	private int councilPrivilege;
@@ -108,7 +108,7 @@ public class Player implements Serializable {
 	 * 
 	 * 
 	 */
-	public ArrayList<DevelopmentCard> getDeckOfType(CardType cardType){
+	public List<DevelopmentCard> getDeckOfType(CardType cardType){
 		return decks.get(cardType);
 		
 	}
@@ -128,7 +128,7 @@ public class Player implements Serializable {
 	}
 	
 	
-	public HashMap<Color, FamilyMember> getFamilyMembers() {
+	public Map<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
 	
@@ -284,6 +284,7 @@ public class Player implements Serializable {
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 		familyMembers.put(Color.values()[i], new FamilyMember(Dice.values()[i],this));
 		}
+		this.observer.notifyPlayerStatusChange(this);
 	}
 	
 	public void removeFamilyMember(Color color){
