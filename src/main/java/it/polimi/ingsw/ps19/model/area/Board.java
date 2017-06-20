@@ -191,7 +191,7 @@ public class Board implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(">>>>>>>> The Board <<<<<<<< \n This is your world, let's try to impose your family "
-				+ "as the most powerful! \n There are : ");
+				+ "as the most powerful! \n There are:\n ");
 		
 		for(Tower t : towers.values()){
 		builder.append(t.toString());

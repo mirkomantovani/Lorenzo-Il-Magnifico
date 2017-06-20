@@ -45,12 +45,9 @@ public class Tower implements Serializable {
 			for(int i = 0; i < deck.length() / 6; i++){
 				r = new ResourceChest();
 				r.addResource(bonuses.get(i));
-				floors.add(new Floor(deck.getCard(currentCard),this,actionSpaceCost,new InstantResourcesEffect(r)));
-				currentCard++;
+				floors.add(new Floor(null,this,actionSpaceCost,new InstantResourcesEffect(r)));
 				actionSpaceCost = actionSpaceCost + 2;
 			}
-	
-			actionSpaceCost = 1;
 			
 	} 
  	
@@ -62,8 +59,7 @@ public class Tower implements Serializable {
  	 */
  	public void changeCards(){
  		for(int i=0; i < deck.length()/6; i++){
- 			Floor floor = new Floor(deck.getCard(currentCard),this,0,null);
- 			floors.set(i,floor);
+ 			floors.get(i).setCard(deck.getCard(currentCard)); 
  			currentCard++;
  		}
  	}
@@ -96,14 +92,15 @@ public class Tower implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append( this.cardType.toString().toUpperCase() + " tower : "
-				+ " \n On the first floor the Dice value required is 1, and you can take the card : "  + 
-				 this.getFloor(0).getCard().toString() + "\n On the second floor the Dice value required is 3, "
-				 		+ "and you can take the card " + this.getFloor(1).getCard().toString() + 
-				 		"\n On the second floor the Dice value required is 5, "
-				 		+ "and you can take the card" + this.getFloor(2).getCard().toString() + 
-				 		"\n On the second floor the Dice value required is 7, "
-				 		+ "and you can take the card" + this.getFloor(3).getCard().toString());
+		string.append( this.cardType.toString().toUpperCase() + " tower : ");
+				for(int i = 0; i < floors.size(); i++){
+					if(this.getFloor(i).getCard() != null){
+				string.append(" \n" + i + " floor: the Dice value required is " +
+					this.getFloor(i).getActionSpace().getActionValueRequired()
+						+ ".\nYou can take the card : "  + 
+				 this.getFloor(0).getCard().toString());
+					}
+				}
 		return string.toString();
 	}
  	
