@@ -230,7 +230,7 @@ public class Player implements Serializable {
 	public void addResources(ResourceChest resourceChest){
 		this.resources.addChest(resourceChest);
 		
-		System.out.println("aggiunte risorse, nuovo status player:"+this.toString());
+//		System.out.println("aggiunte risorse, nuovo status player:"+this.toString());
 		if(observer!=null)
 		this.observer.notifyPlayerStatusChange(this);
 	}
@@ -260,12 +260,12 @@ public class Player implements Serializable {
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
 	
-		System.out.println("player: aggiungo leadercard");
+//		System.out.println("player: aggiungo leadercard");
 		
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
-			System.out.println("player: aggiunta leader, notifico cambio stato");
-			System.out.println(this.toString());
+//			System.out.println("player: aggiunta leader, notifico cambio stato");
+//			System.out.println(this.toString());
      		this.observer.notifyPlayerStatusChange(this);
 	}
 	public void activateLeaderCard(String name){

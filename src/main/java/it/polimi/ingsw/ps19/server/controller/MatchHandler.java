@@ -87,9 +87,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-		startLeaderDiscardPhase(); // dovrebbe esserci questo
+//		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
-//		 startTurn();
+		 startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 		
 //		provaLeaderPlayer();
@@ -200,8 +200,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 //			System.out.println("rollo i dadi");
 			match.getBoard().rollDices();
+			match.addFamilyMembersToPlayers();
 			match.distributeTurnResources();
-
+			
 			// match.changeBoardCards();
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
@@ -384,6 +385,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void applyAction(Action action) throws NotApplicableException {
+		System.out.println("matchhandler: applyaction");
 		action.apply();
 		// TODO verificare se l'azione gli ha dato delle privilege e mandare i
 		// comandi delle priv
@@ -492,11 +494,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// nome:");
 //			System.out.println("matchhandler: handleleaderchoice: leadername:" + name + "playercolor: " + playerColor);
 
-			if (match.getLeaderCards() == null)
-//				System.out.println("match.getleadercards è nullll");
-//				System.out.println(this.match.getLeaderCards().getCard(name).toString());
-				System.out.println("colore del  player"+playerColor);
-			System.out.println("carta leader:"+playerColor);
+			
 				this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));

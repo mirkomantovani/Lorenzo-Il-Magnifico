@@ -34,6 +34,8 @@ public class TakeCardAction extends Action {
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
 		
+		System.out.println("takecardaction: costruttore");
+		
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
@@ -51,6 +53,8 @@ public class TakeCardAction extends Action {
 	@Override
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
+			
+			System.out.println("takecardaction: IS APPLICABLE and i'm applying");
 			
 			player.addCard(card);
 			floor.setCard(null);  //set to null when the player buys the card

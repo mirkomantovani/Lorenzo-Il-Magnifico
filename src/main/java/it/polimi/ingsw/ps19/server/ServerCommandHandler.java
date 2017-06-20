@@ -86,12 +86,15 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
-		
+//		System.out.println("servercommandhandler: apply takecardcommand");
 		Action action=calculateTakeCardAction(takeCardCommand);
+		System.out.println("servercommandhandler: take card action calculated");
 		
 		try {
 			handler.applyAction(action);
 		} catch (NotApplicableException e) {
+			
+			System.out.println("takecard not applicable");
 			handler.sendToCurrentPlayer(new InvalidActionCommand());
 //			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;

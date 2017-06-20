@@ -163,14 +163,18 @@ public class Match {
 
 	public void distributeTurnResources() {
 		for(int i=0;i<players.length;i++){
-//			players[i].addResources(new ResourceChest(roundResourceSupply));
-//			ResourceChest rs=new ResourceChest(
-//		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
-//			rs.addChest(roundResourceSupply);
-//		    players[i].addResources(rs);
+			
+			ResourceChest rs=new ResourceChest(
+		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
+			rs.addChest(roundResourceSupply);
+			
+			//per prova aggiungiamone tante
+			rs.addChest(new ResourceChest(100,100,100,100,100,100,100));
+			
+		    players[i].addResources(rs);
 		    		
 			//prova
-			players[i].addResources(new ResourceChest(1,2,3,4,5,6,6));
+//			players[i].addResources(new ResourceChest(1,2,3,4,5,6,6));
 		}
 		
 	}
@@ -205,6 +209,13 @@ public class Match {
 		for(int i=0;i<players.length;i++)
 		colors.add(playercolors[i]);
 		this.board.setPlayerOrder(colors);
+	}
+
+	public void addFamilyMembersToPlayers() {
+		for(int i=0;i<players.length;i++){
+			players[i].addFamilyMembers();
+		}
+		
 	}
 
 }
