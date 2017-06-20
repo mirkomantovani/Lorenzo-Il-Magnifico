@@ -30,7 +30,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	private int readerState;
 	private int moveState;
 	private int takeCardState;
-	private List<String> actionConstructor;
+	private ArrayList<String> actionConstructor;
 
 	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
@@ -44,9 +44,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void initializeMatch() {
-		print("A new game is about to start");
-		// board.toString(); //o qualcosa di simile
-		// player.toString();
+		print("A new game is about to start!");
 	}
 
 	@Override
@@ -63,14 +61,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void playerStatusChange(Player p) {
 		print("This is your status updated :\n");
-		System.out.println("\nCLI: lunghezza arrayList leadercards: "+p.getLeaderArray().size());
-		System.out.println("\nCLI: lunghezza hashmap leadercards: "+p.getLeaderCards().size());
-		
-		for(int i=0;i<p.getLeaderArray().size();i++){
-			System.out.println("leaders:"+p.getLeaderArray().get(i).toString());
-		}
-		
-		System.out.println("stampo player to string:");
 		print(p.toString());
 
 	}
@@ -136,13 +126,15 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void notify(String input) {
 		switch (readerState) {
 		case ClientConstants.SEND_NAME:
-			gameController.notifyName(input);
+			actionConstructor.add(input);
+			print("Insert your password: ");
+			readerState=ClientConstants.SEND_PASSWORD;
 			break;
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input.equals("2")){
+			if(input.equals("discard")){
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
 			}
@@ -150,7 +142,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 				moveHandler(input);
 			break;
 		case ClientConstants.SEND_PASSWORD:
-			print("Command not recognized");
+			actionConstructor.add(input);
+			gameController.notifyCredentials(actionConstructor);
 			break;
 		case ClientConstants.SEND_PRIVILEGE_CHOICES:
 			gameController.notifyChosenPrivileges(input);
@@ -178,7 +171,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 
 	@Override
-	public void startDraft(List<LeaderCard> leaderCards) {
+	public void startDraft(ArrayList<LeaderCard> leaderCards) {
 		print("Select a leader card from the following: ");
 		if (leaderCards.size() == 0)
 			System.out.println("leader cards è 0");
@@ -194,8 +187,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		takeCardState=0;
 		actionConstructor.clear();
 		print("Choose what you want to do:");
-		print("1- Action");
-		print("2- Discard leader card");
+		print("To perform an action, type \"action\"");
+		print("To discard a leader card and get a privilege, type \"discard\"");
 		readerState = ClientConstants.SEND_MOVE;
 	}
 	
@@ -210,7 +203,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			takeCardState=ClientConstants.SEND_TAKE_CARD_TOWER;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_TOWER:
-			actionConstructor.add(input);
+//			actionConstructor.add(input);
 			print("Select the floor:");
 			print("1 - First floor");
 			print("2 - Second floor");
@@ -219,7 +212,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			takeCardState = ClientConstants.SEND_TAKE_CARD_FLOOR;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_FLOOR:
-			actionConstructor.add(input);
+//			actionConstructor.add(input);
 			gameController.notifyTakeCardAction(actionConstructor);
 			break;
 		}
@@ -260,15 +253,16 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	private void moveHandler(String string) {
-		actionConstructor = new ArrayList<String>();
-		actionConstructor.add(string);
-		
+//		actionConstructor = new ArryList<String>();
+//		actionConstructor.add(string);
+
 		switch (moveState) {
 		case 0:  //First possible case
 			print("Select your available family member: ");
 			moveState=ClientConstants.SEND_FAMILY_MEMBER;
 			break;
 		case ClientConstants.SEND_FAMILY_MEMBER:
+			actionConstructor= new ArrayList<String>();
 			actionConstructor.add(string);
 			print("How many servants do you want to pay to raise your selected family member action value?");
 			moveState=ClientConstants.SEND_PAID_SERVANTS;
@@ -276,11 +270,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_PAID_SERVANTS:
 			actionConstructor.add(string);
 			print("What action do you want to perform?");
-			print("3 - Take card");
-			print("4 - Place into Council Palace");
-			print("5 - Place into Marketplace slot");
-			print("6 - Harvest");
-			print("7 - Product");
+			print("1 - Take card");
+			print("2 - Place into Council Palace");
+			print("3 - Place into Marketplace slot");
+			print("4 - Harvest");
+			print("5 - Product");
 			moveState=ClientConstants.SEND_CHOSEN_ACTION;
 			break;
 		case ClientConstants.SEND_CHOSEN_ACTION:
@@ -297,7 +291,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles) {
+	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
 
 	}
@@ -345,8 +339,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askNameAndPassword() {
-		// TODO Auto-generated method stub
-		
+		print("Insert your name: ");
+		readerState = ClientConstants.SEND_NAME;
 	}
 
 	@Override

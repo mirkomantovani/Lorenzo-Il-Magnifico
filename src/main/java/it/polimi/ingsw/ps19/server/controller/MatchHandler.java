@@ -62,7 +62,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
-		System.out.println("match handler: sono stato creato");
+//		System.out.println("match handler: sono stato creato");
 		// leaderSets = match.getLeaderCards()
 		// .getStartingLeaderSets(match.getPlayers().length);
 	}
@@ -87,25 +87,25 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-//		startLeaderDiscardPhase(); // dovrebbe esserci questo
+		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
 //		 startTurn();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 		
-		provaLeaderPlayer();
+//		provaLeaderPlayer();
 	}
 
-	private void provaLeaderPlayer() {
-		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
-		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
-		try {
-			this.sendToClientHandler(new PlayerStatusChangeCommand(match.getPlayers()[0]),
-					this.getRightClientHandler(match.getPlayers()[0]));
-		} catch (WrongPlayerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	private void provaLeaderPlayer() {
+//		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
+//		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
+//		try {
+//			this.sendToClientHandler(new PlayerStatusChangeCommand(match.getPlayers()[0]),
+//					this.getRightClientHandler(match.getPlayers()[0]));
+//		} catch (WrongPlayerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void communicateColors() {
 		for (ClientHandler c : clients) {
@@ -122,14 +122,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void provaPlayer() {
 		match.getPlayers()[0].addResources(new ResourceChest(1, 2, 3, 4, 5, 6, 6));
-		System.out.println("matchhandler prova player:" + match.getPlayers()[0].toString());
+//		System.out.println("matchhandler prova player:" + match.getPlayers()[0].toString());
 
 	}
 
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
-		System.out.println("matchhandler: lunghezza leadersets" + leaderSets.size());
+//		System.out.println("matchhandler: lunghezza leadersets" + leaderSets.size());
 
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
@@ -198,7 +198,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			handleEndGame();
 		} else {
 
-			System.out.println("rollo i dadi");
+//			System.out.println("rollo i dadi");
 			match.getBoard().rollDices();
 			match.distributeTurnResources();
 
@@ -409,7 +409,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
 		try {
-			System.out.println("matchhandler: invio player:" + player.toString());
+//			System.out.println("matchhandler: invio player:" + player.toString());
 			this.sendToClientHandler(new PlayerStatusChangeCommand(player), this.getRightClientHandler(player));
 		} catch (WrongPlayerException e) {
 			e.printStackTrace();
@@ -485,7 +485,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleLeaderChoice(String name, String playerColor) {
-		// System.out.println("matchhandler: sono in handleleaderchoice");
+		 System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
 			// System.out.println("matchhandler: cerco di aggiungere la carta di
@@ -494,15 +494,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 			if (match.getLeaderCards() == null)
 //				System.out.println("match.getleadercards è nullll");
-				System.out.println(this.match.getLeaderCards().getCard(name).toString());
-			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
+//				System.out.println(this.match.getLeaderCards().getCard(name).toString());
+				System.out.println("colore del  player"+playerColor);
+			System.out.println("carta leader:"+playerColor);
+				this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		System.out.println("matchhandler: leaderresponsecounter=" + leaderResponseCounter);
-		System.out.println("matchhandler: giocatori:=" + match.getPlayers().length);
+//		System.out.println("matchhandler: giocatori:=" + match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
 			// System.out.println("matchhandler: entro nell'if di quando tutti e
 			// quattro hanno scelto");

@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 public interface UserInterface {
 
 	
-	public void startDraft(List<LeaderCard> leaderCards);
+	public void startDraft(ArrayList<LeaderCard> leaderCards);
 	
 	public void initializeMatch();
 	
@@ -49,7 +49,7 @@ public interface UserInterface {
 	
 	public void invalidInput();
 	
-	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles);
+	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles);
 	
 	public void displayOpponentsStatus(Player player);
 	

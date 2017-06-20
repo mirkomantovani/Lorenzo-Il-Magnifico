@@ -29,12 +29,11 @@ public class Player implements Serializable {
 	private String color;
 	private HashMap<Color,FamilyMember> familyMembers;
 	private ResourceChest resources;
-	private HashMap<CardType, List<DevelopmentCard>> decks;
+	private HashMap<CardType, ArrayList<DevelopmentCard>> decks;
 	private Bonus bonuses;
 	private transient MatchObserver observer;
 	private int councilPrivilege;
 	private HashMap<String,LeaderCard> leaderCards;
-	private ArrayList<LeaderCard> leaders;
 	
 	
 	public Player(String name, String color){
@@ -44,8 +43,6 @@ public class Player implements Serializable {
 		decks = new HashMap<>();
 		
 		resources = new ResourceChest();
-		
-		leaders = new ArrayList<LeaderCard>();
 		
 		for(int i = 0; i < Color.values().length; i++){ //NOTE that if Dice and Color values aren't in the same order, this won't work!
 			decks.put(CardType.values()[i], new ArrayList<DevelopmentCard>());
@@ -111,7 +108,7 @@ public class Player implements Serializable {
 	 * 
 	 * 
 	 */
-	public List<DevelopmentCard> getDeckOfType(CardType cardType){
+	public ArrayList<DevelopmentCard> getDeckOfType(CardType cardType){
 		return decks.get(cardType);
 		
 	}
@@ -131,7 +128,7 @@ public class Player implements Serializable {
 	}
 	
 	
-	public Map<Color, FamilyMember> getFamilyMembers() {
+	public HashMap<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
 	
@@ -164,18 +161,23 @@ public class Player implements Serializable {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append("Player : " + this.getName() + "\n" + "Color : " + this.getColor() +
-						"\n" + "Status : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
+						"\n" + "Resources : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
 								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\n\t Character cards : "
 								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
 								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
 
-		string.append("\nThe player has the following family members:\n");
-		string.append(this.getFamilyMembers().values().toArray().toString());
+		string.append("\nFamily members:\n");
+		for(FamilyMember mem : this.getFamilyMembers().values()){
+			string.append(mem.toString());
+		}
+		
 		if(!leaderCards.isEmpty()){
 			string.append("Leader cards : \n");
 			for(int i = 0; i < this.leaderCards.values().toArray().length; i++){
 				string.append(leaderCards.values().toArray()[i].toString());
+				
+		
 				
 //		 Iterator it = leaderCards.entrySet().iterator();
 //		    while (it.hasNext()) {
@@ -190,11 +192,7 @@ public class Player implements Serializable {
 
 //		} else 
 //			string.append("\nThe player hasn't any leader card");
-		for(int j=0; j<leaders.size(); j++){
-			
-		string.append(leaders.get(j).toString());
-		}
-		
+	
 		
 		return string.toString();
 	}
@@ -252,27 +250,23 @@ public class Player implements Serializable {
 		return leaderCards;
 	}
 	
-	public ArrayList<LeaderCard> getLeaderArray(){
-		return this.leaders;
-	}
-	
 	public void setLeaderCards(HashMap<String,LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
 	public void removeLeaderCard(String leaderName) {
-		this.leaderCards.remove(leaderName);
+		this.leaderCards.remove((String)leaderName);
 		if(observer!=null)
 			this.observer.notifyPlayerStatusChange(this);
 	}
 	public void addLeaderCards(LeaderCard leaderCard){
 	
-		this.leaders.add(leaderCard);
+		System.out.println("player: aggiungo leadercard");
 		
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
 			System.out.println("player: aggiunta leader, notifico cambio stato");
 			System.out.println(this.toString());
-//			this.observer.notifyPlayerStatusChange(this);
+     		this.observer.notifyPlayerStatusChange(this);
 	}
 	public void activateLeaderCard(String name){
 		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);
@@ -297,9 +291,6 @@ public class Player implements Serializable {
 		this.familyMembers.remove(familyMembers.get(color));
 		this.observer.notifyPlayerStatusChange(this);
 	}
-	
-	
-
 
 	
 	

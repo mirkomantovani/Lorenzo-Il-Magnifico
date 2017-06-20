@@ -67,19 +67,7 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
-	@Override
-	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void startDraft(List<LeaderCard> leaderCards) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 
 	@Override
 	public void askMove() {
@@ -94,7 +82,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void askPersonalBonusTile(ArrayList<PersonalBonusTile> personalBonusTiles) {
+	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -135,17 +123,6 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
-	@Override
-	public void askNameAndPassword() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void askForProductionExchangeEffect(List<String[]> choices) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void notifyRoundTimerExpired() {
@@ -161,6 +138,30 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void assignColor(String color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void startDraft(ArrayList<LeaderCard> leaderCards) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askNameAndPassword() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askForProductionExchangeEffect(List<String[]> choices) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -78,7 +78,6 @@ public class Board implements Serializable {
 		ventureCards=new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH);
 				
 		for(int i=0;i<CardConstants.DECK_LENGTH;i++)
-		System.out.println(buildingCards.getCard(i).toString());
 		
 		towers.put(CardType.TERRITORY,new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
 		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));

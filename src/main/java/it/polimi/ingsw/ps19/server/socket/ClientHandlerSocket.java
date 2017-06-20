@@ -52,6 +52,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	public void sendCommand(ServerToClientCommand command) throws IOException {
 		outSocket.writeObject(command);
 		outSocket.flush();
+		outSocket.reset();
 	}
 
 	@Override
@@ -97,6 +98,10 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
+				
+				if(command instanceof ChosenLeaderCardCommand)
+					System.out.println("clhandsock ho ricevuto chosenleadercard");
+				
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
