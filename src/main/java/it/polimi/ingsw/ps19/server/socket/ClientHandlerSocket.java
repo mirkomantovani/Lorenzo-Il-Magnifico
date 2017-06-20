@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
@@ -101,7 +102,8 @@ public class ClientHandlerSocket extends ClientHandler {
 				
 				if(command instanceof ChosenLeaderCardCommand)
 					System.out.println("clhandsock ho ricevuto chosenleadercard");
-				
+				if(command instanceof PlaceIntoMarketCommand)
+					System.out.println("clhandsock ha ricevuto un market command");
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();

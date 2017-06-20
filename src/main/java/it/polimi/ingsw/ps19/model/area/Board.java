@@ -4,11 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
@@ -48,25 +47,22 @@ public class Board implements Serializable {
 	private Deck<? extends DevelopmentCard> ventureCards;
 	
 	private int numberOfPlayers;
-	private int blackDice;
-	private int whiteDice;
-	private int orangeDice;
 	
 	
 	private List<String> playerOrder;
 	
 
-	private Set<Dice> dices;
+	private Map<Color,Dice> dices;
 
 	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
-		dices= new HashSet<Dice>();
+		dices= new EnumMap<Color,Dice>(Color.class);
 		
-		dices.add(Dice.BLACK_DICE);
-		dices.add(Dice.ORANGE_DICE);
-		dices.add(Dice.WHITE_DICE);
+		dices.put(Dice.BLACK_DICE.getColor(), Dice.BLACK_DICE);
+		dices.put(Dice.ORANGE_DICE.getColor(),Dice.ORANGE_DICE);
+		dices.put(Dice.WHITE_DICE.getColor(),Dice.WHITE_DICE);
 		
 		towers = new HashMap<>();
 		
@@ -97,9 +93,6 @@ public class Board implements Serializable {
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
 		
-		 blackDice = Dice.BLACK_DICE.getUpperFaceValue();
-		 whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
-		 orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
 		
 		this.numberOfPlayers = numberOfPlayers;
 		
@@ -180,11 +173,7 @@ public class Board implements Serializable {
 	public void rollDices() {
 		for(int i=0;i<Dice.values().length;i++)
 		Dice.values()[i].roll();
-		
-		blackDice = Dice.BLACK_DICE.getUpperFaceValue();
-		whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
-		orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
-
+	
 	}
 
 	@Override
@@ -215,14 +204,9 @@ public class Board implements Serializable {
 		}
 		builder.append("\n The dices are: \n");
 
-		
-			builder.append("Black dice, with a value of " + blackDice);
-			builder.append("\n");
-			builder.append("White dice, with a value of " + whiteDice);
-			builder.append("\n");
-			builder.append("Orange dice, with a value of " + orangeDice);
-			builder.append("\n");
-		
+		for(Dice d : dices.values()){
+			builder.append(d.getColor().toString() + " dice, with an action value of " + d.getUpperFaceValue() + "\n");
+		}
 
 		return builder.toString();
 	}

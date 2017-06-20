@@ -169,7 +169,7 @@ public class Player implements Serializable {
 
 		string.append("\nFamily members:\n");
 		for(FamilyMember mem : this.getFamilyMembers().values()){
-			string.append(mem.toString());
+			string.append(mem.toString() + "\n");
 		}
 		
 		if(!leaderCards.isEmpty()){

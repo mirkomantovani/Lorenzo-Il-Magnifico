@@ -41,7 +41,6 @@ public class Tower implements Serializable {
 			
 			ResourceChest r;
 
-			
 			for(int i = 0; i < deck.length() / 6; i++){
 				r = new ResourceChest();
 				r.addResource(bonuses.get(i));
@@ -98,8 +97,8 @@ public class Tower implements Serializable {
 				string.append(" \n" + i + " floor: the Dice value required is " +
 					this.getFloor(i).getActionSpace().getActionValueRequired()
 						+ ".\nYou can take the card : "  + 
-				 this.getFloor(0).getCard().toString());
-					}
+				 this.getFloor(i).getCard().toString());
+					} else string.append("\n" + i + "floor: ");
 				}
 		return string.toString();
 	}

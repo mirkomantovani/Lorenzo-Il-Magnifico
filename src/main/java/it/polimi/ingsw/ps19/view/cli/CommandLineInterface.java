@@ -224,14 +224,14 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case "1": 
 			takeCardParams(takecard);
 			break;
-		case "2":	
+		case "3":	
 			print("Select market slot:");
 			print("1 - First marketplace slot");
 			print("2 - Second marketplace slot ");
 			print(".. And so on ..");
 			readerState = ClientConstants.SEND_MARKET_SLOT;
 			break;
-		case "3":
+		case "2":
 			gameController.notifyCouncilPalace(actionConstructor);
 			break;
 		case "4":
