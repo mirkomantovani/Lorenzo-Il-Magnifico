@@ -10,8 +10,8 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.ClientHandler;
-import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
+import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
 public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientHandlerInterface{

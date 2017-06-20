@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.deck;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import it.polimi.ingsw.ps19.Period;
@@ -9,8 +10,12 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
  * @author Mirko
  *
  */
-public abstract class Deck<T extends DevelopmentCard> {
+public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1517970109429683372L;
 	protected T[] cards;
 
 	/**

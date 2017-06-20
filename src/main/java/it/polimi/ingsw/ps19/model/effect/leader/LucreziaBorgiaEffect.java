@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class LucreziaBorgiaEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9063070050082460745L;
+
 	@Override
 	public void applyEffect(Player p) {
 		for(FamilyMember member : p.getFamilyMembers().values()){

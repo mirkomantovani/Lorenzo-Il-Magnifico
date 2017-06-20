@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps19.view.UserInterfaceFactory;
 /**
  * @author matteo
  * 
- * this is the client, it should have a main to ask the user which 
+1 * this is the client, it should have a main to ask the user which 
  * connection and which UI he wants to use, and to set up the choice
  *
  */
@@ -37,13 +37,19 @@ public class ClientLauncher {
 		
 		
 		
-		System.out.println("Choose user interface: 1 - Command Line Interface,\n2 - Graphic User Interface");
+		System.out.println("Choose user interface: \n1 - Command Line Interface\n2 - Graphic User Interface");
+		
 		
 		choice = i.nextInt();
 		
-		userInterface = UserInterfaceFactory.getUserInterface(choice);
+		controller = new ClientController(networkInterface);
+		
+		userInterface = UserInterfaceFactory.getUserInterface(choice, controller);
 		
 		handler = new ClientCommandHandler(userInterface,networkInterface);
+		
+		controller.setUserInterface(userInterface);
+		controller.setCommandHandler(handler);
 		
 		try {
 			System.out.println("I'm trying to connect");

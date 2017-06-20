@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps19.model.card.CardType;
  */
 public class RaiseValueWithDiscountEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6683191125876080358L;
 	private int raiseAmount;
 	private CardType cardType;
 	private boolean buildingCardsBonus;

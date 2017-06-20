@@ -6,6 +6,11 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class Stone extends Resource{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4520009044956001937L;
+
 	public Stone(int amount) {
 		super(ResourceType.STONE, amount);
 	}

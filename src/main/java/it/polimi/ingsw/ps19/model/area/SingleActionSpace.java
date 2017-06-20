@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 public class SingleActionSpace extends ActionSpace{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9069295031617624276L;
 	private FamilyMember familyMember;
 	
 	public SingleActionSpace(int actionValueRequired, Effect effect) {
@@ -55,5 +59,17 @@ public class SingleActionSpace extends ActionSpace{
 	public boolean isOccupable(FamilyMember familyMember) {
 		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("The area is occupied by the ");
+		builder.append(familyMember.toString());
+		builder.append(" family member of the ");
+		builder.append(familyMember.getPlayer().getColor());
+		builder.append(" player");
+		return builder.toString();
+	}
+	
 	
 }

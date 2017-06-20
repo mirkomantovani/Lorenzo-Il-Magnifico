@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class TakeCardEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7178424807692191463L;
 	private CardType cardType;
 	private int cardValue;
 	private ResourceChest discountChest;

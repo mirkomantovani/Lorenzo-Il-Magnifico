@@ -8,12 +8,15 @@ import java.net.Socket;
 import it.polimi.ingsw.ps19.command.toclient.CloseClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
-import it.polimi.ingsw.ps19.server.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
+import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
@@ -49,6 +52,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	public void sendCommand(ServerToClientCommand command) throws IOException {
 		outSocket.writeObject(command);
 		outSocket.flush();
+		outSocket.reset();
 	}
 
 	@Override
@@ -74,7 +78,6 @@ public class ClientHandlerSocket extends ClientHandler {
 		return false;
 	}
 
-	
 	public void close() {
 		if (!closed) {
 			try {
@@ -86,7 +89,7 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		ClientToServerCommand command;
@@ -95,6 +98,10 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
+				
+				if(command instanceof ChosenLeaderCardCommand)
+					System.out.println("clhandsock ho ricevuto chosenleadercard");
+				
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
@@ -102,9 +109,20 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
-			else if (matchObserver != null && matchObserver.isAllowed(command, player)) {
+			
+			//commands that can be sent in an asyncronous way from the clients and are always valid
+			//and managed by the ServerCommandHandler
+			else if(command instanceof SendCredentialsCommand || 
+					command instanceof ChosenLeaderCardCommand ||
+					command instanceof ChatMessageClientCommand)
 				commandHandler.notifyNewCommand(command);
-			} else if (!matchObserver.isAllowed(command, player) || matchObserver == null) {
+			//commands that need a check, if they are from the current player they are allowed
+			else if (matchObserver != null && matchObserver.isAllowed(player)) {
+
+				commandHandler.notifyNewCommand(command);
+//				notifyCommand(command);
+
+			} else if (!matchObserver.isAllowed(player) || matchObserver == null) {
 				try {
 					sendCommand(new InvalidCommand());
 				} catch (IOException e) {
@@ -116,15 +134,15 @@ public class ClientHandlerSocket extends ClientHandler {
 	}
 
 
+
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
-		this.matchObserver=matchObserver;
+		this.matchObserver = matchObserver;
 	}
-	
 
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
-		this.commandHandler = commandHandler;		
+		this.commandHandler = commandHandler;
 	}
 
 }

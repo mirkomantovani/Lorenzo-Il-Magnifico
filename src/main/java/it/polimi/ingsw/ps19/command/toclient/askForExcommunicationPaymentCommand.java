@@ -1,7 +1,6 @@
-package it.polimi.ingsw.ps19.command.toserver;
+package it.polimi.ingsw.ps19.command.toclient;
 
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
-import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 
 /**
  * @author matteo
@@ -9,7 +8,7 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
  * wants to pay to prevent excommunication. 
  *
  */
-public class SolveExcommunicationCommand extends ServerToClientCommand{
+public class askForExcommunicationPaymentCommand extends ServerToClientCommand{
 
 	/**
 	 * 
@@ -18,13 +17,17 @@ public class SolveExcommunicationCommand extends ServerToClientCommand{
 	
 	private String excommunicationEffect;
 	
-	public SolveExcommunicationCommand(String excommunicationEffect){
+	public askForExcommunicationPaymentCommand(String excommunicationEffect){
 		this.excommunicationEffect = excommunicationEffect;
 	}
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
 		clientCommandHandler.applyCommand(this);
+	}
+
+	public String getExcommunicationEffect() {
+		return excommunicationEffect;
 	}
 	
 	

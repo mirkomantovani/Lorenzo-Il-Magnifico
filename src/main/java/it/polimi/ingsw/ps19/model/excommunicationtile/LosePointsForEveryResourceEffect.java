@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  */
 public class LosePointsForEveryResourceEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3172886284056207322L;
 	private VictoryPoint victoryPoint;
 	public LosePointsForEveryResourceEffect(VictoryPoint victoryPoint) {
 		this.victoryPoint = victoryPoint;
@@ -27,5 +31,11 @@ public class LosePointsForEveryResourceEffect extends Effect {
 
 	}
 
+	
+	@Override
+	public String toString() {
+		return "You lose "+victoryPoint+" for every resource of"
+				+ " type: wood, stone, servants or coin you have at the end of the game";
+	}
 
 }

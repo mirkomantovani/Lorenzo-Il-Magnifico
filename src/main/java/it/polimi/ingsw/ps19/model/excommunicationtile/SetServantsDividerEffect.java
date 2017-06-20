@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SetServantsDividerEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6964246372125181142L;
 	private int divider;
 	
 	public SetServantsDividerEffect(int divider) {
@@ -22,5 +26,12 @@ public class SetServantsDividerEffect extends Effect {
 		player.getBonuses().setServantsDivider(divider);
 	
 	}
+
+	@Override
+	public String toString() {
+		return "You have to spend 2 servants to raise the value of your action of 1";
+	}
+	
+	
 
 }

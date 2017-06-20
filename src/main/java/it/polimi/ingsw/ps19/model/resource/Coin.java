@@ -7,6 +7,11 @@ package it.polimi.ingsw.ps19.model.resource;
 public class Coin extends Resource {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4990887197340403545L;
+
 	public Coin(int amount) {
 		super(ResourceType.COIN, amount);
 	}

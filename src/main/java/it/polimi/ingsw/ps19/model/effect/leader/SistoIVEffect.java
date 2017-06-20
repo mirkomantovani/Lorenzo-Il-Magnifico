@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class SistoIVEffect extends Effect{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3980112957279298700L;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

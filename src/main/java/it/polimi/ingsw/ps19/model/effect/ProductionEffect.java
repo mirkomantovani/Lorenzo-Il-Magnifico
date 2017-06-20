@@ -14,6 +14,10 @@ public class ProductionEffect extends Effect{
 
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4899398635817616168L;
+	/**
 	 * actualEffect is the the effect to be applied when the production on the card is activated.
 	 * actualEffect at runtime will have only three possible dynamic types: ResourceExchangeEffect, InstantResourceEffect
 	 * or ForEachCardTypeEffect

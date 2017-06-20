@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class FilippoBrunelleschiEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 770128159487460222L;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

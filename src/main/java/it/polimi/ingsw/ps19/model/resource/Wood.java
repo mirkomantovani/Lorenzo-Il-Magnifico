@@ -3,6 +3,11 @@ package it.polimi.ingsw.ps19.model.resource;
 public class Wood extends Resource {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5688728673691418715L;
+
 	public Wood(int amount) {
 		super(ResourceType.WOOD, amount);
 	}

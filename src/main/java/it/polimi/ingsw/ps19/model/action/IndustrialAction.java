@@ -62,6 +62,7 @@ public class IndustrialAction extends Action {
 		for(DevelopmentCard card : industrialArea.getPlayerCards(this.player)){
 			if(isApplicable(card))
 				card.getPermanentEffect().applyEffect(this.player);
+				//TODO The familyMember that was placed should be removed from the available familyMembers for the player
 			else
 				System.out.println("Not applicable!");
 		}

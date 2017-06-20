@@ -1,85 +1,158 @@
 package it.polimi.ingsw.ps19.client;
 
 
-import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import java.util.ArrayList;
+
+import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
-import it.polimi.ingsw.ps19.model.card.Card;
+import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
+import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
+import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
+import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
+import it.polimi.ingsw.ps19.view.InputObserver;
 import it.polimi.ingsw.ps19.view.UserInterface;
 /**
  * @author matteo
  *
  *  this is the game controller of the MVC pattern
  */
-public class ClientController {
+public class ClientController implements InputObserver{
+
+	private UserInterface userInterface;
+	private NetworkInterface networkInterface;
+	private ClientCommandHandler commandHandler;
+	private String playerColor;
 	
-//	
-//	private UserInterface userInterface;
-//	private NetworkInterface networkInterface;
-//	private ClientCommandHandler commandHandler;
-//
-//	public ClientController(NetworkInterface networkInterface) {
-//		this.networkInterface = networkInterface;
-//	}
-//
-//	public void setCommandHandler(ClientCommandHandler handler) {
-//		this.commandHandler = handler;
-//	}
-//
-//	public void setUserInterface(UserInterface userInterface) {
-//		this.userInterface = userInterface;
-//	}
-//
-//	@Override
-//	public void notify(Coordinates coord) {
-//		sendCommand(new CommandSendCoordinates(coord));
-//	}
-//
-//	@Override
-//	public void notify(Card card) {
-//		sendCommand(new CommandCard(card));
-//	}
-//
-//	@Override
-//	public void notifyMove() {
-//		sendCommand(new CommandMove());
-//	}
-//
-//	@Override
-//	public void notifyAttack() {
-//		sendCommand(new CommandAttack());
-//	}
-//
-//	@Override
-//	public void notifyPassTurn() {
-//		sendCommand(new CommandEndTurn());
-//	}
-//
-//	@Override
-//	public void notifyDrawCard() {
-//		sendCommand(new CommandSolveSector());
-//	}
-//
-//	@Override
-//	public void notifyDiscardItem() {
-//		sendCommand(new CommandDiscardItem());
-//	}
-//
-//	private void sendCommand(ClientToServerCommand command) {
-//		try {
-//			networkInterface.sendCommand(command);
-//		} catch (Exception e) {
-//		
-//			 networkInterface.closeConnection();
-//		}
-//	}
-//
-//	// THERE WILL BE A LOT OF NOTIFIES FOR EACH COMMAND
-//	@Override
-//	public void notify(int coordinates) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	
+	public ClientController(NetworkInterface networkInterface) {
+		this.networkInterface = networkInterface;
+	}
+	
+
+	
+	private void sendCommand(ClientToServerCommand command){
+		try {
+			networkInterface.sendCommand(command);
+			
+			System.out.println("clientcontro: invio comando al server");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public void notifyChosenLeaderCard(String leaderCardName) {
+		sendCommand(new ChosenLeaderCardCommand(leaderCardName, playerColor));
+	}
+	
+	@Override
+	public void notifyMove(String move){
+		sendCommand(new PlayerMoveCommand(move));
+	}
+	
+	@Override
+	public void notifyChosenPrivileges(String choices){
+		char[] charArray = choices.toCharArray();
+		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
+		for(int i = 0; i<charArray.length; i+=2){
+			if(Character.getNumericValue(charArray[i]) != -1)
+				commandConstructor.add(Character.getNumericValue(charArray[i]));
+			else{
+				userInterface.invalidInput();
+				notifyInvalidInput();
+				return;
+			}
+		}
+		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+	}
+
+	
+
+	public void setCommandHandler(ClientCommandHandler handler) {
+		this.commandHandler = handler;
+	}
+
+	public void setUserInterface(UserInterface userInterface) {
+		this.userInterface = userInterface;
+	}
+
+
+
+	@Override
+	public void notifyInvalidInput() {
+		sendCommand(new InvalidInputCommand());		
+	}
+
+
+
+	@Override
+	public void notifyCouncilPalace(ArrayList<String> actionConstructor) {
+		sendCommand(new PlaceIntoCouncilPalaceCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1))));
+	}
+
+
+
+	@Override
+	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
+		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(1)), CardType.values()[Integer.parseInt(actionConstructor.get(3))-1]);
+		sendCommand(takeCardCommand);
+		System.out.println("clientcontroller: sending takecard comand");
+	}
+
+
+
+	@Override
+	public void notifyMarket(ArrayList<String> actionConstructor) {
+		PlaceIntoMarketCommand placeIntoMarketCommand = new PlaceIntoMarketCommand(actionConstructor.get(0), actionConstructor.get(3), Integer.parseInt(actionConstructor.get(1)));
+		sendCommand(placeIntoMarketCommand);
+	}
+
+
+
+	@Override
+	public void notifyHarvest(ArrayList<String> actionConstructor) {
+		HarvestCommand harvestCommand = new HarvestCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
+		sendCommand(harvestCommand);
+	}
+
+
+
+	@Override
+	public void notifyProduction(ArrayList<String> actionConstructor) {
+		ProductionCommand productionCommand = new ProductionCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
+		sendCommand(productionCommand);
+	}
+
+
+
+	@Override
+	public void notifyDiscardedLeaderCard(String discardedLeaderCard) {
+		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));
+		
+	}
+
+
+
+	public void setPlayerColor(String color) {
+		this.playerColor=color;
+	}
+
+
+
+	@Override
+	public void notifyCredentials(ArrayList<String> actionConstructor) {
+		sendCommand(new SendCredentialsCommand(actionConstructor.get(0),actionConstructor.get(1), playerColor));
+	}
+	
+
 
 }

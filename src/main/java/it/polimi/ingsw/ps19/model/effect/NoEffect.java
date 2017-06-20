@@ -6,6 +6,11 @@ public class NoEffect extends Effect {
 	
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7758404621897411258L;
+
 	@Override
 	public void applyEffect(Player player) {
 

@@ -16,6 +16,11 @@ public class BuildingDeck extends Deck<BuildingCard> {
 	
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 626392870621207325L;
+
+	/**
 	 * Instantiates a new building deck.
 	 *
 	 * @param filePath the file path

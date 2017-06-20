@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class CesareBorgiaEffect extends Effect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1765669019505493547L;
+
 	@Override
 	public void applyEffect(Player p) {
 		p.getBonuses().setNoMilitaryPointsRequiredForTerritories(true);

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.area;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,13 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author matteo
  *
  */
-public class Tower {
+public class Tower implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5976389942566908672L;
+
 	private List<Floor> floors;
 
 	private CardType cardType;
@@ -48,11 +54,13 @@ public class Tower {
 			
 	} 
  	
+ 	
+ 
  	/**
  	 * This method places one Card in each floor, starting by the card currently on the top of it.
  	 * 
  	 */
- 	public void setCards(){
+ 	public void changeCards(){
  		for(int i=0; i < deck.length()/6; i++){
  			Floor floor = new Floor(deck.getCard(currentCard),this,0,null);
  			floors.set(i,floor);
@@ -88,13 +96,13 @@ public class Tower {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append( this.cardType.toString().toLowerCase() + " tower : "
-				+ " \n\t On the first floor the Dice value required is 1, and you can take the card : "  + 
-				 this.getFloor(0).getCard().toString() + "\n\t On the second floor the Dice value required is 3, "
+		string.append( this.cardType.toString().toUpperCase() + " tower : "
+				+ " \n On the first floor the Dice value required is 1, and you can take the card : "  + 
+				 this.getFloor(0).getCard().toString() + "\n On the second floor the Dice value required is 3, "
 				 		+ "and you can take the card " + this.getFloor(1).getCard().toString() + 
-				 		"\n\t On the second floor the Dice value required is 5, "
+				 		"\n On the second floor the Dice value required is 5, "
 				 		+ "and you can take the card" + this.getFloor(2).getCard().toString() + 
-				 		"\n\t On the second floor the Dice value required is 7, "
+				 		"\n On the second floor the Dice value required is 7, "
 				 		+ "and you can take the card" + this.getFloor(3).getCard().toString());
 		return string.toString();
 	}

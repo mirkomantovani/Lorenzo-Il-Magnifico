@@ -1,5 +1,15 @@
 package it.polimi.ingsw.ps19.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.PersonalBonusTile;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+
 /**
  * @author Mirko
  *
@@ -7,29 +17,60 @@ package it.polimi.ingsw.ps19.view;
 public interface UserInterface {
 
 	
-	void initializeMatch();
+	public void startDraft(ArrayList<LeaderCard> leaderCards);
 	
-	void initializeTurn();
+	public void initializeMatch();
 	
-	void startTurn();
+	public void initializeTurn(Period period, int turn);
 	
-	void commandNotValid();
+	public void startTurn();
 	
-	void playerStatusChange();
+	public void commandNotValid();
+	
+	public void playerStatusChange(Player p);
 	
 	/**
 	 * Notification of a generic player move
 	 */
-	void playerMove();
+	public void playerMove();
 	
 	/**
 	 * It's <player> turn!
 	 */
-	void playerTurn();
+	public void playerTurn();
 	
-	void win();
+	public void win();
 	
-	void lose();
+	public void lose();
 
-	void AskPrivilegeChoice(int numberOfPrivilege);
+	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources);
+
+	public void askMove();
+	
+	public void invalidInput();
+	
+	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles);
+	
+	public void displayOpponentsStatus(Player player);
+	
+	public void assignColor(String color);
+
+	public void refreshBoard(Board board);
+
+	public void notApplicableAction();
+
+	public void notifyExcommunication();
+
+	public void newChatMessage(String message);
+
+	public void askNameAndPassword();
+
+	public void askForProductionExchangeEffect(List<String[]> choices);
+
+	public void notifyRoundTimerExpired();
+
+	public void askForExcommunicationPayment(String excommunicationEffect);
+
+	public void opponentStatusChanged(Player maskedPlayer);
+
 }

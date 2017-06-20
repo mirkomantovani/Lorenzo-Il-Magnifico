@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 public class MultipleActionSpace extends ActionSpace {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3421639191735530503L;
 	protected ArrayList<FamilyMember> members;
 	
 	public MultipleActionSpace(int actionValueRequired, Effect effect) {
@@ -84,6 +88,21 @@ public class MultipleActionSpace extends ActionSpace {
 	public void setMembers(ArrayList<FamilyMember> members) {
 		this.members = members;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("In this space there are these familiars: \n");
+		for(FamilyMember f : members){
+		builder.append(f.toString());
+		builder.append("familiar of the ");
+		builder.append(f.getPlayer().getColor());
+		builder.append(" player ");
+		}
+		return builder.toString();
+	}
+	
+	
 	
 	
 

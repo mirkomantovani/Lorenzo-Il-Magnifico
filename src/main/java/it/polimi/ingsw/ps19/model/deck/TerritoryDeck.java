@@ -13,6 +13,11 @@ public class TerritoryDeck extends Deck<TerritoryCard> {
 
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5081732306033008553L;
+
+	/**
 	 * Instantiates a new territory deck.
 	 *
 	 * @param filePath

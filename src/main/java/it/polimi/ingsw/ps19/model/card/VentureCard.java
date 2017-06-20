@@ -17,6 +17,11 @@ public class VentureCard extends DevelopmentCard {
 	
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3369173763705272528L;
+
+	/**
 	 * Instantiates a new venture card.
 	 *
 	 * @param id the id

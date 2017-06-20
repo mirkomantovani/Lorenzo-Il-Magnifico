@@ -1,20 +1,30 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 
 /**
  * @author matteo
  *
  */
-public class LeaderDeck  {
+public class LeaderDeck implements Serializable  {
 	
-	LeaderCard[] cards;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6540351317616183197L;
+	private LeaderCard[] cards;
 	
-	public LeaderDeck(String filePath, int deckLength) throws IOException{
-		cards = DeckCreator.createLeaderCardDeck(filePath, deckLength);
+	public LeaderDeck() throws IOException{
+		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
+		System.out.println("leaderdeck: creato deck tramite deck creator");
 	}
 	
 	public void shuffleDeck() {
@@ -54,6 +64,37 @@ public class LeaderDeck  {
 //		System.out.println(this.cards[i]);
 //		this.cards[i];
 		return this.cards[i];
+	}
+	
+	public LeaderCard getCard(String name){
+		System.out.println("leaderdeck: getcard");
+		for(LeaderCard c : this.cards){
+			System.out.println("leaderdeck: cardname: "+c.getName()+"card nel deck:"+name);
+			if(c.getName().equals(name)){
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<ArrayList<LeaderCard>> getStartingLeaderSets(int numberOfPlayers){
+		this.shuffleDeck();
+		int a=1;
+		int i=0;
+	
+		List<ArrayList<LeaderCard>> box = new ArrayList<ArrayList<LeaderCard>>();
+		for(int j = 0; j<numberOfPlayers; j++){
+			List<LeaderCard> cards = new ArrayList<LeaderCard>();
+			for(; i < 4*a; i++){
+				cards.add(this.getCard(i));
+			}
+			box.add((ArrayList<LeaderCard>) cards);
+			a++;
+		}
+		
+		System.out.println("dio caneeeee"+box.get(0).get(0).toString());
+		
+		return (ArrayList<ArrayList<LeaderCard>>) box;
 	}
 
 }

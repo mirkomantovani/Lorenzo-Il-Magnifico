@@ -6,6 +6,11 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class FaithPoint extends Resource{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5060499443757488209L;
+
 	public FaithPoint(int amount){
 		super(ResourceType.FAITHPOINT,amount);
 		

@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  */
 public class ColoredFamiliarsVariationEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3421157855376061112L;
 	private int variation;
 	
 	public ColoredFamiliarsVariationEffect(int variation){
@@ -32,6 +36,11 @@ public class ColoredFamiliarsVariationEffect extends Effect{
 		
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Your colored family members' action variation is decreased by"+variation;
+	}
 	
 
 }

@@ -6,6 +6,11 @@ package it.polimi.ingsw.ps19.model.resource;
  */
 public class VictoryPoint extends Resource {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3592945222426163326L;
+
 	public VictoryPoint(int amount) {
 		super(ResourceType.VICTORYPOINT, amount);
 	}

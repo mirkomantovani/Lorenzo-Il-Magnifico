@@ -1,6 +1,6 @@
-package it.polimi.ingsw.ps19.server;
+package it.polimi.ingsw.ps19.server.controller;
 
-
+import it.polimi.ingsw.ps19.server.Server;
 
 public class InitialTimer implements Runnable {
 

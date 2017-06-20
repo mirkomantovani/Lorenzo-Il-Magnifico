@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class CharacterImmediateEffect extends Effect{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -855007535102848648L;
 	Effect immediateEffect;
 	CouncilPrivilegeEffect immediatePrivilegeEffect;
 	

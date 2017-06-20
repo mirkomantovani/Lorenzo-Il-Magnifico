@@ -1,17 +1,21 @@
 package it.polimi.ingsw.ps19.model.resource;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
  * @author Mirko
  *
  */
-public class ResourceChest {
+public class ResourceChest implements Serializable{
 
-	private Map<ResourceType, Resource> resources;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -768950657123798317L;
+	
+	private HashMap<ResourceType, Resource> resources;
 
 	public ResourceChest() {
 		resources = new HashMap<>();
@@ -43,6 +47,15 @@ public class ResourceChest {
 		resources = new HashMap<>();
 		for (int i = 0; i < ResourceType.values().length; i++) {
 			resources.put(ResourceType.values()[i], ResourceFactory.getResource(ResourceType.values()[i], res[i]));
+		}
+	}
+
+	public ResourceChest(ResourceChest InitialChest) {
+		resources = new HashMap<>();
+		for (int i = 0; i < ResourceType.values().length; i++) {
+			resources.put(ResourceType.values()[i], ResourceFactory.getResource
+					(ResourceType.values()[i],InitialChest.getResourceInChest
+							(ResourceType.values()[i]).getAmount()));
 		}
 	}
 

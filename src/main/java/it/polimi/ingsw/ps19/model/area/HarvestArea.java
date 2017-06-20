@@ -15,6 +15,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class HarvestArea extends IndustrialArea{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 813593501545744521L;
 	Effect personalEffect;
 	
 	public HarvestArea(){
@@ -31,4 +35,10 @@ public class HarvestArea extends IndustrialArea{
 		return player.getDeckOfType(CardType.TERRITORY);
 	}
 	
+	
+	public String toString(){
+		return "-------------------- The harvest area --------------------" +
+				super.toString();
+	}
+
 }

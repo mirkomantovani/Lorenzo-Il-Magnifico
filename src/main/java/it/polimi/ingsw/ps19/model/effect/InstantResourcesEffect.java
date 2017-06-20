@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class InstantResourcesEffect extends Effect {
 	   
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6430388980538173536L;
 	private ResourceChest effectResourceChest;	
 	/**
 	 * class constructor

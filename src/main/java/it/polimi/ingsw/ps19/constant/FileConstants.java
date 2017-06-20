@@ -18,7 +18,7 @@ public class FileConstants {
 	public final static String TERRITORYCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforterritory.txt";
 	public final static String TERRITORYCARD_PLAYER_REQUIREMENTS = "src/main/resources/files/fileplayerboardrequirementsforterritory.txt";
 	public final static String CHARACTERCARD_PLAYER_BONUSES = "src/main/resources/files/fileplayerboardbonusesforcharacter.txt";
-	public final static String CHURCH_BONUSES = "src/main/resources/files/filefaithpointbonuses.txt";
+	public final static String CHURCH_BONUSES = "src/main/resources/files/fileboardfaithpointbonuses.txt";
 	public final static String PERSONAL_BONUS_TILES = "src/main/resources/files/filepersonalbonustiles.txt";
 	public final static String TERRITORYCARDS = "src/main/resources/files/fileterritorycards.txt";
 	public final static String BUILDINGCARDS  = "src/main/resources/files/filebuildingcards.txt";
@@ -26,5 +26,6 @@ public class FileConstants {
 	public final static String VENTURECARDS = "src/main/resources/files/fileventurecards.txt";
 	public final static String LEADERCARDS = "src/main/resources/files/fileleadercards.txt";
 	public static final String EXCOMMUNICATIONTILES="src/main/resources/files/fileexcommunicationtiles.txt";
-	
+	public static final String PRIVILEGE_RESOURCES  = "src/main/resources/files/fileprivilegeresources.txt";
+	public static final String VICTORYFORMILITARY = "src/main/resources/files/filevictorypointsformilitarypoints.txt";
 }

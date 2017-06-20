@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.effect.MultipleEffect;
 import it.polimi.ingsw.ps19.model.effect.NoEffect;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
@@ -145,7 +146,7 @@ public class BoardInitializer {
 		
 	}
 	
-	public static int[] churchBonuses() throws FileNotFoundException, IOException{
+	public static MilitaryPoint[] churchBonuses() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHURCH_BONUSES));
 		
@@ -160,8 +161,18 @@ public class BoardInitializer {
 			bonuses[i] = Integer.parseInt(reader.readLine());
 			lineRead = reader.readLine();
 		}
+
 		reader.close();
-		return bonuses;
+
+		
+		MilitaryPoint[] military = new MilitaryPoint[15];
+		
+		for(int j = 0; j<bonuses.length; j++){
+			military[j] = new MilitaryPoint(bonuses[j]);
+		}
+		
+		return military;
+
 	}
 	
 	public static ArrayList<Integer> playerBoardBonusesForTerritory() throws FileNotFoundException, IOException{
@@ -244,5 +255,38 @@ public class BoardInitializer {
 		return tiles;
 	}
 	
+	public static ResourceChest[] createPrivilegeResources(int resourcesNumber) throws FileNotFoundException, IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.PRIVILEGE_RESOURCES));
+		ResourceChest[] privilegeResources = new ResourceChest[resourcesNumber];
+		int index = 0;
+		
+		String lineRead = reader.readLine();
+		while(lineRead!=null){
+			Resource rt1 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(lineRead)], Integer.parseInt(reader.readLine()));
+			Resource rt2 = ResourceFactory.getResource(ResourceType.values()[Integer.parseInt(reader.readLine())], Integer.parseInt(reader.readLine()));
+			ResourceChest resourceChest = new ResourceChest();
+			resourceChest.addResource(rt1);
+			resourceChest.addResource(rt2);
+			privilegeResources[index] = resourceChest;
+			index++;
+			lineRead = reader.readLine();
+		}
+		
+		return privilegeResources;
+	}
+	
+	public static void main(String[] args){
+		ResourceChest[] rc = null;
+		try {
+			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i< rc.length; i++){
+			System.out.println(rc[i]);
+		}
+	}
 	
 }

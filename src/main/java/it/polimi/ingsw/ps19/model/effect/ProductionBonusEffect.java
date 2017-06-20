@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps19.Player;
  */
 public class ProductionBonusEffect extends Effect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -546425703104740489L;
 	int value;
 	
 	public ProductionBonusEffect(int value){

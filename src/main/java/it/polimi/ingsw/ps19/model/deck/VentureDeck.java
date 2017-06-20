@@ -15,6 +15,11 @@ public class VentureDeck extends Deck<VentureCard> {
 
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2801964840693027773L;
+
+	/**
 	 * Instantiates a new venture deck.
 	 *
 	 * @param filePath the file path

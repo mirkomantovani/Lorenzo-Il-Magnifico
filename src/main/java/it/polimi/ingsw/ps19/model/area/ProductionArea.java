@@ -14,6 +14,11 @@ import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
  */
 public class ProductionArea extends IndustrialArea{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3586015416509643408L;
+
 	public ProductionArea(){
 		super();
 		//The "MALUS" costant is defined in IndustrialArea
@@ -23,6 +28,10 @@ public class ProductionArea extends IndustrialArea{
 	@Override
 	public List<DevelopmentCard> getPlayerCards(Player player) {
 		return player.getDeckOfType(CardType.BUILDING);
+	}
+	public String toString(){
+		return "-------------------- The production area --------------------" +
+				super.toString();
 	}
 	
 }

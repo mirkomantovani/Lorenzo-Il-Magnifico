@@ -7,5 +7,15 @@ package it.polimi.ingsw.ps19.exception;
  *
  */
 public class NotApplicableException extends Exception {
+	
+	private String notApplicableCode;
+
+	public NotApplicableException(String notApplicableCode) {
+		this.notApplicableCode=notApplicableCode;
+	}
+
+	public String getNotApplicableCode() {
+		return notApplicableCode;
+	}
 
 }

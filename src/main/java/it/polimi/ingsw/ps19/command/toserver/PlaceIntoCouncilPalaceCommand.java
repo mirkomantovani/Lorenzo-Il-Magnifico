@@ -16,10 +16,12 @@ public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 	private static final long serialVersionUID = -364724017878574034L;
 	
 	private String familyMember; //the color
+	private int paidServants;
 	
 	
-	public PlaceIntoCouncilPalaceCommand(String familyMember){
+	public PlaceIntoCouncilPalaceCommand(String familyMember, int paidServants){
 		this.familyMember = familyMember; 
+		this.paidServants = paidServants;
 	}
 	
 	@Override
@@ -30,6 +32,10 @@ public class PlaceIntoCouncilPalaceCommand extends ClientToServerCommand {
 
 	public String getFamilyMember() {
 		return familyMember;
+	}
+
+	public int getPaidServants() {
+		return paidServants;
 	}
 
 
