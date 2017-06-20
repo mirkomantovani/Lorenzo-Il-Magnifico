@@ -42,14 +42,14 @@ public class Bonus implements Serializable {
 		 * If you have a variation for a certain card type whenever you buy a card of that card type
 		 * you instantly sum the cardActionValueVariation to your action value
 		 */
-		private Map<CardType,Integer> cardActionValueVariation; 
+		private HashMap<CardType,Integer> cardActionValueVariation; 
 		 
 		 /**
 		 * First 5 excommunication tiles, whenever you get resources from an action space effect
 		 * or a development card you have to subtract
 		 * Controlled in InstantResourceEffect
 		 */
-		private List<Resource> resourceMalus;   //in instantresource
+		private ArrayList<Resource> resourceMalus;   //in instantresource
 		
 		/**
 		 * Can only be for territory, venture or character, if you have this boolean set to true
@@ -57,7 +57,7 @@ public class Bonus implements Serializable {
 		 * Controlled in controller-Final Points Count?
 		 * 
 		 */
-		private Map<CardType,Boolean> noCardTypeFinalPoints;
+		private HashMap<CardType,Boolean> noCardTypeFinalPoints;
 		
 		/**
 		 * 13th excommunication tile, the effect sets the divider to be different than 1
@@ -103,11 +103,11 @@ public class Bonus implements Serializable {
 		this.cardCostCoinDiscount = cardCostCoinDiscount;
 	}
 
-	public Map<CardType, Integer> getCardActionValueVariation() {
+	public HashMap<CardType, Integer> getCardActionValueVariation() {
 		return cardActionValueVariation;
 	}
 
-	public void setCardActionValueVariation(Map<CardType, Integer> cardActionValueVariation) {
+	public void setCardActionValueVariation(HashMap<CardType, Integer> cardActionValueVariation) {
 		this.cardActionValueVariation = cardActionValueVariation;
 	}
 
@@ -135,11 +135,11 @@ public class Bonus implements Serializable {
 		this.doubleResourcesFromCards = doubleResourcesFromCards;
 	}
 
-	public List<Resource> getResourceMalus() {
+	public ArrayList<Resource> getResourceMalus() {
 		return resourceMalus;
 	}
 
-	public void setResourceMalus(List<Resource> resourceMalus) {
+	public void setResourceMalus(ArrayList<Resource> resourceMalus) {
 		this.resourceMalus = resourceMalus;
 	}
 	

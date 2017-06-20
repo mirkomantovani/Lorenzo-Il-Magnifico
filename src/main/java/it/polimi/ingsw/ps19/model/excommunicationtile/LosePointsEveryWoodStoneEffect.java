@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -33,7 +33,7 @@ public class LosePointsEveryWoodStoneEffect extends Effect {
 	public void applyEffect(Player player) {
 
 		int sum=0;
-		List<DevelopmentCard> deck;
+		ArrayList<DevelopmentCard> deck;
 		deck=player.getDeckOfType(cardType);
 		for(DevelopmentCard card:deck){
 			sum+=card.getCost().getStoneAmount();

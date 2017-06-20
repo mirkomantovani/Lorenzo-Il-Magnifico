@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.action;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
@@ -124,7 +124,7 @@ public class TakeCardAction extends Action {
 	 * @return true if there are no other family members of the specified player in the tower
 	 */
 	private boolean noSamePlayerMembers(Player player) {
-		List<Floor> floors;
+		ArrayList<Floor> floors;
 		floors=this.floor.getTower().getFloors();
 		for(Floor fl : floors){
 			if(fl.getActionSpace().isOccupied()&&fl!=this.floor

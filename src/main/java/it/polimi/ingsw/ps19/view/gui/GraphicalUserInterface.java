@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Container;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,7 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
 
-	private CatchMouseEvent listener;
+
 	
 	@Override
 	public void initializeMatch() {
@@ -76,7 +75,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
+	public void AskPrivilegeChoice(int numberOfPrivilege, ArrayList<ResourceChest> privilegeResources) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -109,7 +108,7 @@ public class GraphicalUserInterface implements UserInterface{
 		
 		for(ImageButton b : buttons){
 		
-			b.getMouseListener().
+	
 	
 			
 				
@@ -182,7 +181,7 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void askForProductionExchangeEffect(List<String[]> choices) {
+	public void askForProductionExchangeEffect(ArrayList<String[]> choices) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -204,5 +203,6 @@ public class GraphicalUserInterface implements UserInterface{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

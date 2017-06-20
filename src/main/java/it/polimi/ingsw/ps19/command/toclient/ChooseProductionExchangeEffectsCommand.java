@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.command.toclient;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
@@ -18,13 +18,14 @@ public class ChooseProductionExchangeEffectsCommand extends ServerToClientComman
 	 */
 	private static final long serialVersionUID = -5781592866678355190L;
 	
-	List<String[]> choices;
+	private ArrayList<String[]> choices;
 	
-	public ChooseProductionExchangeEffectsCommand(List<String[]> choices){
+	public ChooseProductionExchangeEffectsCommand(ArrayList<String[]> choices){
+		this.choices = new ArrayList<String[]>();
 		this.choices=choices;
 	}
 	
-	public List<String[]> getChoices() {
+	public ArrayList<String[]> getChoices() {
 		return choices;
 	}
 

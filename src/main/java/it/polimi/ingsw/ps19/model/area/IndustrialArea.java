@@ -1,11 +1,10 @@
 package it.polimi.ingsw.ps19.model.area;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -37,7 +36,7 @@ public abstract class IndustrialArea implements Serializable{
 		singleSlot = new SingleActionSpace(SLOT_COST, null);
 	}
 	
-	public abstract List<DevelopmentCard> getPlayerCards(Player player);
+	public abstract ArrayList<DevelopmentCard> getPlayerCards(Player player);
 
 	public SingleActionSpace getSingleActionSpace(){
 		return singleSlot;

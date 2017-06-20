@@ -1,13 +1,12 @@
 package it.polimi.ingsw.ps19.model.area;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author Jimmy
@@ -30,7 +29,7 @@ public class HarvestArea extends IndustrialArea{
 	}
 
 	@Override
-	public List<DevelopmentCard> getPlayerCards(Player player) {
+	public ArrayList<DevelopmentCard> getPlayerCards(Player player) {
 			
 		return player.getDeckOfType(CardType.TERRITORY);
 	}

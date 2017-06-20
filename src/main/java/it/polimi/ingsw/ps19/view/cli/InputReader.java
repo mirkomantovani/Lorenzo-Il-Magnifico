@@ -16,7 +16,7 @@ import java.util.List;
 public class InputReader implements Runnable{
 
 	private BufferedReader reader;
-	private List<InputListener> listeners;
+	private ArrayList<InputListener> listeners;
 	private String input;
 
 	

@@ -29,7 +29,7 @@ public class Player implements Serializable {
 	private String color;
 	private HashMap<Color,FamilyMember> familyMembers;
 	private ResourceChest resources;
-	private HashMap<CardType, List<DevelopmentCard>> decks;
+	private HashMap<CardType, ArrayList<DevelopmentCard>> decks;
 	private Bonus bonuses;
 	private transient MatchObserver observer;
 	private int councilPrivilege;
@@ -108,7 +108,7 @@ public class Player implements Serializable {
 	 * 
 	 * 
 	 */
-	public List<DevelopmentCard> getDeckOfType(CardType cardType){
+	public ArrayList<DevelopmentCard> getDeckOfType(CardType cardType){
 		return decks.get(cardType);
 		
 	}
@@ -128,7 +128,7 @@ public class Player implements Serializable {
 	}
 	
 	
-	public Map<Color, FamilyMember> getFamilyMembers() {
+	public HashMap<Color, FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
 	

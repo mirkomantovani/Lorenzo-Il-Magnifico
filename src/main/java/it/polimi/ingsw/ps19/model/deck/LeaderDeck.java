@@ -82,9 +82,9 @@ public class LeaderDeck implements Serializable  {
 		int a=1;
 		int i=0;
 	
-		List<ArrayList<LeaderCard>> box = new ArrayList<ArrayList<LeaderCard>>();
+		ArrayList<ArrayList<LeaderCard>> box = new ArrayList<ArrayList<LeaderCard>>();
 		for(int j = 0; j<numberOfPlayers; j++){
-			List<LeaderCard> cards = new ArrayList<LeaderCard>();
+			ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
 			for(; i < 4*a; i++){
 				cards.add(this.getCard(i));
 			}

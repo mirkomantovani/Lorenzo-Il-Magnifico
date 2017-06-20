@@ -23,7 +23,7 @@ public class Tower implements Serializable {
 	 */
 	private static final long serialVersionUID = 5976389942566908672L;
 
-	private List<Floor> floors;
+	private ArrayList<Floor> floors;
 
 	private CardType cardType;
 	
@@ -83,7 +83,7 @@ public class Tower implements Serializable {
  		return towerCards;
  	}
  	
- 	public List<Floor> getFloors() {
+ 	public ArrayList<Floor> getFloors() {
 		return floors;
 	}
 

@@ -153,7 +153,7 @@ public class Server implements Runnable, ServerInterface {
 
 	private synchronized void createMatch() {
 
-		List<ClientHandler> list = new ArrayList<ClientHandler>();
+		ArrayList<ClientHandler> list = new ArrayList<ClientHandler>();
 		for (ClientHandler c : waitingClients)
 			list.add(c);
 
@@ -204,7 +204,7 @@ public class Server implements Runnable, ServerInterface {
 	 * this method closes every Match created
 	 */
 	private void closeMatches() {
-		List<MatchHandler> matchToClose = new ArrayList<MatchHandler>();
+		ArrayList<MatchHandler> matchToClose = new ArrayList<MatchHandler>();
 		for (MatchHandler m : createdMatches)
 			matchToClose.add(m);
 		for (MatchHandler m : matchToClose)
