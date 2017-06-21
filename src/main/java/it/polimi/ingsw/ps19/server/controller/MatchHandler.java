@@ -53,7 +53,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerCommandHandler commandHandler;
 	private ServerInterface ServerInterface;
 	private Match match;
-	private Thread roundTimer;
+//	private RoundTimer roundTimer;
+	private Thread roundTimerThread;
 	private int leaderResponseCounter = 0;
 	private ArrayList<ArrayList<LeaderCard>> leaderSets;
 	private int cycle = 1;
@@ -217,6 +218,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startRound() {
+		startRoundTimer();
 		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
@@ -322,8 +324,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		roundTimer = new Thread(new RoundTimer(this, timeMillis));
-		roundTimer.start();
+		roundTimerThread = new Thread(new RoundTimer(this, timeMillis));
+		roundTimerThread.start();
 	}
 
 	/**
@@ -429,7 +431,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
-		setNext();
+		startRoundTimer();
 		nextStep();
 	}
 
@@ -437,7 +439,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (roundNumber == match.getPlayers().length * 4) {
 			if (match.getTurn() % 2 == 1)
 				startTurn();
-			else
+			else 
 				startExcommunicationPhase();
 		} else
 			startRound();

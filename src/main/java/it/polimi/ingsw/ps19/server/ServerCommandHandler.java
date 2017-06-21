@@ -76,6 +76,7 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.sendToCurrentPlayer(new AskMoveCommand());
 	}
 		} else 
+			
 			throw new NotApplicableException("");
 		
 		
@@ -97,12 +98,14 @@ public class ServerCommandHandler implements CommandObserver {
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
 //		System.out.println("servercommandhandler: apply takecardcommand");
-		Action action=calculateTakeCardAction(takeCardCommand);
-		System.out.println("servercommandhandler: take card action calculated");
+		
 		
 
 		try {
+			Action action=calculateTakeCardAction(takeCardCommand);
+			System.out.println("servercommandhandler: take card action calculated");
 			handler.applyAction(action);
+			
 		} catch (NotApplicableException e) {
 			
 			System.out.println("takecard not applicable");
@@ -119,15 +122,26 @@ public class ServerCommandHandler implements CommandObserver {
 						match.getCurrentPlayerProductionChoices()));
 	}
 
-	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) {
+	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) throws NotApplicableException {
 		System.out.println("calculating takecardaction");
 		Player player=match.getCurrentPlayer();
 		FamilyMember familyMember=
 				player.getFamilyMember(takeCardCommand.getFamilyMember());
+		
+		if(familyMember==null){
+			throw new NotApplicableException("you don't have that family member");
+		}
+		else{
 		Floor floor=match.getFloor(takeCardCommand.getCardType(),takeCardCommand.getFloor());
 		System.out.println("creating new take card action");
+		System.out.println("vediamo se si blocca qui:");
+		if(familyMember==null)System.out.println("family member null");
+		System.out.println("avanti");
+//		System.out.println("familymember"+familyMember.toString());
+//		System.out.println("familymember"+floor.toString());
 		return new TakeCardAction(familyMember,floor,
 				new Servant(takeCardCommand.getPaidServants()));
+		}
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
