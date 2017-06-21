@@ -66,13 +66,9 @@ public class TakeCardAction extends Action {
 			ResourceChest realCost;
 			if (player.getBonuses().getCardCostCoinDiscount() != 0) {
 
-				try {
-					realCost = (ResourceChest) card.getCost().clone();
+					realCost = (ResourceChest) card.getCost().cloneChest();
 					realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
-				} catch (CloneNotSupportedException e) {
-					e.printStackTrace();
-					realCost = new ResourceChest();
-				}
+				
 			} else {
 				realCost = card.getCost();
 
@@ -116,13 +112,10 @@ public class TakeCardAction extends Action {
 		ResourceChest realCost;
 		if (player.getBonuses().getCardCostCoinDiscount() != 0) {
 
-			try {
-				realCost = (ResourceChest) card.getCost().clone();
+	
+				realCost = (ResourceChest) card.getCost().cloneChest();
 				realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
-				realCost = new ResourceChest();
-			}
+			
 		} else {
 			realCost = card.getCost();
 

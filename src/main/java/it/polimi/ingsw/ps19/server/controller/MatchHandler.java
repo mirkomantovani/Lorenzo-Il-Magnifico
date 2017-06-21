@@ -192,7 +192,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startTurn() {
-		// sendToCurrentPlayer(new StartTurnCommand());
+//		 sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();

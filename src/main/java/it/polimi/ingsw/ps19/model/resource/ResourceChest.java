@@ -177,12 +177,12 @@ public class ResourceChest implements Serializable{
 
 	}
 	
-	
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public ResourceChest cloneChest(){
+		return new ResourceChest(this);
+		
 	}
+
+	
 
 	/**
 	 * This method sums the amount of wood,stone,servants,coins in the chest,
