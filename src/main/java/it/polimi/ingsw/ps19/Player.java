@@ -288,7 +288,7 @@ public class Player implements Serializable {
 	}
 	
 	public void removeFamilyMember(Color color){
-		this.familyMembers.remove(familyMembers.get(color));
+		this.familyMembers.remove(color);
 		this.observer.notifyPlayerStatusChange(this);
 	}
 	public void resetPrivileges() {

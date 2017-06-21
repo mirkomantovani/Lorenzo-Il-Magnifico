@@ -8,15 +8,13 @@ import it.polimi.ingsw.ps19.model.area.CouncilPalace;
 
 public class CouncilPalaceAction extends Action {
 	
-	CouncilPalace councilPalace;
+	private CouncilPalace councilPalace;
 	int paidServants;
-	ArrayList<FamilyMember> memberOrder;
 	
 	public CouncilPalaceAction(FamilyMember familyMember, CouncilPalace councilPalace, int paidServants){
 		
 		super(familyMember);
 		this.councilPalace = councilPalace;
-        memberOrder.add(familyMember);
         this.paidServants = paidServants;
 	}
 

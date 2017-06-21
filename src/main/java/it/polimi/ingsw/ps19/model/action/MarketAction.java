@@ -26,11 +26,11 @@ public class MarketAction extends Action{
 	public void apply() throws NotApplicableException {
 		System.out.println("sono nell'azione");
 	
-		if(this.isApplicable()){
+		if(isApplicable()){
 			System.out.println("sono entrato in isApplicable");
 			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
 			System.out.println("ho applicato l'effetto");
-			this.marketSpot.isOccupied();
+			this.marketSpot.setFamilyMember(familyMember);
 			System.out.println("setto lo slot a occupato");
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
 			System.out.println("tolgo il family usato");
@@ -54,6 +54,7 @@ public class MarketAction extends Action{
 	
 	
 	private boolean canBePlaced(){
+		System.out.println("sono dentro a can be placed");
 		if(!marketSpot.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.marketSpot.getActionValueRequired()){
 			System.out.println("family memeber can't be placed");
 			return false;

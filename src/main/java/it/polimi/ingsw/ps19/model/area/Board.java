@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -52,17 +53,17 @@ public class Board implements Serializable {
 	private List<String> playerOrder;
 	
 
-	private Map<Color,Dice> dices;
+	private Map<Dice, Integer> dices;
 
 	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
-		dices= new EnumMap<Color,Dice>(Color.class);
+		dices = Collections.synchronizedMap(new EnumMap<Dice, Integer>(Dice.class));
 		
-		dices.put(Dice.BLACK_DICE.getColor(), Dice.BLACK_DICE);
-		dices.put(Dice.ORANGE_DICE.getColor(),Dice.ORANGE_DICE);
-		dices.put(Dice.WHITE_DICE.getColor(),Dice.WHITE_DICE);
+		dices.put(Dice.BLACK_DICE, Dice.BLACK_DICE.getUpperFaceValue());
+		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
+		dices.put(Dice.WHITE_DICE,Dice.WHITE_DICE.getUpperFaceValue());
 		
 		towers = new HashMap<>();
 		
@@ -212,10 +213,11 @@ public class Board implements Serializable {
 		}
 		builder.append("\n The dices are: \n");
 
-		for(Dice d : dices.values()){
-			builder.append(d.getColor().toString() + " dice, with an action value of " + d.getUpperFaceValue() + "\n");
-		}
-
+		
+		builder.append(Dice.BLACK_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.BLACK_DICE) + "\n");
+		builder.append(Dice.ORANGE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.ORANGE_DICE) + "\n");
+		builder.append(Dice.WHITE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.WHITE_DICE) + "\n");
+		
 		return builder.toString();
 	}
 	
