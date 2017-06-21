@@ -28,4 +28,6 @@ public interface InputObserver {
 	public void notifyCredentials(ArrayList<String> actionConstructor);
 	
 	public void notifyFinishRound();
+	
+	public void notifyExcommunicationEffectChoice(Boolean string);
 }

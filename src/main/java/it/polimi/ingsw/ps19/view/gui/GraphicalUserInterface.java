@@ -123,12 +123,6 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void notApplicableAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void notifyExcommunication() {
 		// TODO Auto-generated method stub
 		
@@ -191,6 +185,12 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void askFinishRoundOrDiscard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionCommandNotValid(String reason) {
 		// TODO Auto-generated method stub
 		
 	}

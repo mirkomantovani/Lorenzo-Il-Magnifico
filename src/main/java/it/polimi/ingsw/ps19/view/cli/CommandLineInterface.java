@@ -54,11 +54,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void commandNotValid() {
-		printImp("Invalid command");
-	}
-
-	@Override
 	public void playerStatusChange(Player p) {
 		print("This is your status updated :\n");
 		print(p.toString());
@@ -164,6 +159,15 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_PRODUCTION_ACTION_SPACE:
 			actionConstructor.add(input);
 			gameController.notifyProduction(actionConstructor);
+			break;
+		case ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE:
+			if(input.equals("1"))
+				gameController.notifyExcommunicationEffectChoice(true);
+			else if (input.equals("2"))
+				gameController.notifyExcommunicationEffectChoice(false);
+			else{
+				//TODO default case
+			}
 			break;
 		default:
 			print("Command not recognized");
@@ -313,11 +317,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		gameController.setPlayerColor(color);
 	}
 
-	public void notApplicableAction() {
-		print("The action chosen is not applicable, please select another one!");
-		
-	}
-
 	@Override
 	public void notifyExcommunication() {
 		print("God seems very offended by your behaviour, he established your excommunication.");
@@ -359,8 +358,10 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
-		// TODO Auto-generated method stub
-	
+		print("Do you accept the following excommunication effect?");
+		print("1 - Yes, I accept the excommunication");
+		print("2 - No, I want to pay the faith points");
+		readerState = ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE;
 	}
 
 	@Override
@@ -370,7 +371,16 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		print("- type \"discard\" to discard a leader card, get a privilege and end your turn");
 		readerState = ClientConstants.SEND_MOVE;
 	}
-	
-	
+
+	@Override
+	public void commandNotValid() {
+		printImp("Invalid command!");
+	}
+
+	@Override
+	public void actionCommandNotValid(String reason) {
+		print("Your action is invalid!");
+		print(reason);
+	}
 	
 }

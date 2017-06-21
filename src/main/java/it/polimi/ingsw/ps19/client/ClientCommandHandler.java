@@ -41,10 +41,6 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		this.userInterface = ui;
 		this.networkInterface = networkInterface;
 	}
-	
-	public void applyCommand(InvalidActionCommand ActionNotValidCommand) {
-		userInterface.notApplicableAction();
-	}
 
 	public void applyCommand(InvalidCommand invalidCommand) {
 		userInterface.commandNotValid();
@@ -52,7 +48,6 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(StartTurnCommand startTurnCommand) {
-		// TODO Auto-generated method stub
 		userInterface.startTurn();
 		
 	}
@@ -150,7 +145,9 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		userInterface.askFinishRoundOrDiscard();
 	}
 	
-	
+	public void applyCommand(InvalidActionCommand command){
+		userInterface.actionCommandNotValid(command.getInvalidCode());
+	}
 
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	

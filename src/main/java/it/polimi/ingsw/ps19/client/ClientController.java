@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
@@ -160,8 +161,14 @@ public class ClientController implements InputObserver{
 	public void notifyFinishRound() {
 		sendCommand(new FinishRoundCommand());
 	}
-	
-	
 
+
+
+	@Override
+	public void notifyExcommunicationEffectChoice(Boolean choice) {
+		sendCommand(new ChurchSupportCommand(choice));
+	}
+	
+	
 
 }
