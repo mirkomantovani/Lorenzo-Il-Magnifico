@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps19.model.action;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * @author matteo
@@ -27,13 +28,17 @@ public class MarketAction extends Action{
 		System.out.println("sono nell'azione");
 	
 		if(isApplicable()){
-			System.out.println("sono entrato in isApplicable");
+			
 			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
-			System.out.println("ho applicato l'effetto");
+			
 			this.marketSpot.setFamilyMember(familyMember);
-			System.out.println("setto lo slot a occupato");
+			
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
-			System.out.println("tolgo il family usato");
+			
+			if(paidServants > 0){
+				familyMember.getPlayer().subResources(new ResourceChest(0,0,0,paidServants,0,0,0));
+			}
+			
 		} else {
 			System.out.println("sono nella isApplicable false");
 			throw new NotApplicableException("market action non si può fare");
