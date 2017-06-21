@@ -131,11 +131,7 @@ public class ServerCommandHandler implements CommandObserver {
 		else{
 		Floor floor=match.getFloor(takeCardCommand.getCardType(),takeCardCommand.getFloor());
 		System.out.println("creating new take card action");
-		System.out.println("vediamo se si blocca qui:");
-		if(familyMember==null)System.out.println("family member null");
-		System.out.println("avanti");
-//		System.out.println("familymember"+familyMember.toString());
-//		System.out.println("familymember"+floor.toString());
+		
 		return new TakeCardAction(familyMember,floor,
 				new Servant(takeCardCommand.getPaidServants()));
 		}

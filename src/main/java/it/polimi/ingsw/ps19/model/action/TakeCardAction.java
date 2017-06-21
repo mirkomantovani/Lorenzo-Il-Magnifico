@@ -60,10 +60,31 @@ public class TakeCardAction extends Action {
 
 			player.addCard(card);
 			floor.setCard(null); // set to null when the player buys the card
-			player.subResources(card.getCost());
 			// if the player has a discount given by a leader card
 			player.removeFamilyMember(familyMember.getColor());
-			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			
+			ResourceChest realCost;
+			if (player.getBonuses().getCardCostCoinDiscount() != 0) {
+
+				try {
+					realCost = (ResourceChest) card.getCost().clone();
+					realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+					realCost = new ResourceChest();
+				}
+			} else {
+				realCost = card.getCost();
+
+			}
+			
+			if (isSomeoneInTheTower())
+				realCost.addResource(new Coin(3));
+			
+			realCost.addResource(paidServants);
+			
+			player.subResources(realCost);
+			
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			if (player.getBonuses().isDoubleResourcesFromCards())
 				card.getImmediateEffect().applyEffect(familyMember.getPlayer());
