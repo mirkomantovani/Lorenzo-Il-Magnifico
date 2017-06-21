@@ -196,6 +196,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 //			System.out.println("rollo i dadi");
 			match.getBoard().rollDices();
+			match.refreshDicesValueForPlayers();
 			match.addFamilyMembersToPlayers();
 			match.distributeTurnResources();
 			

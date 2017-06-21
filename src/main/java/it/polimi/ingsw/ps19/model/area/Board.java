@@ -59,7 +59,7 @@ public class Board implements Serializable {
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
-		dices = Collections.synchronizedMap(new EnumMap<Dice, Integer>(Dice.class));
+		dices = new EnumMap<Dice, Integer>(Dice.class);
 		
 		dices.put(Dice.BLACK_DICE, Dice.BLACK_DICE.getUpperFaceValue());
 		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
@@ -182,6 +182,11 @@ public class Board implements Serializable {
 	public void rollDices() {
 		for(int i=0;i<Dice.values().length;i++)
 		Dice.values()[i].roll();
+		
+		dices.put(Dice.BLACK_DICE, Dice.BLACK_DICE.getUpperFaceValue());
+		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
+		dices.put(Dice.WHITE_DICE,Dice.WHITE_DICE.getUpperFaceValue());
+		
 	
 	}
 
