@@ -1,0 +1,84 @@
+package it.polimi.ingsw.ps19.view.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import it.polimi.ingsw.ps19.constant.ImagesConstants;
+
+public class MyFrame extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private Dimension screenDimension = new Dimension();
+	private int height;
+	private int width;
+	private int toolBarHeight;
+
+	private Container content;
+//	private GameBoard board;
+//	private PlayerMoves moves;
+//	private GameConsole console;
+	private InitialPanel initialPanel;
+	
+	public MyFrame() {
+		super("Lorenzo Il Magnifico");
+
+		setLayout(new BorderLayout());
+		content = this.getContentPane();
+
+		screenDimension = toolkit.getScreenSize();
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		toolBarHeight = Toolkit.getDefaultToolkit().getScreenInsets(
+				getGraphicsConfiguration()).bottom;
+
+		width = screenDimension.width;
+		height = screenDimension.height - toolBarHeight;
+
+		addInitialPanel(ImagesConstants.INITIAL_IMAGE);
+		pack();
+		setVisible(true);
+		setResizable(false);
+		setLocationRelativeTo(null);
+	}
+
+	private void addInitialPanel(String initialImage) {
+		ImageIcon backgroundImg = new ImageIcon(this.getClass().getResource(
+				initialImage));
+		
+		backgroundImg=backgroundImg.
+		Image a;		
+        Image image= backgroundImg.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		int imageWidth = backgroundImg.getIconWidth();
+		int imgHeight = backgroundImg.getIconHeight();
+		
+		initialPanel = new InitialPanel(backgroundImg);
+		initialPanel.setSize(new Dimension(imageWidth, imgHeight));
+		initialPanel.setPreferredSize(new Dimension(imageWidth, imgHeight));
+		content.add(initialPanel);
+		pack();
+		setVisible(true);
+		setResizable(false);
+		setLocationRelativeTo(null);	
+		
+		Runnable repaintFrame = new Runnable() {
+			@Override
+			public void run(){
+				content.repaint();
+			}
+		};
+		
+		SwingUtilities.invokeLater(repaintFrame);
+	}	
+
+}

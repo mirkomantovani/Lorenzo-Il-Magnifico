@@ -1,11 +1,16 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.constant.ImagesConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -13,6 +18,24 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
 
+	private MyFrame frame;
+//	private String player;
+//	private ClientController gameController;
+	private Image icon;
+	
+	
+	public GraphicalUserInterface(){
+//		this.gameController = gameController;
+//		try {
+//			icon = ImageIO.read(this.getClass().getResource(
+//					ImagesConstants.icona));
+//		} catch (IOException e) {
+//		}
+		frame = new MyFrame();
+//		frame.setIconImage(icon);
+		frame.validate();
+	}
+	
 	@Override
 	public void initializeMatch() {
 		// TODO Auto-generated method stub
