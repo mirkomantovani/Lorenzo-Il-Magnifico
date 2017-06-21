@@ -85,6 +85,8 @@ public class IndustrialAction extends Action {
 			else
 				System.out.println("Not applicable!");
 		}
+		actionSpace.setFamilyMember(familyMember);
+		this.player.removeFamilyMember(familyMember.getColor());
 	}	
 
 }

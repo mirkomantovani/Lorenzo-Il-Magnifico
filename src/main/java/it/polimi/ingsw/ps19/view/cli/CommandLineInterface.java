@@ -138,7 +138,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
 			} else if(input.toLowerCase().equals("end")){
-				
+				gameController.notifyFinishRound();
 			}
 			else
 				moveHandler(input);
