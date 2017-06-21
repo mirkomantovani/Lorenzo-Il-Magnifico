@@ -19,6 +19,6 @@ public class NetworkConstants {
 	
 	public static final int MINPLAYERS = 2;
 	
-	public static final String SERVER_IP_ADDRESS = "82.48.85.132"; 
+	public static final String SERVER_IP_ADDRESS = /*"82.48.85.132"*/ "127.0.0.1";  
 	
 }

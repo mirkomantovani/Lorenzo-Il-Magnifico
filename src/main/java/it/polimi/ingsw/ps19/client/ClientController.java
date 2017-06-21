@@ -66,7 +66,15 @@ public class ClientController implements InputObserver{
 	
 	@Override
 	public void notifyChosenPrivileges(String choices){		
-		checkAndSend(choices);
+		System.out.println("\nCLIENTCONTROLLER: before check and send\n");
+		ArrayList<Integer> commandConstructor = parseString(choices);
+		if(commandConstructor.size() != 0)
+			sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+		else{
+			userInterface.invalidInput();
+			notifyInvalidInput();
+		}
+		System.out.println("\nCLIENTCONTROLLER: after check and send\n");
 	}
 
 	
@@ -165,11 +173,21 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyProductionChoices(String choices) {
-		checkAndSend(choices);
+		ArrayList<Integer> commandConstructor = parseString(choices);
+		if(commandConstructor.size() != 0)
+			sendCommand(new ProductionActivationCommand(commandConstructor));
+		else{
+			userInterface.invalidInput();
+			notifyInvalidInput();
+		}
 	}
 	
 	private ArrayList<Integer> parseString(String choices){
+		System.out.println("\n\n sono nella parseStirng" + choices + "\n\n");
 		char[] charArray = choices.toCharArray();
+		for(int i = 0; i < choices.length(); i++){
+			System.out.println("\n\n" + charArray[i] + "\n\n");
+		}
 		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
 		for(int i = 0; i<charArray.length; i+=2){
 			if(Character.getNumericValue(charArray[i]) != -1)
@@ -183,14 +201,5 @@ public class ClientController implements InputObserver{
 //		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
 	}
 	
-	private void checkAndSend(String choices){
-		ArrayList<Integer> commandConstructor = parseString(choices);
-		if(commandConstructor.size() != 0)
-			sendCommand(new ProductionActivationCommand(parseString(choices)));
-		else{
-			userInterface.invalidInput();
-			notifyInvalidInput();
-		}
-	}
 
 }
