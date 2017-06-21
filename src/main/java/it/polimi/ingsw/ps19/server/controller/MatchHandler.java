@@ -382,6 +382,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		System.out.println("matchhandler: applyaction");
 		action.apply();
 		
+		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
+		
 		if(match.getCurrentPlayer().getCouncilPrivilege()!=0)
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
 		
@@ -390,8 +392,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		// TODO MANDARE comando per scegliere terminare turno o scartare
 		// leadercards
-
-		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
 	}
 

@@ -98,7 +98,7 @@ public class ClientHandlerSocket extends ClientHandler {
 		while (true) {
 			command = null;
 			try {
-				command = (ClientToServerCommand) inSocket.readObject();
+				command = (ClientToServerCommand) inSocket.readUnshared();
 				
 				if(command instanceof ChosenLeaderCardCommand)
 					System.out.println("clhandsock ho ricevuto chosenleadercard");
