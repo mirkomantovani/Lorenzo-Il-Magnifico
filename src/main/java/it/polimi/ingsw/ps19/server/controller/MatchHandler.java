@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
@@ -764,4 +765,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	private void refreshPlayerOrder(){
+		 
+		 ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
+		 
+		 ArrayList<Player> councilPlayers = new ArrayList<Player>();
+		 
+		 for(int i = 0; i < councilMemberList.size(); i++){
+			 councilPlayers.add(councilMemberList.get(i).getPlayer());
+		 }
+		 
+		 for(int i = 0; i<councilPlayers.size(); i++){
+			 for(int j = 0; j<councilPlayers.size();j++){
+				 if(i!=j && councilPlayers.get(i) == councilPlayers.get(j)){
+					 councilPlayers.remove(j);
+				 }
+			 }
+		 }
+		 
+		 match.setPlayers((Player[]) councilPlayers.toArray());
+	}
 }
