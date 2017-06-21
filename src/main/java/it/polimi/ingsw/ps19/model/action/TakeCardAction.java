@@ -141,6 +141,7 @@ public class TakeCardAction extends Action {
 			this.notApplicableCode = "you don't have space in your personal board to take this card";
 			return false;
 		}
+		System.out.println("let's control if can be placed");
 		return this.canBePlaced();
 
 	}

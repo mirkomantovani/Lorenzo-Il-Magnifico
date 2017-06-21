@@ -35,8 +35,8 @@ public class ClientSocketListener implements Runnable{
 
 				observer.notifyNewCommand(command);
 			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				break;
 			}
 		}
 	}

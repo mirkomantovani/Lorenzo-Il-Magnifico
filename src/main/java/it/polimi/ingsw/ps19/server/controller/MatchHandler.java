@@ -196,17 +196,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-
-//			System.out.println("rollo i dadi");
-			match.getBoard().rollDices();
-			match.refreshDicesValueForPlayers();
-			match.addFamilyMembersToPlayers();
-			match.distributeTurnResources();
 			
+			initTurn();
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
-			this.match.getBoard().changeCardInTowers();
+			
 			
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
@@ -216,6 +211,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// createTurnTimer();
 		}
 
+	}
+
+	private void initTurn() {
+		refreshPlayerOrder();
+//		System.out.println("rollo i dadi");
+		match.getBoard().rollDices();
+		match.refreshDicesValueForPlayers();
+		match.addFamilyMembersToPlayers();
+		match.distributeTurnResources();
+		
+		this.match.getBoard().changeCardInTowers();
+		
+		//TODO ripulire il board dai family members 
 	}
 
 	private void startRound() {
