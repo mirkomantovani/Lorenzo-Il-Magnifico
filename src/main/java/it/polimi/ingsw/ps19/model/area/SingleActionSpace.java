@@ -58,7 +58,7 @@ public class SingleActionSpace extends ActionSpace{
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 		System.out.println("sono nella is Occupable");
-		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;
+		return !isOccupied();
 	}
 
 	@Override

@@ -58,9 +58,15 @@ public class ServerCommandHandler implements CommandObserver {
 		return match.getCurrentPlayer();
 	}
 
-	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) {
+	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) throws NotApplicableException {
 		
-		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
+		FamilyMember familyMember = new FamilyMember(null,null);
+		
+		familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
+		
+		System.out.println("questo è il familyMember che deve fare l'azione" + familyMember.toString());
+		
+		if(familyMember!=null){
 		
 	try {
 		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
@@ -69,6 +75,9 @@ public class ServerCommandHandler implements CommandObserver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+		} else 
+			throw new NotApplicableException("");
+		
 		
 	}
 
@@ -91,6 +100,7 @@ public class ServerCommandHandler implements CommandObserver {
 		Action action=calculateTakeCardAction(takeCardCommand);
 		System.out.println("servercommandhandler: take card action calculated");
 		
+
 		try {
 			handler.applyAction(action);
 		} catch (NotApplicableException e) {
