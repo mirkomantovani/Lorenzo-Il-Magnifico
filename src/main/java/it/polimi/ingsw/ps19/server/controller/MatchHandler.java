@@ -228,6 +228,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startRound() {
+		
+		if(roundTimerThread.isAlive())
+			roundTimerThread.interrupt();
+		
 		startRoundTimer();
 		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
@@ -441,7 +445,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
-		startRoundTimer();
 		nextStep();
 	}
 
