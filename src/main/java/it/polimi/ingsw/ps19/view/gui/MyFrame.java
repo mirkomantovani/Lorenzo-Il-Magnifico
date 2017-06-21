@@ -3,19 +3,39 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
 
+/**
+ * @author Mirko
+ *
+ */
 public class MyFrame extends JFrame {
+	
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MyFrame frame = new MyFrame();
+					frame.setVisible(true);
+					
+					frame.removeInitialImage();
+					frame.initializeGameFrame();
+					frame.getGamePanel().addCard();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * 
@@ -28,9 +48,10 @@ public class MyFrame extends JFrame {
 	private int width;
 	private int toolBarHeight;
 	private Image img;
+	private GamePanel gamePanel;
 
 	private Container content;
-//	private GameBoard board;
+	private BoardPanel board;
 //	private PlayerMoves moves;
 //	private GameConsole console;
 	private InitialPanel initialPanel;
@@ -87,6 +108,29 @@ public class MyFrame extends JFrame {
 //		};
 //		
 //		SwingUtilities.invokeLater(repaintFrame);
-	}	
+	}
+
+	public void removeInitialImage() {
+		remove(initialPanel);
+	}
+
+	public void initializeGameFrame() {
+		gamePanel=new GamePanel();
+		setContentPane(gamePanel);
+		
+	}
+
+	public GamePanel getGamePanel() {
+		
+		return gamePanel;
+	}
+
+	
+
+
+	
+	
+	
+	
 
 }
