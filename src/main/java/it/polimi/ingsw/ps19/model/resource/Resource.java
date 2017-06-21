@@ -39,6 +39,9 @@ public abstract class Resource implements Serializable {
 	
 	public void sub(int amount){	
 		this.amount = this.amount - amount;
+		if(this.amount<0)
+			this.amount=0;
+			
 	}
 
 	@Override

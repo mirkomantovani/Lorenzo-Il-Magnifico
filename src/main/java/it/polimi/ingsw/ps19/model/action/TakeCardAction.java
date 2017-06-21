@@ -64,14 +64,9 @@ public class TakeCardAction extends Action {
 			player.removeFamilyMember(familyMember.getColor());
 			
 			ResourceChest realCost;
+			realCost = card.getCost().cloneChest();
 			if (player.getBonuses().getCardCostCoinDiscount() != 0) {
-
-					realCost = (ResourceChest) card.getCost().cloneChest();
 					realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
-				
-			} else {
-				realCost = card.getCost();
-
 			}
 			
 			if (isSomeoneInTheTower())
