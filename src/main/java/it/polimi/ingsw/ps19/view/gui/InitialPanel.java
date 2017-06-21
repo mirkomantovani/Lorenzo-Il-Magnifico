@@ -10,7 +10,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+
+
+/**
+ * @author Mirko
+ *
+ */
 public class InitialPanel extends JPanel {
+	
 
 	
 	private static final long serialVersionUID = 1L;
