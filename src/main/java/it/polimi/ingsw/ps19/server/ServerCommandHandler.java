@@ -66,28 +66,27 @@ public class ServerCommandHandler implements CommandObserver {
 //		System.out.println("questo è il familyMember che deve fare l'azione" + familyMember.toString());
 		
 		
-		if(familyMember!=null){
-		
 	try {
+		if(familyMember ==null){
+			throw new NotApplicableException("You had alredy Used this family member");
+			}
 		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
 				placeIntoMarketCommand.getPaidServants()));
 	} catch (NotApplicableException e) {
 		handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
 		handler.sendToCurrentPlayer(new AskMoveCommand());
 	}
-		} else 
-			
-			throw new NotApplicableException("");
+}
 		
-		
-	}
-
 	
 	
 
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
 		try {
+			if(familyMember ==null){
+				throw new NotApplicableException("You had alredy Used this family member");
+				}
 			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
 					placeIntoCouncilPalaceCommand.getPaidServants()));
 		} catch (NotApplicableException e) {

@@ -177,7 +177,12 @@ public class Match {
 		
 	}
 
+	
 
+
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
 
 	public void incrementTurn() {
 		this.turn++;
