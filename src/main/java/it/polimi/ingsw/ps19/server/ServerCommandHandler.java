@@ -60,11 +60,11 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) throws NotApplicableException {
 		
-		FamilyMember familyMember = new FamilyMember(null,null);
-		
+		FamilyMember familyMember;
 		familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
 		
-		System.out.println("questo è il familyMember che deve fare l'azione" + familyMember.toString());
+//		System.out.println("questo è il familyMember che deve fare l'azione" + familyMember.toString());
+		
 		
 		if(familyMember!=null){
 		

@@ -139,7 +139,6 @@ public class Player implements Serializable {
 	 */
 	public FamilyMember getFamilyMember(String color){
 		return this.familyMembers.get(Color.valueOf(Color.class, color.toUpperCase()));
-		
 	}
 	
 	/**
