@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeMatchCommand;
 import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
+import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
@@ -380,20 +381,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void applyAction(Action action) throws NotApplicableException {
-		System.out.println("\nmatchhandler: applyaction\n");
-		System.out.println("\nMATCHHANDLER, SOLO PROVVISORIO, DO SUBITO UNA CARTA TERRITORIO AL PLAYER\n");
-		getCurrentPlayer().addCard(match.getBoard().getTower(CardType.TERRITORY).getFloor(1).getCard());
-		System.out.println("\nMATCHHANDLER, SOLO PROVVISORIO, HO DATO LA CARTA: "  + getCurrentPlayer().getDeckOfType(CardType.TERRITORY).get(0).toString() + "\n");
 		action.apply();
-		System.out.println("\nMATCHHANDLER: HO FINITO DI APPLICARE LA ACTION\n");
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		
-		if(match.getCurrentPlayer().getCouncilPrivilege()!=0)
+		if(match.getCurrentPlayer().getCouncilPrivilege()!=0){
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
 		
 		match.getCurrentPlayer().resetPrivileges();
 		
+		}
+		else{
 		sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
+		}
+		
 		// TODO MANDARE comando per scegliere terminare turno o scartare
 		// leadercards
 
@@ -729,8 +729,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				resourcesToGive.addChest(rc[choice.get(i)]);
 			}
 			this.getCurrentPlayer().addResources(resourcesToGive);
+			
+			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 
 		}
+		else{
+			sendToCurrentPlayer(new InvalidActionCommand("You modified the code and "
+					+ "tried to get resources from a council privilege which are not valid in the game"));
+			sendToCurrentPlayer(new AskMoveCommand());
+		}
+		
+		
 
 	}
 

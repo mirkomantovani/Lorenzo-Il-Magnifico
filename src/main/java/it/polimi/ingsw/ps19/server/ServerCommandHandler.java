@@ -72,8 +72,8 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
 				placeIntoMarketCommand.getPaidServants()));
 	} catch (NotApplicableException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+		handler.sendToCurrentPlayer(new AskMoveCommand());
 	}
 		} else 
 			throw new NotApplicableException("");
@@ -90,9 +90,9 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
 					placeIntoCouncilPalaceCommand.getPaidServants()));
 		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+			}
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
@@ -226,8 +226,8 @@ public class ServerCommandHandler implements CommandObserver {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
 						match.getBoard().getHarvestArea().getMultipleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
 			}
 		}
 		

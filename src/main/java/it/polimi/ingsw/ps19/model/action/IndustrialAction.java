@@ -6,8 +6,8 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
-import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * @author Jimmy
@@ -49,44 +49,45 @@ public class IndustrialAction extends Action {
 	}
 	
 	public boolean isApplicable(DevelopmentCard card){
-		if(canBePlaced()){
 			System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO CONTROLLANDO LA CARTA: !" + card.toString());
 			System.out.println("action value fm: " + this.familyMember.getActionValue());
 			System.out.println("players bonuses: " + this.getPlayer().getBonuses()
 				.getActivationVariation(card.getCardType()));
 			System.out.println("card activation cost" + card.getActivationCost());
 			return (this.familyMember.getActionValue() + this.getPlayer().getBonuses()
-					.getActivationVariation(card.getCardType()) + paidServants >= card.getActivationCost()); 		
-		}else{
-			System.out.println("INDUSTRIAL ACTION NON E' POSSIBILE METTERE IL GIOCATORE");
-			return false;
-		}
-		
+					.getActivationVariation(card.getCardType()) + paidServants >= card.getActivationCost());
 	}
 
 	private boolean canBePlaced() {
+		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
 		return actionSpace.isOccupable(this.familyMember);
 	}
 
 
 	@Override
 	public void apply() throws NotApplicableException {  
-		System.out.println("\n\nIndustrial action: sto applicando la industrialAction\n\n");
-		if(actionSpace.getEffect()!=null){
-			System.out.println("\n\nNon è null quindi è una action space multipla\n\n");
-			actionSpace.getEffect().applyEffect(player);
-		}
-		for(DevelopmentCard card : industrialArea.getPlayerCards(this.player)){
-			if(isApplicable(card)){
-				System.out.println("\n\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n\n");
-				card.getPermanentEffect().applyEffect(this.player);
-				System.out.println("\n\nINDUSTRIAL ACTION: STO ATTIVANDO LA CARTA: " + card.toString() + "\n\n");			
+		if(canBePlaced()){
+			actionSpace.setFamilyMember(familyMember);
+			this.player.removeFamilyMember(familyMember.getColor());
+			this.player.getResourceChest().subResource(new Servant(paidServants));
+			System.out.println("\nIndustrial action: sto applicando la industrialAction\n");
+			if(actionSpace.getEffect()!=null){
+				System.out.println("\nNon è null quindi è una action space multipla\n");
+				actionSpace.getEffect().applyEffect(player);
 			}
-			else
-				System.out.println("Not applicable!");
+			for(DevelopmentCard card : industrialArea.getPlayerCards(this.player)){
+				if(isApplicable(card)){
+					System.out.println("\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n");
+					card.getPermanentEffect().applyEffect(this.player);
+					System.out.println("\nINDUSTRIAL ACTION: STO ATTIVANDO LA CARTA: " + card.toString() + "\n");			
+				}
+				else
+					System.out.println("CannotActivate card effect");
+			}
+		}else{
+			System.out.println("You cannot put your member here");
+			throw new NotApplicableException("You cannot put your member here!");
 		}
-		actionSpace.setFamilyMember(familyMember);
-		this.player.removeFamilyMember(familyMember.getColor());
 	}	
 
 }
