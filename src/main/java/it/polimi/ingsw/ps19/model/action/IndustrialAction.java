@@ -6,7 +6,9 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
+import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
@@ -88,6 +90,36 @@ public class IndustrialAction extends Action {
 			System.out.println("You cannot put your member here");
 			throw new NotApplicableException("You cannot put your member here!");
 		}
-	}	
-
-}
+	}
+	
+	public void apply(ArrayList<Integer> choices) throws NotApplicableException{
+		if(canBePlaced()){
+			int index = 0;
+			actionSpace.setFamilyMember(familyMember);
+			this.player.removeFamilyMember(familyMember.getColor());
+			this.player.getResourceChest().subResource(new Servant(paidServants));
+			System.out.println("\nIndustrial action CON SCELTA: sto applicando la industrialAction con scelta\n");
+			if(actionSpace.getEffect()!=null){
+				System.out.println("\nNon è null quindi è una action space multipla\n");
+				actionSpace.getEffect().applyEffect(player);
+			}
+			for(DevelopmentCard card : industrialArea.getPlayerCards(this.player)){
+				if(isApplicable(card)){
+					if((card instanceof BuildingCard) && ((BuildingCard)card).hasProductionChoice()){ //Se la carta è una building card e ha una scelta
+						System.out.println("IndustrialAction: la carta è una building card e ha una scelta");
+						((ResourcesExchangeEffect)(card.getPermanentEffect())).applyEffect(choices.get(index), player);
+					}else{
+						System.out.println("\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n");
+						card.getPermanentEffect().applyEffect(this.player);  //attivo l'effetto 
+						System.out.println("\nINDUSTRIAL ACTION: STO ATTIVANDO LA CARTA: " + card.toString() + "\n");	
+					}
+				}
+				else
+					System.out.println("CannotActivate card effect");
+			}
+		}else{
+			System.out.println("You cannot put your member here");
+			throw new NotApplicableException("You cannot put your member here!");
+			}
+		}
+	}

@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
@@ -22,9 +23,11 @@ import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.InputObserver;
 import it.polimi.ingsw.ps19.view.UserInterface;
 /**
- * @author matteo
+ * This class represents the client controller that takes care of sending through the network
+ * all the commands requested by the player. 
+ * 
+ * @author Jimmy
  *
- *  this is the game controller of the MVC pattern
  */
 public class ClientController implements InputObserver{
 
@@ -62,19 +65,8 @@ public class ClientController implements InputObserver{
 	}
 	
 	@Override
-	public void notifyChosenPrivileges(String choices){
-		char[] charArray = choices.toCharArray();
-		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
-		for(int i = 0; i<charArray.length; i+=2){
-			if(Character.getNumericValue(charArray[i]) != -1)
-				commandConstructor.add(Character.getNumericValue(charArray[i]));
-			else{
-				userInterface.invalidInput();
-				notifyInvalidInput();
-				return;
-			}
-		}
-		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+	public void notifyChosenPrivileges(String choices){		
+		checkAndSend(choices);
 	}
 
 	
@@ -168,7 +160,37 @@ public class ClientController implements InputObserver{
 	public void notifyExcommunicationEffectChoice(Boolean choice) {
 		sendCommand(new ChurchSupportCommand(choice));
 	}
+
+
+
+	@Override
+	public void notifyProductionChoices(String choices) {
+		checkAndSend(choices);
+	}
 	
+	private ArrayList<Integer> parseString(String choices){
+		char[] charArray = choices.toCharArray();
+		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
+		for(int i = 0; i<charArray.length; i+=2){
+			if(Character.getNumericValue(charArray[i]) != -1)
+				commandConstructor.add(Character.getNumericValue(charArray[i]));
+			else{
+				commandConstructor.clear();    //Se l'utente inserisce una stringa a muzzo
+				break;						   //il metodo ritorna una lista vuota
+			}
+		}
+		return commandConstructor;
+//		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+	}
 	
+	private void checkAndSend(String choices){
+		ArrayList<Integer> commandConstructor = parseString(choices);
+		if(commandConstructor.size() != 0)
+			sendCommand(new ProductionActivationCommand(parseString(choices)));
+		else{
+			userInterface.invalidInput();
+			notifyInvalidInput();
+		}
+	}
 
 }

@@ -30,4 +30,6 @@ public interface InputObserver {
 	public void notifyFinishRound();
 	
 	public void notifyExcommunicationEffectChoice(Boolean string);
+	
+	public void notifyProductionChoices(String choices);
 }

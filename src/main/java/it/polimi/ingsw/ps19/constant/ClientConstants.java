@@ -25,6 +25,7 @@ public class ClientConstants {
 	public static final int SEND_PAID_SERVANTS = 13;
 	public static final int SEND_CHOSEN_ACTION = 14;
 	public static final int SEND_EXCOMMUNICATION_PAYMENT_CHOICE = 15;
+	public static final int SEND_PRODUCTION_CHOICES = 16;
 
 
 
