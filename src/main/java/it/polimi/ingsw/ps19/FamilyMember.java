@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps19;
 
 import java.io.Serializable;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * @author matteo
@@ -12,19 +14,27 @@ public class FamilyMember implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 4026210740412805279L;
-	private Dice dice;
+//	private Dice dice;
+	private Map<Dice,Integer> dice;
+	private Color diceColor;
 	private Player player;
 	private int actionValueVariation;
 	private int actionValueImposition;
 
 	public FamilyMember(Dice d,Player player) {
+		dice=new EnumMap<Dice,Integer>(Dice.class);
+		this.diceColor=d.getColor();
 		this.player=player;
-		this.dice = d;
+		this.dice.put(d, d.getUpperFaceValue());
 		this.actionValueVariation=0;
 	}
 
 	public int getActionValueImposition() {
 		return actionValueImposition;
+	}
+	
+	public void refreshDiceValue(){
+		this.dice.put(getDice(),getDice().getUpperFaceValue());
 	}
 
 	public void setActionValueImposition(int actionValueImposition) {
@@ -45,12 +55,13 @@ public class FamilyMember implements Serializable  {
 
 	public Dice getDice() {
 
-		return this.dice;
-	}
+		return (Dice)(dice.keySet().toArray()[0]);
+//		return (Dice)(dice.values().toArray()[0]);
+		}
 
 	public int getActionValue() {
 		if(actionValueImposition == 0)
-			return this.dice.getUpperFaceValue() + actionValueVariation;
+			return dice.get(getDice())+ actionValueVariation;
 		else 
 			return actionValueImposition;
 	}
@@ -60,18 +71,20 @@ public class FamilyMember implements Serializable  {
 	}
 	
 	public Color getColor(){
-		return this.dice.getColor();
+		return this.diceColor;
 	}
 
 	@Override
 	public String toString() {
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("\n");
 		builder.append(this.getColor().toString());
 		builder.append(" family member, of the ");
 		builder.append(player.getColor());
 		builder.append(" player, with an action value of ");
 		builder.append(this.getActionValue());
+		builder.append(" ");
 		return builder.toString();
 	}
 	

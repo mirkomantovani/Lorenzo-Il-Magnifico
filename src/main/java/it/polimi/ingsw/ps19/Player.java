@@ -288,18 +288,29 @@ public class Player implements Serializable {
 	}
 	
 	public void removeFamilyMember(Color color){
-
 		System.out.println("colore family member da eliminare:"+color.toString());
 		this.familyMembers.remove(color);
 		System.out.println("rimosso family member");
 		for(FamilyMember mem : this.getFamilyMembers().values()){
 			System.out.println(mem.toString());
 		}
-
 		this.observer.notifyPlayerStatusChange(this);
 	}
 	public void resetPrivileges() {
 		this.councilPrivilege=0;		
+	}
+	public void refreshFamilyMemberValues() {
+	
+
+		for(Map.Entry<Color, FamilyMember > entry : familyMembers.entrySet()) {
+		    Color key = entry.getKey();
+		    FamilyMember fam = entry.getValue();
+		    
+		    fam.refreshDiceValue();
+
+		}
+	
+		
 	}
 
 	
