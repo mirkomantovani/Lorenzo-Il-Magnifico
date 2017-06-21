@@ -99,8 +99,6 @@ public class ServerCommandHandler implements CommandObserver {
 	public void applyCommand(TakeCardCommand takeCardCommand){
 //		System.out.println("servercommandhandler: apply takecardcommand");
 		
-		
-
 		try {
 			Action action=calculateTakeCardAction(takeCardCommand);
 			System.out.println("servercommandhandler: take card action calculated");
