@@ -90,7 +90,6 @@ public class ClientSocketInterface implements NetworkInterface {
 
 	@Override
 	public void addCommandObserver(ClientCommandHandler handler) {
-		System.out.println("clientsocketinterface: addcommandobserver");
 		listener.addCommandObserver(handler);		
 	}
 
