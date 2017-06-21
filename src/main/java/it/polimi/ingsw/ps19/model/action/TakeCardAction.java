@@ -42,7 +42,12 @@ public class TakeCardAction extends Action {
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
+		
+		System.out.println("takecardaction: prima del calculateactionvaluevariation");
+		
 		this.actionValueVariation = calculateActionValueVariation();
+		
+		System.out.println("takecardaction: finished constructing action");
 
 	}
 
@@ -83,7 +88,8 @@ public class TakeCardAction extends Action {
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 
 			this.floor.getActionSpace().getEffect().applyEffect(player);
-			// TODO rimuovere familyMember dal player!
+			
+			
 		} else
 			throw new NotApplicableException(notApplicableCode);
 	}
@@ -95,14 +101,23 @@ public class TakeCardAction extends Action {
 			return false;
 		if (this.card.getCardType() == CardType.TERRITORY) {
 			if (!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()) {
-				if ((int) Board.getMilitaryRequirementsForTerritories()
-						.get(player.getDeckOfType(card.getCardType()).size() + 1) > player.getResourceChest()
-								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount())
+				System.out.println("takecardaction sono nella isnomilitarypoints");
+				
+				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()
+						.get(player.getDeckOfType(card.getCardType()).size() + 1))));
+				
+				System.out.println("takecard punti del player");
+				if ((int) (Board.getMilitaryRequirementsForTerritories()
+						.get(player.getDeckOfType(card.getCardType()).size() + 1)) > player.getResourceChest()
+								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount()){
 					this.notApplicableCode = "you don't have the required military points to take this card";
 				return false;
+				}
 			}
 		}
-
+			
+			System.out.println("takecardaction params valid");
+		
 		// leader card discount (coin)
 		ResourceChest realCost;
 		if (player.getBonuses().getCardCostCoinDiscount() != 0) {
