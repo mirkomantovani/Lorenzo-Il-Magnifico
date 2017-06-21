@@ -19,7 +19,6 @@ public class CouncilPalace extends MultipleActionSpace implements Serializable {
 	 */
 	private static final long serialVersionUID = -9220272507699532377L;
 
-	private  ArrayList<FamilyMember> memberOrder;
 	/**
 	 * this constructor creates an ActionSpaces that gives a Coin and a privilege if you place a member in it
 	 * @throws IOException 

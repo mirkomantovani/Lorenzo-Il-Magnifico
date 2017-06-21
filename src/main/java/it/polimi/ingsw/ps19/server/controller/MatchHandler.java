@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -774,15 +775,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void refreshPlayerOrder(){
+		
+		 Player[] oldList = match.getPlayers();
 		 
 		 ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
 		 
-		 ArrayList<Player> councilPlayers = new ArrayList<Player>();
+		 System.out.println(councilMemberList.toString());
 		 
+		 ArrayList<Player> councilPlayers = new ArrayList<Player>();
+		 System.out.println("sono nella refresh player order");
+		 
+		 if(!councilMemberList.isEmpty()){
+		 System.out.println("sono nell if della refresh player");
 		 for(int i = 0; i < councilMemberList.size(); i++){
 			 councilPlayers.add(councilMemberList.get(i).getPlayer());
 		 }
-		 
+		 System.out.println("ho ricavato i player che hanno giocato nel council palace");
 		 for(int i = 0; i<councilPlayers.size(); i++){
 			 for(int j = 0; j<councilPlayers.size();j++){
 				 if(i!=j && councilPlayers.get(i) == councilPlayers.get(j)){
@@ -790,7 +798,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				 }
 			 }
 		 }
-		 
+		 System.out.println("ho rimosso i duplicati");
+		 for(int i = 0; i < oldList.length; i++){
+			if(!councilPlayers.contains(oldList[i])){
+				councilPlayers.add(oldList[i]);
+			}
+		 }
+		 System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
 		 match.setPlayers((Player[]) councilPlayers.toArray());
+		 
+		 }
 	}
 }
