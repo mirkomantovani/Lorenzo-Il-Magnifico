@@ -30,5 +30,8 @@ public class InvalidActionCommand extends ServerToClientCommand {
 		
 	}
 	
+	public String getInvalidCode(){
+		return invalidCode;
+	}
 	
 }

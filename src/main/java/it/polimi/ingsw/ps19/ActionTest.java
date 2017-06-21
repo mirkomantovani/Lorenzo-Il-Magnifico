@@ -87,15 +87,15 @@ public class ActionTest {
 			for(DevelopmentCard card : player1.getDeckOfType(CardType.TERRITORY))
 				System.out.println(card);
 			
-			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea(), board.getHarvestArea().getSingleActionSpace());
+//			Action action3 = new IndustrialAction(player1.getFamilyMembers().get(Color.BLACK), board.getHarvestArea(), board.getHarvestArea().getSingleActionSpace());
 			
 			System.out.println("\n\nActivating harvest effect:\n");
-			try {
-				action3.apply();
-			} catch (NotApplicableException e) {
-				e.printStackTrace();
-				
-			}
+//			try {
+//				action3.apply();
+//			} catch (NotApplicableException e) {
+//				e.printStackTrace();
+//				
+//			}
 			
 
 //			Action action6 = new MarketAction(player1.getFamilyMembers().get(Color.BLACK),board.getMarket().getMarktActionSpace("firstMarket"));
@@ -131,16 +131,16 @@ public class ActionTest {
 			
 //			player2.getDeckOfType(CardType.BUILDING).get(0).getPermanentEffect().applyEffect(player2);
 			
-Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea(), board.getProductionArea().getSingleActionSpace());
+//Action action4 = new IndustrialAction(player2.getFamilyMembers().get(Color.BLACK), board.getProductionArea(), board.getProductionArea().getSingleActionSpace());
 			System.out.println("black dice value:"+player2.getFamilyMembers().get(Color.BLACK).getActionValue());
 			System.out.println("\n\nActivating production effect:\n");
-			try {
-				action4.apply();
-			} catch (NotApplicableException e) {
-				System.out.println("Production action not applicable");
-				e.printStackTrace();
-				
-			}
+//			try {
+//				action4.apply();
+//			} catch (NotApplicableException e) {
+//				System.out.println("Production action not applicable");
+//				e.printStackTrace();
+//				
+//			}
 			
 			System.out.println(player2.getResourceChest().toString());
 			

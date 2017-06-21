@@ -54,11 +54,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void commandNotValid() {
-		printImp("Invalid command");
-	}
-
-	@Override
 	public void playerStatusChange(Player p) {
 		print("This is your status updated :\n");
 		print(p.toString());
@@ -134,9 +129,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input.equals("discard")){
+			if(input.toLowerCase().equals("discard")){
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
+			} else if(input.toLowerCase().equals("end")){
+				gameController.notifyFinishRound();
 			}
 			else
 				moveHandler(input);
@@ -162,6 +159,15 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_PRODUCTION_ACTION_SPACE:
 			actionConstructor.add(input);
 			gameController.notifyProduction(actionConstructor);
+			break;
+		case ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE:
+			if(input.equals("1"))
+				gameController.notifyExcommunicationEffectChoice(true);
+			else if (input.equals("2"))
+				gameController.notifyExcommunicationEffectChoice(false);
+			else{
+				//TODO default case
+			}
 			break;
 		default:
 			print("Command not recognized");
@@ -205,10 +211,10 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_TAKE_CARD_TOWER:
 //			actionConstructor.add(input);
 			print("Select the floor:");
-			print("1 - First floor");
-			print("2 - Second floor");
-			print("3 - Third floor");
-			print("4 - Fourth floor");
+			print("0 - First floor");
+			print("1 - Second floor");
+			print("2 - Third floor");
+			print("3 - Fourth floor");
 			takeCardState = ClientConstants.SEND_TAKE_CARD_FLOOR;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_FLOOR:
@@ -224,14 +230,14 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case "1": 
 			takeCardParams(takecard);
 			break;
-		case "2":	
+		case "3":	
 			print("Select market slot:");
 			print("1 - First marketplace slot");
 			print("2 - Second marketplace slot ");
 			print(".. And so on ..");
 			readerState = ClientConstants.SEND_MARKET_SLOT;
 			break;
-		case "3":
+		case "2":
 			gameController.notifyCouncilPalace(actionConstructor);
 			break;
 		case "4":
@@ -311,11 +317,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		gameController.setPlayerColor(color);
 	}
 
-	public void notApplicableAction() {
-		print("The action chosen is not applicable, please select another one!");
-		
-	}
-
 	@Override
 	public void notifyExcommunication() {
 		print("God seems very offended by your behaviour, he established your excommunication.");
@@ -357,8 +358,29 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
-		// TODO Auto-generated method stub
-		
+		print("Do you accept the following excommunication effect?");
+		print("1 - Yes, I accept the excommunication");
+		print("2 - No, I want to pay the faith points");
+		readerState = ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE;
 	}
 
+	@Override
+	public void askFinishRoundOrDiscard() {
+		print("What do you want to do next?");
+		print("- type \"end\" to end the turn");
+		print("- type \"discard\" to discard a leader card, get a privilege and end your turn");
+		readerState = ClientConstants.SEND_MOVE;
+	}
+
+	@Override
+	public void commandNotValid() {
+		printImp("Invalid command!");
+	}
+
+	@Override
+	public void actionCommandNotValid(String reason) {
+		print("Your action is invalid!");
+		print(reason);
+	}
+	
 }

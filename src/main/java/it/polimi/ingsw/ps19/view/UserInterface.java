@@ -57,8 +57,6 @@ public interface UserInterface {
 
 	public void refreshBoard(Board board);
 
-	public void notApplicableAction();
-
 	public void notifyExcommunication();
 
 	public void newChatMessage(String message);
@@ -72,5 +70,10 @@ public interface UserInterface {
 	public void askForExcommunicationPayment(String excommunicationEffect);
 
 	public void opponentStatusChanged(Player maskedPlayer);
+	
+	public void askFinishRoundOrDiscard();
+	
+	public void actionCommandNotValid(String reason);
+
 
 }

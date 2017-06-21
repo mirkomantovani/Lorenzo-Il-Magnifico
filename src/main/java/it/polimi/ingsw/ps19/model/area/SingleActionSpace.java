@@ -48,15 +48,20 @@ public class SingleActionSpace extends ActionSpace{
 	}
 
 	public void setFamilyMember(FamilyMember familyMember) {
-		if(!isOccupied())
+//		if(!isOccupied())
 			this.familyMember = familyMember;
-		else
-			System.out.println("Non occupabile!");
+//		else
+//			System.out.println("Non occupabile!");
 	}
 
 
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
+		System.out.println("\nsono nella is Occupable\n");
+		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
+		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + familyMember.getActionValue());
+		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
+
 		return !isOccupied()&&familyMember.getActionValue()>actionValueRequired;
 	}
 

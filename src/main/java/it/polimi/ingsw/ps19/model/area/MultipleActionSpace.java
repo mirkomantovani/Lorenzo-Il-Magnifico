@@ -74,11 +74,11 @@ public class MultipleActionSpace extends ActionSpace {
 
 	@Override
 	public void setFamilyMember(FamilyMember familyMember) {
-		if(isOccupable(familyMember)){
+//		if(isOccupable(familyMember)){
 			this.members.add(familyMember);
-			System.out.println("Successfully added");
+//			System.out.println("Successfully added");
 			
-		}
+//		}
 	}
 
 	public ArrayList<FamilyMember> getMembers() {

@@ -216,4 +216,10 @@ public class Match {
 		
 	}
 
+	public void refreshDicesValueForPlayers() {
+		for(int i=0;i<this.getPlayers().length;i++)
+			this.getPlayers()[i].refreshFamilyMemberValues();
+		
+	}
+
 }

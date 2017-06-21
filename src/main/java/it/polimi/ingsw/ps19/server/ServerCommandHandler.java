@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
@@ -65,8 +66,8 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
 				placeIntoMarketCommand.getPaidServants()));
 	} catch (NotApplicableException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+		handler.sendToCurrentPlayer(new AskMoveCommand());
 	}
 		
 	}
@@ -80,9 +81,9 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
 					placeIntoCouncilPalaceCommand.getPaidServants()));
 		} catch (NotApplicableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+			}
 	}
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
@@ -96,7 +97,7 @@ public class ServerCommandHandler implements CommandObserver {
 			
 			System.out.println("takecard not applicable");
 			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
-//			handler.sendToCurrentPlayer(new AskMoveCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
 		}
 		
@@ -197,15 +198,15 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(HarvestCommand harvestCommand){
 		
-		FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
-				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());
+		/*FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
+				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());*/
 		
-		member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
+		FamilyMember member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
 		
 		if(harvestCommand.getActionSpace() == 1){
 			try {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
-						match.getBoard().getHarvestArea().getSingleActionSpace()));
+						match.getBoard().getHarvestArea().getSingleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -213,10 +214,10 @@ public class ServerCommandHandler implements CommandObserver {
 		} else {
 			try {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
-						match.getBoard().getHarvestArea().getMultipleActionSpace()));
+						match.getBoard().getHarvestArea().getMultipleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
 			}
 		}
 		

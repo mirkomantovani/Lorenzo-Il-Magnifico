@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
@@ -48,25 +48,22 @@ public class Board implements Serializable {
 	private Deck<? extends DevelopmentCard> ventureCards;
 	
 	private int numberOfPlayers;
-	private int blackDice;
-	private int whiteDice;
-	private int orangeDice;
 	
 	
 	private List<String> playerOrder;
 	
 
-	private Set<Dice> dices;
+	private Map<Dice, Integer> dices;
 
 	
 
 	public Board(int numberOfPlayers) throws FileNotFoundException, IOException{
 		
-		dices= new HashSet<Dice>();
+		dices = new EnumMap<Dice, Integer>(Dice.class);
 		
-		dices.add(Dice.BLACK_DICE);
-		dices.add(Dice.ORANGE_DICE);
-		dices.add(Dice.WHITE_DICE);
+		dices.put(Dice.BLACK_DICE, Dice.BLACK_DICE.getUpperFaceValue());
+		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
+		dices.put(Dice.WHITE_DICE,Dice.WHITE_DICE.getUpperFaceValue());
 		
 		towers = new HashMap<>();
 		
@@ -97,9 +94,6 @@ public class Board implements Serializable {
 		harvestArea = new HarvestArea();
 		productionArea = new ProductionArea();
 		
-		 blackDice = Dice.BLACK_DICE.getUpperFaceValue();
-		 whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
-		 orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
 		
 		this.numberOfPlayers = numberOfPlayers;
 		
@@ -111,6 +105,14 @@ public class Board implements Serializable {
 	
 	public Tower getTower(CardType cardType){
 		return this.towers.get(cardType);
+	}
+	
+	public void changeCardInTowers(){
+		System.out.println("board: change cards in towers");
+		for(int i=0;i<CardType.values().length-1;i++){
+			this.getTower(CardType.values()[i]).changeCards();
+		}
+			
 	}
 
 
@@ -181,17 +183,18 @@ public class Board implements Serializable {
 		for(int i=0;i<Dice.values().length;i++)
 		Dice.values()[i].roll();
 		
-		blackDice = Dice.BLACK_DICE.getUpperFaceValue();
-		whiteDice = Dice.WHITE_DICE.getUpperFaceValue();
-		orangeDice = Dice.ORANGE_DICE.getUpperFaceValue();
-
+		dices.put(Dice.BLACK_DICE, Dice.BLACK_DICE.getUpperFaceValue());
+		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
+		dices.put(Dice.WHITE_DICE,Dice.WHITE_DICE.getUpperFaceValue());
+		
+	
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(">>>>>>>> The Board <<<<<<<< \n This is your world, let's try to impose your family "
-				+ "as the most powerful! \n There are : ");
+				+ "as the most powerful! \n There are:\n ");
 		
 		for(Tower t : towers.values()){
 		builder.append(t.toString());
@@ -216,14 +219,10 @@ public class Board implements Serializable {
 		builder.append("\n The dices are: \n");
 
 		
-			builder.append("Black dice, with a value of " + blackDice);
-			builder.append("\n");
-			builder.append("White dice, with a value of " + whiteDice);
-			builder.append("\n");
-			builder.append("Orange dice, with a value of " + orangeDice);
-			builder.append("\n");
+		builder.append(Dice.BLACK_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.BLACK_DICE) + "\n");
+		builder.append(Dice.ORANGE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.ORANGE_DICE) + "\n");
+		builder.append(Dice.WHITE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.WHITE_DICE) + "\n");
 		
-
 		return builder.toString();
 	}
 	

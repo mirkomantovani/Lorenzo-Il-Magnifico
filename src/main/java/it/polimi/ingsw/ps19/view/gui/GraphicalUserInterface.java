@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,28 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 
 public class GraphicalUserInterface implements UserInterface{
 
+	private MyFrame frame;
+//	private String player;
+//	private ClientController gameController;
+	private Image icon;
+	
+	
+	public GraphicalUserInterface(){
+//		this.gameController = gameController;
+//		try {
+//			icon = ImageIO.read(this.getClass().getResource(
+//					ImagesConstants.icona));
+//		} catch (IOException e) {
+//		}
+		frame = new MyFrame();
+//		frame.setIconImage(icon);
+		frame.validate();
+	}
+	
 	@Override
 	public void initializeMatch() {
-		// TODO Auto-generated method stub
+		frame.removeInitialImage();
+		frame.initializeGameFrame();
 		
 	}
 
@@ -100,12 +120,6 @@ public class GraphicalUserInterface implements UserInterface{
 	}
 
 	@Override
-	public void notApplicableAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void notifyExcommunication() {
 		// TODO Auto-generated method stub
 		
@@ -162,6 +176,18 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void askForProductionExchangeEffect(List<String[]> choices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askFinishRoundOrDiscard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionCommandNotValid(String reason) {
 		// TODO Auto-generated method stub
 		
 	}

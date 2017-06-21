@@ -30,11 +30,11 @@ public class Market implements Serializable {
 		
 		market = new HashMap<String,SingleActionSpace>();
 		
-		market.put("firstMarket",new SingleActionSpace(1,new InstantResourcesEffect(resourceFirstMarket)));
-		market.put("secondMarket", new SingleActionSpace(1, new InstantResourcesEffect(resourceSecondMarket)));
+		market.put("1",new SingleActionSpace(1,new InstantResourcesEffect(resourceFirstMarket)));
+		market.put("2", new SingleActionSpace(1, new InstantResourcesEffect(resourceSecondMarket)));
 		if(playersInTheMatch == 4){
-		market.put("thirdMarket",new SingleActionSpace(1, new InstantResourcesEffect(resourceThirdMarket)));
-		market.put("fourthMarket", new SingleActionSpace(1, new CouncilPrivilegeEffect(2)));
+		market.put("3",new SingleActionSpace(1, new InstantResourcesEffect(resourceThirdMarket)));
+		market.put("4", new SingleActionSpace(1, new CouncilPrivilegeEffect(2)));
 		}
 		this.playersInTheMatch = playersInTheMatch;
 	}
@@ -49,26 +49,26 @@ public class Market implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("---- The Market ---- \n This is the market, by placing into this area you "
-				+ "should have a familar with a value of " + market.get("firstMarket").getActionValueRequired() +""
+				+ "should have a familar with a value of " + market.get("1").getActionValueRequired() +""
 				+ " and you'll gain "
 				+ "some resources: \n First market slot: ");
-		builder.append(market.get("firstMarket").getEffect().toString());
-		if(market.get("firstMarket").isOccupied())
-			builder.append(market.get("firstMarket").toString());
+		builder.append(market.get("1").getEffect().toString());
+		if(market.get("1").isOccupied())
+			builder.append(market.get("1").toString());
 		
 		builder.append("\n Second market slot: ");
-		builder.append(market.get("secondMarket").getEffect().toString());
-		if(market.get("secondMarket").isOccupied())
-			builder.append(market.get("secondMarket").toString());
+		builder.append(market.get("2").getEffect().toString());
+		if(market.get("2").isOccupied())
+			builder.append(market.get("2").toString());
 		if (playersInTheMatch == 4){
 			builder.append("\n Third market slot: ");
-			builder.append(market.get("thirdMarket").getEffect().toString());
-			if(market.get("thirdMarket").isOccupied())
-				builder.append(market.get("thirdMarket").toString());
+			builder.append(market.get("3").getEffect().toString());
+			if(market.get("3").isOccupied())
+				builder.append(market.get("3").toString());
 			builder.append("\n Fourth market slot: ");
-			builder.append(market.get("thirdMarket").getEffect().toString());
-			if(market.get("fourthMarket").isOccupied())
-				builder.append(market.get("fourthMarket").toString());
+			builder.append(market.get("4").getEffect().toString());
+			if(market.get("4").isOccupied())
+				builder.append(market.get("4").toString());
 		}
 		
 		
