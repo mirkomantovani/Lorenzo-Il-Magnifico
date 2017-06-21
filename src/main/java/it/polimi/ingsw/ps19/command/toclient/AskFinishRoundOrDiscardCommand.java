@@ -11,7 +11,7 @@ public class AskFinishRoundOrDiscardCommand extends ServerToClientCommand {
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-		
+		clientCommandHandler.applyCommand(this);
 	}
 
 }

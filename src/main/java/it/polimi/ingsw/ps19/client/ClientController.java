@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.DiscardLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.FinishRoundCommand;
 import it.polimi.ingsw.ps19.command.toserver.HarvestCommand;
 import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
@@ -152,6 +153,14 @@ public class ClientController implements InputObserver{
 	public void notifyCredentials(ArrayList<String> actionConstructor) {
 		sendCommand(new SendCredentialsCommand(actionConstructor.get(0),actionConstructor.get(1), playerColor));
 	}
+
+
+
+	@Override
+	public void notifyFinishRound() {
+		sendCommand(new FinishRoundCommand());
+	}
+	
 	
 
 

@@ -379,9 +379,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void applyAction(Action action) throws NotApplicableException {
-		System.out.println("matchhandler: applyaction");
+		System.out.println("\nmatchhandler: applyaction\n");
+		System.out.println("\nMATCHHANDLER, SOLO PROVVISORIO, DO SUBITO UNA CARTA TERRITORIO AL PLAYER\n");
+		getCurrentPlayer().addCard(match.getBoard().getTower(CardType.TERRITORY).getFloor(1).getCard());
+		System.out.println("\nMATCHHANDLER, SOLO PROVVISORIO, HO DATO LA CARTA: "  + getCurrentPlayer().getDeckOfType(CardType.TERRITORY).get(0).toString() + "\n");
 		action.apply();
-		
+		System.out.println("\nMATCHHANDLER: HO FINITO DI APPLICARE LA ACTION\n");
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		
 		if(match.getCurrentPlayer().getCouncilPrivilege()!=0)

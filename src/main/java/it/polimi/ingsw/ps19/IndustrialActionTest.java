@@ -55,18 +55,18 @@ public class IndustrialActionTest {
 		industrialArea.getMultipleActionSpace().setFamilyMember(player.getFamilyMember(Color.BLACK));
 		industrialArea.getMultipleActionSpace().setFamilyMember(player.getFamilyMember(Color.NEUTRAL));
 		secondIndustrialArea.getSingleActionSpace().setFamilyMember(player.getFamilyMember(Color.WHITE));
-		IndustrialAction action = new IndustrialAction(player.getFamilyMember(Color.BLACK), industrialArea, industrialArea.getMultipleActionSpace());
-		IndustrialAction action2 = new IndustrialAction(player.getFamilyMember(Color.NEUTRAL), industrialArea, industrialArea.getMultipleActionSpace());
+//		IndustrialAction action = new IndustrialAction(player.getFamilyMember(Color.BLACK), industrialArea, industrialArea.getMultipleActionSpace());
+//		IndustrialAction action2 = new IndustrialAction(player.getFamilyMember(Color.NEUTRAL), industrialArea, industrialArea.getMultipleActionSpace());
 		
 		//IndustrialAction action3 = new IndustrialAction(player.getFamilyMember(Color.ORANGE), secondIndustrialArea, secondIndustrialArea.getSingleActionSpace());
 
-		try {
-			action.apply();
-			action2.apply();
-		} catch (NotApplicableException e) {
+//		try {
+//			action.apply();
+//			action2.apply();
+//		} catch (NotApplicableException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			e.printStackTrace();
+//		}
 		
 		System.out.println(player.toString());
 		

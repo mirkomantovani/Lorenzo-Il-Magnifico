@@ -72,5 +72,7 @@ public interface UserInterface {
 	public void askForExcommunicationPayment(String excommunicationEffect);
 
 	public void opponentStatusChanged(Player maskedPlayer);
+	
+	public void askFinishRoundOrDiscard();
 
 }

@@ -166,4 +166,10 @@ public class GraphicalUserInterface implements UserInterface{
 		
 	}
 
+	@Override
+	public void askFinishRoundOrDiscard() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

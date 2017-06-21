@@ -198,15 +198,15 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(HarvestCommand harvestCommand){
 		
-		FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
-				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());
+		/*FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
+				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());*/
 		
-		member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
+		FamilyMember member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
 		
 		if(harvestCommand.getActionSpace() == 1){
 			try {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
-						match.getBoard().getHarvestArea().getSingleActionSpace()));
+						match.getBoard().getHarvestArea().getSingleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -214,7 +214,7 @@ public class ServerCommandHandler implements CommandObserver {
 		} else {
 			try {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
-						match.getBoard().getHarvestArea().getMultipleActionSpace()));
+						match.getBoard().getHarvestArea().getMultipleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

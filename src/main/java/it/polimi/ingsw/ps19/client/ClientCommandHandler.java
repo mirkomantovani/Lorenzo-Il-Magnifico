@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.client;
 
 
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
@@ -40,7 +41,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		this.userInterface = ui;
 		this.networkInterface = networkInterface;
 	}
-
+	
 	public void applyCommand(InvalidActionCommand ActionNotValidCommand) {
 		userInterface.notApplicableAction();
 	}
@@ -143,6 +144,10 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	public void applyCommand(AskMoveCommand askMoveCommand) {
 		userInterface.askMove();
+	}
+
+	public void applyCommand(AskFinishRoundOrDiscardCommand askFinishRoundOrDiscardCommand) {
+		userInterface.askFinishRoundOrDiscard();
 	}
 	
 	

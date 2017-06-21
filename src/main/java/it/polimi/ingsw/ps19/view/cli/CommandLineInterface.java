@@ -134,9 +134,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			gameController.notifyChosenLeaderCard(input);
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input.equals("discard")){
+			if(input.toLowerCase().equals("discard")){
 				print("Select a leader card to discard (insert its name): ");
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
+			} else if(input.toLowerCase().equals("end")){
+				
 			}
 			else
 				moveHandler(input);
@@ -205,10 +207,10 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_TAKE_CARD_TOWER:
 //			actionConstructor.add(input);
 			print("Select the floor:");
-			print("1 - First floor");
-			print("2 - Second floor");
-			print("3 - Third floor");
-			print("4 - Fourth floor");
+			print("0 - First floor");
+			print("1 - Second floor");
+			print("2 - Third floor");
+			print("3 - Fourth floor");
 			takeCardState = ClientConstants.SEND_TAKE_CARD_FLOOR;
 			break;
 		case ClientConstants.SEND_TAKE_CARD_FLOOR:
@@ -358,7 +360,17 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
 		// TODO Auto-generated method stub
-		
+	
 	}
 
+	@Override
+	public void askFinishRoundOrDiscard() {
+		print("What do you want to do next?");
+		print("- type \"end\" to end the turn");
+		print("- type \"discard\" to discard a leader card, get a privilege and end your turn");
+		readerState = ClientConstants.SEND_MOVE;
+	}
+	
+	
+	
 }
