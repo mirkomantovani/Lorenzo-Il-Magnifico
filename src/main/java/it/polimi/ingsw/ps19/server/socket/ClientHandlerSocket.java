@@ -51,7 +51,7 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	@Override
 	public void sendCommand(ServerToClientCommand command) throws IOException {
-		outSocket.writeObject(command);
+		outSocket.writeUnshared(command);
 		outSocket.flush();
 		outSocket.reset();
 	}
@@ -59,7 +59,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void closedByServer() {
 		try {
-			outSocket.writeObject(new CloseClientCommand());
+			outSocket.writeUnshared(new CloseClientCommand());
 		} catch (IOException e) {
 		}
 		close();
