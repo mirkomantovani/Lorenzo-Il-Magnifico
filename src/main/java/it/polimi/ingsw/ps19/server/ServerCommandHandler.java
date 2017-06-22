@@ -129,7 +129,7 @@ public class ServerCommandHandler implements CommandObserver {
 		Player player=match.getCurrentPlayer();
 		FamilyMember familyMember=
 				player.getFamilyMember(takeCardCommand.getFamilyMember());
-		
+		System.out.println("serverCommandHandler, ritornato da getfamilymember");
 		if(familyMember==null){
 			throw new NotApplicableException("you don't have that family member");
 		}
