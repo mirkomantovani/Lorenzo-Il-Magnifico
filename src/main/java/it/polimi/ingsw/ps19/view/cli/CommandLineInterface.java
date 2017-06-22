@@ -166,7 +166,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			else if (input.equals("2"))
 				gameController.notifyExcommunicationEffectChoice(false);
 			else{
-				//TODO default case
+				gameController.notifyExcommunicationEffectChoice(false);  //TODO questo è solo provvisorio
 			}
 			break;
 		case ClientConstants.SEND_PRODUCTION_CHOICES:
