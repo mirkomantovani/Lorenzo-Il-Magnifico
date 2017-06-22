@@ -116,7 +116,8 @@ public class ServerCommandHandler implements CommandObserver {
 	public void applyCommand(ProductionCommand command){
 		handler.sendToCurrentPlayer(
 				new ChooseProductionExchangeEffectsCommand(
-						match.getCurrentPlayerProductionChoices()));
+						match.getCurrentPlayerProductionChoices(
+								command.getFamilyMember(),command.getActionSpace(),command.getPaidServants())));
 	}
 
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) throws NotApplicableException {
