@@ -37,8 +37,10 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
- * This class handles every command arriving from Client to Server, calling methods of MatchHandler
- * The reference to Match is needed to get player objects from the match
+ * This class handles every command arriving from Client to Server, calling
+ * methods of MatchHandler The reference to Match is needed to get player
+ * objects from the match
+ * 
  * @author Mirko
  *
  */
@@ -58,101 +60,109 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) throws NotApplicableException {
-		
-		FamilyMember familyMember;
-		familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
-		
-//		System.out.println("questo è il familyMember che deve fare l'azione" + familyMember.toString());
-		
-		
-	try {
-		if(familyMember ==null){
-			throw new NotApplicableException("You had alredy Used this family member");
-			}
-		handler.applyAction(new MarketAction(familyMember,match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
-				placeIntoMarketCommand.getPaidServants()));
-	} catch (NotApplicableException e) {
-		handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
-		handler.sendToCurrentPlayer(new AskMoveCommand());
-	}
-}
-		
-	
-	
+		try {
+			FamilyMember familyMember;
+			familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
 
-	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand){
-		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
-		try {
-			if(familyMember ==null){
-				throw new NotApplicableException("You had already Used this family member");
+			// System.out.println("questo è il familyMember che deve fare
+			// l'azione" + familyMember.toString());
+
+			try {
+				if (familyMember == null) {
+					throw new NotApplicableException("You had alredy Used this family member");
 				}
-			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
-					placeIntoCouncilPalaceCommand.getPaidServants()));
-		} catch (NotApplicableException e) {
-			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
-			handler.sendToCurrentPlayer(new AskMoveCommand());
+				handler.applyAction(new MarketAction(familyMember,
+						match.getBoard().getMarket().getMarktActionSpace(placeIntoMarketCommand.getActionSpace()),
+						placeIntoMarketCommand.getPaidServants()));
+			} catch (NotApplicableException e) {
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
 			}
-	}
-	
-	public void applyCommand(TakeCardCommand takeCardCommand){
-//		System.out.println("servercommandhandler: apply takecardcommand");
-		try{
-		try {
-			Action action=calculateTakeCardAction(takeCardCommand);
-			System.out.println("servercommandhandler: take card action calculated");
-			handler.applyAction(action);
-			
-		} catch (NotApplicableException e) {
-			
-			System.out.println("takecard not applicable");
-			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+		} catch (Exception e) {
+			handler.sendToCurrentPlayer(new InvalidCommand());
 			handler.sendToCurrentPlayer(new AskMoveCommand());
-			return;
 		}
+	}
+
+	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand) {
+		try {
+			FamilyMember familyMember = handler.getCurrentPlayer()
+					.getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
+			try {
+				if (familyMember == null) {
+					throw new NotApplicableException("You had already Used this family member");
+				}
+				handler.applyAction(new CouncilPalaceAction(familyMember, match.getBoard().getCouncilPalace(),
+						placeIntoCouncilPalaceCommand.getPaidServants()));
+			} catch (NotApplicableException e) {
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
+			}
+		} catch (Exception e) {
+			handler.sendToCurrentPlayer(new InvalidCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
+	}
+
+	public void applyCommand(TakeCardCommand takeCardCommand) {
+		// System.out.println("servercommandhandler: apply takecardcommand");
+		try {
+			try {
+				Action action = calculateTakeCardAction(takeCardCommand);
+				System.out.println("servercommandhandler: take card action calculated");
+				handler.applyAction(action);
+
+			} catch (NotApplicableException e) {
+
+				System.out.println("takecard not applicable");
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
+				return;
+			}
+		} catch (Exception e) {
+			handler.sendToCurrentPlayer(new InvalidCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
+
+	}
+
+	public void applyCommand(ProductionCommand command) {
+		try{
+		handler.saveProductionParams(command);
+		handler.sendToCurrentPlayer(new ChooseProductionExchangeEffectsCommand(match.getCurrentPlayerProductionChoices(
+				command.getFamilyMember(), command.getActionSpace(), command.getPaidServants())));
 		}catch(Exception e){
 			handler.sendToCurrentPlayer(new InvalidCommand());
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
-		
-	}
-	
-	public void applyCommand(ProductionCommand command){
-		handler.saveProductionParams(command);
-		handler.sendToCurrentPlayer(
-				new ChooseProductionExchangeEffectsCommand(
-						match.getCurrentPlayerProductionChoices(
-								command.getFamilyMember(),command.getActionSpace(),command.getPaidServants())));
-	}
+		}
 
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) throws NotApplicableException {
 		System.out.println("calculating takecardaction");
-		Player player=match.getCurrentPlayer();
-		FamilyMember familyMember=
-				player.getFamilyMember(takeCardCommand.getFamilyMember());
+		Player player = match.getCurrentPlayer();
+		FamilyMember familyMember = player.getFamilyMember(takeCardCommand.getFamilyMember());
 		System.out.println("serverCommandHandler, ritornato da getfamilymember");
-		if(familyMember==null){
+		if (familyMember == null) {
 			throw new NotApplicableException("you don't have that family member");
-		}
-		else{
-		Floor floor=match.getFloor(takeCardCommand.getCardType(),takeCardCommand.getFloor());
-		System.out.println("creating new take card action");
-		
-		return new TakeCardAction(familyMember,floor,
-				new Servant(takeCardCommand.getPaidServants()));
+		} else {
+			Floor floor = match.getFloor(takeCardCommand.getCardType(), takeCardCommand.getFloor());
+			System.out.println("creating new take card action");
+
+			return new TakeCardAction(familyMember, floor, new Servant(takeCardCommand.getPaidServants()));
 		}
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
-		handler.closeMatch(); 
-		
+		handler.closeMatch();
+
 	}
 
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
 		handler.addPrivilegeResources(chosenPrivilegeCommand.getChoice());
-//			for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
-//				handler.getCurrentPlayer().addResources(rc);
-//			}
-		
+		// for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
+		// handler.getCurrentPlayer().addResources(rc);
+		// }
+
 	}
 
 	@Override
@@ -165,36 +175,33 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
-		handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());;
-		
+		handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
+		;
+
 	}
 
 	public void applyCommand(ChurchSupportCommand churchSupportCommand) {
-		handler.handleChurchSupportDecision(churchSupportCommand.getPlayerColor(),churchSupportCommand.getDecision());
-		
-		
+		handler.handleChurchSupportDecision(churchSupportCommand.getPlayerColor(), churchSupportCommand.getDecision());
+
 	}
 
 	public void applyCommand(SendCredentialsCommand command, ClientHandler clientHandler) {
-		handler.handleCredentials(command.getUsername(),command.getPassword(),clientHandler);
+		handler.handleCredentials(command.getUsername(), command.getPassword(), clientHandler);
 	}
 
-	
 	public void applyCommand(ChosenLeaderCardCommand command) {
-		handler.handleLeaderChoice(command.getName(),command.getPlayerColor());	
+		handler.handleLeaderChoice(command.getName(), command.getPlayerColor());
 	}
-
-	
 
 	public void applyCommand(PlayerMoveCommand playerMoveCommand, ClientHandler clientHandler) {
-//		handler.handlePlayerMove(playerMoveCommand.getMove(), clientHandler);
+		// handler.handlePlayerMove(playerMoveCommand.getMove(), clientHandler);
 	}
 
 	public void applyCommand(FinishRoundCommand finishRoundCommand) {
 		handler.finishRound();
 	}
-	
-	public void applyCommand(InvalidInputCommand invalidInputCommand){
+
+	public void applyCommand(InvalidInputCommand invalidInputCommand) {
 		handler.handleInvalidCommand();
 	}
 
@@ -204,22 +211,19 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void applyCommand(ChatMessageClientCommand chatMessageClientCommand) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public void applyCommand(HarvestCommand harvestCommand){
-		
-		/*FamilyMember member = new FamilyMember(handler.getCurrentPlayer().getFamilyMember(
-				harvestCommand.getFamilyMember()).getDice(), handler.getCurrentPlayer());*/
-		
+	public void applyCommand(HarvestCommand harvestCommand) {
+		try{
 		FamilyMember member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());
-		
-		if(harvestCommand.getActionSpace() == 1){
+
+		if (harvestCommand.getActionSpace() == 1) {
 			try {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
 						match.getBoard().getHarvestArea().getSingleActionSpace(), harvestCommand.getPaidServants()));
@@ -236,7 +240,16 @@ public class ServerCommandHandler implements CommandObserver {
 				handler.sendToCurrentPlayer(new AskMoveCommand());
 			}
 		}
-		
-	}	
-	//Others apply overloaded methods
+		}catch(Exception e){
+			handler.sendToCurrentPlayer(new InvalidCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
+
+	}
+
+	
+	
+	
+	
+	// Others apply overloaded methods
 }

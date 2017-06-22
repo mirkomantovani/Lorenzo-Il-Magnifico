@@ -842,15 +842,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
 		numPlayersAnsweredExcomm++;
 		if(decision){
+			System.out.println("Non ho scomunicato il giocatore"+playerColor);
 			this.getPlayerFromColor(playerColor).payFaithPoint();
 			ResourceChest rc = new ResourceChest();
 			rc.addResource(match.getChurchSupportPrizeInPeriod());
 			this.getPlayerFromColor(playerColor).addResources(rc);
 		} else {
+			System.out.println("Scomunico il giocatore"+playerColor);
 			ExcommunicationTile tile;
 			tile=this.getCurrentExcommTile();
 			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
+			System.out.println("Ho scomunicato il giocatore"+playerColor);
 			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
+			
 		}	
 		
 		if(numPlayersAnsweredExcomm==this.match.getPlayers().length){
