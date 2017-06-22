@@ -27,6 +27,10 @@ public class ProductionActivationCommand extends ClientToServerCommand {
 	 */
 	List<Integer> choices;
 	
+	public List<Integer> getChoices() {
+		return choices;
+	}
+
 	public ProductionActivationCommand(ArrayList<Integer> choices){
 		this.choices = new ArrayList<Integer>();
 		this.choices = choices;

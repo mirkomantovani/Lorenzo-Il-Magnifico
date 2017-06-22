@@ -6,7 +6,6 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
-import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
@@ -32,7 +31,6 @@ import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.action.MarketAction;
 import it.polimi.ingsw.ps19.model.action.TakeCardAction;
 import it.polimi.ingsw.ps19.model.area.Floor;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
@@ -114,6 +112,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 	
 	public void applyCommand(ProductionCommand command){
+		handler.saveProductionParams(command);
 		handler.sendToCurrentPlayer(
 				new ChooseProductionExchangeEffectsCommand(
 						match.getCurrentPlayerProductionChoices(
@@ -195,7 +194,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ProductionActivationCommand productionActivationCommand) {
-		//TODO qui andrà creata una production action con le scelte
+		handler.handleProductionActivation(productionActivationCommand);
 	}
 
 	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {

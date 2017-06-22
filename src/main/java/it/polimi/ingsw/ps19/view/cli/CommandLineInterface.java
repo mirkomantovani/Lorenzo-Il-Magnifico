@@ -351,9 +351,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void askForProductionExchangeEffect(List<String[]> choices) {
 		
 		for(int i = 0; i < choices.size(); i++){
-			print("You can choose one of these production effects from \"" + choices.get(i)[0] + "\" card (please enter the choices separated by a comma, e.g 1,2,1,1) :");
-			print("1 - " + choices.get(i)[1]);
-			print("2 - " + choices.get(i)[2]);
+			print("You can choose one of these production effects from \"" + choices.get(i)[1] + "\" card (please enter the choices separated by a comma, e.g 1,2,1,1) :");
+			print("1 - " + choices.get(i)[2]);
+			print("2 - " + choices.get(i)[3]);
 			readerState = ClientConstants.SEND_PRODUCTION_CHOICES;
 		}
 		

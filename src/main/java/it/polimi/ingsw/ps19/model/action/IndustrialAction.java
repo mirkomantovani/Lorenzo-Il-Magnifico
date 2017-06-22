@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
@@ -92,7 +93,7 @@ public class IndustrialAction extends Action {
 		}
 	}
 	
-	public void apply(ArrayList<Integer> choices) throws NotApplicableException{
+	public void apply(List<Integer> choices) throws NotApplicableException{
 		if(canBePlaced()){
 			int index = 0;
 			actionSpace.setFamilyMember(familyMember);

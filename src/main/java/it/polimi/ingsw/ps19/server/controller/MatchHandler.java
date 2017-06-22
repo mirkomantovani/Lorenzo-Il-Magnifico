@@ -30,12 +30,15 @@ import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -67,6 +70,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
 	private int numPlayersAnsweredExcomm;
+	
+	private String prodFamilyMember;
+	private int prodActionSpace;
+	private int prodPaidServant;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
@@ -419,6 +426,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// TODO MANDARE comando per scegliere terminare turno o scartare
 		// leadercards
 
+	}
+	
+	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
+		industrialAction.apply(choices);
 	}
 
 	// @Override
@@ -853,4 +864,41 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ExcommunicationTile excommTile=c.getExcommunicationTile(p);
 		return excommTile;
 	}
+
+	public void saveProductionParams(ProductionCommand command) {
+		this.prodActionSpace=command.getActionSpace();
+		this.prodPaidServant=command.getPaidServants();
+		this.prodFamilyMember=command.getFamilyMember();
+		
+	}
+
+	public void handleProductionActivation(ProductionActivationCommand productionActivationCommand) {
+
+		FamilyMember member = getCurrentPlayer().getFamilyMember(this.prodFamilyMember);
+		
+		if(this.prodActionSpace == 1){
+			try {
+				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
+						match.getBoard().getProductionArea().getSingleActionSpace(), this.prodPaidServant));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
+						match.getBoard().getProductionArea().getMultipleActionSpace(), this.prodPaidServant));
+			} catch (NotApplicableException e) {
+				sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				sendToCurrentPlayer(new AskMoveCommand());
+			}
+		}
+		
+		
+		this.prodActionSpace=0;
+		this.prodPaidServant=0;
+		this.prodFamilyMember="";
+	}
+
+	
 }
