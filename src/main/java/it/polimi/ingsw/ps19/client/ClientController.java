@@ -166,7 +166,7 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyExcommunicationEffectChoice(Boolean choice) {
-		sendCommand(new ChurchSupportCommand(playerColor,choice));
+		sendCommand(new ChurchSupportCommand(playerColor, choice));
 	}
 
 
