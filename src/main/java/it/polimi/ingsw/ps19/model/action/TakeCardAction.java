@@ -120,16 +120,12 @@ public class TakeCardAction extends Action {
 		
 		// leader card discount (coin)
 		ResourceChest realCost;
-		if (player.getBonuses().getCardCostCoinDiscount() != 0) {
-
-	
-				realCost = (ResourceChest) card.getCost().cloneChest();
-				realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+		
+		realCost = (ResourceChest) card.getCost().cloneChest();
+		if (player.getBonuses().getCardCostCoinDiscount() != 0) 
+			realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			
-		} else {
-			realCost = card.getCost();
-
-		}
+		
 		
 		//adding 3 additional coins if someone else is occupying the tower
 		if (isSomeoneInTheTower())
