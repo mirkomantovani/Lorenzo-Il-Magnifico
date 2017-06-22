@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
+import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
@@ -95,7 +96,7 @@ public class ServerCommandHandler implements CommandObserver {
 	
 	public void applyCommand(TakeCardCommand takeCardCommand){
 //		System.out.println("servercommandhandler: apply takecardcommand");
-		
+		try{
 		try {
 			Action action=calculateTakeCardAction(takeCardCommand);
 			System.out.println("servercommandhandler: take card action calculated");
@@ -107,6 +108,10 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 			return;
+		}
+		}catch(Exception e){
+			handler.sendToCurrentPlayer(new InvalidCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
 		
 	}
