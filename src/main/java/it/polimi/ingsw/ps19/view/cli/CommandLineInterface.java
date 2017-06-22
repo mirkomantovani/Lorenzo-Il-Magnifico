@@ -367,8 +367,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
-		print("Do you accept the following excommunication effect?");
-		print("1 - Yes, I accept the excommunication");
+		print("Do you accept the following excommunication effect?\n");
+		print(excommunicationEffect);
+		print("\n1 - Yes, I accept the excommunication");
 		print("2 - No, I want to pay the faith points");
 		readerState = ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE;
 	}
