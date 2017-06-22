@@ -220,6 +220,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		refreshPlayerOrder();
 		roundNumber = 0;
 //		System.out.println("rollo i dadi");
+		
+		match.clearBoard();
+		
 		match.getBoard().rollDices();
 		match.refreshDicesValueForPlayers();
 		match.addFamilyMembersToPlayers();
