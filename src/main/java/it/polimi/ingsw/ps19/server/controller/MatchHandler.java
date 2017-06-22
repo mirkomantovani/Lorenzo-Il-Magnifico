@@ -4,15 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
@@ -22,6 +23,7 @@ import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
@@ -35,8 +37,10 @@ import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;
+import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.server.ClientHandler;
@@ -62,6 +66,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private int cycle = 1;
 	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
+	private int numPlayersAnsweredExcomm;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
@@ -202,11 +207,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
-			
-			
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
-			roundNumber = 0;
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
 			// createTurnTimer();
@@ -216,6 +218,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void initTurn() {
 		refreshPlayerOrder();
+		roundNumber = 0;
 //		System.out.println("rollo i dadi");
 		match.getBoard().rollDices();
 		match.refreshDicesValueForPlayers();
@@ -451,6 +454,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void nextStep() {
 		if (roundNumber == match.getPlayers().length * 4) {
+			System.out.println("roundNumber= "+roundNumber+"\n cambio turno");
 			if (match.getTurn() % 2 == 1)
 				startTurn();
 			else 
@@ -459,10 +463,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startRound();
 
 	}
+	
+	
 
 	private void startExcommunicationPhase() {
-
-		startTurn();
+		
+		ExcommunicationTile excommTile=getCurrentExcommTile();
+		
+		sendToAllPlayers(new AskForExcommunicationPaymentCommand(
+				excommTile.getEffect().toString()));
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -812,5 +821,33 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		 match.setPlayers((Player[]) councilPlayers.toArray());
 		 
 		 }
+	}
+
+	public void handleChurchSupportDecision(String playerColor, boolean decision) {
+		numPlayersAnsweredExcomm++;
+		if(decision){
+			this.getPlayerFromColor(playerColor).payFaithPoint();
+			ResourceChest rc = new ResourceChest();
+			rc.addResource(match.getChurchSupportPrizeInPeriod());
+			this.getPlayerFromColor(playerColor).addResources(rc);
+		} else {
+			ExcommunicationTile tile;
+			tile=this.getCurrentExcommTile();
+			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
+			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
+		}	
+		
+		if(numPlayersAnsweredExcomm==this.match.getPlayers().length){
+			numPlayersAnsweredExcomm=0;
+			startTurn();
+		}
+			
+	}
+
+	private ExcommunicationTile getCurrentExcommTile() {
+		Church c=this.match.getBoard().getChurch();
+		Period p=this.match.getPeriod();
+		ExcommunicationTile excommTile=c.getExcommunicationTile(p);
+		return excommTile;
 	}
 }

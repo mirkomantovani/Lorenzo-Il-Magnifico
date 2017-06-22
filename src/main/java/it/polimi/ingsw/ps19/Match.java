@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.constant.BoardConstants;
@@ -33,7 +34,7 @@ public class Match {
 	private int addedPlayers;
 	private int currentPlayer=0;
 	private MatchObserver observer;
-	private String[] playercolors = new String[4];
+	private String[] playercolors;
 	private int playerscreated;
 	private LeaderDeck leaderCards;
 	private Period period;
@@ -53,10 +54,11 @@ public class Match {
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
 		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
-		playercolors[0] = "verde";
-		playercolors[1] = "rosso";
-		playercolors[2] = "blu";
-		playercolors[3] = "giallo";
+		
+		playercolors=new String[numPlayers];
+		
+		shuffleColors();
+		
 		try {
 			leaderCards = new LeaderDeck();
 			
@@ -66,6 +68,20 @@ public class Match {
 			e.printStackTrace();
 		}
 	
+	}
+
+	private void shuffleColors() {
+		ArrayList<String> colors=new ArrayList<>();
+		colors.add("Red");
+		colors.add("Green");
+		colors.add("Blue");
+		colors.add("Yellow");
+		Collections.shuffle(colors);
+		
+		for(int i=0;i<playercolors.length;i++){
+			playercolors[i] = colors.get(i);
+		}
+			
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {

@@ -85,7 +85,7 @@ public class ServerCommandHandler implements CommandObserver {
 		FamilyMember familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoCouncilPalaceCommand.getFamilyMember());
 		try {
 			if(familyMember ==null){
-				throw new NotApplicableException("You had alredy Used this family member");
+				throw new NotApplicableException("You had already Used this family member");
 				}
 			handler.applyAction(new CouncilPalaceAction(familyMember,match.getBoard().getCouncilPalace(),
 					placeIntoCouncilPalaceCommand.getPaidServants()));
@@ -165,14 +165,8 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ChurchSupportCommand churchSupportCommand) {
-		if(churchSupportCommand.getDecision()){
-			handler.getCurrentPlayer().payFaithPoint();
-			ResourceChest rc = new ResourceChest();
-			rc.addResource(match.getChurchSupportPrizeInPeriod());
-			handler.getCurrentPlayer().addResources(rc);
-		} else {
-			handler.sendToCurrentPlayer(new NotifyExcommunicationCommand());
-		}
+		handler.handleChurchSupportDecision(churchSupportCommand.getPlayerColor(),churchSupportCommand.getDecision());
+		
 		
 	}
 
