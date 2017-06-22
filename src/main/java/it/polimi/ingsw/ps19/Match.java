@@ -9,11 +9,11 @@ import java.util.List;
 import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
-import it.polimi.ingsw.ps19.model.area.Tower;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
+import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
@@ -25,22 +25,18 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  */
 public class Match {
 
-	
-
-	private static final ResourceChest roundResourceSupply=new ResourceChest(0,2,2,3,0,0,0);
+	private static final ResourceChest roundResourceSupply = new ResourceChest(0, 2, 2, 3, 0, 0, 0);
 	private Board board;
 	// private List<Player> players;
 	private Player[] players;
 	private int addedPlayers;
-	private int currentPlayer=0;
+	private int currentPlayer = 0;
 	private MatchObserver observer;
 	private String[] playercolors;
 	private int playerscreated;
 	private LeaderDeck leaderCards;
 	private Period period;
-	private int turn=0;
-	
-
+	private int turn = 0;
 
 	public Match(int numPlayers, MatchHandler matchObserver) {
 		this.setMatchObserver(matchObserver);
@@ -54,34 +50,34 @@ public class Match {
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
 		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
-		
-		playercolors=new String[numPlayers];
-		
+
+		playercolors = new String[numPlayers];
+
 		shuffleColors();
-		
+
 		try {
 			leaderCards = new LeaderDeck();
-			
+
 			System.out.println("match: creato oggetto leaderdeck");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	private void shuffleColors() {
-		ArrayList<String> colors=new ArrayList<>();
+		ArrayList<String> colors = new ArrayList<>();
 		colors.add("Red");
 		colors.add("Green");
 		colors.add("Blue");
 		colors.add("Yellow");
 		Collections.shuffle(colors);
-		
-		for(int i=0;i<playercolors.length;i++){
+
+		for (int i = 0; i < playercolors.length; i++) {
 			playercolors[i] = colors.get(i);
 		}
-			
+
 	}
 
 	public void addPlayer(Player p) throws MatchFullException {
@@ -135,67 +131,89 @@ public class Match {
 		this.observer = observer;
 	}
 
-	public List<String[]> getCurrentPlayerProductionChoices() {
-		List<String[]> choices = new ArrayList();
+	public List<String[]> getCurrentPlayerProductionChoices(String familyMember, int actionSpace, int paidServants) {
+
+		List<String[]> choices = new ArrayList<>();
 		List<DevelopmentCard> buildingCards = this.getCurrentPlayer().getDeckOfType(CardType.BUILDING);
+		Player player = getCurrentPlayer();
+		FamilyMember fm = player.getFamilyMember(familyMember);
+		String[] cardFields;
+
 		for (DevelopmentCard card : buildingCards) {
+			if (isApplicable(card, fm, player, paidServants)) {
+				if ((card instanceof BuildingCard) && ((BuildingCard) card).hasProductionChoice()) {
+					cardFields = new String[3];
+					cardFields[0] = "" + card.getId();
+					cardFields[1] = card.getName();
+					String[] tmp = ((BuildingCard) card).getProductionChoice();
+					cardFields[2] = tmp[0];
+					cardFields[3] = tmp[1];
 
-			BuildingCard buildingCard = (BuildingCard) card;
+					choices.add(cardFields);
 
-			if (buildingCard.hasProductionChoice()) {
-				choices.add(buildingCard.getProductionChoice());
+				}
 			}
 		}
+
 		return choices;
 	}
-	
-	public int getChurchSupportCostInPeriod(){
-		if(this.period == Period.FIRST){
+
+	public boolean isApplicable(DevelopmentCard card, FamilyMember fm, Player player, int paidServants) {
+		// System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO
+		// CONTROLLANDO LA CARTA: !" + card.toString());
+		// System.out.println("action value fm: " + fm.getActionValue());
+		// System.out.println("players bonuses: " +
+		// player.getBonuses().getActivationVariation(card.getCardType()));
+		// System.out.println("card activation cost" +
+		// card.getActivationCost());
+		return (fm.getActionValue() + player.getBonuses().getActivationVariation(card.getCardType())
+				+ paidServants >= card.getActivationCost());
+	}
+
+	public int getChurchSupportCostInPeriod() {
+		if (this.period == Period.FIRST) {
 			return BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST;
-		} else if(this.period == Period.SECOND){
+		} else if (this.period == Period.SECOND) {
 			return BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST;
 		} else {
 			return BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST;
 		}
 	}
-		
-	public MilitaryPoint getChurchSupportPrizeInPeriod(){
-		
-		if(this.period == Period.FIRST){
+
+	public MilitaryPoint getChurchSupportPrizeInPeriod() {
+
+		if (this.period == Period.FIRST) {
 			return this.board.getChurch().getMilitaryPoints()[BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST];
-		} else if(this.period == Period.SECOND){
+		} else if (this.period == Period.SECOND) {
 			return this.board.getChurch().getMilitaryPoints()[BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST];
 		} else {
 			return this.board.getChurch().getMilitaryPoints()[BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST];
 		}
 	}
-	
-	public Period getPeriod(){
+
+	public Period getPeriod() {
 		return period;
 	}
-		
+
 	public LeaderDeck getLeaderCards() {
 		return leaderCards;
 	}
 
 	public void distributeTurnResources() {
-		for(int i=0;i<players.length;i++){
-			
-//			ResourceChest rs=new ResourceChest(
-//		    		BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
-//			rs.addChest(roundResourceSupply);
-			
-			//per prova aggiungiamone tante
-			ResourceChest rs=new ResourceChest(100,100,100,100,100,100,100);
-			
-		    players[i].addResources(rs);
-		    		
+		for (int i = 0; i < players.length; i++) {
+
+			// ResourceChest rs=new ResourceChest(
+			// BoardConstants.ROUND_COIN_FIRST_PLAYER+i,0,0,0,0,0,0);
+			// rs.addChest(roundResourceSupply);
+
+			// per prova aggiungiamone tante
+			ResourceChest rs = new ResourceChest(100, 100, 100, 100, 100, 100, 100);
+
+			players[i].addResources(rs);
+
 		}
-		
+
 	}
-
-	
-
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
@@ -207,10 +225,13 @@ public class Match {
 
 	public void handlePeriodsAndTurns() {
 		incrementTurn();
-		if(this.turn==1)this.period=Period.FIRST;
-		else if(this.turn==3)period=Period.SECOND;
-		else if(this.turn==5)period=Period.THIRD;
-		
+		if (this.turn == 1)
+			this.period = Period.FIRST;
+		else if (this.turn == 3)
+			period = Period.SECOND;
+		else if (this.turn == 5)
+			period = Period.THIRD;
+
 	}
 
 	public int getTurn() {
@@ -218,61 +239,60 @@ public class Match {
 	}
 
 	public void setNextPlayer() {
-		if(this.currentPlayer==players.length-1)
-			this.currentPlayer=0;
+		if (this.currentPlayer == players.length - 1)
+			this.currentPlayer = 0;
 		else
-		this.currentPlayer++;
+			this.currentPlayer++;
 	}
 
 	public void setPlayerOrder() {
-		ArrayList<String> colors=new ArrayList<String>();
-		for(int i=0;i<players.length;i++)
-		colors.add(playercolors[i]);
+		ArrayList<String> colors = new ArrayList<String>();
+		for (int i = 0; i < players.length; i++)
+			colors.add(playercolors[i]);
 		this.board.setPlayerOrder(colors);
 	}
 
 	public void addFamilyMembersToPlayers() {
-		for(int i=0;i<players.length;i++){
+		for (int i = 0; i < players.length; i++) {
 			players[i].addFamilyMembers();
 		}
-		
+
 	}
 
 	public void refreshDicesValueForPlayers() {
-		for(int i=0;i<this.getPlayers().length;i++)
+		for (int i = 0; i < this.getPlayers().length; i++)
 			this.getPlayers()[i].refreshFamilyMemberValues();
-		
+
 	}
-	
+
 	/**
-	 * @matteo
-	 * this method removes all the familyMember placed in the game Board
+	 * @matteo this method removes all the familyMember placed in the game Board
 	 */
-	public void clearBoard(){
-		
-		//clearing the council palace
+	public void clearBoard() {
+
+		// clearing the council palace
 		this.getBoard().getCouncilPalace().getMembers().clear();
-		
-		//clearing harvest area
+
+		// clearing harvest area
 		this.getBoard().getHarvestArea().getMultipleActionSpace().getMembers().clear();
 		this.getBoard().getHarvestArea().getSingleActionSpace().setFamilyMember(null);
-		
-		//clearing production area
+
+		// clearing production area
 		this.getBoard().getProductionArea().getMultipleActionSpace().getMembers().clear();
 		this.getBoard().getProductionArea().getSingleActionSpace().setFamilyMember(null);
-		
-		//clearing the market
+
+		// clearing the market
 		this.getBoard().getMarket().getMarktActionSpace("1").setFamilyMember(null);
 		this.getBoard().getMarket().getMarktActionSpace("2").setFamilyMember(null);
-		if(this.players.length == 4){
-		this.getBoard().getMarket().getMarktActionSpace("3").setFamilyMember(null);
-		this.getBoard().getMarket().getMarktActionSpace("4").setFamilyMember(null);
+		if (this.players.length == 4) {
+			this.getBoard().getMarket().getMarktActionSpace("3").setFamilyMember(null);
+			this.getBoard().getMarket().getMarktActionSpace("4").setFamilyMember(null);
 		}
-		
-		//clearing the towers
-		for(CardType c : CardType.values()){
-			if(c != CardType.ANY){
-				for(int i = 0; i < this.getBoard().getTower(c).getFloors().size();i++){
+
+		// clearing the towers
+		for (CardType c : CardType.values()) {
+			if (c != CardType.ANY) {
+				for (int i = 0; i < this.getBoard().getTower(c).getFloors().size(); i++) {
 					this.getBoard().getTower(c).getFloor(i).getActionSpace().setFamilyMember(null);
 				}
 			}
