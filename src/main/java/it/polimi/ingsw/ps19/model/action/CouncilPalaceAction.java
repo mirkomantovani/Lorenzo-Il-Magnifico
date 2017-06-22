@@ -30,7 +30,7 @@ public class CouncilPalaceAction extends Action {
 
 	@Override
 	public boolean isApplicable() {
-		if(!councilPalace.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.councilPalace.getActionValueRequired()){
+		if((familyMember.getActionValue() + paidServants)< this.councilPalace.getActionValueRequired()){
 			return false;
 		}
 		return true;

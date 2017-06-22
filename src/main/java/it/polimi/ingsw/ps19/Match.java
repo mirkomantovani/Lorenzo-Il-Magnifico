@@ -8,6 +8,7 @@ import java.util.List;
 import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
+import it.polimi.ingsw.ps19.model.area.Tower;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -225,6 +226,41 @@ public class Match {
 		for(int i=0;i<this.getPlayers().length;i++)
 			this.getPlayers()[i].refreshFamilyMemberValues();
 		
+	}
+	
+	/**
+	 * @matteo
+	 * this method removes all the familyMember placed in the game Board
+	 */
+	public void clearBoard(){
+		
+		//clearing the council palace
+		this.getBoard().getCouncilPalace().getMembers().clear();
+		
+		//clearing harvest area
+		this.getBoard().getHarvestArea().getMultipleActionSpace().getMembers().clear();
+		this.getBoard().getHarvestArea().getSingleActionSpace().setFamilyMember(null);
+		
+		//clearing production area
+		this.getBoard().getProductionArea().getMultipleActionSpace().getMembers().clear();
+		this.getBoard().getProductionArea().getSingleActionSpace().setFamilyMember(null);
+		
+		//clearing the market
+		this.getBoard().getMarket().getMarktActionSpace("1").setFamilyMember(null);
+		this.getBoard().getMarket().getMarktActionSpace("2").setFamilyMember(null);
+		if(this.players.length == 4){
+		this.getBoard().getMarket().getMarktActionSpace("3").setFamilyMember(null);
+		this.getBoard().getMarket().getMarktActionSpace("4").setFamilyMember(null);
+		}
+		
+		//clearing the towers
+		for(CardType c : CardType.values()){
+			if(c != CardType.ANY){
+				for(int i = 0; i < this.getBoard().getTower(c).getFloors().size();i++){
+					this.getBoard().getTower(c).getFloor(i).getActionSpace().setFamilyMember(null);
+				}
+			}
+		}
 	}
 
 }
