@@ -224,7 +224,9 @@ public class Match {
 	}
 
 	public void handlePeriodsAndTurns() {
+		System.out.println("MATCH: SONO IN HANDLEPERIODSANDTURN");
 		incrementTurn();
+		System.out.println("turno incrementato :" + this.turn);
 		if (this.turn == 1)
 			this.period = Period.FIRST;
 		else if (this.turn == 3)
@@ -232,6 +234,7 @@ public class Match {
 		else if (this.turn == 5)
 			period = Period.THIRD;
 
+		
 	}
 
 	public int getTurn() {

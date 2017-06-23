@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
  * @author matteo
  *
  */
-public class ProductionBonusEffect extends Effect {
+public class ProductionBonusEffect extends Effect implements Disapplyable{
 	
 	/**
 	 * 
@@ -30,6 +31,12 @@ public class ProductionBonusEffect extends Effect {
 			return "You gain a + " + value + " to your production value";
 		else
 			return "You gain a " + value + " to your production value";
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

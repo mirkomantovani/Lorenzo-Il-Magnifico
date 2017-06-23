@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
@@ -10,7 +11,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Jimmy
  *
  */
-public class InstantResourcesEffect extends Effect {
+public class InstantResourcesEffect extends Effect implements Disapplyable{
 	   
 	/**
 	 * 
@@ -51,6 +52,12 @@ public class InstantResourcesEffect extends Effect {
 		builder.append(effectResourceChest.toString());
 		
 		return builder.toString();
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

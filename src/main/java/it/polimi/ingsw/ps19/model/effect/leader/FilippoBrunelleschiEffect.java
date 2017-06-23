@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class FilippoBrunelleschiEffect extends Effect {
+public class FilippoBrunelleschiEffect extends Effect implements Disapplyable {
 
 	/**
 	 * 

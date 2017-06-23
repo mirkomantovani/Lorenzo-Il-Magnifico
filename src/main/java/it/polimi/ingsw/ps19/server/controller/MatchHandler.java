@@ -43,6 +43,8 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -471,10 +473,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void nextStep() {
 		if (roundNumber == match.getPlayers().length * 4) {
 			System.out.println("roundNumber= "+roundNumber+"\n cambio turno");
-			if (match.getTurn() % 2 == 1)
+			if (match.getTurn() % 2 == 1){
+				System.out.println(match.getTurn() + "ho fatto modulo due");
 				startTurn();
-			else 
+			}
+			else {
 				startExcommunicationPhase();
+				System.out.println("sono nell'else di modulo due, inizia l'excommphase" + match.getTurn());
+			}
 		} else
 			startRound();
 
@@ -834,9 +840,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 		 }
 		 System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
-		 match.setPlayers((Player[]) councilPlayers.toArray());
-		 
+		 Player[] newList = new Player[oldList.length];
+		 for(int i= 0; i < councilPlayers.size(); i++){
+			 newList[i] = councilPlayers.get(i);
 		 }
+		 
+		 match.setPlayers(newList);
+		 
+		 System.out.println("questo è il nuovo ordine");
+		 for(int i = 0; i < councilPlayers.size(); i++)
+			 System.out.println(newList[i].toString() + "\n");
+		 }
+	}
+
+	public int getRoundNumber() {
+		return roundNumber;
 	}
 
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
@@ -904,6 +922,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.prodActionSpace=0;
 		this.prodPaidServant=0;
 		this.prodFamilyMember="";
+	}
+	
+	public void deactivateLeaderCards(){
+		if(!this.getCurrentPlayer().getLeaderCards().isEmpty())
+			for(LeaderCard l: this.getCurrentPlayer().getLeaderCards().values()){
+				l.getSpecialEffect().disapplyEffect(getCurrentPlayer());	
+			}
 	}
 
 	

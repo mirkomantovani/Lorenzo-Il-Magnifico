@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class LudovicoAriostoEffect extends Effect {
+public class LudovicoAriostoEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 
@@ -23,6 +23,12 @@ public class LudovicoAriostoEffect extends Effect {
 
 	@Override
 	public void applyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
 		// TODO Auto-generated method stub
 		
 	}

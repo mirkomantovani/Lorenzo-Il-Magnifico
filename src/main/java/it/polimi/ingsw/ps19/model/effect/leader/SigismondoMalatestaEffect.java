@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class SigismondoMalatestaEffect extends Effect {
+public class SigismondoMalatestaEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 

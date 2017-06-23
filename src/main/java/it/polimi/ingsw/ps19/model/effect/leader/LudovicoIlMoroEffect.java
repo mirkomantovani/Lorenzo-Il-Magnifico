@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class LudovicoIlMoroEffect extends Effect {
+public class LudovicoIlMoroEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 

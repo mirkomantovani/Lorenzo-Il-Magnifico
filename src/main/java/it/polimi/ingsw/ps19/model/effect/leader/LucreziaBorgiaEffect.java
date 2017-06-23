@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class LucreziaBorgiaEffect extends Effect {
+public class LucreziaBorgiaEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 

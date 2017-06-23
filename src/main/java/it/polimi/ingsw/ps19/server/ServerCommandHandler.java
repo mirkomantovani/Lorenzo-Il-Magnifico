@@ -175,9 +175,12 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
-		handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
-		;
-
+		if(handler.getCurrentPlayer().getLeaderCards().containsKey(activateLeaderCardCommand.getLeaderName()))
+			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
+		else{
+			handler.sendToCurrentPlayer(new InvalidCommand());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
 	}
 
 	public void applyCommand(ChurchSupportCommand churchSupportCommand) {

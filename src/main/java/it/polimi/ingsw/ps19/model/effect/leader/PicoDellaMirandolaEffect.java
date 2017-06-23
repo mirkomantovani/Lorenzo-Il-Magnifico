@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class PicoDellaMirandolaEffect extends Effect{
+public class PicoDellaMirandolaEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 

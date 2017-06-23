@@ -2,12 +2,13 @@ package it.polimi.ingsw.ps19.model.effect;
 
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
  * @author matteo
  *
  */
-public class InstantHarvestActionEffect extends Effect {
+public class InstantHarvestActionEffect extends Effect implements Disapplyable{
 	
 	/**
 	 * 
@@ -46,6 +47,12 @@ public class InstantHarvestActionEffect extends Effect {
 		builder.append("You can activate a harvest with an action value of ");
 		builder.append(harvestActionValue);
 		return builder.toString();
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
