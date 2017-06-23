@@ -134,6 +134,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
 			} else if(input.toLowerCase().equals("end")){
 				gameController.notifyFinishRound();
+			} else if(input.toLowerCase().equals("activate")){
+				print("Select the leader card you own by typing its name");
+				readerState = ClientConstants.SEND_ACTIVATED_LEADER_CARD;
 			}
 			else
 				moveHandler(input);
@@ -172,6 +175,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_PRODUCTION_CHOICES:
 			gameController.notifyProductionChoices(input);
 			break;
+		case ClientConstants.SEND_ACTIVATED_LEADER_CARD:
+			gameController.notifyLeaderEffectActivation(input);
+			break;
 		default:
 			print("Command not recognized");
 			break;
@@ -198,6 +204,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		print("Choose what you want to do:");
 		print("To perform an action, type \"action\"");
 		print("To discard a leader card and get a privilege, type \"discard\"");
+		print("To activate a leader card effect, type \"activate\"");
 		readerState = ClientConstants.SEND_MOVE;
 	}
 	
@@ -369,8 +376,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void askForExcommunicationPayment(String excommunicationEffect) {
 		print("Do you accept the following excommunication effect?\n");
 		print(excommunicationEffect);
-		print("\n1 - Yes, I accept the excommunication");
-		print("2 - No, I want to pay the faith points");
+		print("\n1 - No, I want to pay the faith points");
+		print("2 - Yes, I accept the excommunication");
 		readerState = ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE;
 	}
 

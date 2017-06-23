@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.client;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
@@ -198,7 +199,12 @@ public class ClientController implements InputObserver{
 			}
 		}
 		return commandConstructor;
-//		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+	}
+
+
+	public void notifyLeaderEffectActivation(String leaderCardName) {
+		sendCommand(new ActivateLeaderCardCommand(leaderCardName, playerColor));
+		
 	}
 	
 
