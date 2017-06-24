@@ -8,9 +8,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
+import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.area.Floor;
+import it.polimi.ingsw.ps19.model.area.Tower;
+import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
  * @author Mirko
@@ -27,8 +30,8 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 					
 					frame.removeInitialImage();
-					frame.initializeGameFrame();
-					frame.getGamePanel().addCard();
+//					frame.initializeGameFrame();
+//					frame.getGamePanel().addCard();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -114,10 +117,25 @@ public class MyFrame extends JFrame {
 		remove(initialPanel);
 	}
 
-	public void initializeGameFrame() {
+	public void initializeGameFrame(Board board) {
 		gamePanel=new GamePanel();
 		setContentPane(gamePanel);
+		addCards(board);
+	}
+
+	private void addCards(Board board) {
 		
+		for(int j=0;j<CardType.values().length;j++){
+			CardType c=CardType.values()[j];
+			if(c!=CardType.ANY){
+			Tower t=board.getTower(c);
+			for(int i=0;i<t.getFloors().size();i++){
+				int id=t.getFloor(i).getCard().getId();
+				getGamePanel().addCard(j,i,id);
+			}
+				
+		}		
+		}
 	}
 
 	public GamePanel getGamePanel() {

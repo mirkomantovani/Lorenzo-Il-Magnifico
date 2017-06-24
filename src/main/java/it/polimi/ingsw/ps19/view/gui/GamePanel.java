@@ -142,8 +142,8 @@ public class GamePanel extends JPanel {
 //		internalFrame2.setVisible(true);
 	}
 	
-	public void addCard(){
-		JButton btnNewButton_2 = new CardButton(boardPanel.getPreferredSize(),2,2,77);
+	public void addCard(int tower,int floor,int id){
+		JButton btnNewButton_2 = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
 		boardPanel.add(btnNewButton_2);
 	}

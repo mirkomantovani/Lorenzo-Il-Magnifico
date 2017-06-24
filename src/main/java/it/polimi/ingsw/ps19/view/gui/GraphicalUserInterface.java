@@ -35,7 +35,7 @@ public class GraphicalUserInterface implements UserInterface{
 	@Override
 	public void initializeMatch() {
 		frame.removeInitialImage();
-		frame.initializeGameFrame();
+//		frame.initializeGameFrame();
 		
 	}
 
@@ -83,7 +83,6 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void initializeTurn(Period period, int turn) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -115,8 +114,8 @@ public class GraphicalUserInterface implements UserInterface{
 
 	@Override
 	public void refreshBoard(Board board) {
-		// TODO Auto-generated method stub
-		
+		frame.removeInitialImage();
+		frame.initializeGameFrame(board);
 	}
 
 	@Override
