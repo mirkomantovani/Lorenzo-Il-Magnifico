@@ -8,9 +8,9 @@ public class UserInterfaceFactory {
 	
 	public static UserInterface getUserInterface(int choice, ClientController gameController){
 		switch(choice){
-			case 2: return new GraphicalUserInterface();
+			case 2: return new GraphicalUserInterface(gameController);
 			case 1: return new CommandLineInterface(gameController);
-			default: return new GraphicalUserInterface();
+			default: return new GraphicalUserInterface(gameController);
 		}
 	}
 }

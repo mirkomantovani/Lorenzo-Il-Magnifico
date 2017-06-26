@@ -32,4 +32,6 @@ public interface InputObserver {
 	public void notifyExcommunicationEffectChoice(Boolean string);
 	
 	public void notifyProductionChoices(String choices);
+	
+	public void notifyChatMessage(String message);
 }

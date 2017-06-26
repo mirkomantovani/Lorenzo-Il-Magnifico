@@ -30,7 +30,8 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 					
 					frame.removeInitialImage();
-//					frame.initializeGameFrame();
+					GamePanel gameP=new GamePanel();
+					frame.setContentPane(gameP);
 //					frame.getGamePanel().addCard();
 					
 				} catch (Exception e) {

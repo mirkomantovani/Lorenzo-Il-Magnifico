@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
+import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
@@ -218,8 +219,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(ChatMessageClientCommand chatMessageClientCommand) {
-		// TODO Auto-generated method stub
-
+		handler.sendToAllPlayers(new ChatMessageServerCommand(chatMessageClientCommand.getMessage()));
 	}
 
 	public void applyCommand(HarvestCommand harvestCommand) {

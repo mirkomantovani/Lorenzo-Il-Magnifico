@@ -60,10 +60,10 @@ public class CardButton extends JButton {
 		path=path+id;
 		path=path+".png";
 		
-		System.out.println(path);
-		
-		System.out.println(getClass().getResource("/").getPath());
-		System.out.println(getClass().getProtectionDomain().getCodeSource().getLocation().toString());
+//		System.out.println(path);
+//		
+//		System.out.println(getClass().getResource("/").getPath());
+//		System.out.println(getClass().getProtectionDomain().getCodeSource().getLocation().toString());
 		
 		try {
 		    img = ImageIO.read(getClass().getResource(path));
@@ -71,7 +71,7 @@ public class CardButton extends JButton {
 		  } catch (Exception ex) {
 		    System.out.println(ex);
 		  }
-		System.out.println((int)(ratio*boardPanelPrefSize.height)+"  "+(int)(ratio*1017));
+//		System.out.println((int)(ratio*boardPanelPrefSize.height)+"  "+(int)(ratio*1017));
 		img = img.getScaledInstance((int)(ratio*boardPanelPrefSize.width),(int)(ratio*boardPanelPrefSize.height),
 				Image.SCALE_SMOOTH);
 		
@@ -89,7 +89,7 @@ public class CardButton extends JButton {
 				leftBorder*boardPanelPrefSize.width+this.tower*cardWidth);
 		applicationPointY=(int)(revertFloor*floorSpace*boardPanelPrefSize.height+
 				northBorder*boardPanelPrefSize.height+revertFloor*cardHeight);
-		System.out.println("appl point:"+applicationPointX+ " "+applicationPointY);
+//		System.out.println("appl point:"+applicationPointX+ " "+applicationPointY);
 		
 		
 		
