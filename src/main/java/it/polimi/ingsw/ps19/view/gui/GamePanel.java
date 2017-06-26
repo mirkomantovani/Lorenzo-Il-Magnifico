@@ -55,11 +55,11 @@ public class GamePanel extends JPanel {
 		add(boardPanel, BorderLayout.WEST);
 		boardPanel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		btnNewButton.setBounds(72, 72, 105, 176);
-		boardPanel.add(btnNewButton);
+//		JButton btnNewButton = new JButton("New button");
+//		btnNewButton.setContentAreaFilled(false);
+//		btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+//		btnNewButton.setBounds(72, 72, 105, 176);
+//		boardPanel.add(btnNewButton);
 		
 //		JButton btnNewButton_2 = new CardButton(boardPanel.getPreferredSize(),1,0,55);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);

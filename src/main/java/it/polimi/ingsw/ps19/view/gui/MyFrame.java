@@ -63,7 +63,7 @@ public class MyFrame extends JFrame {
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
 
-		setUndecorated(true);
+//		setUndecorated(true);
 		setLayout(new BorderLayout());
 		content = this.getContentPane();
 
