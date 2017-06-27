@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -204,8 +205,22 @@ public class GamePanel extends JPanel {
 		this.txtrCiaooo.setCaretPosition(this.txtrCiaooo.getDocument().getLength());
 	}
 	
+	public void setMarkerOrder(ArrayList<MarkerDisk> markers){
+		for(MarkerDisk m : markers){
+			paint(m.getGraphics());
+		}
+	}
 	
+	public void setMarkerVictoryPoints(){
+		
+	}
 	
+	public void setMarkerMilitaryPoint(){
+		
+	}
 	
+	public void setChurchMarker(){
+		
+	}
 	
 }
