@@ -138,8 +138,8 @@ public class Player implements Serializable {
 	 * @return
 	 */
 	public FamilyMember getFamilyMember(String color){
+		System.out.println("player: getfamilymember, prendo dalla mappa");
 		return this.familyMembers.get(Color.valueOf(Color.class, color.toUpperCase()));
-		
 	}
 	
 	/**

@@ -2,13 +2,14 @@ package it.polimi.ingsw.ps19.model.effect;
 
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 
 /**
  * @author matteo
  *
  */
-public class InstantProductionActionEffect extends Effect {
+public class InstantProductionActionEffect extends Effect implements Disapplyable{
 	
 	/**
 	 * 
@@ -44,6 +45,13 @@ public class InstantProductionActionEffect extends Effect {
 		builder.append("You can activate a production with an action value of ");
 		builder.append(productionActionValue);
 		return builder.toString();
+	}
+
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

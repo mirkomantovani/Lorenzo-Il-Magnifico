@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps19.client;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps19.command.toserver.ActivateLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenPrivilegeCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
@@ -14,6 +16,7 @@ import it.polimi.ingsw.ps19.command.toserver.InvalidInputCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoCouncilPalaceCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
@@ -22,9 +25,11 @@ import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.InputObserver;
 import it.polimi.ingsw.ps19.view.UserInterface;
 /**
- * @author matteo
+ * This class represents the client controller that takes care of sending through the network
+ * all the commands requested by the player. 
+ * 
+ * @author Jimmy
  *
- *  this is the game controller of the MVC pattern
  */
 public class ClientController implements InputObserver{
 
@@ -62,19 +67,16 @@ public class ClientController implements InputObserver{
 	}
 	
 	@Override
-	public void notifyChosenPrivileges(String choices){
-		char[] charArray = choices.toCharArray();
-		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
-		for(int i = 0; i<charArray.length; i+=2){
-			if(Character.getNumericValue(charArray[i]) != -1)
-				commandConstructor.add(Character.getNumericValue(charArray[i]));
-			else{
-				userInterface.invalidInput();
-				notifyInvalidInput();
-				return;
-			}
+	public void notifyChosenPrivileges(String choices){		
+		System.out.println("\nCLIENTCONTROLLER: before check and send\n");
+		ArrayList<Integer> commandConstructor = parseString(choices);
+		if(commandConstructor.size() != 0)
+			sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+		else{
+			userInterface.invalidInput();
+			notifyInvalidInput();
 		}
-		sendCommand(new ChosenPrivilegeCommand(commandConstructor));
+		System.out.println("\nCLIENTCONTROLLER: after check and send\n");
 	}
 
 	
@@ -166,9 +168,53 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyExcommunicationEffectChoice(Boolean choice) {
-		sendCommand(new ChurchSupportCommand(choice));
+		sendCommand(new ChurchSupportCommand(playerColor, choice));
+	}
+
+
+
+	@Override
+	public void notifyProductionChoices(String choices) {
+		ArrayList<Integer> commandConstructor = parseString(choices);
+		if(commandConstructor.size() != 0)
+			sendCommand(new ProductionActivationCommand(commandConstructor));
+		else{
+			userInterface.invalidInput();
+			notifyInvalidInput();
+		}
 	}
 	
+	private ArrayList<Integer> parseString(String choices){
+		System.out.println("\n\n sono nella parseStirng" + choices + "\n\n");
+		char[] charArray = choices.toCharArray();
+		for(int i = 0; i < choices.length(); i++){
+			System.out.println("\n\n" + charArray[i] + "\n\n");
+		}
+		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
+		for(int i = 0; i<charArray.length; i+=2){
+			if(Character.getNumericValue(charArray[i]) != -1)
+				commandConstructor.add(Character.getNumericValue(charArray[i]));
+			else{
+				commandConstructor.clear();    //Se l'utente inserisce una stringa a muzzo
+				break;						   //il metodo ritorna una lista vuota
+			}
+		}
+		return commandConstructor;
+	}
+
+
+	public void notifyLeaderEffectActivation(String leaderCardName) {
+		sendCommand(new ActivateLeaderCardCommand(leaderCardName, playerColor));
+		
+	}
+
+
+
+	@Override
+	public void notifyChatMessage(String message) {
+		String m="<--"+playerColor+"--> "+message;
+		sendCommand(new ChatMessageClientCommand(m));
+	}
 	
 
 }

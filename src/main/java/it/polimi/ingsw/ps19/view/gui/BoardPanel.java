@@ -15,6 +15,10 @@ import it.polimi.ingsw.ps19.constant.ImagesConstants;
 
 
 /**
+ * This JPanel extension is the left-side of the frame, the one containing the board image with 
+ * all his components, at the moment of the creation the board image is scaled mantaining the
+ * proportions to adapt it to any kind of screen, components put into this BoardPanel must
+ * set the bounds for themselves and scale their dimensions to create a responsive UI
  * @author Mirko
  *
  */

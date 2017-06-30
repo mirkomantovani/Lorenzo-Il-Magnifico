@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class CesareBorgiaEffect extends Effect {
+public class CesareBorgiaEffect extends Effect implements Disapplyable {
 
 	/**
 	 * 

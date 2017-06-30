@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class SistoIVEffect extends Effect{
+public class SistoIVEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 
@@ -25,6 +25,12 @@ public class SistoIVEffect extends Effect{
 	@Override
 	public void applyEffect(Player p) {
 		p.getBonuses().setChurchSupportBonus(5);
+		
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
 		
 	}
 

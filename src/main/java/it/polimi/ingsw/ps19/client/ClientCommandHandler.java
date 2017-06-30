@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.client;
 
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
@@ -23,7 +24,6 @@ import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
-import it.polimi.ingsw.ps19.command.toclient.askForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -92,7 +92,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		userInterface.startDraft(chooseLeaderCardCommand.getPossibleChoices());
 	}
 
-	public void applyCommand(askForExcommunicationPaymentCommand solveExcommunicationCommand) {
+	public void applyCommand(AskForExcommunicationPaymentCommand solveExcommunicationCommand) {
 		userInterface.askForExcommunicationPayment(solveExcommunicationCommand.getExcommunicationEffect());
 	}
 

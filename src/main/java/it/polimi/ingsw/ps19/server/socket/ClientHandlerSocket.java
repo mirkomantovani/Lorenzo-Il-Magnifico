@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
+import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
@@ -51,7 +52,7 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	@Override
 	public void sendCommand(ServerToClientCommand command) throws IOException {
-		outSocket.writeObject(command);
+		outSocket.writeUnshared(command);
 		outSocket.flush();
 		outSocket.reset();
 	}
@@ -59,7 +60,7 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void closedByServer() {
 		try {
-			outSocket.writeObject(new CloseClientCommand());
+			outSocket.writeUnshared(new CloseClientCommand());
 		} catch (IOException e) {
 		}
 		close();
@@ -98,7 +99,7 @@ public class ClientHandlerSocket extends ClientHandler {
 		while (true) {
 			command = null;
 			try {
-				command = (ClientToServerCommand) inSocket.readUnshared();
+				command = (ClientToServerCommand) inSocket.readObject();
 				
 				if(command instanceof ChosenLeaderCardCommand)
 					System.out.println("clhandsock ho ricevuto chosenleadercard");
@@ -116,7 +117,8 @@ public class ClientHandlerSocket extends ClientHandler {
 			//and managed by the ServerCommandHandler
 			else if(command instanceof SendCredentialsCommand || 
 					command instanceof ChosenLeaderCardCommand ||
-					command instanceof ChatMessageClientCommand)
+					command instanceof ChatMessageClientCommand ||
+					command instanceof ChurchSupportCommand)
 				commandHandler.notifyNewCommand(command);
 			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {

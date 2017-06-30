@@ -56,7 +56,7 @@ public class ClientSocketInterface implements NetworkInterface {
 		
 		System.out.println("clisocket: invio comando");
 		try {
-			outSocket.writeUnshared(command); 
+			outSocket.writeObject(command); 
 			outSocket.flush();
 			outSocket.reset();
 		} catch (IOException e) {

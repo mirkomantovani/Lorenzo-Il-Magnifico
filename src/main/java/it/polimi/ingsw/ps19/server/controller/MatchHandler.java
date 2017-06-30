@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
+import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
@@ -20,21 +23,29 @@ import it.polimi.ingsw.ps19.command.toclient.InitializeTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
+import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
 import it.polimi.ingsw.ps19.model.action.Action;
+import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;
+import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
+import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.server.ClientHandler;
@@ -53,12 +64,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerCommandHandler commandHandler;
 	private ServerInterface ServerInterface;
 	private Match match;
-	private Thread roundTimer;
+//	private RoundTimer roundTimer;
+	private Thread roundTimerThread;
 	private int leaderResponseCounter = 0;
 	private ArrayList<ArrayList<LeaderCard>> leaderSets;
 	private int cycle = 1;
 	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
+	private int numPlayersAnsweredExcomm;
+	
+	private String prodFamilyMember;
+	private int prodActionSpace;
+	private int prodPaidServant;
 
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
@@ -91,7 +108,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// chiesto ancora prima, dal server
 //		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
+//		 match.handlePeriodsAndTurns();
 		 startTurn();
+		 
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 		
 //		provaLeaderPlayer();
@@ -189,26 +208,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startTurn() {
-		// sendToCurrentPlayer(new StartTurnCommand());
+//		 sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-
-//			System.out.println("rollo i dadi");
-			match.getBoard().rollDices();
-			match.refreshDicesValueForPlayers();
-			match.addFamilyMembersToPlayers();
-			match.distributeTurnResources();
 			
+			initTurn();
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
-			this.match.getBoard().changeCardInTowers();
-			
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
+			
+			match.distributeTurnResources();  //this needs to be here and not in initTurn, 
+			//otherwise the GUI wouldn't have a playerResources Panel to add resources into
 
-			roundNumber = 0;
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
 			// createTurnTimer();
@@ -216,7 +230,28 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	private void initTurn() {
+		refreshPlayerOrder();
+		roundNumber = 0;
+//		System.out.println("rollo i dadi");
+		
+		match.clearBoard();
+		
+		match.getBoard().rollDices();
+		match.refreshDicesValueForPlayers();
+		match.addFamilyMembersToPlayers();
+		
+		this.match.getBoard().changeCardInTowers();
+		
+		//TODO ripulire il board dai family members 
+	}
+
 	private void startRound() {
+		if(roundTimerThread!=null)
+		if(roundTimerThread.isAlive())
+			roundTimerThread.interrupt();
+		
+		
 		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
@@ -322,8 +357,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		roundTimer = new Thread(new RoundTimer(this, timeMillis));
-		roundTimer.start();
+		roundTimerThread = new Thread(new RoundTimer(this, timeMillis));
+		roundTimerThread.start();
 	}
 
 	/**
@@ -398,6 +433,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// leadercards
 
 	}
+	
+	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
+		industrialAction.apply(choices);
+	}
 
 	// @Override
 	// public void notifyPlayerStatusChange(Player player) {
@@ -435,18 +474,28 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void nextStep() {
 		if (roundNumber == match.getPlayers().length * 4) {
-			if (match.getTurn() % 2 == 1)
+			System.out.println("roundNumber= "+roundNumber+"\n cambio turno");
+			if (match.getTurn() % 2 == 1){
+				System.out.println(match.getTurn() + "ho fatto modulo due");
 				startTurn();
-			else
+			}
+			else {
 				startExcommunicationPhase();
+				System.out.println("sono nell'else di modulo due, inizia l'excommphase" + match.getTurn());
+			}
 		} else
 			startRound();
 
 	}
+	
+	
 
 	private void startExcommunicationPhase() {
-
-		startTurn();
+		
+		ExcommunicationTile excommTile=getCurrentExcommTile();
+		
+		sendToAllPlayers(new AskForExcommunicationPaymentCommand(
+				excommTile.getEffect().toString()));
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -762,4 +811,127 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	private void refreshPlayerOrder(){
+		
+		 Player[] oldList = match.getPlayers();
+		 
+		 ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
+		 
+		 System.out.println(councilMemberList.toString());
+		 
+		 ArrayList<Player> councilPlayers = new ArrayList<Player>();
+		 System.out.println("sono nella refresh player order");
+		 
+		 if(!councilMemberList.isEmpty()){
+		 System.out.println("sono nell if della refresh player");
+		 for(int i = 0; i < councilMemberList.size(); i++){
+			 councilPlayers.add(councilMemberList.get(i).getPlayer());
+		 }
+		 System.out.println("ho ricavato i player che hanno giocato nel council palace");
+		 for(int i = 0; i<councilPlayers.size(); i++){
+			 for(int j = 0; j<councilPlayers.size();j++){
+				 if(i!=j && councilPlayers.get(i) == councilPlayers.get(j)){
+					 councilPlayers.remove(j);
+				 }
+			 }
+		 }
+		 System.out.println("ho rimosso i duplicati");
+		 for(int i = 0; i < oldList.length; i++){
+			if(!councilPlayers.contains(oldList[i])){
+				councilPlayers.add(oldList[i]);
+			}
+		 }
+		 System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
+		 Player[] newList = new Player[oldList.length];
+		 for(int i= 0; i < councilPlayers.size(); i++){
+			 newList[i] = councilPlayers.get(i);
+		 }
+		 
+		 match.setPlayers(newList);
+		 
+		 System.out.println("questo è il nuovo ordine");
+		 for(int i = 0; i < councilPlayers.size(); i++)
+			 System.out.println(newList[i].toString() + "\n");
+		 }
+	}
+
+	public int getRoundNumber() {
+		return roundNumber;
+	}
+
+	public void handleChurchSupportDecision(String playerColor, boolean decision) {
+		numPlayersAnsweredExcomm++;
+		if(decision){
+			System.out.println("Non ho scomunicato il giocatore"+playerColor);
+			this.getPlayerFromColor(playerColor).payFaithPoint();
+			ResourceChest rc = new ResourceChest();
+			rc.addResource(match.getChurchSupportPrizeInPeriod());
+			this.getPlayerFromColor(playerColor).addResources(rc);
+		} else {
+			System.out.println("Scomunico il giocatore"+playerColor);
+			ExcommunicationTile tile;
+			tile=this.getCurrentExcommTile();
+			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
+			System.out.println("Ho scomunicato il giocatore"+playerColor);
+			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
+			
+		}	
+		
+		if(numPlayersAnsweredExcomm==this.match.getPlayers().length){
+			numPlayersAnsweredExcomm=0;
+			startTurn();
+		}
+			
+	}
+
+	private ExcommunicationTile getCurrentExcommTile() {
+		Church c=this.match.getBoard().getChurch();
+		Period p=this.match.getPeriod();
+		ExcommunicationTile excommTile=c.getExcommunicationTile(p);
+		return excommTile;
+	}
+
+	public void saveProductionParams(ProductionCommand command) {
+		this.prodActionSpace=command.getActionSpace();
+		this.prodPaidServant=command.getPaidServants();
+		this.prodFamilyMember=command.getFamilyMember();
+		
+	}
+
+	public void handleProductionActivation(ProductionActivationCommand productionActivationCommand) {
+
+		FamilyMember member = getCurrentPlayer().getFamilyMember(this.prodFamilyMember);
+		
+		if(this.prodActionSpace == 1){
+			try {
+				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
+						match.getBoard().getProductionArea().getSingleActionSpace(), this.prodPaidServant));
+			} catch (NotApplicableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
+						match.getBoard().getProductionArea().getMultipleActionSpace(), this.prodPaidServant));
+			} catch (NotApplicableException e) {
+				sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				sendToCurrentPlayer(new AskMoveCommand());
+			}
+		}
+		
+		
+		this.prodActionSpace=0;
+		this.prodPaidServant=0;
+		this.prodFamilyMember="";
+	}
+	
+	public void deactivateLeaderCards(){
+		if(!this.getCurrentPlayer().getLeaderCards().isEmpty())
+			for(LeaderCard l: this.getCurrentPlayer().getLeaderCards().values()){
+				l.getSpecialEffect().disapplyEffect(getCurrentPlayer());	
+			}
+	}
+
+	
 }

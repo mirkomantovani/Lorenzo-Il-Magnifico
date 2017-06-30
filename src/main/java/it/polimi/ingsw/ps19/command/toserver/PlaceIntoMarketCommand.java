@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
 
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
@@ -28,7 +29,12 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	
 	@Override
 	public void processCommand(ServerCommandHandler serverCommandHandler) {
-		serverCommandHandler.applyCommand(this);
+		try {
+			serverCommandHandler.applyCommand(this);
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

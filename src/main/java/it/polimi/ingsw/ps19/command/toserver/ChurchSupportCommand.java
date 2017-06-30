@@ -22,8 +22,12 @@ public class ChurchSupportCommand extends ClientToServerCommand{
 	private static final long serialVersionUID = 2379068517465682578L;
 	
 	private boolean decision;
+	private String playerColor;
 	
-	public ChurchSupportCommand(boolean decision){
+	
+
+	public ChurchSupportCommand(String playerColor, boolean decision){
+		this.playerColor=playerColor;
 		this.decision = decision;
 	}
 
@@ -34,6 +38,10 @@ public class ChurchSupportCommand extends ClientToServerCommand{
 
 	public boolean getDecision() {
 		return decision;
+	}
+	
+	public String getPlayerColor() {
+		return playerColor;
 	}
 	
 	

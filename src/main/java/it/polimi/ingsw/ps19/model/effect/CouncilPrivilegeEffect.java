@@ -1,16 +1,13 @@
 	package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
-import it.polimi.ingsw.ps19.model.resource.Servant;
-import it.polimi.ingsw.ps19.model.resource.Stone;
-import it.polimi.ingsw.ps19.model.resource.Wood;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
  * @author matteo
  *
  */
-public class CouncilPrivilegeEffect extends Effect {
+public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 	
 	/**
 	 * 
@@ -43,6 +40,14 @@ public class CouncilPrivilegeEffect extends Effect {
 		StringBuilder builder = new StringBuilder();
 		builder.append("You can take " + privilegeAmount + " privileges");
 		return builder.toString();
+	}
+
+
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 		
 		

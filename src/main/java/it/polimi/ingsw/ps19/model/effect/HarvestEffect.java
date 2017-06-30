@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
  * This class implements the harvest effect that gives only resources,
@@ -10,7 +11,7 @@ import it.polimi.ingsw.ps19.Player;
  * @author Jimmy
  *
  */
-public class HarvestEffect extends Effect {
+public class HarvestEffect extends Effect implements Disapplyable{
 	
 	/**
 	 * 
@@ -38,6 +39,12 @@ public class HarvestEffect extends Effect {
 	@Override
 	public String toString() {
 		return instantEffect.toString();
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

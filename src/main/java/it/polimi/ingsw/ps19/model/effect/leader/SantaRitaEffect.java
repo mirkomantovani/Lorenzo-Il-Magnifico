@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class SantaRitaEffect extends Effect{
+public class SantaRitaEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 

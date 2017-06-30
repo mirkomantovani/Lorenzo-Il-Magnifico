@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.model.effect;
 
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.exception.NotAnExchangeEffectException;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
  * This class represents the production effect of a building card, it differs from other effects because its actual effect
@@ -10,7 +11,7 @@ import it.polimi.ingsw.ps19.exception.NotAnExchangeEffectException;
  * @author Mirko
  *
  */
-public class ProductionEffect extends Effect{
+public class ProductionEffect extends Effect implements Disapplyable{
 
 
 	/**
@@ -52,6 +53,12 @@ public class ProductionEffect extends Effect{
 		if(this.actualEffect instanceof ResourcesExchangeEffect)
 			return (ResourcesExchangeEffect)this.actualEffect;			
 		else throw new NotAnExchangeEffectException();
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

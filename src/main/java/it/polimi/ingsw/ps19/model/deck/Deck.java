@@ -27,11 +27,11 @@ public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 		Random rnd = new Random();
 
 		for (int i = cards.length / Period.values().length; i > 1; i--)
-			swap(cards, i - 1, rnd.nextInt(i));
+			swap(cards, i - 1, rnd.nextInt(cards.length / Period.values().length));
 		for (int i = 2 * cards.length / Period.values().length; i > cards.length / Period.values().length + 1; i--)
-			swap(cards, i - 1, rnd.nextInt(i));
+			swap(cards, i - 1, (rnd.nextInt(cards.length / Period.values().length))+cards.length / Period.values().length);
 		for (int i = cards.length; i > 2 * cards.length / Period.values().length + 1; i--)
-			swap(cards, i - 1, rnd.nextInt(i));
+			swap(cards, i - 1, (rnd.nextInt(cards.length / Period.values().length))+cards.length / Period.values().length);
 	}
 
 	/**

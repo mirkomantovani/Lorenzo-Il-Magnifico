@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 public class LeaderCard extends Card implements Serializable{
 	
@@ -15,10 +16,10 @@ public class LeaderCard extends Card implements Serializable{
 
 	private LeaderCardRequirement requirement;
 	
-	private Effect specialEffect; 
+	private Disapplyable specialEffect; 
 	
 	
-	public LeaderCard(String name, LeaderCardRequirement requirement, Effect specialEffect){
+	public LeaderCard(String name, LeaderCardRequirement requirement, Disapplyable specialEffect){
 		
 	
 		super(name);
@@ -35,11 +36,11 @@ public class LeaderCard extends Card implements Serializable{
 		this.requirement = requirement;
 	}
 
-	public Effect getSpecialEffect() {
+	public Disapplyable getSpecialEffect() {
 		return specialEffect;
 	}
 
-	public void setSpecialEffect(Effect specialEffect) {
+	public void setSpecialEffect(Disapplyable specialEffect) {
 		this.specialEffect = specialEffect;
 	}
 

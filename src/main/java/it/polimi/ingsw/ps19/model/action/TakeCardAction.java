@@ -42,7 +42,12 @@ public class TakeCardAction extends Action {
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
+		
+		System.out.println("takecardaction: prima del calculateactionvaluevariation");
+		
 		this.actionValueVariation = calculateActionValueVariation();
+		
+		System.out.println("takecardaction: finished constructing action");
 
 	}
 
@@ -60,10 +65,22 @@ public class TakeCardAction extends Action {
 
 			player.addCard(card);
 			floor.setCard(null); // set to null when the player buys the card
-			player.subResources(card.getCost());
 			// if the player has a discount given by a leader card
 			player.removeFamilyMember(familyMember.getColor());
-			player.getResourceChest().addResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			
+			ResourceChest realCost;
+			realCost = card.getCost().cloneChest();
+			if (player.getBonuses().getCardCostCoinDiscount() != 0) {
+					realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			}
+			
+			if (isSomeoneInTheTower())
+				realCost.addResource(new Coin(3));
+			
+			realCost.addResource(paidServants);
+			
+			player.subResources(realCost);
+			
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			if (player.getBonuses().isDoubleResourcesFromCards())
 				card.getImmediateEffect().applyEffect(familyMember.getPlayer());
@@ -71,7 +88,8 @@ public class TakeCardAction extends Action {
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 
 			this.floor.getActionSpace().getEffect().applyEffect(player);
-			// TODO rimuovere familyMember dal player!
+			
+			
 		} else
 			throw new NotApplicableException(notApplicableCode);
 	}
@@ -83,29 +101,31 @@ public class TakeCardAction extends Action {
 			return false;
 		if (this.card.getCardType() == CardType.TERRITORY) {
 			if (!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()) {
-				if ((int) Board.getMilitaryRequirementsForTerritories()
-						.get(player.getDeckOfType(card.getCardType()).size() + 1) > player.getResourceChest()
-								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount())
+				System.out.println("takecardaction sono nella isnomilitarypoints");
+				
+				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()
+						.get(player.getDeckOfType(card.getCardType()).size() + 1))));
+				
+				System.out.println("takecard punti del player");
+				if ((int) (Board.getMilitaryRequirementsForTerritories()
+						.get(player.getDeckOfType(card.getCardType()).size() + 1)) > player.getResourceChest()
+								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount()){
 					this.notApplicableCode = "you don't have the required military points to take this card";
 				return false;
+				}
 			}
 		}
-
+			
+			System.out.println("takecardaction params valid");
+		
 		// leader card discount (coin)
 		ResourceChest realCost;
-		if (player.getBonuses().getCardCostCoinDiscount() != 0) {
-
-			try {
-				realCost = (ResourceChest) card.getCost().clone();
-				realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
-				realCost = new ResourceChest();
-			}
-		} else {
-			realCost = card.getCost();
-
-		}
+		
+		realCost = (ResourceChest) card.getCost().cloneChest();
+		if (player.getBonuses().getCardCostCoinDiscount() != 0) 
+			realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
+			
+		
 		
 		//adding 3 additional coins if someone else is occupying the tower
 		if (isSomeoneInTheTower())
@@ -120,6 +140,7 @@ public class TakeCardAction extends Action {
 			this.notApplicableCode = "you don't have space in your personal board to take this card";
 			return false;
 		}
+		System.out.println("let's control if can be placed");
 		return this.canBePlaced();
 
 	}

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.model.deck;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -33,6 +32,7 @@ import it.polimi.ingsw.ps19.model.effect.RaiseValueWithDiscountEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.effect.TakeCardEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.CesareBorgiaEffect;
+import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 import it.polimi.ingsw.ps19.model.effect.leader.FedericoDaMontefeltroEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.FilippoBrunelleschiEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.LorenzoDeMediciEffect;
@@ -721,7 +721,7 @@ public class DeckCreator {
 		int lucreziaBorgiaEffect;
 		int federicoDaMontefeltroEffect;
 		
-		Effect specialEffect;
+		Disapplyable specialEffect;
 
 		
 		LeaderCard[] deck = new LeaderCard[deckLength];

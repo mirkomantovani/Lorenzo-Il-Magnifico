@@ -11,6 +11,7 @@ public abstract class Action {
 	protected FamilyMember familyMember;
 	
 	public Action(FamilyMember familyMember) {
+		if(familyMember!=null)
 		this.player = familyMember.getPlayer();
 		this.familyMember=familyMember;
 	}

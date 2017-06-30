@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
  * @author matteo
  *
  */
-public class LorenzoDeMediciEffect extends Effect{
+public class LorenzoDeMediciEffect extends Effect implements Disapplyable{
 
 	/**
 	 * 
@@ -26,6 +26,12 @@ public class LorenzoDeMediciEffect extends Effect{
 		builder.append("Copy the ability of a leader card played by any other player."
 				+ "Once you choose one ability, it can't be changed");
 		return builder.toString();
+	}
+
+	@Override
+	public void disapplyEffect(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
