@@ -49,6 +49,7 @@ public class GamePanel extends JPanel {
 	private JButton sendChat;
 	private JTextArea txtrCiaooo;
 	private PlayerResources playerResources;
+	private final Font buttonsFont= new Font("SansSerif", Font.BOLD, 16);
 
 	
 	public GamePanel(String playerColor){
@@ -134,7 +135,7 @@ public class GamePanel extends JPanel {
 		sendChat = new JButton("Send");
 		sendChat.setForeground(new Color(255, 255, 255));
 		sendChat.setBackground(new Color(102, 51, 51));
-		sendChat.setFont(new Font("SansSerif", Font.BOLD, 14));
+		sendChat.setFont(buttonsFont);
 		sendChat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sendChat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.add(sendChat, BorderLayout.EAST);
@@ -195,28 +196,28 @@ public class GamePanel extends JPanel {
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnNewButton_3 = new JButton("Show Leader Cards");
-		btnNewButton_3.setFont(new Font("Consolas", Font.ITALIC, 14));
+		btnNewButton_3.setFont(buttonsFont);
 		btnNewButton_3.setForeground(new Color(255, 255, 255));
 		btnNewButton_3.setBackground(new Color(102, 51, 51));
 		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_3);
 		
 		JButton btnNewButton_5 = new JButton("Show Personal Board");
-		btnNewButton_5.setFont(new Font("SansSerif", Font.ROMAN_BASELINE, 18));
+		btnNewButton_5.setFont(buttonsFont);
 		btnNewButton_5.setBackground(new Color(102, 51, 51));
 		btnNewButton_5.setForeground(new Color(255, 255, 255));
 		btnNewButton_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_5);
 		
 		JButton btnNewButton_4 = new JButton("End Round");
-		btnNewButton_4.setFont(new Font("Consolas", Font.BOLD, 12));
+		btnNewButton_4.setFont(buttonsFont);
 		btnNewButton_4.setBackground(new Color(102, 51, 51));
 		btnNewButton_4.setForeground(new Color(255, 255, 255));
 		btnNewButton_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_4);
 		
 		JButton btnStrategyEditor = new JButton("Strategy editor");
-		btnStrategyEditor.setFont(new Font("SansSerif", Font.BOLD, 14));
+		btnStrategyEditor.setFont(buttonsFont);
 		btnStrategyEditor.setBackground(new Color(102, 51, 51));
 		btnStrategyEditor.setForeground(new Color(255, 255, 255));
 		btnStrategyEditor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -226,10 +227,11 @@ public class GamePanel extends JPanel {
 //		internalFrame2.setVisible(true);
 	}
 	
-	public void addCard(int tower,int floor,int id){
-		JButton btnNewButton_2 = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
+	public void addCard(int tower,int floor,int id, String descr){
+		JButton card = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
-		boardPanel.add(btnNewButton_2);
+		card.setToolTipText(descr);
+		boardPanel.add(card);
 	}
 
 	public JButton getSendChat() {

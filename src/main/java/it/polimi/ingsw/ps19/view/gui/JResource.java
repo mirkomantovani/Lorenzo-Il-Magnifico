@@ -48,7 +48,7 @@ public class JResource extends JLabel {
 	
 	public void setAmount(int amount) {
 		this.amount=amount;
-		setText(resourceType+": "+amount);	
+		setText(resourceType+"s: "+amount+"  ");	
 	}
 	
 	

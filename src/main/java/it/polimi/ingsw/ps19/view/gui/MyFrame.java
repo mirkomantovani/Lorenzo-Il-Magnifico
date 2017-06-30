@@ -150,7 +150,8 @@ public class MyFrame extends JFrame {
 			Tower t=board.getTower(c);
 			for(int i=0;i<t.getFloors().size();i++){
 				int id=t.getFloor(i).getCard().getId();
-				gamePanel.addCard(j,i,id);
+				String descr=t.getFloor(i).getCard().toString();
+				gamePanel.addCard(j,i,id,descr);
 			}
 				
 		}		
