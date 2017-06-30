@@ -8,18 +8,25 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.area.Tower;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
+ * This is the main frame of the game
  * @author Mirko
  *
  */
 public class MyFrame extends JFrame {
+	
+	private String playerColor;
 	
 	
 	public static void main(String[] args) {
@@ -30,7 +37,7 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 					
 					frame.removeInitialImage();
-					GamePanel gameP=new GamePanel();
+					GamePanel gameP=new GamePanel("red");
 					frame.setContentPane(gameP);
 //					frame.getGamePanel().addCard();
 					
@@ -62,7 +69,18 @@ public class MyFrame extends JFrame {
 	
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
-
+		
+		//Setting the LookAndFeel theme
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		   
+		}
 //		setUndecorated(true);
 		setLayout(new BorderLayout());
 		content = this.getContentPane();
@@ -119,7 +137,7 @@ public class MyFrame extends JFrame {
 	}
 
 	public void initializeGameFrame(Board board) {
-		gamePanel=new GamePanel();
+		gamePanel=new GamePanel(playerColor);
 		setContentPane(gamePanel);
 		addCards(board);
 	}
@@ -132,7 +150,7 @@ public class MyFrame extends JFrame {
 			Tower t=board.getTower(c);
 			for(int i=0;i<t.getFloors().size();i++){
 				int id=t.getFloor(i).getCard().getId();
-				getGamePanel().addCard(j,i,id);
+				gamePanel.addCard(j,i,id);
 			}
 				
 		}		
@@ -144,12 +162,16 @@ public class MyFrame extends JFrame {
 		return gamePanel;
 	}
 
+	public void refreshPlayerStatus(Player p) {
+		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.COIN));
+		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.WOOD));
+		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.STONE));
+		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.SERVANT));
+	}
 	
-
-
-	
-	
-	
+	public void setPlayerColor(String playerColor){
+		this.playerColor=playerColor;
+	}
 	
 
 }

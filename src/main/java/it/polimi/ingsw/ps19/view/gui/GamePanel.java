@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -15,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -22,12 +24,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.html.StyleSheet;
+
+import it.polimi.ingsw.ps19.model.resource.Resource;
+
 
 
 /**
+ * The content of the entire frame (MyFrame) during the GamePlay
  * @author Mirko
  *
  */
@@ -38,10 +47,11 @@ public class GamePanel extends JPanel {
 	private JTextField textField;
 	private JPanel boardPanel;
 	private JButton sendChat;
-	JTextArea txtrCiaooo;
+	private JTextArea txtrCiaooo;
+	private PlayerResources playerResources;
 
 	
-	public GamePanel(){
+	public GamePanel(String playerColor){
 		screenDim=toolkit.getScreenSize();
 //      setUndecorated(true);
 //		setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -122,10 +132,17 @@ public class GamePanel extends JPanel {
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		sendChat = new JButton("Send");
+		sendChat.setForeground(new Color(255, 255, 255));
+		sendChat.setBackground(new Color(102, 51, 51));
+		sendChat.setFont(new Font("SansSerif", Font.BOLD, 14));
+		sendChat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		sendChat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.add(sendChat, BorderLayout.EAST);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(160, 82, 45));
 		panel_2.add(panel_3, BorderLayout.CENTER);
+		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(100, 26));
@@ -133,11 +150,20 @@ public class GamePanel extends JPanel {
 		panel_3.add(textField);
 		textField.setColumns(50);
 		
-		JPanel playerResources = new JPanel();
+		//Player Resources Panel
+		playerResources = new PlayerResources(screenDim.width-boardPanel.getPreferredSize().width,playerColor);
+//		playerResources.setPreferredSize(new Dimension(screenDim.width-panel.getPreferredSize().width,400));
+//		playerResources.setMaximumSize(new Dimension(screenDim.width-panel.getPreferredSize().width,800));
+		
 		panel_1.add(playerResources);
 		
-		JInternalFrame internalFrame_1 = new JInternalFrame("New JInternalFrame");
+		
+		
+		JInternalFrame internalFrame_1 = new JInternalFrame("Game actions");
 		internalFrame_1.setMaximizable(true);
+		internalFrame_1.getContentPane().setBackground(new Color(160, 82, 45));
+		internalFrame_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		internalFrame_1.setResizable(true);
 //		internalFrame_1.setIconifiable(true);
 //		internalFrame_1.setClosable(true);
 //		internalFrame_1.setResizable(true);
@@ -152,31 +178,49 @@ public class GamePanel extends JPanel {
 		internalFrame_1.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(204, 153, 51));
 		internalFrame_1.getContentPane().add(panel_4);
-//		panel_4.setSize(new Dimension(500, 800));
-//		panel_4.setBounds(1000,500,500,500);
+		panel_4.setLayout(null);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panel_4.add(scrollPane_1);
+		
+
 		
 //		JPanel personalBoard = new PersonalBoardPanel();
 //		panel_4.add(personalBoard);
 //		personalBoard.setLayout(null);
 		
 		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBackground(new Color(210, 180, 140));
 		panel_1.add(buttonsPanel);
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnNewButton_3 = new JButton("Show Leader Cards");
+		btnNewButton_3.setFont(new Font("Consolas", Font.ITALIC, 14));
+		btnNewButton_3.setForeground(new Color(255, 255, 255));
+		btnNewButton_3.setBackground(new Color(102, 51, 51));
+		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_3);
 		
 		JButton btnNewButton_5 = new JButton("Show Personal Board");
+		btnNewButton_5.setFont(new Font("SansSerif", Font.ROMAN_BASELINE, 18));
+		btnNewButton_5.setBackground(new Color(102, 51, 51));
+		btnNewButton_5.setForeground(new Color(255, 255, 255));
+		btnNewButton_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_5);
 		
 		JButton btnNewButton_4 = new JButton("End Round");
+		btnNewButton_4.setFont(new Font("Consolas", Font.BOLD, 12));
+		btnNewButton_4.setBackground(new Color(102, 51, 51));
+		btnNewButton_4.setForeground(new Color(255, 255, 255));
+		btnNewButton_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_4);
+		
+		JButton btnStrategyEditor = new JButton("Strategy editor");
+		btnStrategyEditor.setFont(new Font("SansSerif", Font.BOLD, 14));
+		btnStrategyEditor.setBackground(new Color(102, 51, 51));
+		btnStrategyEditor.setForeground(new Color(255, 255, 255));
+		btnStrategyEditor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonsPanel.add(btnStrategyEditor);
 		internalFrame_1.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
@@ -221,6 +265,10 @@ public class GamePanel extends JPanel {
 	
 	public void setChurchMarker(){
 		
+	}
+
+	public void addResourceToPlayerStatus(Resource resourceInChest) {
+		playerResources.refreshResource(resourceInChest);
 	}
 	
 }

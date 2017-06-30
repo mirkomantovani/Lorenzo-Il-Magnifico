@@ -59,7 +59,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void playerStatusChange(Player p) {
-		// TODO Auto-generated method stub
+		frame.refreshPlayerStatus(p);
 
 	}
 
@@ -118,9 +118,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void refreshBoard(Board board) {
-		frame.removeInitialImage();
+		frame.removeInitialImage();  //TODO non andrà qui
 		frame.initializeGameFrame(board);
-		this.addListeners();
+		this.addListeners();  //neanche questo credo
 		frame.pack();
 		frame.repaint();
 	}
@@ -158,6 +158,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void assignColor(String color) {
 			gameController.setPlayerColor(color);
+			frame.setPlayerColor(color);
 	}
 
 	@Override

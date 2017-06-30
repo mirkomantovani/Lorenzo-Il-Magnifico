@@ -219,6 +219,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
+			
+			match.distributeTurnResources();  //this needs to be here and not in initTurn, 
+			//otherwise the GUI wouldn't have a playerResources Panel to add resources into
 
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
@@ -237,7 +240,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		match.getBoard().rollDices();
 		match.refreshDicesValueForPlayers();
 		match.addFamilyMembersToPlayers();
-		match.distributeTurnResources();
 		
 		this.match.getBoard().changeCardInTowers();
 		
