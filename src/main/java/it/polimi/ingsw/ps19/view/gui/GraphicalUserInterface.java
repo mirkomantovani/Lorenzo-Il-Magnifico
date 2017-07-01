@@ -42,6 +42,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeMatch() {
 		frame.removeInitialImage();
 		// frame.initializeGameFrame();
+		frame.addOrderMarkerDisks(gameController.);
 
 	}
 

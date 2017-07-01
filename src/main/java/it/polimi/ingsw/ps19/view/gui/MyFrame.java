@@ -174,5 +174,11 @@ public class MyFrame extends JFrame {
 		this.playerColor=playerColor;
 	}
 	
+	public void addOrderMarkerDisks(Player[] players){
+		for(int i = 0; i < players.length; i++){
+			gamePanel.add(new OrderMarkerDisk(players[i].getColor()));
+		}
+	}
+	
 
 }

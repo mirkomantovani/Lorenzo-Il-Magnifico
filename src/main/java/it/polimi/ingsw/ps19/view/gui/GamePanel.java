@@ -6,10 +6,12 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -222,7 +224,14 @@ public class GamePanel extends JPanel {
 		internalFrame_1.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
-		MarkerDisk Marker = new MarkerDisk("red");
+		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
+		boardPanel.add(redMarker);
+		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
+		boardPanel.add(blueMarker);
+		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
+		boardPanel.add(greenMarker);
+		
+
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
@@ -249,8 +258,8 @@ public class GamePanel extends JPanel {
 		this.txtrCiaooo.setCaretPosition(this.txtrCiaooo.getDocument().getLength());
 	}
 	
-	public void setMarkerOrder(ArrayList<MarkerDisk> markers){
-		for(MarkerDisk m : markers){
+	public void setMarkerOrder(ArrayList<OrderMarkerDisk> markers){
+		for(OrderMarkerDisk m : markers){
 			paint(m.getGraphics());
 			m.setAlignmentX((float) 782.23);
 			m.setAlignmentY(792);
