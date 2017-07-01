@@ -42,7 +42,8 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  */
 public class GamePanel extends JPanel {
 	
-	private Dimension screenDim;
+	public static Dimension screenDim;
+	
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private JTextField textField;
 	private BoardPanel boardPanel;
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel {
 	private final Font buttonsFont= new Font("SansSerif", Font.BOLD, 16);
 	
 	private List<CardButton> cards;
+	
 
 	
 	public GamePanel(String playerColor){

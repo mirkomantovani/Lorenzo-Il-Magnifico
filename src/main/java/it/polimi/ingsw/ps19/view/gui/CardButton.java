@@ -73,7 +73,12 @@ public class CardButton extends JButton implements MouseListener {
 		this.id=id;
 		this.boardPanelPrefSize=boardPanelPrefSize;
 		
-		cardWidth=(int)(ratio*boardPanelPrefSize.width-15);
+		int cardCut;
+		if((GamePanel.screenDim.getWidth()/GamePanel.screenDim.getHeight())<1.6)
+			cardCut=15;
+		else cardCut=12;
+		
+		cardWidth=(int)(ratio*boardPanelPrefSize.width-cardCut);
 		cardHeight=(int)(ratio*boardPanelPrefSize.height);
 		
 		calculateApplicationPoint();

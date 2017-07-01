@@ -81,7 +81,7 @@ public class MyFrame extends JFrame {
 		} catch (Exception e) {
 
 		}
-		// setUndecorated(true);
+//		 setUndecorated(true);
 		setLayout(new BorderLayout());
 		content = this.getContentPane();
 
