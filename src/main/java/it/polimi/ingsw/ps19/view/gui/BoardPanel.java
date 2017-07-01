@@ -7,10 +7,12 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
 
 
@@ -77,4 +79,6 @@ public class BoardPanel extends JPanel {
 
 		g.drawImage(img, 0, 0, this);
 	}
+	
+
 }

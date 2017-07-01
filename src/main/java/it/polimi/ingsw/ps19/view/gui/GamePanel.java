@@ -16,7 +16,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -24,12 +23,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.html.StyleSheet;
 
 import it.polimi.ingsw.ps19.model.resource.Resource;
 
@@ -225,6 +222,7 @@ public class GamePanel extends JPanel {
 		internalFrame_1.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
+		MarkerDisk Marker = new MarkerDisk("red");
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
@@ -254,6 +252,8 @@ public class GamePanel extends JPanel {
 	public void setMarkerOrder(ArrayList<MarkerDisk> markers){
 		for(MarkerDisk m : markers){
 			paint(m.getGraphics());
+			m.setAlignmentX((float) 782.23);
+			m.setAlignmentY(792);
 		}
 	}
 	
