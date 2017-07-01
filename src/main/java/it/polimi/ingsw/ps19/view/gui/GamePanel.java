@@ -13,6 +13,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -44,14 +45,22 @@ public class GamePanel extends JPanel {
 	private Dimension screenDim;
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private JTextField textField;
-	private JPanel boardPanel;
+	private BoardPanel boardPanel;
+	
 	private JButton sendChat;
+	private JButton showPersonalBoard;
+	
 	private JTextArea txtrCiaooo;
 	private PlayerResources playerResources;
 	private final Font buttonsFont= new Font("SansSerif", Font.BOLD, 16);
+	
+	private List<CardButton> cards;
 
 	
 	public GamePanel(String playerColor){
+		
+		cards=new ArrayList<CardButton>();
+
 		screenDim=toolkit.getScreenSize();
 //      setUndecorated(true);
 //		setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -159,28 +168,29 @@ public class GamePanel extends JPanel {
 		
 		
 		
-		JInternalFrame internalFrame_1 = new JInternalFrame("Game actions");
-		internalFrame_1.setMaximizable(true);
-		internalFrame_1.getContentPane().setBackground(new Color(160, 82, 45));
-		internalFrame_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		internalFrame_1.setResizable(true);
+		JInternalFrame actionsInternalFrame = new JInternalFrame("Game actions");
+		actionsInternalFrame.setMaximizable(true);
+		actionsInternalFrame.getContentPane().setBackground(new Color(160, 82, 45));
+		actionsInternalFrame.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		actionsInternalFrame.setResizable(true);
 //		internalFrame_1.setIconifiable(true);
 //		internalFrame_1.setClosable(true);
 //		internalFrame_1.setResizable(true);
+		
+		
 		
 //		setBorder(val ? null : border);
 
 //		internalFrame_1.setRootPaneCheckingEnabled(false);
 //		internalFrame_1.getUI().setNorthPane(val ? null : northPane);
 //		internalFrame_1.setRootPaneCheckingEnabled(true);
-		internalFrame_1.setBounds(new Rectangle(0, 0, 500, 0));
-		panel_1.add(internalFrame_1);
-		internalFrame_1.getContentPane().setLayout(new BorderLayout(0, 0));
+		actionsInternalFrame.setBounds(new Rectangle(0, 0, 500, 0));
+		panel_1.add(actionsInternalFrame);
+		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(204, 153, 51));
-		internalFrame_1.getContentPane().add(panel_4);
-		panel_4.setLayout(null);
+		ActionPanel actionPanel=new ActionPanel();
+		actionPanel.setBackground(new Color(204, 153, 51));
+		actionsInternalFrame.getContentPane().add(actionPanel);
 		
 		
 
@@ -201,12 +211,12 @@ public class GamePanel extends JPanel {
 		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnNewButton_3);
 		
-		JButton btnNewButton_5 = new JButton("Show Personal Board");
-		btnNewButton_5.setFont(buttonsFont);
-		btnNewButton_5.setBackground(new Color(102, 51, 51));
-		btnNewButton_5.setForeground(new Color(255, 255, 255));
-		btnNewButton_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(btnNewButton_5);
+		showPersonalBoard = new JButton("Show Personal Board");
+		showPersonalBoard.setFont(buttonsFont);
+		showPersonalBoard.setBackground(new Color(102, 51, 51));
+		showPersonalBoard.setForeground(new Color(255, 255, 255));
+		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonsPanel.add(showPersonalBoard);
 		
 		JButton btnNewButton_4 = new JButton("End Round");
 		btnNewButton_4.setFont(buttonsFont);
@@ -221,7 +231,7 @@ public class GamePanel extends JPanel {
 		btnStrategyEditor.setForeground(new Color(255, 255, 255));
 		btnStrategyEditor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(btnStrategyEditor);
-		internalFrame_1.setVisible(true);
+		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
 		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
@@ -235,14 +245,24 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
-		JButton card = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
+		if(tower==1)
+			tower=2;
+		else if(tower==2)
+			tower=1;
+		CardButton card = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
 		card.setToolTipText(descr);
 		boardPanel.add(card);
+		cards.add(card);
+		
 	}
 
 	public JButton getSendChat() {
 		return sendChat;
+	}
+	
+	public JButton getShowPersonalBoard(){
+		return showPersonalBoard;
 	}
 	
 	public String getAndDeleteChatInput(){
@@ -280,6 +300,11 @@ public class GamePanel extends JPanel {
 
 	public void addResourceToPlayerStatus(Resource resourceInChest) {
 		playerResources.refreshResource(resourceInChest);
+	}
+
+	public void removeCards() {
+		cards.forEach(card -> boardPanel.remove(card));
+		
 	}
 	
 }

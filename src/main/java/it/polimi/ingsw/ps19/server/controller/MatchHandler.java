@@ -109,8 +109,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 //		startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
 //		 match.handlePeriodsAndTurns();
-		 startTurn();
-		 
+		 startMatch();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
 		
 //		provaLeaderPlayer();

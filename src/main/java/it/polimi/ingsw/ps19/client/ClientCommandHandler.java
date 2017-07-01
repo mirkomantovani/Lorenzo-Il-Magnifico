@@ -48,6 +48,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(StartTurnCommand startTurnCommand) {
+		System.out.println("clientcommandhandler: arrivato startturn command");
 		userInterface.startTurn();
 		
 	}

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,14 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
+/**
+ * @author Mirko
+ *
+ */
 public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	private MyFrame frame;
+	private PersonalBoard personalBoard;
 	// private String player;
 	private Image icon;
 	private ClientController gameController;
@@ -30,26 +36,34 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		// } catch (IOException e) {
 		// }
 		frame = new MyFrame();
+		personalBoard=new PersonalBoard();
 		// frame.setIconImage(icon);
 		frame.validate();
 	}
 
 	public void addListeners() {
 		frame.getGamePanel().getSendChat().addActionListener(this);
+		frame.getGamePanel().getShowPersonalBoard().addActionListener(this);
 	}
 
 	@Override
 	public void initializeMatch() {
 		frame.removeInitialImage();
-		// frame.initializeGameFrame();
-		frame.addOrderMarkerDisks(gameController.);
+		frame.initializeGameFrame();
+		this.addListeners(); 
+		frame.pack();   //?
+		frame.repaint();  //?
 
 	}
 
 	@Override
 	public void startTurn() {
-		// TODO Auto-generated method stub
+	
 
+	}
+
+	private void writeGameMessage(String string) {
+		writeMessage("\n<-GAME-> "+string+"\n");
 	}
 
 	@Override
@@ -95,8 +109,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askMove() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("It's your turn, decide an action to perform");
 	}
 
 	@Override
@@ -119,10 +132,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void refreshBoard(Board board) {
-		frame.removeInitialImage();  //TODO non andrà qui
-		frame.initializeGameFrame(board);
-		this.addListeners();  //neanche questo credo
-		frame.pack();
+		frame.refreshBoard(board);
+//		frame.pack();
 		frame.repaint();
 	}
 
@@ -140,8 +151,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void newChatMessage(String message) {
-		frame.getGamePanel().addMessageToConsole(message);
+		writeMessage(message);
 
+	}
+
+	private void writeMessage(String message) {
+		frame.getGamePanel().addMessageToConsole(message);		
 	}
 
 	@Override
@@ -208,7 +223,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 			
 			gameController.notifyChatMessage(message);
 
+		} else if(e.getSource() == frame.getGamePanel().getShowPersonalBoard()){
+			personalBoard.setVisible(!personalBoard.isVisible());
 		}
+		
+		
+		
 	}
 
 }
