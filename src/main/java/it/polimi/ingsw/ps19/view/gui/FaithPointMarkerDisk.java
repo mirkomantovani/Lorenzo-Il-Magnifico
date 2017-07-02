@@ -25,7 +25,9 @@ public class FaithPointMarkerDisk extends JPanel{
 	private static int wCount = 0;
 	private static final double WIDTH_PERC = 0.06824146981627296587926509186352;
 	private static final double HEIGHT_PERC = 0.73333333333333333333333333333333;
-	private BoardPanel boardPanel;
+	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
+	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
+	
 	
 	public FaithPointMarkerDisk(String color){
 		src = color;
@@ -36,15 +38,14 @@ public class FaithPointMarkerDisk extends JPanel{
 		super.paintComponent(g);
 
 		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance(20, 20, 0), 0, 0, this);
+		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
 	private void setFaithPointMarkers(){
 		
-		boardPanel = new BoardPanel();
 		
-		int widthRel = (int) (boardPanel.getDimension().getWidth()*WIDTH_PERC);
-		int heightRel = (int) (boardPanel.getDimension().getHeight()*HEIGHT_PERC);
+		int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+		int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 	
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
@@ -53,7 +54,7 @@ public class FaithPointMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds( widthRel +  wCount, heightRel , 36,36);
+		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
 		wCount = wCount + 5;

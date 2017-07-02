@@ -32,18 +32,12 @@ public class BoardPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Image img;
-	Dimension dimension;
+	static Dimension dimension;
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private int imgHeight;
 	private int imgWidth;
 
-	public int getImgHeight() {
-		return imgHeight;
-	}
 
-	public int getImgWidth() {
-		return imgWidth;
-	}
 
 	public BoardPanel() {
 		super(new GridBagLayout());

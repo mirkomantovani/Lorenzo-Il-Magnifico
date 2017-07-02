@@ -27,12 +27,14 @@ public class OrderMarkerDisk extends JPanel{
 	private final static double HEIGHT_PERC = 0.5324074074;
 	private final static double DELTA_PERC= 0.03703703704;
 	private static int Ordercounter = 0;
+	private final static double wDIM_PERC = 0.04724409448818897637795275590551;
+	private final static double hDIM_PERC = 0.03333333333333333333333333333333;
 	
 	private int widthRel;
 	private int heightRel;
 	private int delta;
 	
-	private BoardPanel boardPanel;
+
 
 	
 	public OrderMarkerDisk(String color){
@@ -45,18 +47,14 @@ public class OrderMarkerDisk extends JPanel{
 		super.paintComponent(g);
 
 		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance(36, 36, 0), 0, 0, this);
+		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
 	private void setOrderMarkers(){
 		
-		boardPanel = new BoardPanel();
-		
 		
 		this.heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
-		System.out.println(boardPanel.getDimension().getWidth());
-		System.out.println(boardPanel.getDimension().getHeight());
-		this.widthRel = (int) (boardPanel.getDimension().getWidth()*WIDTH_PERC);
+		this.widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		this.delta = (int) (DELTA_PERC*tool.getScreenSize().height);
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
@@ -65,7 +63,7 @@ public class OrderMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds(widthRel, heightRel + delta*Ordercounter, 36,36);
+		this.setBounds(widthRel, heightRel + delta*Ordercounter, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
 		Ordercounter++;
