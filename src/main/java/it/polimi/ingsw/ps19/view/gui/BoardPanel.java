@@ -32,8 +32,18 @@ public class BoardPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Image img;
-	private Dimension dimension;
+	Dimension dimension;
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private int imgHeight;
+	private int imgWidth;
+
+	public int getImgHeight() {
+		return imgHeight;
+	}
+
+	public int getImgWidth() {
+		return imgWidth;
+	}
 
 	public BoardPanel() {
 		super(new GridBagLayout());
@@ -61,8 +71,8 @@ public class BoardPanel extends JPanel {
 		} catch (IOException e) {
 		}
 		System.out.println(dimension.width+" e "+ dimension.height);
-		int imgHeight=img.getHeight(null);
-		int imgWidth=img.getWidth(null);
+		imgHeight=img.getHeight(null);
+		imgWidth=img.getWidth(null);
 		float ratio=imgWidth/imgHeight;
 		System.out.println(imgHeight+" e "+ imgWidth);
 		img = img.getScaledInstance(dimension.height*imgWidth/imgHeight, dimension.height,
@@ -78,6 +88,12 @@ public class BoardPanel extends JPanel {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, this);
 	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	
 	
 
 }

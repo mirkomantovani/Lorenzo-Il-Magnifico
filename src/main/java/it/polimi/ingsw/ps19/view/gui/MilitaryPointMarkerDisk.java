@@ -8,56 +8,39 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-/**
- * @author matteo
- *
- */
-public class OrderMarkerDisk extends JPanel{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8409734849829937305L;
+public class MilitaryPointMarkerDisk extends JPanel{
 	
+
 	private String src; //red,blue,green,yellow
 	private final static int ORDER_DISC_DIAM = 36;
 	private Image img;
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
-	private final static double WIDTH_PERC = 0.76771653543307086614173228346457;
-	private final static double HEIGHT_PERC = 0.5324074074;
-	private final static double DELTA_PERC= 0.03703703704;
-	private static int Ordercounter = 0;
-	
-	private int widthRel;
-	private int heightRel;
-	private int delta;
-	
+	private static int hCount = 0;
+	private static int wCount = 0;
+	private static double WIDTH_PERC = 0.86614173228346456692913385826772;
+	private static double HEIGHT_PERC = 0.89814814814814814814814814814815;
 	private BoardPanel boardPanel;
-
 	
-	public OrderMarkerDisk(String color){
-		this.src = color;
-		
-		setOrderMarkers();
+	public MilitaryPointMarkerDisk(String color){
+		src = color;
+		setMilitaryPointMarkers();
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance(36, 36, 0), 0, 0, this);
+		g.drawImage(img.getScaledInstance(20, 20, 0), 0, 0, this);
 		}
 	
-	private void setOrderMarkers(){
+	private void setMilitaryPointMarkers(){
 		
 		boardPanel = new BoardPanel();
-		
-		
-		this.heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
+		int heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
 		System.out.println(boardPanel.getDimension().getWidth());
 		System.out.println(boardPanel.getDimension().getHeight());
-		this.widthRel = (int) (boardPanel.getDimension().getWidth()*WIDTH_PERC);
-		this.delta = (int) (DELTA_PERC*tool.getScreenSize().height);
+		int widthRel = (int) (boardPanel.getDimension().getWidth()*WIDTH_PERC);
+
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
@@ -65,13 +48,10 @@ public class OrderMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds(widthRel, heightRel + delta*Ordercounter, 36,36);
+		this.setBounds(widthRel + wCount, heightRel , 36,36);
 		this.setVisible(true);
 		this.setOpaque(false);
-		Ordercounter++;
+		wCount = wCount + 5;
 	}
-	
-	
-	
 
 }

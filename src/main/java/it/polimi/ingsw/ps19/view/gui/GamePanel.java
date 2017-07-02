@@ -6,12 +6,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,9 +188,9 @@ public class GamePanel extends JPanel {
 		panel_1.add(actionsInternalFrame);
 		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		ActionPanel actionPanel=new ActionPanel();
-		actionPanel.setBackground(new Color(204, 153, 51));
-		actionsInternalFrame.getContentPane().add(actionPanel);
+     	ActionPanel actionPanel=new ActionPanel();
+        actionPanel.setBackground(new Color(204, 153, 51));
+	    actionsInternalFrame.getContentPane().add(actionPanel);
 		
 		
 
@@ -243,7 +241,14 @@ public class GamePanel extends JPanel {
 		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
 		boardPanel.add(greenMarker);
 		
-
+		boardPanel.add(new VictoryPointMarkerDisk("red"));
+		boardPanel.add(new VictoryPointMarkerDisk("blue"));
+		
+		boardPanel.add(new FaithPointMarkerDisk("green"));
+		boardPanel.add(new FaithPointMarkerDisk("yellow"));
+		
+		boardPanel.add(new MilitaryPointMarkerDisk("green"));
+		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
