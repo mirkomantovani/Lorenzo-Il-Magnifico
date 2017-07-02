@@ -52,6 +52,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private JButton sendChat;
 	private JButton showPersonalBoard;
+	private JButton strategyEditorButton;
+	private JButton endRoundButton;
+	private JButton showLeaderCardsButton;
 	
 	private JTextArea textArea;
 	private PlayerResources playerResources;
@@ -63,10 +66,14 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private ActionPanel actionPanel;
 	private ChooseAction chooseAction;
+	private StrategyEditor strategyEditor;
+	private EndOrDiscardPanel endOrDiscardPanel;
 	
 	private ArrayList<String> actionConstructor;
 	
 	private GraphicalUserInterface GUI;
+	
+	private Component currentActionPanel;
 	
 
 	
@@ -216,13 +223,21 @@ public class GamePanel extends JPanel implements ActionListener {
 		actionPanel=new ActionPanel(this);
 		actionPanel.setBackground(new Color(204, 153, 51));
 		actionPanel.setVisible(false);
-		actionContentPane.add(actionPanel);
+//		actionContentPane.add(actionPanel);
 		
 		chooseAction=new ChooseAction(this);
 		chooseAction.setBackground(new Color(204, 153, 51));
 		chooseAction.setVisible(false);
-		actionContentPane.add(chooseAction);
+//		actionContentPane.add(chooseAction);
 //		actionsInternalFrame.getContentPane().add(actionPanel);
+		
+		strategyEditor=new StrategyEditor();
+		strategyEditor.setVisible(false);
+//		actionContentPane.add(strategyEditor);
+		
+		endOrDiscardPanel=new EndOrDiscardPanel(this);
+		endOrDiscardPanel.setBackground(new Color(204, 153, 51));
+		endOrDiscardPanel.setVisible(false);
 		
 	
 		//FINAL BUTTONS PANEL
@@ -232,7 +247,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		rightScrollbarContainer.add(buttonsPanel);
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton showLeaderCardsButton = new JButton("Show Leader Cards");
+		showLeaderCardsButton = new JButton("Show Leader Cards");
 		showLeaderCardsButton.setFont(buttonsFont);
 		showLeaderCardsButton.setForeground(new Color(255, 255, 255));
 		showLeaderCardsButton.setBackground(new Color(102, 51, 51));
@@ -246,18 +261,19 @@ public class GamePanel extends JPanel implements ActionListener {
 		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(showPersonalBoard);
 		
-		JButton endRoundButton = new JButton("End Round");
+		endRoundButton = new JButton("End Round");
 		endRoundButton.setFont(buttonsFont);
 		endRoundButton.setBackground(new Color(102, 51, 51));
 		endRoundButton.setForeground(new Color(255, 255, 255));
 		endRoundButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(endRoundButton);
 		
-		JButton strategyEditorButton = new JButton("Strategy editor");
+		strategyEditorButton = new JButton("Strategy editor");
 		strategyEditorButton.setFont(buttonsFont);
 		strategyEditorButton.setBackground(new Color(102, 51, 51));
 		strategyEditorButton.setForeground(new Color(255, 255, 255));
 		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		strategyEditorButton.addActionListener(this);
 		buttonsPanel.add(strategyEditorButton);
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
@@ -342,6 +358,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
 	}
 	
+	private void writeGameMessage(String string) {
+		addMessageToConsole("\n<-GAME-> "+string+"\n");
+	}
+	
 	public void setMarkerOrder(ArrayList<OrderMarkerDisk> markers){
 		for(OrderMarkerDisk m : markers){
 			paint(m.getGraphics());
@@ -377,14 +397,26 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private void showActionPanel(Component panel){
 		//rimuovo tutti gli altri panels
-		chooseAction.setVisible(false);
-		actionContentPane.remove(chooseAction);
+//		chooseAction.setVisible(false);
+//		actionContentPane.remove(chooseAction);
+		setEveryoneInvisible(this.actionContentPane.getComponents());
+		this.actionContentPane.removeAll();
 		this.actionContentPane.add(panel);
 		panel.setVisible(true);
+	}
+	
+	private void setEveryoneInvisible(Component[] components) {
+		for(int i=0;i<components.length;i++)
+			components[i].setVisible(false);
+	}
+
+	private void removeActionPanel() {
+		this.actionContentPane.removeAll();
 	}
 
 	public void showChooseAction() {
 		System.out.println("show choose action");
+		this.currentActionPanel=chooseAction;
 		this.showActionPanel(chooseAction);
 		
 	}
@@ -395,7 +427,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 
 	public void notifyActionClick() {
-		System.out.println("notifyactionclick");
+		writeGameMessage("Choose the family member and the amount of servants "
+				+ "you intend to use in this action, then press the area"
+				+ "you want to place your family member into");
+		this.currentActionPanel=actionPanel;
 		this.showActionPanel(actionPanel);
 	}
 
@@ -406,7 +441,18 @@ public class GamePanel extends JPanel implements ActionListener {
 			constructAction(card);
 			this.GUI.notifyTakeCard(actionConstructor);
 			
-		}
+		} else if(e.getSource()==strategyEditorButton){
+			if(!strategyEditor.isVisible())
+			showActionPanel(strategyEditor);
+			else backToCurrentAction();
+			
+		} 
+	}
+
+	
+
+	private void backToCurrentAction() {
+       showActionPanel(currentActionPanel);		
 	}
 
 	private void constructAction(CardButton card) {
@@ -450,6 +496,16 @@ public class GamePanel extends JPanel implements ActionListener {
 	private void invalidInputMessage(String string) {
 		this.addMessageToConsole("--INVALID INPUT--: "+string);
 		
+	}
+
+	public void notifyEndRound() {
+		writeGameMessage("Your round has ended");
+		GUI.notifyEndRound();
+	}
+
+	public void showEndOrDiscard() {
+		this.currentActionPanel=endOrDiscardPanel;
+		this.showActionPanel(endOrDiscardPanel);
 	}
 
 
