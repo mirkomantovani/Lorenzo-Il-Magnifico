@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,16 @@ import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.view.UserInterface;
+import javafx.beans.value.WritableObjectValue;
 
+/**
+ * @author Mirko
+ *
+ */
 public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	private MyFrame frame;
+	private PersonalBoard personalBoard;
 	// private String player;
 	private Image icon;
 	private ClientController gameController;
@@ -30,25 +37,36 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		// } catch (IOException e) {
 		// }
 		frame = new MyFrame();
+		personalBoard=new PersonalBoard();
 		// frame.setIconImage(icon);
 		frame.validate();
 	}
 
 	public void addListeners() {
 		frame.getGamePanel().getSendChat().addActionListener(this);
+		frame.getGamePanel().getShowPersonalBoard().addActionListener(this);
 	}
 
 	@Override
 	public void initializeMatch() {
 		frame.removeInitialImage();
-		// frame.initializeGameFrame();
+		frame.initializeGameFrame();
+		this.addListeners(); 
+		frame.getGamePanel().setObserver(this);
+		frame.pack();   //?
+		frame.repaint();  //?
+		writeGameMessage("The game has started");
 
 	}
 
 	@Override
 	public void startTurn() {
-		// TODO Auto-generated method stub
+	
 
+	}
+
+	private void writeGameMessage(String string) {
+		writeMessage("\n<-GAME-> "+string+"\n");
 	}
 
 	@Override
@@ -77,31 +95,29 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void win() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("CONGRATULATIONS! You won the game!\nPress any key to exit the game");
 	}
 
 	@Override
 	public void lose() {
-		// TODO Auto-generated method stub
+		writeGameMessage("OOPS, You lost. Try again, next time you will be luckier!\nPress any key to exit the game");
 
 	}
 
 	@Override
 	public void initializeTurn(Period period, int turn) {
-
+		writeGameMessage("A new turn is starting, Period:"+period.toString()+" Turn:"+turn);
 	}
 
 	@Override
 	public void askMove() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("It's your turn, decide an action to perform");
+		frame.showChooseAction();
 	}
 
 	@Override
 	public void invalidInput() {
-		// TODO Auto-generated method stub
-
+		writeMessage("--INVALID INPUT--");
 	}
 
 	@Override
@@ -118,17 +134,14 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void refreshBoard(Board board) {
-		frame.removeInitialImage();  //TODO non andrà qui
-		frame.initializeGameFrame(board);
-		this.addListeners();  //neanche questo credo
-		frame.pack();
+		frame.refreshBoard(board);
+//		frame.pack();
 		frame.repaint();
 	}
 
 	@Override
 	public void notifyExcommunication() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("God seems very offended by your behaviour, he established your excommunication.");
 	}
 
 	@Override
@@ -139,14 +152,17 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void newChatMessage(String message) {
-		frame.getGamePanel().addMessageToConsole(message);
+		writeMessage(message);
 
+	}
+
+	private void writeMessage(String message) {
+		frame.getGamePanel().addMessageToConsole(message);		
 	}
 
 	@Override
 	public void notifyRoundTimerExpired() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("Your time's up, you'll skip this round");
 	}
 
 	@Override
@@ -159,6 +175,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void assignColor(String color) {
 			gameController.setPlayerColor(color);
 			frame.setPlayerColor(color);
+			
 	}
 
 	@Override
@@ -187,14 +204,14 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askFinishRoundOrDiscard() {
-		// TODO Auto-generated method stub
+		writeGameMessage("Choose what you want to do next, Discard a leader card or end the turn");
+		frame.showEndOrDiscard();
 
 	}
 
 	@Override
 	public void actionCommandNotValid(String reason) {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("Your action is invalid: "+reason);
 	}
 
 	@Override
@@ -207,7 +224,21 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 			
 			gameController.notifyChatMessage(message);
 
+		} else if(e.getSource() == frame.getGamePanel().getShowPersonalBoard()){
+			personalBoard.setVisible(!personalBoard.isVisible());
 		}
+		
+		
+		
+	}
+
+	public void notifyTakeCard(ArrayList<String> actionConstructor) {
+		gameController.notifyTakeCardAction(actionConstructor);
+	}
+
+	public void notifyEndRound() {
+		gameController.notifyFinishRound();
+		
 	}
 
 }

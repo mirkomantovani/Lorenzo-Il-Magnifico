@@ -7,10 +7,12 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
 
 
@@ -30,8 +32,12 @@ public class BoardPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Image img;
-	private Dimension dimension;
+	static Dimension dimension;
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private int imgHeight;
+	private int imgWidth;
+
+
 
 	public BoardPanel() {
 		super(new GridBagLayout());
@@ -59,8 +65,8 @@ public class BoardPanel extends JPanel {
 		} catch (IOException e) {
 		}
 		System.out.println(dimension.width+" e "+ dimension.height);
-		int imgHeight=img.getHeight(null);
-		int imgWidth=img.getWidth(null);
+		imgHeight=img.getHeight(null);
+		imgWidth=img.getWidth(null);
 		float ratio=imgWidth/imgHeight;
 		System.out.println(imgHeight+" e "+ imgWidth);
 		img = img.getScaledInstance(dimension.height*imgWidth/imgHeight, dimension.height,
@@ -74,7 +80,14 @@ public class BoardPanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		g.drawImage(img, 0, 0, this);
 	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	
+	
+
 }
