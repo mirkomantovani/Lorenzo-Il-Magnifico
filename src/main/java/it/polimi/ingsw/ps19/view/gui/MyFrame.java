@@ -190,6 +190,11 @@ public class MyFrame extends JFrame {
 //		gamePanel.hideActionPanels();
 		gamePanel.showChooseAction();
 	}
+
+	public void showEndOrDiscard() {
+		gamePanel.showEndOrDiscard();
+		
+	}
 	
 
 }
