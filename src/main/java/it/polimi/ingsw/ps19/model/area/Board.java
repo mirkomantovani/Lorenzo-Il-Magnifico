@@ -225,6 +225,12 @@ public class Board implements Serializable {
 		
 		return builder.toString();
 	}
+
+	public ArrayList<String> getPlayerOrder() {
+		return (ArrayList<String>) playerOrder;
+	}
+	
+	
 	
 	
 	

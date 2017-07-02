@@ -27,7 +27,10 @@ public class FaithPointMarkerDisk extends JPanel{
 	private static final double HEIGHT_PERC = 0.73333333333333333333333333333333;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
 	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
-	
+	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
+	private final static double slotRelDim = 0.03937007874015748031496062992126;
+	private final static double offset = 0.00065616797900262467191601049868766;
 	
 	public FaithPointMarkerDisk(String color){
 		src = color;
@@ -41,11 +44,8 @@ public class FaithPointMarkerDisk extends JPanel{
 		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
-	private void setFaithPointMarkers(){
+	public void setFaithPointMarkers(){
 		
-		
-		int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
-		int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 	
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
@@ -60,5 +60,25 @@ public class FaithPointMarkerDisk extends JPanel{
 		wCount = wCount + 5;
 	}
 	
+	
+	public void setFaithPointsAmount(double val){
+		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+		if(val <=2){
+			widthRel = (int) (widthRel + val*slotRelDim*BoardPanel.dimension.getWidth() );
+		}
+		else if(val > 6){
+			widthRel = (int)(widthRel + 8.5*slotRelDim*BoardPanel.dimension.getWidth());
+			this.setFaithPointMarkers();
+		} else if(val == 3){
+			widthRel = (int)(widthRel + 3.5*slotRelDim*BoardPanel.dimension.getWidth());
+			this.setFaithPointMarkers();
+		} else if(val == 4){
+			widthRel = (int)(widthRel + 5.2*slotRelDim*BoardPanel.dimension.getWidth());
+			this.setFaithPointMarkers();
+		} else {
+			widthRel = (int)(widthRel + 7*slotRelDim*BoardPanel.dimension.getWidth());
+			this.setFaithPointMarkers();
+		}
+	}
 
 }

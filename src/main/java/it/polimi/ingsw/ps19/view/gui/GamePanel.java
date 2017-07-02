@@ -62,7 +62,7 @@ public class GamePanel extends JPanel {
 		cards=new ArrayList<CardButton>();
 
 		screenDim=toolkit.getScreenSize();
-//      setUndecorated(true);
+//		this.set(true);
 //		setExtendedState(Frame.MAXIMIZED_BOTH);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setBounds(100, 100, 450, 300);
@@ -234,21 +234,49 @@ public class GamePanel extends JPanel {
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
-		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
-		boardPanel.add(redMarker);
-		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
-		boardPanel.add(blueMarker);
-		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
-		boardPanel.add(greenMarker);
+//		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
+//		boardPanel.add(redMarker);
+//		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
+//		boardPanel.add(blueMarker);
+//		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
+//		boardPanel.add(greenMarker);
 		
-		boardPanel.add(new VictoryPointMarkerDisk("red"));
-		boardPanel.add(new VictoryPointMarkerDisk("blue"));
+//		boardPanel.add(new VictoryPointMarkerDisk("red"));
+//		boardPanel.add(new VictoryPointMarkerDisk("blue"));
+//		
+//		boardPanel.add(new FaithPointMarkerDisk("green"));
+//		boardPanel.add(new FaithPointMarkerDisk("yellow"));
+//		
+//		boardPanel.add(new MilitaryPointMarkerDisk("green"));
+//		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
+//		FaithPointMarkerDisk red = new FaithPointMarkerDisk("red");
+//		boardPanel.add(red);
+//	
+//		red.setFaithPointsAmount(5);
+//		
+//		MilitaryPointMarkerDisk militaryBlue = new MilitaryPointMarkerDisk("blue");
+//		boardPanel.add(militaryBlue);
+//		militaryBlue.setMilitaryPointsAmount(10);
+//		
+//		VictoryPointMarkerDisk victoryYellow = new VictoryPointMarkerDisk("yellow");
+//		boardPanel.add(victoryYellow);
+//		victoryYellow.setVictoryPointsAmount(50);
+//		
+//		FamilyMemberPawn family = new FamilyMemberPawn("black","red");
+//		boardPanel.add(family);
+//		family.PlaceFamiliarInTower("venture", 2);
+//		family.PlaceFamiliarIntoCouncilPalace();
+//		FamilyMemberPawn family3 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family3);
+//		family3.PlaceFamiliarIntoMarket(4);
+//		FamilyMemberPawn family4 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family4);
+//		family3.PlaceFamiliarIntoProductionArea("2");
+//		FamilyMemberPawn family5 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family5);
+//		family5.PlaceFamiliarIntoProductionArea("2");
 		
-		boardPanel.add(new FaithPointMarkerDisk("green"));
-		boardPanel.add(new FaithPointMarkerDisk("yellow"));
 		
-		boardPanel.add(new MilitaryPointMarkerDisk("green"));
-		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
@@ -313,5 +341,11 @@ public class GamePanel extends JPanel {
 		cards.forEach(card -> boardPanel.remove(card));
 		
 	}
+
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
+	}
+	
+	
 	
 }

@@ -21,6 +21,9 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	private static double HEIGHT_PERC = 0.89814814814814814814814814814815;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
 	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
+	private int  heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
+	private int  widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	private final static double offset = 0.03333333333333333333333333333333;
 	
 	
 	public MilitaryPointMarkerDisk(String color){
@@ -36,11 +39,6 @@ public class MilitaryPointMarkerDisk extends JPanel{
 		}
 	
 	private void setMilitaryPointMarkers(){
-		
-		
-		int heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
-		
-		int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
@@ -53,6 +51,11 @@ public class MilitaryPointMarkerDisk extends JPanel{
 		this.setVisible(true);
 		this.setOpaque(false);
 		wCount = wCount + 5;
+	}
+	
+	public void setMilitaryPointsAmount(int amount){
+		heightRel = (int) (heightRel - amount*offset*BoardPanel.dimension.getHeight());
+		setMilitaryPointMarkers();
 	}
 
 }
