@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,6 +12,8 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +42,9 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 	
-	public static Dimension screenDim;
+	protected static Dimension screenDim;
 	
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private JTextField textField;
@@ -49,15 +53,25 @@ public class GamePanel extends JPanel {
 	private JButton sendChat;
 	private JButton showPersonalBoard;
 	
-	private JTextArea txtrCiaooo;
+	private JTextArea textArea;
 	private PlayerResources playerResources;
 	private final Font buttonsFont= new Font("SansSerif", Font.BOLD, 16);
 	
 	private List<CardButton> cards;
+
+	private Container actionContentPane;
+	
+	private ActionPanel actionPanel;
+	private ChooseAction chooseAction;
+	
+	private ArrayList<String> actionConstructor;
+	
+	private GraphicalUserInterface GUI;
 	
 
 	
 	public GamePanel(String playerColor){
+		
 		
 		cards=new ArrayList<CardButton>();
 
@@ -69,7 +83,8 @@ public class GamePanel extends JPanel {
 //		contentPane = new JPanel();
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setLayout(new BorderLayout(0, 0));
-//		setContentPane(contentPane);
+		
+		//BOARD
 		
 		boardPanel = new BoardPanel();
 		add(boardPanel, BorderLayout.WEST);
@@ -90,55 +105,58 @@ public class GamePanel extends JPanel {
 		System.out.println("BoardPanel preferredSize: "+boardPanel.getPreferredSize().getHeight()+" "+
 				boardPanel.getPreferredSize().getWidth());
 		
+		//RIGHT SCROLLBAR
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 //		scrollPane.setSize(new Dimension(screenDim.width-panel.getPreferredSize().width, 100));
 		scrollPane.setPreferredSize(new Dimension(screenDim.width-boardPanel.getPreferredSize().width, 500));
 		add(scrollPane, BorderLayout.EAST);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setMaximumSize(new Dimension(1000, 1000));
-		scrollPane.setViewportView(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		//PANEL CONTAINED IN THE SCROLLBAR
+		
+		JPanel rightScrollbarContainer = new JPanel();
+		rightScrollbarContainer.setMaximumSize(new Dimension(1000, 1000));
+		scrollPane.setViewportView(rightScrollbarContainer);
+		rightScrollbarContainer.setLayout(new BoxLayout(rightScrollbarContainer, BoxLayout.Y_AXIS));
+		
+		//CHAT INTERNALFRAME
 		
 		JInternalFrame internalFrame = new JInternalFrame("Chat");
 		internalFrame.setBackground(SystemColor.controlHighlight);
-		panel_1.add(internalFrame);
+		rightScrollbarContainer.add(internalFrame);
 		internalFrame.setPreferredSize(new Dimension(screenDim.width-boardPanel
 				.getPreferredSize().width,screenDim.height/3));
 		internalFrame.setMaximumSize(new Dimension(screenDim.width-boardPanel
 				.getPreferredSize().width,screenDim.height/3));
-//		internalFrame.setSize(new Dimension(20,50));
+
+		//CHAT TEXTAREA
 		
-//		JInternalFrame internalFrame2 = new JInternalFrame("Chat");
-//		internalFrame.setBackground(SystemColor.controlHighlight);
-//		panel_1.add(internalFrame2);
+		textArea = new JTextArea();
+		textArea.setMargin(new Insets(1, 1, 1, 1));
+		textArea.setText("ciaooo");
+		textArea.setEditable(true);
+		textArea.setLineWrap(true);
+		textArea.setBorder(new EmptyBorder(5, 5, 5, 5));
+		textArea.setBackground(new Color(245, 200, 86));
+		textArea.setFont(new Font("Consolas", 0, 20));
 		
+		//SCROLLPANE FOR CHAT
 		
-		txtrCiaooo = new JTextArea();
-		txtrCiaooo.setMargin(new Insets(1, 1, 1, 1));
-		txtrCiaooo.setText("ciaooo");
-		txtrCiaooo.setEditable(true);
-		txtrCiaooo.setLineWrap(true);
-		txtrCiaooo.setBorder(new EmptyBorder(5, 5, 5, 5));
-		txtrCiaooo.setBackground(new Color(245, 200, 86));
-		txtrCiaooo.setFont(new Font("Consolas", 0, 20));
-		
-		
-		JScrollPane scrPane = new JScrollPane(txtrCiaooo);
+		JScrollPane scrPane = new JScrollPane(textArea);
 		Border border = BorderFactory.createLoweredBevelBorder();
 		scrPane.setBorder(border);
-//		scrollPane.setSize(new Dimension(getWidth(), getHeight() * 1 / 3 - 10));
-//		scrollPane.setPreferredSize(new Dimension(getWidth(),
-//				getHeight() * 1 / 3 - 10));
+
 		JScrollBar vertical = scrPane.getVerticalScrollBar();
 		vertical.setPreferredSize(new Dimension(0, 0));
 		
 		internalFrame.getContentPane().add(scrPane, BorderLayout.CENTER);
 		
-		JPanel panel_2 = new JPanel();
-		internalFrame.getContentPane().add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel chatInputPanel = new JPanel();
+		internalFrame.getContentPane().add(chatInputPanel, BorderLayout.SOUTH);
+		chatInputPanel.setLayout(new BorderLayout(0, 0));
+		
+		//CHAT INPUT BUTTON
 		
 		sendChat = new JButton("Send");
 		sendChat.setForeground(new Color(255, 255, 255));
@@ -146,27 +164,30 @@ public class GamePanel extends JPanel {
 		sendChat.setFont(buttonsFont);
 		sendChat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sendChat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.add(sendChat, BorderLayout.EAST);
+		chatInputPanel.add(sendChat, BorderLayout.EAST);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(160, 82, 45));
-		panel_2.add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		//TEXTFIELD
+		
+		JPanel textFieldOuterPanel = new JPanel();
+		textFieldOuterPanel.setBackground(new Color(160, 82, 45));
+		chatInputPanel.add(textFieldOuterPanel, BorderLayout.CENTER);
+		textFieldOuterPanel.setLayout(new BorderLayout(0, 0));
 		
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(100, 26));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(textField);
+		textFieldOuterPanel.add(textField);
 		textField.setColumns(50);
 		
-		//Player Resources Panel
+		//PLAYER RESOURCES PANEL
+		
 		playerResources = new PlayerResources(screenDim.width-boardPanel.getPreferredSize().width,playerColor);
 //		playerResources.setPreferredSize(new Dimension(screenDim.width-panel.getPreferredSize().width,400));
 //		playerResources.setMaximumSize(new Dimension(screenDim.width-panel.getPreferredSize().width,800));
 		
-		panel_1.add(playerResources);
+		rightScrollbarContainer.add(playerResources);
 		
-		
+		//ACTIONS INTERNAL FRAME
 		
 		JInternalFrame actionsInternalFrame = new JInternalFrame("Game actions");
 		actionsInternalFrame.setMaximizable(true);
@@ -185,31 +206,38 @@ public class GamePanel extends JPanel {
 //		internalFrame_1.getUI().setNorthPane(val ? null : northPane);
 //		internalFrame_1.setRootPaneCheckingEnabled(true);
 		actionsInternalFrame.setBounds(new Rectangle(0, 0, 500, 0));
-		panel_1.add(actionsInternalFrame);
+		rightScrollbarContainer.add(actionsInternalFrame);
 		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-     	ActionPanel actionPanel=new ActionPanel();
-        actionPanel.setBackground(new Color(204, 153, 51));
-	    actionsInternalFrame.getContentPane().add(actionPanel);
+		actionContentPane=actionsInternalFrame.getContentPane();
 		
+		//ACTION PANELS
 		
-
+		actionPanel=new ActionPanel(this);
+		actionPanel.setBackground(new Color(204, 153, 51));
+		actionPanel.setVisible(false);
+		actionContentPane.add(actionPanel);
 		
-//		JPanel personalBoard = new PersonalBoardPanel();
-//		panel_4.add(personalBoard);
-//		personalBoard.setLayout(null);
+		chooseAction=new ChooseAction(this);
+		chooseAction.setBackground(new Color(204, 153, 51));
+		chooseAction.setVisible(false);
+		actionContentPane.add(chooseAction);
+//		actionsInternalFrame.getContentPane().add(actionPanel);
+		
+	
+		//FINAL BUTTONS PANEL
 		
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setBackground(new Color(210, 180, 140));
-		panel_1.add(buttonsPanel);
+		rightScrollbarContainer.add(buttonsPanel);
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton_3 = new JButton("Show Leader Cards");
-		btnNewButton_3.setFont(buttonsFont);
-		btnNewButton_3.setForeground(new Color(255, 255, 255));
-		btnNewButton_3.setBackground(new Color(102, 51, 51));
-		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(btnNewButton_3);
+		JButton showLeaderCardsButton = new JButton("Show Leader Cards");
+		showLeaderCardsButton.setFont(buttonsFont);
+		showLeaderCardsButton.setForeground(new Color(255, 255, 255));
+		showLeaderCardsButton.setBackground(new Color(102, 51, 51));
+		showLeaderCardsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonsPanel.add(showLeaderCardsButton);
 		
 		showPersonalBoard = new JButton("Show Personal Board");
 		showPersonalBoard.setFont(buttonsFont);
@@ -218,19 +246,19 @@ public class GamePanel extends JPanel {
 		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(showPersonalBoard);
 		
-		JButton btnNewButton_4 = new JButton("End Round");
-		btnNewButton_4.setFont(buttonsFont);
-		btnNewButton_4.setBackground(new Color(102, 51, 51));
-		btnNewButton_4.setForeground(new Color(255, 255, 255));
-		btnNewButton_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(btnNewButton_4);
+		JButton endRoundButton = new JButton("End Round");
+		endRoundButton.setFont(buttonsFont);
+		endRoundButton.setBackground(new Color(102, 51, 51));
+		endRoundButton.setForeground(new Color(255, 255, 255));
+		endRoundButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonsPanel.add(endRoundButton);
 		
-		JButton btnStrategyEditor = new JButton("Strategy editor");
-		btnStrategyEditor.setFont(buttonsFont);
-		btnStrategyEditor.setBackground(new Color(102, 51, 51));
-		btnStrategyEditor.setForeground(new Color(255, 255, 255));
-		btnStrategyEditor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(btnStrategyEditor);
+		JButton strategyEditorButton = new JButton("Strategy editor");
+		strategyEditorButton.setFont(buttonsFont);
+		strategyEditorButton.setBackground(new Color(102, 51, 51));
+		strategyEditorButton.setForeground(new Color(255, 255, 255));
+		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonsPanel.add(strategyEditorButton);
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
 //		internalFrame2.setVisible(true);
@@ -286,6 +314,7 @@ public class GamePanel extends JPanel {
 			tower=1;
 		CardButton card = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
+		card.addActionListener(this);
 		card.setToolTipText(descr);
 		boardPanel.add(card);
 		cards.add(card);
@@ -309,8 +338,8 @@ public class GamePanel extends JPanel {
 
 	public void addMessageToConsole(String message) {
 		message="\n"+message;
-		this.txtrCiaooo.append(message);
-		this.txtrCiaooo.setCaretPosition(this.txtrCiaooo.getDocument().getLength());
+		this.textArea.append(message);
+		this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
 	}
 	
 	public void setMarkerOrder(ArrayList<OrderMarkerDisk> markers){
@@ -346,6 +375,83 @@ public class GamePanel extends JPanel {
 		return boardPanel;
 	}
 	
+	private void showActionPanel(Component panel){
+		//rimuovo tutti gli altri panels
+		chooseAction.setVisible(false);
+		actionContentPane.remove(chooseAction);
+		this.actionContentPane.add(panel);
+		panel.setVisible(true);
+	}
+
+	public void showChooseAction() {
+		System.out.println("show choose action");
+		this.showActionPanel(chooseAction);
+		
+	}
 	
+	public void setObserver(GraphicalUserInterface GUI){
+		this.GUI=GUI;
+	}
+	
+
+	public void notifyActionClick() {
+		System.out.println("notifyactionclick");
+		this.showActionPanel(actionPanel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() instanceof CardButton){
+			CardButton card=(CardButton)e.getSource();
+			constructAction(card);
+			this.GUI.notifyTakeCard(actionConstructor);
+			
+		}
+	}
+
+	private void constructAction(CardButton card) {
+		//order; 0-member, 1-servants, 2-unused, 3-cardtype,4-floor
+		actionConstructor=new ArrayList<String>();
+		
+		String familyMember;
+		String floor;  //number
+		String servants;  //number
+		int tower;
+		String cardType;  //number
+		familyMember=actionPanel.getFamilyMember();
+		
+		if(familyMember=="none"){
+	        invalidInputMessage("Select a family member");
+	        return;
+		}
+		
+		floor=""+card.getFloor();
+		tower=card.getTower();
+		
+		if(tower==1)
+			tower=2;
+		else if(tower==2)
+			tower=1;
+		
+		tower=tower+1; //to use the conventions of CLI...
+		
+		servants=actionPanel.getServants();
+		cardType=""+tower;  //scambio 2 torri centrali
+		
+		System.out.println("GamePanel: costructAction: member:"+familyMember+" servants:"+servants+" cardtype/tower:"+cardType+" floor:"+floor);
+		
+		actionConstructor.add(familyMember);
+		actionConstructor.add(servants);
+		actionConstructor.add("takecard");
+		actionConstructor.add(cardType);
+		actionConstructor.add(floor);
+	}
+
+	private void invalidInputMessage(String string) {
+		this.addMessageToConsole("--INVALID INPUT--: "+string);
+		
+	}
+
+
 	
 }

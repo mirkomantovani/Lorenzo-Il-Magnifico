@@ -51,6 +51,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.removeInitialImage();
 		frame.initializeGameFrame();
 		this.addListeners(); 
+		frame.getGamePanel().setObserver(this);
 		frame.pack();   //?
 		frame.repaint();  //?
 
@@ -110,6 +111,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void askMove() {
 		writeGameMessage("It's your turn, decide an action to perform");
+		frame.showChooseAction();
 	}
 
 	@Override
@@ -234,6 +236,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		
 		
 		
+	}
+
+	public void notifyTakeCard(ArrayList<String> actionConstructor) {
+		gameController.notifyTakeCardAction(actionConstructor);
 	}
 
 }
