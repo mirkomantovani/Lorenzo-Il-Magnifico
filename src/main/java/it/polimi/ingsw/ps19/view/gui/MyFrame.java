@@ -185,6 +185,11 @@ public class MyFrame extends JFrame {
 			gamePanel.add(new OrderMarkerDisk(players[i].getColor()));
 		}
 	}
+
+	public void showChooseAction() {
+//		gamePanel.hideActionPanels();
+		gamePanel.showChooseAction();
+	}
 	
 
 }

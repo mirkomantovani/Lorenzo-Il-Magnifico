@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -11,6 +12,8 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +42,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 	
 	protected static Dimension screenDim;
 	
@@ -58,9 +61,17 @@ public class GamePanel extends JPanel {
 
 	private Container actionContentPane;
 	
+	private ActionPanel actionPanel;
+	private ChooseAction chooseAction;
+	
+	private ArrayList<String> actionConstructor;
+	
+	private GraphicalUserInterface GUI;
+	
 
 	
 	public GamePanel(String playerColor){
+		
 		
 		cards=new ArrayList<CardButton>();
 
@@ -196,11 +207,17 @@ public class GamePanel extends JPanel {
 		
 		actionContentPane=actionsInternalFrame.getContentPane();
 		
-		ActionPanel actionPanel=new ActionPanel();
-		actionPanel.setBackground(new Color(204, 153, 51));
+		//ACTION PANELS
 		
-		ChooseAction chooseAction=new ChooseAction();
+		actionPanel=new ActionPanel(this);
+		actionPanel.setBackground(new Color(204, 153, 51));
+		actionPanel.setVisible(false);
+		actionContentPane.add(actionPanel);
+		
+		chooseAction=new ChooseAction(this);
 		chooseAction.setBackground(new Color(204, 153, 51));
+		chooseAction.setVisible(false);
+		actionContentPane.add(chooseAction);
 //		actionsInternalFrame.getContentPane().add(actionPanel);
 		
 	
@@ -267,6 +284,7 @@ public class GamePanel extends JPanel {
 			tower=1;
 		CardButton card = new CardButton(boardPanel.getPreferredSize(),tower,floor,id);
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
+		card.addActionListener(this);
 		card.setToolTipText(descr);
 		boardPanel.add(card);
 		cards.add(card);
@@ -322,5 +340,84 @@ public class GamePanel extends JPanel {
 		cards.forEach(card -> boardPanel.remove(card));
 		
 	}
+	
+	private void showActionPanel(Component panel){
+		//rimuovo tutti gli altri panels
+		chooseAction.setVisible(false);
+		actionContentPane.remove(chooseAction);
+		this.actionContentPane.add(panel);
+		panel.setVisible(true);
+	}
+
+	public void showChooseAction() {
+		System.out.println("show choose action");
+		this.showActionPanel(chooseAction);
+		
+	}
+	
+	public void setObserver(GraphicalUserInterface GUI){
+		this.GUI=GUI;
+	}
+	
+
+	public void notifyActionClick() {
+		System.out.println("notifyactionclick");
+		this.showActionPanel(actionPanel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() instanceof CardButton){
+			CardButton card=(CardButton)e.getSource();
+			constructAction(card);
+			this.GUI.notifyTakeCard(actionConstructor);
+			
+		}
+	}
+
+	private void constructAction(CardButton card) {
+		//order; 0-member, 1-servants, 2-unused, 3-cardtype,4-floor
+		actionConstructor=new ArrayList<String>();
+		
+		String familyMember;
+		String floor;  //number
+		String servants;  //number
+		int tower;
+		String cardType;  //number
+		familyMember=actionPanel.getFamilyMember();
+		
+		if(familyMember=="none"){
+	        invalidInputMessage("Select a family member");
+	        return;
+		}
+		
+		floor=""+card.getFloor();
+		tower=card.getTower();
+		
+		if(tower==1)
+			tower=2;
+		else if(tower==2)
+			tower=1;
+		
+		tower=tower+1; //to use the conventions of CLI...
+		
+		servants=actionPanel.getServants();
+		cardType=""+tower;  //scambio 2 torri centrali
+		
+		System.out.println("GamePanel: costructAction: member:"+familyMember+" servants:"+servants+" cardtype/tower:"+cardType+" floor:"+floor);
+		
+		actionConstructor.add(familyMember);
+		actionConstructor.add(servants);
+		actionConstructor.add("takecard");
+		actionConstructor.add(cardType);
+		actionConstructor.add(floor);
+	}
+
+	private void invalidInputMessage(String string) {
+		this.addMessageToConsole("--INVALID INPUT--: "+string);
+		
+	}
+
+
 	
 }

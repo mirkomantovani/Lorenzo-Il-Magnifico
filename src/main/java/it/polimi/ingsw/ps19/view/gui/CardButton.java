@@ -307,7 +307,6 @@ public class CardButton extends JButton implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -315,6 +314,14 @@ public class CardButton extends JButton implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public int getTower() {
+		return tower;
+	}
+
+	public int getFloor() {
+		return floor;
 	}
 	
 
