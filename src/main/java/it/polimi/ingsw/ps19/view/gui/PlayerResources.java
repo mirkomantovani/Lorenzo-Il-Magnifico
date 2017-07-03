@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -14,6 +15,8 @@ import javax.swing.text.html.StyleSheet;
 
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import java.awt.GridLayout;
+import java.awt.Image;
 
 public class PlayerResources extends JPanel {
 	/**
@@ -66,6 +69,42 @@ public class PlayerResources extends JPanel {
 		JResource servant = new JResource("servant",resourceWidth);
 		add(servant);
 		resources.put(ResourceType.SERVANT, servant);
+		
+		JPanel panel = new JPanel();
+		add(panel);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel neutralFam = new JLabel("");
+		ImageIcon neutral = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"neutralFamiliar.png"));
+		Image img = neutral.getImage();
+		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
+		neutral = new ImageIcon(img);
+		neutralFam.setIcon(neutral);
+		panel.add(neutralFam);
+		
+		JLabel whiteFam = new JLabel("");
+		ImageIcon white = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"whiteFamiliar.png"));
+		img = white.getImage();
+		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
+		white = new ImageIcon(img);
+		whiteFam.setIcon(white);
+		panel.add(whiteFam);
+		
+		JLabel orangeFam = new JLabel("");
+		ImageIcon orange = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"orangeFamiliar.png"));
+		img = orange.getImage();
+		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
+		orange = new ImageIcon(img);
+		orangeFam.setIcon(orange);
+		panel.add(orangeFam);
+		
+		JLabel blackFam = new JLabel("");
+		ImageIcon black = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"blackFamiliar.png"));
+		img = black.getImage();
+		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
+		black = new ImageIcon(img);
+		blackFam.setIcon(black);
+		panel.add(blackFam);
 	}
 	
 //	public void setBackgroundColor(String color){
