@@ -26,7 +26,7 @@ public class OrderMarkerDisk extends JPanel{
 	private final static double WIDTH_PERC = 0.76771653543307086614173228346457;
 	private final static double HEIGHT_PERC = 0.5324074074;
 	private final static double DELTA_PERC= 0.03703703704;
-	private static int Ordercounter = 0;
+	static int Ordercounter = 0;
 	private final static double wDIM_PERC = 0.04724409448818897637795275590551;
 	private final static double hDIM_PERC = 0.03333333333333333333333333333333;
 	

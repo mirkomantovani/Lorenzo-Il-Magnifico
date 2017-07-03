@@ -136,10 +136,11 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void refreshBoard(Board board) {
 		frame.refreshBoard(board);
 //		frame.pack();
+		OrderMarkerDisk.Ordercounter = 0;
 		for(int i = 0; i< board.getPlayerOrder().size();i++){
 			frame.getGamePanel().getBoardPanel().add(new OrderMarkerDisk(board.getPlayerOrder().get(i)));
-			
 		}
+		
 		frame.repaint();
 	
 	}
