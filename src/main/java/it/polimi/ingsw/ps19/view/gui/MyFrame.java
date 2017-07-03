@@ -174,6 +174,8 @@ public class MyFrame extends JFrame {
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.WOOD));
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.STONE));
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.SERVANT));
+		
+		gamePanel.addFamilyMembersToPlayerStatus(p.getFamilyMembers());
 	}
 
 	public void setPlayerColor(String playerColor) {

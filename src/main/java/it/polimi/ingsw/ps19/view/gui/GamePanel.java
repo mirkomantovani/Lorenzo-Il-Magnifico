@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -33,6 +34,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 
 
@@ -399,6 +401,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void addResourceToPlayerStatus(Resource resourceInChest) {
 		playerResources.refreshResource(resourceInChest);
 	}
+	
+	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> familyMembers) {
+		playerResources.refreshFamilyMembers(familyMembers);
+	}
 
 	public void removeCards() {
 		cards.forEach(card -> boardPanel.remove(card));
@@ -521,6 +527,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.currentActionPanel=endOrDiscardPanel;
 		this.showActionPanel(endOrDiscardPanel);
 	}
+
+	
 
 
 	
