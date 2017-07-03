@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.view.UserInterface;
 import javafx.beans.value.WritableObjectValue;
 
@@ -56,6 +57,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.pack();   //?
 		frame.repaint();  //?
 		writeGameMessage("The game has started");
+		
 
 	}
 
@@ -78,6 +80,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
+		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
+		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
+		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
+		
 
 	}
 
@@ -140,6 +146,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		for(int i = 0; i< board.getPlayerOrder().size();i++){
 			frame.getGamePanel().getBoardPanel().add(new OrderMarkerDisk(board.getPlayerOrder().get(i)));
 		}
+		frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
 		
 		frame.repaint();
 	
@@ -152,7 +159,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
-		// TODO Auto-generated method stub
+		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(maskedPlayer.getColor(),maskedPlayer.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
+		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(maskedPlayer.getColor(),maskedPlayer.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
+		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(maskedPlayer.getColor(),maskedPlayer.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
+		
 
 	}
 

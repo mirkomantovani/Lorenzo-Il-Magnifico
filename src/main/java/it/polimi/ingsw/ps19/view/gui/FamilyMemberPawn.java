@@ -40,11 +40,12 @@ public class FamilyMemberPawn extends JPanel{
 	
 
 	public FamilyMemberPawn(String color,String player) {
-		super(new GridBagLayout());
+		
 		this.color = color;
 		this.player = player;
 		setFamilyMember();
 	}
+	
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

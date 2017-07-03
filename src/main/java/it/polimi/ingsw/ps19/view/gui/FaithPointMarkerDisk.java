@@ -37,6 +37,12 @@ public class FaithPointMarkerDisk extends JPanel{
 		setFaithPointMarkers();
 	}
 	
+	public FaithPointMarkerDisk(String color, double amount){
+		src = color;
+		setFaithPointMarkers();
+		setFaithPointsAmount(amount);
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

@@ -31,6 +31,12 @@ public class MilitaryPointMarkerDisk extends JPanel{
 		setMilitaryPointMarkers();
 	}
 	
+	public MilitaryPointMarkerDisk(String color, int amount){
+		src = color;
+		setMilitaryPointMarkers();
+		setMilitaryPointsAmount(amount);
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

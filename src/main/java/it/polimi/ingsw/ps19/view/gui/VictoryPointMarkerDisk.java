@@ -37,6 +37,12 @@ public class VictoryPointMarkerDisk extends JPanel{
 		setVictoryPointMarkers();
 	}
 	
+	public VictoryPointMarkerDisk(String color,int amount){
+		src = color;
+		setVictoryPointMarkers();
+		setVictoryPointsAmount(amount);
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
