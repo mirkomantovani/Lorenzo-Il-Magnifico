@@ -15,11 +15,11 @@ public class NetworkConstants {
 	
 	public static final int RMICLIENTHANDLERPORT = 4321;
 	
-	public static final int MAXPLAYERS = 2;    //deve essere 4
+	public static final int MAXPLAYERS = 3;    //deve essere 4
 	
 	public static final int MINPLAYERS = 2;
 	
-	public static final String SERVER_IP_ADDRESS = "127.0.0.1";
+	public static final String SERVER_IP_ADDRESS = "82.48.85.225";
 			//"82.48.85.132"; // "82.48.85.132";  
 	
 	

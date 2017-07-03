@@ -99,11 +99,13 @@ public class BoardPanel extends JPanel {
 					board.getCouncilPalace().getMembers().get(i).getPlayer().toString()));
 			familiars.get(i).PlaceFamiliarIntoCouncilPalace();
 		}familiars.clear();
+		if(!board.getPlayerOrder().isEmpty()){
 		for(int i=1; i < board.getPlayerOrder().size(); i++){
 			familiars.add(new FamilyMemberPawn(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString(),
 					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().toString()));
 			familiars.get(i-1).PlaceFamiliarIntoMarket(i);
 		}familiars.clear();
+		}
 		for(int i=0 ; i<board.getHarvestArea().getMultipleActionSpace().getMembers().size();i++){
 			familiars.add(new FamilyMemberPawn(board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString(),
 					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().toString()));
