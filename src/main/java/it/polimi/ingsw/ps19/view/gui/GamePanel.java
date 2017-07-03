@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private JButton sendChat;
 	private JButton showPersonalBoard;
 	private JButton strategyEditorButton;
-	private JButton endRoundButton;
+	private JButton quitGameButton;
 	private JButton showLeaderCardsButton;
 	
 	private JTextArea textArea;
@@ -261,12 +261,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(showPersonalBoard);
 		
-		endRoundButton = new JButton("End Round");
-		endRoundButton.setFont(buttonsFont);
-		endRoundButton.setBackground(new Color(102, 51, 51));
-		endRoundButton.setForeground(new Color(255, 255, 255));
-		endRoundButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(endRoundButton);
 		
 		strategyEditorButton = new JButton("Strategy editor");
 		strategyEditorButton.setFont(buttonsFont);
@@ -275,50 +269,70 @@ public class GamePanel extends JPanel implements ActionListener {
 		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		strategyEditorButton.addActionListener(this);
 		buttonsPanel.add(strategyEditorButton);
+		
+		quitGameButton = new JButton("Quit Game");
+		quitGameButton.setFont(buttonsFont);
+		quitGameButton.setBackground(new Color(20, 20, 0));
+		quitGameButton.setForeground(new Color(255, 255, 255));
+		quitGameButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		quitGameButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUI.notifyCloseGame();
+			}
+		});
+		buttonsPanel.add(quitGameButton);
+		
+		
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
-//		internalFrame2.setVisible(true);
-//		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
-//		boardPanel.add(redMarker);
-//		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
-//		boardPanel.add(blueMarker);
-//		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
-//		boardPanel.add(greenMarker);
 		
-//		boardPanel.add(new VictoryPointMarkerDisk("red"));
-//		boardPanel.add(new VictoryPointMarkerDisk("blue"));
-//		
-//		boardPanel.add(new FaithPointMarkerDisk("green"));
-//		boardPanel.add(new FaithPointMarkerDisk("yellow"));
-//		
-//		boardPanel.add(new MilitaryPointMarkerDisk("green"));
-//		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
-//		FaithPointMarkerDisk red = new FaithPointMarkerDisk("red");
-//		boardPanel.add(red);
-//	
-//		red.setFaithPointsAmount(5);
-//		
-//		MilitaryPointMarkerDisk militaryBlue = new MilitaryPointMarkerDisk("blue");
-//		boardPanel.add(militaryBlue);
-//		militaryBlue.setMilitaryPointsAmount(10);
-//		
-//		VictoryPointMarkerDisk victoryYellow = new VictoryPointMarkerDisk("yellow");
-//		boardPanel.add(victoryYellow);
-//		victoryYellow.setVictoryPointsAmount(50);
-//		
-//		FamilyMemberPawn family = new FamilyMemberPawn("black","red");
-//		boardPanel.add(family);
-//		family.PlaceFamiliarInTower("venture", 2);
-//		family.PlaceFamiliarIntoCouncilPalace();
-//		FamilyMemberPawn family3 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family3);
-//		family3.PlaceFamiliarIntoMarket(4);
-//		FamilyMemberPawn family4 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family4);
-//		family3.PlaceFamiliarIntoProductionArea("2");
-//		FamilyMemberPawn family5 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family5);
-//		family5.PlaceFamiliarIntoProductionArea("2");
+		
+		
+		
+//		internalFrame2.setVisible(true);
+		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
+		boardPanel.add(redMarker);
+		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
+		boardPanel.add(blueMarker);
+		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
+		boardPanel.add(greenMarker);
+		
+		boardPanel.add(new VictoryPointMarkerDisk("red"));
+		boardPanel.add(new VictoryPointMarkerDisk("blue"));
+		
+		boardPanel.add(new FaithPointMarkerDisk("green"));
+		boardPanel.add(new FaithPointMarkerDisk("yellow"));
+		
+		boardPanel.add(new MilitaryPointMarkerDisk("green"));
+		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
+		FaithPointMarkerDisk red = new FaithPointMarkerDisk("red");
+		boardPanel.add(red);
+	
+		red.setFaithPointsAmount(5);
+		
+		MilitaryPointMarkerDisk militaryBlue = new MilitaryPointMarkerDisk("blue");
+		boardPanel.add(militaryBlue);
+		militaryBlue.setMilitaryPointsAmount(10);
+		
+		VictoryPointMarkerDisk victoryYellow = new VictoryPointMarkerDisk("yellow");
+		boardPanel.add(victoryYellow);
+		victoryYellow.setVictoryPointsAmount(50);
+		
+		FamilyMemberPawn family = new FamilyMemberPawn("black","red");
+		boardPanel.add(family);
+		family.PlaceFamiliarInTower("venture", 2);
+		family.PlaceFamiliarIntoCouncilPalace();
+		FamilyMemberPawn family3 = new FamilyMemberPawn("black","blue");
+		boardPanel.add(family3);
+		family3.PlaceFamiliarIntoMarket(4);
+		FamilyMemberPawn family4 = new FamilyMemberPawn("black","blue");
+		boardPanel.add(family4);
+		family3.PlaceFamiliarIntoProductionArea("2");
+		FamilyMemberPawn family5 = new FamilyMemberPawn("black","blue");
+		boardPanel.add(family5);
+		family5.PlaceFamiliarIntoProductionArea("2");
 		
 		
 	}
