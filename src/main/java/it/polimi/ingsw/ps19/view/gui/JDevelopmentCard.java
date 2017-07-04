@@ -13,7 +13,7 @@ import javax.swing.JButton;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 
-public class DevelopmentCard extends JButton implements MouseListener {
+public class JDevelopmentCard extends JButton implements MouseListener {
 	/**
 	 * 
 	 */
@@ -37,15 +37,15 @@ public class DevelopmentCard extends JButton implements MouseListener {
 	private Dimension screenDimension;
 
 	private final double ratio = 0.11875;
-	private final double ratioHighBorder=0.01;
-	private final double ratioSecondHighBorder=0.45;
-	private final double ratioLeftBorder=0.01;
+	private final double ratioHighBorder=0.025;
+	private final double ratioSecondHighBorder=0.464;
+	private final double ratioLeftBorder=0.006;
 	private final double ratioSecondLeftBorder=0.505;
 	
 	private final double northBorder = 0.052083333;
 	private final double leftBorder = 0.069813176;
 	private final double floorSpace = 0.006944444;
-	private final double towerSpace = 0.089029007;
+	private final double towerSpace = 0.089529007;
 
 	ImageIcon icon;
 	private String path;
@@ -55,18 +55,23 @@ public class DevelopmentCard extends JButton implements MouseListener {
 	private int h;
 	private int w;
 	private Image img;
+	
+	private double personalRatio=2.789166667;
+;
 
 	/**
 	 * @param cardType
 	 * @param id
 	 * @param cardNumber the number of cards of the same type the player already has in his personal board
 	 */
-	public DevelopmentCard(CardType cardType, int id, int cardNumber) {
+	public JDevelopmentCard(CardType cardType, int id, int cardNumber) {
 
 		screenDimension = toolkit.getScreenSize();
 		
 		personalW=screenDimension.width;
-		personalH=personalW*3347/1200;
+		personalH=(int)(personalW/personalRatio);
+		
+//		System.out.println("personal W e H: "+personalW+"  "+personalH);
 
 		img = null;
 		this.cardType = cardType;
@@ -113,6 +118,8 @@ public class DevelopmentCard extends JButton implements MouseListener {
 		
 		calculateApplicationPoint();
 
+		
+		System.out.println("setting bounds: "+applicationPointX+" "+applicationPointY);
 		setBounds(applicationPointX, applicationPointY, newW, newH);
 
 		this.addMouseListener(this);
@@ -123,6 +130,7 @@ public class DevelopmentCard extends JButton implements MouseListener {
 
 	private void calculateApplicationPoint() {
 		setInitialApplicationPoint();
+//		System.out.println("InitialapplicationPoint: x: "+applicationPointX+"  y: "+applicationPointY);
 		applicationPointX+=cardNumber*(cardWidth+ratioSpaceW*personalW);
 
 	}
@@ -134,7 +142,7 @@ public class DevelopmentCard extends JButton implements MouseListener {
 			applicationPointY=(int)(ratioHighBorder*personalH);
 			break;
 		case VENTURE:
-			applicationPointX=(int)(ratioSecondHighBorder*personalW);
+			applicationPointX=(int)(ratioSecondLeftBorder*personalW);
 			applicationPointY=(int)(ratioHighBorder*personalH);
 			break;
 		case TERRITORY:
@@ -142,7 +150,7 @@ public class DevelopmentCard extends JButton implements MouseListener {
 			applicationPointY=(int)(ratioSecondHighBorder*personalH);
 			break;
 		case CHARACTER:
-			applicationPointX=(int)(ratioSecondHighBorder*personalW);
+			applicationPointX=(int)(ratioSecondLeftBorder*personalW);
 			applicationPointY=(int)(ratioSecondHighBorder*personalH);
 			break;
 		}

@@ -43,7 +43,7 @@ public class BoardPanel extends JPanel {
 
 
 	public BoardPanel() {
-		super(new GridBagLayout());
+		super(new GridBagLayout());  //metto a null
 		
 //		 JButton button;
 ////			setLayout(new GridBagLayout());
