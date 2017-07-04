@@ -197,6 +197,11 @@ public class MyFrame extends JFrame {
 		gamePanel.showEndOrDiscard();
 		
 	}
+
+	public void showPrivilegeChoice() {
+		gamePanel.showChoosePrivilege();
+		
+	}
 	
 
 }

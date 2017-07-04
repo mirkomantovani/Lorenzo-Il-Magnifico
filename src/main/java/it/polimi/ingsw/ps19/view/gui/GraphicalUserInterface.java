@@ -80,9 +80,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
-		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
+//		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
+//		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
+//		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
 		
 
 	}
@@ -142,11 +142,11 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void refreshBoard(Board board) {
 		frame.refreshBoard(board);
 //		frame.pack();
-		OrderMarkerDisk.Ordercounter = 0;
-		for(int i = 0; i< board.getPlayerOrder().size();i++){
-			frame.getGamePanel().getBoardPanel().add(new OrderMarkerDisk(board.getPlayerOrder().get(i)));
-		}
-		frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
+//		OrderMarkerDisk.Ordercounter = 0;
+//		for(int i = 0; i< board.getPlayerOrder().size();i++){
+//			frame.getGamePanel().getBoardPanel().add(new OrderMarkerDisk(board.getPlayerOrder().get(i)));
+//		}
+//		frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
 		
 		frame.repaint();
 	
@@ -202,8 +202,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("You have "+numberOfPrivilege+" council privileges to "
+				+ "choose, click on the resource you would like to get");
+		frame.showPrivilegeChoice();
 	}
 
 	@Override
@@ -260,6 +261,11 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void notifyCloseGame() {
 		personalBoard.dispose();
 		frame.dispose();
+		
+	}
+
+	public void notifyChosenPrivilege(String chosenP) {
+		gameController.notifyChosenPrivileges(chosenP);
 		
 	}
 

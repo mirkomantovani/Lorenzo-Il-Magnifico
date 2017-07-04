@@ -14,6 +14,8 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +46,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	
 	protected static Dimension screenDim;
 	
@@ -70,6 +72,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private ChooseAction chooseAction;
 	private StrategyEditor strategyEditor;
 	private EndOrDiscardPanel endOrDiscardPanel;
+	private ChoosePrivilegePanel choosePrivilegePanel;
 	
 	private ArrayList<String> actionConstructor;
 	
@@ -109,6 +112,10 @@ public class GamePanel extends JPanel implements ActionListener {
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
 //		boardPanel.add(btnNewButton_2);
 		
+		MarketButton market=new MarketButton();
+		market.setBounds(200,200,50,50);
+		boardPanel.add(market);
+		
 		
 		
 		System.out.println("BoardPanel preferredSize: "+boardPanel.getPreferredSize().getHeight()+" "+
@@ -125,7 +132,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		//PANEL CONTAINED IN THE SCROLLBAR
 		
 		JPanel rightScrollbarContainer = new JPanel();
-		rightScrollbarContainer.setMaximumSize(new Dimension(1000, 1000));
+		rightScrollbarContainer.setMaximumSize(new Dimension(screenDim.width-boardPanel.getPreferredSize().width, 20000));
+		rightScrollbarContainer.setPreferredSize(new Dimension(screenDim.width-boardPanel.getPreferredSize().width, 1000));
 		scrollPane.setViewportView(rightScrollbarContainer);
 		rightScrollbarContainer.setLayout(new BoxLayout(rightScrollbarContainer, BoxLayout.Y_AXIS));
 		
@@ -241,7 +249,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		endOrDiscardPanel.setBackground(new Color(204, 153, 51));
 		endOrDiscardPanel.setVisible(false);
 		
-	
+		choosePrivilegePanel=new ChoosePrivilegePanel(screenDim.width-boardPanel.getPreferredSize().width,this);
+		choosePrivilegePanel.setBackground(new Color(204, 153, 51));
+		choosePrivilegePanel.setVisible(false);
 		//FINAL BUTTONS PANEL
 		
 		JPanel buttonsPanel = new JPanel();
@@ -432,6 +442,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private void removeActionPanel() {
 		this.actionContentPane.removeAll();
+		actionContentPane.repaint();
 	}
 
 	public void showChooseAction() {
@@ -467,6 +478,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			else backToCurrentAction();
 			
 		} 
+		
 	}
 
 	
@@ -520,6 +532,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void notifyEndRound() {
 		writeGameMessage("Your round has ended");
+		this.removeActionPanel();
 		GUI.notifyEndRound();
 	}
 
@@ -527,6 +540,48 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.currentActionPanel=endOrDiscardPanel;
 		this.showActionPanel(endOrDiscardPanel);
 	}
+	
+	public void showChoosePrivilege() {
+		this.currentActionPanel=choosePrivilegePanel;
+		this.showActionPanel(choosePrivilegePanel);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() instanceof JResource){
+			String chosenP=((JResource)e.getSource()).getName();
+//			choices.add(Integer.parseInt(((JResource)e.getSource()).getName()));
+			System.out.println("choicepriv:"+chosenP);
+			this.removeActionPanel();
+			this.GUI.notifyChosenPrivilege(chosenP);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 	
 

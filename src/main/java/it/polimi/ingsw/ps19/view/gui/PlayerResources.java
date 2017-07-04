@@ -19,6 +19,7 @@ import javax.swing.text.html.StyleSheet;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import java.awt.Dimension;
 
 public class PlayerResources extends JPanel {
 	/**
@@ -32,6 +33,10 @@ public class PlayerResources extends JPanel {
 	
 	
 	public PlayerResources(int resourceWidth,String playerColor) {
+		
+		
+		setSize(new Dimension(resourceWidth, 1000));
+		setMaximumSize(new Dimension(resourceWidth, 32767));
 		
 		familyMembers=new HashMap<it.polimi.ingsw.ps19.Color,JLabel>();
 		
@@ -51,7 +56,7 @@ public class PlayerResources extends JPanel {
 		
 		setBackground(new Color(r, g, b));
 		
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		
 		JLabel lblPlayername = new JLabel("PlayerName");
 		lblPlayername.setFont(new Font("SansSerif", Font.BOLD, 20));
