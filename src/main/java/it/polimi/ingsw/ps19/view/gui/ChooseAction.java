@@ -68,7 +68,7 @@ public class ChooseAction extends JPanel implements ActionListener {
 		panel.setLayout(new BorderLayout(0, 0));
 
 		discard = new JButton("");
-		discard.setPressedIcon(new ImageIcon(ChooseAction.class.getResource("/discardbtnpress.png")));
+		discard.setPressedIcon(new ImageIcon(ChooseAction.class.getResource("/discardbtnpressed.png")));
 		discard.setBorderPainted(false);
 		discard.setContentAreaFilled(false);
 		discard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

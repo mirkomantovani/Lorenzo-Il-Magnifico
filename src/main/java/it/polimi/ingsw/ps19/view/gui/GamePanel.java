@@ -14,7 +14,10 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -33,6 +36,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 
 
@@ -42,7 +46,7 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
  * @author Mirko
  *
  */
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	
 	protected static Dimension screenDim;
 	
@@ -53,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private JButton sendChat;
 	private JButton showPersonalBoard;
 	private JButton strategyEditorButton;
-	private JButton endRoundButton;
+	private JButton quitGameButton;
 	private JButton showLeaderCardsButton;
 	
 	private JTextArea textArea;
@@ -68,6 +72,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private ChooseAction chooseAction;
 	private StrategyEditor strategyEditor;
 	private EndOrDiscardPanel endOrDiscardPanel;
+	private ChoosePrivilegePanel choosePrivilegePanel;
 	
 	private ArrayList<String> actionConstructor;
 	
@@ -83,7 +88,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		cards=new ArrayList<CardButton>();
 
 		screenDim=toolkit.getScreenSize();
-
+//		this.set(true);
+//		setExtendedState(Frame.MAXIMIZED_BOTH);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setBounds(100, 100, 450, 300);
+//		contentPane = new JPanel();
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setLayout(new BorderLayout(0, 0));
 		
@@ -103,6 +112,10 @@ public class GamePanel extends JPanel implements ActionListener {
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
 //		boardPanel.add(btnNewButton_2);
 		
+		MarketButton market=new MarketButton();
+		market.setBounds(200,200,50,50);
+		boardPanel.add(market);
+		
 		
 		
 		System.out.println("BoardPanel preferredSize: "+boardPanel.getPreferredSize().getHeight()+" "+
@@ -119,7 +132,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		//PANEL CONTAINED IN THE SCROLLBAR
 		
 		JPanel rightScrollbarContainer = new JPanel();
-		rightScrollbarContainer.setMaximumSize(new Dimension(1000, 1000));
+		rightScrollbarContainer.setMaximumSize(new Dimension(screenDim.width-boardPanel.getPreferredSize().width, 20000));
+		rightScrollbarContainer.setPreferredSize(new Dimension(screenDim.width-boardPanel.getPreferredSize().width, 1000));
 		scrollPane.setViewportView(rightScrollbarContainer);
 		rightScrollbarContainer.setLayout(new BoxLayout(rightScrollbarContainer, BoxLayout.Y_AXIS));
 		
@@ -235,7 +249,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		endOrDiscardPanel.setBackground(new Color(204, 153, 51));
 		endOrDiscardPanel.setVisible(false);
 		
-	
+		choosePrivilegePanel=new ChoosePrivilegePanel(screenDim.width-boardPanel.getPreferredSize().width,this);
+		choosePrivilegePanel.setBackground(new Color(204, 153, 51));
+		choosePrivilegePanel.setVisible(false);
 		//FINAL BUTTONS PANEL
 		
 		JPanel buttonsPanel = new JPanel();
@@ -257,12 +273,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonsPanel.add(showPersonalBoard);
 		
-		endRoundButton = new JButton("End Round");
-		endRoundButton.setFont(buttonsFont);
-		endRoundButton.setBackground(new Color(102, 51, 51));
-		endRoundButton.setForeground(new Color(255, 255, 255));
-		endRoundButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(endRoundButton);
 		
 		strategyEditorButton = new JButton("Strategy editor");
 		strategyEditorButton.setFont(buttonsFont);
@@ -271,26 +281,72 @@ public class GamePanel extends JPanel implements ActionListener {
 		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		strategyEditorButton.addActionListener(this);
 		buttonsPanel.add(strategyEditorButton);
+		
+		quitGameButton = new JButton("Quit Game");
+		quitGameButton.setFont(buttonsFont);
+		quitGameButton.setBackground(new Color(20, 20, 0));
+		quitGameButton.setForeground(new Color(255, 255, 255));
+		quitGameButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		quitGameButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUI.notifyCloseGame();
+			}
+		});
+		buttonsPanel.add(quitGameButton);
+		
+		
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
+		
+		
+		
+		
 //		internalFrame2.setVisible(true);
-		
-		//Those shouldn't be here, they need to be created when messages from server arrive
-		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
-		boardPanel.add(redMarker);
-		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
-		boardPanel.add(blueMarker);
-		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
-		boardPanel.add(greenMarker);
-		
-		boardPanel.add(new VictoryPointMarkerDisk("red"));
-		boardPanel.add(new VictoryPointMarkerDisk("blue"));
-		
-		boardPanel.add(new FaithPointMarkerDisk("green"));
-		boardPanel.add(new FaithPointMarkerDisk("yellow"));
-		
-		boardPanel.add(new MilitaryPointMarkerDisk("green"));
-		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
+//		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
+//		boardPanel.add(redMarker);
+//		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
+//		boardPanel.add(blueMarker);
+//		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
+//		boardPanel.add(greenMarker);
+//		
+//		boardPanel.add(new VictoryPointMarkerDisk("red"));
+//		boardPanel.add(new VictoryPointMarkerDisk("blue"));
+//		
+//		boardPanel.add(new FaithPointMarkerDisk("green"));
+//		boardPanel.add(new FaithPointMarkerDisk("yellow"));
+//		
+//		boardPanel.add(new MilitaryPointMarkerDisk("green"));
+//		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
+//		FaithPointMarkerDisk red = new FaithPointMarkerDisk("red");
+//		boardPanel.add(red);
+//	
+//		red.setFaithPointsAmount(5);
+//		
+//		MilitaryPointMarkerDisk militaryBlue = new MilitaryPointMarkerDisk("blue");
+//		boardPanel.add(militaryBlue);
+//		militaryBlue.setMilitaryPointsAmount(10);
+//		
+//		VictoryPointMarkerDisk victoryYellow = new VictoryPointMarkerDisk("yellow");
+//		boardPanel.add(victoryYellow);
+//		victoryYellow.setVictoryPointsAmount(50);
+//		
+//		FamilyMemberPawn family = new FamilyMemberPawn("black","red");
+//		boardPanel.add(family);
+//		family.PlaceFamiliarInTower("venture", 2);
+//		family.PlaceFamiliarIntoCouncilPalace();
+//		FamilyMemberPawn family3 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family3);
+//		family3.PlaceFamiliarIntoMarket(4);
+//		FamilyMemberPawn family4 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family4);
+//		family3.PlaceFamiliarIntoProductionArea("2");
+//		FamilyMemberPawn family5 = new FamilyMemberPawn("black","blue");
+//		boardPanel.add(family5);
+//		family5.PlaceFamiliarIntoProductionArea("2");
+//		
+//		
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
@@ -355,10 +411,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void addResourceToPlayerStatus(Resource resourceInChest) {
 		playerResources.refreshResource(resourceInChest);
 	}
+	
+	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> familyMembers) {
+		playerResources.refreshFamilyMembers(familyMembers);
+	}
 
 	public void removeCards() {
 		cards.forEach(card -> boardPanel.remove(card));
 		
+	}
+
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
 	}
 	
 	private void showActionPanel(Component panel){
@@ -378,6 +442,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private void removeActionPanel() {
 		this.actionContentPane.removeAll();
+		actionContentPane.repaint();
 	}
 
 	public void showChooseAction() {
@@ -413,6 +478,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			else backToCurrentAction();
 			
 		} 
+		
 	}
 
 	
@@ -466,6 +532,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void notifyEndRound() {
 		writeGameMessage("Your round has ended");
+		this.removeActionPanel();
 		GUI.notifyEndRound();
 	}
 
@@ -473,6 +540,50 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.currentActionPanel=endOrDiscardPanel;
 		this.showActionPanel(endOrDiscardPanel);
 	}
+	
+	public void showChoosePrivilege() {
+		this.currentActionPanel=choosePrivilegePanel;
+		this.showActionPanel(choosePrivilegePanel);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() instanceof JResource){
+			String chosenP=((JResource)e.getSource()).getName();
+//			choices.add(Integer.parseInt(((JResource)e.getSource()).getName()));
+			System.out.println("choicepriv:"+chosenP);
+			this.removeActionPanel();
+			this.GUI.notifyChosenPrivilege(chosenP);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	
 
 
 	

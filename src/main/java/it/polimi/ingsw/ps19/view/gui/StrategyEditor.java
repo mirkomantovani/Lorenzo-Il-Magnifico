@@ -24,6 +24,11 @@ import javax.swing.border.EmptyBorder;
  *
  */
 public class StrategyEditor extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public StrategyEditor() {
 		setLayout(new BorderLayout(0, 0));
 		

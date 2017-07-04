@@ -784,7 +784,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		else{
 			sendToCurrentPlayer(new InvalidActionCommand("You modified the code and "
 					+ "tried to get resources from a council privilege which are not valid in the game"));
-			sendToCurrentPlayer(new AskMoveCommand());
+			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 		
 		

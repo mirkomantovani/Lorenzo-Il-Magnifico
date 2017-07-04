@@ -26,10 +26,21 @@ public class VictoryPointMarkerDisk extends JPanel{
 	private final static double HEIGHT_PERC = 0.00462962962962962962962962962963;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
 	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
+	int heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
+	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	private final static double wOffset = 0.04593175853018372703412073490814;
+	private final static double hOffset = 0.03194444444444444444444444444444;
+	
 	
 	public VictoryPointMarkerDisk(String color){
 		src = color;
 		setVictoryPointMarkers();
+	}
+	
+	public VictoryPointMarkerDisk(String color,int amount){
+		src = color;
+		setVictoryPointMarkers();
+		setVictoryPointsAmount(amount);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -40,13 +51,7 @@ public class VictoryPointMarkerDisk extends JPanel{
 		}
 	
 	private void setVictoryPointMarkers(){
-		
 	
-		int heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
-
-		int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
-		
-
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
@@ -58,6 +63,28 @@ public class VictoryPointMarkerDisk extends JPanel{
 		this.setVisible(true);
 		this.setOpaque(false);
 		wCount = wCount + 5;
+	}
+	
+	public void setVictoryPointsAmount(int amount){
+		amount = amount%100;
+		if(amount<=20){
+			widthRel=(int)(widthRel + amount*wOffset*BoardPanel.dimension.getWidth());
+			setVictoryPointMarkers();
+		} else if(amount >20 && amount <=50){
+			widthRel=(int)(widthRel + 20.5*wOffset*BoardPanel.dimension.getWidth());
+			heightRel=(int)(heightRel + (amount-20)*hOffset*BoardPanel.dimension.getHeight());
+			setVictoryPointMarkers();
+		} else if(amount > 70 && amount <=100){
+			widthRel = (int) (0.1*BoardPanel.dimension.getWidth()*WIDTH_PERC);
+			heightRel = (int) (30.2*hOffset*BoardPanel.dimension.getHeight());
+			heightRel=(int)(heightRel - (amount-70)*hOffset*BoardPanel.dimension.getHeight());
+			setVictoryPointMarkers();
+		} else {
+			widthRel=(int)(widthRel + 20*wOffset*BoardPanel.dimension.getWidth());
+			heightRel = (int) (30.5*hOffset*BoardPanel.dimension.getHeight());
+			widthRel=(int)(widthRel - (amount-50)*wOffset*BoardPanel.dimension.getWidth());
+			setVictoryPointMarkers();
+		}
 	}
 	
 

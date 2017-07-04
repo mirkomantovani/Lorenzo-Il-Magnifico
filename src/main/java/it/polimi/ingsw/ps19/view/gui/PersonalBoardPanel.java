@@ -24,7 +24,7 @@ public class PersonalBoardPanel extends JPanel {
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 	public PersonalBoardPanel() {
-		super(new GridBagLayout());
+		super(null);
 		
 dimension = toolkit.getScreenSize();
 		

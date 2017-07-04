@@ -81,7 +81,7 @@ public class MyFrame extends JFrame {
 		} catch (Exception e) {
 
 		}
-//		 setUndecorated(true);
+	 setUndecorated(true);
 		setLayout(new BorderLayout());
 		content = this.getContentPane();
 
@@ -174,6 +174,9 @@ public class MyFrame extends JFrame {
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.WOOD));
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.STONE));
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.SERVANT));
+		
+		gamePanel.addFamilyMembersToPlayerStatus(p.getFamilyMembers());
+		
 	}
 
 	public void setPlayerColor(String playerColor) {
@@ -193,6 +196,11 @@ public class MyFrame extends JFrame {
 
 	public void showEndOrDiscard() {
 		gamePanel.showEndOrDiscard();
+		
+	}
+
+	public void showPrivilegeChoice() {
+		gamePanel.showChoosePrivilege();
 		
 	}
 	
