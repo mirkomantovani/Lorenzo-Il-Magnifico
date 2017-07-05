@@ -983,10 +983,19 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	
 	public void draftExcommTiles(Board board){
 		if(familiars.isEmpty()){
-			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId()));
-			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId()));
-			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId()));
+			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),board.getChurch().getExcommunicationFirst().toString()));
+			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),board.getChurch().getExcommunicationFirst().toString()));
+			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),board.getChurch().getExcommunicationFirst().toString()));
 		}
+	}
+
+	public void addExcommunicationCubes(Player p) {
+//		if(p.isExcommunicatedFirst())
+//			
+//		if(p.isExcommunicatedSecond())
+//			
+//		if(p.isExcommunicatedThird())
+		
 	}
 
 }

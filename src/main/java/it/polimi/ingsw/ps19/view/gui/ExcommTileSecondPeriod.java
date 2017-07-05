@@ -24,7 +24,7 @@ public class ExcommTileSecondPeriod extends JPanel{
 	private final static double hDIM_PERC = 0.09022222222222222222222222222222;
 
 	
-	public ExcommTileSecondPeriod(int id){
+	public ExcommTileSecondPeriod(int id, String effect){
 		this.id = id;
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+id+".png"));
@@ -33,6 +33,7 @@ public class ExcommTileSecondPeriod extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.setToolTipText(effect);
 		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);

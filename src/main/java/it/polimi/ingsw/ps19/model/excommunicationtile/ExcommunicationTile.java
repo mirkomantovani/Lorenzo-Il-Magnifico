@@ -26,6 +26,7 @@ public class ExcommunicationTile implements Serializable {
 	public ExcommunicationTile(Period period, Effect effect,int id) {
 		this.period = period;
 		this.effect = effect;
+		this.id=id;
 	}
 
 
@@ -53,7 +54,6 @@ public class ExcommunicationTile implements Serializable {
 
 
 	public int getId() {
-		// TODO Auto-generated method stub
 		return this.id;
 	}
 

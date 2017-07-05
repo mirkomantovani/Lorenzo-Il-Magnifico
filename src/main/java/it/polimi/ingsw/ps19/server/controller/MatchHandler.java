@@ -875,6 +875,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			tile=this.getCurrentExcommTile();
 			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
 			System.out.println("Ho scomunicato il giocatore"+playerColor);
+			
+			if(match.getPeriod()==Period.FIRST)
+				this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
+			else if(match.getPeriod()==Period.SECOND){
+				this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
+			} else if(match.getPeriod()==Period.SECOND){
+				this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
+			}
+			
 			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
 			
 		}	

@@ -28,6 +28,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	// private String player;
 	private Image icon;
 	private ClientController gameController;
+	private boolean excommunicationCubeNeeded;
 
 	public GraphicalUserInterface(ClientController clientController) {
 		this.gameController = clientController;
@@ -75,6 +76,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void playerStatusChange(Player p) {
+		
+		if(excommunicationCubeNeeded){
+			frame.getGamePanel().addExcommunicationCubes(p);
+			excommunicationCubeNeeded=false;
+		}
+		
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
 		frame.refreshLeaderCards(p.getLeaderCards());
@@ -174,6 +181,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void notifyExcommunication() {
+		excommunicationCubeNeeded=true;
 		writeGameMessage("God seems very offended by your behaviour, he established your excommunication.");
 	}
 
