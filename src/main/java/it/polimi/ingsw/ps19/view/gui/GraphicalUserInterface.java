@@ -78,7 +78,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
-		frame.getGamePanel().setPointsMarkers(p);
+//		frame.getGamePanel().setPointsMarkers(p);
 		frame.repaint();
 	}
 
@@ -163,7 +163,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.getGamePanel().populateFamiliars(board);
 		frame.getGamePanel().createMarkers(board);
 		frame.getGamePanel().updateOrder(board);
-		frame.getGamePanel().PlaceFamiliars(board);
+//		frame.getGamePanel().PlaceFamiliars(board);
 
 		frame.repaint();
 
@@ -282,6 +282,13 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void notifyChosenPrivilege(String chosenP) {
 		gameController.notifyChosenPrivileges(chosenP);
 
+	}
+
+	public void notifyMarketAction(ArrayList<String> actionConstructor) {
+		System.out.println("\nmarket action: actionconstructor:"+actionConstructor.get(0)+
+				" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
+				" "+actionConstructor.get(3));
+		gameController.notifyMarket(actionConstructor);
 	}
 
 }

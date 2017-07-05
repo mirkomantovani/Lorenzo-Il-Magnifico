@@ -153,6 +153,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			break;
 		case ClientConstants.SEND_MARKET_SLOT:
 			actionConstructor.add(input);
+			
+//			System.out.println("\nCLI:market action: actionconstructor:"+actionConstructor.get(0)+
+//					" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
+//					" "+actionConstructor.get(3));
+			
 			gameController.notifyMarket(actionConstructor);
 			break;
 		case ClientConstants.SEND_HARVEST_ACTION_SPACE:

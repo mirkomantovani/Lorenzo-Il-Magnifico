@@ -67,6 +67,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private JButton quitGameButton;
 	private JButton showLeaderCardsButton;
 	
+	private MarketButton firstMarket;
+	private MarketButton secondMarket;
+	private MarketButton thirdMarket;
+	private MarketButton fourthMarket;
+	
 	private JTextArea textArea;
 	private PlayerResources playerResources;
 	private final Font buttonsFont= new Font("SansSerif", Font.BOLD, 16);
@@ -238,6 +243,34 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		actionContentPane=actionsInternalFrame.getContentPane();
+		
+		//BUTTONS: Market, council, production and harvest
+		
+		firstMarket=new MarketButton();
+		firstMarket.setBounds(580,1180,50,50);
+		firstMarket.addActionListener(this);
+		firstMarket.setName("1");
+		boardPanel.add(firstMarket);
+		
+		secondMarket=new MarketButton();
+		secondMarket.setBounds(650,1200,50,50);
+		secondMarket.addActionListener(this);
+		secondMarket.setName("2");
+		boardPanel.add(secondMarket);
+		
+		thirdMarket=new MarketButton();
+		thirdMarket.setBounds(720,1220,50,50);
+		thirdMarket.addActionListener(this);
+		thirdMarket.setName("3");
+		boardPanel.add(thirdMarket);
+		
+		fourthMarket=new MarketButton();
+		fourthMarket.setBounds(800,1250,50,50);
+		fourthMarket.addActionListener(this);
+		fourthMarket.setName("4");
+		boardPanel.add(fourthMarket);
+		
+		
 		
 		//ACTION PANELS
 		
@@ -446,11 +479,47 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			showActionPanel(strategyEditor);
 			else backToCurrentAction();
 			
-		} 
+		} else if(e.getSource() instanceof MarketButton){
+			String market=((MarketButton)e.getSource()).getName();
+			constructAction(market);
+			if(actionConstructor.size()==4){
+			this.GUI.notifyMarketAction(actionConstructor);
+			}else{
+				System.out.println("gamepanel: market actionconstructor non con 4 elementi");
+			}
+			
+		}
 		
 	}
 
 	
+
+	private void constructAction(String market) {
+		System.out.println("gamepanel:constructing marketaction");
+actionConstructor=new ArrayList<String>();
+		
+		String familyMember;
+		String servants;  //number
+		String actionSpace=market; // FIRST,SECOND,THIRD,FOURTH as the place of the marker spot from the left to the
+		// right on the board
+		familyMember=actionPanel.getFamilyMember();
+		
+		if(familyMember=="none"){
+	        invalidInputMessage("Select a family member");
+	        return;
+		}
+		
+		servants=actionPanel.getServants();
+		
+		//I have to adapt the order because it was made that way in the ClietController
+		//order: 0-family member, 1-servants, 2-doesn't matter (actiontype), 3-actionspace
+		
+		actionConstructor.add(familyMember);
+		actionConstructor.add(servants);
+		actionConstructor.add("market");
+		actionConstructor.add(actionSpace);
+	
+	}
 
 	private void backToCurrentAction() {
        showActionPanel(currentActionPanel);		
