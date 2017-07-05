@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -50,15 +51,18 @@ public class MilitaryPointMarkerDisk extends JPanel{
 		}
 	
 	private void setMilitaryPointMarkers(){
+		
+		
 
 
 		this.setBounds(widthRel , heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount ;
 	}
 	
 	public void setMilitaryPointsAmount(int amount){
+		Random random = new Random();
+		int n = random.nextInt(50) + 100;
 		System.out.println("military amount:" + amount);
 		if(amount>25){
 			amount = 25;

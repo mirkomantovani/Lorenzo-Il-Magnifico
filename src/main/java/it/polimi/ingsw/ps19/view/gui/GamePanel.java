@@ -879,6 +879,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		this.currentActionPanel = chooseExcommunicationPanel;
 		this.showActionPanel(chooseExcommunicationPanel);
 	}
+	
+	public void resetFamiliars(){
+		for(FamilyMemberPawn f: familiars.values()){
+			if(!familiars.isEmpty())
+				boardPanel.remove(f);
+		}
+	}
 
 	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
 		if(!leadersPanel.areLeaderCards(leaderCards.size())){

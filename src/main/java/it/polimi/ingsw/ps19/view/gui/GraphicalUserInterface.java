@@ -129,6 +129,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void initializeTurn(Period period, int turn) {
 		writeGameMessage("A new turn is starting, Period:" + period.toString() + " Turn:" + turn);
+		FamilyMemberPawn.councilCounter = 0;
+		frame.getGamePanel().resetFamiliars();
 	}
 
 	@Override
