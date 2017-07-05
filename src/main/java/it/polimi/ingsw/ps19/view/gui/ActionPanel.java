@@ -38,7 +38,7 @@ public class ActionPanel extends JPanel {
 	 * 
 	 * @param gamePanel
 	 */
-	public ActionPanel(GamePanel gamePanel) {
+	public ActionPanel(GamePanel gamePanel,String playerColor) {
 
 		radioButtons = new ArrayList<JRadioButton>();
 
@@ -47,10 +47,10 @@ public class ActionPanel extends JPanel {
 		setBackground(new Color(222, 184, 135));
 		familyGroup = new ButtonGroup();
 
-		URL neutral = ActionPanel.class.getResource("/redneutralFamiliar.png");
-		URL orange = ActionPanel.class.getResource("/redorangeFamiliar.png");
-		URL white = ActionPanel.class.getResource("/redwhiteFamiliar.png");
-		URL black = ActionPanel.class.getResource("/redblackFamiliar.png");
+		URL neutral = ActionPanel.class.getResource("/"+playerColor+"neutralFamiliar.png");
+		URL orange = ActionPanel.class.getResource("/"+playerColor+"orangeFamiliar.png");
+		URL white = ActionPanel.class.getResource("/"+playerColor+"whiteFamiliar.png");
+		URL black = ActionPanel.class.getResource("/"+playerColor+"blackFamiliar.png");
 
 		String html = "<html><body><img src='" + neutral.toString() + "'width=160 height=160>";
 
