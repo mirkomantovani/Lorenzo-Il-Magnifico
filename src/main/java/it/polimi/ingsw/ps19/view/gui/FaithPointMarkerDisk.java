@@ -64,7 +64,7 @@ public class FaithPointMarkerDisk extends JPanel{
 	public void setFaithPointsAmount(double val){
 		System.out.println("faith amount:" + val);
 		if(val>=30){
-			setFaithPointsAmount(30);
+			widthRel = (int) (BoardPanel.dimension.getWidth()*30*slotRelDim);
 		} else {
 		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		if(val <=2){
@@ -72,6 +72,7 @@ public class FaithPointMarkerDisk extends JPanel{
 		}
 		else if(val > 6){
 			widthRel = (int)(widthRel + 8.5*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + val*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
 		} else if(val == 3){
 			widthRel = (int)(widthRel + 3.5*slotRelDim*BoardPanel.dimension.getWidth());
