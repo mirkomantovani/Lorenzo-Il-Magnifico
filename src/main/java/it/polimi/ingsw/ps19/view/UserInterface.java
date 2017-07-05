@@ -51,7 +51,6 @@ public interface UserInterface {
 	
 	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles);
 	
-	public void displayOpponentsStatus(Player player);
 	
 	public void assignColor(String color);
 

@@ -24,7 +24,7 @@ public class MarketAction extends Action{
 
 	@Override
 	public void apply() throws NotApplicableException {
-		System.out.println("sono nell'azione");
+		System.out.println("sono nell'azione market");
 	
 		if(isApplicable()){
 			System.out.println("sono entrato in isApplicable");

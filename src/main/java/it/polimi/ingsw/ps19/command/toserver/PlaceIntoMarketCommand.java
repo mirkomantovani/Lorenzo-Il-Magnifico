@@ -18,7 +18,11 @@ public class PlaceIntoMarketCommand extends ClientToServerCommand{
 	
 	private String familyMember; // orange,black,white,neutral
 	private String actionSpace; // FIRST,SECOND,THIRD,FOURTH as the place of the marker spot from the left to the
-								// right on the board
+								// right on the board **Mirko**: NO!! whoever wrote this and
+	//then used 1,2,3,4 in thre actionSpace string made me lose 1 hour understanding why it 
+	//didnt't work on the GUI, it's 1,2,3,4 at this point
+	
+	
 	private int paidServants;
 
 	public PlaceIntoMarketCommand(String familyMember, String actionSpace, int paidServants){

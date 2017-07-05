@@ -68,6 +68,10 @@ public class OrderMarkerDisk extends JPanel{
 		this.setOpaque(false);
 		Ordercounter++;
 	}
+
+	public String getSrc() {
+		return src;
+	}
 	
 	
 	

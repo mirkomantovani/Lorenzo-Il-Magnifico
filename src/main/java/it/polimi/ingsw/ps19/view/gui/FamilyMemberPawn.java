@@ -43,6 +43,16 @@ public class FamilyMemberPawn extends JPanel{
 		
 		this.color = color;
 		this.player = player;
+		try {
+			this.img = ImageIO.read(getClass().getResource("/"+player+color+"Familiar.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setVisible(true);
+		this.setOpaque(false);
+		this.setBounds(widthRel, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		setFamilyMember();
 	}
 	
@@ -54,24 +64,18 @@ public class FamilyMemberPawn extends JPanel{
 	
 	public void PlaceFamiliarInTower(String Tower, int Floor){
 		 if (Tower.equals("building")){
-			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + wTOWER_OFFSET*BoardPanel.dimension.getWidth());
-		}else if (Tower.equals("character")){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + 2*wTOWER_OFFSET*BoardPanel.dimension.getWidth());
+		}else if (Tower.equals("character")){
+			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + wTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		}else if (Tower.equals("venture")){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + 3*wTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		}
-		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT + (Floor-1)*hTOWER_OFFSET*BoardPanel.dimension.getWidth());
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT + (3-Floor)*hTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		setFamilyMember();
 	}
 	
 	public void setFamilyMember(){
-		try {
-			this.img = ImageIO.read(getClass().getResource("/"+player+color+"Familiar.png"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		this.setVisible(true);
 		this.setOpaque(false);
 		this.setBounds(widthRel, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));

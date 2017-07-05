@@ -15,8 +15,7 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	private final static int ORDER_DISC_DIAM = 36;
 	private Image img;
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
-	private static int hCount = 0;
-	private static int wCount = 0;
+	static int wCount = 0;
 	private static double WIDTH_PERC = 0.86614173228346456692913385826772;
 	private static double HEIGHT_PERC = 0.89814814814814814814814814814815;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
@@ -28,14 +27,20 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	
 	public MilitaryPointMarkerDisk(String color){
 		src = color;
+		try {
+			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setBounds(widthRel , heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setVisible(true);
+		this.setOpaque(false);
 		setMilitaryPointMarkers();
 	}
 	
-	public MilitaryPointMarkerDisk(String color, int amount){
-		src = color;
-		setMilitaryPointMarkers();
-		setMilitaryPointsAmount(amount);
-	}
+
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -46,22 +51,21 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	
 	private void setMilitaryPointMarkers(){
 
-		try {
-			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.setBounds(widthRel + wCount, heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+
+		this.setBounds(widthRel , heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount + 5;
+		wCount = wCount ;
 	}
 	
 	public void setMilitaryPointsAmount(int amount){
+		System.out.println("military amount:" + amount);
+		if(amount>25){
+			amount = 25;
+		}
 		heightRel = (int) (heightRel - amount*offset*BoardPanel.dimension.getHeight());
 		setMilitaryPointMarkers();
+		heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
 	}
 
 }

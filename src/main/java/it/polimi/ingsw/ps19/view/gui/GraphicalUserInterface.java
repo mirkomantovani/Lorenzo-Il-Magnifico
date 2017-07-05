@@ -15,7 +15,6 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
-import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
@@ -71,21 +70,15 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void commandNotValid() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("Your command is invalid");
 	}
 
 	@Override
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
-		// frame.getGamePanel().getBoardPanel().add(new
-		// VictoryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
-		// frame.getGamePanel().getBoardPanel().add(new
-		// FaithPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
-		// frame.getGamePanel().getBoardPanel().add(new
-		// MilitaryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
-
+		frame.getGamePanel().setPointsMarkers(p);
+		frame.repaint();
 	}
 
 	private void addCardsToPersonalBoard(Player p) {
@@ -154,22 +147,17 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	}
 
-	@Override
-	public void displayOpponentsStatus(Player player) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void refreshBoard(Board board) {
+		
 		frame.refreshBoard(board);
 		// frame.pack();
-		// OrderMarkerDisk.Ordercounter = 0;
-		// for(int i = 0; i< board.getPlayerOrder().size();i++){
-		// frame.getGamePanel().getBoardPanel().add(new
-		// OrderMarkerDisk(board.getPlayerOrder().get(i)));
-		// }
-		// frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
+		 OrderMarkerDisk.Ordercounter = 0;
+		frame.getGamePanel().populateFamiliars(board);
+		frame.getGamePanel().createMarkers(board);
+		frame.getGamePanel().updateOrder(board);
+		frame.getGamePanel().PlaceFamiliars(board);
 
 		frame.repaint();
 
@@ -182,12 +170,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
-		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
+		frame.getGamePanel().setPointsMarkers(maskedPlayer);
+		System.out.println("sono in opponent status change");
+		frame.repaint();
 
 	}
 
@@ -208,8 +193,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("The excommunication phase has started, choose if you want "
+				+ "to be excommunicated or not, the excommunication effect is: "+
+				excommunicationEffect);
+		frame.showExcommunicationPanel();
 	}
 
 	@Override
@@ -289,6 +276,29 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void notifyChosenPrivilege(String chosenP) {
 		gameController.notifyChosenPrivileges(chosenP);
 
+	}
+
+	public void notifyMarketAction(ArrayList<String> actionConstructor) {
+		System.out.println("\nmarket action: actionconstructor:"+actionConstructor.get(0)+
+				" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
+				" "+actionConstructor.get(3));
+		gameController.notifyMarket(actionConstructor);
+	}
+
+	public void notifyCouncilAction(ArrayList<String> actionConstructor) {
+		gameController.notifyCouncilPalace(actionConstructor);
+	}
+
+	public void notifyHarvest(ArrayList<String> actionConstructor) {
+		gameController.notifyHarvest(actionConstructor);
+	}
+
+	public void notifyProduction(ArrayList<String> actionConstructor) {
+		gameController.notifyProduction(actionConstructor);
+	}
+
+	public void notifyExcommunicationChoice(boolean showSupportDecision) {
+		gameController.notifyExcommunicationEffectChoice(showSupportDecision);
 	}
 
 }
