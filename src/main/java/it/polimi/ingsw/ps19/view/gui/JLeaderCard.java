@@ -53,7 +53,7 @@ public class JLeaderCard extends JButton implements MouseListener {
 			System.out.println(ex);
 		}
 		
-		zoomedImage = zoomedImage.getScaledInstance(screenDimension.width/5,screenDimension.width/5*500/300, Image.SCALE_SMOOTH);
+		zoomedImage = zoomedImage.getScaledInstance(screenDimension.width/8,screenDimension.width/8*500/300, Image.SCALE_SMOOTH);
 
 		h = zoomedImage.getHeight(null);
 		w = zoomedImage.getWidth(null);

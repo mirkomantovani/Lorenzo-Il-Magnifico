@@ -137,6 +137,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void askMove() {
 		writeGameMessage("It's your turn, decide an action to perform");
 		frame.showChooseAction();
+		frame.getGamePanel().setLeaderState("none");
 	}
 
 	@Override
@@ -306,6 +307,18 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifyExcommunicationChoice(boolean showSupportDecision) {
 		gameController.notifyExcommunicationEffectChoice(showSupportDecision);
+	}
+
+	public void notifyChosenLeaderInDraft(String leaderName) {
+		gameController.notifyChosenLeaderCard(leaderName);
+	}
+
+	public void notifyActivateLeader(String leaderName) {
+		gameController.notifyLeaderEffectActivation(leaderName);
+	}
+
+	public void notifyDiscardLeader(String leaderName) {
+		gameController.notifyDiscardedLeaderCard(leaderName);
 	}
 
 }

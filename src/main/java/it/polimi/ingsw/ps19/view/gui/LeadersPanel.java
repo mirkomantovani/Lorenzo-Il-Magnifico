@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,9 +64,28 @@ public class LeadersPanel extends JPanel {
 	public void addLeaderCards(ArrayList<LeaderCard> leaderCards) {
 		for(LeaderCard leader: leaderCards){
 			JLeaderCard jLeaderCard=new JLeaderCard(leader.getName());
+			jLeaderCard.setToolTipText(leader.toString());
 			leaders.add(jLeaderCard);
 			add(jLeaderCard);
 		}
+	}
+
+	public void addLeaderCardsWithListener(ArrayList<LeaderCard> leaderCards, GamePanel actionListener) {
+		for(LeaderCard leader: leaderCards){
+			JLeaderCard jLeaderCard=new JLeaderCard(leader.getName());
+			jLeaderCard.setToolTipText(leader.toString());
+			leaders.add(jLeaderCard);
+			add(jLeaderCard);
+			jLeaderCard.addActionListener(actionListener);
+		}
+	}
+
+	public void deleteLeaders() {
+		this.removeAll();
+//		for(JLeaderCard leader: leaders){
+//			this.remove
+//		}
+		
 	}
 
 }

@@ -115,7 +115,7 @@ public class ExcommunicationTilesCreator {
 														
 														//perdi n1 punti vittoria per ogni risorsa (legno, pietra servitori e monete) nella tua plancia
 														effect=new LosePointsForEveryResourceEffect(new VictoryPoint(n1));
-														tilesArray[index]=new ExcommunicationTile(period, effect);
+														tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 		
 													}
 													else {//perdi un punto vittoria per ogni legno e pietra sulle carte di tipo t in tuo possesso
@@ -127,7 +127,7 @@ public class ExcommunicationTilesCreator {
 															}
 															
 														effect=new LosePointsEveryWoodStoneEffect(new VictoryPoint(1), cardType);
-														tilesArray[index]=new ExcommunicationTile(period, effect);
+														tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 														}
 														
 														s=buffReader.readLine();  //line 19
@@ -141,7 +141,7 @@ public class ExcommunicationTilesCreator {
 													r2=ResourceFactory.getResource(ResourceType.values()[rt1-1],n2);
 													
 													effect=new LosePointsBasedOnResourcesEffect(r2, vp);
-													tilesArray[index]=new ExcommunicationTile(period, effect);
+													tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 													
 
 													for(int i=18;i<20;i++)s=buffReader.readLine();  //lines 18 to 19
@@ -150,7 +150,7 @@ public class ExcommunicationTilesCreator {
 											else {
 												//no final points for cartType type card (can't be building type)
 												effect=new SetNoCardTypeFinalPointsEffect(cardType);
-												tilesArray[index]=new ExcommunicationTile(period, effect);
+												tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 
 												for(int i=15;i<20;i++)s=buffReader.readLine();  //lines 15 to 19
 											}
@@ -158,7 +158,7 @@ public class ExcommunicationTilesCreator {
 										else {
 											//salta turno
 											effect=new SetSkipRoundEffect();
-											tilesArray[index]=new ExcommunicationTile(period, effect);
+											tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 
 											
 											for(int i=14;i<20;i++)s=buffReader.readLine();  //lines 14 to 19
@@ -167,7 +167,7 @@ public class ExcommunicationTilesCreator {
 									else {
 										//fattore moltiplicativo servitori su aumento valore azione
 										effect=new SetServantsDividerEffect(n1);
-										tilesArray[index]=new ExcommunicationTile(period, effect);
+										tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 										
 										for(int i=13;i<20;i++)s=buffReader.readLine();  //lines 13 to 19
 									}
@@ -175,7 +175,7 @@ public class ExcommunicationTilesCreator {
 								else {
 									//non puoi piazzare in mercato
 									effect=new SetNoMarketActionEffect();
-									tilesArray[index]=new ExcommunicationTile(period, effect);
+									tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 									
 									for(int i=12;i<20;i++)s=buffReader.readLine();  //lines 12 to 19
 								}
@@ -183,27 +183,27 @@ public class ExcommunicationTilesCreator {
 							else { //malus di n1 su valore azione per carte di tipo cardType
 //raise value with discount effect
 								effect=new RaiseValueWithDiscountEffect(n1, cardType, false, false);
-								tilesArray[index]=new ExcommunicationTile(period, effect);
+								tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 								for(int i=11;i<20;i++)s=buffReader.readLine();  //lines 11 to 19
 							}
 							
 						}
 						else {	effect = new ColoredFamiliarsVariationEffect(-n1);
-								tilesArray[index]=new ExcommunicationTile(period, effect);
+								tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 							
 							
 							for(int i=9;i<20;i++)s=buffReader.readLine();  //lines 9 to 19
 						}	
 					}
 					else {	effect = new ProductionBonusEffect(-n1);
-					tilesArray[index]=new ExcommunicationTile(period, effect);
+					tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 						
 						for(int i=8;i<20;i++)s=buffReader.readLine();  //lines 8 to 19
 					}	
 				}
 				else{ 
 					effect = new HarvestBonusEffect(-n1);
-						tilesArray[index]=new ExcommunicationTile(period, effect);
+						tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 					
 					for(int i=7;i<20;i++)s=buffReader.readLine();  //lines 7 to 19
 				}
@@ -216,7 +216,7 @@ public class ExcommunicationTilesCreator {
 					resource.add(r2);
 					}
 					effect = new ResourceMalusEffect(resource);
-					tilesArray[index]=new ExcommunicationTile(period, effect);
+					tilesArray[index]=new ExcommunicationTile(period, effect,index+1);
 				
 				for(int i=6;i<20;i++)s=buffReader.readLine();   //lines 6 to 19
 			}

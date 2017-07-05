@@ -164,6 +164,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand());
+		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		startLeaderDiscardPhase();
 //		startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
