@@ -164,7 +164,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand());
-		startTurn();
+		startLeaderDiscardPhase();
+//		startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -582,7 +583,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			cycle++;
 			if (cycle == 4)
-				startMatch();
+//				startMatch();
+				startTurn();
 		}
 
 	}

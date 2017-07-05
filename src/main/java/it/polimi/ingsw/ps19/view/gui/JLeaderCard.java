@@ -52,6 +52,8 @@ public class JLeaderCard extends JButton implements MouseListener {
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
+		
+		zoomedImage = zoomedImage.getScaledInstance(screenDimension.width/5,screenDimension.width/5*500/300, Image.SCALE_SMOOTH);
 
 		h = zoomedImage.getHeight(null);
 		w = zoomedImage.getWidth(null);
@@ -72,7 +74,7 @@ public class JLeaderCard extends JButton implements MouseListener {
 		
 //		calculateApplicationPoint();
 
-		
+		this.addMouseListener(this);
 
 //		this.addMouseListener(this);
 
@@ -96,7 +98,7 @@ public class JLeaderCard extends JButton implements MouseListener {
 
 		// this.getParent().getComponentZOrder(this);
 
-		this.getParent().setComponentZOrder(this, 0);
+//		this.getParent().setComponentZOrder(this, 0);
 
 //		setBounds(applicationPointX, applicationPointY, w, h);
 		setIcon(new ImageIcon(zoomedImage));
@@ -127,7 +129,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 	public String getLeaderName() {
 		return leaderName;
 	}
-	
 	
 	
 	

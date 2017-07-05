@@ -107,33 +107,48 @@ public class ClientController implements InputObserver{
 
 	@Override
 	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
+		try{
 		TakeCardCommand takeCardCommand = new TakeCardCommand(actionConstructor.get(0),Integer.parseInt(actionConstructor.get(4)), Integer.parseInt(actionConstructor.get(1)), CardType.values()[Integer.parseInt(actionConstructor.get(3))-1]);
 		sendCommand(takeCardCommand);
-		System.out.println("clientcontroller: sending takecard comand");
+	} catch(IndexOutOfBoundsException e){
+		System.out.println("action constructor non riempito");
+	}
 	}
 
 
 
 	@Override
 	public void notifyMarket(ArrayList<String> actionConstructor) {
+		try{
 		PlaceIntoMarketCommand placeIntoMarketCommand = new PlaceIntoMarketCommand(actionConstructor.get(0), actionConstructor.get(3), Integer.parseInt(actionConstructor.get(1)));
 		sendCommand(placeIntoMarketCommand);
+	} catch(IndexOutOfBoundsException e){
+		System.out.println("action constructor non riempito");
+	}
 	}
 
 
 
 	@Override
 	public void notifyHarvest(ArrayList<String> actionConstructor) {
+		try{
 		HarvestCommand harvestCommand = new HarvestCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 		sendCommand(harvestCommand);
+		} catch(IndexOutOfBoundsException e){
+			System.out.println("action constructor non riempito");
+		}
 	}
 
 
 
 	@Override
 	public void notifyProduction(ArrayList<String> actionConstructor) {
+		try{
 		ProductionCommand productionCommand = new ProductionCommand(actionConstructor.get(0), Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 		sendCommand(productionCommand);
+	} catch(IndexOutOfBoundsException e){
+		System.out.println("action constructor non riempito");
+	}
 	}
 
 
