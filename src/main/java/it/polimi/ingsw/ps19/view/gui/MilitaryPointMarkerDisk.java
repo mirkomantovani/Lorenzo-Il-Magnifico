@@ -34,7 +34,7 @@ public class MilitaryPointMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds(widthRel + wCount, heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setBounds(widthRel , heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
 		setMilitaryPointMarkers();
@@ -52,16 +52,20 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	private void setMilitaryPointMarkers(){
 
 
-		this.setBounds(widthRel + wCount, heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setBounds(widthRel , heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount + 5;
+		wCount = wCount ;
 	}
 	
 	public void setMilitaryPointsAmount(int amount){
 		System.out.println("military amount:" + amount);
+		if(amount>25){
+			amount = 25;
+		}
 		heightRel = (int) (heightRel - amount*offset*BoardPanel.dimension.getHeight());
 		setMilitaryPointMarkers();
+		heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
 	}
 
 }

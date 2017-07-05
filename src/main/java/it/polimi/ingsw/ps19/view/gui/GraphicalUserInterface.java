@@ -78,7 +78,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
-//		frame.getGamePanel().setPointsMarkers(p);
+		frame.getGamePanel().setPointsMarkers(p);
 		frame.repaint();
 	}
 
@@ -176,10 +176,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
-		VictoryPointMarkerDisk.wCount = 0;
-		FaithPointMarkerDisk.wCount = 0;
-		MilitaryPointMarkerDisk.wCount = 0;
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
+		System.out.println("sono in opponent status change");
 		frame.repaint();
 
 	}

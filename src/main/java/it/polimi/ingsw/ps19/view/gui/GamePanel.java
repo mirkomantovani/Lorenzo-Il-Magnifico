@@ -627,6 +627,7 @@ actionConstructor=new ArrayList<String>();
 	
 	public void createMarkers(Board board){
 		if(orderMarkers.isEmpty()){
+			System.out.println("sono nel for creatore");
 		 for(int i = 0; i< board.getPlayerOrder().size();i++){
 			 orderMarkers.add(new
 					 OrderMarkerDisk(board.getPlayerOrder().get(i)));
@@ -666,10 +667,11 @@ actionConstructor=new ArrayList<String>();
 					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()));
 			boardPanel.add(familiars.get(i));
 			familiars.get(i-1).PlaceFamiliarIntoMarket(i);
-			}
+			} else familiars.add(null);
 		}
 		for(FamilyMemberPawn f:familiars){
-			f.ResetAllCounters();
+			if(f!=null)
+				f.ResetAllCounters();
 		}
 		familiars.clear();
 		
@@ -722,9 +724,12 @@ actionConstructor=new ArrayList<String>();
 					boardPanel.add(familiars.get(i));
 					familiars.get(i).PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
 					}
+					familiars.add(null);
 				}
 				for(FamilyMemberPawn f:familiars){
+					if(f != null){
 					f.ResetAllCounters();
+					}
 				}
 				familiars.clear();
 			}
@@ -736,10 +741,10 @@ actionConstructor=new ArrayList<String>();
 	
 	public void setPointsMarkers(Player p){
 
-		victoryMarkers.get(p.getColor()).setVictoryPointsAmount(
-				p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
-		militaryMarkers.get(p.getColor()).setMilitaryPointsAmount(
-				p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount());
+	victoryMarkers.get(p.getColor()).setVictoryPointsAmount(
+			p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
+	militaryMarkers.get(p.getColor()).setMilitaryPointsAmount(
+			p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount());
 		faithMarkers.get(p.getColor()).setFaithPointsAmount(
 				p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount());
 	}

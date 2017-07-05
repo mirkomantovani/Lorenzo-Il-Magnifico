@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -38,7 +39,7 @@ public class FaithPointMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
 		setFaithPointMarkers();
@@ -54,37 +55,49 @@ public class FaithPointMarkerDisk extends JPanel{
 	
 	public void setFaithPointMarkers(){
 		
-		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount + 5;
+		wCount = wCount ;
 	}
 	
 	
 	public void setFaithPointsAmount(double val){
 		System.out.println("faith amount:" + val);
-		if(val>=30){
-			widthRel = (int) (BoardPanel.dimension.getWidth()*30*slotRelDim);
-		} else {
-		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+		System.out.println("old width" + widthRel);
+		
+		Random random = new Random();
+		int n = random.nextInt(20);
+		
+		if(val>=15)
+			val=18.7;
+		
+		widthRel = (int) ((BoardPanel.dimension.getWidth() + n)*WIDTH_PERC);
 		if(val <=2){
-			widthRel = (int) (widthRel + val*slotRelDim*BoardPanel.dimension.getWidth() );
+			widthRel = (int) (widthRel + val*slotRelDim*BoardPanel.dimension.getWidth());
+			this.setFaithPointMarkers();
+			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		}
 		else if(val > 6){
 			widthRel = (int)(widthRel + 8.5*slotRelDim*BoardPanel.dimension.getWidth());
-			widthRel = (int)(widthRel + val*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + (val-8.5)*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
+			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		} else if(val == 3){
 			widthRel = (int)(widthRel + 3.5*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
+			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		} else if(val == 4){
 			widthRel = (int)(widthRel + 5.2*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
+			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		} else {
 			widthRel = (int)(widthRel + 7*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
+			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		}
-		}
+		
+		System.out.println("new width" + widthRel);
 	}
 
 }
