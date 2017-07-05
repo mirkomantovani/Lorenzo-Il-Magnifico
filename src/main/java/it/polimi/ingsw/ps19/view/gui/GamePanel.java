@@ -43,6 +43,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
@@ -79,6 +80,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private SingleProductionButton singleProductionButton;
 	private MultipleHarvestButton multipleHarvestButton;
 	private MultipleProductionButton multipleProductionButton;
+	
 
 	private JTextArea textArea;
 	private PlayerResources playerResources;
@@ -90,10 +92,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	private ActionPanel actionPanel;
 	private ChooseAction chooseAction;
+	private LeadersPanel leadersPanel;
 	private StrategyEditor strategyEditor;
 	private EndOrDiscardPanel endOrDiscardPanel;
 	private ChoosePrivilegePanel choosePrivilegePanel;
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
+	
+	private LeadersPanel draftPanel;
 
 	private ArrayList<String> actionConstructor;
 
@@ -323,6 +328,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		chooseExcommunicationPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		chooseExcommunicationPanel.setVisible(false);
 		
+		leadersPanel=new LeadersPanel();
+		leadersPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		leadersPanel.setVisible(false);
+		
+		draftPanel=new LeadersPanel();
+		draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		draftPanel.setVisible(false);
+		
 		
 		// FINAL BUTTONS PANEL
 
@@ -460,6 +473,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		setEveryoneInvisible(this.actionContentPane.getComponents());
 		this.actionContentPane.removeAll();
 		this.actionContentPane.add(panel);
+		this.actionContentPane.repaint();
 		panel.setVisible(true);
 	}
 
@@ -601,6 +615,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	private void backToCurrentAction() {
+		if(currentActionPanel!=null)
 		showActionPanel(currentActionPanel);
 	}
 
@@ -652,6 +667,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		writeGameMessage("Your round has ended");
 		this.removeActionPanel();
 		GUI.notifyEndRound();
+		currentActionPanel=null;
 	}
 
 	public void showEndOrDiscard() {
@@ -862,6 +878,52 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void showExcommunicationPanel() {
 		this.currentActionPanel = chooseExcommunicationPanel;
 		this.showActionPanel(chooseExcommunicationPanel);
+	}
+
+	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
+		if(!leadersPanel.areLeaderCards(leaderCards.size())){
+			leadersPanel.refreshLeaderCards(leaderCards);
+		}
+	}
+
+	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
+		draftPanel.addLeaderCards(leaderCards);
+		showActionPanel(draftPanel);
+	}
+
+	public void repaintResources() {
+		playerResources.repaint();
+	}
+
+	public void repaintBoard() {
+		boardPanel.repaint();
+	}
+
+	/**
+	 * @param id
+	 * @return true if the card with the specified id is contained in the board
+	 */
+	public boolean isContained(int id) {
+		for(CardButton card: cards){
+			if(card.getId()==id)
+				return true;
+		}
+		return false;
+	}
+
+	public void removeCard(int tower, int floor) {
+		if(tower==1)
+			tower=2;
+		else if(tower==2)
+			tower=1;
+		
+		for(CardButton card: cards){
+			if(card.getTower()==tower&&card.getFloor()==floor){
+				boardPanel.remove(card);
+				System.out.println("cardremoved");
+			}
+		}
+		
 	}
 
 }

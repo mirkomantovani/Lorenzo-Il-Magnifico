@@ -13,14 +13,12 @@ import javax.swing.JButton;
 public class ImageButton extends JButton {
 
 	private Image img;
-	private ClickListener listener;
 
 
 	public ImageButton(String img) {
 		this.img = new ImageIcon(img).getImage().getScaledInstance(300,500, 700);
 		this.setBounds(0, 0, 300, 500);
 		this.setVisible(true);
-		listener = new ClickListener();
 	}
 
 	public ImageButton(Image img) {
@@ -37,19 +35,7 @@ public class ImageButton extends JButton {
 		g.drawImage(img, 0, 0, null);
 	}
 	
-	class ClickListener implements ActionListener{
 
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
 	
-	}
-	
-	public ClickListener getCLickListener(){
-		return this.listener;
-	}
 
 }

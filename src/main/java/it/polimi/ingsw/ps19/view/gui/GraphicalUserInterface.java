@@ -77,8 +77,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
+		frame.refreshLeaderCards(p.getLeaderCards());
 		frame.getGamePanel().setPointsMarkers(p);
-		frame.repaint();
+		frame.getGamePanel().repaintResources();
 	}
 
 	private void addCardsToPersonalBoard(Player p) {
@@ -159,7 +160,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.getGamePanel().updateOrder(board);
 		frame.getGamePanel().PlaceFamiliars(board);
 
-		frame.repaint();
+		frame.getGamePanel().repaintBoard();
 
 	}
 
@@ -172,7 +173,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void opponentStatusChanged(Player maskedPlayer) {
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
 		System.out.println("sono in opponent status change");
-		frame.repaint();
+		frame.getGamePanel().repaintBoard();
 
 	}
 
@@ -208,8 +209,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
-		// TODO Auto-generated method stub
-
+		if(leaderCards.size()==4)
+			writeGameMessage("The Leader Draft phase has started!");
+	
+		writeGameMessage("Choose the leader card you want and pass the other 3 to"
+				+ "the player at your right");
+		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
 	}
 
 	@Override
