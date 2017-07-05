@@ -27,8 +27,7 @@ public class OpponentStatusChangeCommand extends ServerToClientCommand {
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-		// TODO Auto-generated method stub
-
+		clientCommandHandler.applyCommand(this);
 	}
 	
 	public Player getMaskedPlayer() {
