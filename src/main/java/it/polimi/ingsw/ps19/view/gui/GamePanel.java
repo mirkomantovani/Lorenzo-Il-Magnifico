@@ -54,6 +54,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
  */
 public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
+	private static final Color CHAT_BACKGROUND_COLOR = new Color(245, 200, 86);
+
+	private static final Color BACKGROUND_PANELS_COLOR = new Color(204, 153, 51);
+
 	protected static Dimension screenDim;
 
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -89,6 +93,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private StrategyEditor strategyEditor;
 	private EndOrDiscardPanel endOrDiscardPanel;
 	private ChoosePrivilegePanel choosePrivilegePanel;
+	private ChooseExcommunicationPanel chooseExcommunicationPanel;
 
 	private ArrayList<String> actionConstructor;
 
@@ -178,7 +183,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		textArea.setEditable(true);
 		textArea.setLineWrap(true);
 		textArea.setBorder(new EmptyBorder(5, 5, 5, 5));
-		textArea.setBackground(new Color(245, 200, 86));
+		textArea.setBackground(CHAT_BACKGROUND_COLOR);
 		textArea.setFont(new Font("Consolas", 0, 20));
 
 		// SCROLLPANE FOR CHAT
@@ -298,12 +303,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// ACTION PANELS
 
 		actionPanel = new ActionPanel(this);
-		actionPanel.setBackground(new Color(204, 153, 51));
+		actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		actionPanel.setVisible(false);
 		// actionContentPane.add(actionPanel);
 
 		chooseAction = new ChooseAction(this);
-		chooseAction.setBackground(new Color(204, 153, 51));
+		chooseAction.setBackground(BACKGROUND_PANELS_COLOR);
 		chooseAction.setVisible(false);
 		// actionContentPane.add(chooseAction);
 		// actionsInternalFrame.getContentPane().add(actionPanel);
@@ -313,12 +318,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// actionContentPane.add(strategyEditor);
 
 		endOrDiscardPanel = new EndOrDiscardPanel(this);
-		endOrDiscardPanel.setBackground(new Color(204, 153, 51));
+		endOrDiscardPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		endOrDiscardPanel.setVisible(false);
 
 		choosePrivilegePanel = new ChoosePrivilegePanel(screenDim.width - boardPanel.getPreferredSize().width, this);
-		choosePrivilegePanel.setBackground(new Color(204, 153, 51));
+		choosePrivilegePanel.setBackground(BACKGROUND_PANELS_COLOR);
 		choosePrivilegePanel.setVisible(false);
+		
+		chooseExcommunicationPanel=new ChooseExcommunicationPanel(this);
+		chooseExcommunicationPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		chooseExcommunicationPanel.setVisible(false);
+		
+		
 		// FINAL BUTTONS PANEL
 
 		JPanel buttonsPanel = new JPanel();
@@ -857,6 +868,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public Map<String, FaithPointMarkerDisk> getFaithMarkers() {
 		return faithMarkers;
+	}
+
+	public void showSupport(boolean showSupportDecision) {
+		this.GUI.notifyExcommunicationChoice(showSupportDecision);
+		
+	}
+
+	public void showExcommunicationPanel() {
+		this.currentActionPanel = chooseExcommunicationPanel;
+		this.showActionPanel(chooseExcommunicationPanel);
 	}
 
 }

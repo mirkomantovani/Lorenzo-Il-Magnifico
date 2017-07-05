@@ -203,6 +203,10 @@ public class MyFrame extends JFrame {
 		gamePanel.showChoosePrivilege();
 		
 	}
+
+	public void showExcommunicationPanel() {
+		gamePanel.showExcommunicationPanel();
+	}
 	
 
 }

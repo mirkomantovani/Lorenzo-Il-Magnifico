@@ -317,14 +317,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	}
 
-	@Override
-	public void displayOpponentsStatus(Player player) {
-		print(player.getName() + " with color " + player.getColor() + " has changed his status: ");
-		print("Victory points: " + player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
-		print("Faith points: " + player.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
-		print("Military points: " + player.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
-		print("");
-	}
+	
 
 	@Override
 	public void assignColor(String color) {

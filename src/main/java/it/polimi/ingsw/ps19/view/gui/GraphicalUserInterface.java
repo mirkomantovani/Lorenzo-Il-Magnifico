@@ -70,8 +70,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void commandNotValid() {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("Your command is invalid");
 	}
 
 	@Override
@@ -148,11 +147,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	}
 
-	@Override
-	public void displayOpponentsStatus(Player player) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void refreshBoard(Board board) {
@@ -163,7 +157,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.getGamePanel().populateFamiliars(board);
 		frame.getGamePanel().createMarkers(board);
 		frame.getGamePanel().updateOrder(board);
-//		frame.getGamePanel().PlaceFamiliars(board);
+		frame.getGamePanel().PlaceFamiliars(board);
 
 		frame.repaint();
 
@@ -199,8 +193,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
-		// TODO Auto-generated method stub
-
+		writeGameMessage("The excommunication phase has started, choose if you want "
+				+ "to be excommunicated or not, the excommunication effect is: "+
+				excommunicationEffect);
+		frame.showExcommunicationPanel();
 	}
 
 	@Override
@@ -299,6 +295,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifyProduction(ArrayList<String> actionConstructor) {
 		gameController.notifyProduction(actionConstructor);
+	}
+
+	public void notifyExcommunicationChoice(boolean showSupportDecision) {
+		gameController.notifyExcommunicationEffectChoice(showSupportDecision);
 	}
 
 }
