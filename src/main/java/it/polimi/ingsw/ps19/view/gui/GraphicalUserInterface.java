@@ -163,7 +163,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.getGamePanel().populateFamiliars(board);
 		frame.getGamePanel().createMarkers(board);
 		frame.getGamePanel().updateOrder(board);
-//		frame.getGamePanel().PlaceFamiliars(board);
+		frame.getGamePanel().PlaceFamiliars(board);
 
 		frame.repaint();
 

@@ -254,28 +254,22 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// BUTTONS: Market, council, production and harvest
 
 		firstMarket = new MarketButton(1);
-		firstMarket.setBounds(580, 1180, 50, 50); // non ci devono essere i
-													// setbounds qui
 		firstMarket.addActionListener(this);
 		boardPanel.add(firstMarket);
 
 		secondMarket = new MarketButton(2);
-		secondMarket.setBounds(650, 1200, 50, 50);
 		secondMarket.addActionListener(this);
 		boardPanel.add(secondMarket);
 
 		thirdMarket = new MarketButton(3);
-		thirdMarket.setBounds(720, 1220, 50, 50);
 		thirdMarket.addActionListener(this);
 		boardPanel.add(thirdMarket);
 
 		fourthMarket = new MarketButton(4);
-		fourthMarket.setBounds(800, 1250, 50, 50);
 		fourthMarket.addActionListener(this);
 		boardPanel.add(fourthMarket);
 
 		councilButton = new CouncilButton();
-		councilButton.setBounds(500, 800, 200, 90);
 		councilButton.addActionListener(this);
 		boardPanel.add(councilButton);
 
@@ -714,99 +708,88 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void PlaceFamiliars(Board board) {
 
-		ArrayList<FamilyMemberPawn> familiars = new ArrayList<FamilyMemberPawn>();
 
 		for (int i = 0; i < board.getCouncilPalace().getMembers().size(); i++) {
-			familiars.add(this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
+			
+			boardPanel.add(this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
 					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()));
-			boardPanel.add(familiars.get(i));
-			familiars.get(i).PlaceFamiliarIntoCouncilPalace();
+			this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
+					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoCouncilPalace();
 		}
-		for (FamilyMemberPawn f : familiars) {
-			f.ResetAllCounters();
-		}
-		familiars.clear();
+	
 		
-		for(int i=1; i < board.getPlayerOrder().size(); i++){
+		for(int i=1; i <= board.getPlayerOrder().size(); i++){
 			if(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember()!=null){
-			familiars.add(this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
+	
+			boardPanel.add(this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
 					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()));
-			boardPanel.add(familiars.get(i));
-			familiars.get(i-1).PlaceFamiliarIntoMarket(i);
-			} else familiars.add(null);
+			this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
+					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoMarket(i);
+			} 
 		}
-		for(FamilyMemberPawn f:familiars){
-			if(f!=null)
-				f.ResetAllCounters();
-		}
-		familiars.clear();
+	
 
 		for (int i = 0; i < board.getHarvestArea().getMultipleActionSpace().getMembers().size(); i++) {
-			familiars.add(this.familiars.get(
+			
+			boardPanel.add(this.familiars.get(
 					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-							.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
-			boardPanel.add(familiars.get(i));
-			familiars.get(i).PlaceFamiliarIntoHarvestArea("2");
+					.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+			this.familiars.get(
+					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
+					.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoHarvestArea("2");
 		}
-		for (FamilyMemberPawn f : familiars) {
-			f.ResetAllCounters();
-		}
-		familiars.clear();
+		
 		if (board.getHarvestArea().getSingleActionSpace().getFamilyMember() != null) {
-			familiars.add(this.familiars
+			
+			boardPanel.add(this.familiars
 					.get(board.getHarvestArea().getSingleActionSpace().getFamilyMember().getColor().toString()
 							+ board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
-			boardPanel.add(familiars.get(0));
-			familiars.get(0).PlaceFamiliarIntoHarvestArea("1");
-			for (FamilyMemberPawn f : familiars) {
-				f.ResetAllCounters();
-			}
-			familiars.clear();
+			this.familiars
+					.get(board.getHarvestArea().getSingleActionSpace().getFamilyMember().getColor().toString()
+							+ board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoHarvestArea("1");
+			
 		}
 		for (int i = 0; i < board.getProductionArea().getMultipleActionSpace().getMembers().size(); i++) {
-			familiars.add(this.familiars.get(
+			
+			boardPanel.add(this.familiars.get(
 					board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-							.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
-			boardPanel.add(familiars.get(i));
-			familiars.get(i).PlaceFamiliarIntoProductionArea("2");
+					.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+			this.familiars.get(
+					board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
+					.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoProductionArea("2");
 		}
-		for (FamilyMemberPawn f : familiars) {
-			f.ResetAllCounters();
-		}
-		familiars.clear();
+	
 		if (board.getProductionArea().getSingleActionSpace().getFamilyMember() != null) {
-			familiars.add(this.familiars.get(
+		
+			boardPanel.add(this.familiars.get(
 					board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString() + board
-							.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
-			boardPanel.add(familiars.get(0));
-			familiars.get(0).PlaceFamiliarIntoProductionArea("1");
-			for (FamilyMemberPawn f : familiars) {
-				f.ResetAllCounters();
-			}
-			familiars.clear();
+					.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
+			familiars.get(
+					board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString() + board
+							.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoProductionArea("1");
+			
 		}
 		for (CardType c : CardType.values()) {
 			if (c != CardType.ANY) {
 				for (int i = 0; i < board.getTower(c).getFloors().size(); i++) {
 					if (board.getFloor(c, i).getActionSpace().getFamilyMember() != null) {
-						familiars.add(this.familiars.get(
+						
+						boardPanel.add(this.familiars.get(
 								board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString() + board
-										.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()));
-						boardPanel.add(familiars.get(i));
-						familiars.get(i).PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
+								.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()));
+						this.familiars.get(
+								board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString() + board
+										.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
 					}
-					familiars.add(null);
+					
 				}
-				for(FamilyMemberPawn f:familiars){
-					if(f != null){
-					f.ResetAllCounters();
-					}
-				}
-				familiars.clear();
+			
 			}
 		}
 
 	}
+	
+	public void setPointsMarkers(Player p){
 
 	victoryMarkers.get(p.getColor()).setVictoryPointsAmount(
 			p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
