@@ -296,7 +296,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// ACTION PANELS
 
-		actionPanel = new ActionPanel(this);
+		actionPanel = new ActionPanel(this,playerColor);
 		actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		actionPanel.setVisible(false);
 		// actionContentPane.add(actionPanel);
