@@ -41,6 +41,7 @@ public class LeadersPanel extends JPanel {
 		
 		for(LeaderCard leader: leaderArray){
 			JLeaderCard jLeaderCard=new JLeaderCard(leader.getName());
+			jLeaderCard.setToolTipText(leader.toString());
 			leaders.add(jLeaderCard);
 			add(jLeaderCard);
 		}
