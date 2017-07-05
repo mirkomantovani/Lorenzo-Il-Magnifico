@@ -78,9 +78,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
-		VictoryPointMarkerDisk.wCount = 0;
-		FaithPointMarkerDisk.wCount = 0;
-		MilitaryPointMarkerDisk.wCount = 0;
 		frame.getGamePanel().setPointsMarkers(p);
 		frame.repaint();
 	}

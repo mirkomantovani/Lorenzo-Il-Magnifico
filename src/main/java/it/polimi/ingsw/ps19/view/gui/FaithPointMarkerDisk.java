@@ -10,9 +10,6 @@ import javax.swing.JPanel;
 
 public class FaithPointMarkerDisk extends JPanel{
 
-
-	
-	
 	/**
 	 * 
 	 */
@@ -34,25 +31,6 @@ public class FaithPointMarkerDisk extends JPanel{
 	
 	public FaithPointMarkerDisk(String color){
 		src = color;
-		setFaithPointMarkers();
-	}
-	
-	public FaithPointMarkerDisk(String color, double amount){
-		src = color;
-		setFaithPointMarkers();
-		setFaithPointsAmount(amount);
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
-		}
-	
-	public void setFaithPointMarkers(){
-		
-	
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
@@ -63,11 +41,31 @@ public class FaithPointMarkerDisk extends JPanel{
 		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
+		setFaithPointMarkers();
+	}
+	
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		// Disegno l'immagine sul pannello alle coordinate (0,0)
+		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
+		}
+	
+	public void setFaithPointMarkers(){
+		
+		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setVisible(true);
+		this.setOpaque(false);
 		wCount = wCount + 5;
 	}
 	
 	
 	public void setFaithPointsAmount(double val){
+		System.out.println("faith amount:" + val);
+		if(val>=30){
+			setFaithPointsAmount(30);
+		} else {
 		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		if(val <=2){
 			widthRel = (int) (widthRel + val*slotRelDim*BoardPanel.dimension.getWidth() );
@@ -84,6 +82,7 @@ public class FaithPointMarkerDisk extends JPanel{
 		} else {
 			widthRel = (int)(widthRel + 7*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
+		}
 		}
 	}
 

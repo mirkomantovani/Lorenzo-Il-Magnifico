@@ -33,24 +33,6 @@ public class VictoryPointMarkerDisk extends JPanel{
 	
 	public VictoryPointMarkerDisk(String color){
 		src = color;
-		setVictoryPointMarkers();
-	}
-	
-	public VictoryPointMarkerDisk(String color,int amount){
-		src = color;
-		setVictoryPointMarkers();
-		setVictoryPointsAmount(amount);
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
-		}
-	
-	private void setVictoryPointMarkers(){
-	
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
@@ -61,10 +43,29 @@ public class VictoryPointMarkerDisk extends JPanel{
 		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
+		setVictoryPointMarkers();
+	}
+	
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		// Disegno l'immagine sul pannello alle coordinate (0,0)
+		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
+		}
+	
+	private void setVictoryPointMarkers(){
+	
+		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setVisible(true);
+		this.setOpaque(false);
 		wCount = wCount + 5;
+		
 	}
 	
 	public void setVictoryPointsAmount(int amount){
+		
+		System.out.println("victory amount:" + amount);
 		amount = amount%100;
 		if(amount<=20){
 			widthRel=(int)(widthRel + amount*wOffset*BoardPanel.dimension.getWidth());

@@ -27,24 +27,6 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	
 	public MilitaryPointMarkerDisk(String color){
 		src = color;
-		setMilitaryPointMarkers();
-	}
-	
-	public MilitaryPointMarkerDisk(String color, int amount){
-		src = color;
-		setMilitaryPointMarkers();
-		setMilitaryPointsAmount(amount);
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		// Disegno l'immagine sul pannello alle coordinate (0,0)
-		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
-		}
-	
-	private void setMilitaryPointMarkers(){
-
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
@@ -55,10 +37,29 @@ public class MilitaryPointMarkerDisk extends JPanel{
 		this.setBounds(widthRel + wCount, heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
+		setMilitaryPointMarkers();
+	}
+	
+
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		// Disegno l'immagine sul pannello alle coordinate (0,0)
+		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
+		}
+	
+	private void setMilitaryPointMarkers(){
+
+
+		this.setBounds(widthRel + wCount, heightRel , (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setVisible(true);
+		this.setOpaque(false);
 		wCount = wCount + 5;
 	}
 	
 	public void setMilitaryPointsAmount(int amount){
+		System.out.println("military amount:" + amount);
 		heightRel = (int) (heightRel - amount*offset*BoardPanel.dimension.getHeight());
 		setMilitaryPointMarkers();
 	}

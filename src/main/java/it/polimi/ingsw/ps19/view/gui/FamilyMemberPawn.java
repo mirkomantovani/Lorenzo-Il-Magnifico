@@ -43,6 +43,16 @@ public class FamilyMemberPawn extends JPanel{
 		
 		this.color = color;
 		this.player = player;
+		try {
+			this.img = ImageIO.read(getClass().getResource("/"+player+color+"Familiar.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setVisible(true);
+		this.setOpaque(false);
+		this.setBounds(widthRel, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		setFamilyMember();
 	}
 	
@@ -65,13 +75,7 @@ public class FamilyMemberPawn extends JPanel{
 	}
 	
 	public void setFamilyMember(){
-		try {
-			this.img = ImageIO.read(getClass().getResource("/"+player+color+"Familiar.png"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		this.setVisible(true);
 		this.setOpaque(false);
 		this.setBounds(widthRel, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
