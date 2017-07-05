@@ -291,4 +291,16 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		gameController.notifyMarket(actionConstructor);
 	}
 
+	public void notifyCouncilAction(ArrayList<String> actionConstructor) {
+		gameController.notifyCouncilPalace(actionConstructor);
+	}
+
+	public void notifyHarvest(ArrayList<String> actionConstructor) {
+		gameController.notifyHarvest(actionConstructor);
+	}
+
+	public void notifyProduction(ArrayList<String> actionConstructor) {
+		gameController.notifyProduction(actionConstructor);
+	}
+
 }
