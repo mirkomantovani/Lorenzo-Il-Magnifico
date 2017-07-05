@@ -718,15 +718,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	public void PlaceFamiliars(Board board) {
-
-
-		for (int i = 0; i < board.getCouncilPalace().getMembers().size(); i++) {
+	
 			
-			boardPanel.add(this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
-					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()));
-			this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
-					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoCouncilPalace();
-		}
+		if(board.getCouncilPalace().getMembers().size() != FamilyMemberPawn.councilCounter){
+			FamilyMember last = board.getCouncilPalace().getMembers().get(board.getCouncilPalace().getMembers().size() - 1);
+			boardPanel.add(this.familiars.get(last.getColor().toString()
+					+ last.getPlayer().getColor()));
+		this.familiars.get(last.getColor().toString()
+					+ last.getPlayer().getColor()).PlaceFamiliarIntoCouncilPalace();
+	    }
+		
 	
 		
 		for(int i=1; i <= board.getPlayerOrder().size(); i++){

@@ -26,7 +26,7 @@ public class FamilyMemberPawn extends JPanel{
 	private final static double hFIRST_SLOT = 0.08333333333333333333333333333333;
 	private final static double wTOWER_OFFSET = 0.19028871391076115485564304461942;
 	private final static double hTOWER_OFFSET = 0.17592592592592592592592592592593;
-	private static int councilCounter = 0;
+	static int councilCounter = 0;
 	private final static double wCOUNCIL =0.51181102362204724409448818897638;
 	private final static double hCOUNCIL = 0.55092592592592592592592592592593;
 	private final static double wFirstMarket = 0.53149606299212598425196850393701;
@@ -82,16 +82,21 @@ public class FamilyMemberPawn extends JPanel{
 	}
 	
 	public void PlaceFamiliarIntoCouncilPalace(){
+		
 		if(councilCounter<4){
 		widthRel = (int) (wCOUNCIL*BoardPanel.dimension.getWidth() + councilCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
 		heightRel = (int) (hCOUNCIL*BoardPanel.dimension.getHeight());
 		} else {
-			councilCounter = 0;
-			widthRel = (int) (wCOUNCIL*BoardPanel.dimension.getWidth() + councilCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
+			widthRel = (int) (wCOUNCIL*BoardPanel.dimension.getWidth() + (councilCounter%4)*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
 			heightRel = (int) (hCOUNCIL*BoardPanel.dimension.getHeight() + 0.7*hDIM_PERC*BoardPanel.dimension.getWidth());
 		}
 		setFamilyMember();
-		councilCounter++;
+		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
+		if(councilCounter==7)
+			councilCounter=0;
+		else
+			councilCounter++;
 		
 	}
 
@@ -100,19 +105,24 @@ public class FamilyMemberPawn extends JPanel{
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFirstMarket);
 			heightRel = (int) (BoardPanel.dimension.getHeight()*hFirstMarket);
 			setFamilyMember();
+			
 		} else if(market == 2){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFirstMarket + BoardPanel.dimension.getWidth()*0.09);
 			heightRel = (int) (BoardPanel.dimension.getHeight()*hFirstMarket);
 			setFamilyMember();
+			
 		} else if(market == 3){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFirstMarket + BoardPanel.dimension.getWidth()*0.175);
 			heightRel = (int) (BoardPanel.dimension.getHeight()*hFirstMarket + BoardPanel.dimension.getHeight()*0.0175);
 			setFamilyMember();
+			
 		} else if(market == 4){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFirstMarket + BoardPanel.dimension.getWidth()*0.235);
 			heightRel = (int) (BoardPanel.dimension.getHeight()*hFirstMarket + BoardPanel.dimension.getHeight()*0.065);
 			setFamilyMember();
 		}
+		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
 	}
 
 	public void PlaceFamiliarIntoHarvestArea(String area){
@@ -126,6 +136,8 @@ public class FamilyMemberPawn extends JPanel{
 			setFamilyMember();
 			harvestCounter++;
 		}
+		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
 	}
 	
 	public void PlaceFamiliarIntoProductionArea(String area){
@@ -139,6 +151,8 @@ public class FamilyMemberPawn extends JPanel{
 			setFamilyMember();
 			productionCounter++;
 		}
+		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
 	}
 	
 	public void ResetAllCounters(){

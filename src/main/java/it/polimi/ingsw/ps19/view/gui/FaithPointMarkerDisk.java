@@ -67,7 +67,7 @@ public class FaithPointMarkerDisk extends JPanel{
 		System.out.println("old width" + widthRel);
 		
 		Random random = new Random();
-		int n = random.nextInt(20);
+		int n = random.nextInt(50) + 100;
 		
 		if(val>=15)
 			val=18.7;
