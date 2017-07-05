@@ -15,7 +15,6 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
-import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
@@ -79,13 +78,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void playerStatusChange(Player p) {
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
-		// frame.getGamePanel().getBoardPanel().add(new
-		// VictoryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
-		// frame.getGamePanel().getBoardPanel().add(new
-		// FaithPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
-		// frame.getGamePanel().getBoardPanel().add(new
-		// MilitaryPointMarkerDisk(p.getColor(),p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
-
+		VictoryPointMarkerDisk.wCount = 0;
+		FaithPointMarkerDisk.wCount = 0;
+		MilitaryPointMarkerDisk.wCount = 0;
+		frame.getGamePanel().getBoardPanel().setPointsMarkers(p);
 	}
 
 	private void addCardsToPersonalBoard(Player p) {
@@ -162,14 +158,29 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void refreshBoard(Board board) {
+		int cont = 0;
 		frame.refreshBoard(board);
 		// frame.pack();
-		// OrderMarkerDisk.Ordercounter = 0;
-		// for(int i = 0; i< board.getPlayerOrder().size();i++){
-		// frame.getGamePanel().getBoardPanel().add(new
-		// OrderMarkerDisk(board.getPlayerOrder().get(i)));
-		// }
-		// frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
+		 OrderMarkerDisk.Ordercounter = 0;
+		 if(cont == 0){
+			 for(int i = 0; i< board.getPlayerOrder().size();i++){
+				 frame.getGamePanel().getBoardPanel().getOrderMarkers().add(new
+						 OrderMarkerDisk(board.getPlayerOrder().get(i)));
+				 frame.getGamePanel().getBoardPanel().add(
+				 frame.getGamePanel().getBoardPanel().getOrderMarkers().get(i));
+					frame.getGamePanel().getBoardPanel().getVictoryMarkers().put(board.getPlayerOrder().get(i), 
+							new VictoryPointMarkerDisk(board.getPlayerOrder().get(i)));
+					frame.getGamePanel().getBoardPanel().getMilitaryMarkers().put(board.getPlayerOrder().get(i), 
+							new MilitaryPointMarkerDisk(board.getPlayerOrder().get(i)));
+					frame.getGamePanel().getBoardPanel().getFaithMarkers().put(board.getPlayerOrder().get(i), 
+							new FaithPointMarkerDisk(board.getPlayerOrder().get(i)));
+					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getVictoryMarkers().get(board.getPlayerOrder().get(i)));
+					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getMilitaryMarkers().get(board.getPlayerOrder().get(i)));
+					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getFaithMarkers().get(board.getPlayerOrder().get(i)));
+					cont++;
+			 }
+		 } else frame.getGamePanel().getBoardPanel().updateOrder(board);
+		frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
 
 		frame.repaint();
 
@@ -182,12 +193,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
-		frame.getGamePanel().getBoardPanel().add(new VictoryPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new FaithPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount()));
-		frame.getGamePanel().getBoardPanel().add(new MilitaryPointMarkerDisk(maskedPlayer.getColor(),
-				maskedPlayer.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount()));
+		VictoryPointMarkerDisk.wCount = 0;
+		FaithPointMarkerDisk.wCount = 0;
+		MilitaryPointMarkerDisk.wCount = 0;
+		frame.getGamePanel().getBoardPanel().setPointsMarkers(maskedPlayer);
 
 	}
 

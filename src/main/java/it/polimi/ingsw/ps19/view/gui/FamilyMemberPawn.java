@@ -60,7 +60,7 @@ public class FamilyMemberPawn extends JPanel{
 		}else if (Tower.equals("venture")){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + 3*wTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		}
-		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT + (Floor-1)*hTOWER_OFFSET*BoardPanel.dimension.getWidth());
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT + (3-Floor)*hTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		setFamilyMember();
 	}
 	

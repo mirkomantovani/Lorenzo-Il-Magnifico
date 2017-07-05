@@ -15,8 +15,7 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	private final static int ORDER_DISC_DIAM = 36;
 	private Image img;
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
-	private static int hCount = 0;
-	private static int wCount = 0;
+	static int wCount = 0;
 	private static double WIDTH_PERC = 0.86614173228346456692913385826772;
 	private static double HEIGHT_PERC = 0.89814814814814814814814814814815;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;

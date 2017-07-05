@@ -20,8 +20,7 @@ public class VictoryPointMarkerDisk extends JPanel{
 	private final static int ORDER_DISC_DIAM = 36;
 	private Image img;
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
-	private static int hCount = 0;
-	private static int wCount = 0;
+	static int wCount = 0;
 	private final static double WIDTH_PERC = 0.01312335958005249343832020997375;
 	private final static double HEIGHT_PERC = 0.00462962962962962962962962962963;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
@@ -59,7 +58,7 @@ public class VictoryPointMarkerDisk extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBounds(widthRel + wCount, heightRel + hCount, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
+		this.setBounds(widthRel + wCount, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
 		wCount = wCount + 5;

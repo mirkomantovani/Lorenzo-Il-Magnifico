@@ -22,7 +22,7 @@ public class FaithPointMarkerDisk extends JPanel{
 	private final static int ORDER_DISC_DIAM = 36;
 	private Image img;
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
-	private static int wCount = 0;
+	static int wCount = 0;
 	private static final double WIDTH_PERC = 0.06824146981627296587926509186352;
 	private static final double HEIGHT_PERC = 0.73333333333333333333333333333333;
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
