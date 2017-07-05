@@ -26,7 +26,7 @@ public class ExcommunicationTile implements Serializable {
 	public ExcommunicationTile(Period period, Effect effect,int id) {
 		this.period = period;
 		this.effect = effect;
-		this.id=id;
+		this.id = id;
 	}
 
 

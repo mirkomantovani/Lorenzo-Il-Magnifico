@@ -152,6 +152,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
 		
+		
+		
 
 
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
@@ -981,12 +983,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		leaderState = string;
 	}
 	
-	public void draftExcommTiles(Board board){
+	public void setExcommTiles(Board board){
 		if(familiars.isEmpty()){
-			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),board.getChurch().getExcommunicationFirst().toString()));
-			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),board.getChurch().getExcommunicationFirst().toString()));
-			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),board.getChurch().getExcommunicationFirst().toString()));
+			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId()));
+			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId()));
+			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId()));
+			for(int i = 0; i<orderMarkers.size(); i++){
+				boardPanel.add(new ExcommDice(1,"red"));
+				boardPanel.add(new ExcommDice(2,orderMarkers.get(i).getSrc()));
+				boardPanel.add(new ExcommDice(3,orderMarkers.get(i).getSrc()));
+			}
 		}
+		
 	}
 
 	public void addExcommunicationCubes(Player p) {
