@@ -151,6 +151,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// MarketButton market=new MarketButton();
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
+		
+		boardPanel.add(new ExcommTileFirstPeriod(1));
+		boardPanel.add(new ExcommTileSecondPeriod(8));
+		boardPanel.add(new ExcommTileThirdPeriod(20));
 
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
 				+ boardPanel.getPreferredSize().getWidth());
@@ -911,6 +915,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		for (FamilyMemberPawn f : familiars.values()) {
 			if (!familiars.isEmpty())
 				boardPanel.remove(f);
+				System.out.println("ho rimosso");
 		}
 	}
 
