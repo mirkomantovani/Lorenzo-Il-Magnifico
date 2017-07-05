@@ -48,10 +48,12 @@ public class LeadersPanel extends JPanel {
 	
 	}
 	
-	public void refreshLeaderCards(Map<String,LeaderCard> leaderCards){
+	public void refreshLeaderCards(Map<String,LeaderCard> leaderCards, GamePanel gamePanel){
+		ArrayList<LeaderCard> leaderArray = new ArrayList<LeaderCard>(leaderCards.values());
+		
 		leaders.clear();
 		this.removeAll();
-		this.addLeaderCards(leaderCards);
+		this.addLeaderCardsWithListener(leaderArray, gamePanel);
 	}
 
 	/**
