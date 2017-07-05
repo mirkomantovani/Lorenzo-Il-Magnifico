@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
+import java.awt.LayoutManager;
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.Period;
@@ -47,6 +48,13 @@ public class ExcommunicationTile implements Serializable {
 		s.append("\nEffect: "+effect.toString());
 			
 		return s.toString();
+	}
+
+
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 
 

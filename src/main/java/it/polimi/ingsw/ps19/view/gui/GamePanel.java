@@ -152,9 +152,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
 		
-		boardPanel.add(new ExcommTileFirstPeriod(1));
-		boardPanel.add(new ExcommTileSecondPeriod(8));
-		boardPanel.add(new ExcommTileThirdPeriod(20));
+
 
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
 				+ boardPanel.getPreferredSize().getWidth());
@@ -981,6 +979,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void setLeaderState(String string) {
 		leaderState = string;
+	}
+	
+	public void draftExcommTiles(Board board){
+		if(familiars.isEmpty()){
+			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId()));
+			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId()));
+			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId()));
+		}
 	}
 
 }
