@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private MarketButton secondMarket;
 	private MarketButton thirdMarket;
 	private MarketButton fourthMarket;
+	private CouncilButton councilButton;
 	
 	private JTextArea textArea;
 	private PlayerResources playerResources;
@@ -128,9 +129,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 //		btnNewButton_2.setBounds(268, 256, 105, 170);
 //		boardPanel.add(btnNewButton_2);
 		
-		MarketButton market=new MarketButton();
-		market.setBounds(200,200,50,50);
-		boardPanel.add(market);
+//		MarketButton market=new MarketButton();
+//		market.setBounds(200,200,50,50);
+//		boardPanel.add(market);
 		
 		
 		
@@ -246,29 +247,30 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		
 		//BUTTONS: Market, council, production and harvest
 		
-		firstMarket=new MarketButton();
-		firstMarket.setBounds(580,1180,50,50);
+		firstMarket=new MarketButton(1);
+		firstMarket.setBounds(580,1180,50,50);   //non ci devono essere i setbounds qui
 		firstMarket.addActionListener(this);
-		firstMarket.setName("1");
 		boardPanel.add(firstMarket);
 		
-		secondMarket=new MarketButton();
+		secondMarket=new MarketButton(2);
 		secondMarket.setBounds(650,1200,50,50);
 		secondMarket.addActionListener(this);
-		secondMarket.setName("2");
 		boardPanel.add(secondMarket);
 		
-		thirdMarket=new MarketButton();
+		thirdMarket=new MarketButton(3);
 		thirdMarket.setBounds(720,1220,50,50);
 		thirdMarket.addActionListener(this);
-		thirdMarket.setName("3");
 		boardPanel.add(thirdMarket);
 		
-		fourthMarket=new MarketButton();
+		fourthMarket=new MarketButton(4);
 		fourthMarket.setBounds(800,1250,50,50);
 		fourthMarket.addActionListener(this);
-		fourthMarket.setName("4");
 		boardPanel.add(fourthMarket);
+		
+		councilButton=new CouncilButton();
+		councilButton.setBounds(500, 800, 200, 90);
+		councilButton.addActionListener(this);
+		boardPanel.add(councilButton);
 		
 		
 		
@@ -487,6 +489,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			}else{
 				System.out.println("gamepanel: market actionconstructor non con 4 elementi");
 			}
+			
+		} else if(e.getSource() instanceof CouncilButton){
+//			constructCouncilAction();
+//			this.GUI.notify
 			
 		}
 		

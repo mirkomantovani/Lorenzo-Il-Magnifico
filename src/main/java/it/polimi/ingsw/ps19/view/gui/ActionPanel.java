@@ -52,7 +52,7 @@ public class ActionPanel extends JPanel {
 		URL white = ActionPanel.class.getResource("/redwhiteFamiliar.png");
 		URL black = ActionPanel.class.getResource("/redblackFamiliar.png");
 
-		String html = "<html><body><img src='" + neutral.toString() + "'width=200 height=200>";
+		String html = "<html><body><img src='" + neutral.toString() + "'width=160 height=160>";
 
 		setLayout(new BorderLayout(0, 0));
 		Font font = new Font("Serif", Font.ITALIC, 15);
@@ -65,7 +65,7 @@ public class ActionPanel extends JPanel {
 		panel.add(neutralB);
 		neutralB.setName("neutral");
 		
-		html = "<html><body><img src='" + white.toString() + "'width=200 height=200>";
+		html = "<html><body><img src='" + white.toString() + "'width=160 height=160>";
 
 		familyGroup.add(neutralB);
 		radioButtons.add(neutralB);
@@ -76,7 +76,7 @@ public class ActionPanel extends JPanel {
 		radioButtons.add(whiteB);
 		whiteB.setName("white");
 
-		html = "<html><body><img src='" + orange.toString() + "'width=200 height=200>";
+		html = "<html><body><img src='" + orange.toString() + "'width=160 height=160>";
 
 		JRadioButton orangeB = new JRadioButton(html);
 		panel.add(orangeB);
@@ -84,7 +84,7 @@ public class ActionPanel extends JPanel {
 		radioButtons.add(orangeB);
 		orangeB.setName("orange");
 
-		html = "<html><body><img src='" + black.toString() + "'width=200 height=200>";
+		html = "<html><body><img src='" + black.toString() + "'width=160 height=160>";
 
 		JRadioButton blackB = new JRadioButton(html);
 		panel.add(blackB);
@@ -98,20 +98,20 @@ public class ActionPanel extends JPanel {
 		panel_1.setLayout(null);
 
 		JLabel label = new JLabel("");
-		label.setBounds(225, 16, 202, 350);
+		label.setBounds(315, 0, 132, 132);
 		panel_1.add(label);
 		ImageIcon servant = new ImageIcon(ActionPanel.class.getResource("/servant.png"));
 
 		Image img = servant.getImage();
 
-		img = img.getScaledInstance(img.getWidth(null) / 2, img.getHeight(null) / 2, java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(img.getWidth(null) / 3, img.getHeight(null) / 3, java.awt.Image.SCALE_SMOOTH);
 
 		servant = new ImageIcon(img);
 
 		label.setIcon(servant);
 
 		slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
-		slider.setBounds(534, 172, 200, 71);
+		slider.setBounds(488, 0, 200, 71);
 		panel_1.add(slider);
 		slider.setMajorTickSpacing(2);
 		slider.setMinorTickSpacing(1);
