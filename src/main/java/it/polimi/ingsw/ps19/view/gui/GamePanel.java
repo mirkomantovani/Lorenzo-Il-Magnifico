@@ -19,6 +19,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -36,8 +38,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.Resource;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 
 
@@ -80,7 +87,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	
 	private Component currentActionPanel;
 	
-
+	private List<OrderMarkerDisk> orderMarkers;
+	private Map<String,VictoryPointMarkerDisk> victoryMarkers;
+	private Map<String,MilitaryPointMarkerDisk> militaryMarkers;
+	private Map<String,FaithPointMarkerDisk> faithMarkers;
+	private Map<String,FamilyMemberPawn> familiars; //the key is diceColor+playerColor
 	
 	public GamePanel(String playerColor){
 		
@@ -300,53 +311,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		actionsInternalFrame.setVisible(true);
 		internalFrame.setVisible(true);
 		
-		
-		
-		
-//		internalFrame2.setVisible(true);
-//		OrderMarkerDisk redMarker = new OrderMarkerDisk("red");
-//		boardPanel.add(redMarker);
-//		OrderMarkerDisk blueMarker = new OrderMarkerDisk("blue");
-//		boardPanel.add(blueMarker);
-//		OrderMarkerDisk greenMarker = new OrderMarkerDisk("green");
-//		boardPanel.add(greenMarker);
-//		
-//		boardPanel.add(new VictoryPointMarkerDisk("red"));
-//		boardPanel.add(new VictoryPointMarkerDisk("blue"));
-//		
-//		boardPanel.add(new FaithPointMarkerDisk("green"));
-//		boardPanel.add(new FaithPointMarkerDisk("yellow"));
-//		
-//		boardPanel.add(new MilitaryPointMarkerDisk("green"));
-//		boardPanel.add(new MilitaryPointMarkerDisk("yellow"));
-//		FaithPointMarkerDisk red = new FaithPointMarkerDisk("red");
-//		boardPanel.add(red);
-//	
-//		red.setFaithPointsAmount(5);
-//		
-//		MilitaryPointMarkerDisk militaryBlue = new MilitaryPointMarkerDisk("blue");
-//		boardPanel.add(militaryBlue);
-//		militaryBlue.setMilitaryPointsAmount(10);
-//		
-//		VictoryPointMarkerDisk victoryYellow = new VictoryPointMarkerDisk("yellow");
-//		boardPanel.add(victoryYellow);
-//		victoryYellow.setVictoryPointsAmount(50);
-//		
-//		FamilyMemberPawn family = new FamilyMemberPawn("black","red");
-//		boardPanel.add(family);
-//		family.PlaceFamiliarInTower("venture", 2);
-//		family.PlaceFamiliarIntoCouncilPalace();
-//		FamilyMemberPawn family3 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family3);
-//		family3.PlaceFamiliarIntoMarket(4);
-//		FamilyMemberPawn family4 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family4);
-//		family3.PlaceFamiliarIntoProductionArea("2");
-//		FamilyMemberPawn family5 = new FamilyMemberPawn("black","blue");
-//		boardPanel.add(family5);
-//		family5.PlaceFamiliarIntoProductionArea("2");
-//		
-//		
+		orderMarkers = new ArrayList<OrderMarkerDisk>();
+		victoryMarkers = new HashMap<String,VictoryPointMarkerDisk>();
+		militaryMarkers = new HashMap<String,MilitaryPointMarkerDisk>();
+		faithMarkers = new HashMap<String,FaithPointMarkerDisk>();
+		familiars = new HashMap<String,FamilyMemberPawn>();
 	}
 	
 	public void addCard(int tower,int floor,int id, String descr){
@@ -579,6 +548,169 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void createMarkers(Board board){
+		if(orderMarkers.isEmpty()){
+		 for(int i = 0; i< board.getPlayerOrder().size();i++){
+			 orderMarkers.add(new
+					 OrderMarkerDisk(board.getPlayerOrder().get(i)));
+			 boardPanel.add(orderMarkers.get(i));
+			 victoryMarkers.put(board.getPlayerOrder().get(i), 
+						new VictoryPointMarkerDisk(board.getPlayerOrder().get(i)));
+			 militaryMarkers.put(board.getPlayerOrder().get(i), 
+						new MilitaryPointMarkerDisk(board.getPlayerOrder().get(i)));
+			 faithMarkers.put(board.getPlayerOrder().get(i), 
+						new FaithPointMarkerDisk(board.getPlayerOrder().get(i)));
+			 boardPanel.add(victoryMarkers.get(board.getPlayerOrder().get(i)));
+			 boardPanel.add(militaryMarkers.get(board.getPlayerOrder().get(i)));
+			 boardPanel.add(faithMarkers.get(board.getPlayerOrder().get(i)));
+		 }
+		}
+	}
+	
+	public void PlaceFamiliars(Board board){
+
+		
+		ArrayList<FamilyMemberPawn> familiars = new ArrayList<FamilyMemberPawn>();
+		
+		for(int i = 0; i < board.getCouncilPalace().getMembers().size();i++){
+			familiars.add(this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString() +
+					board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()));
+			boardPanel.add(familiars.get(i));
+			familiars.get(i).PlaceFamiliarIntoCouncilPalace();
+		}
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		
+		for(int i=1; i < board.getPlayerOrder().size(); i++){
+			if(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember()!=null){
+			familiars.add(this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
+					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()));
+			boardPanel.add(familiars.get(i));
+			familiars.get(i-1).PlaceFamiliarIntoMarket(i);
+			}
+		}
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		
+		for(int i=0 ; i<board.getHarvestArea().getMultipleActionSpace().getMembers().size();i++){
+			familiars.add(this.familiars.get(board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() +
+					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+			boardPanel.add(familiars.get(i));
+			familiars.get(i).PlaceFamiliarIntoHarvestArea("2");
+		}
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		if(board.getHarvestArea().getSingleActionSpace().getFamilyMember()!=null){
+		familiars.add(this.familiars.get(board.getHarvestArea().getSingleActionSpace().getFamilyMember().getColor().toString() + 
+				board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
+		boardPanel.add(familiars.get(0));
+		familiars.get(0).PlaceFamiliarIntoHarvestArea("1");
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		}
+		for(int i=0 ; i<board.getProductionArea().getMultipleActionSpace().getMembers().size();i++){
+			familiars.add(this.familiars.get(board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() +
+					board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+			boardPanel.add(familiars.get(i));
+			familiars.get(i).PlaceFamiliarIntoProductionArea("2");
+		}
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		if(board.getProductionArea().getSingleActionSpace().getFamilyMember()!=null){
+		familiars.add(this.familiars.get(board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString() +
+				board.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
+		boardPanel.add(familiars.get(0));
+		familiars.get(0).PlaceFamiliarIntoProductionArea("1");
+		for(FamilyMemberPawn f:familiars){
+			f.ResetAllCounters();
+		}
+		familiars.clear();
+		}
+		for(CardType c : CardType.values()){
+			if(c!=CardType.ANY){
+				for(int i=0;i < board.getTower(c).getFloors().size();i++){
+					if(board.getFloor(c, i).getActionSpace().getFamilyMember()!= null){
+					familiars.add(this.familiars.get(board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString() +
+							board.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()));
+					boardPanel.add(familiars.get(i));
+					familiars.get(i).PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
+					}
+				}
+				for(FamilyMemberPawn f:familiars){
+					f.ResetAllCounters();
+				}
+				familiars.clear();
+			}
+		}
+			
+		
+		
+	}
+	
+	public void setPointsMarkers(Player p){
+
+		victoryMarkers.get(p.getColor()).setVictoryPointsAmount(
+				p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
+		militaryMarkers.get(p.getColor()).setMilitaryPointsAmount(
+				p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount());
+		faithMarkers.get(p.getColor()).setFaithPointsAmount(
+				p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount());
+	}
+	
+	public void updateOrder(Board board){
+		for(int i = 0; i<board.getPlayerOrder().size();i++){
+			for(int j = 0; j<orderMarkers.size(); j++){
+			if(orderMarkers.get(j).getSrc() == board.getPlayerOrder().get(i)){
+				OrderMarkerDisk flag = orderMarkers.get(i);
+				OrderMarkerDisk old = orderMarkers.get(j);
+				orderMarkers.set(j, flag);
+				orderMarkers.set(i,old);
+			}
+			}
+			
+		}
+	}
+
+	public void populateFamiliars(Board board){
+		if(familiars.isEmpty()){
+		for(String s: board.getPlayerOrder()){
+			for(Dice d: Dice.values()){
+				
+					familiars.put(d.getColor().toString() + s, 
+							new FamilyMemberPawn(d.getColor().toString(),s));
+					System.out.println("ho creato una pawn " + d.getColor().toString() + s);
+				
+			}
+		}
+		}
+	}
+	
+	public ArrayList<OrderMarkerDisk> getOrderMarkers() {
+		return (ArrayList<OrderMarkerDisk>) orderMarkers;
+	}
+
+	public Map<String, VictoryPointMarkerDisk> getVictoryMarkers() {
+		return victoryMarkers;
+	}
+
+	public Map<String, MilitaryPointMarkerDisk> getMilitaryMarkers() {
+		return militaryMarkers;
+	}
+
+	public Map<String, FaithPointMarkerDisk> getFaithMarkers() {
+		return faithMarkers;
 	}
 
 

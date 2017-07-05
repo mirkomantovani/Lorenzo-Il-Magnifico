@@ -54,9 +54,9 @@ public class FamilyMemberPawn extends JPanel{
 	
 	public void PlaceFamiliarInTower(String Tower, int Floor){
 		 if (Tower.equals("building")){
-			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + wTOWER_OFFSET*BoardPanel.dimension.getWidth());
-		}else if (Tower.equals("character")){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + 2*wTOWER_OFFSET*BoardPanel.dimension.getWidth());
+		}else if (Tower.equals("character")){
+			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + wTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		}else if (Tower.equals("venture")){
 			widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT + 3*wTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		}

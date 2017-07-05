@@ -81,7 +81,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		VictoryPointMarkerDisk.wCount = 0;
 		FaithPointMarkerDisk.wCount = 0;
 		MilitaryPointMarkerDisk.wCount = 0;
-		frame.getGamePanel().getBoardPanel().setPointsMarkers(p);
+		frame.getGamePanel().setPointsMarkers(p);
+		frame.repaint();
 	}
 
 	private void addCardsToPersonalBoard(Player p) {
@@ -158,29 +159,14 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void refreshBoard(Board board) {
-		int cont = 0;
+		
 		frame.refreshBoard(board);
 		// frame.pack();
 		 OrderMarkerDisk.Ordercounter = 0;
-		 if(cont == 0){
-			 for(int i = 0; i< board.getPlayerOrder().size();i++){
-				 frame.getGamePanel().getBoardPanel().getOrderMarkers().add(new
-						 OrderMarkerDisk(board.getPlayerOrder().get(i)));
-				 frame.getGamePanel().getBoardPanel().add(
-				 frame.getGamePanel().getBoardPanel().getOrderMarkers().get(i));
-					frame.getGamePanel().getBoardPanel().getVictoryMarkers().put(board.getPlayerOrder().get(i), 
-							new VictoryPointMarkerDisk(board.getPlayerOrder().get(i)));
-					frame.getGamePanel().getBoardPanel().getMilitaryMarkers().put(board.getPlayerOrder().get(i), 
-							new MilitaryPointMarkerDisk(board.getPlayerOrder().get(i)));
-					frame.getGamePanel().getBoardPanel().getFaithMarkers().put(board.getPlayerOrder().get(i), 
-							new FaithPointMarkerDisk(board.getPlayerOrder().get(i)));
-					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getVictoryMarkers().get(board.getPlayerOrder().get(i)));
-					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getMilitaryMarkers().get(board.getPlayerOrder().get(i)));
-					frame.getGamePanel().getBoardPanel().add(frame.getGamePanel().getBoardPanel().getFaithMarkers().get(board.getPlayerOrder().get(i)));
-					cont++;
-			 }
-		 } else frame.getGamePanel().getBoardPanel().updateOrder(board);
-		frame.getGamePanel().getBoardPanel().PlaceFamiliars(board);
+		frame.getGamePanel().populateFamiliars(board);
+		frame.getGamePanel().createMarkers(board);
+		frame.getGamePanel().updateOrder(board);
+		frame.getGamePanel().PlaceFamiliars(board);
 
 		frame.repaint();
 
@@ -196,7 +182,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		VictoryPointMarkerDisk.wCount = 0;
 		FaithPointMarkerDisk.wCount = 0;
 		MilitaryPointMarkerDisk.wCount = 0;
-		frame.getGamePanel().getBoardPanel().setPointsMarkers(maskedPlayer);
+		frame.getGamePanel().setPointsMarkers(maskedPlayer);
+		frame.repaint();
 
 	}
 
