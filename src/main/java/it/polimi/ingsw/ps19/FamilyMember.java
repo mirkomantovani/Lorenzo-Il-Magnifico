@@ -87,6 +87,11 @@ public class FamilyMember implements Serializable  {
 		builder.append(" ");
 		return builder.toString();
 	}
+
+	public int getActionValueVariation() {
+		// TODO Auto-generated method stub
+		return actionValueVariation;
+	}
 	
 	
 

@@ -265,6 +265,12 @@ public class Bonus implements Serializable {
 		throw new CardTypeException();
 		
 	}
+
+
+	public int getChurchSupportBonus() {
+		// TODO Auto-generated method stub
+		return churchSupportBonus;
+	}
 	 
 	
 	

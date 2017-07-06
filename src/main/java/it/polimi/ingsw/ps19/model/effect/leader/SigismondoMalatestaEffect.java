@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect.leader;
 
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
@@ -27,7 +28,7 @@ public class SigismondoMalatestaEffect extends Effect implements Disapplyable{
 	@Override
 	public void applyEffect(Player p) {
 		for(FamilyMember member : p.getFamilyMembers().values()){
-			if(member.getDice() == Dice.NEUTRAL_DICE){
+			if(member.getColor() == Color.NEUTRAL){
 				member.setActionValueVariation(3);
 			}
 		}
