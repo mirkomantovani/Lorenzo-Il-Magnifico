@@ -10,7 +10,9 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.CharacterCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
+import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -68,6 +70,9 @@ public class TakeCardAction extends Action {
 			// if the player has a discount given by a leader card
 			player.removeFamilyMember(familyMember.getColor());
 			
+			
+			System.out.println("TakeCard calculating realcost");
+			
 			ResourceChest realCost;
 			realCost = card.getCost().cloneChest();
 			if (player.getBonuses().getCardCostCoinDiscount() != 0) {
@@ -79,11 +84,27 @@ public class TakeCardAction extends Action {
 			
 			realCost.addResource(paidServants);
 			
+			System.out.println("TakeCard sub resources");
+			
 			player.subResources(realCost);
 			
+			System.out.println("TakeCard beforeapplyingimmediate");
+			
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			
+			System.out.println("takecard before isdoubleresourcefromcards");
+			
 			if (player.getBonuses().isDoubleResourcesFromCards())
 				card.getImmediateEffect().applyEffect(familyMember.getPlayer());
+			
+			if(card instanceof CharacterCard){
+				Effect permanent=card.getPermanentEffect();
+				if(permanent!=null)
+					permanent.applyEffect(familyMember.getPlayer());
+			}
+				
+			
+			System.out.println("TakeCard after applyingimmediate");
 
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 
