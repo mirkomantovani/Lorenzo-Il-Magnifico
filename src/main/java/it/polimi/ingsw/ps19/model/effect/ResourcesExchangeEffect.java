@@ -34,7 +34,9 @@ public class ResourcesExchangeEffect extends Effect {
 	}
 	
 	private void applyEffect(AtomicExchangeEffect chosenExchangeEffect,Player player){
+		System.out.println("resourcesexchangeeffect applying atomic exchange effect");
 		chosenExchangeEffect.applyEffect(player);
+		
 	}
 	
 	
@@ -65,11 +67,15 @@ public class ResourcesExchangeEffect extends Effect {
 	 * 
 	 */
 	public void applyEffect(int choice, Player player) {
-		if(choice==1)
+		if(choice==1){
+			System.out.println("ResourcesExchangeEffect: choice=1");
 			applyEffect(normalExchangeEffect,player);
-		else if(choice==2)
+		}
+		else if(choice==2){
+			System.out.println("ResourcesExchangeEffect: choice =2 ");
 			applyEffect(alternativeExchangeEffect,player);
-		//else exception?, but it shouldn't be possible to has another value 
+		}
+		//else exception?, but it shouldn't be possible to have another value 
 	
 	}
 

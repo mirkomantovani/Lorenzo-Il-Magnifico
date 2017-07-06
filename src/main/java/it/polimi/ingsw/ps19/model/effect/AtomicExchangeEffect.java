@@ -27,8 +27,10 @@ public class AtomicExchangeEffect extends Effect {
 	
 	@Override
 	public void applyEffect(Player player) {
+		System.out.println("atomic exchange effect: applying it");
 		player.addResources(resourcesIn);
 		player.subResources(resourcesOut);	
+		System.out.println("atomic exchange effect: applied");
 	}
 	
 	@Override

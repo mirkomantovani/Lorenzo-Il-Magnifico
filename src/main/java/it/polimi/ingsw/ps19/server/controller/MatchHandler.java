@@ -968,6 +968,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToCurrentPlayer(new AskMoveCommand());
 			}
 		}
+		
+		if (match.getCurrentPlayer().getCouncilPrivilege() != 0) {
+			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
+
+			match.getCurrentPlayer().resetPrivileges();
+
+		} else {
+			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
+		}
 
 		this.prodActionSpace = 0;
 		this.prodPaidServant = 0;

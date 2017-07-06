@@ -18,6 +18,7 @@ public class InstantResourcesEffect extends Effect implements Disapplyable{
 	 */
 	private static final long serialVersionUID = -6430388980538173536L;
 	private ResourceChest effectResourceChest;	
+	private CouncilPrivilegeEffect councilPrivilegeEffect;
 	/**
 	 * class constructor
 	 * 
@@ -30,6 +31,7 @@ public class InstantResourcesEffect extends Effect implements Disapplyable{
 	
 	public InstantResourcesEffect(ResourceChest effectResourceChest,CouncilPrivilegeEffect councilPrivilegeEffect){
 		this.effectResourceChest = effectResourceChest;
+		this.councilPrivilegeEffect=councilPrivilegeEffect;
 	}	
 	
 	/* (non-Javadoc)
@@ -39,6 +41,9 @@ public class InstantResourcesEffect extends Effect implements Disapplyable{
 		System.out.println("instantres: applyingeffect");
 		p.addResources(effectResourceChest);
 		System.out.println("instantres: applied effect");
+		if(councilPrivilegeEffect!=null){
+			councilPrivilegeEffect.applyEffect(p);
+		}
 	}
 	
 
