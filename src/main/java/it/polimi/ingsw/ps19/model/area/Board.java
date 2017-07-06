@@ -229,6 +229,11 @@ public class Board implements Serializable {
 	public ArrayList<String> getPlayerOrder() {
 		return (ArrayList<String>) playerOrder;
 	}
+
+	public Map<Dice, Integer> getDices() {
+		return dices;
+	}
+	
 	
 	
 	

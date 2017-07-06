@@ -33,10 +33,15 @@ public class ExcommCube extends JPanel{
 		switch(player){
 		
 		case "yellow" : widthRel = widthRel + 5;
+						break;
 		case "red" : widthRel = widthRel + 10;
+						break;
 		case "blue" : widthRel = widthRel + 15;
+						break;
 		case "green" : widthRel = widthRel + 20;
+						break;
 		default : widthRel = widthRel;
+						break;
 		
 		}
 		
