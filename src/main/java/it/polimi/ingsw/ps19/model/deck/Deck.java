@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
- * A generic deck of <T> type where <T> extends a Development Card
+ * A generic deck of T type where T extends a Development Card
  *
  * @author Mirko
  * @param <T> the generic type

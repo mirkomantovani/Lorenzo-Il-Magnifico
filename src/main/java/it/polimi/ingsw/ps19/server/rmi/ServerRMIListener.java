@@ -18,11 +18,11 @@ import it.polimi.ingsw.ps19.server.ServerInterface;
  * The class that is interested in processing a serverRMI
  * event implements this interface, and the object created
  * with that class is registered with a component using the
- * component's <code>addServerRMIListener<code> method. When
+ * component's <code>addServerRMIListener</code> method. When
  * the serverRMI event occurs, that object's appropriate
  * method is invoked.
  *
- * @see ServerRMIEvent
+ * 
  */
 public class ServerRMIListener implements Runnable {
 

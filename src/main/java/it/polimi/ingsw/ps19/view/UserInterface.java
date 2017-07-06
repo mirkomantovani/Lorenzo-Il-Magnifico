@@ -63,7 +63,7 @@ public interface UserInterface {
 	public void playerMove();
 	
 	/**
-	 * It's <player> turn!.
+	 * It's turn!.
 	 */
 	public void playerTurn();
 	

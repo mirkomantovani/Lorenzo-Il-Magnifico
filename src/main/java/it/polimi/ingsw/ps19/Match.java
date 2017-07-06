@@ -506,7 +506,7 @@ public class Match {
 	/**
 	 * Clear board.
 	 *
-	 * @matteo this method removes all the familyMember placed in the game Board
+	 * @author matteo this method removes all the familyMember placed in the game Board
 	 */
 	public void clearBoard() {
 
