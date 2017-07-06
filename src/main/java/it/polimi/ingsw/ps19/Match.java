@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.constant.BoardConstants;
+import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
@@ -29,11 +30,19 @@ public class Match {
 	private Board board;
 	// private List<Player> players;
 	private Player[] players;
+	private Player[] disconnectedPlayers;
+	
 	private int addedPlayers;
+	private int addedDisconnectedPlayers;
 	private int currentPlayer = 0;
+	
+	private boolean matchFinished;
+	
 	private MatchObserver observer;
+	
 	private String[] playercolors;
 	private int playerscreated;
+	
 	private LeaderDeck leaderCards;
 	private Period period;
 	private int turn = 0;
@@ -49,7 +58,8 @@ public class Match {
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
+		disconnectedPlayers=new Player[numPlayers];
+//		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
 
 		playercolors = new String[numPlayers];
 
@@ -89,6 +99,29 @@ public class Match {
 			p.addObserver(this.observer);
 			addedPlayers++;
 		}
+	}
+	
+	public void addDisconnectedPlayer(Player p) throws MatchFullException{
+		if(!isDisconnected(p)){
+		
+		System.out.println("\nmatch, adddisconnectedPlayer");
+			
+		if (addedDisconnectedPlayers == players.length)
+			throw new MatchFullException();
+		else {
+			this.disconnectedPlayers[addedDisconnectedPlayers] = p;
+			addedDisconnectedPlayers++;
+		}
+		}
+		
+	}
+
+	private boolean isDisconnected(Player p) {
+		for(int i=0;i<disconnectedPlayers.length;i++){
+			if(p==disconnectedPlayers[i])
+				return true;
+		}
+		return false;
 	}
 
 	public Board getBoard() {
@@ -217,6 +250,19 @@ public class Match {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
+		this.refreshOrder();
+	}
+	
+	
+
+	private void refreshOrder() {
+		ArrayList<String> playerOrder=new ArrayList<String>();
+		for(int i=0;i<players.length;i++){
+		playerOrder.add(players[i].getColor());
+		}
+		
+		board.setPlayerOrder(playerOrder);
+		
 	}
 
 	public void incrementTurn() {
@@ -241,11 +287,30 @@ public class Match {
 		return turn;
 	}
 
-	public void setNextPlayer() {
+	public void setNextPlayer() throws EveryPlayerDisconnectedException {
+		
+		if(players.length==addedDisconnectedPlayers){
+			matchFinished=true;
+			throw new EveryPlayerDisconnectedException();
+		}
+		
 		if (this.currentPlayer == players.length - 1)
 			this.currentPlayer = 0;
 		else
 			this.currentPlayer++;
+		
+		if(isDisconnected(currentPlayer))
+			this.setNextPlayer();
+	}
+
+	private boolean isDisconnected(int currentPlayer) {
+		for(int i=0;i<disconnectedPlayers.length;i++){
+			if(players[currentPlayer]==disconnectedPlayers[i]){
+				System.out.println("MATCH: player is disconnected, setting nextplayer");
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setPlayerOrder() {
@@ -300,6 +365,10 @@ public class Match {
 				}
 			}
 		}
+	}
+
+	public boolean isAnyoneStillPlaying() {
+		return !matchFinished;
 	}
 
 }

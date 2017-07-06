@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
  */
 public class InitializeMatchCommand extends ServerToClientCommand{
 
+	
+	int numPlayers;
 	/**
 	 * 
 	 */
@@ -16,11 +18,25 @@ public class InitializeMatchCommand extends ServerToClientCommand{
 	
 
 
+	public InitializeMatchCommand(int numPlayers) {
+		this.numPlayers=numPlayers;
+	}
+
+
+
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
 		clientCommandHandler.applyCommand(this);
 		
 	}
+
+
+
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+	
+	
 	
 	
 

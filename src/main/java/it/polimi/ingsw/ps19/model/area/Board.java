@@ -174,9 +174,8 @@ public class Board implements Serializable {
 	}
 	
 	public void setPlayerOrder(ArrayList<String> playerOrder){
-		for(String p : playerOrder){
-			this.playerOrder.add(p);
-		}
+		this.playerOrder=playerOrder;
+		
 	}
 	
 	public void rollDices() {

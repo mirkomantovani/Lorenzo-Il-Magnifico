@@ -8,10 +8,13 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
@@ -33,6 +36,12 @@ public class Server implements Runnable, ServerInterface {
 	 * List of matches created
 	 */
 	private Deque<MatchHandler> createdMatches;
+	
+	/**
+	 * A map that stores the futures associated to the execution with
+	 * ExecutionService of MatchHandler threads, needed in order to stop the thread 
+	 */
+	private Map<MatchHandler,Future> futures;
 
 	private ServerSocketListener socketListener;
 
@@ -49,6 +58,7 @@ public class Server implements Runnable, ServerInterface {
 	private Server(int port) {
 		this.port = port;
 		inKeyboard = new BufferedReader(new InputStreamReader(System.in));
+		futures=new HashMap<MatchHandler,Future>();
 	}
 
 
@@ -158,7 +168,8 @@ public class Server implements Runnable, ServerInterface {
 			list.add(c);
 
 		MatchHandler matchH = new MatchHandler(list, this);
-		executor.submit(matchH); 
+		
+		futures.put(matchH, executor.submit(matchH));
 								
 		createdMatches.add(matchH);
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
@@ -214,10 +225,18 @@ public class Server implements Runnable, ServerInterface {
 
 	@Override
 	public synchronized void closeMatch(MatchHandler mh) {
+		
+		futures.get(mh).cancel(true);
+			
+			
 		createdMatches.remove(mh);
+		mh=null;
 
 	}
 
+	/* 
+	 * This method removes the clientHandler from the waitingList
+	 */
 	@Override
 	public synchronized void removeClient(ClientHandler c) {
 		waitingClients.remove(c);

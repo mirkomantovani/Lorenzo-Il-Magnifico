@@ -114,8 +114,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private Map<String, VictoryPointMarkerDisk> victoryMarkers;
 	private Map<String, MilitaryPointMarkerDisk> militaryMarkers;
 	private Map<String, FaithPointMarkerDisk> faithMarkers;
-	private Map<String, FamilyMemberPawn> familiars; // the key is diceColor+playerColor
-	private Map<String, DicePanel> dices;  // (String) diceValue + diceColor
+	private Map<String, FamilyMemberPawn> familiars; // the key is
+														// diceColor+playerColor
+	private Map<String, DicePanel> dices; // (String) diceValue + diceColor
 
 	public GamePanel(String playerColor, int numPlayers) {
 
@@ -151,8 +152,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// MarketButton market=new MarketButton();
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
-		
-
 
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
 				+ boardPanel.getPreferredSize().getWidth());
@@ -277,15 +276,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		secondMarket.addActionListener(this);
 		boardPanel.add(secondMarket);
 
-		if(numPlayers>3){
-		thirdMarket = new MarketButton(3);
-		thirdMarket.addActionListener(this);
-		boardPanel.add(thirdMarket);
+		if (numPlayers > 3) {
+			thirdMarket = new MarketButton(3);
+			thirdMarket.addActionListener(this);
+			boardPanel.add(thirdMarket);
 
-		fourthMarket = new MarketButton(4);
-		fourthMarket.addActionListener(this);
-		boardPanel.add(fourthMarket);
-	    }
+			fourthMarket = new MarketButton(4);
+			fourthMarket.addActionListener(this);
+			boardPanel.add(fourthMarket);
+		}
 
 		councilButton = new CouncilButton();
 		councilButton.addActionListener(this);
@@ -299,14 +298,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		singleProductionButton.addActionListener(this);
 		boardPanel.add(singleProductionButton);
 
-		if(numPlayers>2){
-		multipleHarvestButton = new MultipleHarvestButton();
-		multipleHarvestButton.addActionListener(this);
-		boardPanel.add(multipleHarvestButton);
+		if (numPlayers > 2) {
+			multipleHarvestButton = new MultipleHarvestButton();
+			multipleHarvestButton.addActionListener(this);
+			boardPanel.add(multipleHarvestButton);
 
-		multipleProductionButton = new MultipleProductionButton();
-		multipleProductionButton.addActionListener(this);
-		boardPanel.add(multipleProductionButton);
+			multipleProductionButton = new MultipleProductionButton();
+			multipleProductionButton.addActionListener(this);
+			boardPanel.add(multipleProductionButton);
 		}
 
 		// ACTION PANELS
@@ -398,7 +397,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		militaryMarkers = new HashMap<String, MilitaryPointMarkerDisk>();
 		faithMarkers = new HashMap<String, FaithPointMarkerDisk>();
 		familiars = new HashMap<String, FamilyMemberPawn>();
-		dices = new HashMap<String,DicePanel>();
+		dices = new HashMap<String, DicePanel>();
 		createDices();
 	}
 
@@ -542,7 +541,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		} else if (e.getSource() instanceof CouncilButton) {
 			constructCouncilAction();
-			 this.GUI.notifyCouncilAction(actionConstructor);
+			this.GUI.notifyCouncilAction(actionConstructor);
 
 		} else if (e.getSource() instanceof SingleHarvestButton) {
 			addFamServToConstructor();
@@ -568,36 +567,34 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			actionConstructor.add("2");
 			this.GUI.notifyProduction(actionConstructor);
 
-		} else if(e.getSource() instanceof JLeaderCard){
+		} else if (e.getSource() instanceof JLeaderCard) {
 			System.out.println("leader card clicked");
-			JLeaderCard leader=(JLeaderCard)(e.getSource());
+			JLeaderCard leader = (JLeaderCard) (e.getSource());
 			this.removeActionPanel();
-			
-			if(leaderState.equals("draft")){
-			this.GUI.notifyChosenLeaderInDraft(leader.getLeaderName());
-			draftPanel=new LeadersPanel();
-			draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
-			draftPanel.setVisible(false);
-			} else if(leaderState.equals("activate")){
-//				System.out.println("activate leader");
+
+			if (leaderState.equals("draft")) {
+				this.GUI.notifyChosenLeaderInDraft(leader.getLeaderName());
+				draftPanel = new LeadersPanel();
+				draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
+				draftPanel.setVisible(false);
+			} else if (leaderState.equals("activate")) {
+				// System.out.println("activate leader");
 				this.GUI.notifyActivateLeader(leader.getLeaderName());
-				leaderState="none";
+				leaderState = "none";
 				leadersPanel.setVisible(false);
-				
-				
-			} else if(leaderState.equals("discard")){
-//				System.out.println("discard leader");
+
+			} else if (leaderState.equals("discard")) {
+				// System.out.println("discard leader");
 				this.GUI.notifyDiscardLeader(leader.getLeaderName());
-				leaderState="none";
-//				this.removeActionPanel();
+				leaderState = "none";
+				// this.removeActionPanel();
 				leadersPanel.setVisible(false);
-				
+
 			}
-		} else if(e.getSource()==showLeaderCardsButton){
-			if (!leadersPanel.isVisible()){
+		} else if (e.getSource() == showLeaderCardsButton) {
+			if (!leadersPanel.isVisible()) {
 				showActionPanel(leadersPanel);
-			}
-			else {
+			} else {
 				System.out.println("panel is visible, backto current");
 				backToCurrentAction();
 			}
@@ -877,23 +874,26 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	public void updateOrder(Board board) {
-		
-		ArrayList<String> playerColor=board.getPlayerOrder();
-		for(int i = 0; i < playerColor.size(); i++){
-		getOrderFromColor(playerColor.get(i)).setOrderMarkers();
-		boardPanel.add(getOrderFromColor(playerColor.get(i)));
+
+		ArrayList<String> playerColor = board.getPlayerOrder();
+		for (int i = 0; i < playerColor.size(); i++) {
+			getOrderFromColor(playerColor.get(i)).setOrderMarkers();
+			System.out.println("gamepanel: update order color: color:adding to board");
+			boardPanel.add(getOrderFromColor(playerColor.get(i)));
 		}
-		
+
 	}
 
 	private OrderMarkerDisk getOrderFromColor(String color) {
-		for(int i=0;i<orderMarkers.size();i++){
-			if(orderMarkers.get(i).getSrc().equals(color))
+		for (int i = 0; i < orderMarkers.size(); i++) {
+			if (orderMarkers.get(i).getSrc().equals(color)) {
+				System.out.println("gamepanel: getorderfrom color: color:" + color);
 				return orderMarkers.get(i);
+			}
 		}
 		System.out.println("error, order markers not initialized correctly");
 		return null;
-		
+
 	}
 
 	public void populateFamiliars(Board board) {
@@ -939,13 +939,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		for (FamilyMemberPawn f : familiars.values()) {
 			if (!familiars.isEmpty())
 				boardPanel.remove(f);
-				System.out.println("ho rimosso");
+			System.out.println("ho rimosso");
 		}
 	}
 
 	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
 		if (!leadersPanel.areLeaderCards(leaderCards.size())) {
-			leadersPanel.refreshLeaderCards(leaderCards,this);
+			leadersPanel.refreshLeaderCards(leaderCards, this);
 		}
 	}
 
@@ -999,8 +999,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void notifyDiscardClick() {
 		System.out.println("discard click");
-		
-		
+
 		leaderState = "discard";
 		currentActionPanel = leadersPanel;
 		showActionPanel(leadersPanel);
@@ -1009,76 +1008,78 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void setLeaderState(String string) {
 		leaderState = string;
 	}
-	
-	public void setExcommTiles(Board board){
-		if(familiars.isEmpty()){
-			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),board.getChurch().getExcommunicationFirst().toString())); 
-		      boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),board.getChurch().getExcommunicationSecond().toString())); 
-		      boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),board.getChurch().getExcommunicationThird().toString()));
-	
+
+	public void setExcommTiles(Board board) {
+		if (familiars.isEmpty()) {
+			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),
+					board.getChurch().getExcommunicationFirst().toString()));
+			boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),
+					board.getChurch().getExcommunicationSecond().toString()));
+			boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),
+					board.getChurch().getExcommunicationThird().toString()));
+
 		}
-		
+
 	}
 
 	public void addExcommunicationCubes(Player p) {
-    	if(p.isExcommunicatedFirst()){
-    		ExcommCube first = new ExcommCube(1,p.getColor());
-    		boardPanel.add(first);
-    		first.getParent().setComponentZOrder(first, 0);
-    	}
-		
-    	if(p.isExcommunicatedSecond()){
-    		ExcommCube second = new ExcommCube(2,p.getColor());
-    		boardPanel.add(second);
-    		second.getParent().setComponentZOrder(second, 0);
-    	}
-			
-		if(p.isExcommunicatedThird()){
-			ExcommCube third = new ExcommCube(3,p.getColor());
-    		boardPanel.add(third);
-    		third.getParent().setComponentZOrder(third, 0);
+		if (p.isExcommunicatedFirst()) {
+			ExcommCube first = new ExcommCube(1, p.getColor());
+			boardPanel.add(first);
+			first.getParent().setComponentZOrder(first, 0);
 		}
-		
+
+		if (p.isExcommunicatedSecond()) {
+			ExcommCube second = new ExcommCube(2, p.getColor());
+			boardPanel.add(second);
+			second.getParent().setComponentZOrder(second, 0);
+		}
+
+		if (p.isExcommunicatedThird()) {
+			ExcommCube third = new ExcommCube(3, p.getColor());
+			boardPanel.add(third);
+			third.getParent().setComponentZOrder(third, 0);
+		}
+
 	}
 
 	public void playerDisconnected() {
-		this.currentActionPanel=null;
+		this.currentActionPanel = null;
 		this.removeActionPanel();
-		
+
 	}
 
-	
-	public void createDices(){
-		for(int i = 1; i < 7; i++){
-			dices.put(String.valueOf(i) + "black", new DicePanel(i,"black"));
-			dices.put(String.valueOf(i) + "white", new DicePanel(i,"white"));
-			dices.put(String.valueOf(i) + "orange", new DicePanel(i,"orange"));
+	public void createDices() {
+		for (int i = 1; i < 7; i++) {
+			dices.put(String.valueOf(i) + "black", new DicePanel(i, "black"));
+			dices.put(String.valueOf(i) + "white", new DicePanel(i, "white"));
+			dices.put(String.valueOf(i) + "orange", new DicePanel(i, "orange"));
 		}
 	}
-	
-	public void setDices(Board board){
-		if(board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0 &&
-				board.getDices().get(Dice.ORANGE_DICE)!= 0){
-		DicePanel black = dices.get(String.valueOf(board.getDices().get(Dice.BLACK_DICE)) + "black");
-		DicePanel white = dices.get(String.valueOf(board.getDices().get(Dice.WHITE_DICE)) + "white");
-		DicePanel orange = dices.get(String.valueOf(board.getDices().get(Dice.ORANGE_DICE)) + "orange");
-			
-		boardPanel.add(black);
-		boardPanel.add(orange);
-		boardPanel.add(white);
+
+	public void setDices(Board board) {
+		if (board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0
+				&& board.getDices().get(Dice.ORANGE_DICE) != 0) {
+			DicePanel black = dices.get(String.valueOf(board.getDices().get(Dice.BLACK_DICE)) + "black");
+			DicePanel white = dices.get(String.valueOf(board.getDices().get(Dice.WHITE_DICE)) + "white");
+			DicePanel orange = dices.get(String.valueOf(board.getDices().get(Dice.ORANGE_DICE)) + "orange");
+
+			boardPanel.add(black);
+			boardPanel.add(orange);
+			boardPanel.add(white);
 		}
 	}
-	
-	public void removeDicesAndMarkers(){
-		for(int i = 0; i<orderMarkers.size();i++){
+
+	public void removeDicesAndMarkers() {
+		for (int i = 0; i < orderMarkers.size(); i++) {
 			boardPanel.remove(orderMarkers.get(i));
 		}
-		
-		for(DicePanel d: dices.values()){
-			if(d.getParent() == boardPanel){
+
+		for (DicePanel d : dices.values()) {
+			if (d.getParent() == boardPanel) {
 				boardPanel.remove(d);
 			}
 		}
-		
+
 	}
 }

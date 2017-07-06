@@ -60,7 +60,6 @@ public class ClientSocketInterface implements NetworkInterface {
 			outSocket.flush();
 			outSocket.reset();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
