@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.CouncilPalace;
+import it.polimi.ingsw.ps19.model.resource.Servant;
 
 public class CouncilPalaceAction extends Action {
 	
@@ -24,6 +25,7 @@ public class CouncilPalaceAction extends Action {
 		councilPalace.getMembers().add(familyMember);
 		councilPalace.getEffect().applyEffect(familyMember.getPlayer());
 		familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
+		familyMember.getPlayer().getResourceChest().subResource(new Servant(paidServants));
 		} else throw new NotApplicableException("");
 		
 	}

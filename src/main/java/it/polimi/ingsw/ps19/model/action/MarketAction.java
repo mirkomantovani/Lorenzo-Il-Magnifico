@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps19.model.action;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
+import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * @author matteo
@@ -34,6 +35,7 @@ public class MarketAction extends Action{
 			System.out.println("setto lo slot a occupato");
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
 			System.out.println("tolgo il family usato");
+			familyMember.getPlayer().getResourceChest().subResource(new Servant(paidServants));
 		} else {
 			System.out.println("sono nella isApplicable false");
 			throw new NotApplicableException("market action non si può fare");

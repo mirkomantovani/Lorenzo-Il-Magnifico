@@ -2,13 +2,22 @@ package it.polimi.ingsw.ps19;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ColoredFamiliarsVariationEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsBasedOnResourcesEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsEveryWoodStoneEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsForEveryResourceEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.ResourceMalusEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
@@ -43,5 +52,44 @@ public class ExcommunicationEffectTest {
 		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount() == 85);
 		
 	}
-
+	
+	
+	@Test
+	public void losePointsEveryWoodStoneEffectTest() throws FileNotFoundException, IOException{
+		player.addResources(new ResourceChest(100,100,100,0,0,100,0));
+		Match match = new Match(2,null);
+		match.getBoard().changeCardInTowers();
+		try{
+			
+			player.addCard(match.getBoard().getTower(CardType.BUILDING).getFloor(0).getCard());
+		
+		}catch(NullPointerException e){
+			
+		}
+		Effect effect = new LosePointsEveryWoodStoneEffect(new VictoryPoint(2), CardType.BUILDING);
+		effect.applyEffect(player);
+		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount() == 100 
+				-2*(match.getBoard().getFloor(CardType.BUILDING, 0).getCard().getCost().getStoneAmount() + 
+						match.getBoard().getFloor(CardType.BUILDING, 0).getCard().getCost().getWoodAmount()));
+		
+	}
+	
+	@Test
+	public void losePointsForEveryResourceEffectTest(){
+		player.addResources(new ResourceChest(2,2,2,2,0,100,0));
+		Effect effect = new LosePointsForEveryResourceEffect(new VictoryPoint(2));
+		effect.applyEffect(player);
+		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()
+				 == 84);
+	}
+	
+	@Test
+	public void resourceMalusEffectTest(){
+		ArrayList<Resource> resources = new ArrayList<Resource>();
+		resources.add(new VictoryPoint(2));
+		
+		Effect effect = new ResourceMalusEffect(resources);
+		effect.applyEffect(player);
+		assertTrue(player.getBonuses().getResourceMalus().get(0).getAmount() == resources.get(0).getAmount());
+	}
 }

@@ -218,7 +218,7 @@ public class BoardInitializer {
 		
 		while (lineRead != null){
 			
-			requirementsForTerritory.add(Integer.parseInt(reader.readLine()));
+			requirementsForTerritory.add(Integer.parseInt(lineRead));
 			lineRead = reader.readLine();
 		}
 		reader.close();
