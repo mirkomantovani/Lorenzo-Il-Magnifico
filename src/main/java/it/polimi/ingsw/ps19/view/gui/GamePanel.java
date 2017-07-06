@@ -863,13 +863,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void updateOrder(Board board) {
 		for (int i = 0; i < board.getPlayerOrder().size(); i++) {
-			for (int j = 0; j < orderMarkers.size(); j++) {
-				if (orderMarkers.get(j).getSrc() == board.getPlayerOrder().get(i)) {
-					OrderMarkerDisk flag = orderMarkers.get(i);
-					OrderMarkerDisk old = orderMarkers.get(j);
-					orderMarkers.set(j, flag);
-					orderMarkers.set(i, old);
-				}
+			if(orderMarkers.get(i).getSrc().equals(board.getPlayerOrder().get(i))){
+				orderMarkers.get(i).setOrderMarkers();
 			}
 
 		}

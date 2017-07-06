@@ -50,7 +50,7 @@ public class OrderMarkerDisk extends JPanel{
 		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
-	private void setOrderMarkers(){
+	protected void setOrderMarkers(){
 		
 		
 		this.heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
