@@ -17,6 +17,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 /**
  * The Class EffectTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class EffectTest {
 	
 	/** The player. */

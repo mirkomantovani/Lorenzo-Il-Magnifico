@@ -4,6 +4,11 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
  * The Class HarvestCommand.
+ * This class manages the client decision to make an harvest action
+ */
+/**
+ * @author matteo
+ *
  */
 public class HarvestCommand extends ClientToServerCommand {
 

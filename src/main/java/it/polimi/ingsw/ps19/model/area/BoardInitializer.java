@@ -22,6 +22,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
  * The Class BoardInitializer.
+ * This class update the board components by taking information in files, to have 
+ * the faculty to change some game details
  *
  * @author matteo
  */

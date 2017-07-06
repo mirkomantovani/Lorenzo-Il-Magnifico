@@ -29,6 +29,8 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
  * The Class ClientCommandHandler.
+ * This class manages the commands from the Server by calling the right method based on 
+ * connection and view type
  *
  * @author matteo
  * 

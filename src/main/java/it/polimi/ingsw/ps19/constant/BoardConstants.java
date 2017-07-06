@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps19.constant;
 
 /**
  * The Class BoardConstants.
+ * The constants related to the Board
+ * 
  */
 public class BoardConstants {
 	

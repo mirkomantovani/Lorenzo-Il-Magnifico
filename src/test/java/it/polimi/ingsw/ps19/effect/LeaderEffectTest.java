@@ -22,6 +22,10 @@ import it.polimi.ingsw.ps19.model.effect.leader.SistoIVEffect;
 /**
  * The Class LeaderEffectTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class LeaderEffectTest {
 	
 	/** The player. */

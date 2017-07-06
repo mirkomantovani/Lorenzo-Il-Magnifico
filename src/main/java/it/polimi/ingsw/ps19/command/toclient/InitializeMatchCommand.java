@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 /**
  * The Class InitializeMatchCommand.
  *
+ * The class to notify the client that a match has been intialized
  * @author matteo
  * The command that the match has started
  */

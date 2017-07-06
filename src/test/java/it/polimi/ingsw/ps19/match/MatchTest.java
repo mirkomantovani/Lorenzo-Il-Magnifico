@@ -16,6 +16,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 /**
  * The Class MatchTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class MatchTest {
 	
 	/** The player 1. */

@@ -53,7 +53,8 @@ import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
- * The Class DeckCreator.
+ * The Class DeckCreator
+ * 
  */
 /**
  * @author Matteo, Jimmy, Mirko

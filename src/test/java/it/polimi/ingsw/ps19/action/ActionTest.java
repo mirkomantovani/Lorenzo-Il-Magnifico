@@ -23,6 +23,10 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
 /**
  * The Class ActionTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class ActionTest {
 	
 	/** The match. */

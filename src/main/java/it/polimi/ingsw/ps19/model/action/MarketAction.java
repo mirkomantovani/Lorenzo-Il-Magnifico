@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * The Class MarketAction.
+ * This class represent the placement in a market slot action
  *
  * @author matteo
  */

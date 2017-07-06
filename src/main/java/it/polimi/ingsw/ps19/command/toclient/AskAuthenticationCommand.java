@@ -4,6 +4,11 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**
  * The Class AskAuthenticationCommand.
+ * The class to recognize one player and let him return to the right match 
+ */
+/**
+ * @author matteo
+ *
  */
 public class AskAuthenticationCommand extends ServerToClientCommand {
 

@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**
  * The Class AssignColorCommand.
+ * This is the message to assign a specific color to the client
  */
 public class AssignColorCommand extends ServerToClientCommand {
 

@@ -14,6 +14,9 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class Tower.
+ * This class represents the four towers in the game: TERRITORY,CHARACTER,BUILDING,VENTURE.
+ * Each tower has a dynamic number of floors and a related deck, whit a method to fill the floors
+ * with cards of the deck according to the Periods
  *
  * @author matteo
  */

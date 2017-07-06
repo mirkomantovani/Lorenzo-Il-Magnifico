@@ -23,6 +23,13 @@ import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 
 /**
  * The Class Board.
+ * 
+ * This class represents the board with all the areas you can find in the physical board panel.
+ * In its different areas you can place the familiars and also it contains the cards and the excommunication tiles.
+ */
+/**
+ * @author matteo
+ *
  */
 public class Board implements Serializable {
 	

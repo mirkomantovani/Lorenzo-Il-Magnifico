@@ -3,7 +3,13 @@ package it.polimi.ingsw.ps19.command.toserver;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
+ * 
  * The Class ChosenLeaderCardCommand.
+ * This class represent the leader card choice made by one client
+ */
+/**
+ * @author matteo
+ *
  */
 public class ChosenLeaderCardCommand extends ClientToServerCommand {
 

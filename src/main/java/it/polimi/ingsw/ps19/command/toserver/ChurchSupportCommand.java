@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
  * true if you want to support, false otherwise
  */
 /**
+ * The class to catch the client answer about the excommunication
  * @author matteo
  *
  */

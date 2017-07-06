@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.LeaderCardRequirement;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
 import it.polimi.ingsw.ps19.Period;
@@ -1276,6 +1277,36 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (MatchFullException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isLeaderCardActivable(String leaderName) {
+		LeaderCard leader = match.getLeaderCards().getCard(leaderName);
+		ResourceChest resourcesRequired = leader.getRequirement().getResourcesRequired();
+		int buildingCardRequired = leader.getRequirement().getBuildingCardRequired();
+		int characterCardRequired = leader.getRequirement().getCharacterCardRequired();
+		int ventureCardRequired = leader.getRequirement().getVentureCardRequired();
+		int territoryCardRequired = leader.getRequirement().getTerritoryCardRequired();
+		int anyCardRequired = leader.getRequirement().getAnyCardRequired();
+		
+		int totalCards = match.getCurrentPlayer().getDeckOfType(CardType.BUILDING).size()  
+				+ match.getCurrentPlayer().getDeckOfType(CardType.CHARACTER).size()  
+				+ match.getCurrentPlayer().getDeckOfType(CardType.VENTURE).size() 
+				+ match.getCurrentPlayer().getDeckOfType(CardType.TERRITORY).size();
+		
+		ResourceChest cloned = match.getCurrentPlayer().getResourceChest().cloneChest();
+		cloned.subChest(resourcesRequired);
+		if(!cloned.isGreaterEqualThan(new ResourceChest(0,0,0,0,0,0,0)) ||
+		match.getCurrentPlayer().getDeckOfType(CardType.BUILDING).size() < buildingCardRequired 
+		|| match.getCurrentPlayer().getDeckOfType(CardType.CHARACTER).size() < characterCardRequired 
+		|| match.getCurrentPlayer().getDeckOfType(CardType.VENTURE).size() < ventureCardRequired
+		|| match.getCurrentPlayer().getDeckOfType(CardType.TERRITORY).size() < territoryCardRequired
+		|| totalCards < anyCardRequired)
+			return false;
+		else 
+			return true;
+		
+		
+		
 	}
 
 }

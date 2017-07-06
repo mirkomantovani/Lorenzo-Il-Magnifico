@@ -6,6 +6,12 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class LeaderCardRequirement.
+ * This class represents the requirments values to activate the differents leaderCards, 
+ * for each leader card there is a specific requirements
+ */
+/**
+ * @author matteo
+ *
  */
 public class LeaderCardRequirement implements Serializable {
 	
@@ -13,7 +19,7 @@ public class LeaderCardRequirement implements Serializable {
 	private static final long serialVersionUID = -2973716369334411303L;
 
 	/** The resources required. */
-	ResourceChest resourcesRequired;
+	private ResourceChest resourcesRequired;
 	
 	/** The building card required. */
 	private int buildingCardRequired;

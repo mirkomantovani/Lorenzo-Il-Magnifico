@@ -6,6 +6,11 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 
 /**
  * The Class Action.
+ * This is the abstract class to generalize an action
+ */
+/**
+ * @author matteo
+ *
  */
 public abstract class Action {
 	

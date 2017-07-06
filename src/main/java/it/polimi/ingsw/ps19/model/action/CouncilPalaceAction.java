@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * The Class CouncilPalaceAction.
+ * This is the action related to familiar placement in the council palace
+ */
+/**
+ * @author matteo
+ *
  */
 public class CouncilPalaceAction extends Action {
 	

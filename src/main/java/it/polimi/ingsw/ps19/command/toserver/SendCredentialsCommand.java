@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
  * The Class SendCredentialsCommand.
+ * This class represent the message with a client credentials received by server
  */
 public class SendCredentialsCommand extends ClientToServerCommand {
 

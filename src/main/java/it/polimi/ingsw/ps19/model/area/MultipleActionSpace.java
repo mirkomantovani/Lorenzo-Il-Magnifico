@@ -10,6 +10,9 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * The Class MultipleActionSpace.
+ *  This class is the generic multiple action space, the one that characterizes the council palace
+ *  and the big production and harvest areas. This class is different from the single action space
+ *  because it can store more than one familiar per time.
  */
 public class MultipleActionSpace extends ActionSpace {
 

@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class Market.
+ * This class represents the market area, this is made by four different single action spaces
+ * where you can place one familiar to get a specific resource bonus
  *
  * @author matteo
  */

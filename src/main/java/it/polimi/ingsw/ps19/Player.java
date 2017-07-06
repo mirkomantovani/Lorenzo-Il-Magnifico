@@ -16,6 +16,7 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * The Class Player.
+ * This is the player class, everyone in the match is linked with an instance of this class
  *
  * @author matteo
  */

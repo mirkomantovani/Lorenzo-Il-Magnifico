@@ -33,6 +33,10 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 /**
  * The Class ExcommunicationEffectTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class ExcommunicationEffectTest {
 	
 	/** The player. */

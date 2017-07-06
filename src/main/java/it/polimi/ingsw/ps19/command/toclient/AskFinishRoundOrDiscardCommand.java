@@ -4,6 +4,12 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**
  * The Class AskFinishRoundOrDiscardCommand.
+ * This class represents the command to ask the client if he wants to end turn or to 
+ * discard a leader card
+ */
+/**
+ * @author matteo
+ *
  */
 public class AskFinishRoundOrDiscardCommand extends ServerToClientCommand {
 

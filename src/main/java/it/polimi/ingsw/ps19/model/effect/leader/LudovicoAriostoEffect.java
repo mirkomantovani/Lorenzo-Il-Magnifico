@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * The Class LudovicoAriostoEffect.
+ * This class represents the effect of the leader card with the same name
  *
  * @author matteo
  */
