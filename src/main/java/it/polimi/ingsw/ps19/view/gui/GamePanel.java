@@ -1058,10 +1058,26 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void setDices(Board board){
 		if(board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0 &&
 				board.getDices().get(Dice.ORANGE_DICE)!= 0){
-		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.BLACK_DICE)) + "black"));
-		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.WHITE_DICE)) + "white"));
-		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.ORANGE_DICE)) + "orange"));
-	
+		DicePanel black = dices.get(String.valueOf(board.getDices().get(Dice.BLACK_DICE)) + "black");
+		DicePanel white = dices.get(String.valueOf(board.getDices().get(Dice.WHITE_DICE)) + "white");
+		DicePanel orange = dices.get(String.valueOf(board.getDices().get(Dice.ORANGE_DICE)) + "orange");
+			
+		boardPanel.add(black);
+		boardPanel.add(orange);
+		boardPanel.add(white);
 		}
+	}
+	
+	public void removeDicesAndMarkers(){
+		for(int i = 0; i<orderMarkers.size();i++){
+			boardPanel.remove(orderMarkers.get(i));
+		}
+		
+		for(DicePanel d: dices.values()){
+			if(d.getParent() == boardPanel){
+				boardPanel.remove(d);
+			}
+		}
+		
 	}
 }
