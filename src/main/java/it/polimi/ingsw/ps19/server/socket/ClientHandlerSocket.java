@@ -22,7 +22,7 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
- * The Class ClientHandlerSocket.
+ * The Class that handles the communication between client and server, server-side
  *
  * @author Mirko
  */

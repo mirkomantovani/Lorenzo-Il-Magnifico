@@ -55,7 +55,11 @@ import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
- * The Class MatchHandler.
+ * The is The Controller of the entire Gameplay, the server is the only one that
+ * makes decision about the match, this class has the references to every model object
+ * and uses the methods of it, it also decides the commands to send to the clients
+ * and handles the commands arrived by every client, an instance of MatchHandler exist for
+ * every Match created by the server
  *
  * @author Mirko
  */

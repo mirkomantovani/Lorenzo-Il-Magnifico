@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * The Interface UserInterface.
+ * The Interface UserInterface to be implemented by the different type of views
  *
  * @author Mirko
  */

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps19.exception;
 
 /**
- * The Class NotAnExchangeEffectException.
+ * The unchecked exception to signal that effect is not an exchange effect of a
+ * building card
+ * 
  */
 public class NotAnExchangeEffectException extends RuntimeException {
 

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import it.polimi.ingsw.ps19.Player;
 
 /**
- * The Class Effect.
+ * The abstract class Effect, it only has one method: applyEffect
  *
  * @author Mirko
  */

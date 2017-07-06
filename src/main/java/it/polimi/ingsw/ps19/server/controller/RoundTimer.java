@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.server.controller;
 
 /**
- * The Class RoundTimer.
+ * The Timer thread that awaits the end of one's roundtime
  */
 public class RoundTimer implements Runnable {
 

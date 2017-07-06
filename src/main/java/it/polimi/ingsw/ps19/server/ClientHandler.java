@@ -9,7 +9,8 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 
 /**
- * The Class ClientHandler.
+ * A Runnable abstract messages client-server handler to be implemented by classes
+ * using different connection types
  *
  * @author Mirko
  */

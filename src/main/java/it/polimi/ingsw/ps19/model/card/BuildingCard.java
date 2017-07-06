@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 
 /**
- * The Class BuildingCard.
+ * A card of type Building
  *
  * @author Mirko
  */

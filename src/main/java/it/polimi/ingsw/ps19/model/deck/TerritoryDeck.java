@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.deck;
 import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 
 /**
- * The Class TerritoryDeck.
+ * A deck of territory cards
  
 
  * @author Mirko

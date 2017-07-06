@@ -7,7 +7,9 @@ import java.awt.Insets;
 import javax.swing.border.Border;
 
 /**
- * The Class RoundedBorder.
+ * A rounded border used for market buttons and single production and harvest
+ * @author Mirko
+ *
  */
 public class RoundedBorder implements Border {
 

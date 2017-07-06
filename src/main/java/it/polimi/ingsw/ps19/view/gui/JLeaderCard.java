@@ -12,7 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- * The Class JLeaderCard.
+ * This class represents a general leader card, it displays it and gives the
+ * functionalities offered by a JButton
  *
  * @author Mirko
  */

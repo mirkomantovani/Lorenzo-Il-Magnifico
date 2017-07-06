@@ -18,7 +18,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
 /**
- * The Class GraphicalUserInterface.
+ * The GUI, implementations of the User Interface using Swing & AWT components
  *
  * @author Mirko
  */

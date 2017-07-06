@@ -22,7 +22,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import java.awt.Dimension;
 
 /**
- * The Class PlayerResources.
+ * The panel showing the resources of the player, note that the points aren't shown here
+ * because everyone can see them in the board panel
+ * @author Mirko
+ *
  */
 public class PlayerResources extends JPanel {
 	

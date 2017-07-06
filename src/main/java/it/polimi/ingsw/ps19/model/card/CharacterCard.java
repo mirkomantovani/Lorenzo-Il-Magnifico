@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 
 /**
- * The Class CharacterCard.
+ * A card of type Character
  *
  * @author Mirko
  */

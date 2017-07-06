@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * The Class ChooseExcommunicationPanel.
+ * The Panel that lets the player choose if he wants to be excommunicated or support the church
  *
  * @author Mirko
  */

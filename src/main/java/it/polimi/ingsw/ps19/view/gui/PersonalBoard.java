@@ -11,7 +11,10 @@ import javax.swing.JPanel;
 import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
- * The Class PersonalBoard.
+ * The player personal board, it extends JFrame, and it's the only "external" frame
+ * in the GUI
+ * @author Mirko
+ *
  */
 public class PersonalBoard extends JFrame {
 	

@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * The Class TerritoryCard.
+ * A card of type Territory
  *
  * @author Mirko
  */

@@ -5,7 +5,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
 
 /**
- * The Class CharacterDeck.
+ * A deck of character cards
  
  *
  * @author Mirko
