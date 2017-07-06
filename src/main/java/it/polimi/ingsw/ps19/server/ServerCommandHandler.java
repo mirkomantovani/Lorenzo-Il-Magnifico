@@ -154,8 +154,7 @@ public class ServerCommandHandler implements CommandObserver {
 	}
 
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
-		handler.closeMatch();
-
+		handler.clientClosedTheGame(requestClosureCommand.getPlayerColor());
 	}
 
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {

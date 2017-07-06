@@ -54,6 +54,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(CloseClientCommand closeConnectionCommand) {
+		userInterface.notifyServerClosed();
 		networkInterface.closeConnection();
 		
 	}
@@ -64,7 +65,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(InitializeMatchCommand initializeMatchCommand) {
-		userInterface.initializeMatch();
+		userInterface.initializeMatch(initializeMatchCommand.getNumPlayers());
 	}
 
 	public void applyCommand(WinCommand winCommand) {

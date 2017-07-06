@@ -18,6 +18,7 @@ import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
+import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -229,6 +230,12 @@ public class ClientController implements InputObserver{
 	public void notifyChatMessage(String message) {
 		String m="<--"+playerColor+"--> "+message;
 		sendCommand(new ChatMessageClientCommand(m));
+	}
+
+
+
+	public void notifyRequestClosureCommand() {
+		sendCommand(new RequestClosureCommand(playerColor));
 	}
 	
 

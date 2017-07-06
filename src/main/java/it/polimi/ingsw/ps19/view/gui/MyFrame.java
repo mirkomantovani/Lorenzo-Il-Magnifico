@@ -15,7 +15,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
 import it.polimi.ingsw.ps19.model.area.Board;
-import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.area.Tower;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
@@ -39,7 +38,7 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 
 					frame.removeInitialImage();
-					GamePanel gameP = new GamePanel("red");
+					GamePanel gameP = new GamePanel("red",2);
 					frame.setContentPane(gameP);
 					// frame.getGamePanel().addCard();
 
@@ -71,6 +70,8 @@ public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
+		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("/MJMLogoTransparent.png")));
 
 		// Setting the LookAndFeel theme
 		try {
@@ -136,8 +137,8 @@ public class MyFrame extends JFrame {
 		remove(initialPanel);
 	}
 
-	public void initializeGameFrame() {
-		gamePanel = new GamePanel(playerColor);
+	public void initializeGameFrame(int numPlayers) {
+		gamePanel = new GamePanel(playerColor,numPlayers);
 		setContentPane(gamePanel);
 
 	}

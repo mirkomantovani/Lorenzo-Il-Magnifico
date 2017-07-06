@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
+import it.polimi.ingsw.ps19.MatchFullException;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
@@ -34,6 +36,7 @@ import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.constant.FileConstants;
+import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
@@ -43,8 +46,6 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
-import it.polimi.ingsw.ps19.model.effect.Effect;
-import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -64,7 +65,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ServerCommandHandler commandHandler;
 	private ServerInterface ServerInterface;
 	private Match match;
-//	private RoundTimer roundTimer;
+	// private RoundTimer roundTimer;
 	private Thread roundTimerThread;
 	private int leaderResponseCounter = 0;
 	private ArrayList<ArrayList<LeaderCard>> leaderSets;
@@ -72,7 +73,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private int roundNumber = 0;
 	private ServerToClientCommand lastCommandSent;
 	private int numPlayersAnsweredExcomm;
-	
+
 	private String prodFamilyMember;
 	private int prodActionSpace;
 	private int prodPaidServant;
@@ -81,7 +82,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
-//		System.out.println("match handler: sono stato creato");
+		// System.out.println("match handler: sono stato creato");
 		// leaderSets = match.getLeaderCards()
 		// .getStartingLeaderSets(match.getPlayers().length);
 	}
@@ -90,7 +91,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void run() {
 		initMatch();
 	}
-
 
 	private void initMatch() {
 
@@ -106,26 +106,27 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// asking credentials to everyone ma se facciamo riconnessione alla
 		// partita deve essere
 		// chiesto ancora prima, dal server
-//		startLeaderDiscardPhase(); // dovrebbe esserci questo
+		// startLeaderDiscardPhase(); // dovrebbe esserci questo
 		// provaPlayer();
-//		 match.handlePeriodsAndTurns();
-		 startMatch();
+		// match.handlePeriodsAndTurns();
+		startMatch();
 		// startMatch(); non parte qui ma dopo aver scartato i familiari
-		
-//		provaLeaderPlayer();
+
+		// provaLeaderPlayer();
 	}
 
-//	private void provaLeaderPlayer() {
-//		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
-//		match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
-//		try {
-//			this.sendToClientHandler(new PlayerStatusChangeCommand(match.getPlayers()[0]),
-//					this.getRightClientHandler(match.getPlayers()[0]));
-//		} catch (WrongPlayerException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	// private void provaLeaderPlayer() {
+	// match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
+	// match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
+	// try {
+	// this.sendToClientHandler(new
+	// PlayerStatusChangeCommand(match.getPlayers()[0]),
+	// this.getRightClientHandler(match.getPlayers()[0]));
+	// } catch (WrongPlayerException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
 
 	private void communicateColors() {
 		for (ClientHandler c : clients) {
@@ -140,11 +141,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
-//		System.out.println("matchhandler: lunghezza leadersets" + leaderSets.size());
+		// System.out.println("matchhandler: lunghezza leadersets" +
+		// leaderSets.size());
 
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
@@ -163,10 +164,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	// }
 
 	private void startMatch() {
-		sendToAllPlayers(new InitializeMatchCommand());
+		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		startLeaderDiscardPhase();
-//		startTurn();
+		// startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -202,27 +203,34 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void setNext() {
 		// Map<Player, Boolean> winners = match.checkWinners();
 		// if (winners.isEmpty() && !clients.isEmpty()) {
-		match.setNextPlayer();
+		try {
+			match.setNextPlayer();
+		} catch (EveryPlayerDisconnectedException e) {
+			closeMatch();
+			e.printStackTrace();
+		}
 
 		// } else if (!winners.isEmpty() && !clients.isEmpty())
 		// notifyEndOfGame(winners);
 	}
 
 	private void startTurn() {
-//		 sendToCurrentPlayer(new StartTurnCommand());
+		// sendToCurrentPlayer(new StartTurnCommand());
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-			
+
 			initTurn();
 
 			sendToAllPlayers(new InitializeTurnCommand(match.getPeriod(), match.getTurn()));
 
 			sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-			
-			match.distributeTurnResources();  //this needs to be here and not in initTurn, 
-			//otherwise the GUI wouldn't have a playerResources Panel to add resources into
+
+			match.distributeTurnResources(); // this needs to be here and not in
+												// initTurn,
+			// otherwise the GUI wouldn't have a playerResources Panel to add
+			// resources into
 
 			startRound();
 			// notifyCurrentPlayer(new CommandAskMove());
@@ -234,25 +242,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initTurn() {
 		refreshPlayerOrder();
 		roundNumber = 0;
-//		System.out.println("rollo i dadi");
-		
+		// System.out.println("rollo i dadi");
+
 		match.clearBoard();
-		
+
 		match.getBoard().rollDices();
 		match.refreshDicesValueForPlayers();
 		match.addFamilyMembersToPlayers();
-		
+
 		this.match.getBoard().changeCardInTowers();
-		
-		//TODO ripulire il board dai family members 
+
+		// TODO ripulire il board dai family members
 	}
 
 	private void startRound() {
-		if(roundTimerThread!=null)
-		if(roundTimerThread.isAlive())
-			roundTimerThread.interrupt();
-		
-		
+		if (roundTimerThread != null)
+			if (roundTimerThread.isAlive())
+				roundTimerThread.interrupt();
+
 		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
@@ -320,7 +327,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
-
 	/**
 	 * method invoked by the ping timer to check if the current player is always
 	 * on
@@ -358,6 +364,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("\n\n Marchhandler: new thread for roundtimer\n\n");
 		roundTimerThread = new Thread(new RoundTimer(this, timeMillis));
 		roundTimerThread.start();
 	}
@@ -377,18 +384,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public synchronized void closeMatch() {
 		// timerNotNeed();
-		// if (!clients.isEmpty()) {
-		// List<ClientHandler> list = new ArrayList<ClientHandler>();
-		// for (ClientHandler clientHandler : clients)
-		// list.add(clientHandler);
-		// for (ClientHandler clientHandler : list) {
-		// clients.remove(clientHandler);
-		// if (!clientHandler.getPlayer().isDead())
-		// match.killPlayer(clientHandler.getPlayer());
-		// clientHandler.closeByServer();
-		// }
-		// }
-		// ServerInterface.notifyClose(this);
+		if (!clients.isEmpty()) {
+			for (ClientHandler clientHandler : clients) {
+//				clients.remove(clientHandler);
+				try {
+					clientHandler.closedByServer();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		ServerInterface.closeMatch(this);
 	}
 
 	@Override
@@ -404,8 +410,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
-		// TODO Auto-generated method stub
-
+		try {
+			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
+		} catch (MatchFullException e) {
+			System.out.println("Disconnected more players than the ones in the game");
+			e.printStackTrace();
+		} catch (WrongClientHandlerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private ClientHandler getRightClientHandler(Player player) throws WrongPlayerException {
@@ -419,22 +431,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void applyAction(Action action) throws NotApplicableException {
 		action.apply();
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-		
-		if(match.getCurrentPlayer().getCouncilPrivilege()!=0){
+
+		if (match.getCurrentPlayer().getCouncilPrivilege() != 0) {
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
-		
-		match.getCurrentPlayer().resetPrivileges();
-		
+
+			match.getCurrentPlayer().resetPrivileges();
+
+		} else {
+			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
-		else{
-		sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
-		}
-		
+
 		// TODO MANDARE comando per scegliere terminare turno o scartare
 		// leadercards
 
 	}
-	
+
 	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
 		industrialAction.apply(choices);
 	}
@@ -454,7 +465,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
 		try {
-//			System.out.println("matchhandler: invio player:" + player.toString());
+			// System.out.println("matchhandler: invio player:" +
+			// player.toString());
 			this.sendToClientHandler(new PlayerStatusChangeCommand(player), this.getRightClientHandler(player));
 		} catch (WrongPlayerException e) {
 			e.printStackTrace();
@@ -469,18 +481,33 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
+		try {
+			closedClients.add(getRightClientHandler(getCurrentPlayer()));
+		} catch (WrongPlayerException e) {
+			System.out.println(e.getError());
+			e.printStackTrace();
+		}
+		try {
+			this.match.addDisconnectedPlayer(getCurrentPlayer());
+		} catch (MatchFullException e) {
+			e.printStackTrace();
+		}
+		if(match.isAnyoneStillPlaying()){
 		setNext();
 		nextStep();
+		}
+		else {
+			this.match=null;
+		}
 	}
 
 	private void nextStep() {
-		if (roundNumber == match.getPlayers().length * 4) {
-			System.out.println("roundNumber= "+roundNumber+"\n cambio turno");
-			if (match.getTurn() % 2 == 1){
+		if ((roundNumber == match.getPlayers().length * 4)||currentPlayerWithoutFamilyMembers()) {
+			System.out.println("roundNumber= " + roundNumber + "\n cambio turno");
+			if (match.getTurn() % 2 == 1) {
 				System.out.println(match.getTurn() + "ho fatto modulo due");
 				startTurn();
-			}
-			else {
+			} else {
 				startExcommunicationPhase();
 				System.out.println("sono nell'else di modulo due, inizia l'excommphase" + match.getTurn());
 			}
@@ -488,15 +515,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startRound();
 
 	}
-	
-	
+
+	private boolean currentPlayerWithoutFamilyMembers() {
+		if(this.match.getCurrentPlayer().getFamilyMembers().isEmpty()){
+			return true;
+		}
+		return false;
+	}
 
 	private void startExcommunicationPhase() {
-		
-		ExcommunicationTile excommTile=getCurrentExcommTile();
-		
-		sendToAllPlayers(new AskForExcommunicationPaymentCommand(
-				excommTile.getEffect().toString()));
+
+		ExcommunicationTile excommTile = getCurrentExcommTile();
+
+		sendToAllPlayers(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -515,6 +546,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			clientHandler.sendCommand(command);
 		} catch (IOException e) {
 			e.printStackTrace();
+			closedClients.add(clientHandler);
 		}
 	}
 
@@ -530,32 +562,36 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
-//			System.out.println("matchhandler: getplayerfromcolor: p" + "layer.getcolor:" + players[i].getColor()
-//					+ "playerColor:" + playerColor);
+			// System.out.println("matchhandler: getplayerfromcolor: p" +
+			// "layer.getcolor:" + players[i].getColor()
+			// + "playerColor:" + playerColor);
 			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
-//		System.out.println("matchhandler: getplayerfromcolor: sto ritornando null");
+		// System.out.println("matchhandler: getplayerfromcolor: sto ritornando
+		// null");
 		return null;
 	}
 
 	public void handleLeaderChoice(String name, String playerColor) {
-		 System.out.println("matchhandler: sono in handleleaderchoice");
+		System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
 			// System.out.println("matchhandler: cerco di aggiungere la carta di
 			// nome:");
-//			System.out.println("matchhandler: handleleaderchoice: leadername:" + name + "playercolor: " + playerColor);
+			// System.out.println("matchhandler: handleleaderchoice:
+			// leadername:" + name + "playercolor: " + playerColor);
 
-			
-				this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
+			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
 			removeLeaderFromSets(match.getLeaderCards().getCard(name));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		System.out.println("matchhandler: leaderresponsecounter=" + leaderResponseCounter);
-//		System.out.println("matchhandler: giocatori:=" + match.getPlayers().length);
+		// System.out.println("matchhandler: leaderresponsecounter=" +
+		// leaderResponseCounter);
+		// System.out.println("matchhandler: giocatori:=" +
+		// match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
 			// System.out.println("matchhandler: entro nell'if di quando tutti e
 			// quattro hanno scelto");
@@ -584,7 +620,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			cycle++;
 			if (cycle == 4)
-//				startMatch();
+				// startMatch();
 				startTurn();
 		}
 
@@ -733,8 +769,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToCurrentPlayer(lastCommandSent);
 
 	}
-	
-	public void sendPrivilegeToCurrentPlayer(int numberOfPrivilege){
+
+	public void sendPrivilegeToCurrentPlayer(int numberOfPrivilege) {
 		ResourceChest[] rc = null;
 		try {
 			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
@@ -746,7 +782,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ArrayList<ResourceChest> arrayListPrivilege = getArrayListPrivilegeFromArray(rc);
 
 		sendToCurrentPlayer(new AskPrivilegeChoiceCommand(numberOfPrivilege, arrayListPrivilege));
-		
+
 	}
 
 	public void discardLeaderCard(String leaderName) {
@@ -780,17 +816,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				resourcesToGive.addChest(rc[choice.get(i)]);
 			}
 			this.getCurrentPlayer().addResources(resourcesToGive);
-			
+
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 
-		}
-		else{
+		} else {
 			sendToCurrentPlayer(new InvalidActionCommand("You modified the code and "
 					+ "tried to get resources from a council privilege which are not valid in the game"));
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
-		
-		
 
 	}
 
@@ -813,48 +846,48 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	private void refreshPlayerOrder(){
-		
-		 Player[] oldList = match.getPlayers();
-		 
-		 ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
-		 
-		 System.out.println(councilMemberList.toString());
-		 
-		 ArrayList<Player> councilPlayers = new ArrayList<Player>();
-		 System.out.println("sono nella refresh player order");
-		 
-		 if(!councilMemberList.isEmpty()){
-		 System.out.println("sono nell if della refresh player");
-		 for(int i = 0; i < councilMemberList.size(); i++){
-			 councilPlayers.add(councilMemberList.get(i).getPlayer());
-		 }
-		 System.out.println("ho ricavato i player che hanno giocato nel council palace");
-		 for(int i = 0; i<councilPlayers.size(); i++){
-			 for(int j = 0; j<councilPlayers.size();j++){
-				 if(i!=j && councilPlayers.get(i) == councilPlayers.get(j)){
-					 councilPlayers.remove(j);
-				 }
-			 }
-		 }
-		 System.out.println("ho rimosso i duplicati");
-		 for(int i = 0; i < oldList.length; i++){
-			if(!councilPlayers.contains(oldList[i])){
-				councilPlayers.add(oldList[i]);
+	private void refreshPlayerOrder() {
+
+		Player[] oldList = match.getPlayers();
+
+		ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
+
+		System.out.println(councilMemberList.toString());
+
+		ArrayList<Player> councilPlayers = new ArrayList<Player>();
+		System.out.println("sono nella refresh player order");
+
+		if (!councilMemberList.isEmpty()) {
+			System.out.println("sono nell if della refresh player");
+			for (int i = 0; i < councilMemberList.size(); i++) {
+				councilPlayers.add(councilMemberList.get(i).getPlayer());
 			}
-		 }
-		 System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
-		 Player[] newList = new Player[oldList.length];
-		 for(int i= 0; i < councilPlayers.size(); i++){
-			 newList[i] = councilPlayers.get(i);
-		 }
-		 
-		 match.setPlayers(newList);
-		 
-		 System.out.println("questo è il nuovo ordine");
-		 for(int i = 0; i < councilPlayers.size(); i++)
-			 System.out.println(newList[i].toString() + "\n");
-		 }
+			System.out.println("ho ricavato i player che hanno giocato nel council palace");
+			for (int i = 0; i < councilPlayers.size(); i++) {
+				for (int j = 0; j < councilPlayers.size(); j++) {
+					if (i != j && councilPlayers.get(i) == councilPlayers.get(j)) {
+						councilPlayers.remove(j);
+					}
+				}
+			}
+			System.out.println("ho rimosso i duplicati");
+			for (int i = 0; i < oldList.length; i++) {
+				if (!councilPlayers.contains(oldList[i])) {
+					councilPlayers.add(oldList[i]);
+				}
+			}
+			System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
+			Player[] newList = new Player[oldList.length];
+			for (int i = 0; i < councilPlayers.size(); i++) {
+				newList[i] = councilPlayers.get(i);
+			}
+
+			match.setPlayers(newList);
+
+			System.out.println("questo è il nuovo ordine");
+			for (int i = 0; i < councilPlayers.size(); i++)
+				System.out.println(newList[i].toString() + "\n");
+		}
 	}
 
 	public int getRoundNumber() {
@@ -863,86 +896,94 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
 		numPlayersAnsweredExcomm++;
-		if(decision){
-			System.out.println("Non ho scomunicato il giocatore"+playerColor);
+		if (decision) {
+			System.out.println("Non ho scomunicato il giocatore" + playerColor);
 			this.getPlayerFromColor(playerColor).payFaithPoint();
 			ResourceChest rc = new ResourceChest();
 			rc.addResource(match.getChurchSupportPrizeInPeriod());
 			this.getPlayerFromColor(playerColor).addResources(rc);
 		} else {
-			System.out.println("Scomunico il giocatore"+playerColor);
+			System.out.println("Scomunico il giocatore" + playerColor);
 			ExcommunicationTile tile;
-			tile=this.getCurrentExcommTile();
+			tile = this.getCurrentExcommTile();
 			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
-			System.out.println("Ho scomunicato il giocatore"+playerColor);
-			
-			if(match.getPeriod()==Period.FIRST)
+			System.out.println("Ho scomunicato il giocatore" + playerColor);
+
+			if (match.getPeriod() == Period.FIRST)
 				this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
-			else if(match.getPeriod()==Period.SECOND){
+			else if (match.getPeriod() == Period.SECOND) {
 				this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
-			} else if(match.getPeriod()==Period.SECOND){
+			} else if (match.getPeriod() == Period.SECOND) {
 				this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
 			}
-			
+
 			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
-			
-		}	
-		
-		if(numPlayersAnsweredExcomm==this.match.getPlayers().length){
-			numPlayersAnsweredExcomm=0;
+
+		}
+
+		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
+			numPlayersAnsweredExcomm = 0;
 			startTurn();
 		}
-			
+
 	}
 
 	private ExcommunicationTile getCurrentExcommTile() {
-		Church c=this.match.getBoard().getChurch();
-		Period p=this.match.getPeriod();
-		ExcommunicationTile excommTile=c.getExcommunicationTile(p);
+		Church c = this.match.getBoard().getChurch();
+		Period p = this.match.getPeriod();
+		ExcommunicationTile excommTile = c.getExcommunicationTile(p);
 		return excommTile;
 	}
 
 	public void saveProductionParams(ProductionCommand command) {
-		this.prodActionSpace=command.getActionSpace();
-		this.prodPaidServant=command.getPaidServants();
-		this.prodFamilyMember=command.getFamilyMember();
-		
+		this.prodActionSpace = command.getActionSpace();
+		this.prodPaidServant = command.getPaidServants();
+		this.prodFamilyMember = command.getFamilyMember();
+
 	}
 
 	public void handleProductionActivation(ProductionActivationCommand productionActivationCommand) {
 
 		FamilyMember member = getCurrentPlayer().getFamilyMember(this.prodFamilyMember);
-		
-		if(this.prodActionSpace == 1){
+
+		if (this.prodActionSpace == 1) {
 			try {
-				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
-						match.getBoard().getProductionArea().getSingleActionSpace(), this.prodPaidServant));
+				this.applyAction(productionActivationCommand.getChoices(),
+						new IndustrialAction(member, match.getBoard().getProductionArea(),
+								match.getBoard().getProductionArea().getSingleActionSpace(), this.prodPaidServant));
 			} catch (NotApplicableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			try {
-				this.applyAction(productionActivationCommand.getChoices(),new IndustrialAction(member, match.getBoard().getProductionArea(),
-						match.getBoard().getProductionArea().getMultipleActionSpace(), this.prodPaidServant));
+				this.applyAction(productionActivationCommand.getChoices(),
+						new IndustrialAction(member, match.getBoard().getProductionArea(),
+								match.getBoard().getProductionArea().getMultipleActionSpace(), this.prodPaidServant));
 			} catch (NotApplicableException e) {
 				sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
 				sendToCurrentPlayer(new AskMoveCommand());
 			}
 		}
-		
-		
-		this.prodActionSpace=0;
-		this.prodPaidServant=0;
-		this.prodFamilyMember="";
+
+		this.prodActionSpace = 0;
+		this.prodPaidServant = 0;
+		this.prodFamilyMember = "";
 	}
-	
-	public void deactivateLeaderCards(){
-		if(!this.getCurrentPlayer().getLeaderCards().isEmpty())
-			for(LeaderCard l: this.getCurrentPlayer().getLeaderCards().values()){
-				l.getSpecialEffect().disapplyEffect(getCurrentPlayer());	
+
+	public void deactivateLeaderCards() {
+		if (!this.getCurrentPlayer().getLeaderCards().isEmpty())
+			for (LeaderCard l : this.getCurrentPlayer().getLeaderCards().values()) {
+				l.getSpecialEffect().disapplyEffect(getCurrentPlayer());
 			}
 	}
 
-	
+	public void clientClosedTheGame(String playerColor) {
+		try {
+			match.addDisconnectedPlayer(getPlayerFromColor(playerColor));
+		} catch (MatchFullException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

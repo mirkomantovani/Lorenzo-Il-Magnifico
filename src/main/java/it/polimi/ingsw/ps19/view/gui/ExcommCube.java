@@ -6,20 +6,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class ExcommDice extends JPanel{
+public class ExcommCube extends JPanel{
 	
 	private int period;
 	private String player;
 	private Image img;
 	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
-	private static final double WIDTH_PERC = 0.1938503937007874015748031496063;
-	private static final double HEIGHT_PERC = 0.60759259259259259259259259259259;
-	private final static double wDIM_PERC = 0.06561679790026246719160104986877;
-	private final static double hDIM_PERC = 0.09422222222222222222222222222222;
+	private static final double WIDTH_PERC = 0.1788503937007874015748031496063;
+	private static final double HEIGHT_PERC = 0.64759259259259259259259259259259;
+	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
+	private final static double hDIM_PERC = 0.02351851851851851851851851851852;
 	private final static double offset = 0.075;
+
 	
-	public ExcommDice(int period,String player){
+	public ExcommCube(int period,String player){
 		this.period = period;
 		this.player = player;
 		try {
@@ -32,17 +33,22 @@ public class ExcommDice extends JPanel{
 		switch(player){
 		
 		case "yellow" : widthRel = widthRel + 5;
+						break;
 		case "red" : widthRel = widthRel + 10;
+						break;
 		case "blue" : widthRel = widthRel + 15;
+						break;
 		case "green" : widthRel = widthRel + 20;
+						break;
 		default : widthRel = widthRel;
+						break;
 		
 		}
 		
 	    this.setBounds((int) (widthRel + (period-1)*offset*BoardPanel.dimension.getWidth()), heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		this.setComponentZOrder(this, 0);
+		//this.getParent().setComponentZOrder(this, 0);
 		
 		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		

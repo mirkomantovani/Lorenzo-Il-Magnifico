@@ -49,9 +49,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	@Override
-	public void initializeMatch() {
+	public void initializeMatch(int numPlayers) {
 		frame.removeInitialImage();
-		frame.initializeGameFrame();
+		frame.initializeGameFrame(numPlayers);
 		this.addListeners();
 		frame.getGamePanel().setObserver(this);
 		frame.pack(); // ?
@@ -171,10 +171,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.getGamePanel().setExcommTiles(board);
 		frame.getGamePanel().populateFamiliars(board);
 		frame.getGamePanel().createMarkers(board);
+		frame.getGamePanel().removeDicesAndMarkers();
 		frame.getGamePanel().updateOrder(board);
 		frame.getGamePanel().PlaceFamiliars(board);
-	
-
+		frame.getGamePanel().setDices(board);
 		
 		frame.getGamePanel().repaintBoard();
 
@@ -206,7 +206,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void notifyRoundTimerExpired() {
-		writeGameMessage("Your time's up, you'll skip this round");
+		writeGameMessage("Your time's up, you've been disconnected");
+		frame.getGamePanel().playerDisconnected();
 	}
 
 	@Override
@@ -290,6 +291,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	public void notifyCloseGame() {
+		gameController.notifyRequestClosureCommand();
 		personalBoard.dispose();
 		frame.dispose();
 
@@ -333,6 +335,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifyDiscardLeader(String leaderName) {
 		gameController.notifyDiscardedLeaderCard(leaderName);
+	}
+
+	@Override
+	public void notifyServerClosed() {
+		writeGameMessage("The server has closed the game and the connections"
+				+ " because no one was connected anymore");
 	}
 
 }
