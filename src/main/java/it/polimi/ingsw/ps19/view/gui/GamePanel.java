@@ -575,24 +575,28 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
 			draftPanel.setVisible(false);
 			} else if(leaderState.equals("activate")){
-				System.out.println("activate leader");
+//				System.out.println("activate leader");
 				this.GUI.notifyActivateLeader(leader.getLeaderName());
 				leaderState="none";
+				leadersPanel.setVisible(false);
+				
 				
 			} else if(leaderState.equals("discard")){
-				System.out.println("discard leader");
+//				System.out.println("discard leader");
 				this.GUI.notifyDiscardLeader(leader.getLeaderName());
 				leaderState="none";
+//				this.removeActionPanel();
+				leadersPanel.setVisible(false);
 				
 			}
 		} else if(e.getSource()==showLeaderCardsButton){
-			System.out.println("show leader card button clicked");
 			if (!leadersPanel.isVisible()){
-				System.out.println("panel is not visible, lo metto");
 				showActionPanel(leadersPanel);
 			}
-			else
+			else {
+				System.out.println("panel is visible, backto current");
 				backToCurrentAction();
+			}
 		}
 
 	}
@@ -654,6 +658,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private void backToCurrentAction() {
 		if (currentActionPanel != null)
 			showActionPanel(currentActionPanel);
+		else {
+			setEveryoneInvisible(this.actionContentPane.getComponents());
+			this.actionContentPane.removeAll();
+		}
 	}
 
 	private void constructAction(CardButton card) {
