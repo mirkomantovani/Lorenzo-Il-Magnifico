@@ -1,10 +1,11 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.effect;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.HarvestBonusEffect;
@@ -13,10 +14,17 @@ import it.polimi.ingsw.ps19.model.effect.NoFloorBonusEffect;
 import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
+/**
+ * The Class EffectTest.
+ */
 public class EffectTest {
 	
+	/** The player. */
 	private Player player;
 	
+	/**
+	 * Sets the up.
+	 */
 	@Before
 	public void setUp(){
 		player = new Player("matteo", "blue");
@@ -25,6 +33,9 @@ public class EffectTest {
 	
 	}
 	
+	/**
+	 * Test instant resources effect.
+	 */
 	@Test
 	public void testInstantResourcesEffect(){
 		ResourceChest rc = new ResourceChest(1,1,1,1,1,1,1);
@@ -35,6 +46,9 @@ public class EffectTest {
 		
 	}
 	
+	/**
+	 * Test council privilege effect.
+	 */
 	@Test 
 	public void testCouncilPrivilegeEffect(){
 		Effect effect = new CouncilPrivilegeEffect(2);
@@ -49,13 +63,19 @@ public class EffectTest {
 //		assertTrue(player.getDeckOfType(CardType.BUILDING).size() == 1);
 //	}
 	
-	@Test
+	/**
+ * Harvest bonus effect test.
+ */
+@Test
 	public void HarvestBonusEffectTest(){
 		Effect effect = new HarvestBonusEffect(34);
 		effect.applyEffect(player);
 		assertTrue(player.getBonuses().getHarvestVariation() == 34);
 	}
 	
+	/**
+	 * Production bonus effect test.
+	 */
 	@Test
 	public void ProductionBonusEffectTest(){
 		Effect effect = new ProductionBonusEffect(34);
@@ -63,6 +83,9 @@ public class EffectTest {
 		assertTrue(player.getBonuses().getProductionVariation() == 34);
 	}
 	
+	/**
+	 * Nofloor bonus effect test.
+	 */
 	@Test
 	public void NofloorBonusEffectTest(){
 		Effect effect = new NoFloorBonusEffect();

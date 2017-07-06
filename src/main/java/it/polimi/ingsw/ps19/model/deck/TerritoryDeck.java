@@ -12,9 +12,7 @@ import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 public class TerritoryDeck extends Deck<TerritoryCard> {
 
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5081732306033008553L;
 
 	/**

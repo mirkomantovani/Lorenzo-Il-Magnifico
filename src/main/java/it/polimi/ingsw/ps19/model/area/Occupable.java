@@ -7,24 +7,42 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 
 /**
- * @author Mirko
+ * The Interface Occupable.
  *
+ * @author Mirko
  */
 public interface Occupable {
 	
+	/**
+	 * Checks if is occupied.
+	 *
+	 * @return true, if is occupied
+	 */
 	public boolean isOccupied();
 	
 	/**
-	 * @param actionValue is the action value of the family member that is being 
-	 * @return true if it's occupable by the familyMember passed. N.B (we're not considering here 
+	 * Checks if is occupable.
+	 *
+	 * @param familyMember the family member
+	 * @return true if it's occupable by the familyMember passed. N.B (we're not considering here
 	 * the fact that more family members of the same players can't stay in the same tower, it can't be done
 	 * at this level)
 	 */
 	public boolean isOccupable(FamilyMember familyMember);
 	
+	/**
+	 * Occupied by member.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<FamilyMember> occupiedByMember();
 	//public FamilyMember occupiedByMember();
 	
+	/**
+	 * Occupied by player.
+	 *
+	 * @return the hash set
+	 */
 	public HashSet<Player> occupiedByPlayer();
 	//public Player occupiedByPlayer();
 	

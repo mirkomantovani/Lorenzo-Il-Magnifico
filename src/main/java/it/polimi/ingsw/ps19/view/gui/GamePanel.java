@@ -48,78 +48,152 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
- * The content of the entire frame (MyFrame) during the GamePlay
- * 
- * @author Mirko
+ * The content of the entire frame (MyFrame) during the GamePlay.
  *
+ * @author Mirko
  */
 public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
+	/** The Constant CHAT_BACKGROUND_COLOR. */
 	private static final Color CHAT_BACKGROUND_COLOR = new Color(245, 200, 86);
 
+	/** The Constant BACKGROUND_PANELS_COLOR. */
 	private static final Color BACKGROUND_PANELS_COLOR = new Color(204, 153, 51);
 
+	/** The screen dim. */
 	protected static Dimension screenDim;
 
-	/**
-	 * Can be: draft, none, activate, discard
-	 */
+	/** Can be: draft, none, activate, discard. */
 	private String leaderState = "draft";
 
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/** The text field. */
 	private JTextField textField;
+	
+	/** The board panel. */
 	private BoardPanel boardPanel;
 
+	/** The send chat. */
 	private JButton sendChat;
+	
+	/** The show personal board. */
 	private JButton showPersonalBoard;
+	
+	/** The strategy editor button. */
 	private JButton strategyEditorButton;
+	
+	/** The quit game button. */
 	private JButton quitGameButton;
+	
+	/** The show leader cards button. */
 	private JButton showLeaderCardsButton;
 
+	/** The first market. */
 	private MarketButton firstMarket;
+	
+	/** The second market. */
 	private MarketButton secondMarket;
+	
+	/** The third market. */
 	private MarketButton thirdMarket;
+	
+	/** The fourth market. */
 	private MarketButton fourthMarket;
+	
+	/** The council button. */
 	private CouncilButton councilButton;
+	
+	/** The single harvest button. */
 	private SingleHarvestButton singleHarvestButton;
+	
+	/** The single production button. */
 	private SingleProductionButton singleProductionButton;
+	
+	/** The multiple harvest button. */
 	private MultipleHarvestButton multipleHarvestButton;
+	
+	/** The multiple production button. */
 	private MultipleProductionButton multipleProductionButton;
 	
 
+	/** The text area. */
 	private JTextArea textArea;
+	
+	/** The player resources. */
 	private PlayerResources playerResources;
+	
+	/** The buttons font. */
 	private final Font buttonsFont = new Font("SansSerif", Font.BOLD, 16);
 
+	/** The cards. */
 	private List<CardButton> cards;
 
+	/** The action content pane. */
 	private Container actionContentPane;
 
+	/** The action panel. */
 	private ActionPanel actionPanel;
+	
+	/** The choose action. */
 	private ChooseAction chooseAction;
+	
+	/** The leaders panel. */
 	private LeadersPanel leadersPanel;
+	
+	/** The strategy editor. */
 	private StrategyEditor strategyEditor;
+	
+	/** The production choices. */
 	private ProductionChoices productionChoices;
+	
+	/** The end or discard panel. */
 	private EndOrDiscardPanel endOrDiscardPanel;
+	
+	/** The choose privilege panel. */
 	private ChoosePrivilegePanel choosePrivilegePanel;
+	
+	/** The choose excommunication panel. */
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
 
+	/** The draft panel. */
 	private LeadersPanel draftPanel;
 
+	/** The action constructor. */
 	private ArrayList<String> actionConstructor;
 
+	/** The gui. */
 	private GraphicalUserInterface GUI;
 
+	/** The current action panel. */
 	private Component currentActionPanel;
 
+	/** The order markers. */
 	private List<OrderMarkerDisk> orderMarkers;
+	
+	/** The victory markers. */
 	private Map<String, VictoryPointMarkerDisk> victoryMarkers;
+	
+	/** The military markers. */
 	private Map<String, MilitaryPointMarkerDisk> militaryMarkers;
+	
+	/** The faith markers. */
 	private Map<String, FaithPointMarkerDisk> faithMarkers;
+	
+	/** The familiars. */
 	private Map<String, FamilyMemberPawn> familiars; // the key is
+														
+														/** The dices. */
 														// diceColor+playerColor
 	private Map<String, DicePanel> dices; // (String) diceValue + diceColor
 
+	/**
+	 * Instantiates a new game panel.
+	 *
+	 * @param playerColor the player color
+	 * @param numPlayers the num players
+	 */
 	public GamePanel(String playerColor, int numPlayers) {
 
 		cards = new ArrayList<CardButton>();
@@ -407,6 +481,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		createDices();
 	}
 
+	/**
+	 * Adds the card.
+	 *
+	 * @param tower the tower
+	 * @param floor the floor
+	 * @param id the id
+	 * @param descr the descr
+	 */
 	public void addCard(int tower, int floor, int id, String descr) {
 		if (tower == 1)
 			tower = 2;
@@ -421,14 +503,29 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Gets the send chat.
+	 *
+	 * @return the send chat
+	 */
 	public JButton getSendChat() {
 		return sendChat;
 	}
 
+	/**
+	 * Gets the show personal board.
+	 *
+	 * @return the show personal board
+	 */
 	public JButton getShowPersonalBoard() {
 		return showPersonalBoard;
 	}
 
+	/**
+	 * Gets the and delete chat input.
+	 *
+	 * @return the and delete chat input
+	 */
 	public String getAndDeleteChatInput() {
 		String m = this.textField.getText();
 		this.textField.setText("");
@@ -436,16 +533,31 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Adds the message to console.
+	 *
+	 * @param message the message
+	 */
 	public void addMessageToConsole(String message) {
 		message = "\n" + message;
 		this.textArea.append(message);
 		this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
 	}
 
+	/**
+	 * Write game message.
+	 *
+	 * @param string the string
+	 */
 	private void writeGameMessage(String string) {
 		addMessageToConsole("\n<-GAME-> " + string + "\n");
 	}
 
+	/**
+	 * Sets the marker order.
+	 *
+	 * @param markers the new marker order
+	 */
 	public void setMarkerOrder(ArrayList<OrderMarkerDisk> markers) {
 		for (OrderMarkerDisk m : markers) {
 			paint(m.getGraphics());
@@ -454,35 +566,67 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Sets the marker victory points.
+	 */
 	public void setMarkerVictoryPoints() {
 
 	}
 
+	/**
+	 * Sets the marker military point.
+	 */
 	public void setMarkerMilitaryPoint() {
 
 	}
 
+	/**
+	 * Sets the church marker.
+	 */
 	public void setChurchMarker() {
 
 	}
 
+	/**
+	 * Adds the resource to player status.
+	 *
+	 * @param resourceInChest the resource in chest
+	 */
 	public void addResourceToPlayerStatus(Resource resourceInChest) {
 		playerResources.refreshResource(resourceInChest);
 	}
 
+	/**
+	 * Adds the family members to player status.
+	 *
+	 * @param familyMembers the family members
+	 */
 	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> familyMembers) {
 		playerResources.refreshFamilyMembers(familyMembers);
 	}
 
+	/**
+	 * Removes the cards.
+	 */
 	public void removeCards() {
 		cards.forEach(card -> boardPanel.remove(card));
 
 	}
 
+	/**
+	 * Gets the board panel.
+	 *
+	 * @return the board panel
+	 */
 	public BoardPanel getBoardPanel() {
 		return boardPanel;
 	}
 
+	/**
+	 * Show action panel.
+	 *
+	 * @param panel the panel
+	 */
 	private void showActionPanel(Component panel) {
 		// rimuovo tutti gli altri panels
 		// chooseAction.setVisible(false);
@@ -494,16 +638,27 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		panel.setVisible(true);
 	}
 
+	/**
+	 * Sets the everyone invisible.
+	 *
+	 * @param components the new everyone invisible
+	 */
 	private void setEveryoneInvisible(Component[] components) {
 		for (int i = 0; i < components.length; i++)
 			components[i].setVisible(false);
 	}
 
+	/**
+	 * Removes the action panel.
+	 */
 	private void removeActionPanel() {
 		this.actionContentPane.removeAll();
 		actionContentPane.repaint();
 	}
 
+	/**
+	 * Show choose action.
+	 */
 	public void showChooseAction() {
 		System.out.println("show choose action");
 		this.currentActionPanel = chooseAction;
@@ -511,10 +666,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Sets the observer.
+	 *
+	 * @param GUI the new observer
+	 */
 	public void setObserver(GraphicalUserInterface GUI) {
 		this.GUI = GUI;
 	}
 
+	/**
+	 * Notify action click.
+	 */
 	public void notifyActionClick() {
 		writeGameMessage("Choose the family member and the amount of servants "
 				+ "you intend to use in this action, then press the area"
@@ -523,6 +686,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		this.showActionPanel(actionPanel);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof CardButton) {
@@ -608,6 +774,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Adds the fam serv to constructor.
+	 */
 	private void addFamServToConstructor() {
 		actionConstructor = new ArrayList<String>();
 		String familyMember;
@@ -626,11 +795,19 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		actionConstructor.add(servants);
 	}
 
+	/**
+	 * Construct council action.
+	 */
 	private void constructCouncilAction() {
 		addFamServToConstructor();
 
 	}
 
+	/**
+	 * Construct action.
+	 *
+	 * @param market the market
+	 */
 	private void constructAction(String market) {
 		System.out.println("gamepanel:constructing marketaction");
 		actionConstructor = new ArrayList<String>();
@@ -662,6 +839,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Back to current action.
+	 */
 	private void backToCurrentAction() {
 		if (currentActionPanel != null)
 			showActionPanel(currentActionPanel);
@@ -671,6 +851,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Construct action.
+	 *
+	 * @param card the card
+	 */
 	private void constructAction(CardButton card) {
 		// order; 0-member, 1-servants, 2-unused, 3-cardtype,4-floor
 		actionConstructor = new ArrayList<String>();
@@ -710,11 +895,19 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		actionConstructor.add(floor);
 	}
 
+	/**
+	 * Invalid input message.
+	 *
+	 * @param string the string
+	 */
 	private void invalidInputMessage(String string) {
 		this.addMessageToConsole("--INVALID INPUT--: " + string);
 
 	}
 
+	/**
+	 * Notify end round.
+	 */
 	public void notifyEndRound() {
 		writeGameMessage("Your round has ended");
 		this.removeActionPanel();
@@ -722,16 +915,25 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		currentActionPanel = null;
 	}
 
+	/**
+	 * Show end or discard.
+	 */
 	public void showEndOrDiscard() {
 		this.currentActionPanel = endOrDiscardPanel;
 		this.showActionPanel(endOrDiscardPanel);
 	}
 
+	/**
+	 * Show choose privilege.
+	 */
 	public void showChoosePrivilege() {
 		this.currentActionPanel = choosePrivilegePanel;
 		this.showActionPanel(choosePrivilegePanel);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() instanceof JResource) {
@@ -743,29 +945,42 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
 	}
 
 	/**
-	 * @param board
-	 *  This class creates the marker for the order and this should be done only one time at the 
+	 * Creates the markers.
+	 *
+	 * @param board  This class creates the marker for the order and this should be done only one time at the 
 	 *  beggining of the match
 	 */
 	public void createMarkers(Board board) {
@@ -786,6 +1001,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Place familiars.
+	 *
+	 * @param board the board
+	 */
 	public void PlaceFamiliars(Board board) {
 
 		if (board.getCouncilPalace().getMembers().size() != FamilyMemberPawn.councilCounter) {
@@ -874,6 +1094,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Sets the points markers.
+	 *
+	 * @param p the new points markers
+	 */
 	public void setPointsMarkers(Player p) {
 
 		victoryMarkers.get(p.getColor())
@@ -884,6 +1109,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 				.setFaithPointsAmount(p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount());
 	}
 
+	/**
+	 * Update order.
+	 *
+	 * @param board the board
+	 */
 	public void updateOrder(Board board) {
 
 		ArrayList<String> playerColor = board.getPlayerOrder();
@@ -895,6 +1125,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Gets the order from color.
+	 *
+	 * @param color the color
+	 * @return the order from color
+	 */
 	private OrderMarkerDisk getOrderFromColor(String color) {
 		for (int i = 0; i < orderMarkers.size(); i++) {
 			if (orderMarkers.get(i).getSrc().equals(color)) {
@@ -907,6 +1143,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Populate familiars.
+	 *
+	 * @param board the board
+	 */
 	public void populateFamiliars(Board board) {
 		if (familiars.isEmpty()) {
 			for (String s : board.getPlayerOrder()) {
@@ -920,32 +1161,63 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Gets the order markers.
+	 *
+	 * @return the order markers
+	 */
 	public ArrayList<OrderMarkerDisk> getOrderMarkers() {
 		return (ArrayList<OrderMarkerDisk>) orderMarkers;
 	}
 
+	/**
+	 * Gets the victory markers.
+	 *
+	 * @return the victory markers
+	 */
 	public Map<String, VictoryPointMarkerDisk> getVictoryMarkers() {
 		return victoryMarkers;
 	}
 
+	/**
+	 * Gets the military markers.
+	 *
+	 * @return the military markers
+	 */
 	public Map<String, MilitaryPointMarkerDisk> getMilitaryMarkers() {
 		return militaryMarkers;
 	}
 
+	/**
+	 * Gets the faith markers.
+	 *
+	 * @return the faith markers
+	 */
 	public Map<String, FaithPointMarkerDisk> getFaithMarkers() {
 		return faithMarkers;
 	}
 
+	/**
+	 * Show support.
+	 *
+	 * @param showSupportDecision the show support decision
+	 */
 	public void showSupport(boolean showSupportDecision) {
 		this.GUI.notifyExcommunicationChoice(showSupportDecision);
 
 	}
 
+	/**
+	 * Show excommunication panel.
+	 */
 	public void showExcommunicationPanel() {
 		this.currentActionPanel = chooseExcommunicationPanel;
 		this.showActionPanel(chooseExcommunicationPanel);
 	}
 
+	/**
+	 * Reset familiars.
+	 */
 	public void resetFamiliars() {
 		for (FamilyMemberPawn f : familiars.values()) {
 			if (!familiars.isEmpty())
@@ -954,12 +1226,22 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Refresh leaders.
+	 *
+	 * @param leaderCards the leader cards
+	 */
 	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
 		if (!leadersPanel.areLeaderCards(leaderCards.size())) {
 			leadersPanel.refreshLeaderCards(leaderCards, this);
 		}
 	}
 
+	/**
+	 * Show choose leader draft.
+	 *
+	 * @param leaderCards the leader cards
+	 */
 	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
 
 		draftPanel.addLeaderCardsWithListener(leaderCards, this);
@@ -967,16 +1249,24 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		this.currentActionPanel = draftPanel;
 	}
 
+	/**
+	 * Repaint resources.
+	 */
 	public void repaintResources() {
 		playerResources.repaint();
 	}
 
+	/**
+	 * Repaint board.
+	 */
 	public void repaintBoard() {
 		boardPanel.repaint();
 	}
 
 	/**
-	 * @param id
+	 * Checks if is contained.
+	 *
+	 * @param id the id
 	 * @return true if the card with the specified id is contained in the board
 	 */
 	public boolean isContained(int id) {
@@ -987,6 +1277,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		return false;
 	}
 
+	/**
+	 * Removes the card.
+	 *
+	 * @param tower the tower
+	 * @param floor the floor
+	 */
 	public void removeCard(int tower, int floor) {
 		if (tower == 1)
 			tower = 2;
@@ -1002,12 +1298,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Notify activate click.
+	 */
 	public void notifyActivateClick() {
 		leaderState = "activate";
 		currentActionPanel = leadersPanel;
 		showActionPanel(leadersPanel);
 	}
 
+	/**
+	 * Notify discard click.
+	 */
 	public void notifyDiscardClick() {
 		System.out.println("discard click");
 
@@ -1016,10 +1318,20 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		showActionPanel(leadersPanel);
 	}
 
+	/**
+	 * Sets the leader state.
+	 *
+	 * @param string the new leader state
+	 */
 	public void setLeaderState(String string) {
 		leaderState = string;
 	}
 
+	/**
+	 * Sets the excomm tiles.
+	 *
+	 * @param board the new excomm tiles
+	 */
 	public void setExcommTiles(Board board) {
 		if (familiars.isEmpty()) {
 			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),
@@ -1033,6 +1345,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Adds the excommunication cubes.
+	 *
+	 * @param p the p
+	 */
 	public void addExcommunicationCubes(Player p) {
 		if (p.isExcommunicatedFirst()) {
 			ExcommCube first = new ExcommCube(1, p.getColor());
@@ -1054,12 +1371,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Player disconnected.
+	 */
 	public void playerDisconnected() {
 		this.currentActionPanel = null;
 		this.removeActionPanel();
 
 	}
 
+	/**
+	 * Creates the dices.
+	 */
 	public void createDices() {
 		for (int i = 1; i < 7; i++) {
 			dices.put(String.valueOf(i) + "black", new DicePanel(i, "black"));
@@ -1068,6 +1391,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Sets the dices.
+	 *
+	 * @param board the new dices
+	 */
 	public void setDices(Board board) {
 		if (board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0
 				&& board.getDices().get(Dice.ORANGE_DICE) != 0) {
@@ -1081,6 +1409,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Removes the dices and markers.
+	 */
 	public void removeDicesAndMarkers() {
 		for (int i = 0; i < orderMarkers.size(); i++) {
 			boardPanel.remove(orderMarkers.get(i));
@@ -1094,10 +1425,20 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * Notify activate production.
+	 *
+	 * @param choices the choices
+	 */
 	public void notifyActivateProduction(ArrayList<Integer> choices) {
 		this.GUI.notifyActivateProduction(choices);
 	}
 
+	/**
+	 * Show choose production effects.
+	 *
+	 * @param cardsIds the cards ids
+	 */
 	public void showChooseProductionEffects(ArrayList<Integer> cardsIds) {
 		productionChoices.addCards(cardsIds);
 		currentActionPanel=productionChoices;

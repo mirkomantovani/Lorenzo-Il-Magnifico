@@ -12,25 +12,34 @@ import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreato
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 
 /**
- * @author Mirko
+ * The Class Church.
  *
+ * @author Mirko
  */
 public class Church implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2245918610305460800L;
+	
+	/** The excommunication first. */
 	private ExcommunicationTile excommunicationFirst;
+	
+	/** The excommunication second. */
 	private ExcommunicationTile excommunicationSecond;
+	
+	/** The excommunication third. */
 	private ExcommunicationTile excommunicationThird;
 
+	/** The military points. */
 	private MilitaryPoint[] militaryPoints; // Those are the military points
 											// amount related to a specific
 											// amount of faithpoints (this
 											// values are taken from file);
 
-	public Church() {
+	/**
+											 * Instantiates a new church.
+											 */
+											public Church() {
 
 		Random rnd = new Random();
 		ExcommunicationTile[] tiles = new ExcommunicationTile[CardConstants.EXCOMMUNICATION_TILES];
@@ -59,18 +68,39 @@ public class Church implements Serializable {
 		}
 	}
 
+	/**
+	 * Gets the excommunication first.
+	 *
+	 * @return the excommunication first
+	 */
 	public ExcommunicationTile getExcommunicationFirst() {
 		return excommunicationFirst;
 	}
 
+	/**
+	 * Gets the excommunication second.
+	 *
+	 * @return the excommunication second
+	 */
 	public ExcommunicationTile getExcommunicationSecond() {
 		return excommunicationSecond;
 	}
 
+	/**
+	 * Gets the excommunication third.
+	 *
+	 * @return the excommunication third
+	 */
 	public ExcommunicationTile getExcommunicationThird() {
 		return excommunicationThird;
 	}
 
+	/**
+	 * Gets the excommunication tile.
+	 *
+	 * @param p the p
+	 * @return the excommunication tile
+	 */
 	public ExcommunicationTile getExcommunicationTile(Period p){
 		if(p==Period.FIRST)
 			return this.excommunicationFirst;
@@ -83,10 +113,18 @@ public class Church implements Serializable {
 		
 	}
 
+	/**
+	 * Gets the military points.
+	 *
+	 * @return the military points
+	 */
 	public MilitaryPoint[] getMilitaryPoints() {
 		return militaryPoints;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

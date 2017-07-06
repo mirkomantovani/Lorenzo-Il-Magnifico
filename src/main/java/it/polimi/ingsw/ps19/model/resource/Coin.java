@@ -1,17 +1,21 @@
 package it.polimi.ingsw.ps19.model.resource;
 
 /**
- * @author matteo
+ * The Class Coin.
  *
+ * @author matteo
  */
 public class Coin extends Resource {
 	
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4990887197340403545L;
 
+	/**
+	 * Instantiates a new coin.
+	 *
+	 * @param amount the amount
+	 */
 	public Coin(int amount) {
 		super(ResourceType.COIN, amount);
 	}

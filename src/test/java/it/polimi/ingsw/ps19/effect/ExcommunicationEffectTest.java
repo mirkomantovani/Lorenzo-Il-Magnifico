@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.effect;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.polimi.ingsw.ps19.Color;
+import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.Match;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ColoredFamiliarsVariationEffect;
@@ -26,15 +30,25 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
+/**
+ * The Class ExcommunicationEffectTest.
+ */
 public class ExcommunicationEffectTest {
 	
+	/** The player. */
 	private Player player;
 	
+	/**
+	 * Sets the up.
+	 */
 	@Before
 	public void setUp(){
 		player = new Player("matteo","blue");
 	}
 	
+	/**
+	 * Colored familiars variation effect test.
+	 */
 	@Test
 	public void coloredFamiliarsVariationEffectTest(){
 		Effect effect = new ColoredFamiliarsVariationEffect(18);
@@ -45,6 +59,9 @@ public class ExcommunicationEffectTest {
 		}
 	}
 	
+	/**
+	 * Lose points based on resources effect.
+	 */
 	@Test
 	public void losePointsBasedOnResourcesEffect(){
 		player.addResources(new ResourceChest(10,0,0,0,0,100,0));
@@ -58,6 +75,12 @@ public class ExcommunicationEffectTest {
 	}
 	
 	
+	/**
+	 * Lose points every wood stone effect test.
+	 *
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void losePointsEveryWoodStoneEffectTest() throws FileNotFoundException, IOException{
 		player.addResources(new ResourceChest(100,100,100,0,0,100,0));
@@ -78,6 +101,9 @@ public class ExcommunicationEffectTest {
 		
 	}
 	
+	/**
+	 * Lose points for every resource effect test.
+	 */
 	@Test
 	public void losePointsForEveryResourceEffectTest(){
 		player.addResources(new ResourceChest(2,2,2,2,0,100,0));
@@ -87,6 +113,9 @@ public class ExcommunicationEffectTest {
 				 == 84);
 	}
 	
+	/**
+	 * Resource malus effect test.
+	 */
 	@Test
 	public void resourceMalusEffectTest(){
 		ArrayList<Resource> resources = new ArrayList<Resource>();
@@ -97,6 +126,9 @@ public class ExcommunicationEffectTest {
 		assertTrue(player.getBonuses().getResourceMalus().get(0).getAmount() == resources.get(0).getAmount());
 	}
 	
+	/**
+	 * Sets the no market action effect test.
+	 */
 	@Test
 	public void setNoMarketActionEffectTest(){
 		Effect effect = new SetNoMarketActionEffect();
@@ -104,6 +136,9 @@ public class ExcommunicationEffectTest {
 		assertTrue(player.getBonuses().isNoMarketActionActive());
 	}
 	
+	/**
+	 * Sets the no card type final points effect test.
+	 */
 	@Test
 	public void setNoCardTypeFinalPointsEffectTest(){
 		Effect effect = new SetNoCardTypeFinalPointsEffect(CardType.BUILDING);
@@ -111,6 +146,9 @@ public class ExcommunicationEffectTest {
 		assertTrue(player.getBonuses().getNoCardTypeFinalPoints(CardType.BUILDING));
 	}
 	
+	/**
+	 * Sets the servants divider effect test.
+	 */
 	@Test
 	public void setServantsDividerEffectTest(){
 		Effect effect = new SetServantsDividerEffect(2);
@@ -118,6 +156,9 @@ public class ExcommunicationEffectTest {
 		assertTrue(player.getBonuses().getServantsDivider() == 2);
 	}
 	
+	/**
+	 * Sets the skip round effect test.
+	 */
 	@Test
 	public void setSkipRoundEffectTest(){
 		Effect effect = new SetSkipRoundEffect();

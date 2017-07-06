@@ -8,32 +8,51 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * @author matteo
+ * The Class DicePanel.
  *
+ * @author matteo
+ * 
  * This class represent the dices images on the boardPanel
  */
 public class DicePanel extends JPanel{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -543922157239004995L;
 	
+	/** The value. */
 	private int value;
+	
+	/** The dice color. */
 	private String diceColor;
+	
+	/** The img. */
 	private Image img;
+	
+	/** The width rel. */
 	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	
+	/** The height rel. */
 	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
+	
+	/** The Constant WIDTH_PERC. */
 	private static final double WIDTH_PERC =  0.52149606299212598425196850393701;
+	
+	/** The Constant HEIGHT_PERC. */
 	private static final double HEIGHT_PERC = 0.90592592592592592592592592592593;
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.06561679790026246719160104986877;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.0462962962962962962962962962963;
 
 
 	
 	/**
-	 * @param value
-	 * @param diceColor
+	 * Instantiates a new dice panel.
+	 *
+	 * @param value the value
+	 * @param diceColor the dice color
 	 */
 	/**
 	 * @param value
@@ -72,6 +91,9 @@ public class DicePanel extends JPanel{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

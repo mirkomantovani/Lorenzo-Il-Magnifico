@@ -13,28 +13,39 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * @author matteo
+ * The Class Tower.
  *
+ * @author matteo
  */
 public class Tower implements Serializable {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5976389942566908672L;
 
+	/** The floors. */
 	private List<Floor> floors;
 
+	/** The card type. */
 	private CardType cardType;
 	
+	/** The deck. */
 	private Deck<? extends DevelopmentCard> deck;
 	
+	/** The current card. */
 	private int currentCard = 0; // index of the card on the top of the deck
 	
+	/** The action space cost. */
 	private int actionSpaceCost = 1;
 	
 	
- 	public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Resource> bonuses){ 
+ 	/**
+	  * Instantiates a new tower.
+	  *
+	  * @param cardType the card type
+	  * @param deck the deck
+	  * @param bonuses the bonuses
+	  */
+	 public Tower(CardType cardType, Deck<? extends DevelopmentCard> deck,ArrayList<Resource> bonuses){ 
  			floors=new ArrayList<Floor>();
 			this.cardType = cardType;
 			this.deck = deck;
@@ -65,11 +76,10 @@ public class Tower implements Serializable {
  	}
  	
  	/**
- 	 * 
- 	 * This Method builds an Array with the cards in the tower and returns it
- 	 * 
- 	 * @return
- 	 */
+	  * This Method builds an Array with the cards in the tower and returns it.
+	  *
+	  * @return the cards
+	  */
  	public ArrayList<DevelopmentCard> getCards(){
  		
  		ArrayList<DevelopmentCard> towerCards = new ArrayList<DevelopmentCard>();
@@ -81,14 +91,28 @@ public class Tower implements Serializable {
  		return towerCards;
  	}
  	
- 	public List<Floor> getFloors() {
+ 	/**
+	  * Gets the floors.
+	  *
+	  * @return the floors
+	  */
+	 public List<Floor> getFloors() {
 		return floors;
 	}
 
+	/**
+	 * Gets the floor.
+	 *
+	 * @param index the index
+	 * @return the floor
+	 */
 	public Floor getFloor(int index) {
 		return floors.get(index);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

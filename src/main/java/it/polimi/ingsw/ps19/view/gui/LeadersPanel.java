@@ -10,13 +10,18 @@ import javax.swing.JPanel;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 
 /**
- * @author Mirko
+ * The Class LeadersPanel.
  *
+ * @author Mirko
  */
 public class LeadersPanel extends JPanel {
 	
+	/** The leaders. */
 	private List<JLeaderCard> leaders;
 	
+	/**
+	 * Instantiates a new leaders panel.
+	 */
 	public LeadersPanel() {
 		
 		
@@ -36,6 +41,11 @@ public class LeadersPanel extends JPanel {
 //		add(fourth);
 	}
 	
+	/**
+	 * Adds the leader cards.
+	 *
+	 * @param leaderCards the leader cards
+	 */
 	public void addLeaderCards(Map<String,LeaderCard> leaderCards){
 		ArrayList<LeaderCard> leaderArray = new ArrayList<LeaderCard>(leaderCards.values());
 		
@@ -48,6 +58,12 @@ public class LeadersPanel extends JPanel {
 	
 	}
 	
+	/**
+	 * Refresh leader cards.
+	 *
+	 * @param leaderCards the leader cards
+	 * @param gamePanel the game panel
+	 */
 	public void refreshLeaderCards(Map<String,LeaderCard> leaderCards, GamePanel gamePanel){
 		ArrayList<LeaderCard> leaderArray = new ArrayList<LeaderCard>(leaderCards.values());
 		
@@ -57,6 +73,8 @@ public class LeadersPanel extends JPanel {
 	}
 
 	/**
+	 * Are leader cards.
+	 *
 	 * @param size the number of leader cards
 	 * @return true if the number of leader cards in the panel is equal to size
 	 */
@@ -64,6 +82,11 @@ public class LeadersPanel extends JPanel {
 		return leaders.size()==size;
 	}
 
+	/**
+	 * Adds the leader cards.
+	 *
+	 * @param leaderCards the leader cards
+	 */
 	public void addLeaderCards(ArrayList<LeaderCard> leaderCards) {
 		for(LeaderCard leader: leaderCards){
 			JLeaderCard jLeaderCard=new JLeaderCard(leader.getName());
@@ -73,6 +96,12 @@ public class LeadersPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds the leader cards with listener.
+	 *
+	 * @param leaderCards the leader cards
+	 * @param actionListener the action listener
+	 */
 	public void addLeaderCardsWithListener(ArrayList<LeaderCard> leaderCards, GamePanel actionListener) {
 		for(LeaderCard leader: leaderCards){
 			JLeaderCard jLeaderCard=new JLeaderCard(leader.getName());
@@ -83,6 +112,9 @@ public class LeadersPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Delete leaders.
+	 */
 	public void deleteLeaders() {
 		this.removeAll();
 //		for(JLeaderCard leader: leaders){

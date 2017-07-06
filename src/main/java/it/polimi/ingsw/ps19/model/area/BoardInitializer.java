@@ -21,14 +21,22 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 
 /**
- * @author matteo
+ * The Class BoardInitializer.
  *
+ * @author matteo
  */
 public class BoardInitializer {
 	
 	
 	
 	
+	/**
+	 * Territory bonuses.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Resource> territoryBonuses() throws FileNotFoundException, IOException{
 		
 		ArrayList<Resource> territoryBonuses = new ArrayList<Resource>();
@@ -48,6 +56,13 @@ public class BoardInitializer {
 		return territoryBonuses;
 	}
 	
+	/**
+	 * Building bonuses.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Resource> buildingBonuses() throws FileNotFoundException, IOException{
 		
 		ArrayList<Resource> buildingBonuses = new ArrayList<Resource>();
@@ -67,6 +82,13 @@ public class BoardInitializer {
 		return buildingBonuses;
 	}
 	
+	/**
+	 * Character bonuses.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Resource> characterBonuses() throws FileNotFoundException, IOException{
 		
 		ArrayList<Resource> characterBonuses = new ArrayList<Resource>();
@@ -85,6 +107,13 @@ public class BoardInitializer {
 		return characterBonuses;
 	}
 	
+	/**
+	 * Venture bonuses.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Resource> ventureBonuses() throws FileNotFoundException, IOException{
 		
 		ArrayList<Resource> ventureBonuses = new ArrayList<Resource>();
@@ -104,6 +133,13 @@ public class BoardInitializer {
 		return ventureBonuses;
 	}
 	
+	/**
+	 * Council palace bonuses.
+	 *
+	 * @return the multiple effect
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static MultipleEffect councilPalaceBonuses() throws FileNotFoundException, IOException{
 		
 
@@ -146,6 +182,13 @@ public class BoardInitializer {
 		
 	}
 	
+	/**
+	 * Church bonuses.
+	 *
+	 * @return the military point[]
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static MilitaryPoint[] churchBonuses() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHURCH_BONUSES));
@@ -175,6 +218,13 @@ public class BoardInitializer {
 
 	}
 	
+	/**
+	 * Player board bonuses for territory.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Integer> playerBoardBonusesForTerritory() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.TERRITORYCARD_PLAYER_BONUSES));
@@ -192,6 +242,13 @@ public class BoardInitializer {
 		return bonusesForTerritory;
 	}
 	
+	/**
+	 * Player board bonuses for character.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Integer> playerBoardBonusesForCharacter() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHARACTERCARD_PLAYER_BONUSES));
@@ -208,6 +265,13 @@ public class BoardInitializer {
 		return bonusesForCharacter;
 	}
 	
+	/**
+	 * Player board requirements for territory.
+	 *
+	 * @return the array list
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<Integer> playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.TERRITORYCARD_PLAYER_REQUIREMENTS));
@@ -225,6 +289,14 @@ public class BoardInitializer {
 		return requirementsForTerritory;
 	}
 	
+	/**
+	 * Creates the personal bonus tiles.
+	 *
+	 * @param tilesNumber the tiles number
+	 * @return the personal bonus tile[]
+	 * @throws NumberFormatException the number format exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static PersonalBonusTile[] createPersonalBonusTiles(int tilesNumber) throws NumberFormatException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.PERSONAL_BONUS_TILES));
@@ -255,6 +327,14 @@ public class BoardInitializer {
 		return tiles;
 	}
 	
+	/**
+	 * Creates the privilege resources.
+	 *
+	 * @param resourcesNumber the resources number
+	 * @return the resource chest[]
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ResourceChest[] createPrivilegeResources(int resourcesNumber) throws FileNotFoundException, IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.PRIVILEGE_RESOURCES));
 		ResourceChest[] privilegeResources = new ResourceChest[resourcesNumber];
@@ -275,6 +355,11 @@ public class BoardInitializer {
 		return privilegeResources;
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		ResourceChest[] rc = null;
 		try {

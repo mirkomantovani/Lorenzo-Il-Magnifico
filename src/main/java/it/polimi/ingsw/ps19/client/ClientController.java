@@ -34,15 +34,32 @@ import it.polimi.ingsw.ps19.view.UserInterface;
  */
 public class ClientController implements InputObserver {
 
+	/** The user interface. */
 	private UserInterface userInterface;
+	
+	/** The network interface. */
 	private NetworkInterface networkInterface;
+	
+	/** The command handler. */
 	private ClientCommandHandler commandHandler;
+	
+	/** The player color. */
 	private String playerColor;
 
+	/**
+	 * Instantiates a new client controller.
+	 *
+	 * @param networkInterface the network interface
+	 */
 	public ClientController(NetworkInterface networkInterface) {
 		this.networkInterface = networkInterface;
 	}
 
+	/**
+	 * Send command.
+	 *
+	 * @param command the command
+	 */
 	private void sendCommand(ClientToServerCommand command) {
 		try {
 			networkInterface.sendCommand(command);
@@ -54,16 +71,25 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyChosenLeaderCard(java.lang.String)
+	 */
 	@Override
 	public void notifyChosenLeaderCard(String leaderCardName) {
 		sendCommand(new ChosenLeaderCardCommand(leaderCardName, playerColor));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyMove(java.lang.String)
+	 */
 	@Override
 	public void notifyMove(String move) {
 		sendCommand(new PlayerMoveCommand(move));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyChosenPrivileges(java.lang.String)
+	 */
 	@Override
 	public void notifyChosenPrivileges(String choices) {
 		System.out.println("\nCLIENTCONTROLLER: before check and send\n");
@@ -77,25 +103,44 @@ public class ClientController implements InputObserver {
 		System.out.println("\nCLIENTCONTROLLER: after check and send\n");
 	}
 
+	/**
+	 * Sets the command handler.
+	 *
+	 * @param handler the new command handler
+	 */
 	public void setCommandHandler(ClientCommandHandler handler) {
 		this.commandHandler = handler;
 	}
 
+	/**
+	 * Sets the user interface.
+	 *
+	 * @param userInterface the new user interface
+	 */
 	public void setUserInterface(UserInterface userInterface) {
 		this.userInterface = userInterface;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyInvalidInput()
+	 */
 	@Override
 	public void notifyInvalidInput() {
 		sendCommand(new InvalidInputCommand());
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyCouncilPalace(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyCouncilPalace(ArrayList<String> actionConstructor) {
 		sendCommand(new PlaceIntoCouncilPalaceCommand(actionConstructor.get(0),
 				Integer.parseInt(actionConstructor.get(1))));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyTakeCardAction(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyTakeCardAction(ArrayList<String> actionConstructor) {
 		try {
@@ -108,6 +153,9 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyMarket(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyMarket(ArrayList<String> actionConstructor) {
 		try {
@@ -119,6 +167,9 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyHarvest(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyHarvest(ArrayList<String> actionConstructor) {
 		try {
@@ -130,6 +181,9 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyProduction(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyProduction(ArrayList<String> actionConstructor) {
 		try {
@@ -141,31 +195,51 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyDiscardedLeaderCard(java.lang.String)
+	 */
 	@Override
 	public void notifyDiscardedLeaderCard(String discardedLeaderCard) {
 		sendCommand(new DiscardLeaderCardCommand(discardedLeaderCard));
 
 	}
 
+	/**
+	 * Sets the player color.
+	 *
+	 * @param color the new player color
+	 */
 	public void setPlayerColor(String color) {
 		this.playerColor = color;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyCredentials(java.util.ArrayList)
+	 */
 	@Override
 	public void notifyCredentials(ArrayList<String> actionConstructor) {
 		sendCommand(new SendCredentialsCommand(actionConstructor.get(0), actionConstructor.get(1), playerColor));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyFinishRound()
+	 */
 	@Override
 	public void notifyFinishRound() {
 		sendCommand(new FinishRoundCommand());
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyExcommunicationEffectChoice(java.lang.Boolean)
+	 */
 	@Override
 	public void notifyExcommunicationEffectChoice(Boolean choice) {
 		sendCommand(new ChurchSupportCommand(playerColor, choice));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyProductionChoices(java.lang.String)
+	 */
 	@Override
 	public void notifyProductionChoices(String choices) {
 		ArrayList<Integer> commandConstructor = parseString(choices);
@@ -177,6 +251,9 @@ public class ClientController implements InputObserver {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyProductionChoices(java.util.ArrayList)
+	 */
 	/* 
 	 * Overload was needed for GUI
 	 */
@@ -185,6 +262,12 @@ public class ClientController implements InputObserver {
 		sendCommand(new ProductionActivationCommand(choices));
 	}
 
+	/**
+	 * Parses the string.
+	 *
+	 * @param choices the choices
+	 * @return the array list
+	 */
 	private ArrayList<Integer> parseString(String choices) {
 		System.out.println("\n\n sono nella parseStirng" + choices + "\n\n");
 		char[] charArray = choices.toCharArray();
@@ -204,17 +287,28 @@ public class ClientController implements InputObserver {
 		return commandConstructor;
 	}
 
+	/**
+	 * Notify leader effect activation.
+	 *
+	 * @param leaderCardName the leader card name
+	 */
 	public void notifyLeaderEffectActivation(String leaderCardName) {
 		sendCommand(new ActivateLeaderCardCommand(leaderCardName, playerColor));
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.InputObserver#notifyChatMessage(java.lang.String)
+	 */
 	@Override
 	public void notifyChatMessage(String message) {
 		String m = "<--" + playerColor + "--> " + message;
 		sendCommand(new ChatMessageClientCommand(m));
 	}
 
+	/**
+	 * Notify request closure command.
+	 */
 	public void notifyRequestClosureCommand() {
 		sendCommand(new RequestClosureCommand(playerColor));
 	}

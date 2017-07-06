@@ -12,22 +12,28 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * The panel that lets the user choose what he wants to do when it's his turn
- * 
- * @author Mirko
+ * The panel that lets the user choose what he wants to do when it's his turn.
  *
+ * @author Mirko
  */
 public class ChooseAction extends JPanel implements ActionListener {
 
+	/** The action. */
 	private JButton action;
+	
+	/** The activate. */
 	private JButton activate;
+	
+	/** The discard. */
 	private JButton discard;
 	
+	/** The game panel. */
 	private GamePanel gamePanel;
 
 	/**
 	 * Create the panel.
-	 * @param gamePanel 
+	 *
+	 * @param gamePanel the game panel
 	 */
 	public ChooseAction(GamePanel gamePanel) {
 		
@@ -81,6 +87,9 @@ public class ChooseAction extends JPanel implements ActionListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

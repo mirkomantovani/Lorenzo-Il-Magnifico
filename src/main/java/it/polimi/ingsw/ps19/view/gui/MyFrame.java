@@ -21,15 +21,20 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
- * This is the main frame of the game
- * 
- * @author Mirko
+ * This is the main frame of the game.
  *
+ * @author Mirko
  */
 public class MyFrame extends JFrame {
 
+	/** The player color. */
 	private String playerColor;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -49,25 +54,43 @@ public class MyFrame extends JFrame {
 		});
 	}
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/** The screen dimension. */
 	private Dimension screenDimension = new Dimension();
+	
+	/** The height. */
 	private int height;
+	
+	/** The width. */
 	private int width;
+	
+	/** The tool bar height. */
 	private int toolBarHeight;
+	
+	/** The img. */
 	private Image img;
+	
+	/** The game panel. */
 	private GamePanel gamePanel;
 
+	/** The content. */
 	private Container content;
+	
+	/** The board. */
 	private BoardPanel board;
 	// private PlayerMoves moves;
+	/** The initial panel. */
 	// private GameConsole console;
 	private InitialPanel initialPanel;
 
+	/**
+	 * Instantiates a new my frame.
+	 */
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
 		
@@ -103,6 +126,11 @@ public class MyFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Adds the initial panel.
+	 *
+	 * @param initialImage the initial image
+	 */
 	private void addInitialPanel(String initialImage) {
 
 		// ImageIcon backgroundImg = new ImageIcon(this.getClass().getResource(
@@ -133,21 +161,39 @@ public class MyFrame extends JFrame {
 		// SwingUtilities.invokeLater(repaintFrame);
 	}
 
+	/**
+	 * Removes the initial image.
+	 */
 	public void removeInitialImage() {
 		remove(initialPanel);
 	}
 
+	/**
+	 * Initialize game frame.
+	 *
+	 * @param numPlayers the num players
+	 */
 	public void initializeGameFrame(int numPlayers) {
 		gamePanel = new GamePanel(playerColor,numPlayers);
 		setContentPane(gamePanel);
 
 	}
 
+	/**
+	 * Refresh board.
+	 *
+	 * @param board the board
+	 */
 	public void refreshBoard(Board board) {
 //		gamePanel.removeCards();
 		addCards(board);
 	}
 
+	/**
+	 * Adds the cards.
+	 *
+	 * @param board the board
+	 */
 	private void addCards(Board board) {
 		System.out.println("adding cards");
 
@@ -176,11 +222,21 @@ public class MyFrame extends JFrame {
 
 	
 
+	/**
+	 * Gets the game panel.
+	 *
+	 * @return the game panel
+	 */
 	public GamePanel getGamePanel() {
 
 		return gamePanel;
 	}
 
+	/**
+	 * Refresh player status.
+	 *
+	 * @param p the p
+	 */
 	public void refreshPlayerStatus(Player p) {
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.COIN));
 		gamePanel.addResourceToPlayerStatus(p.getResourceChest().getResourceInChest(ResourceType.WOOD));
@@ -191,35 +247,62 @@ public class MyFrame extends JFrame {
 		
 	}
 
+	/**
+	 * Sets the player color.
+	 *
+	 * @param playerColor the new player color
+	 */
 	public void setPlayerColor(String playerColor) {
 		this.playerColor = playerColor;
 	}
 	
+	/**
+	 * Adds the order marker disks.
+	 *
+	 * @param players the players
+	 */
 	public void addOrderMarkerDisks(Player[] players){
 		for(int i = 0; i < players.length; i++){
 			gamePanel.add(new OrderMarkerDisk(players[i].getColor()));
 		}
 	}
 
+	/**
+	 * Show choose action.
+	 */
 	public void showChooseAction() {
 //		gamePanel.hideActionPanels();
 		gamePanel.showChooseAction();
 	}
 
+	/**
+	 * Show end or discard.
+	 */
 	public void showEndOrDiscard() {
 		gamePanel.showEndOrDiscard();
 		
 	}
 
+	/**
+	 * Show privilege choice.
+	 */
 	public void showPrivilegeChoice() {
 		gamePanel.showChoosePrivilege();
 		
 	}
 
+	/**
+	 * Show excommunication panel.
+	 */
 	public void showExcommunicationPanel() {
 		gamePanel.showExcommunicationPanel();
 	}
 
+	/**
+	 * Refresh leader cards.
+	 *
+	 * @param leaderCards the leader cards
+	 */
 	public void refreshLeaderCards(Map<String, LeaderCard> leaderCards) {
 		gamePanel.refreshLeaders(leaderCards);
 	}

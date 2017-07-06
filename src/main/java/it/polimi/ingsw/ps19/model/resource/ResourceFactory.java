@@ -13,6 +13,13 @@ import it.polimi.ingsw.ps19.exception.ResourceTypeException;
 public class ResourceFactory {
 	
 
+	/**
+	 * Gets the resource.
+	 *
+	 * @param resourceType the resource type
+	 * @param amount the amount
+	 * @return the resource
+	 */
 	public static Resource getResource(ResourceType resourceType,int amount){
 		switch (resourceType) {
 		case COIN:

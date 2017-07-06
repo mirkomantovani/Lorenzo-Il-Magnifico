@@ -7,15 +7,17 @@ import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**
- * @author Mirko
+ * The Class Deck.
  *
+ * @author Mirko
+ * @param <T> the generic type
  */
 public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1517970109429683372L;
+	
+	/** The cards. */
 	protected T[] cards;
 
 	/**
@@ -35,10 +37,11 @@ public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 	}
 
 	/**
-	 * @param arr
-	 * @param i
-	 * @param j
-	 *            swaps cards in index i and j
+	 * Swap.
+	 *
+	 * @param arr the arr
+	 * @param i the i
+	 * @param j            swaps cards in index i and j
 	 */
 	private static void swap(Object[] arr, int i, int j) {
 		Object tmp = arr[i];
@@ -46,10 +49,20 @@ public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 		arr[j] = tmp;
 	}
 
+	/**
+	 * Length.
+	 *
+	 * @return the int
+	 */
 	public int length(){
 		return this.cards.length;
 	}
 	
+	/**
+	 * Prints the card info.
+	 *
+	 * @param i the i
+	 */
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getId());
 		
@@ -57,7 +70,9 @@ public abstract class Deck<T extends DevelopmentCard> implements Serializable {
 	
 	
 	/**
-	 * @param i
+	 * Gets the card.
+	 *
+	 * @param i the i
 	 * @return dynamic type T extends DevelopmentCard
 	 */
 	public T getCard(int i) {  

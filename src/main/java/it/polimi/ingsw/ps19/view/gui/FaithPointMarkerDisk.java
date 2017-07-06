@@ -10,31 +10,60 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
+ * The Class FaithPointMarkerDisk.
+ *
  * @author matteo
  *  This class represents the images of the markers for the faithPoint of each player
- *
  */
 public class FaithPointMarkerDisk extends JPanel{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3087444235128620320L;
 	
+	/** The src. */
 	private String src; //red,blue,green,yellow
+	
+	/** The Constant ORDER_DISC_DIAM. */
 	private final static int ORDER_DISC_DIAM = 36;
+	
+	/** The img. */
 	private Image img;
+	
+	/** The tool. */
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
+	
+	/** The w count. */
 	static int wCount = 0;
+	
+	/** The Constant WIDTH_PERC. */
 	private static final double WIDTH_PERC = 0.06824146981627296587926509186352;
+	
+	/** The Constant HEIGHT_PERC. */
 	private static final double HEIGHT_PERC = 0.73333333333333333333333333333333;
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
+	
+	/** The width rel. */
 	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	
+	/** The height rel. */
 	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
+	
+	/** The Constant slotRelDim. */
 	private final static double slotRelDim = 0.03937007874015748031496062992126;
+	
+	/** The Constant offset. */
 	private final static double offset = 0.00065616797900262467191601049868766;
 	
+	/**
+	 * Instantiates a new faith point marker disk.
+	 *
+	 * @param color the color
+	 */
 	public FaithPointMarkerDisk(String color){
 		src = color;
 		try {
@@ -51,6 +80,9 @@ public class FaithPointMarkerDisk extends JPanel{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -58,6 +90,9 @@ public class FaithPointMarkerDisk extends JPanel{
 		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
+	/**
+	 * Sets the faith point markers.
+	 */
 	public void setFaithPointMarkers(){
 		
 		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
@@ -66,6 +101,11 @@ public class FaithPointMarkerDisk extends JPanel{
 	}
 	
 	
+	/**
+	 * Sets the faith points amount.
+	 *
+	 * @param val the new faith points amount
+	 */
 	public void setFaithPointsAmount(double val){
 		System.out.println("faith amount:" + val);
 		System.out.println("old width" + widthRel);

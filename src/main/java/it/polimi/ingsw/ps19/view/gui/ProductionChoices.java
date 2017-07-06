@@ -16,19 +16,29 @@ import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 
 /**
- * @author Mirko
+ * The Class ProductionChoices.
  *
+ * @author Mirko
  */
 public class ProductionChoices extends JPanel implements ActionListener {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The cards. */
 	private List<CardButton> cards;
+	
+	/** The toggles. */
 	private List<JToggleButton> toggles;
+	
+	/** The observer. */
 	private GamePanel observer;
 
+	/**
+	 * Instantiates a new production choices.
+	 *
+	 * @param observer the observer
+	 */
 	public ProductionChoices(GamePanel observer) {
 		this.observer=observer;
 		
@@ -38,6 +48,11 @@ public class ProductionChoices extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Gets the choices.
+	 *
+	 * @return the choices
+	 */
 	private ArrayList<Integer> getChoices() {
 		ArrayList<Integer> choices=new ArrayList<Integer>();
 		for(JToggleButton toggle: toggles){
@@ -52,6 +67,11 @@ public class ProductionChoices extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * Adds the card and toggle.
+	 *
+	 * @param cardId the card id
+	 */
 	private void addCardAndToggle(int cardId) {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 153, 51));
@@ -83,6 +103,11 @@ public class ProductionChoices extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Adds the cards.
+	 *
+	 * @param cardIds the card ids
+	 */
 	public void addCards(ArrayList<Integer> cardIds) {
 
 		for (Integer cardId : cardIds) {
@@ -101,6 +126,9 @@ public class ProductionChoices extends JPanel implements ActionListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		observer.notifyActivateProduction(this.getChoices());

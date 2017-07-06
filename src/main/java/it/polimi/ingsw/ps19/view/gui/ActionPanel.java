@@ -18,25 +18,29 @@ import javax.swing.JSlider;
 
 /**
  * The panel that allows the construction of an action, letting the user choose
- * between the family members and the servants he wants to use in the action
- * 
- * @author Mirko
+ * between the family members and the servants he wants to use in the action.
  *
+ * @author Mirko
  */
 public class ActionPanel extends JPanel {
 
+	/** The family group. */
 	private ButtonGroup familyGroup;
 
+	/** The radio buttons. */
 	private List<JRadioButton> radioButtons;
 
+	/** The game panel. */
 	private GamePanel gamePanel;
 	
+	/** The slider. */
 	JSlider slider;
 
 	/**
 	 * Create the panel.
-	 * 
-	 * @param gamePanel
+	 *
+	 * @param gamePanel the game panel
+	 * @param playerColor the player color
 	 */
 	public ActionPanel(GamePanel gamePanel,String playerColor) {
 
@@ -123,6 +127,11 @@ public class ActionPanel extends JPanel {
 
 	}
 
+	/**
+	 * Gets the family member.
+	 *
+	 * @return the family member
+	 */
 	public String getFamilyMember() {
 		JRadioButton button = getSelectedRadioButton();
 		if (button == null)
@@ -132,6 +141,11 @@ public class ActionPanel extends JPanel {
 
 	}
 
+	/**
+	 * Gets the selected radio button.
+	 *
+	 * @return the selected radio button
+	 */
 	public JRadioButton getSelectedRadioButton() {
 		for (JRadioButton button : radioButtons) {
 			if (button.isSelected())
@@ -140,6 +154,11 @@ public class ActionPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the servants.
+	 *
+	 * @return the servants
+	 */
 	public String getServants() {
 		return ""+slider.getValue();
 	}

@@ -7,16 +7,18 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * @author matteo
+ * The Class SigismondoMalatestaEffect.
  *
+ * @author matteo
  */
 public class SigismondoMalatestaEffect extends Effect implements Disapplyable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4556068502386357940L;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -25,6 +27,9 @@ public class SigismondoMalatestaEffect extends Effect implements Disapplyable{
 		return builder.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void applyEffect(Player p) {
 		for(FamilyMember member : p.getFamilyMembers().values()){
@@ -35,6 +40,9 @@ public class SigismondoMalatestaEffect extends Effect implements Disapplyable{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	public void disapplyEffect(Player p){
 		for(FamilyMember member : p.getFamilyMembers().values()){
 			if(member.getDice() == Dice.NEUTRAL_DICE){

@@ -11,22 +11,31 @@ import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 
 /**
- * @author matteo
+ * The Class LeaderDeck.
  *
+ * @author matteo
  */
 public class LeaderDeck implements Serializable  {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6540351317616183197L;
+	
+	/** The cards. */
 	private LeaderCard[] cards;
 	
+	/**
+	 * Instantiates a new leader deck.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public LeaderDeck() throws IOException{
 		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
 		System.out.println("leaderdeck: creato deck tramite deck creator");
 	}
 	
+	/**
+	 * Shuffle deck.
+	 */
 	public void shuffleDeck() {
 		Random rnd = new Random();
 
@@ -36,10 +45,11 @@ public class LeaderDeck implements Serializable  {
 	}
 	
 	/**
-	 * @param arr
-	 * @param i
-	 * @param j
-	 *            swaps cards in index i and j
+	 * Swap.
+	 *
+	 * @param arr the arr
+	 * @param i the i
+	 * @param j            swaps cards in index i and j
 	 */
 	private static void swap(Object[] arr, int i, int j) {
 		Object tmp = arr[i];
@@ -47,17 +57,29 @@ public class LeaderDeck implements Serializable  {
 		arr[j] = tmp;
 	}
 	
+	/**
+	 * Length.
+	 *
+	 * @return the int
+	 */
 	public int length(){
 		return this.cards.length;
 	}
 	
+	/**
+	 * Prints the card info.
+	 *
+	 * @param i the i
+	 */
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getName());
 		
 	}
 	
 	/**
-	 * @param i
+	 * Gets the card.
+	 *
+	 * @param i the i
 	 * @return LeaderCard
 	 */
 	public LeaderCard getCard(int i) {  
@@ -66,6 +88,12 @@ public class LeaderDeck implements Serializable  {
 		return this.cards[i];
 	}
 	
+	/**
+	 * Gets the card.
+	 *
+	 * @param name the name
+	 * @return the card
+	 */
 	public LeaderCard getCard(String name){
 		System.out.println("leaderdeck: getcard");
 		for(LeaderCard c : this.cards){
@@ -77,6 +105,12 @@ public class LeaderDeck implements Serializable  {
 		return null;
 	}
 	
+	/**
+	 * Gets the starting leader sets.
+	 *
+	 * @param numberOfPlayers the number of players
+	 * @return the starting leader sets
+	 */
 	public ArrayList<ArrayList<LeaderCard>> getStartingLeaderSets(int numberOfPlayers){
 		this.shuffleDeck();
 		int a=1;

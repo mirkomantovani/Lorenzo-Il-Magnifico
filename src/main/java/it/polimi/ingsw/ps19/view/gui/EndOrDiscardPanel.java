@@ -13,21 +13,26 @@ import javax.swing.JPanel;
 
 /**
  * The panel that lets the user choose to discard a leader card or end his round
- * when he's already performed an action
- * @author Mirko
+ * when he's already performed an action.
  *
+ * @author Mirko
  */
 public class EndOrDiscardPanel extends JPanel implements ActionListener {
 
 	
+	/** The end. */
 	private JButton end;
+	
+	/** The discard. */
 	private JButton discard;
 	
+	/** The game panel. */
 	private GamePanel gamePanel;
 
 	/**
 	 * Create the panel.
-	 * @param gamePanel 
+	 *
+	 * @param gamePanel the game panel
 	 */
 	public EndOrDiscardPanel(GamePanel gamePanel) {
 		
@@ -67,6 +72,9 @@ public class EndOrDiscardPanel extends JPanel implements ActionListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

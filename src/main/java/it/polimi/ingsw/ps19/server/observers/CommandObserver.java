@@ -7,18 +7,19 @@ import it.polimi.ingsw.ps19.server.ClientHandler;
 
 /**
  * This interface is implemented by ServerCommandHandler, an instance of the
- * concrete class is in ClientHandlerSocket
- * @author Mirko
+ * concrete class is in ClientHandlerSocket.
  *
+ * @author Mirko
  */
 public interface CommandObserver {
 	
 //	public void applyCommand(ClientToServerCommand command);
 
 	/**
-	 * This allows the switch based on the type of command
-	 * @param command
-	 */
+ * This allows the switch based on the type of command.
+ *
+ * @param command the command
+ */
 	public void notifyNewCommand(ClientToServerCommand command);
 
 }

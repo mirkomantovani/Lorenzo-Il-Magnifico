@@ -9,23 +9,32 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * @author matteo
+ * The Class ResourceMalusEffect.
  *
+ * @author matteo
  */
 public class ResourceMalusEffect extends Effect{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2781912671942166597L;
+	
+	/** The resources. */
 	ArrayList<Resource> resources;
 	
+	/**
+	 * Instantiates a new resource malus effect.
+	 *
+	 * @param resources the resources
+	 */
 	public ResourceMalusEffect(ArrayList<Resource> resources){
 		
 		this.resources=resources;
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void applyEffect(Player player) {
 		
@@ -39,6 +48,9 @@ public class ResourceMalusEffect extends Effect{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder s=new StringBuilder();

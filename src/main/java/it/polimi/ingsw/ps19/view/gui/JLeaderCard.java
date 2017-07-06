@@ -12,23 +12,44 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- * @author Mirko
+ * The Class JLeaderCard.
  *
+ * @author Mirko
  */
 public class JLeaderCard extends JButton implements MouseListener {
 	
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/** The icon. */
 	ImageIcon icon;
+	
+	/** The path. */
 	private String path;
+	
+	/** The leader name. */
 	private String leaderName;
 	
+	/** The screen dimension. */
 	private Dimension screenDimension;
 	
+	/** The zoomed image. */
 	private Image zoomedImage;
+	
+	/** The h. */
 	private int h;
+	
+	/** The w. */
 	private int w;
+	
+	/** The img. */
 	private Image img;
 	
+	/**
+	 * Instantiates a new j leader card.
+	 *
+	 * @param leaderName the leader name
+	 */
 	public JLeaderCard(String leaderName) {
 		
 		this.leaderName=leaderName;
@@ -82,12 +103,18 @@ public class JLeaderCard extends JButton implements MouseListener {
 		// this.setIcon(icon);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -107,6 +134,9 @@ public class JLeaderCard extends JButton implements MouseListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -115,17 +145,28 @@ public class JLeaderCard extends JButton implements MouseListener {
 		setIcon(new ImageIcon(img));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the leader name.
+	 *
+	 * @return the leader name
+	 */
 	public String getLeaderName() {
 		return leaderName;
 	}

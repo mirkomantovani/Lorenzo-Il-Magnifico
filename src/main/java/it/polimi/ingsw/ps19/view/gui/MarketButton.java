@@ -7,21 +7,45 @@ import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 
 /**
+ * The Class MarketButton.
+ *
  * @author matteo
  * This is the class for the market buttons
- *
  */
 public class MarketButton extends JButton {
 	
+	/** The width rel. */
 	private int widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+	
+	/** The height rel. */
 	private int heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.06561679790026246719160104986877;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.0462962962962962962962962962963;
+	
+	/** The Constant wFIRST_SLOT. */
 	private final static double wFIRST_SLOT = 0.17716535433070866141732283464567;
+	
+	/** The Constant hFIRST_SLOT. */
 	private final static double hFIRST_SLOT = 0.08333333333333333333333333333333;
+	
+	/** The Constant wFirstMarket. */
 	private final static double wFirstMarket = 0.53149606299212598425196850393701;
+	
+	/** The Constant hFirstMarket. */
 	private final static double hFirstMarket = 0.79166666666666666666666666666667;
+	
+	/** The tool. */
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
+	
+	/**
+	 * Instantiates a new market button.
+	 *
+	 * @param i the i
+	 */
 	public MarketButton(int i) {
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 //		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -31,6 +55,11 @@ public class MarketButton extends JButton {
 		setPosition(i);
 	}
 
+	/**
+	 * Sets the position.
+	 *
+	 * @param i the new position
+	 */
 	private void setPosition(int i) {
 //			public void PlaceFamiliarIntoMarket(int market){
 		if(i == 1){

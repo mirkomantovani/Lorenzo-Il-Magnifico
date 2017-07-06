@@ -55,29 +55,64 @@ import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
- * @author Mirko
+ * The Class MatchHandler.
  *
+ * @author Mirko
  */
 public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserver {
 
+	/** The clients. */
 	private List<ClientHandler> clients;
+	
+	/** The closed clients. */
 	private List<ClientHandler> closedClients;
+	
+	/** The command handler. */
 	private ServerCommandHandler commandHandler;
+	
+	/** The Server interface. */
 	private ServerInterface ServerInterface;
+	
+	/** The match. */
 	private Match match;
+	
+	/** The round timer thread. */
 	// private RoundTimer roundTimer;
 	private Thread roundTimerThread;
+	
+	/** The leader response counter. */
 	private int leaderResponseCounter = 0;
+	
+	/** The leader sets. */
 	private ArrayList<ArrayList<LeaderCard>> leaderSets;
+	
+	/** The cycle. */
 	private int cycle = 1;
+	
+	/** The round number. */
 	private int roundNumber = 0;
+	
+	/** The last command sent. */
 	private ServerToClientCommand lastCommandSent;
+	
+	/** The num players answered excomm. */
 	private int numPlayersAnsweredExcomm;
 
+	/** The prod family member. */
 	private String prodFamilyMember;
+	
+	/** The prod action space. */
 	private int prodActionSpace;
+	
+	/** The prod paid servant. */
 	private int prodPaidServant;
 
+	/**
+	 * Instantiates a new match handler.
+	 *
+	 * @param clients the clients
+	 * @param ServerInterface the server interface
+	 */
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
@@ -87,11 +122,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// .getStartingLeaderSets(match.getPlayers().length);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		initMatch();
 	}
 
+	/**
+	 * Inits the match.
+	 */
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
@@ -128,6 +169,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	// }
 	// }
 
+	/**
+	 * Communicate colors.
+	 */
 	private void communicateColors() {
 		for (ClientHandler c : clients) {
 			String color = null;
@@ -141,6 +185,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Start leader discard phase.
+	 */
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
@@ -156,7 +203,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * 
+	 * Start match.
+	 *
 	 * @return the current id player
 	 */
 	// public int getCurrentIdPlayer() {
@@ -174,7 +222,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * 
+	 * Gets the current player.
+	 *
 	 * @return the current player of the match
 	 */
 	public Player getCurrentPlayer() {
@@ -182,7 +231,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * randomly shuffling clients
+	 * randomly shuffling clients.
 	 */
 	private void setPlayers() {
 		Collections.shuffle(clients);
@@ -199,7 +248,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	/**
 	 * method invoked at the end of a turn that checks if the game is end or set
-	 * the next player
+	 * the next player.
 	 */
 	public void setNext() {
 		// Map<Player, Boolean> winners = match.checkWinners();
@@ -215,6 +264,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// notifyEndOfGame(winners);
 	}
 
+	/**
+	 * Start turn.
+	 */
 	private void startTurn() {
 		// sendToCurrentPlayer(new StartTurnCommand());
 		
@@ -243,6 +295,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Inits the turn.
+	 */
 	private void initTurn() {
 		refreshPlayerOrder();
 		roundNumber = 0;
@@ -259,6 +314,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// TODO ripulire il board dai family members
 	}
 
+	/**
+	 * Start round.
+	 */
 	private void startRound() {
 		stopTimerIfAlive();
 
@@ -268,10 +326,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * notifying command in broadcast
-	 * 
-	 * @param command
-	 *            to be notified
+	 * notifying command in broadcast.
+	 *
+	 * @param command            to be notified
 	 */
 	public void sendToAllPlayers(ServerToClientCommand command) {
 		for (ClientHandler client : clients) {
@@ -284,6 +341,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
+	/**
+	 * Send to all players except current.
+	 *
+	 * @param command the command
+	 */
 	public void sendToAllPlayersExceptCurrent(ServerToClientCommand command) {
 		ClientHandler dontSendClient;
 		try {
@@ -304,6 +366,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
+	/**
+	 * Send to player.
+	 *
+	 * @param command the command
+	 * @param player the player
+	 */
 	public void sendToPlayer(ServerToClientCommand command, Player player) {
 		ClientHandler client;
 		try {
@@ -324,6 +392,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// checkDisconnection();
 	}
 
+	/**
+	 * Send to current player.
+	 *
+	 * @param command the command
+	 */
 	public void sendToCurrentPlayer(ServerToClientCommand command) {
 		sendToPlayer(command, match.getCurrentPlayer());
 		// checkDisconnection();
@@ -331,7 +404,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	/**
 	 * method invoked by the ping timer to check if the current player is always
-	 * on
+	 * on.
 	 */
 	// @Override
 	// public void turnTimerExpired() {
@@ -372,7 +445,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * method to interrupt the turn timer if it is alive
+	 * method to interrupt the turn timer if it is alive.
 	 */
 
 	private void checkDisconnection() {
@@ -381,8 +454,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	/**
-	 * close the match and all its connection with client
-	 * 
+	 * close the match and all its connection with client.
 	 */
 	public synchronized void closeMatch() {
 		// timerNotNeed();
@@ -399,6 +471,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ServerInterface.closeMatch(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver#isAllowed(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public boolean isAllowed(Player player) {
 		if (getCurrentPlayer() != null) {
@@ -410,6 +485,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver#removeClient(it.polimi.ingsw.ps19.server.ClientHandler)
+	 */
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
 		try {
@@ -422,6 +500,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 	}
 
+	/**
+	 * Gets the right client handler.
+	 *
+	 * @param player the player
+	 * @return the right client handler
+	 * @throws WrongPlayerException the wrong player exception
+	 */
 	private ClientHandler getRightClientHandler(Player player) throws WrongPlayerException {
 		for (ClientHandler client : clients)
 			if (client.getPlayer().equals(player))
@@ -430,6 +515,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		throw new WrongPlayerException();
 	}
 
+	/**
+	 * Apply action.
+	 *
+	 * @param action the action
+	 * @throws NotApplicableException the not applicable exception
+	 */
 	public void applyAction(Action action) throws NotApplicableException {
 		action.apply();
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
@@ -448,6 +539,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Apply action.
+	 *
+	 * @param choices the choices
+	 * @param industrialAction the industrial action
+	 * @throws NotApplicableException the not applicable exception
+	 */
 	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
 		industrialAction.apply(choices);
 	}
@@ -464,6 +562,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	// }
 	// }
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.observers.MatchObserver#notifyPlayerStatusChange(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void notifyPlayerStatusChange(Player player) {
 		try {
@@ -476,11 +577,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.observers.MatchObserver#notifyFamilyPlaced()
+	 */
 	@Override
 	public void notifyFamilyPlaced() {
 
 	}
 
+	/**
+	 * Round timer expired.
+	 */
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
 		try {
@@ -503,6 +610,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 	}
 
+	/**
+	 * Next step.
+	 */
 	private void nextStep() {
 		if ((roundNumber == match.getPlayers().length * 4)||currentPlayerWithoutFamilyMembers()) {
 			System.out.println("roundNumber= " + roundNumber + "\n cambio turno");
@@ -518,6 +628,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Current player without family members.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean currentPlayerWithoutFamilyMembers() {
 		if(this.match.getCurrentPlayer().getFamilyMembers().isEmpty()){
 			return true;
@@ -525,6 +640,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return false;
 	}
 
+	/**
+	 * Start excommunication phase.
+	 */
 	private void startExcommunicationPhase() {
 		
 		stopTimerIfAlive();
@@ -534,12 +652,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToAllPlayers(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
 	}
 
+	/**
+	 * Stop timer if alive.
+	 */
 	private void stopTimerIfAlive() {
 		if (roundTimerThread != null)
 			if (roundTimerThread.isAlive())
 				roundTimerThread.interrupt();
 	}
 
+	/**
+	 * Handle credentials.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param clientHandler the client handler
+	 */
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
 		// for now it's just setting the name of the user
 		try {
@@ -551,6 +679,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Send to client handler.
+	 *
+	 * @param command the command
+	 * @param clientHandler the client handler
+	 */
 	private void sendToClientHandler(ServerToClientCommand command, ClientHandler clientHandler) {
 		try {
 			clientHandler.sendCommand(command);
@@ -560,6 +694,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 	}
 
+	/**
+	 * Gets the right player.
+	 *
+	 * @param clientHandler the client handler
+	 * @return the right player
+	 * @throws WrongClientHandlerException the wrong client handler exception
+	 */
 	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
 		for (ClientHandler c : clients) {
 			if (c == clientHandler)
@@ -569,6 +710,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Gets the player from color.
+	 *
+	 * @param playerColor the player color
+	 * @return the player from color
+	 */
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
@@ -583,6 +730,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return null;
 	}
 
+	/**
+	 * Handle leader choice.
+	 *
+	 * @param name the name
+	 * @param playerColor the player color
+	 */
 	public void handleLeaderChoice(String name, String playerColor) {
 		System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
@@ -636,6 +789,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Removes the leader from sets.
+	 *
+	 * @param leaderCard the leader card
+	 */
 	private void removeLeaderFromSets(LeaderCard leaderCard) {
 		// System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
@@ -648,11 +806,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 	}
 
+	/**
+	 * Finish round.
+	 */
 	public void finishRound() {
 		setNext();
 		nextStep();
 	}
 
+	/**
+	 * Handle end game.
+	 */
 	private void handleEndGame() {
 		Player[] rank = new Player[match.getPlayers().length];
 		Player prevPlayer;
@@ -674,6 +838,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Calculate player points.
+	 *
+	 * @param p the p
+	 * @return the int
+	 */
 	private int calculatePlayerPoints(Player p) {
 		int points = 0;
 		for (Player player : match.getPlayers()) {
@@ -695,6 +865,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return points;
 	}
 
+	/**
+	 * Calculate points from resources.
+	 *
+	 * @param p the p
+	 * @return the int
+	 */
 	private int calculatePointsFromResources(Player p) {
 		int ResourceSum = 0;
 		for (ResourceType r : ResourceType.values()) {
@@ -705,6 +881,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return ResourceSum / 5;
 	}
 
+	/**
+	 * Calculate points for territories.
+	 *
+	 * @param p the p
+	 * @return the int
+	 */
 	private int calculatePointsForTerritories(Player p) {
 		int points = 0;
 		ArrayList<Integer> territoryBonuses = new ArrayList<Integer>();
@@ -724,6 +906,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return points;
 	}
 
+	/**
+	 * Calculate points for character cards.
+	 *
+	 * @param p the p
+	 * @return the int
+	 */
 	private int calculatePointsForCharacterCards(Player p) {
 		int points = 0;
 		ArrayList<Integer> characterBonuses = new ArrayList<Integer>();
@@ -743,6 +931,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return points;
 	}
 
+	/**
+	 * Calculate points for military points.
+	 *
+	 * @param p the p
+	 * @return the int
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private int calculatePointsForMilitaryPoints(Player p) throws IOException {
 		Player[] rank = new Player[match.getPlayers().length];
 		Player prevPlayer;
@@ -775,11 +970,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return points;
 	}
 
+	/**
+	 * Handle invalid command.
+	 */
 	public void handleInvalidCommand() {
 		sendToCurrentPlayer(lastCommandSent);
 
 	}
 
+	/**
+	 * Send privilege to current player.
+	 *
+	 * @param numberOfPrivilege the number of privilege
+	 */
 	public void sendPrivilegeToCurrentPlayer(int numberOfPrivilege) {
 		ResourceChest[] rc = null;
 		try {
@@ -795,11 +998,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Discard leader card.
+	 *
+	 * @param leaderName the leader name
+	 */
 	public void discardLeaderCard(String leaderName) {
 		match.getCurrentPlayer().removeLeaderCard(leaderName);
 		sendPrivilegeToCurrentPlayer(1);
 	}
 
+	/**
+	 * Gets the array list privilege from array.
+	 *
+	 * @param rc the rc
+	 * @return the array list privilege from array
+	 */
 	private ArrayList<ResourceChest> getArrayListPrivilegeFromArray(ResourceChest[] rc) {
 		ArrayList<ResourceChest> arr = new ArrayList<ResourceChest>();
 		for (int i = 0; i < rc.length; i++) {
@@ -808,6 +1022,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return arr;
 	}
 
+	/**
+	 * Adds the privilege resources.
+	 *
+	 * @param choice the choice
+	 */
 	public void addPrivilegeResources(ArrayList<Integer> choice) {
 
 		if (isPrivilegeCorrect(choice)) {
@@ -837,6 +1056,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Checks if is privilege correct.
+	 *
+	 * @param choice the choice
+	 * @return true, if is privilege correct
+	 */
 	private boolean isPrivilegeCorrect(ArrayList<Integer> choice) {
 		if (privilegeChoiceHasDuplicates(choice))
 			return false;
@@ -844,6 +1069,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			return true;
 	}
 
+	/**
+	 * Privilege choice has duplicates.
+	 *
+	 * @param choice the choice
+	 * @return true, if successful
+	 */
 	private boolean privilegeChoiceHasDuplicates(ArrayList<Integer> choice) {
 		for (int i = 0; i < choice.size(); i++) {
 			for (int j = 0; j < choice.size(); j++) {
@@ -856,6 +1087,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Refresh player order.
+	 */
 	private void refreshPlayerOrder() {
 
 		Player[] oldList = match.getPlayers();
@@ -901,10 +1135,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		
 	}
 
+	/**
+	 * Gets the round number.
+	 *
+	 * @return the round number
+	 */
 	public int getRoundNumber() {
 		return roundNumber;
 	}
 
+	/**
+	 * Handle church support decision.
+	 *
+	 * @param playerColor the player color
+	 * @param decision the decision
+	 */
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
 		numPlayersAnsweredExcomm++;
 		if (decision) {
@@ -939,6 +1184,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Gets the current excomm tile.
+	 *
+	 * @return the current excomm tile
+	 */
 	private ExcommunicationTile getCurrentExcommTile() {
 		Church c = this.match.getBoard().getChurch();
 		Period p = this.match.getPeriod();
@@ -946,6 +1196,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		return excommTile;
 	}
 
+	/**
+	 * Save production params.
+	 *
+	 * @param command the command
+	 */
 	public void saveProductionParams(ProductionCommand command) {
 		this.prodActionSpace = command.getActionSpace();
 		this.prodPaidServant = command.getPaidServants();
@@ -953,6 +1208,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
+	/**
+	 * Handle production activation.
+	 *
+	 * @param productionActivationCommand the production activation command
+	 */
 	public void handleProductionActivation(ProductionActivationCommand productionActivationCommand) {
 
 		FamilyMember member = getCurrentPlayer().getFamilyMember(this.prodFamilyMember);
@@ -991,6 +1251,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.prodFamilyMember = "";
 	}
 
+	/**
+	 * Deactivate leader cards.
+	 */
 	public void deactivateLeaderCards() {
 		if (!this.getCurrentPlayer().getLeaderCards().isEmpty())
 			for (LeaderCard l : this.getCurrentPlayer().getLeaderCards().values()) {
@@ -998,6 +1261,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 	}
 
+	/**
+	 * Client closed the game.
+	 *
+	 * @param playerColor the player color
+	 */
 	public void clientClosedTheGame(String playerColor) {
 		try {
 			match.addDisconnectedPlayer(getPlayerFromColor(playerColor));

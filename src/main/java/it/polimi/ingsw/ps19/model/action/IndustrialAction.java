@@ -14,30 +14,34 @@ import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
- * @author Jimmy
+ * The Class IndustrialAction.
  *
+ * @author Jimmy
  */
 public class IndustrialAction extends Action {
 
+	/** The industrial area. */
 	IndustrialArea industrialArea;
+	
+	/** The player cards. */
 	ArrayList<? extends DevelopmentCard> playerCards;
+	
+	/** The action space. */
 	ActionSpace actionSpace;
+	
+	/** The paid servants. */
 	int paidServants;
 
 	/**
-	 * 
-	 * @param familyMember
-	 *            A familyMember is passed so that the action can identify the
+	 * Instantiates a new industrial action.
+	 *
+	 * @param familyMember            A familyMember is passed so that the action can identify the
 	 *            player that is calling the action // totaly not needed
-	 * @param industrialArea
-	 *            The industrialArea will tell whether the industrial area
+	 * @param industrialArea            The industrialArea will tell whether the industrial area
 	 *            refers to a production area or a harvest area
-	 * @param actionSpace
-	 *            This needs to say whether it is passed a single or a multiple
+	 * @param actionSpace            This needs to say whether it is passed a single or a multiple
 	 *            slot through its effect
-	 * 
-	 * @param paid
-	 *            servants that increment player's family member action value
+	 * @param paidServants the paid servants
 	 */
 	public IndustrialAction(FamilyMember familyMember, IndustrialArea industrialArea, ActionSpace actionSpace,
 			int paidServants) {
@@ -51,11 +55,20 @@ public class IndustrialAction extends Action {
 		this.paidServants = paidServants;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#isApplicable()
+	 */
 	@Override
 	public boolean isApplicable() {
 		return false;
 	}
 
+	/**
+	 * Checks if is applicable.
+	 *
+	 * @param card the card
+	 * @return true, if is applicable
+	 */
 	public boolean isApplicable(DevelopmentCard card) {
 		System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO CONTROLLANDO LA CARTA: !" + card.toString());
 		System.out.println("action value fm: " + this.familyMember.getActionValue());
@@ -67,11 +80,19 @@ public class IndustrialAction extends Action {
 				+ paidServants >= card.getActivationCost());
 	}
 
+	/**
+	 * Can be placed.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean canBePlaced() {
 		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
 		return actionSpace.isOccupable(this.familyMember);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#apply()
+	 */
 	@Override
 	public void apply() throws NotApplicableException {
 		if (canBePlaced()) {
@@ -97,6 +118,12 @@ public class IndustrialAction extends Action {
 		}
 	}
 
+	/**
+	 * Apply.
+	 *
+	 * @param choices the choices
+	 * @throws NotApplicableException the not applicable exception
+	 */
 	public void apply(List<Integer> choices) throws NotApplicableException {
 		if (canBePlaced()) {
 			int index = 0;

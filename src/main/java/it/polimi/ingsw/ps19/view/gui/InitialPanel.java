@@ -13,18 +13,31 @@ import javax.swing.JPanel;
 
 
 /**
- * @author Mirko
+ * The Class InitialPanel.
  *
+ * @author Mirko
  */
 public class InitialPanel extends JPanel {
 	
 
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/** The screen dimension. */
 	private Dimension screenDimension;
+	
+	/** The img. */
 	private Image img;
 
+	/**
+	 * Instantiates a new initial panel.
+	 *
+	 * @param image the image
+	 */
 	public InitialPanel(String image) {
 		super(new GridBagLayout());
 		
@@ -43,6 +56,9 @@ public class InitialPanel extends JPanel {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

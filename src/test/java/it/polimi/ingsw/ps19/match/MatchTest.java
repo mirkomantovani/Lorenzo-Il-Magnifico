@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.match;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -6,15 +6,32 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.polimi.ingsw.ps19.Color;
+import it.polimi.ingsw.ps19.Match;
+import it.polimi.ingsw.ps19.MatchFullException;
+import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
+/**
+ * The Class MatchTest.
+ */
 public class MatchTest {
 	
+	/** The player 1. */
 	private Player player1;
+	
+	/** The player 2. */
 	private Player player2;
+	
+	/** The match. */
 	private Match match;
 	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws MatchFullException the match full exception
+	 */
 	@Before
 	public void setUp() throws MatchFullException{
 		player1 = new Player("matteo", "blue");
@@ -25,39 +42,62 @@ public class MatchTest {
 		
 	}
 	
+	/**
+	 * Match created.
+	 */
 	@Test
 	public void MatchCreated(){
 		assertNotNull(match);
 	}
 	
+	/**
+	 * Players in match.
+	 *
+	 * @throws MatchFullException the match full exception
+	 */
 	@Test
 	public void PlayersInMatch() throws MatchFullException{
 		assertNotNull(match.getPlayers());
 	}
 	
+	/**
+	 * Board created.
+	 */
 	@Test
 	public void BoardCreated(){
 		assertNotNull(match.getBoard());
 	}
 	
 	
+	/**
+	 * Created leaders.
+	 */
 	@Test 
 	public void CreatedLeaders(){
 		assertTrue(match.getLeaderCards().length() != 0);
 	}
 	
+	/**
+	 * Distributed resources.
+	 */
 	@Test
 	public void distributedResources(){
 		match.distributeTurnResources();
 		assertTrue(match.getPlayers()[0].getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount() == 100);
 	}
 	
+	/**
+	 * Turn changes.
+	 */
 	@Test
 	public void turnChanges(){
 		match.incrementTurn();
 		assertTrue(match.getTurn() == 1);
 	}
 	
+	/**
+	 * Clear board test.
+	 */
 	@Test
 	public void clearBoardTest(){
 		match.getBoard().getCouncilPalace().setFamilyMember(player1.getFamilyMember(Color.BLACK));

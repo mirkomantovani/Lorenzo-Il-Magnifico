@@ -13,22 +13,31 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  */
 public class InstantResourcesEffect extends Effect implements Disapplyable{
 	   
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6430388980538173536L;
+	
+	/** The effect resource chest. */
 	private ResourceChest effectResourceChest;	
+	
+	/** The council privilege effect. */
 	private CouncilPrivilegeEffect councilPrivilegeEffect;
+	
 	/**
-	 * class constructor
-	 * 
-	 * @param effectResourceChest it contains all the resources that a player gets as the 
-	 *                            result of the effect.  
+	 * class constructor.
+	 *
+	 * @param effectResourceChest it contains all the resources that a player gets as the
+	 *                            result of the effect.
 	 */
 	public InstantResourcesEffect(ResourceChest effectResourceChest){
 		this.effectResourceChest = effectResourceChest;
 	}	
 	
+	/**
+	 * Instantiates a new instant resources effect.
+	 *
+	 * @param effectResourceChest the effect resource chest
+	 * @param councilPrivilegeEffect the council privilege effect
+	 */
 	public InstantResourcesEffect(ResourceChest effectResourceChest,CouncilPrivilegeEffect councilPrivilegeEffect){
 		this.effectResourceChest = effectResourceChest;
 		this.councilPrivilegeEffect=councilPrivilegeEffect;
@@ -61,6 +70,9 @@ public class InstantResourcesEffect extends Effect implements Disapplyable{
 		return builder.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void disapplyEffect(Player p) {
 		// TODO Auto-generated method stub

@@ -12,19 +12,25 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * @author Mirko
+ * The Class ChooseExcommunicationPanel.
  *
+ * @author Mirko
  */
 public class ChooseExcommunicationPanel extends JPanel implements ActionListener {
 	
+	/** The show support. */
 	private JButton showSupport;
+	
+	/** The be excommunicated. */
 	private JButton beExcommunicated;
 	
+	/** The game panel. */
 	private GamePanel gamePanel;
 
 	/**
 	 * Create the panel.
-	 * @param gamePanel 
+	 *
+	 * @param gamePanel the game panel
 	 */
 	public ChooseExcommunicationPanel(GamePanel gamePanel) {
 		
@@ -64,6 +70,9 @@ public class ChooseExcommunicationPanel extends JPanel implements ActionListener
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

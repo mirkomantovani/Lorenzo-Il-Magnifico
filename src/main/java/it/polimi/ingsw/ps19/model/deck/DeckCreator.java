@@ -61,25 +61,28 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
  */
 public class DeckCreator {
 
-	/** The buffered reader used to read from file */
+	/**  The buffered reader used to read from file. */
 	private static BufferedReader buffReader;
 	
-	/** The line read from file */
+	/**  The line read from file. */
 	private static String lineRead;
 	
 
+	/**
+	 * Instantiates a new deck creator.
+	 */
 	private DeckCreator(){
 		
 	}
+	
 	/**
 	 * Creates the building card deck from the file, see template FileTemplateBuildingsCardV1.xlsx
-	 * 
+	 *
+	 * @author Mirko
 	 * @param filePath the file path
 	 * @param deckLength the deck length
 	 * @return the building card[]
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 * 
-	 * @author Mirko
 	 */
 	public static BuildingCard[] createBuildingCardDeck(String filePath, int deckLength) throws IOException {
 		
@@ -301,12 +304,11 @@ public class DeckCreator {
 	/**
 	 * Creates the territory card deck.
 	 *
-	 *@author Jimmy
+	 * @author Jimmy
 	 * @param filePath the file path
 	 * @param deckLength the deck length
 	 * @return the territory card[]
-	 * @throws Exception Signals that a territory card has no harvest effect
-	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static TerritoryCard[] createTerritoryCardDeck(String filePath, int deckLength) throws IOException {
 
@@ -680,11 +682,13 @@ public class DeckCreator {
 	
 
 	/**
+	 * Creates the leader card deck.
+	 *
 	 * @author matteo
-	 * @param filePath
-	 * @param deckLength
-	 * @return
-	 * @throws IOException
+	 * @param filePath the file path
+	 * @param deckLength the deck length
+	 * @return the leader card[]
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static LeaderCard[] createLeaderCardDeck(String filePath, int deckLength) throws IOException {
 		

@@ -22,21 +22,36 @@ import it.polimi.ingsw.ps19.model.resource.Servant;
 /**
  * This class represents the action of placing a family member onto an action
  * space of a tower and taking the corresponding card, it throws a NotApplicableException with a field
- * that states why the action is not applicable 
- * 
+ * that states why the action is not applicable .
+ *
  * @author Mirko
  * 
  *         
- *
  */
 public class TakeCardAction extends Action {
 
+	/** The card. */
 	private DevelopmentCard card;
+	
+	/** The paid servants. */
 	private Servant paidServants;
+	
+	/** The floor. */
 	private Floor floor;
+	
+	/** The action value variation. */
 	private int actionValueVariation;
+	
+	/** The not applicable code. */
 	private String notApplicableCode = "You can't apply this action";
 
+	/**
+	 * Instantiates a new take card action.
+	 *
+	 * @param familyMember the family member
+	 * @param floor the floor
+	 * @param paidServants the paid servants
+	 */
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
 
@@ -54,12 +69,20 @@ public class TakeCardAction extends Action {
 
 	}
 
+	/**
+	 * Calculate action value variation.
+	 *
+	 * @return the int
+	 */
 	private int calculateActionValueVariation() {
 
 		return this.player.getBonuses().getCardTypeActionVariation(this.card.getCardType());
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#apply()
+	 */
 	@Override
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
@@ -116,6 +139,9 @@ public class TakeCardAction extends Action {
 			throw new NotApplicableException(notApplicableCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#isApplicable()
+	 */
 	@Override
 	public boolean isApplicable() {
 
@@ -197,6 +223,11 @@ public class TakeCardAction extends Action {
 
 	}
 
+	/**
+	 * Checks if is someone in the tower.
+	 *
+	 * @return true, if is someone in the tower
+	 */
 	private boolean isSomeoneInTheTower() {
 		List<Floor> floors;
 		floors = this.floor.getTower().getFloors();
@@ -208,6 +239,11 @@ public class TakeCardAction extends Action {
 
 	}
 
+	/**
+	 * Valid params.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean validParams() {
 		if (this.familyMember == null) {
 			this.notApplicableCode = "you don't have this family member";
@@ -225,6 +261,8 @@ public class TakeCardAction extends Action {
 	}
 
 	/**
+	 * Can be placed.
+	 *
 	 * @return true if this.familymember can be placed in this.actionspace
 	 */
 	private boolean canBePlaced() {
@@ -241,7 +279,9 @@ public class TakeCardAction extends Action {
 	}
 
 	/**
-	 * @param player
+	 * No same player members.
+	 *
+	 * @param player the player
 	 * @return true if there are no other family members of the specified player
 	 *         in the tower
 	 */
@@ -259,9 +299,9 @@ public class TakeCardAction extends Action {
 
 	/**
 	 * //controlling if the action value of the family member is enough to place
-	 * it in this action space
-	 * 
-	 * @return
+	 * it in this action space.
+	 *
+	 * @return true, if is action value enough
 	 */
 	private boolean isActionValueEnough() {
 		// personal bonuses to add

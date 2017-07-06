@@ -4,21 +4,36 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
- * @author Jimmy
+ * The Class RaiseValueWithDiscountEffect.
  *
+ * @author Jimmy
  */
 public class RaiseValueWithDiscountEffect extends Effect{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6683191125876080358L;
+	
+	/** The raise amount. */
 	private int raiseAmount;
+	
+	/** The card type. */
 	private CardType cardType;
+	
+	/** The building cards bonus. */
 	private boolean buildingCardsBonus;
+	
+	/** The character cards bonus. */
 	private boolean characterCardsBonus;
 	
 	
+	/**
+	 * Instantiates a new raise value with discount effect.
+	 *
+	 * @param raiseAmount the raise amount
+	 * @param cardType the card type
+	 * @param buildingCardsBonus the building cards bonus
+	 * @param characterCardsBonus the character cards bonus
+	 */
 	public RaiseValueWithDiscountEffect(int raiseAmount, CardType cardType, boolean buildingCardsBonus, boolean characterCardsBonus){
 		this.raiseAmount = raiseAmount;
 		this.cardType = cardType;
@@ -27,6 +42,9 @@ public class RaiseValueWithDiscountEffect extends Effect{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	public void applyEffect(Player p) {
 				p.getBonuses().addCardTypeActionVariation(cardType, raiseAmount);
 		
@@ -40,6 +58,9 @@ public class RaiseValueWithDiscountEffect extends Effect{
 			
 			}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();

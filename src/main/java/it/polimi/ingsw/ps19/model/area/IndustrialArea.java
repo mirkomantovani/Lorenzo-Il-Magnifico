@@ -13,40 +13,68 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * this class represents both the harvest and the production area, its multipleActionSpace will be initialized 
- * by the heirs classes
- * 
- * @author Jimmy
+ * by the heirs classes.
  *
+ * @author Jimmy
  */
 public abstract class IndustrialArea implements Serializable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5514546243119979995L;
+	
+	/** The slot cost. */
 	protected final int SLOT_COST = 1;
+	
+	/** The malus. */
 	protected final int MALUS = -3;
+	
+	/** The given resources. */
 	protected ResourceChest givenResources;
 
 	
+	/** The single slot. */
 	protected SingleActionSpace singleSlot;
+	
+	/** The multiple slot. */
 	protected MultipleActionSpace multipleSlot;
 	
+	/**
+	 * Instantiates a new industrial area.
+	 */
 	protected IndustrialArea(){
 		
 		singleSlot = new SingleActionSpace(SLOT_COST, null);
 	}
 	
+	/**
+	 * Gets the player cards.
+	 *
+	 * @param player the player
+	 * @return the player cards
+	 */
 	public abstract List<DevelopmentCard> getPlayerCards(Player player);
 
+	/**
+	 * Gets the single action space.
+	 *
+	 * @return the single action space
+	 */
 	public SingleActionSpace getSingleActionSpace(){
 		return singleSlot;
 	}
 	
+	/**
+	 * Gets the multiple action space.
+	 *
+	 * @return the multiple action space
+	 */
 	public MultipleActionSpace getMultipleActionSpace(){
 		return multipleSlot;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString(){
 		StringBuilder string = new StringBuilder();
 		Set<String> playerColors = new HashSet<String>();

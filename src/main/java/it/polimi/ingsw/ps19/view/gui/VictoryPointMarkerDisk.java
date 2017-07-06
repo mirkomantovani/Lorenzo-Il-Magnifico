@@ -10,33 +10,63 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * @author matteo
+ * The Class VictoryPointMarkerDisk.
  *
- *This class represents the markers to show the victory points amount of each player
+ * @author matteo
+ * 
+ * This class represents the markers to show the victory points amount of each player
  */
 public class VictoryPointMarkerDisk extends JPanel{
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2138063191515420324L;
 	
+	/** The src. */
 	private String src; //red,blue,green,yellow
+	
+	/** The Constant ORDER_DISC_DIAM. */
 	private final static int ORDER_DISC_DIAM = 36;
+	
+	/** The img. */
 	private Image img;
+	
+	/** The tool. */
 	private transient Toolkit tool = Toolkit.getDefaultToolkit();
+	
+	/** The w count. */
 	static int wCount = 0;
+	
+	/** The Constant WIDTH_PERC. */
 	private final static double WIDTH_PERC = 0.01912335958005249343832020997375;
+	
+	/** The Constant HEIGHT_PERC. */
 	private final static double HEIGHT_PERC = 0.00562962962962962962962962962963;
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.01851851851851851851851851851852;
+	
+	/** The height rel. */
 	int heightRel = (int) (tool.getScreenSize().height*HEIGHT_PERC);
+	
+	/** The width rel. */
 	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	
+	/** The Constant wOffset. */
 	private final static double wOffset = 0.04593175853018372703412073490814;
+	
+	/** The Constant hOffset. */
 	private final static double hOffset = 0.03194444444444444444444444444444;
 	
 	
+	/**
+	 * Instantiates a new victory point marker disk.
+	 *
+	 * @param color the color
+	 */
 	public VictoryPointMarkerDisk(String color){
 		src = color;
 		try {
@@ -53,6 +83,9 @@ public class VictoryPointMarkerDisk extends JPanel{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -60,6 +93,9 @@ public class VictoryPointMarkerDisk extends JPanel{
 		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
+	/**
+	 * Sets the victory point markers.
+	 */
 	private void setVictoryPointMarkers(){
 	
 		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
@@ -69,6 +105,11 @@ public class VictoryPointMarkerDisk extends JPanel{
 		
 	}
 	
+	/**
+	 * Sets the victory points amount.
+	 *
+	 * @param amount the new victory points amount
+	 */
 	public void setVictoryPointsAmount(int amount){
 		
 		Random random = new Random();

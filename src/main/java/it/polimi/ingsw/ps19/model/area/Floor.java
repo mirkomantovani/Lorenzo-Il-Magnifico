@@ -8,38 +8,71 @@ import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 
 /**
- * @author matteo
+ * The Class Floor.
  *
+ * @author matteo
  */
 public class Floor implements Serializable {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5822825459286872128L;
+	
+	/** The card. */
 	DevelopmentCard card;
+	
+	/** The action space. */
 	SingleActionSpace actionSpace;	
+	
+	/** The tower. */
 	Tower tower;
 
 	
+	/**
+	 * Instantiates a new floor.
+	 *
+	 * @param card the card
+	 * @param tower the tower
+	 * @param actionSpaceCost the action space cost
+	 * @param instantResourcesEffect the instant resources effect
+	 */
 	public Floor(DevelopmentCard card, Tower tower, int actionSpaceCost, InstantResourcesEffect instantResourcesEffect){
 		this.card = card;
 		this.tower = tower;
 		this.actionSpace = new SingleActionSpace(actionSpaceCost,instantResourcesEffect);
 	}
 
+	/**
+	 * Gets the card.
+	 *
+	 * @return the card
+	 */
 	public DevelopmentCard getCard() {
 		return card;
 	}
 	
+	/**
+	 * Sets the card.
+	 *
+	 * @param card the new card
+	 */
 	public void setCard(DevelopmentCard card) {
 		this.card = card;
 	}
 
+	/**
+	 * Gets the action space.
+	 *
+	 * @return the action space
+	 */
 	public SingleActionSpace getActionSpace() {
 		return actionSpace;
 	}
 
+	/**
+	 * Gets the tower.
+	 *
+	 * @return the tower
+	 */
 	public Tower getTower() {
 		return tower;
 	}

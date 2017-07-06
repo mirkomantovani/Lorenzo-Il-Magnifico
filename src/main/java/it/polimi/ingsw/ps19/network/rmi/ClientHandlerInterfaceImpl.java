@@ -20,13 +20,29 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
+/**
+ * The Class ClientHandlerInterfaceImpl.
+ */
 public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientHandlerInterface {
 
+	/** The server. */
 	private ServerRMIListener server;
+	
+	/** The client. */
 	private ClientInterface client;
+	
+	/** The match handler observer. */
 	private MatchHandlerObserver matchHandlerObserver;
+	
+	/** The server command handler. */
 	private ServerCommandHandler serverCommandHandler;
 
+	/**
+	 * Instantiates a new client handler interface impl.
+	 *
+	 * @param server the server
+	 * @param id the id
+	 */
 	public ClientHandlerInterfaceImpl(ServerRMIListener server, int id) {
 		this.server = server;
 		this.code = id;
@@ -38,10 +54,11 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	/**
 	 * We distinguished commands that can be sent in an asyncronous way from the
 	 * clients and are always valid and managed by the ServerCommandHandler, and
-	 * the ones which don't
-	 * 
+	 * the ones which don't.
+	 *
 	 * @author Mirko
-	 * 
+	 * @param command the command
+	 * @throws RemoteException the remote exception
 	 */
 	@Override
 	public void notifyServer(ClientToServerCommand command) throws RemoteException {
@@ -57,6 +74,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByServer()
+	 */
 	@Override
 	public void closedByServer() throws RemoteException {
 		if (!closed) {
@@ -72,6 +92,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 		closed = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.rmi.ClientHandlerInterface#addClient(int)
+	 */
 	@Override
 	public void addClient(int port) throws RemoteException {
 		System.out.println("In ClientHandlerInterfaceImpl addClient function");
@@ -99,11 +122,17 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#sendCommand(it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand)
+	 */
 	@Override
 	public void sendCommand(ServerToClientCommand command) throws RemoteException {
 		client.notifyClient(command);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByClient()
+	 */
 	@Override
 	public void closedByClient() {
 		if (!closed) {
@@ -116,16 +145,25 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		System.out.println("ClientHandleInterfaceImpl is running");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addObserver(it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver)
+	 */
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
 		this.matchHandlerObserver = matchObserver;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addCommandObserver(it.polimi.ingsw.ps19.server.ServerCommandHandler)
+	 */
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.serverCommandHandler = commandHandler;

@@ -7,23 +7,50 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
+ * The Class ExcommCube.
+ *
  * @author matteo
  * this class represent the image of excommunication dices
  */
 public class ExcommCube extends JPanel{
 	
+	/** The period. */
 	private int period;
+	
+	/** The player. */
 	private String player;
+	
+	/** The img. */
 	private Image img;
+	
+	/** The width rel. */
 	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	
+	/** The height rel. */
 	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
+	
+	/** The Constant WIDTH_PERC. */
 	private static final double WIDTH_PERC = 0.2028503937007874015748031496063;
+	
+	/** The Constant HEIGHT_PERC. */
 	private static final double HEIGHT_PERC = 0.61559259259259259259259259259259;
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.02624671916010498687664041994751;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.02351851851851851851851851851852;
+	
+	/** The Constant offset. */
 	private final static double offset = 0.075;
 
 	
+	/**
+	 * Instantiates a new excomm cube.
+	 *
+	 * @param period the period
+	 * @param player the player
+	 */
 	public ExcommCube(int period,String player){
 		this.period = period;
 		this.player = player;
@@ -60,6 +87,9 @@ public class ExcommCube extends JPanel{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

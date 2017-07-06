@@ -25,20 +25,39 @@ import it.polimi.ingsw.ps19.network.NetworkInterface;
  */
 public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 
+	/** The name. */
 	private String name;
+	
+	/** The second name. */
 	private String secondName;
+	
+	/** The client handler registry. */
 	private Registry clientHandlerRegistry;
+	
+	/** The client registry. */
 	private Registry clientRegistry;
+	
+	/** The client handler. */
 	private ClientHandlerInterface clientHandler;
+	
+	/** The client. */
 	private ClientInterface client;   //to me, useless, but more readable?
+	
+	/** The observer. */
 	private ServerToClientCommandObserver observer;
 	
+	/**
+	 * Instantiates a new client RMI interface.
+	 */
 	public ClientRMIInterface(){
 		this.name = "ClientHandler";
 		this.secondName = "Client";
 		this.client = this;          //to me, useless
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#connect()
+	 */
 	@Override
 	public void connect() throws Exception {
 		
@@ -69,6 +88,9 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 //		System.out.println("Horaay, client seems to be added");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#sendCommand(it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand)
+	 */
 	@Override
 	public void sendCommand(ClientToServerCommand command) throws Exception {
 		clientHandler.notifyServer(command);
@@ -76,12 +98,18 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 
 
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.rmi.ClientInterface#notifyClient(it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand)
+	 */
 	//Questo metodo è implementato sia da clientInterface che da networkInterface chiedere info
 	@Override
 	public void notifyClient(ServerToClientCommand command){
 		this.observer.notifyNewCommand(command);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.rmi.ClientInterface#closeConnection()
+	 */
 	@Override
 	public void closeConnection() {
 		try {
@@ -96,6 +124,9 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 		} 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#addCommandObserver(it.polimi.ingsw.ps19.client.ClientCommandHandler)
+	 */
 	@Override
 	public void addCommandObserver(ClientCommandHandler handler) {
 		this.observer = handler;		

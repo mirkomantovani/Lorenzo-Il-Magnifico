@@ -40,26 +40,45 @@ import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 /**
  * This class handles every command arriving from Client to Server, calling
  * methods of MatchHandler The reference to Match is needed to get player
- * objects from the match
- * 
- * @author Mirko
+ * objects from the match.
  *
+ * @author Mirko
  */
 public class ServerCommandHandler implements CommandObserver {
 
+	/** The handler. */
 	private MatchHandler handler;
+	
+	/** The match. */
 	private Match match;
 
+	/**
+	 * Instantiates a new server command handler.
+	 *
+	 * @param matchHandler the match handler
+	 * @param match the match
+	 */
 	public ServerCommandHandler(MatchHandler matchHandler, Match match) {
 		this.handler = matchHandler;
 		this.match = match;
 		System.out.println("Server command handler: sono stato creato");
 	}
 
+	/**
+	 * Gets the current player.
+	 *
+	 * @return the current player
+	 */
 	private Player getCurrentPlayer() {
 		return match.getCurrentPlayer();
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param placeIntoMarketCommand the place into market command
+	 * @throws NotApplicableException the not applicable exception
+	 */
 	public void applyCommand(PlaceIntoMarketCommand placeIntoMarketCommand) throws NotApplicableException {
 		try {
 			FamilyMember familyMember;
@@ -85,6 +104,11 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param placeIntoCouncilPalaceCommand the place into council palace command
+	 */
 	public void applyCommand(PlaceIntoCouncilPalaceCommand placeIntoCouncilPalaceCommand) {
 		try {
 			FamilyMember familyMember = handler.getCurrentPlayer()
@@ -105,6 +129,11 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param takeCardCommand the take card command
+	 */
 	public void applyCommand(TakeCardCommand takeCardCommand) {
 		// System.out.println("servercommandhandler: apply takecardcommand");
 		try {
@@ -127,6 +156,11 @@ public class ServerCommandHandler implements CommandObserver {
 
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param command the command
+	 */
 	public void applyCommand(ProductionCommand command) {
 		try{
 		handler.saveProductionParams(command);
@@ -139,6 +173,13 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 		}
 
+	/**
+	 * Calculate take card action.
+	 *
+	 * @param takeCardCommand the take card command
+	 * @return the action
+	 * @throws NotApplicableException the not applicable exception
+	 */
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) throws NotApplicableException {
 		System.out.println("calculating takecardaction");
 		Player player = match.getCurrentPlayer();
@@ -154,10 +195,20 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param requestClosureCommand the request closure command
+	 */
 	public void applyCommand(RequestClosureCommand requestClosureCommand) {
 		handler.clientClosedTheGame(requestClosureCommand.getPlayerColor());
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param chosenPrivilegeCommand the chosen privilege command
+	 */
 	public void applyCommand(ChosenPrivilegeCommand chosenPrivilegeCommand) {
 		handler.addPrivilegeResources(chosenPrivilegeCommand.getChoice());
 		// for(ResourceChest rc : chosenPrivilegeCommand.getChoice()){
@@ -166,15 +217,28 @@ public class ServerCommandHandler implements CommandObserver {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.observers.CommandObserver#notifyNewCommand(it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand)
+	 */
 	@Override
 	public void notifyNewCommand(ClientToServerCommand command) {
 		command.processCommand(this);
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param discardLeaderCardCommand the discard leader card command
+	 */
 	public void applyCommand(DiscardLeaderCardCommand discardLeaderCardCommand) {
 		handler.discardLeaderCard(discardLeaderCardCommand.getLeaderName());
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param activateLeaderCardCommand the activate leader card command
+	 */
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) {
 		if(handler.getCurrentPlayer().getLeaderCards().containsKey(activateLeaderCardCommand.getLeaderName()))
 			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
@@ -184,44 +248,96 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param churchSupportCommand the church support command
+	 */
 	public void applyCommand(ChurchSupportCommand churchSupportCommand) {
 		handler.handleChurchSupportDecision(churchSupportCommand.getPlayerColor(), churchSupportCommand.getDecision());
 
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param command the command
+	 * @param clientHandler the client handler
+	 */
 	public void applyCommand(SendCredentialsCommand command, ClientHandler clientHandler) {
 		handler.handleCredentials(command.getUsername(), command.getPassword(), clientHandler);
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param command the command
+	 */
 	public void applyCommand(ChosenLeaderCardCommand command) {
 		handler.handleLeaderChoice(command.getName(), command.getPlayerColor());
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param playerMoveCommand the player move command
+	 * @param clientHandler the client handler
+	 */
 	public void applyCommand(PlayerMoveCommand playerMoveCommand, ClientHandler clientHandler) {
 		// handler.handlePlayerMove(playerMoveCommand.getMove(), clientHandler);
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param finishRoundCommand the finish round command
+	 */
 	public void applyCommand(FinishRoundCommand finishRoundCommand) {
 		handler.finishRound();
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param invalidInputCommand the invalid input command
+	 */
 	public void applyCommand(InvalidInputCommand invalidInputCommand) {
 		handler.handleInvalidCommand();
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param productionActivationCommand the production activation command
+	 */
 	public void applyCommand(ProductionActivationCommand productionActivationCommand) {
 		handler.handleProductionActivation(productionActivationCommand);
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param sendCredentialsCommand the send credentials command
+	 */
 	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param chatMessageClientCommand the chat message client command
+	 */
 	public void applyCommand(ChatMessageClientCommand chatMessageClientCommand) {
 		handler.sendToAllPlayers(new ChatMessageServerCommand(chatMessageClientCommand.getMessage()));
 	}
 
+	/**
+	 * Apply command.
+	 *
+	 * @param harvestCommand the harvest command
+	 */
 	public void applyCommand(HarvestCommand harvestCommand) {
 		try{
 		FamilyMember member = handler.getCurrentPlayer().getFamilyMember(harvestCommand.getFamilyMember());

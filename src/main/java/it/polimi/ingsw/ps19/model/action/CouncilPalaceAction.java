@@ -7,11 +7,24 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.CouncilPalace;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
+/**
+ * The Class CouncilPalaceAction.
+ */
 public class CouncilPalaceAction extends Action {
 	
+	/** The council palace. */
 	private CouncilPalace councilPalace;
+	
+	/** The paid servants. */
 	int paidServants;
 	
+	/**
+	 * Instantiates a new council palace action.
+	 *
+	 * @param familyMember the family member
+	 * @param councilPalace the council palace
+	 * @param paidServants the paid servants
+	 */
 	public CouncilPalaceAction(FamilyMember familyMember, CouncilPalace councilPalace, int paidServants){
 		
 		super(familyMember);
@@ -19,6 +32,9 @@ public class CouncilPalaceAction extends Action {
         this.paidServants = paidServants;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#apply()
+	 */
 	@Override
 	public void apply() throws NotApplicableException {
 		if(isApplicable()){
@@ -30,6 +46,9 @@ public class CouncilPalaceAction extends Action {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#isApplicable()
+	 */
 	@Override
 	public boolean isApplicable() {
 		if((familyMember.getActionValue() + paidServants)< this.councilPalace.getActionValueRequired()){

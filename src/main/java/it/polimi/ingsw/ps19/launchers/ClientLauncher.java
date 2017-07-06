@@ -10,16 +10,24 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 import it.polimi.ingsw.ps19.view.UserInterfaceFactory;
 
 /**
+ * The Class ClientLauncher.
+ *
  * @author matteo
  * 
-1 * this is the client, it should have a main to ask the user which 
+ * 1 * this is the client, it should have a main to ask the user which 
  * connection and which UI he wants to use, and to set up the choice
- *
  */
 public class ClientLauncher {
 	
 
+	/** The i. */
 	static Scanner  i;
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		
 		NetworkInterface networkInterface;

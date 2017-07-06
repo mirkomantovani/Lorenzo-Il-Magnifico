@@ -21,17 +21,30 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import java.awt.Dimension;
 
+/**
+ * The Class PlayerResources.
+ */
 public class PlayerResources extends JPanel {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The resources. */
 	private Map<ResourceType,JResource> resources;
 	
+	/** The family members. */
 	private Map<it.polimi.ingsw.ps19.Color,JLabel> familyMembers;
+	
+	/** The family grid panel. */
 	private JPanel familyGridPanel;
 	
 	
+	/**
+	 * Instantiates a new player resources.
+	 *
+	 * @param resourceWidth the resource width
+	 * @param playerColor the player color
+	 */
 	public PlayerResources(int resourceWidth,String playerColor) {
 		
 		
@@ -122,14 +135,25 @@ public class PlayerResources extends JPanel {
 	
 
 	
+	/**
+	 * Refresh resource.
+	 *
+	 * @param r the r
+	 */
 	public void refreshResource(Resource r){
 		resources.get(r.getResourceType()).setAmount(r.getAmount());
 	}
 	
+	/**
+	 * Removes the all family members.
+	 */
 	public void removeAllFamilyMembers(){
 		familyGridPanel.removeAll();
 	}
 	
+	/**
+	 * Adds the all family members.
+	 */
 	public void addAllFamilyMembers(){
 		
 		for(int i=0;i<it.polimi.ingsw.ps19.Color.values().length;i++)
@@ -138,6 +162,11 @@ public class PlayerResources extends JPanel {
 
 
 
+	/**
+	 * Refresh family members.
+	 *
+	 * @param families the families
+	 */
 	public void refreshFamilyMembers(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> families) {
 		this.removeAllFamilyMembers();
 //		for(FamilyMember mem : families.values()){

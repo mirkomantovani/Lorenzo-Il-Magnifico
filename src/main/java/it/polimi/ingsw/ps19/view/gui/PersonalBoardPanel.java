@@ -11,18 +11,28 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * @author Mirko
+ * The Class PersonalBoardPanel.
  *
+ * @author Mirko
  */
 public class PersonalBoardPanel extends JPanel {
 
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The img. */
 	private Image img;
+	
+	/** The dimension. */
 	private Dimension dimension;
+	
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 
+	/**
+	 * Instantiates a new personal board panel.
+	 */
 	public PersonalBoardPanel() {
 		super(null);
 		
@@ -44,6 +54,9 @@ dimension = toolkit.getScreenSize();
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

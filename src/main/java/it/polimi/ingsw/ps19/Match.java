@@ -21,32 +21,61 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
- * @author Mirko
+ * The Class Match.
  *
+ * @author Mirko
  */
 public class Match {
 
+	/** The Constant roundResourceSupply. */
 	private static final ResourceChest roundResourceSupply = new ResourceChest(0, 2, 2, 3, 0, 0, 0);
+	
+	/** The board. */
 	private Board board;
+	
+	/** The players. */
 	// private List<Player> players;
 	private Player[] players;
+	
+	/** The disconnected players. */
 	private Player[] disconnectedPlayers;
 	
+	/** The added players. */
 	private int addedPlayers;
+	
+	/** The added disconnected players. */
 	private int addedDisconnectedPlayers;
+	
+	/** The current player. */
 	private int currentPlayer = 0;
 	
+	/** The match finished. */
 	private boolean matchFinished;
 	
+	/** The observer. */
 	private MatchObserver observer;
 	
+	/** The playercolors. */
 	private String[] playercolors;
+	
+	/** The playerscreated. */
 	private int playerscreated;
 	
+	/** The leader cards. */
 	private LeaderDeck leaderCards;
+	
+	/** The period. */
 	private Period period;
+	
+	/** The turn. */
 	private int turn = 0;
 
+	/**
+	 * Instantiates a new match.
+	 *
+	 * @param numPlayers the num players
+	 * @param matchObserver the match observer
+	 */
 	public Match(int numPlayers, MatchHandler matchObserver) {
 		this.setMatchObserver(matchObserver);
 		try {
@@ -76,6 +105,9 @@ public class Match {
 
 	}
 
+	/**
+	 * Shuffle colors.
+	 */
 	private void shuffleColors() {
 		ArrayList<String> colors = new ArrayList<>();
 		colors.add("Red");
@@ -90,6 +122,12 @@ public class Match {
 
 	}
 
+	/**
+	 * Adds the player.
+	 *
+	 * @param p the p
+	 * @throws MatchFullException the match full exception
+	 */
 	public void addPlayer(Player p) throws MatchFullException {
 
 		if (addedPlayers == players.length)
@@ -101,6 +139,12 @@ public class Match {
 		}
 	}
 	
+	/**
+	 * Adds the disconnected player.
+	 *
+	 * @param p the p
+	 * @throws MatchFullException the match full exception
+	 */
 	public void addDisconnectedPlayer(Player p) throws MatchFullException{
 		if(!isDisconnected(p)){
 		
@@ -116,6 +160,12 @@ public class Match {
 		
 	}
 
+	/**
+	 * Checks if is disconnected.
+	 *
+	 * @param p the p
+	 * @return true, if is disconnected
+	 */
 	private boolean isDisconnected(Player p) {
 		for(int i=0;i<disconnectedPlayers.length;i++){
 			if(p==disconnectedPlayers[i])
@@ -124,18 +174,39 @@ public class Match {
 		return false;
 	}
 
+	/**
+	 * Gets the board.
+	 *
+	 * @return the board
+	 */
 	public Board getBoard() {
 		return board;
 	}
 
+	/**
+	 * Gets the players.
+	 *
+	 * @return the players
+	 */
 	public synchronized Player[] getPlayers() {
 		return players;
 	}
 
+	/**
+	 * Gets the added players.
+	 *
+	 * @return the added players
+	 */
 	public int getAddedPlayers() {
 		return addedPlayers;
 	}
 
+	/**
+	 * Creates the and return player.
+	 *
+	 * @param id the id
+	 * @return the player
+	 */
 	public Player createAndReturnPlayer(int id) {
 		Player player = new Player("", playercolors[playerscreated]);
 		playerscreated++;
@@ -148,22 +219,50 @@ public class Match {
 		return player;
 	}
 
+	/**
+	 * Sets the initial player.
+	 */
 	public void setInitialPlayer() {
 		currentPlayer = 0;
 	}
 
+	/**
+	 * Gets the current player.
+	 *
+	 * @return the current player
+	 */
 	public Player getCurrentPlayer() {
 		return this.players[this.currentPlayer];
 	}
 
+	/**
+	 * Gets the floor.
+	 *
+	 * @param cardType the card type
+	 * @param index the index
+	 * @return the floor
+	 */
 	public Floor getFloor(CardType cardType, int index) {
 		return this.board.getFloor(cardType, index);
 	}
 
+	/**
+	 * Sets the match observer.
+	 *
+	 * @param observer the new match observer
+	 */
 	public void setMatchObserver(MatchObserver observer) {
 		this.observer = observer;
 	}
 
+	/**
+	 * Gets the current player production choices.
+	 *
+	 * @param familyMember the family member
+	 * @param actionSpace the action space
+	 * @param paidServants the paid servants
+	 * @return the current player production choices
+	 */
 	public List<String[]> getCurrentPlayerProductionChoices(String familyMember, int actionSpace, int paidServants) {
 
 		List<String[]> choices = new ArrayList<>();
@@ -191,6 +290,15 @@ public class Match {
 		return choices;
 	}
 
+	/**
+	 * Checks if is applicable.
+	 *
+	 * @param card the card
+	 * @param fm the fm
+	 * @param player the player
+	 * @param paidServants the paid servants
+	 * @return true, if is applicable
+	 */
 	public boolean isApplicable(DevelopmentCard card, FamilyMember fm, Player player, int paidServants) {
 		// System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO
 		// CONTROLLANDO LA CARTA: !" + card.toString());
@@ -203,6 +311,11 @@ public class Match {
 				+ paidServants >= card.getActivationCost());
 	}
 
+	/**
+	 * Gets the church support cost in period.
+	 *
+	 * @return the church support cost in period
+	 */
 	public int getChurchSupportCostInPeriod() {
 		if (this.period == Period.FIRST) {
 			return BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST;
@@ -213,6 +326,11 @@ public class Match {
 		}
 	}
 
+	/**
+	 * Gets the church support prize in period.
+	 *
+	 * @return the church support prize in period
+	 */
 	public MilitaryPoint getChurchSupportPrizeInPeriod() {
 
 		if (this.period == Period.FIRST) {
@@ -224,14 +342,27 @@ public class Match {
 		}
 	}
 
+	/**
+	 * Gets the period.
+	 *
+	 * @return the period
+	 */
 	public Period getPeriod() {
 		return period;
 	}
 
+	/**
+	 * Gets the leader cards.
+	 *
+	 * @return the leader cards
+	 */
 	public LeaderDeck getLeaderCards() {
 		return leaderCards;
 	}
 
+	/**
+	 * Distribute turn resources.
+	 */
 	public void distributeTurnResources() {
 		for (int i = 0; i < players.length; i++) {
 
@@ -248,6 +379,11 @@ public class Match {
 
 	}
 
+	/**
+	 * Sets the players.
+	 *
+	 * @param players the new players
+	 */
 	public void setPlayers(Player[] players) {
 		this.players = players;
 		this.refreshOrder();
@@ -255,6 +391,9 @@ public class Match {
 	
 	
 
+	/**
+	 * Refresh order.
+	 */
 	private void refreshOrder() {
 		ArrayList<String> playerOrder=new ArrayList<String>();
 		for(int i=0;i<players.length;i++){
@@ -265,10 +404,16 @@ public class Match {
 		
 	}
 
+	/**
+	 * Increment turn.
+	 */
 	public void incrementTurn() {
 		this.turn++;
 	}
 
+	/**
+	 * Handle periods and turns.
+	 */
 	public void handlePeriodsAndTurns() {
 		System.out.println("MATCH: SONO IN HANDLEPERIODSANDTURN");
 		incrementTurn();
@@ -283,10 +428,20 @@ public class Match {
 		
 	}
 
+	/**
+	 * Gets the turn.
+	 *
+	 * @return the turn
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * Sets the next player.
+	 *
+	 * @throws EveryPlayerDisconnectedException the every player disconnected exception
+	 */
 	public void setNextPlayer() throws EveryPlayerDisconnectedException {
 		
 		if(players.length==addedDisconnectedPlayers){
@@ -303,6 +458,12 @@ public class Match {
 			this.setNextPlayer();
 	}
 
+	/**
+	 * Checks if is disconnected.
+	 *
+	 * @param currentPlayer the current player
+	 * @return true, if is disconnected
+	 */
 	private boolean isDisconnected(int currentPlayer) {
 		for(int i=0;i<disconnectedPlayers.length;i++){
 			if(players[currentPlayer]==disconnectedPlayers[i]){
@@ -313,6 +474,9 @@ public class Match {
 		return false;
 	}
 
+	/**
+	 * Sets the player order.
+	 */
 	public void setPlayerOrder() {
 		ArrayList<String> colors = new ArrayList<String>();
 		for (int i = 0; i < players.length; i++)
@@ -320,6 +484,9 @@ public class Match {
 		this.board.setPlayerOrder(colors);
 	}
 
+	/**
+	 * Adds the family members to players.
+	 */
 	public void addFamilyMembersToPlayers() {
 		for (int i = 0; i < players.length; i++) {
 			players[i].addFamilyMembers();
@@ -327,6 +494,9 @@ public class Match {
 
 	}
 
+	/**
+	 * Refresh dices value for players.
+	 */
 	public void refreshDicesValueForPlayers() {
 		for (int i = 0; i < this.getPlayers().length; i++)
 			this.getPlayers()[i].refreshFamilyMemberValues();
@@ -334,6 +504,8 @@ public class Match {
 	}
 
 	/**
+	 * Clear board.
+	 *
 	 * @matteo this method removes all the familyMember placed in the game Board
 	 */
 	public void clearBoard() {
@@ -367,6 +539,11 @@ public class Match {
 		}
 	}
 
+	/**
+	 * Checks if is anyone still playing.
+	 *
+	 * @return true, if is anyone still playing
+	 */
 	public boolean isAnyoneStillPlaying() {
 		return !matchFinished;
 	}
