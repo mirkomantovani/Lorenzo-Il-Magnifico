@@ -873,11 +873,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	public void updateOrder(Board board) {
+		int j=0;
 		for (int i = 0; i < board.getPlayerOrder().size(); i++) {
-			if(orderMarkers.get(i).getSrc().equals(board.getPlayerOrder().get(i))){
+			if(orderMarkers.get(i).getSrc().equals((board.getPlayerOrder().get(j)))){
 				orderMarkers.get(i).setOrderMarkers();
+			j++;
 			}
-
+			
 		}
 	}
 
@@ -1000,21 +1002,29 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),board.getChurch().getExcommunicationFirst().toString())); 
 		      boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),board.getChurch().getExcommunicationSecond().toString())); 
 		      boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),board.getChurch().getExcommunicationThird().toString()));
-			for(int i = 0; i<orderMarkers.size(); i++){
-				boardPanel.add(new ExcommDice(1,"red"));
-				boardPanel.add(new ExcommDice(2,orderMarkers.get(i).getSrc()));
-				boardPanel.add(new ExcommDice(3,orderMarkers.get(i).getSrc()));
-			}
+	
 		}
 		
 	}
 
 	public void addExcommunicationCubes(Player p) {
-//		if(p.isExcommunicatedFirst())
-//			
-//		if(p.isExcommunicatedSecond())
-//			
-//		if(p.isExcommunicatedThird())
+    	if(p.isExcommunicatedFirst()){
+    		ExcommCube first = new ExcommCube(1,p.getColor());
+    		boardPanel.add(first);
+    		first.getParent().setComponentZOrder(first, 0);
+    	}
+		
+    	if(p.isExcommunicatedSecond()){
+    		ExcommCube second = new ExcommCube(2,p.getColor());
+    		boardPanel.add(second);
+    		second.getParent().setComponentZOrder(second, 0);
+    	}
+			
+		if(p.isExcommunicatedThird()){
+			ExcommCube third = new ExcommCube(3,p.getColor());
+    		boardPanel.add(third);
+    		third.getParent().setComponentZOrder(third, 0);
+		}
 		
 	}
 

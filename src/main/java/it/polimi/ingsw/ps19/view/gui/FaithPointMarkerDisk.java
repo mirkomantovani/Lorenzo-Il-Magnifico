@@ -58,7 +58,6 @@ public class FaithPointMarkerDisk extends JPanel{
 		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount ;
 	}
 	
 	
@@ -74,30 +73,29 @@ public class FaithPointMarkerDisk extends JPanel{
 		
 		widthRel = (int) ((BoardPanel.dimension.getWidth() + n)*WIDTH_PERC);
 		if(val <=2){
-			widthRel = (int) (widthRel + val*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int) (widthRel + val*slotRelDim*(BoardPanel.dimension.getWidth()));
 			this.setFaithPointMarkers();
 			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		}
 		else if(val > 6){
-			widthRel = (int)(widthRel + 8.5*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + 8.5*slotRelDim*(BoardPanel.dimension.getWidth()));
 			widthRel = (int)(widthRel + (val-8.5)*slotRelDim*BoardPanel.dimension.getWidth());
 			this.setFaithPointMarkers();
 			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		} else if(val == 3){
-			widthRel = (int)(widthRel + 3.5*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + 3.5*slotRelDim*(BoardPanel.dimension.getWidth()));
 			this.setFaithPointMarkers();
-			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+			widthRel = (int) ((BoardPanel.dimension.getWidth() + n)*WIDTH_PERC);
 		} else if(val == 4){
-			widthRel = (int)(widthRel + 5.2*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + 5.2*slotRelDim*(BoardPanel.dimension.getWidth()));
 			this.setFaithPointMarkers();
 			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		} else {
-			widthRel = (int)(widthRel + 7*slotRelDim*BoardPanel.dimension.getWidth());
+			widthRel = (int)(widthRel + 7*slotRelDim*(BoardPanel.dimension.getWidth()));
 			this.setFaithPointMarkers();
 			widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 		}
 		
-		System.out.println("new width" + widthRel);
 	}
 
 }
