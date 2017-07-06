@@ -117,7 +117,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private Map<String, FamilyMemberPawn> familiars; // the key is
 														// diceColor+playerColor
 
-	public GamePanel(String playerColor) {
+	public GamePanel(String playerColor, int numPlayers) {
 
 		cards = new ArrayList<CardButton>();
 
@@ -279,6 +279,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		secondMarket.addActionListener(this);
 		boardPanel.add(secondMarket);
 
+		if(numPlayers>3){
 		thirdMarket = new MarketButton(3);
 		thirdMarket.addActionListener(this);
 		boardPanel.add(thirdMarket);
@@ -286,6 +287,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		fourthMarket = new MarketButton(4);
 		fourthMarket.addActionListener(this);
 		boardPanel.add(fourthMarket);
+	    }
 
 		councilButton = new CouncilButton();
 		councilButton.addActionListener(this);
@@ -299,6 +301,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		singleProductionButton.addActionListener(this);
 		boardPanel.add(singleProductionButton);
 
+		if(numPlayers>2){
 		multipleHarvestButton = new MultipleHarvestButton();
 		multipleHarvestButton.addActionListener(this);
 		boardPanel.add(multipleHarvestButton);
@@ -306,6 +309,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		multipleProductionButton = new MultipleProductionButton();
 		multipleProductionButton.addActionListener(this);
 		boardPanel.add(multipleProductionButton);
+		}
 
 		// ACTION PANELS
 
@@ -873,14 +877,22 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	public void updateOrder(Board board) {
-		int j=0;
-		for (int i = 0; i < board.getPlayerOrder().size(); i++) {
-			if(orderMarkers.get(i).getSrc().equals((board.getPlayerOrder().get(j)))){
-				orderMarkers.get(i).setOrderMarkers();
-			j++;
-			}
-			
+		
+		ArrayList<String> playerColor=board.getPlayerOrder();
+		for(int i = 0; i < playerColor.size(); i++){
+		getOrderFromColor(playerColor.get(i)).setOrderMarkers();
 		}
+		
+	}
+
+	private OrderMarkerDisk getOrderFromColor(String color) {
+		for(int i=0;i<orderMarkers.size();i++){
+			if(orderMarkers.get(i).getSrc().equals(color))
+				return orderMarkers.get(i);
+		}
+		System.out.println("error, order markers not initialized correctly");
+		return null;
+		
 	}
 
 	public void populateFamiliars(Board board) {
@@ -1025,6 +1037,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
     		boardPanel.add(third);
     		third.getParent().setComponentZOrder(third, 0);
 		}
+		
+	}
+
+	public void playerDisconnected() {
+		this.currentActionPanel=null;
+		this.removeActionPanel();
 		
 	}
 

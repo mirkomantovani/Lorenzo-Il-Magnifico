@@ -19,7 +19,7 @@ public interface UserInterface {
 	
 	public void startDraft(ArrayList<LeaderCard> leaderCards);
 	
-	public void initializeMatch();
+	public void initializeMatch(int numPlayers);
 	
 	public void initializeTurn(Period period, int turn);
 	
@@ -73,6 +73,8 @@ public interface UserInterface {
 	public void askFinishRoundOrDiscard();
 	
 	public void actionCommandNotValid(String reason);
+
+	public void notifyServerClosed();
 
 
 }

@@ -43,7 +43,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 	@Override
-	public void initializeMatch() {
+	public void initializeMatch(int numPlayers) {
 		print("A new game is about to start!");
 	}
 
@@ -396,6 +396,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void actionCommandNotValid(String reason) {
 		print("Your action is invalid!");
 		print(reason);
+	}
+
+	@Override
+	public void notifyServerClosed() {
+print("The server has closed the game");		
 	}
 	
 }

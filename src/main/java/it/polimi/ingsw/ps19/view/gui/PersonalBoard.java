@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,6 +39,8 @@ public class PersonalBoard extends JFrame {
 	public PersonalBoard() {
 		setUndecorated(true);
 		setResizable(false);
+		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("/MJMLogoTransparent.png")));
 		
 		personalBoardPanel = new PersonalBoardPanel();
 		getContentPane().add(personalBoardPanel, BorderLayout.CENTER);
