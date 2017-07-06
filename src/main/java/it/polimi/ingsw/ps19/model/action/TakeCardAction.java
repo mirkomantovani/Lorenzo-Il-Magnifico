@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.model.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Color;
@@ -124,8 +125,38 @@ public class TakeCardAction extends Action {
 			if (!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()) {
 				System.out.println("takecardaction sono nella isnomilitarypoints");
 				
+				
+				try{
+//				List l=Board.getMilitaryRequirementsForTerritories();
+//				l=new ArrayList<>();
+//				
+//				int a=(int) (Board.getMilitaryRequirementsForTerritories().get(0));
+//				int b=(int) (Board.getMilitaryRequirementsForTerritories().get(1));
+//				int c=(int) (Board.getMilitaryRequirementsForTerritories().get(2));
+//				int d=(int) (Board.getMilitaryRequirementsForTerritories().get(3));
+//				System.out.println(a);
+//				System.out.println(b);
+//				System.out.println(c);
+//				System.out.println(d);
+//				
+//				l.forEach(point -> System.out.println(point));
+				
+//				System.out.println(l.get(0));
+//				System.out.println(l.get(1));
+//				System.out.println(l.get(2));
+				
+				int len=player.getDeckOfType(card.getCardType()).size();
+				
+				System.out.println("player deck length :"+player.getDeckOfType(card.getCardType()).size());
+				
 				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()
-						.get(player.getDeckOfType(card.getCardType()).size() + 1))));
+						.get(len))));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				
+				
 				
 				System.out.println("takecard punti del player");
 				if ((int) (Board.getMilitaryRequirementsForTerritories()

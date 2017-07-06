@@ -166,8 +166,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-		startLeaderDiscardPhase();
-//		 startTurn();
+//		startLeaderDiscardPhase();
+		
+		 startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -222,6 +223,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
+			match.incrementTurn();
 
 			initTurn();
 
@@ -258,9 +260,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startRound() {
-		if (roundTimerThread != null)
-			if (roundTimerThread.isAlive())
-				roundTimerThread.interrupt();
+		stopTimerIfAlive();
 
 		roundNumber++;
 		sendToCurrentPlayer(new AskMoveCommand());
@@ -526,10 +526,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void startExcommunicationPhase() {
+		
+		stopTimerIfAlive();
 
 		ExcommunicationTile excommTile = getCurrentExcommTile();
 
 		sendToAllPlayers(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
+	}
+
+	private void stopTimerIfAlive() {
+		if (roundTimerThread != null)
+			if (roundTimerThread.isAlive())
+				roundTimerThread.interrupt();
 	}
 
 	public void handleCredentials(String username, String password, ClientHandler clientHandler) {
@@ -921,7 +929,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
-
+			System.out.println("matchHandler: excommunicationCommandSent");
 		}
 
 		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
