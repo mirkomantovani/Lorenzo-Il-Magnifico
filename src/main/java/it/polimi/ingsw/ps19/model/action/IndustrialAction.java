@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
+import it.polimi.ingsw.ps19.model.area.MultipleActionSpace;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
@@ -87,6 +88,8 @@ public class IndustrialAction extends Action {
 	 */
 	private boolean canBePlaced() {
 		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
+		if(actionSpace instanceof MultipleActionSpace)
+			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants);
 		return actionSpace.isOccupable(this.familyMember);
 	}
 

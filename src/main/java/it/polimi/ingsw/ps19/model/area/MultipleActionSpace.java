@@ -47,16 +47,17 @@ public class MultipleActionSpace extends ActionSpace {
 	private boolean checkAvailability(FamilyMember familyMember){
 		
 		boolean available = true;
+		System.out.println("\n\nFamily member color's " + familyMember.getColor().toString() + "\n\n");
 		
 		for(FamilyMember member : members){
 			//Se esiste un family member dentro members che ha come player lo stesso di quello passato
 			//come parametro, e il cui colore non sia neutral allora non è possibile farlo
-			if(member.getPlayer() == familyMember.getPlayer() && member.getDice().getColor() != Color.NEUTRAL){
+			if(member.getPlayer() == familyMember.getPlayer() && familyMember.getDice().getColor() != Color.NEUTRAL){
 				available = false;
 				break;  					 //L'ho visto fare da qualche parte nel corso :-)
 			}
 		}
-		
+		System.out.println("available: " + available + "\n\n");
 		return available || familyMember.getDice().getColor() == Color.NEUTRAL;
 	}
 	
@@ -64,11 +65,14 @@ public class MultipleActionSpace extends ActionSpace {
 	/* (non-Javadoc)
 	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
 	 */
-	@Override
-	public boolean isOccupable(FamilyMember familyMember) {
+	
+	public boolean isOccupable(FamilyMember familyMember, int paidServants) {
 		if(!checkAvailability(familyMember))
 			System.out.println("Non occupabile");
-		return familyMember.getActionValue() > this.actionValueRequired && checkAvailability(familyMember);
+		System.out.println("Family member action value: " + familyMember.getActionValue());
+		System.out.println("Action value required " + this.actionValueRequired);
+		System.out.println("Checkavailabity " + checkAvailability(familyMember));
+		return familyMember.getActionValue() + paidServants > this.actionValueRequired && checkAvailability(familyMember);
 	}
 	
 	/* (non-Javadoc)
@@ -137,6 +141,12 @@ public class MultipleActionSpace extends ActionSpace {
 		builder.append(" player ");
 		}
 		return builder.toString();
+	}
+
+	@Override
+	public boolean isOccupable(FamilyMember familyMember) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
