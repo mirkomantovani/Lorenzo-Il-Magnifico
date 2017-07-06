@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
@@ -36,7 +37,12 @@ public class ActivateLeaderCardCommand extends ClientToServerCommand{
 	 */
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-		serverHandlerCommand.applyCommand(this);
+		try {
+			serverHandlerCommand.applyCommand(this);
+		} catch (NotApplicableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
