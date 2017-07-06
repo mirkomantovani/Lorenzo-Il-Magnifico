@@ -114,8 +114,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private Map<String, VictoryPointMarkerDisk> victoryMarkers;
 	private Map<String, MilitaryPointMarkerDisk> militaryMarkers;
 	private Map<String, FaithPointMarkerDisk> faithMarkers;
-	private Map<String, FamilyMemberPawn> familiars; // the key is
-														// diceColor+playerColor
+	private Map<String, FamilyMemberPawn> familiars; // the key is diceColor+playerColor
+	private Map<String, DicePanel> dices;  // (String) diceValue + diceColor
 
 	public GamePanel(String playerColor, int numPlayers) {
 
@@ -151,8 +151,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// MarketButton market=new MarketButton();
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
-		
-		
 		
 
 
@@ -400,6 +398,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		militaryMarkers = new HashMap<String, MilitaryPointMarkerDisk>();
 		faithMarkers = new HashMap<String, FaithPointMarkerDisk>();
 		familiars = new HashMap<String, FamilyMemberPawn>();
+		dices = new HashMap<String,DicePanel>();
+		createDices();
 	}
 
 	public void addCard(int tower, int floor, int id, String descr) {
@@ -1046,4 +1046,22 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		
 	}
 
+	
+	public void createDices(){
+		for(int i = 1; i < 7; i++){
+			dices.put(String.valueOf(i) + "black", new DicePanel(i,"black"));
+			dices.put(String.valueOf(i) + "white", new DicePanel(i,"white"));
+			dices.put(String.valueOf(i) + "orange", new DicePanel(i,"orange"));
+		}
+	}
+	
+	public void setDices(Board board){
+		if(board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0 &&
+				board.getDices().get(Dice.ORANGE_DICE)!= 0){
+		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.BLACK_DICE)) + "black"));
+		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.WHITE_DICE)) + "white"));
+		boardPanel.add(dices.get(String.valueOf(board.getDices().get(Dice.ORANGE_DICE)) + "orange"));
+	
+		}
+	}
 }
