@@ -8,6 +8,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ * This class represents the Pawn image for each family member in the game
+ *
+ */
 public class FamilyMemberPawn extends JPanel{
 	/**
 	 * 

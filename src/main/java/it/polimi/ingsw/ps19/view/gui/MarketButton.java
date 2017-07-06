@@ -6,6 +6,11 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 
+/**
+ * @author matteo
+ * This is the class for the market buttons
+ *
+ */
 public class MarketButton extends JButton {
 	
 	private int widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);

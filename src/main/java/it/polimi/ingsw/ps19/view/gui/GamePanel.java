@@ -762,6 +762,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
+	/**
+	 * @param board
+	 *  This class creates the marker for the order and this should be done only one time at the 
+	 *  beggining of the match
+	 */
 	public void createMarkers(Board board) {
 		if (orderMarkers.isEmpty()) {
 			for (int i = 0; i < board.getPlayerOrder().size(); i++) {

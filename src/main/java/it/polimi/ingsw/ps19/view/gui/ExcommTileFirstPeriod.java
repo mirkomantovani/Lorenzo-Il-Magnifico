@@ -8,9 +8,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class ExcommTileFirstPeriod extends JPanel{
-
+	
 	/**
-	 * 
+	 * @author matteo
+	 * This class represents the image of a first period excommunication tile
 	 */
 	private static final long serialVersionUID = -4041818591027769735L;
 	

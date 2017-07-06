@@ -333,6 +333,10 @@ public class Player implements Serializable {
 	public void setExcommunicatedThird(boolean isExcommunicatedThird) {
 		this.isExcommunicatedThird = isExcommunicatedThird;
 	}
+	public MatchObserver getObserver() {
+		return observer;
+	}
+	
 	
 	
 }

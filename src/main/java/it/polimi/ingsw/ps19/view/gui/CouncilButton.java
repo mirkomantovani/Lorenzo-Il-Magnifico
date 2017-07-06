@@ -4,6 +4,11 @@ import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 
+/**
+ * @author matteo
+ * This class represents the button to place a familiar into the market area
+ *
+ */
 public class CouncilButton extends JButton {
 	
 	private final static double wCOUNCIL =0.46281102362204724409448818897638;

@@ -6,6 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ * this class represent the image of excommunication dices
+ */
 public class ExcommCube extends JPanel{
 	
 	private int period;

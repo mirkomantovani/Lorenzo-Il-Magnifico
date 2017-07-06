@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 /**
  * @author matteo
  *
+ *This class represents the images of the marker discs to show the order of in-game players
  */
 public class OrderMarkerDisk extends JPanel{
 

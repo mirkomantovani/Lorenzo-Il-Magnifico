@@ -7,6 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ *
+ * This class represent the dices images on the boardPanel
+ */
 public class DicePanel extends JPanel{
 
 	/**
@@ -26,6 +31,14 @@ public class DicePanel extends JPanel{
 
 
 	
+	/**
+	 * @param value
+	 * @param diceColor
+	 */
+	/**
+	 * @param value
+	 * @param diceColor
+	 */
 	public DicePanel(int value,String diceColor){
 		this.value = value;
 		this.diceColor = diceColor;

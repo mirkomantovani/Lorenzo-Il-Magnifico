@@ -4,6 +4,10 @@ import java.awt.Cursor;
 
 import javax.swing.JButton;
 
+/**
+ * @author matteo
+ * This button leads a player to place familiars in the single harvest area
+ */
 public class SingleHarvestButton extends JButton {
 	private final static double wDIM_PERC = 0.07874015748031496062992125984252;
 	private final static double hDIM_PERC = 0.05555555555555555555555555555556;
@@ -12,7 +16,7 @@ public class SingleHarvestButton extends JButton {
 	private final static double wFIRST_SLOT = 0.17716535433070866141732283464567;
 	private final static double hFIRST_SLOT = 0.08333333333333333333333333333333;
 	private final static double wHarvest = 0.06561679790026246719160104986877;
-	private final static double hHarvest = 0.81018518518518518518518518518519;
+	private final static double hHarvest = 0.88888888888888888888888888888889;
 	
 	
 	public SingleHarvestButton() {

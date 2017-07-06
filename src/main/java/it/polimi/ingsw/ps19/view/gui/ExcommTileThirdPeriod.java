@@ -7,6 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ * This class represents the image of a third period excommunication tile
+ *
+ */
 public class ExcommTileThirdPeriod extends JPanel{
 
 	

@@ -9,6 +9,11 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ * This class represents the marker images to count the military point amount for each player
+ *
+ */
 public class MilitaryPointMarkerDisk extends JPanel{
 	
 

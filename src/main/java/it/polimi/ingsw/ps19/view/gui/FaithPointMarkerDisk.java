@@ -9,6 +9,11 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ *  This class represents the images of the markers for the faithPoint of each player
+ *
+ */
 public class FaithPointMarkerDisk extends JPanel{
 
 	/**

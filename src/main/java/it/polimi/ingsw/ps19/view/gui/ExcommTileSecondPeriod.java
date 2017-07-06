@@ -6,11 +6,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author matteo
+ * This class represents the image of a second period excommunication tile
+ * 
+ *
+ */
 public class ExcommTileSecondPeriod extends JPanel{
 
 	
 	
 	/**
+	 * 
 	 * 
 	 */
 	private static final long serialVersionUID = -3936204196996153621L;
