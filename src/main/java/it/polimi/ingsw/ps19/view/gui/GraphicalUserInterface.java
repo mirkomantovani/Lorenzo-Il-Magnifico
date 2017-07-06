@@ -137,6 +137,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeTurn(Period period, int turn) {
 		writeGameMessage("A new turn is starting, Period:" + period.toString() + " Turn:" + turn);
 		FamilyMemberPawn.councilCounter = 0;
+		frame.getGamePanel().removeCards();
 		System.out.println("sono in initialize ho azzerato council");
 		frame.getGamePanel().resetFamiliars();
 		System.out.println("ho chiamato la reset da initialize");

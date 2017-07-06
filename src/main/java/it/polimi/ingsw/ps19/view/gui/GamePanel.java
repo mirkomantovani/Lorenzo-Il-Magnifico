@@ -577,17 +577,20 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			} else if(leaderState.equals("activate")){
 				System.out.println("activate leader");
 				this.GUI.notifyActivateLeader(leader.getLeaderName());
+				leaderState="none";
 				
 			} else if(leaderState.equals("discard")){
 				System.out.println("discard leader");
 				this.GUI.notifyDiscardLeader(leader.getLeaderName());
+				leaderState="none";
 				
 			}
-			
-			
 		} else if(e.getSource()==showLeaderCardsButton){
-			if (!leadersPanel.isVisible())
+			System.out.println("show leader card button clicked");
+			if (!leadersPanel.isVisible()){
+				System.out.println("panel is not visible, lo metto");
 				showActionPanel(leadersPanel);
+			}
 			else
 				backToCurrentAction();
 		}
