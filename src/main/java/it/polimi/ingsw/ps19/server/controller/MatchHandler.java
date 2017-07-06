@@ -161,18 +161,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// provaLeaderPlayer();
 	}
 
-	// private void provaLeaderPlayer() {
-	// match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(0));
-	// match.getPlayers()[0].addLeaderCards(match.getLeaderCards().getCard(1));
-	// try {
-	// this.sendToClientHandler(new
-	// PlayerStatusChangeCommand(match.getPlayers()[0]),
-	// this.getRightClientHandler(match.getPlayers()[0]));
-	// } catch (WrongPlayerException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
 
 	/**
 	 * Communicate colors.
@@ -212,16 +200,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *
 	 * @return the current id player
 	 */
-	// public int getCurrentIdPlayer() {
-	// return match.getCurrentPlayer().getPlayerId();
-	// }
 
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-//		startLeaderDiscardPhase();
+		startLeaderDiscardPhase();
 		
-		 startTurn();
+//		 startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -280,7 +265,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-			match.incrementTurn();
+//			match.incrementTurn();
 
 			initTurn();
 
