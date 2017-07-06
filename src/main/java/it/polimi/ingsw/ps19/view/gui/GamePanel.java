@@ -881,6 +881,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		ArrayList<String> playerColor=board.getPlayerOrder();
 		for(int i = 0; i < playerColor.size(); i++){
 		getOrderFromColor(playerColor.get(i)).setOrderMarkers();
+		boardPanel.add(getOrderFromColor(playerColor.get(i)));
 		}
 		
 	}

@@ -291,7 +291,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	public void notifyCloseGame() {
-		gameController.notifyRequestClosureCommand();
+		//gameController.notifyRequestClosureCommand();
 		personalBoard.dispose();
 		frame.dispose();
 
