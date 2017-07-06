@@ -45,28 +45,28 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 		
 		clientHandlerRegistry = LocateRegistry
 				.getRegistry(NetworkConstants.RMICLIENTHANDLERPORT);
-		System.out.println("Registry accessed");
+//		System.out.println("Registry accessed");
 		clientHandler = (ClientHandlerInterface) clientHandlerRegistry.lookup(name); //Va a recuperare il clientHandler
-		System.out.println("Got the remote ClientHandler");
+//		System.out.println("Got the remote ClientHandler");
 		ClientInterface stub = (ClientInterface) UnicastRemoteObject		//Esporta l'oggetto
 				.exportObject(client, 0);    //could have passed diectly this
-		System.out.println("Got the remote reference");
+//		System.out.println("Got the remote reference");
 
 		try {
 			clientRegistry = LocateRegistry.getRegistry(NetworkConstants.RMICLIENTPORT);
-			System.out.println("Accessed client registry");
+//			System.out.println("Accessed client registry");
 			clientRegistry.rebind(secondName, stub);
-			System.out.println("Added this in the registry");
+//			System.out.println("Added this in the registry");
 		} catch (Exception e) {              //In questo caso non ci sarà il registro
-			System.out.println("There is no registry at port: "+ NetworkConstants.RMICLIENTPORT + ", so i'm creating one");
+//			System.out.println("There is no registry at port: "+ NetworkConstants.RMICLIENTPORT + ", so i'm creating one");
 			clientRegistry = LocateRegistry.createRegistry(NetworkConstants.RMICLIENTPORT);  //Allora crea il registro su cui inserire il riferimento
 			clientRegistry.bind(secondName, stub);
-			System.out.println("Created and client stub bound");
+//			System.out.println("Created and client stub bound");
 		}
 		// the client handler will add the client to the server
-		System.out.println("Preparing for the add in the registry at port: " + NetworkConstants.RMICLIENTPORT);
+//		System.out.println("Preparing for the add in the registry at port: " + NetworkConstants.RMICLIENTPORT);
 		clientHandler.addClient(NetworkConstants.RMICLIENTPORT);  //QUI C'E' L'ERRORE
-		System.out.println("Horaay, client seems to be added");
+//		System.out.println("Horaay, client seems to be added");
 	}
 
 	@Override

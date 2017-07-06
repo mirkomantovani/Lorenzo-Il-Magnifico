@@ -52,7 +52,6 @@ public class ClientSocketInterface implements NetworkInterface {
 
 	@Override
 	public void sendCommand(ClientToServerCommand command) {
-		// TODO Auto-generated method stub
 		
 		System.out.println("clisocket: invio comando");
 		try {

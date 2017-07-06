@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -49,6 +50,8 @@ public class CardButton extends JButton implements MouseListener {
 	private int applicationPointX;
 	private int applicationPointY;
 	
+	private final double ratioCardW = 0.076486406;
+	
 	private final double ratio=0.11875;
 	private final double northBorder=0.052083333;
 	private final double leftBorder=0.069813176;
@@ -57,12 +60,61 @@ public class CardButton extends JButton implements MouseListener {
 	
 	ImageIcon icon;
 	private String path;
-	private String cardToString;
 	
 	private Image zoomedImage;
 	private int h;
 	private int w;
 	private Image img;
+	
+	private Dimension screenDimension;
+	
+	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/**
+	 * Constructor to use only for production choices Panel
+	 * @param id
+	 */
+	public CardButton(int id){
+        
+		screenDimension = toolkit.getScreenSize();
+
+		img = null;
+		this.id = id;
+
+
+		path = "/devcards_f_en_c_";
+		path = path + id;
+		path = path + ".png";
+
+		try {
+			zoomedImage = ImageIO.read(getClass().getResource(path));
+
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+
+		h = zoomedImage.getHeight(null);
+		w = zoomedImage.getWidth(null);
+
+		int newW = (int) (ratioCardW * screenDimension.width);
+		int newH = newW * h / w;
+		
+		cardWidth=newW;
+		cardHeight=newH;
+
+		// System.out.println((int)(ratio*boardPanelPrefSize.height)+"
+		// "+(int)(ratio*1017));
+		img = zoomedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+
+		setIcon(new ImageIcon(img));
+		
+		
+//		System.out.println("setting bounds: "+applicationPointX+" "+applicationPointY);
+//		setBounds(applicationPointX, applicationPointY, newW, newH);
+
+		this.addMouseListener(this);
+		
+	}
 	
 
 	public CardButton(Dimension boardPanelPrefSize,int tower,int floor,int id) {

@@ -87,7 +87,7 @@ public class BuildingCard extends DevelopmentCard {
 			ResourcesExchangeEffect resourcesExchangeEffect=productionEffect.getResourcesExchangeEffect();
 			choices=new String[2];
 			choices[0]=resourcesExchangeEffect.getNormalEffectToString();
-			choices[1]=resourcesExchangeEffect.getNormalEffectToString();
+			choices[1]=resourcesExchangeEffect.getAlternativeEffectToString();
 //			
 		}
 

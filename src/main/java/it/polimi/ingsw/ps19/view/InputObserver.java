@@ -33,5 +33,7 @@ public interface InputObserver {
 	
 	public void notifyProductionChoices(String choices);
 	
+	public void notifyProductionChoices(ArrayList<Integer> choices);
+	
 	public void notifyChatMessage(String message);
 }

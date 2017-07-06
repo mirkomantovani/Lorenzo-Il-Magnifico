@@ -250,8 +250,16 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askForProductionExchangeEffect(List<String[]> choices) {
-		// TODO Auto-generated method stub
-
+		
+		ArrayList<Integer> cardsIds=new ArrayList<>();
+		
+		writeGameMessage("Choose the production effects you want to activate:");
+		for(String[] stringArray: choices){
+			cardsIds.add(Integer.parseInt(stringArray[0]));
+			writeGameMessage("Normal effect: "+stringArray[2]+" or alternative effect"+stringArray[3]);
+		}
+		
+		frame.getGamePanel().showChooseProductionEffects(cardsIds);
 	}
 
 	@Override
@@ -341,6 +349,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void notifyServerClosed() {
 		writeGameMessage("The server has closed the game and the connections"
 				+ " because no one was connected anymore");
+	}
+
+	public void notifyActivateProduction(ArrayList<Integer> choices) {
+		gameController.notifyProductionChoices(choices);
 	}
 
 }

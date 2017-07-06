@@ -85,6 +85,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private SingleProductionButton singleProductionButton;
 	private MultipleHarvestButton multipleHarvestButton;
 	private MultipleProductionButton multipleProductionButton;
+	
 
 	private JTextArea textArea;
 	private PlayerResources playerResources;
@@ -98,6 +99,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private ChooseAction chooseAction;
 	private LeadersPanel leadersPanel;
 	private StrategyEditor strategyEditor;
+	private ProductionChoices productionChoices;
 	private EndOrDiscardPanel endOrDiscardPanel;
 	private ChoosePrivilegePanel choosePrivilegePanel;
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
@@ -189,7 +191,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		textArea = new JTextArea();
 		textArea.setMargin(new Insets(1, 1, 1, 1));
-		textArea.setText("ciaooo");
 		textArea.setEditable(true);
 		textArea.setLineWrap(true);
 		textArea.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -344,6 +345,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		draftPanel = new LeadersPanel();
 		draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		draftPanel.setVisible(false);
+		
+		productionChoices=new ProductionChoices(this);
+		productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
+		productionChoices.setVisible(false);
 
 		// FINAL BUTTONS PANEL
 
@@ -1081,5 +1086,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			}
 		}
 
+	}
+
+	public void notifyActivateProduction(ArrayList<Integer> choices) {
+		this.GUI.notifyActivateProduction(choices);
+	}
+
+	public void showChooseProductionEffects(ArrayList<Integer> cardsIds) {
+		productionChoices.addCards(cardsIds);
+		currentActionPanel=productionChoices;
+		this.showActionPanel(productionChoices);
+		
 	}
 }

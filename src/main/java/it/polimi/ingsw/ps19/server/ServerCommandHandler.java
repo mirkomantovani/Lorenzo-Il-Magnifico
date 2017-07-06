@@ -133,6 +133,7 @@ public class ServerCommandHandler implements CommandObserver {
 		handler.sendToCurrentPlayer(new ChooseProductionExchangeEffectsCommand(match.getCurrentPlayerProductionChoices(
 				command.getFamilyMember(), command.getActionSpace(), command.getPaidServants())));
 		}catch(Exception e){
+			e.printStackTrace();
 			handler.sendToCurrentPlayer(new InvalidCommand());
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}

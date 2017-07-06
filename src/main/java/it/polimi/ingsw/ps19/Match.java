@@ -175,7 +175,7 @@ public class Match {
 		for (DevelopmentCard card : buildingCards) {
 			if (isApplicable(card, fm, player, paidServants)) {
 				if ((card instanceof BuildingCard) && ((BuildingCard) card).hasProductionChoice()) {
-					cardFields = new String[3];
+					cardFields = new String[4];
 					cardFields[0] = "" + card.getId();
 					cardFields[1] = card.getName();
 					String[] tmp = ((BuildingCard) card).getProductionChoice();

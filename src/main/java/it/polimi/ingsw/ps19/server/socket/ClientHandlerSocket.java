@@ -100,11 +100,6 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
-				
-				if(command instanceof ChosenLeaderCardCommand)
-					System.out.println("clhandsock ho ricevuto chosenleadercard");
-				if(command instanceof PlaceIntoMarketCommand)
-					System.out.println("clhandsock ha ricevuto un market command");
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
