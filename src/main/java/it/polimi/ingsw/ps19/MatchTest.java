@@ -74,6 +74,8 @@ public class MatchTest {
 		assertTrue(!match.getBoard().getFloor(CardType.BUILDING, 0).getActionSpace().isOccupied());
 		assertTrue(!match.getBoard().getProductionArea().getMultipleActionSpace().isOccupied());
 	}
+	
+	
 
 
 }

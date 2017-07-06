@@ -16,6 +16,10 @@ import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsBasedOnResources
 import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsEveryWoodStoneEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.LosePointsForEveryResourceEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ResourceMalusEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.SetNoCardTypeFinalPointsEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.SetNoMarketActionEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.SetServantsDividerEffect;
+import it.polimi.ingsw.ps19.model.excommunicationtile.SetSkipRoundEffect;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -91,5 +95,33 @@ public class ExcommunicationEffectTest {
 		Effect effect = new ResourceMalusEffect(resources);
 		effect.applyEffect(player);
 		assertTrue(player.getBonuses().getResourceMalus().get(0).getAmount() == resources.get(0).getAmount());
+	}
+	
+	@Test
+	public void setNoMarketActionEffectTest(){
+		Effect effect = new SetNoMarketActionEffect();
+		effect.applyEffect(player);
+		assertTrue(player.getBonuses().isNoMarketActionActive());
+	}
+	
+	@Test
+	public void setNoCardTypeFinalPointsEffectTest(){
+		Effect effect = new SetNoCardTypeFinalPointsEffect(CardType.BUILDING);
+		effect.applyEffect(player);
+		assertTrue(player.getBonuses().getNoCardTypeFinalPoints(CardType.BUILDING));
+	}
+	
+	@Test
+	public void setServantsDividerEffectTest(){
+		Effect effect = new SetServantsDividerEffect(2);
+		effect.applyEffect(player);
+		assertTrue(player.getBonuses().getServantsDivider() == 2);
+	}
+	
+	@Test
+	public void setSkipRoundEffectTest(){
+		Effect effect = new SetSkipRoundEffect();
+		effect.applyEffect(player);
+		assertTrue(player.getBonuses().isSkipRoundActive());
 	}
 }

@@ -158,6 +158,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
 				+ boardPanel.getPreferredSize().getWidth());
 
+		
 		// RIGHT SCROLLBAR
 
 		JScrollPane scrollPane = new JScrollPane();
