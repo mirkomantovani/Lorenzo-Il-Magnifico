@@ -32,7 +32,6 @@ public class TakeCardEffect extends Effect{
 
 	@Override
 	public void applyEffect(Player p) {
-		// TODO Auto-generated method stub
 		
 	}
 

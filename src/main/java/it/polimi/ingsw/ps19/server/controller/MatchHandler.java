@@ -166,8 +166,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-		startLeaderDiscardPhase();
-		// startTurn();
+//		startLeaderDiscardPhase();
+		 startTurn();
 		// notifyCurrentPlayer(new CommandAskMove());
 		// createTurnTimer();
 	}
@@ -216,6 +216,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void startTurn() {
 		// sendToCurrentPlayer(new StartTurnCommand());
+		
+		
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
@@ -888,6 +890,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			for (int i = 0; i < councilPlayers.size(); i++)
 				System.out.println(newList[i].toString() + "\n");
 		}
+		
 	}
 
 	public int getRoundNumber() {

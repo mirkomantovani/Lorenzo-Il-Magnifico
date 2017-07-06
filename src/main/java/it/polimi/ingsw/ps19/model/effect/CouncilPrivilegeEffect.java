@@ -29,7 +29,9 @@ public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 
 		
 	public void applyEffect(Player p){
+		System.out.println("applying privilege");
 		p.setCouncilPrivilege(privilegeAmount);
+		System.out.println("privilege applied");
 	}
 	
 

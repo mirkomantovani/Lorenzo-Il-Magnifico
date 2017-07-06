@@ -33,7 +33,9 @@ public class CharacterImmediateEffect extends Effect{
 	
 	@Override
 	public void applyEffect(Player p) {
+		if(immediateEffect!=null)
 		immediateEffect.applyEffect(p);   
+		if(immediatePrivilegeEffect!=null)
 		immediatePrivilegeEffect.applyEffect(p); //This line activates the permanent effect
 						//so that the related bonuses can be set
 						//and effect permanently the player's game 
