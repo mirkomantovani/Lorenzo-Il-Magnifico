@@ -34,6 +34,9 @@ public class Player implements Serializable {
 	private transient MatchObserver observer;
 	private int councilPrivilege;
 	private HashMap<String,LeaderCard> leaderCards;
+	private boolean isExcommunicatedFirst;
+	private boolean isExcommunicatedSecond;
+	private boolean isExcommunicatedThird;
 	
 	
 	public Player(String name, String color){
@@ -312,7 +315,24 @@ public class Player implements Serializable {
 	
 		
 	}
-
+	public boolean isExcommunicatedFirst() {
+		return isExcommunicatedFirst;
+	}
+	public boolean isExcommunicatedSecond() {
+		return isExcommunicatedSecond;
+	}
+	public boolean isExcommunicatedThird() {
+		return isExcommunicatedThird;
+	}
+	public void setExcommunicatedFirst(boolean isExcommunicatedFirst) {
+		this.isExcommunicatedFirst = isExcommunicatedFirst;
+	}
+	public void setExcommunicatedSecond(boolean isExcommunicatedSecond) {
+		this.isExcommunicatedSecond = isExcommunicatedSecond;
+	}
+	public void setExcommunicatedThird(boolean isExcommunicatedThird) {
+		this.isExcommunicatedThird = isExcommunicatedThird;
+	}
 	
 	
 }

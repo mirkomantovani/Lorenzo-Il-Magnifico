@@ -43,6 +43,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
@@ -59,6 +60,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private static final Color BACKGROUND_PANELS_COLOR = new Color(204, 153, 51);
 
 	protected static Dimension screenDim;
+
+	/**
+	 * Can be: draft, none, activate, discard
+	 */
+	private String leaderState = "draft";
 
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private JTextField textField;
@@ -90,10 +96,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	private ActionPanel actionPanel;
 	private ChooseAction chooseAction;
+	private LeadersPanel leadersPanel;
 	private StrategyEditor strategyEditor;
 	private EndOrDiscardPanel endOrDiscardPanel;
 	private ChoosePrivilegePanel choosePrivilegePanel;
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
+
+	private LeadersPanel draftPanel;
 
 	private ArrayList<String> actionConstructor;
 
@@ -142,6 +151,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// MarketButton market=new MarketButton();
 		// market.setBounds(200,200,50,50);
 		// boardPanel.add(market);
+		
+		
+		
+
 
 		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
 				+ boardPanel.getPreferredSize().getWidth());
@@ -296,7 +309,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// ACTION PANELS
 
-		actionPanel = new ActionPanel(this,playerColor);
+		actionPanel = new ActionPanel(this, playerColor);
 		actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		actionPanel.setVisible(false);
 		// actionContentPane.add(actionPanel);
@@ -318,12 +331,19 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		choosePrivilegePanel = new ChoosePrivilegePanel(screenDim.width - boardPanel.getPreferredSize().width, this);
 		choosePrivilegePanel.setBackground(BACKGROUND_PANELS_COLOR);
 		choosePrivilegePanel.setVisible(false);
-		
-		chooseExcommunicationPanel=new ChooseExcommunicationPanel(this);
+
+		chooseExcommunicationPanel = new ChooseExcommunicationPanel(this);
 		chooseExcommunicationPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		chooseExcommunicationPanel.setVisible(false);
-		
-		
+
+		leadersPanel = new LeadersPanel();
+		leadersPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		leadersPanel.setVisible(false);
+
+		draftPanel = new LeadersPanel();
+		draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		draftPanel.setVisible(false);
+
 		// FINAL BUTTONS PANEL
 
 		JPanel buttonsPanel = new JPanel();
@@ -336,6 +356,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		showLeaderCardsButton.setForeground(new Color(255, 255, 255));
 		showLeaderCardsButton.setBackground(new Color(102, 51, 51));
 		showLeaderCardsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		showLeaderCardsButton.addActionListener(this);
 		buttonsPanel.add(showLeaderCardsButton);
 
 		showPersonalBoard = new JButton("Show Personal Board");
@@ -460,6 +481,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		setEveryoneInvisible(this.actionContentPane.getComponents());
 		this.actionContentPane.removeAll();
 		this.actionContentPane.add(panel);
+		this.actionContentPane.repaint();
 		panel.setVisible(true);
 	}
 
@@ -542,6 +564,39 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			actionConstructor.add("2");
 			this.GUI.notifyProduction(actionConstructor);
 
+		} else if(e.getSource() instanceof JLeaderCard){
+			System.out.println("leader card clicked");
+			JLeaderCard leader=(JLeaderCard)(e.getSource());
+			this.removeActionPanel();
+			
+			if(leaderState.equals("draft")){
+			this.GUI.notifyChosenLeaderInDraft(leader.getLeaderName());
+			draftPanel=new LeadersPanel();
+			draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			draftPanel.setVisible(false);
+			} else if(leaderState.equals("activate")){
+//				System.out.println("activate leader");
+				this.GUI.notifyActivateLeader(leader.getLeaderName());
+				leaderState="none";
+				leadersPanel.setVisible(false);
+				
+				
+			} else if(leaderState.equals("discard")){
+//				System.out.println("discard leader");
+				this.GUI.notifyDiscardLeader(leader.getLeaderName());
+				leaderState="none";
+//				this.removeActionPanel();
+				leadersPanel.setVisible(false);
+				
+			}
+		} else if(e.getSource()==showLeaderCardsButton){
+			if (!leadersPanel.isVisible()){
+				showActionPanel(leadersPanel);
+			}
+			else {
+				System.out.println("panel is visible, backto current");
+				backToCurrentAction();
+			}
 		}
 
 	}
@@ -550,7 +605,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		actionConstructor = new ArrayList<String>();
 		String familyMember;
 		String servants; // number
-		
+
 		familyMember = actionPanel.getFamilyMember();
 
 		if (familyMember == "none") {
@@ -559,7 +614,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 
 		servants = actionPanel.getServants();
-		
+
 		actionConstructor.add(familyMember);
 		actionConstructor.add(servants);
 	}
@@ -601,7 +656,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	}
 
 	private void backToCurrentAction() {
-		showActionPanel(currentActionPanel);
+		if (currentActionPanel != null)
+			showActionPanel(currentActionPanel);
+		else {
+			setEveryoneInvisible(this.actionContentPane.getComponents());
+			this.actionContentPane.removeAll();
+		}
 	}
 
 	private void constructAction(CardButton card) {
@@ -652,6 +712,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		writeGameMessage("Your round has ended");
 		this.removeActionPanel();
 		GUI.notifyEndRound();
+		currentActionPanel = null;
 	}
 
 	public void showEndOrDiscard() {
@@ -677,25 +738,21 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -719,106 +776,106 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void PlaceFamiliars(Board board) {
 
+		if (board.getCouncilPalace().getMembers().size() != FamilyMemberPawn.councilCounter) {
+			FamilyMember last = board.getCouncilPalace().getMembers()
+					.get(board.getCouncilPalace().getMembers().size() - 1);
+			boardPanel.add(this.familiars.get(last.getColor().toString() + last.getPlayer().getColor()));
+			this.familiars.get(last.getColor().toString() + last.getPlayer().getColor())
+					.PlaceFamiliarIntoCouncilPalace();
+		}
 
-		for (int i = 0; i < board.getCouncilPalace().getMembers().size(); i++) {
-			
-			boardPanel.add(this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
-					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()));
-			this.familiars.get(board.getCouncilPalace().getMembers().get(i).getColor().toString()
-					+ board.getCouncilPalace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoCouncilPalace();
+		for (int i = 1; i <= board.getPlayerOrder().size(); i++) {
+			if (board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember() != null) {
+
+				boardPanel.add(this.familiars.get(
+						board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString()
+								+ board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer()
+										.getColor()));
+				this.familiars.get(
+						board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString()
+								+ board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer()
+										.getColor())
+						.PlaceFamiliarIntoMarket(i);
+			}
 		}
-	
-		
-		for(int i=1; i <= board.getPlayerOrder().size(); i++){
-			if(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember()!=null){
-	
-			boardPanel.add(this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
-					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()));
-			this.familiars.get(board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString() +
-					board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoMarket(i);
-			} 
-		}
-	
 
 		for (int i = 0; i < board.getHarvestArea().getMultipleActionSpace().getMembers().size(); i++) {
-			
+
 			boardPanel.add(this.familiars.get(
 					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-					.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
-			this.familiars.get(
-					board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-					.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoHarvestArea("2");
+							.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+			this.familiars.get(board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getColor().toString()
+					+ board.getHarvestArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor())
+					.PlaceFamiliarIntoHarvestArea("2");
 		}
-		
+
 		if (board.getHarvestArea().getSingleActionSpace().getFamilyMember() != null) {
-			
+
 			boardPanel.add(this.familiars
 					.get(board.getHarvestArea().getSingleActionSpace().getFamilyMember().getColor().toString()
 							+ board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
 			this.familiars
 					.get(board.getHarvestArea().getSingleActionSpace().getFamilyMember().getColor().toString()
-							+ board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoHarvestArea("1");
-			
+							+ board.getHarvestArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor())
+					.PlaceFamiliarIntoHarvestArea("1");
+
 		}
 		for (int i = 0; i < board.getProductionArea().getMultipleActionSpace().getMembers().size(); i++) {
-			
+
 			boardPanel.add(this.familiars.get(
 					board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-					.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
+							.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()));
 			this.familiars.get(
 					board.getProductionArea().getMultipleActionSpace().getMembers().get(i).getColor().toString() + board
-					.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor()).PlaceFamiliarIntoProductionArea("2");
+							.getProductionArea().getMultipleActionSpace().getMembers().get(i).getPlayer().getColor())
+					.PlaceFamiliarIntoProductionArea("2");
 		}
-	
+
 		if (board.getProductionArea().getSingleActionSpace().getFamilyMember() != null) {
-		
+
 			boardPanel.add(this.familiars.get(
 					board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString() + board
-					.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
-			familiars.get(
-					board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString() + board
-							.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarIntoProductionArea("1");
-			
+							.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor()));
+			familiars
+					.get(board.getProductionArea().getSingleActionSpace().getFamilyMember().getColor().toString()
+							+ board.getProductionArea().getSingleActionSpace().getFamilyMember().getPlayer().getColor())
+					.PlaceFamiliarIntoProductionArea("1");
+
 		}
 		for (CardType c : CardType.values()) {
 			if (c != CardType.ANY) {
 				for (int i = 0; i < board.getTower(c).getFloors().size(); i++) {
 					if (board.getFloor(c, i).getActionSpace().getFamilyMember() != null) {
-						
+
 						boardPanel.add(this.familiars.get(
 								board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString() + board
-								.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()));
-						this.familiars.get(
-								board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString() + board
-										.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()).PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
+										.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor()));
+						this.familiars.get(board.getFloor(c, i).getActionSpace().getFamilyMember().getColor().toString()
+								+ board.getFloor(c, i).getActionSpace().getFamilyMember().getPlayer().getColor())
+								.PlaceFamiliarInTower(c.toString().toLowerCase(Locale.ROOT), i);
 					}
-					
+
 				}
-			
+
 			}
 		}
 
 	}
-	
-	public void setPointsMarkers(Player p){
 
-	victoryMarkers.get(p.getColor()).setVictoryPointsAmount(
-			p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
-	militaryMarkers.get(p.getColor()).setMilitaryPointsAmount(
-			p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount());
-		faithMarkers.get(p.getColor()).setFaithPointsAmount(
-				p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount());
+	public void setPointsMarkers(Player p) {
+
+		victoryMarkers.get(p.getColor())
+				.setVictoryPointsAmount(p.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount());
+		militaryMarkers.get(p.getColor()).setMilitaryPointsAmount(
+				p.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount());
+		faithMarkers.get(p.getColor())
+				.setFaithPointsAmount(p.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT).getAmount());
 	}
 
 	public void updateOrder(Board board) {
 		for (int i = 0; i < board.getPlayerOrder().size(); i++) {
-			for (int j = 0; j < orderMarkers.size(); j++) {
-				if (orderMarkers.get(j).getSrc() == board.getPlayerOrder().get(i)) {
-					OrderMarkerDisk flag = orderMarkers.get(i);
-					OrderMarkerDisk old = orderMarkers.get(j);
-					orderMarkers.set(j, flag);
-					orderMarkers.set(i, old);
-				}
+			if(orderMarkers.get(i).getSrc().equals(board.getPlayerOrder().get(i))){
+				orderMarkers.get(i).setOrderMarkers();
 			}
 
 		}
@@ -855,12 +912,110 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void showSupport(boolean showSupportDecision) {
 		this.GUI.notifyExcommunicationChoice(showSupportDecision);
-		
+
 	}
 
 	public void showExcommunicationPanel() {
 		this.currentActionPanel = chooseExcommunicationPanel;
 		this.showActionPanel(chooseExcommunicationPanel);
+	}
+
+	public void resetFamiliars() {
+		for (FamilyMemberPawn f : familiars.values()) {
+			if (!familiars.isEmpty())
+				boardPanel.remove(f);
+				System.out.println("ho rimosso");
+		}
+	}
+
+	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
+		if (!leadersPanel.areLeaderCards(leaderCards.size())) {
+			leadersPanel.refreshLeaderCards(leaderCards,this);
+		}
+	}
+
+	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
+
+		draftPanel.addLeaderCardsWithListener(leaderCards, this);
+		showActionPanel(draftPanel);
+		this.currentActionPanel = draftPanel;
+	}
+
+	public void repaintResources() {
+		playerResources.repaint();
+	}
+
+	public void repaintBoard() {
+		boardPanel.repaint();
+	}
+
+	/**
+	 * @param id
+	 * @return true if the card with the specified id is contained in the board
+	 */
+	public boolean isContained(int id) {
+		for (CardButton card : cards) {
+			if (card.getId() == id)
+				return true;
+		}
+		return false;
+	}
+
+	public void removeCard(int tower, int floor) {
+		if (tower == 1)
+			tower = 2;
+		else if (tower == 2)
+			tower = 1;
+
+		for (CardButton card : cards) {
+			if (card.getTower() == tower && card.getFloor() == floor) {
+				boardPanel.remove(card);
+				System.out.println("cardremoved");
+			}
+		}
+
+	}
+
+	public void notifyActivateClick() {
+		leaderState = "activate";
+		currentActionPanel = leadersPanel;
+		showActionPanel(leadersPanel);
+	}
+
+	public void notifyDiscardClick() {
+		System.out.println("discard click");
+		
+		
+		leaderState = "discard";
+		currentActionPanel = leadersPanel;
+		showActionPanel(leadersPanel);
+	}
+
+	public void setLeaderState(String string) {
+		leaderState = string;
+	}
+	
+	public void setExcommTiles(Board board){
+		if(familiars.isEmpty()){
+			boardPanel.add(new ExcommTileFirstPeriod(board.getChurch().getExcommunicationFirst().getId(),board.getChurch().getExcommunicationFirst().toString())); 
+		      boardPanel.add(new ExcommTileSecondPeriod(board.getChurch().getExcommunicationSecond().getId(),board.getChurch().getExcommunicationSecond().toString())); 
+		      boardPanel.add(new ExcommTileThirdPeriod(board.getChurch().getExcommunicationThird().getId(),board.getChurch().getExcommunicationThird().toString()));
+			for(int i = 0; i<orderMarkers.size(); i++){
+				boardPanel.add(new ExcommDice(1,"red"));
+				boardPanel.add(new ExcommDice(2,orderMarkers.get(i).getSrc()));
+				boardPanel.add(new ExcommDice(3,orderMarkers.get(i).getSrc()));
+			}
+		}
+		
+	}
+
+	public void addExcommunicationCubes(Player p) {
+//		if(p.isExcommunicatedFirst())
+//			
+//		if(p.isExcommunicatedSecond())
+//			
+//		if(p.isExcommunicatedThird())
+		
 	}
 
 }

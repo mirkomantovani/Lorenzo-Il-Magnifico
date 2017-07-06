@@ -65,7 +65,6 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	public void applyCommand(InitializeMatchCommand initializeMatchCommand) {
 		userInterface.initializeMatch();
-		
 	}
 
 	public void applyCommand(WinCommand winCommand) {

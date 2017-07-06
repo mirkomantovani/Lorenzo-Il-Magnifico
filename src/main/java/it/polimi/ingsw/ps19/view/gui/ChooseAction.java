@@ -88,10 +88,10 @@ public class ChooseAction extends JPanel implements ActionListener {
 			gamePanel.notifyActionClick();
 
 		} else if (e.getSource() == this.activate) {
-//			gamePanel.notifyActivateClick();
+			gamePanel.notifyActivateClick();
 
 		} else if (e.getSource() == this.discard) {
-//			gamePanel.notifyDiscardClick();
+			gamePanel.notifyDiscardClick();
 
 		}
 	}

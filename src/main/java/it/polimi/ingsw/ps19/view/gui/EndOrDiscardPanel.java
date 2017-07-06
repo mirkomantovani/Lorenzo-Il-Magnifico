@@ -74,7 +74,7 @@ public class EndOrDiscardPanel extends JPanel implements ActionListener {
 			gamePanel.notifyEndRound();
 
 		} else if (e.getSource() == this.discard) {
-//			gamePanel.notifyDiscardClick();
+			gamePanel.notifyDiscardClick();
 
 		}
 	}

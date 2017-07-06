@@ -28,6 +28,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	// private String player;
 	private Image icon;
 	private ClientController gameController;
+	private boolean excommunicationCubeNeeded;
 
 	public GraphicalUserInterface(ClientController clientController) {
 		this.gameController = clientController;
@@ -75,10 +76,17 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void playerStatusChange(Player p) {
+		
+		if(excommunicationCubeNeeded){
+			frame.getGamePanel().addExcommunicationCubes(p);
+			excommunicationCubeNeeded=false;
+		}
+		
 		frame.refreshPlayerStatus(p);
 		addCardsToPersonalBoard(p);
+		frame.refreshLeaderCards(p.getLeaderCards());
 		frame.getGamePanel().setPointsMarkers(p);
-		frame.repaint();
+		frame.getGamePanel().repaintResources();
 	}
 
 	private void addCardsToPersonalBoard(Player p) {
@@ -128,12 +136,18 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void initializeTurn(Period period, int turn) {
 		writeGameMessage("A new turn is starting, Period:" + period.toString() + " Turn:" + turn);
+		FamilyMemberPawn.councilCounter = 0;
+		frame.getGamePanel().removeCards();
+		System.out.println("sono in initialize ho azzerato council");
+		frame.getGamePanel().resetFamiliars();
+		System.out.println("ho chiamato la reset da initialize");
 	}
 
 	@Override
 	public void askMove() {
 		writeGameMessage("It's your turn, decide an action to perform");
 		frame.showChooseAction();
+		frame.getGamePanel().setLeaderState("none");
 	}
 
 	@Override
@@ -154,17 +168,21 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.refreshBoard(board);
 		// frame.pack();
 		 OrderMarkerDisk.Ordercounter = 0;
+		frame.getGamePanel().setExcommTiles(board);
 		frame.getGamePanel().populateFamiliars(board);
 		frame.getGamePanel().createMarkers(board);
 		frame.getGamePanel().updateOrder(board);
 		frame.getGamePanel().PlaceFamiliars(board);
+	
 
-		frame.repaint();
+		
+		frame.getGamePanel().repaintBoard();
 
 	}
 
 	@Override
 	public void notifyExcommunication() {
+		excommunicationCubeNeeded=true;
 		writeGameMessage("God seems very offended by your behaviour, he established your excommunication.");
 	}
 
@@ -172,7 +190,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void opponentStatusChanged(Player maskedPlayer) {
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
 		System.out.println("sono in opponent status change");
-		frame.repaint();
+		frame.getGamePanel().repaintBoard();
 
 	}
 
@@ -208,8 +226,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
-		// TODO Auto-generated method stub
-
+		if(leaderCards.size()==4)
+			writeGameMessage("The Leader Draft phase has started!");
+	
+		writeGameMessage("Choose the leader card you want and pass the other 3 to"
+				+ "the player at your right");
+		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
 	}
 
 	@Override
@@ -299,6 +321,18 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifyExcommunicationChoice(boolean showSupportDecision) {
 		gameController.notifyExcommunicationEffectChoice(showSupportDecision);
+	}
+
+	public void notifyChosenLeaderInDraft(String leaderName) {
+		gameController.notifyChosenLeaderCard(leaderName);
+	}
+
+	public void notifyActivateLeader(String leaderName) {
+		gameController.notifyLeaderEffectActivation(leaderName);
+	}
+
+	public void notifyDiscardLeader(String leaderName) {
+		gameController.notifyDiscardedLeaderCard(leaderName);
 	}
 
 }

@@ -13,6 +13,10 @@ import javax.swing.JButton;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 
+/**
+ * @author Mirko
+ *
+ */
 public class JDevelopmentCard extends JButton implements MouseListener {
 	/**
 	 * 

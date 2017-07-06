@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -17,6 +18,7 @@ import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.area.Floor;
 import it.polimi.ingsw.ps19.model.area.Tower;
 import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
@@ -141,7 +143,7 @@ public class MyFrame extends JFrame {
 	}
 
 	public void refreshBoard(Board board) {
-		gamePanel.removeCards();
+//		gamePanel.removeCards();
 		addCards(board);
 	}
 
@@ -156,13 +158,22 @@ public class MyFrame extends JFrame {
 					if (t.getFloor(i).getCard() != null) {
 						int id = t.getFloor(i).getCard().getId();
 						String descr = t.getFloor(i).getCard().toString();
+						
+//						if(!gamePanel.isContained(id))
 						gamePanel.addCard(j, i, id, descr);
+					} else{
+						System.out.println("removing card: tower"+j+" floor:"+i);
+						gamePanel.removeCard(j,i);
+						
 					}
+					
 				}
 
 			}
 		}
 	}
+
+	
 
 	public GamePanel getGamePanel() {
 
@@ -206,6 +217,10 @@ public class MyFrame extends JFrame {
 
 	public void showExcommunicationPanel() {
 		gamePanel.showExcommunicationPanel();
+	}
+
+	public void refreshLeaderCards(Map<String, LeaderCard> leaderCards) {
+		gamePanel.refreshLeaders(leaderCards);
 	}
 	
 
