@@ -261,6 +261,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
+		frame.getGamePanel().addExcommunicationCubes(maskedPlayer);
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
 		System.out.println("sono in opponent status change");
 		frame.getGamePanel().repaintBoard();
