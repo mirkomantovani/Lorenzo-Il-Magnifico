@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**
  * The Interface NetworkInterface.
+ * This class represents the generic network interface to hide the type of client connection
+ * to the server
  */
 public interface NetworkInterface{
 

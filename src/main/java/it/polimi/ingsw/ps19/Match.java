@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
@@ -331,14 +332,14 @@ public class Match {
 	 *
 	 * @return the church support prize in period
 	 */
-	public MilitaryPoint getChurchSupportPrizeInPeriod() {
+	public VictoryPoint getChurchSupportPrizeInPeriod() {
 
 		if (this.period == Period.FIRST) {
-			return this.board.getChurch().getMilitaryPoints()[BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST];
+			return this.board.getChurch().getVictoryPoints()[BoardConstants.FIRSTPERIOD_CHURCHSUPPORTCOST];
 		} else if (this.period == Period.SECOND) {
-			return this.board.getChurch().getMilitaryPoints()[BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST];
+			return this.board.getChurch().getVictoryPoints()[BoardConstants.SECONDPERIOD_CHURCHSUPPORTCOST];
 		} else {
-			return this.board.getChurch().getMilitaryPoints()[BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST];
+			return this.board.getChurch().getVictoryPoints()[BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST];
 		}
 	}
 
