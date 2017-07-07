@@ -813,18 +813,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	/**
 	 * Handle end game.
 	 */
-	private void handleEndGame() {
+	public void handleEndGame() {
 		Player[] rank = new Player[match.getPlayers().length];
 		Player prevPlayer;
 		for (int i = 0; i < match.getPlayers().length; i++) {
 			int val = calculatePlayerPoints(match.getPlayers()[i]);
 			rank[i] = match.getPlayers()[i];
-			if (val > calculatePlayerPoints(match.getPlayers()[i - 1]) && i > 0) {
+			if (i>0 && val > calculatePlayerPoints(match.getPlayers()[i - 1])) {
 				prevPlayer = rank[i - 1];
 				rank[i - 1] = match.getPlayers()[i];
 				rank[i] = prevPlayer;
 			}
+			
 		}
+		System.out.println(rank.toString());
 		sendToPlayer(new WinCommand(), rank[0]);
 		for (Player p : rank) {
 			if (p != rank[0]) {
@@ -855,7 +857,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 					e.printStackTrace();
 				}
 			}
-			return points;
+			
 		}
 
 		return points;
@@ -942,8 +944,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			int val = match.getPlayers()[i].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
 					.getAmount();
 			rank[i] = match.getPlayers()[i];
-			if (val > match.getPlayers()[i - 1].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
-					.getAmount() && i > 0) {
+			if (i > 0 && val > match.getPlayers()[i - 1].getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT)
+					.getAmount()) {
 				prevPlayer = rank[i - 1];
 				rank[i - 1] = match.getPlayers()[i];
 				rank[i] = prevPlayer;
@@ -963,6 +965,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 		}
 
+		reader.close();
 		return points;
 	}
 
@@ -1306,4 +1309,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		
 	}
 
+	public Match getMatch() {
+		return match;
+	}
+
+	
 }
