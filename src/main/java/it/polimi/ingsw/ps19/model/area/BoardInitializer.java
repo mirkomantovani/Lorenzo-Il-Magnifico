@@ -275,17 +275,18 @@ public class BoardInitializer {
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ArrayList<Integer> playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
+	public static int[] playerBoardRequirementsForTerritory() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.TERRITORYCARD_PLAYER_REQUIREMENTS));
 		
-		ArrayList<Integer> requirementsForTerritory = new ArrayList<Integer>();
+		int[] requirementsForTerritory = new int[6];
 		String lineRead = reader.readLine();
 		
-		
+		int i = 0;
 		while (lineRead != null){
 			
-			requirementsForTerritory.add(Integer.parseInt(lineRead));
+			requirementsForTerritory[i]=(Integer.parseInt(lineRead));
+			i++;
 			lineRead = reader.readLine();
 		}
 		reader.close();

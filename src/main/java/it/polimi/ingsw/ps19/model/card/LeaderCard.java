@@ -21,7 +21,9 @@ public class LeaderCard extends Card implements Serializable{
 	/** The special effect. */
 	private Disapplyable specialEffect; 
 	
+	private boolean activationState;
 	
+
 	/**
 	 * Instantiates a new leader card.
 	 *
@@ -72,6 +74,14 @@ public class LeaderCard extends Card implements Serializable{
 	 */
 	public void setSpecialEffect(Disapplyable specialEffect) {
 		this.specialEffect = specialEffect;
+	}
+	
+	public boolean isActivationState() {
+		return activationState;
+	}
+
+	public void setActivationState(boolean activationState) {
+		this.activationState = activationState;
 	}
 
 	/* (non-Javadoc)

@@ -55,7 +55,7 @@ public class Board implements Serializable {
 	private ProductionArea productionArea;
 	
 	/** The military requirements for territories. */
-	private static List militaryRequirementsForTerritories;
+	private static int[] militaryRequirementsForTerritories;
 	
 	/** The territory cards. */
 	private Deck<? extends DevelopmentCard> territoryCards;
@@ -253,7 +253,7 @@ public class Board implements Serializable {
 	 *
 	 * @return the military requirements for territories
 	 */
-	public static List getMilitaryRequirementsForTerritories() {
+	public static int[] getMilitaryRequirementsForTerritories() {
 		return militaryRequirementsForTerritories;
 	}
 	

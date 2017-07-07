@@ -1257,7 +1257,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void deactivateLeaderCards() {
 		if (!this.getCurrentPlayer().getLeaderCards().isEmpty())
 			for (LeaderCard l : this.getCurrentPlayer().getLeaderCards().values()) {
-				l.getSpecialEffect().disapplyEffect(getCurrentPlayer());
+				if(l.isActivationState())
+					l.getSpecialEffect().disapplyEffect(getCurrentPlayer());
+					l.setActivationState(false);
 			}
 	}
 
@@ -1295,7 +1297,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		|| match.getCurrentPlayer().getDeckOfType(CardType.CHARACTER).size() < characterCardRequired 
 		|| match.getCurrentPlayer().getDeckOfType(CardType.VENTURE).size() < ventureCardRequired
 		|| match.getCurrentPlayer().getDeckOfType(CardType.TERRITORY).size() < territoryCardRequired
-		|| totalCards < anyCardRequired)
+		|| totalCards < anyCardRequired || leader.isActivationState())
 			return false;
 		else 
 			return true;

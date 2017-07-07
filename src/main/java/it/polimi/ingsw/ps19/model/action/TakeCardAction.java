@@ -175,8 +175,7 @@ public class TakeCardAction extends Action {
 				
 				System.out.println("player deck length :"+player.getDeckOfType(card.getCardType()).size());
 				
-				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()
-						.get(len))));
+				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()[len])));
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -185,8 +184,8 @@ public class TakeCardAction extends Action {
 				
 				
 				System.out.println("takecard punti del player");
-				if ((int) (Board.getMilitaryRequirementsForTerritories()
-						.get(player.getDeckOfType(card.getCardType()).size() + 1)) > player.getResourceChest()
+				if ((int) (Board.getMilitaryRequirementsForTerritories()[
+						(player.getDeckOfType(card.getCardType()).size())]) > player.getResourceChest()
 								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount()){
 					this.notApplicableCode = "you don't have the required military points to take this card";
 				return false;

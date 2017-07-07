@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.action;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,8 +67,8 @@ public class ActionTest {
 			
 		}
 		assertTrue(!player.getFamilyMembers().containsKey(Color.BLACK));
-		assertTrue(match.getFloor(CardType.BUILDING, 0).getCard() == null);
-		assertTrue(player.getDeckOfType(CardType.BUILDING).get(0).getName().equals(cardName));
+		assertEquals(match.getFloor(CardType.BUILDING, 0).getCard(), null);
+		assertEquals(player.getDeckOfType(CardType.BUILDING).get(0).getName(),cardName);
 		
 	}
 	
@@ -87,8 +87,8 @@ public class ActionTest {
 			
 		}
 		assertTrue(!player.getFamilyMembers().containsKey(Color.BLACK));
-		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount() == 5);
-		assertTrue(match.getBoard().getMarket().getMarktActionSpace("1").getFamilyMember().getColor() == Color.BLACK);
+		assertEquals(player.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount(), 5);
+		assertEquals(match.getBoard().getMarket().getMarktActionSpace("1").getFamilyMember().getColor(),Color.BLACK);
 	}
 	
 	/**
@@ -105,9 +105,9 @@ public class ActionTest {
 			
 		}
 		assertTrue(!player.getFamilyMembers().containsKey(Color.BLACK));
-		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount() == 1);
-		assertTrue(player.getCouncilPrivilege() == 1);
-		assertTrue(match.getBoard().getCouncilPalace().getMembers().get(0).getColor() == Color.BLACK);
+		assertEquals(player.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount(), 1);
+		assertEquals(player.getCouncilPrivilege(), 1);
+		assertEquals(match.getBoard().getCouncilPalace().getMembers().get(0).getColor(), Color.BLACK);
 		
 	}
 
