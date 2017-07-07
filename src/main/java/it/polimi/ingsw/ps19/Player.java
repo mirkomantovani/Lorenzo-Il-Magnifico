@@ -295,6 +295,10 @@ public class Player implements Serializable {
 		Player maskedPlayer=new Player(this.name, this.color);
 		ResourceChest maskedRC=new ResourceChest();
 		
+		maskedPlayer.setExcommunicatedFirst(this.isExcommunicatedFirst);
+		maskedPlayer.setExcommunicatedSecond(this.isExcommunicatedSecond);
+		maskedPlayer.setExcommunicatedThird(this.isExcommunicatedThird);
+		
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
