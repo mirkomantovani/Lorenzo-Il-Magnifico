@@ -87,7 +87,7 @@ public class MatchTest {
 	@Test
 	public void distributedResources(){
 		match.distributeTurnResources();
-		assertTrue(match.getPlayers()[0].getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount() == 100);
+		assertTrue(match.getPlayers()[0].getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount() == 3);
 	}
 	
 	/**

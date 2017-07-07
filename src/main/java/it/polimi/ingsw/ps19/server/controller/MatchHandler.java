@@ -111,6 +111,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	
 	/** The prod paid servant. */
 	private int prodPaidServant;
+	
+	private boolean alreadyDoneAction=false;
 
 	/**
 	 * Instantiates a new match handler.
@@ -308,6 +310,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Start round.
 	 */
 	private void startRound() {
+		alreadyDoneAction=false;
 		stopTimerIfAlive();
 
 		roundNumber++;
@@ -521,6 +524,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			match.getCurrentPlayer().resetPrivileges();
 
 		} else {
+			alreadyDoneAction=true;
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 
@@ -1035,8 +1039,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				resourcesToGive.addChest(rc[choice.get(i)]);
 			}
 			this.getCurrentPlayer().addResources(resourcesToGive);
-
+			
+			if(alreadyDoneAction)
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
+			else 
+				sendToCurrentPlayer(new AskMoveCommand());
 
 		} else {
 			sendToCurrentPlayer(new InvalidActionCommand("You modified the code and "
@@ -1233,6 +1240,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			match.getCurrentPlayer().resetPrivileges();
 
 		} else {
+			alreadyDoneAction=true;
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 

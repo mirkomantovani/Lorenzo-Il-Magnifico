@@ -1204,6 +1204,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 */
 	public void showSupport(boolean showSupportDecision) {
 		this.GUI.notifyExcommunicationChoice(showSupportDecision);
+		currentActionPanel=null;
+		this.removeActionPanel();
 
 	}
 
@@ -1432,6 +1434,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 */
 	public void notifyActivateProduction(ArrayList<Integer> choices) {
 		this.GUI.notifyActivateProduction(choices);
+		productionChoices=new ProductionChoices(this);
+		productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
+		productionChoices.setVisible(false);
 	}
 
 	/**
