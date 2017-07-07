@@ -517,6 +517,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void applyAction(Action action) throws NotApplicableException {
 		action.apply();
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
+		
+		alreadyDoneAction=true;
 
 		if (match.getCurrentPlayer().getCouncilPrivilege() != 0) {
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
@@ -524,7 +526,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			match.getCurrentPlayer().resetPrivileges();
 
 		} else {
-			alreadyDoneAction=true;
+			
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 
