@@ -82,8 +82,6 @@ public class ExcommCube extends JPanel{
 		this.setOpaque(false);
 		//this.getParent().setComponentZOrder(this, 0);
 		
-		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
-		heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 		
 	}
 	
