@@ -13,16 +13,16 @@ import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
  */
 public class HarvestEffect extends Effect implements Disapplyable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1643184690128815176L;
+	
+	/** The instant effect. */
 	Effect instantEffect;
 	
 	/**
-	 * class constructor
-	 * 
-	 * @param effectResourceChest  the chest that contains the rewarded resources or the council privilege effect
+	 * class constructor.
+	 *
+	 * @param instantEffect the instant effect
 	 */
 	public HarvestEffect(Effect instantEffect){
 		this.instantEffect=instantEffect;
@@ -36,11 +36,17 @@ public class HarvestEffect extends Effect implements Disapplyable{
 		instantEffect.applyEffect(p);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return instantEffect.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void disapplyEffect(Player p) {
 		// TODO Auto-generated method stub

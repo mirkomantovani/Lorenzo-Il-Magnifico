@@ -7,16 +7,16 @@ import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
 import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
 
 /**
- * The Class BuildingCard.
+ * A card of type Building
  *
  * @author Mirko
  */
 public class BuildingCard extends DevelopmentCard {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6226375170446454135L;
+	
+	/** The production activation cost. */
 	private int productionActivationCost;
 
 	/**
@@ -28,6 +28,7 @@ public class BuildingCard extends DevelopmentCard {
 	 * @param cost the cost
 	 * @param immediateEffect the immediate effect
 	 * @param permanentEffect the permanent effect
+	 * @param productionActivationCost the production activation cost
 	 */
 	
 	public BuildingCard(int id, String name, Period period, ResourceChest cost, Effect immediateEffect,
@@ -39,7 +40,7 @@ public class BuildingCard extends DevelopmentCard {
 	}
 
 	/**
-	 * Can activate production with a certain production value
+	 * Can activate production with a certain production value.
 	 *
 	 * @param productionValue the production value
 	 * @return true, if the production effect of this card can be activated with the given production Value
@@ -48,6 +49,9 @@ public class BuildingCard extends DevelopmentCard {
     	return productionValue>productionActivationCost;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#toString()
+	 */
 	@Override
 	public String toString() {	
     	StringBuilder string = new StringBuilder();
@@ -60,11 +64,19 @@ public class BuildingCard extends DevelopmentCard {
     	return string.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#getActivationCost()
+	 */
 	@Override
 	public int getActivationCost() {
 		return this.productionActivationCost;
 	}
 	
+	/**
+	 * Checks for production choice.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasProductionChoice(){
 		ProductionEffect productionEffect=
 		(ProductionEffect)this.getPermanentEffect();
@@ -78,6 +90,11 @@ public class BuildingCard extends DevelopmentCard {
 	
 	
 	
+	/**
+	 * Gets the production choice.
+	 *
+	 * @return the production choice
+	 */
 	public String[] getProductionChoice(){
 		String[] choices = null;
 		
@@ -87,7 +104,7 @@ public class BuildingCard extends DevelopmentCard {
 			ResourcesExchangeEffect resourcesExchangeEffect=productionEffect.getResourcesExchangeEffect();
 			choices=new String[2];
 			choices[0]=resourcesExchangeEffect.getNormalEffectToString();
-			choices[1]=resourcesExchangeEffect.getNormalEffectToString();
+			choices[1]=resourcesExchangeEffect.getAlternativeEffectToString();
 //			
 		}
 

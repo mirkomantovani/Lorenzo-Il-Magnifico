@@ -5,16 +5,16 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * The Class TerritoryCard.
+ * A card of type Territory
  *
  * @author Mirko
  */
 public class TerritoryCard extends DevelopmentCard {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1065227820762540803L;
+	
+	/** The harvest activation cost. */
 	private int harvestActivationCost;
 
 	/**
@@ -35,7 +35,7 @@ public class TerritoryCard extends DevelopmentCard {
 	}
 
     /**
-     * Can activate harvest with a certain production value
+     * Can activate harvest with a certain production value.
      *
      * @param harvestValue the harvest value
      * @return true, if the harvest effect of this card can be activated with the given production Value
@@ -45,6 +45,9 @@ public class TerritoryCard extends DevelopmentCard {
 		
 	}
     
+     /* (non-Javadoc)
+      * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#toString()
+      */
      @Override
     public String toString() {
     	StringBuilder string = new StringBuilder();
@@ -55,6 +58,9 @@ public class TerritoryCard extends DevelopmentCard {
     	return string.toString();
     }
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#getActivationCost()
+	 */
 	@Override
 	public int getActivationCost() {
 		return this.harvestActivationCost;

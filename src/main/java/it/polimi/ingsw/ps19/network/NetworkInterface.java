@@ -6,21 +6,48 @@ import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 
+/**
+ * The Interface NetworkInterface.
+ */
 public interface NetworkInterface{
 
 	
+	/**
+	 * Connect.
+	 *
+	 * @throws Exception the exception
+	 */
 	void connect() throws Exception;
 
 	
+	/**
+	 * Send command.
+	 *
+	 * @param command the command
+	 * @throws Exception the exception
+	 */
 	void sendCommand( ClientToServerCommand command) throws Exception;
 
 
+	/**
+	 * Notify client.
+	 *
+	 * @param command the command
+	 */
 	void notifyClient(ServerToClientCommand command);
 
 	
+	/**
+	 * Close connection.
+	 */
 	void closeConnection();
 
 
+	/**
+	 * Adds the command observer.
+	 *
+	 * @param handler the handler
+	 */
 	void addCommandObserver(ClientCommandHandler handler);
 
 }

@@ -4,17 +4,30 @@ package it.polimi.ingsw.ps19.model.action;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
+import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
- * @author matteo
+ * The Class MarketAction.
+ * This class represent the placement in a market slot action
  *
+ * @author matteo
  */
 public class MarketAction extends Action{
 	
+	/** The market spot. */
 	private SingleActionSpace marketSpot;
+	
+	/** The paid servants. */
 	private int paidServants;
 	
 	
+	/**
+	 * Instantiates a new market action.
+	 *
+	 * @param familyMember the family member
+	 * @param marketSpot the market spot
+	 * @param paidServants the paid servants
+	 */
 	public MarketAction(FamilyMember familyMember, SingleActionSpace marketSpot, int paidServants){
 		super(familyMember);
 		this.marketSpot = marketSpot;
@@ -22,6 +35,9 @@ public class MarketAction extends Action{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#apply()
+	 */
 	@Override
 	public void apply() throws NotApplicableException {
 		System.out.println("sono nell'azione market");
@@ -34,6 +50,7 @@ public class MarketAction extends Action{
 			System.out.println("setto lo slot a occupato");
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
 			System.out.println("tolgo il family usato");
+			familyMember.getPlayer().getResourceChest().subResource(new Servant(paidServants));
 		} else {
 			System.out.println("sono nella isApplicable false");
 			throw new NotApplicableException("market action non si può fare");
@@ -41,6 +58,9 @@ public class MarketAction extends Action{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.action.Action#isApplicable()
+	 */
 	@Override
 	public boolean isApplicable() {
 		System.out.println("sono dentro a isApplicable");
@@ -53,6 +73,11 @@ public class MarketAction extends Action{
 	}
 	
 	
+	/**
+	 * Can be placed.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean canBePlaced(){
 		System.out.println("sono dentro a can be placed");
 		if(!marketSpot.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.marketSpot.getActionValueRequired()){

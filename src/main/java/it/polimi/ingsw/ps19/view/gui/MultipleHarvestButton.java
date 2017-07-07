@@ -5,18 +5,43 @@ import java.awt.Cursor;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 
+/**
+ * The Class MultipleHarvestButton.
+ *
+ * @author matteo
+ * This is the button to place familiars in the multiple harvest area
+ */
 public class MultipleHarvestButton extends JButton {
+	
+	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.07874015748031496062992125984252;
+	
+	/** The Constant hDIM_PERC. */
 	private final static double hDIM_PERC = 0.05555555555555555555555555555556;
+	
+	/** The width rel. */
 	private int widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+	
+	/** The height rel. */
 	private int heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
+	
+	/** The Constant wFIRST_SLOT. */
 	private final static double wFIRST_SLOT = 0.17716535433070866141732283464567;
+	
+	/** The Constant hFIRST_SLOT. */
 	private final static double hFIRST_SLOT = 0.08333333333333333333333333333333;
-	private final static double hHarvest = 0.81018518518518518518518518518519;
+	
+	/** The Constant wBigHarvest. */
 	private final static double wBigHarvest = 0.17060367454068241469816272965879;
+	
+	/** The Constant hHarvest. */
+	private final static double hHarvest= 0.88888888888888888888888888888889;
 
 	
 	
+	/**
+	 * Instantiates a new multiple harvest button.
+	 */
 	public MultipleHarvestButton() {
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		setContentAreaFilled(false);
@@ -24,6 +49,9 @@ public class MultipleHarvestButton extends JButton {
 		setPosition();
 	}
 	
+	/**
+	 * Sets the position.
+	 */
 	private void setPosition() {
 		widthRel = (int)(BoardPanel.dimension.getWidth()*wBigHarvest);
 		heightRel = (int)(BoardPanel.dimension.getHeight()*hHarvest);

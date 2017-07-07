@@ -10,16 +10,24 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * A generic resource displaying image, name and amount
- * 
- * @author Mirko
+ * A generic resource displaying image, name and amount.
  *
+ * @author Mirko
  */
 public class JResource extends JLabel {
 
+	/** The amount. */
 	private int amount;
+	
+	/** The resource type. */
 	private String resourceType;
 
+	/**
+	 * Instantiates a new j resource.
+	 *
+	 * @param resourceType the resource type
+	 * @param rightPanelWidth the right panel width
+	 */
 	public JResource(String resourceType, int rightPanelWidth) {
 
 		this.resourceType = resourceType;
@@ -57,6 +65,11 @@ public class JResource extends JLabel {
 
 	}
 
+	/**
+	 * Sets the amount.
+	 *
+	 * @param amount the new amount
+	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
 		if (resourceType.equals("woodstone")) {

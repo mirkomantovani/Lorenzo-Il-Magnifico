@@ -24,37 +24,50 @@ import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 import it.polimi.ingsw.ps19.server.socket.ServerSocketListener;
 
 /**
- * This is the Server Manager, it handles the Listeners, creates the Matches and starts them
+ * This is the Server Manager, it handles the Listeners, creates the Matches and starts them.
+ * It also closes the matches when everyone has disconnected from a Match
  * @author Mirko
- *
  */
 public class Server implements Runnable, ServerInterface {
 
+	/** The waiting clients. */
 	private Deque<ClientHandler> waitingClients;
 
-	/**
-	 * List of matches created
-	 */
+	/** List of matches created. */
 	private Deque<MatchHandler> createdMatches;
 	
-	/**
-	 * A map that stores the futures associated to the execution with
-	 * ExecutionService of MatchHandler threads, needed in order to stop the thread 
-	 */
+	/** A map that stores the futures associated to the execution with ExecutionService of MatchHandler threads, needed in order to stop the thread. */
 	private Map<MatchHandler,Future> futures;
 
+	/** The socket listener. */
 	private ServerSocketListener socketListener;
 
+	/** The rmi listener. */
 	private ServerRMIListener rmiListener;
 
+	/** The executor. */
 	private ExecutorService executor;
 
+	/** The in keyboard. */
 	private BufferedReader inKeyboard;
+	
+	/** The port. */
 	private int port;
+	
+	/** The instance. */
 	private static Server instance;
+	
+	/** The timer. */
 	private Thread timer;
+	
+	/** The suppress server. */
 	private boolean suppressServer = false;
 
+	/**
+	 * Instantiates a new server.
+	 *
+	 * @param port the port
+	 */
 	private Server(int port) {
 		this.port = port;
 		inKeyboard = new BufferedReader(new InputStreamReader(System.in));
@@ -62,6 +75,11 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 
+	/**
+	 * Gets the single instance of Server.
+	 *
+	 * @return single instance of Server
+	 */
 	public static synchronized Server getInstance() {
 		if (instance == null) {
 			return new Server(NetworkConstants.PORT);
@@ -69,6 +87,9 @@ public class Server implements Runnable, ServerInterface {
 			return instance;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		System.out.println("Starting the server");
@@ -77,6 +98,9 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 
+	/**
+	 * Start server.
+	 */
 	private void startServer() {
 		executor = Executors.newCachedThreadPool();
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
@@ -103,10 +127,9 @@ public class Server implements Runnable, ServerInterface {
 	/**
 	 * adds a new client handler to the list of waiting clients and if the timer has
 	 * expired or the queue has reached the max number of players for a match, starts
-	 * a new match
-	 * 
-	 * @param clientHandler
-	 *            :the client handler that has to be added
+	 * a new match.
+	 *
+	 * @param clientHandler            :the client handler that has to be added
 	 */
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
@@ -124,8 +147,8 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * this method check if there's the minimum number of waiting client to start a match
-	 * 
+	 * this method check if there's the minimum number of waiting client to start a match.
+	 *
 	 * @return true if there are at least 2 players
 	 */
 	public synchronized boolean checkWaitingList() {
@@ -134,13 +157,16 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * this method is invoked by the InitialTimer 
+	 * this method is invoked by the InitialTimer.
 	 */
 	public synchronized void timerExpired() {
 		if (checkWaitingList())
 			createMatch();
 	}
 
+	/**
+	 * Start initial timer.
+	 */
 	private void startInitialTimer() {
 		BufferedReader reader = null;
 		try {
@@ -161,6 +187,9 @@ public class Server implements Runnable, ServerInterface {
 		timer.start();
 	}
 
+	/**
+	 * Creates the match.
+	 */
 	private synchronized void createMatch() {
 
 		List<ClientHandler> list = new ArrayList<ClientHandler>();
@@ -177,7 +206,7 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * this method closes everything
+	 * this method closes everything.
 	 */
 	private void suppress() {
 		closeWaitingList();
@@ -199,7 +228,7 @@ public class Server implements Runnable, ServerInterface {
 
 	/**
 	 * method called when the server is shutting down itself and than notifies the
-	 * closing connection to all waiting clients
+	 * closing connection to all waiting clients.
 	 */
 	private void closeWaitingList() {
 		if (!waitingClients.isEmpty())
@@ -212,7 +241,7 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * this method closes every Match created
+	 * this method closes every Match created.
 	 */
 	private void closeMatches() {
 		List<MatchHandler> matchToClose = new ArrayList<MatchHandler>();
@@ -223,6 +252,9 @@ public class Server implements Runnable, ServerInterface {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ServerInterface#closeMatch(it.polimi.ingsw.ps19.server.controller.MatchHandler)
+	 */
 	@Override
 	public synchronized void closeMatch(MatchHandler mh) {
 		
@@ -234,6 +266,9 @@ public class Server implements Runnable, ServerInterface {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ServerInterface#removeClient(it.polimi.ingsw.ps19.server.ClientHandler)
+	 */
 	/* 
 	 * This method removes the clientHandler from the waitingList
 	 */

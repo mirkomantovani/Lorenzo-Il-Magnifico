@@ -5,7 +5,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 /**
- * The Class VentureDeck.
+ * A deck of venture cards
 
  * @author Mirko
  *
@@ -14,9 +14,7 @@ public class VentureDeck extends Deck<VentureCard> {
 
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2801964840693027773L;
 
 	/**
@@ -39,6 +37,9 @@ public class VentureDeck extends Deck<VentureCard> {
 		return this.cards.length;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.deck.Deck#printCardInfo(int)
+	 */
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getId());
 		

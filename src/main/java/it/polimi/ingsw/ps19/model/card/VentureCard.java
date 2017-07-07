@@ -6,9 +6,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 
 /**
- * The Class VentureCard.
- */
-/**
+ * A card of type Venture
+
  * @author Mirko
  *
  */
@@ -16,9 +15,7 @@ public class VentureCard extends DevelopmentCard {
 	
 	
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3369173763705272528L;
 
 	/**
@@ -37,6 +34,14 @@ public class VentureCard extends DevelopmentCard {
 		this.cardType=CardType.VENTURE;
 	}
 	
+	/**
+	 * Select cost.
+	 *
+	 * @param cost the cost
+	 * @param alternativeCost the alternative cost
+	 * @param choice the choice
+	 * @return the resource chest
+	 */
 	public ResourceChest selectCost(ResourceChest cost, ResourceChest alternativeCost, int choice){
 		switch(choice){
 		case 1: return cost;
@@ -46,6 +51,9 @@ public class VentureCard extends DevelopmentCard {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#toString()
+	 */
 	@Override
 	public String toString() {
 		
@@ -57,6 +65,9 @@ public class VentureCard extends DevelopmentCard {
     	return string.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#getActivationCost()
+	 */
 	@Override
 	public int getActivationCost() {
 		return -1;

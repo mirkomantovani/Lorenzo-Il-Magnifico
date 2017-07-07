@@ -10,13 +10,23 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+/**
+ * The Panel that lets the player choose the resources given by a council privilege
+ *
+ * @author Mirko
+ *
+ */
 public class ChoosePrivilegePanel extends JPanel {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new choose privilege panel.
+	 *
+	 * @param resourceWidth the resource width
+	 * @param listener the listener
+	 */
 	public ChoosePrivilegePanel(int resourceWidth, GamePanel listener){
 //		setSize(new Dimension(resourceWidth, 1000));
 		setMaximumSize(new Dimension(resourceWidth, 32767));

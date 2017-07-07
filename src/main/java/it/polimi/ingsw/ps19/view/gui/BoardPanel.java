@@ -27,25 +27,35 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
  * This JPanel extension is the left-side of the frame, the one containing the board image with 
  * all his components, at the moment of the creation the board image is scaled mantaining the
  * proportions to adapt it to any kind of screen, components put into this BoardPanel must
- * set the bounds for themselves and scale their dimensions to create a responsive UI
- * @author Mirko
+ * set the bounds for themselves and scale their dimensions to create a responsive UI.
  *
+ * @author Mirko
  */
 public class BoardPanel extends JPanel {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The img. */
 	private Image img;
+	
+	/** The dimension. */
 	static Dimension dimension;
+	
+	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
+	
+	/** The img height. */
 	private int imgHeight;
+	
+	/** The img width. */
 	private int imgWidth;
 
 
 
+	/**
+	 * Instantiates a new board panel.
+	 */
 	public BoardPanel() {
 		super(new GridBagLayout());  //metto a null
 		
@@ -85,11 +95,19 @@ public class BoardPanel extends JPanel {
 
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, this);
 	}
 
+	/**
+	 * Gets the dimension.
+	 *
+	 * @return the dimension
+	 */
 	public Dimension getDimension() {
 		return dimension;
 	}

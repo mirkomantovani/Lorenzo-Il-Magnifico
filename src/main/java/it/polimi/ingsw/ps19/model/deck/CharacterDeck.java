@@ -5,7 +5,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;
 
 /**
- * The Class CharacterDeck.
+ * A deck of character cards
  
  *
  * @author Mirko
@@ -14,9 +14,7 @@ import it.polimi.ingsw.ps19.model.card.CharacterCard;
 public class CharacterDeck extends Deck<CharacterCard> {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6919342650647211328L;
 
 	/**
@@ -38,6 +36,9 @@ public class CharacterDeck extends Deck<CharacterCard> {
 		return this.cards.length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.deck.Deck#printCardInfo(int)
+	 */
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getId());
 		

@@ -22,16 +22,35 @@ import it.polimi.ingsw.ps19.view.UserInterface;
  */
 public class CommandLineInterface implements UserInterface, InputListener {
 
+	/** The welcome message. */
 	private final String welcomeMessage = "|------------------Welcome to Lorenzo il Magnifico, the board game!----------------|";
 
+	/** The reader. */
 	private InputReader reader;
+	
+	/** The game controller. */
 	private ClientController gameController;
+	
+	/** The input reader thread. */
 	private Thread inputReaderThread;
+	
+	/** The reader state. */
 	private int readerState;
+	
+	/** The move state. */
 	private int moveState;
+	
+	/** The take card state. */
 	private int takeCardState;
+	
+	/** The action constructor. */
 	private ArrayList<String> actionConstructor;
 
+	/**
+	 * Instantiates a new command line interface.
+	 *
+	 * @param clientController the client controller
+	 */
 	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
 		actionConstructor=new ArrayList<String>();
@@ -42,17 +61,26 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		print(welcomeMessage);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#initializeMatch(int)
+	 */
 	@Override
 	public void initializeMatch(int numPlayers) {
 		print("A new game is about to start!");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#startTurn()
+	 */
 	@Override
 	public void startTurn() {
 		print("-------------------------------------------------------------");
 		print("\nIt is now your turn, what do you want to do next?");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#playerStatusChange(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void playerStatusChange(Player p) {
 		print("This is your status updated :\n");
@@ -60,17 +88,26 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#playerMove()
+	 */
 	@Override
 	public void playerMove() {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#win()
+	 */
 	@Override
 	public void win() {
 		print("CONGRATULATIONS! You won the game!\nPress any key to exit the game");
 		readerState = ClientConstants.SEND_END_GAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#lose()
+	 */
 	/*
 	 * This is just provisional, we will adopt another mechanism
 	 */
@@ -80,32 +117,54 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_END_GAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#playerTurn()
+	 */
 	@Override
 	public void playerTurn() {
 
 	}
 
+	/**
+	 * Prints the.
+	 *
+	 * @param s the s
+	 */
 	private void print(String s) {
 		System.out.println(s);
 
 	}
 
+	/**
+	 * Prints the imp.
+	 *
+	 * @param s the s
+	 */
 	private void printImp(String s) {
 		System.out.println("¤¤¤  " + s.toUpperCase() + "  ¤¤¤");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#initializeTurn(it.polimi.ingsw.ps19.Period, int)
+	 */
 	@Override
 	public void initializeTurn(Period period, int turn) {
 		printImp("New turn");
 		print("Period: " + period.toString() + "\tTurn: " + turn);
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#refreshBoard(it.polimi.ingsw.ps19.model.area.Board)
+	 */
 	@Override
 	public void refreshBoard(Board board){
 		print("Board status:");
 		print(board.toString());
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#AskPrivilegeChoice(int, java.util.List)
+	 */
 	@Override
 	public void AskPrivilegeChoice(int numberOfPrivilege, List<ResourceChest> privilegeResources) {
 		print("Choose " + numberOfPrivilege
@@ -117,6 +176,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_PRIVILEGE_CHOICES;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.cli.InputListener#notify(java.lang.String)
+	 */
 	@Override
 	public void notify(String input) {
 		switch (readerState) {
@@ -190,6 +252,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#startDraft(java.util.ArrayList)
+	 */
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
 		print("Select a leader card from the following: ");
@@ -201,6 +266,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_CHOSEN_LEADERCARD;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askMove()
+	 */
 	@Override
 	public void askMove() {
 		moveState=0;
@@ -213,6 +281,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_MOVE;
 	}
 	
+	/**
+	 * Take card params.
+	 *
+	 * @param input the input
+	 */
 	private void takeCardParams(String input){
 		switch(takeCardState){
 		case 0:
@@ -240,6 +313,12 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		
 	}
 	
+	/**
+	 * Distinguish action.
+	 *
+	 * @param string the string
+	 * @param takecard the takecard
+	 */
 	private void distinguishAction(String string, String takecard){
 		switch(string){
 		case "1": 
@@ -273,6 +352,11 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		}
 	}
 
+	/**
+	 * Move handler.
+	 *
+	 * @param string the string
+	 */
 	private void moveHandler(String string) {
 //		actionConstructor = new ArryList<String>();
 //		actionConstructor.add(string);
@@ -306,11 +390,17 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#invalidInput()
+	 */
 	@Override
 	public void invalidInput() {
 		printImp("Invalid Input");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askPersonalBonusTile(java.util.List)
+	 */
 	@Override
 	public void askPersonalBonusTile(List<PersonalBonusTile> personalBonusTiles) {
 		// TODO Auto-generated method stub
@@ -319,18 +409,27 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#assignColor(java.lang.String)
+	 */
 	@Override
 	public void assignColor(String color) {
 		print("Ti è stato assegnato il colore: "+color);
 		gameController.setPlayerColor(color);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#notifyExcommunication()
+	 */
 	@Override
 	public void notifyExcommunication() {
 		print("God seems very offended by your behaviour, he established your excommunication.");
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#opponentStatusChanged(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void opponentStatusChanged(Player maskedPlayer) {
 		print("The ");
@@ -340,18 +439,27 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#newChatMessage(java.lang.String)
+	 */
 	@Override
 	public void newChatMessage(String message) {
 		print(message);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askNameAndPassword()
+	 */
 	@Override
 	public void askNameAndPassword() {
 		print("Insert your name: ");
 		readerState = ClientConstants.SEND_NAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askForProductionExchangeEffect(java.util.List)
+	 */
 	@Override
 	public void askForProductionExchangeEffect(List<String[]> choices) {
 		
@@ -364,12 +472,18 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#notifyRoundTimerExpired()
+	 */
 	@Override
 	public void notifyRoundTimerExpired() {
 		print("Your time to move is elapsed, you have lost the turn.");
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askForExcommunicationPayment(java.lang.String)
+	 */
 	@Override
 	public void askForExcommunicationPayment(String excommunicationEffect) {
 		print("Do you accept the following excommunication effect?\n");
@@ -379,6 +493,9 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_EXCOMMUNICATION_PAYMENT_CHOICE;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#askFinishRoundOrDiscard()
+	 */
 	@Override
 	public void askFinishRoundOrDiscard() {
 		print("What do you want to do next?");
@@ -387,17 +504,26 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		readerState = ClientConstants.SEND_MOVE;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#commandNotValid()
+	 */
 	@Override
 	public void commandNotValid() {
 		printImp("Invalid command!");
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#actionCommandNotValid(java.lang.String)
+	 */
 	@Override
 	public void actionCommandNotValid(String reason) {
 		print("Your action is invalid!");
 		print(reason);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.view.UserInterface#notifyServerClosed()
+	 */
 	@Override
 	public void notifyServerClosed() {
 print("The server has closed the game");		

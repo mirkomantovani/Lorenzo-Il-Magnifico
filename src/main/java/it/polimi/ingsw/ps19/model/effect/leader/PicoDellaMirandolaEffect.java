@@ -4,16 +4,19 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * @author matteo
+ * The Class PicoDellaMirandolaEffect.
+ * This class represents the effect of the leader card with the same name
  *
+ * @author matteo
  */
 public class PicoDellaMirandolaEffect extends Effect implements Disapplyable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6583399799257349121L;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -22,11 +25,17 @@ public class PicoDellaMirandolaEffect extends Effect implements Disapplyable{
 		return builder.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void applyEffect(Player p) {
 		p.getBonuses().setCardCostCoinDiscount(3);
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	public void disapplyEffect(Player p){
 		p.getBonuses().setCardCostCoinDiscount(0);
 	}

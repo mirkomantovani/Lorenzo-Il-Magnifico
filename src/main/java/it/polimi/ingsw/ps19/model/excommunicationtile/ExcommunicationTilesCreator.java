@@ -19,17 +19,25 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
- * @author Mirko
+ * The class that creates the excommunication tiles from file
  *
+ * @author Mirko
  */
 public class ExcommunicationTilesCreator {
 
-	/** The buffered reader used to read from file */
+	/**  The buffered reader used to read from file. */
 	private static BufferedReader buffReader;
 	
-	/** The line read from file */
+	/**  The line read from file. */
 	private static String lineRead;
 	
+	/**
+	 * Creates the excommunication tiles.
+	 *
+	 * @param tiles the tiles
+	 * @return the excommunication tile[]
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ExcommunicationTile[] createExcommunicationTiles(int tiles) throws IOException{
 		
 		Period period; 

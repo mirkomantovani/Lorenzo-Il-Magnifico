@@ -19,16 +19,18 @@ import javax.swing.border.EmptyBorder;
  * status of the other players that he's now allowed to freely see in our version
  * of the game, this decision was made to make the game more challenging and to
  * rewards the player who better use this feature and are constantly monitoring
- * the actions of other players
- * @author Mirko
+ * the actions of other players.
  *
+ * @author Mirko
  */
 public class StrategyEditor extends JPanel {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new strategy editor.
+	 */
 	public StrategyEditor() {
 		setLayout(new BorderLayout(0, 0));
 		

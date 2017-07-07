@@ -5,8 +5,8 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 
 /**
- * The Class BuildingDeck.
-
+ * A deck of building cards
+ * 
 *
 * @author Mirko
 *
@@ -15,9 +15,7 @@ public class BuildingDeck extends Deck<BuildingCard> {
 
 	
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 626392870621207325L;
 
 	/**
@@ -39,6 +37,9 @@ public class BuildingDeck extends Deck<BuildingCard> {
 		return this.cards.length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.deck.Deck#printCardInfo(int)
+	 */
 	public void printCardInfo(int i){
 		System.out.println(this.cards[i].getId());
 		

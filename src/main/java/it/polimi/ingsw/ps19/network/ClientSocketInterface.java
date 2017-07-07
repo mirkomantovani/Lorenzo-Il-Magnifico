@@ -13,20 +13,33 @@ import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 
 /**
+ * The Class ClientSocketInterface.
+ *
  * @author matteo
  * 
  * This class connects the client that chooses a socket connection, with the server
- *
  */
 public class ClientSocketInterface implements NetworkInterface {
 
+	/** The in socket. */
 	private ObjectInputStream inSocket;
+	
+	/** The out socket. */
 	private ObjectOutputStream outSocket;
+	
+	/** The socket. */
 	private Socket socket;
+	
+	/** The listener. */
 	private ClientSocketListener listener; 
+	
+	/** The hear. */
 	private Thread hear; // the thread that listens on the socket channel
 	
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#connect()
+	 */
 	public void connect() {
 		try {
 			socket = new Socket(NetworkConstants.SERVER_IP_ADDRESS, NetworkConstants.PORT);
@@ -50,9 +63,11 @@ public class ClientSocketInterface implements NetworkInterface {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#sendCommand(it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand)
+	 */
 	@Override
 	public void sendCommand(ClientToServerCommand command) {
-		// TODO Auto-generated method stub
 		
 		System.out.println("clisocket: invio comando");
 		try {
@@ -66,6 +81,9 @@ public class ClientSocketInterface implements NetworkInterface {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#notifyClient(it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand)
+	 */
 	@Override
 	public void notifyClient(ServerToClientCommand command) {
 		// TODO Auto-generated method stub
@@ -73,6 +91,9 @@ public class ClientSocketInterface implements NetworkInterface {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#closeConnection()
+	 */
 	@Override
 	public void closeConnection() {
 		// TODO Auto-generated method stub
@@ -87,6 +108,9 @@ public class ClientSocketInterface implements NetworkInterface {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.network.NetworkInterface#addCommandObserver(it.polimi.ingsw.ps19.client.ClientCommandHandler)
+	 */
 	@Override
 	public void addCommandObserver(ClientCommandHandler handler) {
 		listener.addCommandObserver(handler);		

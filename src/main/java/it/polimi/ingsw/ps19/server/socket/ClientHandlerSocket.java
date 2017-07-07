@@ -22,19 +22,40 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
- * @author Mirko
+ * The Class that handles the communication between client and server, server-side
  *
+ * @author Mirko
  */
 public class ClientHandlerSocket extends ClientHandler {
 
+	/** The socket. */
 	private Socket socket;
+	
+	/** The in socket. */
 	private ObjectInputStream inSocket;
+	
+	/** The out socket. */
 	private ObjectOutputStream outSocket;
+	
+	/** The client number. */
 	private int clientNumber;
+	
+	/** The command handler. */
 	private CommandObserver commandHandler;
+	
+	/** The creator. */
 	private ServerInterface creator;
+	
+	/** The match observer. */
 	private MatchHandlerObserver matchObserver;
 
+	/**
+	 * Instantiates a new client handler socket.
+	 *
+	 * @param socket the socket
+	 * @param number the number
+	 * @param serverStarter the server starter
+	 */
 	public ClientHandlerSocket(Socket socket, int number, ServerInterface serverStarter) {
 		clientNumber = number;
 		this.socket = socket;
@@ -50,6 +71,9 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#sendCommand(it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand)
+	 */
 	@Override
 	public void sendCommand(ServerToClientCommand command) throws IOException {
 		outSocket.writeUnshared(command);
@@ -57,6 +81,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		outSocket.reset();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByServer()
+	 */
 	@Override
 	public void closedByServer() {
 		try {
@@ -66,6 +93,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		close();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByClient()
+	 */
 	@Override
 	public void closedByClient() {
 		if (matchObserver != null)
@@ -75,11 +105,17 @@ public class ClientHandlerSocket extends ClientHandler {
 		close();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#isClosed()
+	 */
 	@Override
 	public boolean isClosed() {
 		return false;
 	}
 
+	/**
+	 * Close.
+	 */
 	public void close() {
 		if (!closed) {
 			try {
@@ -92,6 +128,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		ClientToServerCommand command;
@@ -100,11 +139,6 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
-				
-				if(command instanceof ChosenLeaderCardCommand)
-					System.out.println("clhandsock ho ricevuto chosenleadercard");
-				if(command instanceof PlaceIntoMarketCommand)
-					System.out.println("clhandsock ha ricevuto un market command");
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
@@ -139,11 +173,17 @@ public class ClientHandlerSocket extends ClientHandler {
 
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addObserver(it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver)
+	 */
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
 		this.matchObserver = matchObserver;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addCommandObserver(it.polimi.ingsw.ps19.server.ServerCommandHandler)
+	 */
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.commandHandler = commandHandler;

@@ -7,18 +7,33 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
+/**
+ * The Class SingleActionSpace.
+ * This class is the generic single action space that you can find in floors, markets and in small
+ * production and harvest area. This action space can store only one familiar per time. 
+ * 
+ */
 public class SingleActionSpace extends ActionSpace{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 9069295031617624276L;
+	
+	/** The family member. */
 	private FamilyMember familyMember;
 	
+	/**
+	 * Instantiates a new single action space.
+	 *
+	 * @param actionValueRequired the action value required
+	 * @param effect the effect
+	 */
 	public SingleActionSpace(int actionValueRequired, Effect effect) {
 		super(actionValueRequired, effect);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupied()
+	 */
 	@Override
 	public boolean isOccupied() {
 		return familyMember!=null;
@@ -26,6 +41,9 @@ public class SingleActionSpace extends ActionSpace{
 	
 	
 	//This method returns an arraylist with a single family member, in order to access the
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.Occupable#occupiedByMember()
+	 */
 	//attribute use the getFamilyMember method
 	@Override
 	public ArrayList<FamilyMember> occupiedByMember() {
@@ -35,6 +53,9 @@ public class SingleActionSpace extends ActionSpace{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.Occupable#occupiedByPlayer()
+	 */
 	@Override
 	public HashSet<Player> occupiedByPlayer() {
 		HashSet<Player> forInterface = new HashSet<Player>();
@@ -43,10 +64,18 @@ public class SingleActionSpace extends ActionSpace{
 	}
 
 
+	/**
+	 * Gets the family member.
+	 *
+	 * @return the family member
+	 */
 	public FamilyMember getFamilyMember() {
 		return familyMember;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.ActionSpace#setFamilyMember(it.polimi.ingsw.ps19.FamilyMember)
+	 */
 	public void setFamilyMember(FamilyMember familyMember) {
 //		if(!isOccupied())
 			this.familyMember = familyMember;
@@ -55,6 +84,9 @@ public class SingleActionSpace extends ActionSpace{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
+	 */
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 
@@ -69,6 +101,9 @@ public class SingleActionSpace extends ActionSpace{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -15,16 +15,27 @@ import java.util.List;
  */
 public class InputReader implements Runnable{
 
+	/** The reader. */
 	private BufferedReader reader;
+	
+	/** The listeners. */
 	private List<InputListener> listeners;
+	
+	/** The input. */
 	private String input;
 
 	
+	/**
+	 * Instantiates a new input reader.
+	 */
 	public InputReader(){
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		listeners = new ArrayList<InputListener>();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		while(true){
@@ -39,10 +50,20 @@ public class InputReader implements Runnable{
 		}
 	}
 	
+	/**
+	 * Adds the listener.
+	 *
+	 * @param inputListener the input listener
+	 */
 	public void addListener(InputListener inputListener){
 		listeners.add(inputListener);
 	}
 	
+	/**
+	 * Notify listeners.
+	 *
+	 * @param input the input
+	 */
 	private void notifyListeners(String input){
 		for(InputListener listener : listeners)
 			listener.notify(input);

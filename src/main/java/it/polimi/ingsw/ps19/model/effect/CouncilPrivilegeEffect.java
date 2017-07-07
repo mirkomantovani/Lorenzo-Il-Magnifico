@@ -4,30 +4,50 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
- * @author matteo
+ * The Class CouncilPrivilegeEffect.
  *
+ * @author matteo
  */
 public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2209211330966096453L;
+	
+	/** The privilege coin. */
 	private final int PRIVILEGE_COIN = 2;
+	
+	/** The privilege wood. */
 	private final int PRIVILEGE_WOOD = 1;
+	
+	/** The privilege stone. */
 	private final int PRIVILEGE_STONE = 1;
+	
+	/** The privilege faithpoint. */
 	private final int PRIVILEGE_FAITHPOINT = 1;
+	
+	/** The privilege servant. */
 	private final int PRIVILEGE_SERVANT = 2;
+	
+	/** The privilege militarypoint. */
 	private final int PRIVILEGE_MILITARYPOINT = 2;
 	
+	/** The privilege amount. */
 	int privilegeAmount;
 
+	/**
+	 * Instantiates a new council privilege effect.
+	 *
+	 * @param privilegeAmount the privilege amount
+	 */
 	public CouncilPrivilegeEffect(int privilegeAmount) {
 		this.privilegeAmount = privilegeAmount;
 	}
 
 
 		
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	public void applyEffect(Player p){
 		System.out.println("applying privilege");
 		p.setCouncilPrivilege(privilegeAmount);
@@ -37,6 +57,9 @@ public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -46,6 +69,9 @@ public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void disapplyEffect(Player p) {
 		// TODO Auto-generated method stub

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 
 /**
- * The Class CharacterCard.
+ * A card of type Character
  *
  * @author Mirko
  */
@@ -15,9 +15,7 @@ public class CharacterCard extends DevelopmentCard {
 	
 	//we have to pass some null values to immediate or permanent effect of some of these cards because some of them don't have both
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8075237121381367847L;
 
 	/**
@@ -36,6 +34,9 @@ public class CharacterCard extends DevelopmentCard {
 		this.cardType=CardType.CHARACTER;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#toString()
+	 */
 	@Override
 	public String toString() {
 		
@@ -47,6 +48,9 @@ public class CharacterCard extends DevelopmentCard {
     	return string.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.card.DevelopmentCard#getActivationCost()
+	 */
 	@Override
 	public int getActivationCost() {
 		return -1;

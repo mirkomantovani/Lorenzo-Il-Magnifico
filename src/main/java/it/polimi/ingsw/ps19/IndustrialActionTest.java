@@ -11,9 +11,17 @@ import it.polimi.ingsw.ps19.model.card.TerritoryCard;
 import it.polimi.ingsw.ps19.model.deck.DeckCreator;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
+/**
+ * The Class IndustrialActionTest.
+ */
 public class IndustrialActionTest {
 
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		Player player = new Player("Jimmy", "Blue");
 		Player player2 = new Player("Teo", "Red");

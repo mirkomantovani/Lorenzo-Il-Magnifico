@@ -6,17 +6,23 @@ import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 
 /**
- * @author matteo
+ * The Class InstantProductionActionEffect.
  *
+ * @author matteo
  */
 public class InstantProductionActionEffect extends Effect implements Disapplyable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3257137657687177488L;
+	
+	/** The production action value. */
 	int productionActionValue;
 
+	/**
+	 * Instantiates a new instant production action effect.
+	 *
+	 * @param productionActionValue the production action value
+	 */
 	public InstantProductionActionEffect(int productionActionValue){
 		this.productionActionValue = productionActionValue;
 	}
@@ -39,6 +45,9 @@ public class InstantProductionActionEffect extends Effect implements Disapplyabl
 	}
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -48,6 +57,9 @@ public class InstantProductionActionEffect extends Effect implements Disapplyabl
 	}
 
 
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.effect.leader.Disapplyable#disapplyEffect(it.polimi.ingsw.ps19.Player)
+	 */
 	@Override
 	public void disapplyEffect(Player p) {
 		// TODO Auto-generated method stub

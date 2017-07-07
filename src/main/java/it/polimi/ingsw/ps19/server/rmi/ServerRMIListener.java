@@ -13,25 +13,56 @@ import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 
+/**
+ * The listener interface for receiving serverRMI events.
+ * The class that is interested in processing a serverRMI
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addServerRMIListener</code> method. When
+ * the serverRMI event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * 
+ */
 public class ServerRMIListener implements Runnable {
 
+	/** The id. */
 	private static int id = 0;
+	
+	/** The client handler. */
 	private ClientHandlerInterface clientHandler;
+	
+	/** The registry. */
 	private Registry registry;
+	
+	/** The name. */
 	private String name;
+	
+	/** The creator. */
 	private ServerInterface creator;
 	
+	/**
+	 * Instantiates a new server RMI listener.
+	 *
+	 * @param server the server
+	 */
 	public ServerRMIListener(Server server) {
 		name = "ClientHandler";
 		creator = server;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		System.out.println("Running ServerRMIListener");
 		createClientHandler();
 	}
 	
+	/**
+	 * Creates the client handler.
+	 */
 	private void createClientHandler(){		
 		try {
 			clientHandler = new ClientHandlerInterfaceImpl(this, id);
@@ -52,7 +83,7 @@ public class ServerRMIListener implements Runnable {
 	}
 	
 	/**
-	 * This method closes the RMI listener locking the resources so that no other thread can interfere
+	 * This method closes the RMI listener locking the resources so that no other thread can interfere.
 	 */
 	public synchronized void closeListener() {
 		try {
@@ -64,7 +95,9 @@ public class ServerRMIListener implements Runnable {
 	}
 	
 	/**
-	 * This method adds a client once the registry is active so when the first one has already been instantiated
+	 * This method adds a client once the registry is active so when the first one has already been instantiated.
+	 *
+	 * @param clientHandler the client handler
 	 */
 	public void addClient(ClientHandlerInterfaceImpl clientHandler){
 		System.out.println("ServerRMIListener received an add call");
@@ -80,10 +113,18 @@ public class ServerRMIListener implements Runnable {
 		}
 	}
 	
+	/**
+	 * Removes the waiting client.
+	 *
+	 * @param clientHandler the client handler
+	 */
 	public void removeWaitingClient(ClientHandler clientHandler) {
 		creator.removeClient(clientHandler);
 	}
 
+	/**
+	 * End listening.
+	 */
 	public void endListening() {
 		try {
 			registry.unbind(name);
