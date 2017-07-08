@@ -207,11 +207,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		cards = new ArrayList<CardButton>();
 
 		screenDim = toolkit.getScreenSize();
-		// this.set(true);
-		// setExtendedState(Frame.MAXIMIZED_BOTH);
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// setBounds(100, 100, 450, 300);
-		// contentPane = new JPanel();
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setLayout(new BorderLayout(0, 0));
 
@@ -221,24 +216,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		add(boardPanel, BorderLayout.WEST);
 		boardPanel.setLayout(null);
 
-		// JButton btnNewButton = new JButton("New button");
-		// btnNewButton.setContentAreaFilled(false);
-		// btnNewButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null,
-		// null, null, null));
-		// btnNewButton.setBounds(72, 72, 105, 176);
-		// boardPanel.add(btnNewButton);
-
-		// JButton btnNewButton_2 = new
-		// CardButton(boardPanel.getPreferredSize(),1,0,55);
-		// btnNewButton_2.setBounds(268, 256, 105, 170);
-		// boardPanel.add(btnNewButton_2);
-
-		// MarketButton market=new MarketButton();
-		// market.setBounds(200,200,50,50);
-		// boardPanel.add(market);
-
-		System.out.println("BoardPanel preferredSize: " + boardPanel.getPreferredSize().getHeight() + " "
-				+ boardPanel.getPreferredSize().getWidth());
 
 		
 		// RIGHT SCROLLBAR
@@ -672,7 +649,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 * Show choose action.
 	 */
 	public void showChooseAction() {
-		System.out.println("show choose action");
 		this.currentActionPanel = chooseAction;
 		this.showActionPanel(chooseAction);
 
@@ -749,12 +725,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			actionConstructor.add("production");
 			actionConstructor.add("2");
 			this.GUI.notifyProduction(actionConstructor);
-
 		} else if (e.getSource() instanceof JLeaderCard) {
-//			System.out.println("leader card clicked");
 			JLeaderCard leader = (JLeaderCard) (e.getSource());
 			this.removeActionPanel();
-			leadersPanel.setVisible(true);
+			leadersPanel.setVisible(false);
 
 			if (leaderState.equals("draft")) {
 				this.GUI.notifyChosenLeaderInDraft(leader.getLeaderName());
@@ -762,16 +736,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 				draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
 				draftPanel.setVisible(false);
 			} else if (leaderState.equals("activate")) {
-				// System.out.println("activate leader");
 				this.GUI.notifyActivateLeader(leader.getLeaderName());
 				leaderState = "none";
 				leadersPanel.setVisible(false);
 
 			} else if (leaderState.equals("discard")) {
-				// System.out.println("discard leader");
 				this.GUI.notifyDiscardLeader(leader.getLeaderName());
 				leaderState = "none";
-				// this.removeActionPanel();
 				leadersPanel.setVisible(false);
 
 			}
@@ -820,7 +791,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 * @param market the market
 	 */
 	private void constructAction(String market) {
-		System.out.println("gamepanel:constructing marketaction");
 		actionConstructor = new ArrayList<String>();
 
 		String familyMember;
@@ -896,8 +866,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		servants = actionPanel.getServants();
 		cardType = "" + tower; // scambio 2 torri centrali
 
-		System.out.println("GamePanel: costructAction: member:" + familyMember + " servants:" + servants
-				+ " cardtype/tower:" + cardType + " floor:" + floor);
 
 		actionConstructor.add(familyMember);
 		actionConstructor.add(servants);
@@ -950,8 +918,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		if (e.getSource() instanceof JResource) {
 			String chosenP = ((JResource) e.getSource()).getName();
 			chosenPrivileges.add(chosenP);
-			// choices.add(Integer.parseInt(((JResource)e.getSource()).getName()));
-//			System.out.println("choicepriv:" + chosenP);
 			if(currentNumberOfPrivilege==chosenPrivileges.size()){
 			this.removeActionPanel();
 			

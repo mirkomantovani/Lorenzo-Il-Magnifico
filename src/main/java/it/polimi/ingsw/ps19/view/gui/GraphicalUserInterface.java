@@ -193,9 +193,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		writeGameMessage("A new turn is starting, Period:" + period.toString() + " Turn:" + turn);
 		FamilyMemberPawn.councilCounter = 0;
 		frame.getGamePanel().removeCards();
-		System.out.println("sono in initialize ho azzerato council");
 		frame.getGamePanel().resetFamiliars();
-		System.out.println("ho chiamato la reset da initialize");
 	}
 
 	/* (non-Javadoc)
@@ -263,7 +261,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void opponentStatusChanged(Player maskedPlayer) {
 		frame.getGamePanel().addExcommunicationCubes(maskedPlayer);
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
-		System.out.println("sono in opponent status change");
 		frame.getGamePanel().repaintBoard();
 
 	}
@@ -390,7 +387,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(" GUI: Sono nell'action performed");
 		if (e.getSource() == frame.getGamePanel().getSendChat()) {
 			String message;
 			message = frame.getGamePanel().getAndDeleteChatInput();
@@ -446,9 +442,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 * @param actionConstructor the action constructor
 	 */
 	public void notifyMarketAction(ArrayList<String> actionConstructor) {
-		System.out.println("\nmarket action: actionconstructor:"+actionConstructor.get(0)+
-				" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
-				" "+actionConstructor.get(3));
 		gameController.notifyMarket(actionConstructor);
 	}
 

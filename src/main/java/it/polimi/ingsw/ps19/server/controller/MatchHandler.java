@@ -275,6 +275,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Start turn.
 	 */
 	private void startTurn() {
+		
+		updateGamePlayTimeForEveryone();
 
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
@@ -380,8 +382,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			client = getRightClientHandler(player);
 		} catch (WrongPlayerException e1) {
-			System.out.println(e1.getError());
-			e1.printStackTrace();
+//			System.out.println(e1.getError());
+//			e1.printStackTrace();
 			return;
 		}
 
@@ -423,7 +425,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("\n\n Marchhandler: new thread for roundtimer\n\n");
+
 		roundTimerThread = new Thread(new RoundTimer(this, timeMillis));
 		roundTimerThread.start();
 	}
@@ -483,10 +485,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
 		} catch (MatchFullException e) {
-			System.out.println("Disconnected more players than the ones in the game");
-			e.printStackTrace();
+//			System.out.println("Disconnected more players than the ones in the game");
+//			e.printStackTrace();
 		} catch (WrongClientHandlerException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+		}
+	}
+	
+	private void updateGamePlayTimeForEveryone(){
+		for(int i=0;i<match.getPlayers().length;i++){
+		updateGamePlayTime(match.getPlayers()[i].getColor());
 		}
 	}
 
@@ -501,8 +509,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		int elapsedTime = (int) ((currentTime - startTime) / 1000);
 
 		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
-
+		
 		UsersCreator.updateFile(users);
+		
 	}
 
 	/**
@@ -588,13 +597,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			closedClients.add(getRightClientHandler(getCurrentPlayer()));
 		} catch (WrongPlayerException e) {
-			System.out.println(e.getError());
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			this.match.addDisconnectedPlayer(getCurrentPlayer());
 		} catch (MatchFullException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		if (match.isAnyoneStillPlaying()) {
 			setNext();
@@ -609,13 +617,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	private void nextStep() {
 		if ((roundNumber == match.getPlayers().length * 4) || currentPlayerWithoutFamilyMembers()) {
-			System.out.println("roundNumber= " + roundNumber + "\n cambio turno");
 			if (match.getTurn() % 2 == 1) {
-				System.out.println(match.getTurn() + "ho fatto modulo due");
 				startTurn();
 			} else {
 				startExcommunicationPhase();
-				System.out.println("sono nell'else di modulo due, inizia l'excommphase" + match.getTurn());
 			}
 		} else
 			startRound();
@@ -736,7 +741,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the player color
 	 */
 	public void handleLeaderChoice(String name, String playerColor) {
-		System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
 
@@ -780,7 +784,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the leader card
 	 */
 	private void removeLeaderFromSets(LeaderCard leaderCard) {
-		// System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
 			for (LeaderCard card : set) {
 				if (leaderCard == card) {
@@ -815,7 +818,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 		}
-		System.out.println(rank.toString());
 		sendToPlayer(new WinCommand(), rank[0]);
 		for (Player p : rank) {
 			if (p != rank[0]) {
@@ -1099,17 +1101,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
 
-		System.out.println(councilMemberList.toString());
 
 		ArrayList<Player> councilPlayers = new ArrayList<Player>();
-		System.out.println("sono nella refresh player order");
 
 		if (!councilMemberList.isEmpty()) {
-			System.out.println("sono nell if della refresh player");
 			for (int i = 0; i < councilMemberList.size(); i++) {
 				councilPlayers.add(councilMemberList.get(i).getPlayer());
 			}
-			System.out.println("ho ricavato i player che hanno giocato nel council palace");
 			for (int i = 0; i < councilPlayers.size(); i++) {
 				for (int j = 0; j < councilPlayers.size(); j++) {
 					if (i != j && councilPlayers.get(i) == councilPlayers.get(j)) {
@@ -1117,13 +1115,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 					}
 				}
 			}
-			System.out.println("ho rimosso i duplicati");
 			for (int i = 0; i < oldList.length; i++) {
 				if (!councilPlayers.contains(oldList[i])) {
 					councilPlayers.add(oldList[i]);
 				}
 			}
-			System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
 			Player[] newList = new Player[oldList.length];
 			for (int i = 0; i < councilPlayers.size(); i++) {
 				newList[i] = councilPlayers.get(i);
@@ -1131,9 +1127,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 			match.setPlayers(newList);
 
-			System.out.println("questo è il nuovo ordine");
 			for (int i = 0; i < councilPlayers.size(); i++)
-				System.out.println(newList[i].toString() + "\n");
 		}
 
 	}
@@ -1355,7 +1349,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		final Optional<User> user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 
 		if (user.isPresent()) {
-			System.out.println("user was in the list");
 			if (user.get().correctPassword(password)) {
 				user.get().incrementMatches();
 				UsersCreator.updateFile(users);
@@ -1364,7 +1357,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			} else
 				return false;
 		} else {
-			System.out.println("user was not in the list");
 			User newUser = new User(username, password);
 			this.users.add(newUser);
 			userFromColor.put(playerColor, newUser);
