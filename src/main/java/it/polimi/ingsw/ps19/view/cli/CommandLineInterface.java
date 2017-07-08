@@ -540,5 +540,11 @@ print("The server has closed the game");
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void displayPlayerDisconnected(String color) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

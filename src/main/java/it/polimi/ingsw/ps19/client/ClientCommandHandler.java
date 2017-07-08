@@ -19,6 +19,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.PlayerDisconnectedCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
@@ -284,6 +285,10 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 
 	public void applyCommand(WrongPasswordCommand wrongPasswordCommand) {
 		userInterface.displayWrongPasswordMessage(wrongPasswordCommand.getUsername());
+	}
+
+	public void applyCommand(PlayerDisconnectedCommand playerDisconnectedCommand) {
+		userInterface.displayPlayerDisconnected(playerDisconnectedCommand.getColor());
 	}
 
 	

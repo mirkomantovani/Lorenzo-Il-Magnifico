@@ -337,6 +337,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		writeGameMessage("You have " + numberOfPrivilege + " council privileges to "
 				+ "choose, click on the resource you would like to get");
 		frame.showPrivilegeChoice();
+		frame.getGamePanel().setCurrentNumberOfPrivilege(numberOfPrivilege);
 	}
 
 	/* (non-Javadoc)
@@ -547,6 +548,11 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void displayWrongPasswordMessage(String username) {
 		writeGameMessage("The password you inserted did not correspond to the one of the player: "+username+" , please try again");
 		frame.getGamePanel().showAskAuthentication();
+	}
+
+	@Override
+	public void displayPlayerDisconnected(String color) {
+		writeGameMessage("The "+color+" player has disconnected from the game!");
 	}
 
 }

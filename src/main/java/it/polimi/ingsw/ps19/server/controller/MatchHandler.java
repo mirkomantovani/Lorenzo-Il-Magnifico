@@ -31,6 +31,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.PlayerDisconnectedCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
@@ -125,6 +126,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private HashMap<String,User> userFromColor;
 	
 	private int authenticatedCorrectly;
+	
+	private long startTime;
 
 	/**
 	 * Instantiates a new match handler.
@@ -215,6 +218,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		
 		sendToAllPlayers(new AskAuthenticationCommand());
+		
+		this.startTime=System.currentTimeMillis();
 		
 	}
 
@@ -325,7 +330,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				closedClients.add(client);
 			}
 		}
-		// checkDisconnection();
 	}
 
 	/**
@@ -351,7 +355,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				}
 			}
 		}
-		// checkDisconnection();
 	}
 
 	/**
@@ -459,6 +462,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
+		
+		updateGamePlayTime(clientHandler.getPlayer().getColor());
+		
+		try {
+			sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
+		} catch (WrongClientHandlerException e1) {
+			e1.printStackTrace();
+		}
+		
 		try {
 			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
 		} catch (MatchFullException e) {
@@ -467,6 +479,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (WrongClientHandlerException e) {
 			e.printStackTrace();
 		}
+	}
+
+	
+	/**
+	 * Updates the gameplay time for the disconnected player
+	 * @param color 
+	 */
+	private void updateGamePlayTime(String color) {
+		
+		long currentTime=System.currentTimeMillis();
+		int elapsedTime=(int) ((currentTime-startTime)/1000);
+		
+		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
+		
+		UsersCreator.updateFile(users);
 	}
 
 	/**

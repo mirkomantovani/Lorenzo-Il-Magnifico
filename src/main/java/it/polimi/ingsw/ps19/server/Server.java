@@ -92,7 +92,6 @@ public class Server implements Runnable, ServerInterface {
 	 */
 	@Override
 	public void run() {
-//		System.out.println("Starting the server");
 		startServer();
 
 	}
@@ -110,13 +109,13 @@ public class Server implements Runnable, ServerInterface {
 		rmiListener = new ServerRMIListener(this);
 		executor.submit(rmiListener);
 		while (!closeServer) {
-			String scelta = null;
+			String input = null;
 			try {
-				scelta = inKeyboard.readLine();
+				input = inKeyboard.readLine();
 			} catch (IOException e) {
 			}
 
-			if ("Q".equals(scelta) || "q".equals(scelta)) {
+			if ("M".equals(input) || "m".equals(input)) {
 				closeServer = true;
 				closeServer();
 			}

@@ -189,6 +189,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 														/** The dices. */
 														// diceColor+playerColor
 	private Map<String, DicePanel> dices; // (String) diceValue + diceColor
+	
+	private int currentNumberOfPrivilege;
+	
+	private ArrayList<String> chosenPrivileges;
 
 	/**
 	 * Instantiates a new game panel.
@@ -944,10 +948,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() instanceof JResource) {
 			String chosenP = ((JResource) e.getSource()).getName();
+			chosenPrivileges.add(chosenP);
 			// choices.add(Integer.parseInt(((JResource)e.getSource()).getName()));
-			System.out.println("choicepriv:" + chosenP);
+//			System.out.println("choicepriv:" + chosenP);
+			if(currentNumberOfPrivilege==chosenPrivileges.size()){
 			this.removeActionPanel();
+			
 			this.GUI.notifyChosenPrivilege(chosenP);
+			chosenPrivileges.clear();
+		}
 		}
 	}
 
@@ -1471,5 +1480,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void setUsername(String username) {
 		this.askAuthenticationPanel=null; //freeing up memory by "invoking" garbage collector
 		playerResources.setUsername(username);
+	}
+
+	public void setCurrentNumberOfPrivilege(int numberOfPrivilege) {
+		currentNumberOfPrivilege=numberOfPrivilege;
 	}
 }

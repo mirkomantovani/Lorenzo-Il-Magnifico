@@ -181,5 +181,7 @@ public interface UserInterface {
 
 	public void displayWrongPasswordMessage(String username);
 
+	public void displayPlayerDisconnected(String color);
+
 
 }

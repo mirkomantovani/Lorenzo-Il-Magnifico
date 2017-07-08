@@ -26,7 +26,7 @@ public static final int RMICLIENTPORT = 1234;
 	public static final int RMICLIENTHANDLERPORT = 4321;
 	
 	/** The Constant MAXPLAYERS. */
-	public static final int MAXPLAYERS = 4;    //deve essere 4
+	public static final int MAXPLAYERS = 2;    //deve essere 4
 	
 	/** The Constant MINPLAYERS. */
 	public static final int MINPLAYERS = 2;
