@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.exception.CardTypeException;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 
 /**
  * A factory to create development Cards based on the Type

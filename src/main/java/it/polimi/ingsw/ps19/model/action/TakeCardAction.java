@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
+import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 
 /**
  * This class represents the action of placing a family member onto an action
@@ -176,15 +177,36 @@ public class TakeCardAction extends Action {
 		}
 			
 			System.out.println("takecardaction params valid");
+			
 		
 		// leader card discount (coin)
 		ResourceChest realCost;
 		
 		realCost = (ResourceChest) card.getCost().cloneChest();
+		
+		if (this.card.getCardType() == CardType.VENTURE){
+			ResourceChest vCost = card.getVentureCost();
+			int militaryCost = card.getVentureCost().getMilitaryPointsCost();
+			int militaryRequired = card.getVentureCost().getRequiredMilitaryPoints();
+			
+			if(vCost.isEqualTo(new VentureCostResourceChest(0,0,0,0,0,0,0,militaryCost,militaryRequired))){
+					if(this.familyMember.getPlayer().getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount() >= militaryRequired){
+						realCost.addChest(new ResourceChest(0,0,0,0,0,0,militaryCost));
+						
+					}
+					else if(this.familyMember.getPlayer().getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount() < militaryRequired)
+					{
+						this.notApplicableCode = "you don't have enough military points to take this card";
+						return false;
+					}
+			}
+			
+			
+		}
 		if (player.getBonuses().getCardCostCoinDiscount() != 0) 
 			realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
 			
-		
+	
 		
 		//adding 3 additional coins if someone else is occupying the tower
 		if (isSomeoneInTheTower())
@@ -199,9 +221,12 @@ public class TakeCardAction extends Action {
 			this.notApplicableCode = "you don't have space in your personal board to take this card";
 			return false;
 		}
+		
+	
 		System.out.println("let's control if can be placed");
 		return this.canBePlaced();
 
+		
 	}
 
 	/**

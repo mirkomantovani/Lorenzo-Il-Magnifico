@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.model.card;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 
 
 /**
