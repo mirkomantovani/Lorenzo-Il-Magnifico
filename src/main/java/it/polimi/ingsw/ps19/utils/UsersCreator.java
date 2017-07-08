@@ -20,7 +20,6 @@ import java.util.function.Consumer;
 public class UsersCreator {
 
 	private static BufferedReader buffReader;
-	private static BufferedWriter buffWriter;
 
 	private static String lineRead;
 
@@ -83,7 +82,6 @@ public class UsersCreator {
 		try {
 			fos = new FileOutputStream(fout);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	 
@@ -115,12 +113,10 @@ public class UsersCreator {
 		
 		//using the lambda expression on every object of the list
 		users.forEach(writeFields);
-//		User us=users.get(0);
 		
 		try {
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

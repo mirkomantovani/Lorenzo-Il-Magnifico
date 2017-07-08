@@ -10,13 +10,8 @@ import it.polimi.ingsw.ps19.server.ServerInterface;
 
 
 /**
- * The listener interface for receiving serverSocket events.
- * The class that is interested in processing a serverSocket
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addServerSocketListener</code> method. When
- * the serverSocket event occurs, that object's appropriate
- * method is invoked.
+ * The listener for receiving Socket events, this is instantiated by the server and
+ * listens for new clients that try to connect to the server via socket
  *
  * @author Mirko
  */

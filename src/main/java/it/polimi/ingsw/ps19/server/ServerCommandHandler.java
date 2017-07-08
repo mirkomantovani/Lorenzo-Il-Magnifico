@@ -64,14 +64,6 @@ public class ServerCommandHandler implements CommandObserver {
 		System.out.println("Server command handler: sono stato creato");
 	}
 
-	/**
-	 * Gets the current player.
-	 *
-	 * @return the current player
-	 */
-	private Player getCurrentPlayer() {
-		return match.getCurrentPlayer();
-	}
 
 	/**
 	 * Apply command.

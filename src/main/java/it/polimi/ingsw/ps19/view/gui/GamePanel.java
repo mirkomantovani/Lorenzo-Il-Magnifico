@@ -1464,10 +1464,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void notifyAuthenticateClick(String username, String password) {
 		this.GUI.notifyAuthenticationRequest(username,password);
+		this.currentActionPanel=null;
 		this.removeActionPanel();
 	}
 
 	public void setUsername(String username) {
+		this.askAuthenticationPanel=null; //freeing up memory by "invoking" garbage collector
 		playerResources.setUsername(username);
 	}
 }

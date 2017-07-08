@@ -145,9 +145,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("match handler: sono stato creato");
-		// leaderSets = match.getLeaderCards()
-		// .getStartingLeaderSets(match.getPlayers().length);
 	}
 
 	/*
@@ -167,29 +164,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
-		// match.setNotifier(this);
+		
 		commandHandler = new ServerCommandHandler(this, match);
+		
 		setPlayers();
-		// notifyAllStartMatch();
 
 		communicateColors();
 
 		match.setInitialPlayer();
 		
-		
-		
-		
-		
-		// asking credentials to everyone ma se facciamo riconnessione alla
-		// partita deve essere
-		// chiesto ancora prima, dal server
-		// startLeaderDiscardPhase(); // dovrebbe esserci questo
-		// provaPlayer();
-		// match.handlePeriodsAndTurns();
-//		startMatch();
-		// startMatch(); non parte qui ma dopo aver scartato i familiari
-
-		// provaLeaderPlayer();
 	}
 
 	/**
@@ -214,13 +197,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
-		// System.out.println("matchhandler: lunghezza leadersets" +
-		// leaderSets.size());
 
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
-			// System.out.println("matchHH : creato comando da
-			// inv"+leaderSets.get(i).get(0).toString());
 		}
 
 	}
@@ -237,9 +216,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		
 		sendToAllPlayers(new AskAuthenticationCommand());
 		
-		// startTurn();
-		// notifyCurrentPlayer(new CommandAskMove());
-		// createTurnTimer();
 	}
 
 	/**
@@ -272,30 +248,23 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
-		// Map<Player, Boolean> winners = match.checkWinners();
-		// if (winners.isEmpty() && !clients.isEmpty()) {
 		try {
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
 			closeMatch();
 			e.printStackTrace();
 		}
-
-		// } else if (!winners.isEmpty() && !clients.isEmpty())
-		// notifyEndOfGame(winners);
 	}
 
 	/**
 	 * Start turn.
 	 */
 	private void startTurn() {
-		// sendToCurrentPlayer(new StartTurnCommand());
 
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-			// match.incrementTurn();
 
 			initTurn();
 
@@ -309,8 +278,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// resources into
 
 			startRound();
-			// notifyCurrentPlayer(new CommandAskMove());
-			// createTurnTimer();
 		}
 
 	}
@@ -321,7 +288,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initTurn() {
 		refreshPlayerOrder();
 		roundNumber = 0;
-		// System.out.println("rollo i dadi");
 
 		match.clearBoard();
 
@@ -331,7 +297,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		this.match.getBoard().changeCardInTowers();
 
-		// TODO ripulire il board dai family members
 	}
 
 	/**
@@ -414,7 +379,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			closedClients.add(client);
 		}
 
-		// checkDisconnection();
 	}
 
 	/**
@@ -425,29 +389,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public void sendToCurrentPlayer(ServerToClientCommand command) {
 		sendToPlayer(command, match.getCurrentPlayer());
-		// checkDisconnection();
 	}
 
 	/**
-	 * method invoked by the ping timer to check if the current player is always
-	 * on.
-	 */
-	// @Override
-	// public void turnTimerExpired() {
-	// List<ClientHandler> list = new ArrayList<ClientHandler>(clients);
-	// for (ClientHandler clientHandler : list)
-	// if (clientHandler.getPlayer().equals(getCurrentPlayer())) {
-	// closedClients.add(clientHandler);
-	// try {
-	// clientHandler.sendCommand(new CommandDisconnection());
-	// } catch (Exception e) {
-	// }
-	// }
-	// removeClosedClients();
-	// }
-
-	/**
-	 * method to make the ping timer start
+	 * Starting the round timer thread
 	 */
 	public void startRoundTimer() {
 		BufferedReader reader = null;
@@ -470,23 +415,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		roundTimerThread.start();
 	}
 
-	/**
-	 * method to interrupt the turn timer if it is alive.
-	 */
-
-	private void checkDisconnection() {
-		// if (!closedClients.isEmpty())
-		// removeClosedClients();
-	}
 
 	/**
 	 * close the match and all its connection with client.
 	 */
 	public synchronized void closeMatch() {
-		// timerNotNeed();
 		if (!clients.isEmpty()) {
 			for (ClientHandler clientHandler : clients) {
-				// clients.remove(clientHandler);
 				try {
 					clientHandler.closedByServer();
 				} catch (RemoteException e) {
@@ -575,9 +510,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 
-		// TODO MANDARE comando per scegliere terminare turno o scartare
-		// leadercards
-
 	}
 
 	/**
@@ -593,18 +525,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
 		industrialAction.apply(choices);
 	}
-
-	// @Override
-	// public void notifyPlayerStatusChange(Player player) {
-	// System.out.println("matchhandler: notifyplayer status change");
-	//
-	// Player currentPlayer = match.getCurrentPlayer();
-	// if (player == currentPlayer) {
-	// this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-	// this.sendToAllPlayers(new
-	// OpponentStatusChangeCommand(player.maskedClone()));
-	// }
-	// }
 
 	/*
 	 * (non-Javadoc)
@@ -624,16 +544,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * it.polimi.ingsw.ps19.server.observers.MatchObserver#notifyFamilyPlaced()
-	 */
-	@Override
-	public void notifyFamilyPlaced() {
-
-	}
 
 	/**
 	 * Round timer expired.
@@ -776,14 +686,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
-			// System.out.println("matchhandler: getplayerfromcolor: p" +
-			// "layer.getcolor:" + players[i].getColor()
-			// + "playerColor:" + playerColor);
 			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
-		// System.out.println("matchhandler: getplayerfromcolor: sto ritornando
-		// null");
 		return null;
 	}
 
@@ -799,10 +704,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
-			// System.out.println("matchhandler: cerco di aggiungere la carta di
-			// nome:");
-			// System.out.println("matchhandler: handleleaderchoice:
-			// leadername:" + name + "playercolor: " + playerColor);
 
 			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
@@ -810,19 +711,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// System.out.println("matchhandler: leaderresponsecounter=" +
-		// leaderResponseCounter);
-		// System.out.println("matchhandler: giocatori:=" +
-		// match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
-			// System.out.println("matchhandler: entro nell'if di quando tutti e
-			// quattro hanno scelto");
 
 			leaderResponseCounter = 0;
 			for (int i = 0; i < clients.size(); i++) {
 				if (cycle == 3) {
-					// System.out.println("matchhandler: sono nell'if perchè
-					// cycle ="+cycle);
 					try {
 						this.getRightPlayer(clients.get((i + cycle) % (match.getPlayers().length)))
 								.addLeaderCards(leaderSets.get(i).get(0));
@@ -830,8 +723,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 						e.printStackTrace();
 					}
 				} else {
-					// System.out.println("matchhandler: sono nell'else perchè
-					// cycle ="+cycle);
 					if (i >= match.getPlayers().length - cycle) {
 						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)),
 								clients.get((i + cycle) % (match.getPlayers().length)));
@@ -842,7 +733,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			cycle++;
 			if (cycle == 4)
-				// startMatch();
 				startTurn();
 		}
 
@@ -1254,7 +1144,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
-			System.out.println("matchHandler: excommunicationCommandSent");
 		}
 
 		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
@@ -1403,7 +1292,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if(authenticatedCorrectly==this.match.getPlayers().length)
 			startLeaderDiscardPhase();
 		
-		
 	}
 	
 
@@ -1416,6 +1304,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *         username), false otherwise
 	 */
 	private boolean getUserOrCreateOne(String username, String password,String playerColor) {
+		
+		//using functional programming with streams of Users to get the user from the username, if it exists
 		final Optional<User> user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 
 		if (user.isPresent()) {

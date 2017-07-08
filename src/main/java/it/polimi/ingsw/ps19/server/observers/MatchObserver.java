@@ -14,23 +14,12 @@ import it.polimi.ingsw.ps19.Player;
 public interface MatchObserver {
 
 	/**
-	 * This method is called when information about an Match
-	 * which was previously requested using an asynchronous
-	 * interface becomes available.
+	 * This method is called when a generic player in the game changes his status
 	 *
 	 * @param player the player
 	 */
 	public void notifyPlayerStatusChange(Player player);
+
 	
-//	public void notifyBoardChange();
-	
-	/**
- * This method is called when information about an Match
- * which was previously requested using an asynchronous
- * interface becomes available.
- */
-public void notifyFamilyPlaced();
-	
-//	public void notifyCardTaken();
 	
 }
