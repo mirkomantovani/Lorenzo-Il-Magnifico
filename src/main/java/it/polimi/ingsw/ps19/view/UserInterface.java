@@ -177,5 +177,9 @@ public interface UserInterface {
 	 */
 	public void notifyServerClosed();
 
+	public void authenticatedCorrectly(String username);
+
+	public void displayWrongPasswordMessage(String username);
+
 
 }

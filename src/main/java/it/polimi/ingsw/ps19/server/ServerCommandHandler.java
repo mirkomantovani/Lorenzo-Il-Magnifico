@@ -324,8 +324,8 @@ public class ServerCommandHandler implements CommandObserver {
 	 * @param sendCredentialsCommand the send credentials command
 	 */
 	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {
-		// TODO Auto-generated method stub
-
+		handler.handleAuthenticationRequest(sendCredentialsCommand.getUsername(),
+				sendCredentialsCommand.getPassword(),sendCredentialsCommand.getPlayerColor());
 	}
 
 	/**

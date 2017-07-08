@@ -344,7 +344,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void askNameAndPassword() {
-		// TODO Auto-generated method stub
+		writeGameMessage("Insert Name and Password to Login or Signup");
+		frame.getGamePanel().showAskAuthentication();
 
 	}
 
@@ -529,6 +530,23 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	public void notifyActivateProduction(ArrayList<Integer> choices) {
 		gameController.notifyProductionChoices(choices);
+	}
+
+	public void notifyAuthenticationRequest(String username, String password) {
+		gameController.notifyAuthenticationRequest(username,password);
+	}
+
+	@Override
+	public void authenticatedCorrectly(String username) {
+		writeGameMessage(username+" your authentication was successful");
+		frame.getGamePanel().setUsername(username);
+		
+	}
+
+	@Override
+	public void displayWrongPasswordMessage(String username) {
+		writeGameMessage("The password you inserted did not correspond to the one of the player: "+username+" , please try again");
+		frame.getGamePanel().showAskAuthentication();
 	}
 
 }

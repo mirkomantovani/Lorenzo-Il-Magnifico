@@ -313,4 +313,9 @@ public class ClientController implements InputObserver {
 		sendCommand(new RequestClosureCommand(playerColor));
 	}
 
+	public void notifyAuthenticationRequest(String username, String password) {
+		sendCommand(new SendCredentialsCommand(username, password, playerColor));
+		
+	}
+
 }

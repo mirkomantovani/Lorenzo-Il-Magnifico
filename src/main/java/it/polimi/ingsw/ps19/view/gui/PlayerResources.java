@@ -41,6 +41,8 @@ public class PlayerResources extends JPanel {
 	/** The family grid panel. */
 	private JPanel familyGridPanel;
 	
+	private JLabel lblPlayername;
+	
 	
 	/**
 	 * Instantiates a new player resources.
@@ -74,7 +76,7 @@ public class PlayerResources extends JPanel {
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		
-		JLabel lblPlayername = new JLabel("PlayerName");
+		lblPlayername = new JLabel("Waiting for Authentication");
 		lblPlayername.setFont(new Font("SansSerif", Font.BOLD, 20));
 		add(lblPlayername);
 		
@@ -182,6 +184,10 @@ public class PlayerResources extends JPanel {
 		 for (;iterator.hasNext();) //ciclo con l'iterator
 		           familyGridPanel.add(familyMembers.get(iterator.next()));
 		      
+	}
+	
+	public void setUsername(String name){
+		lblPlayername.setText(name);
 	}
 	
 	

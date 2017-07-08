@@ -159,6 +159,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	/** The draft panel. */
 	private LeadersPanel draftPanel;
+	
+	private AskAuthenticationPanel askAuthenticationPanel;
 
 	/** The action constructor. */
 	private ArrayList<String> actionConstructor;
@@ -424,6 +426,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		productionChoices=new ProductionChoices(this);
 		productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
 		productionChoices.setVisible(false);
+		
+		askAuthenticationPanel=new AskAuthenticationPanel(this);
+		askAuthenticationPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		askAuthenticationPanel.setVisible(false);
 
 		// FINAL BUTTONS PANEL
 
@@ -1449,5 +1455,19 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		currentActionPanel=productionChoices;
 		this.showActionPanel(productionChoices);
 		
+	}
+
+	public void showAskAuthentication() {
+		currentActionPanel=askAuthenticationPanel;
+		this.showActionPanel(askAuthenticationPanel);
+	}
+
+	public void notifyAuthenticateClick(String username, String password) {
+		this.GUI.notifyAuthenticationRequest(username,password);
+		this.removeActionPanel();
+	}
+
+	public void setUsername(String username) {
+		playerResources.setUsername(username);
 	}
 }
