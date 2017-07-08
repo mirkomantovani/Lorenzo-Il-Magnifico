@@ -201,6 +201,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 * @param numPlayers the num players
 	 */
 	public GamePanel(String playerColor, int numPlayers) {
+		
+		chosenPrivileges=new ArrayList<String>();
 
 		cards = new ArrayList<CardButton>();
 
