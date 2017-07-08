@@ -4,13 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -90,13 +88,13 @@ public class Board implements Serializable {
 		dices.put(Dice.ORANGE_DICE,Dice.ORANGE_DICE.getUpperFaceValue());
 		dices.put(Dice.WHITE_DICE,Dice.WHITE_DICE.getUpperFaceValue());
 		
-		towers = new HashMap<>();
+		towers = new LinkedHashMap<>();
 		
 		militaryRequirementsForTerritories=BoardInitializer.playerBoardRequirementsForTerritory();
 		
 		territoryCards=new TerritoryDeck("src/main/resources/files/fileterritorycards.txt",CardConstants.DECK_LENGTH);
-		buildingCards=new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH);
 		characterCards=new CharacterDeck("src/main/resources/files/filecharactercards.txt",CardConstants.DECK_LENGTH);
+		buildingCards=new BuildingDeck("src/main/resources/files/filebuildingcards.txt",CardConstants.DECK_LENGTH);
 		ventureCards=new VentureDeck("src/main/resources/files/fileventurecards.txt",CardConstants.DECK_LENGTH);
 				
 		territoryCards.shuffleDeck();
@@ -108,8 +106,8 @@ public class Board implements Serializable {
 		for(int i=0;i<CardConstants.DECK_LENGTH;i++)
 		
 		towers.put(CardType.TERRITORY,new Tower(CardType.TERRITORY, territoryCards,BoardInitializer.territoryBonuses()));
-		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
 		towers.put(CardType.CHARACTER,new Tower(CardType.CHARACTER, characterCards,BoardInitializer.characterBonuses()));
+		towers.put(CardType.BUILDING,new Tower(CardType.BUILDING, buildingCards,BoardInitializer.buildingBonuses()));
 		towers.put(CardType.VENTURE,new Tower(CardType.VENTURE, ventureCards,BoardInitializer.ventureBonuses()));
 		
 		church = new Church();
@@ -287,45 +285,52 @@ public class Board implements Serializable {
 	
 	}
 
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(">>>>>>>> The Board <<<<<<<< \n This is your world, let's try to impose your family "
-				+ "as the most powerful! \n There are:\n ");
 		
-		for(Tower t : towers.values()){
-		builder.append(t.toString());
-		builder.append("\n");
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("--------------------------------------------------THE BOARD-------------------------------------------------");
+		builder.append("\n\n");
+		builder.append("\t\t\t\tThis is your world, let's try to impose your family\n\n");
+		builder.append("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°Development cards in the towers°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+		for(Tower t: towers.values()){
+			builder.append(t.toString());
 		}
+		builder.append("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		builder.append(church.toString());
 		builder.append("\n");
 		builder.append(councilPalace.toString());
-		builder.append("\n");
 		builder.append(market.toString());
 		builder.append("\n");
 		builder.append(harvestArea.toString());
 		builder.append("\n");
 		builder.append(productionArea.toString());
-		builder.append("\n The player order is : ");
+		
+		builder.append("------------------------------------------------------------------------------------------------------------\n\n");
+		
+		builder.append("\nPLAY ORDER:\n");
 		for(String p : playerOrder){
 			builder.append(playerOrder.indexOf(p) + 1);
 			builder.append(" - ");
 			builder.append(p);
-			builder.append("\t");
+			builder.append("\n");
 		}
-		builder.append("\n The dices are: \n");
+		builder.append("\nDICES: \n");
 
 		
-		builder.append(Dice.BLACK_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.BLACK_DICE) + "\n");
-		builder.append(Dice.ORANGE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.ORANGE_DICE) + "\n");
-		builder.append(Dice.WHITE_DICE.getColor().toString() + " dice, with an action value of " + dices.get(Dice.WHITE_DICE) + "\n");
-		
+		builder.append(Dice.BLACK_DICE.getColor().toString() + " dice: " + dices.get(Dice.BLACK_DICE) + "\n");
+		builder.append(Dice.ORANGE_DICE.getColor().toString() + " dice: " + dices.get(Dice.ORANGE_DICE) + "\n");
+		builder.append(Dice.WHITE_DICE.getColor().toString() + " dice: " + dices.get(Dice.WHITE_DICE) + "\n");
+				
 		return builder.toString();
 	}
-
+	
+	
 	/**
 	 * Gets the player order.
 	 *

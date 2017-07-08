@@ -39,8 +39,13 @@ public class ProductionArea extends IndustrialArea{
 	 * @see it.polimi.ingsw.ps19.model.area.IndustrialArea#toString()
 	 */
 	public String toString(){
-		return "-------------------- The production area --------------------" +
-				super.toString();
+		StringBuilder builder = new StringBuilder();
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°The Harvest Area°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+		builder.append(super.toString());
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+
+		
+		return builder.toString();
 	}
 	
 }

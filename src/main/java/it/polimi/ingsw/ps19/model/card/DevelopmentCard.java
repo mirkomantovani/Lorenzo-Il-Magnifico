@@ -136,8 +136,7 @@ public abstract class DevelopmentCard extends Card {
 		 		string.append(cost.toString());
 		 	string.append("\nImmediate effect: ");
 		 	if(this.immediateEffect!=null)
-		 		string.append(immediateEffect.toString());
-		 		
+		 		string.append(immediateEffect.toString());	
 		 	return string.toString();
 		}
 	 

@@ -133,12 +133,12 @@ public class MultipleActionSpace extends ActionSpace {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("In this space there are these familiars: \n");
+		builder.append("Members here:\n");
 		for(FamilyMember f : members){
-		builder.append(f.toString());
-		builder.append("familiar of the ");
-		builder.append(f.getPlayer().getColor());
-		builder.append(" player ");
+			builder.append(f.toString());
+			builder.append("familiar of the ");
+			builder.append(f.getPlayer().getColor());
+			builder.append(" player\n");
 		}
 		return builder.toString();
 	}

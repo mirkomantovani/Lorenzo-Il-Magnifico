@@ -47,16 +47,19 @@ public class CouncilPalace extends MultipleActionSpace implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---- The CouncilPalace ---- \n To place a pawn into this area your familiar should have a"
-				+ " value of, ");
-		builder.append(actionValueRequired);
-		builder.append(" and your position into this area establish the player order of the next turn. "
-				+ "\n Actually if you visit the CouncilPalace you ");
-		builder.append(effect.toString());
+		builder.append("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°The Council Palace°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n");
+		builder.append("Remember that this area affects the play order\n\n");
+		builder.append("Action value required: " + actionValueRequired);
+		builder.append("\n\nEffect: " + effect.toString() + "\n\n");
 		
 		if(!members.isEmpty()){
 			builder.append(super.toString());
 		}
+		
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+		
+		
+		
 		return builder.toString();
 	}
 	

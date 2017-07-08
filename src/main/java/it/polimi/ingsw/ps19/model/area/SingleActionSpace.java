@@ -104,11 +104,13 @@ public class SingleActionSpace extends ActionSpace{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("The area is occupied by the ");
-		builder.append(familyMember.toString());
-		builder.append(" family member of the ");
-		builder.append(familyMember.getPlayer().getColor());
-		builder.append(" player");
+		if(familyMember != null){
+			builder.append("The area is occupied by the ");
+			builder.append(familyMember.toString());
+			builder.append(" family member of the ");
+			builder.append(familyMember.getPlayer().getColor());
+			builder.append(" player\n");
+		}
 		return builder.toString();
 	}
 	
