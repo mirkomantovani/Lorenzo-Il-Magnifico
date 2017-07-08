@@ -14,6 +14,7 @@ import java.util.Optional;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
+import it.polimi.ingsw.ps19.MatchSaver;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
@@ -80,7 +81,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private List<ClientHandler> closedClients;
 
 	/** The command handler. */
-	private ServerCommandHandler commandHandler;
+	private transient ServerCommandHandler commandHandler;
 
 	/** The Server interface. */
 	private ServerInterface ServerInterface;
@@ -176,6 +177,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		match.setInitialPlayer();
 		
+	}
+	
+	private void initExistingMatch(int id) throws FileNotFoundException, ClassNotFoundException, IOException{
+		
+		match = MatchSaver.readMatch(id);
+		
+		commandHandler = new ServerCommandHandler(this,match);
 	}
 
 	/**
