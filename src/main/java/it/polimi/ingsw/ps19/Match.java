@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +15,6 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
-import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
-import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
@@ -26,7 +25,12 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  *
  * @author Mirko
  */
-public class Match {
+public class Match implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4611746373897593079L;
 
 	/** The Constant roundResourceSupply. */
 	private static final ResourceChest roundResourceSupply = new ResourceChest(0, 2, 2, 3, 0, 0, 0);
@@ -54,7 +58,7 @@ public class Match {
 	private boolean matchFinished;
 	
 	/** The observer. */
-	private MatchObserver observer;
+	private transient MatchObserver observer;
 	
 	/** The playercolors. */
 	private String[] playercolors;

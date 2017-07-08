@@ -226,6 +226,17 @@ public class ResourceChest implements Serializable{
 
 	}
 	
+	public boolean isGreaterThan(ResourceChest resourceChest) {
+
+		for (int i = 0; i < ResourceType.values().length; i++) {
+			if (this.resources.get(ResourceType.values()[i]).getAmount() <= resourceChest.resources
+					.get(ResourceType.values()[i]).getAmount())
+				return false;
+		}
+		return true;
+
+	}
+	
 	/**
 	 * Clone chest.
 	 *

@@ -202,6 +202,7 @@ public class TakeCardAction extends Action {
 			}
 			
 			
+			
 		}
 		if (player.getBonuses().getCardCostCoinDiscount() != 0) 
 			realCost.subResource(new Coin(player.getBonuses().getCardCostCoinDiscount()));
