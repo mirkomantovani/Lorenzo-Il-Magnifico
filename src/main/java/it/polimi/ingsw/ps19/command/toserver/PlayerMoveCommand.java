@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
  * The Class PlayerMoveCommand.
+ * 
+ * The class to notify the server about the client move
  */
 public class PlayerMoveCommand extends ClientToServerCommand {
 

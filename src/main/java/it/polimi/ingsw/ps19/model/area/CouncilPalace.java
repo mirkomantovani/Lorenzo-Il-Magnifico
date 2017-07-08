@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps19.FamilyMember;
 
 /**
  * The Class CouncilPalace.
+ * This class represent the council palace, a multiple action space that gave specific things
  *
  * @author matteo
  */

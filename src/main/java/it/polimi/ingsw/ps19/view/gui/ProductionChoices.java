@@ -16,7 +16,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 
 /**
- * The Class ProductionChoices.
+ * The panel that lets the user selects the different choices he has for the 
+ * production action he intended to do
  *
  * @author Mirko
  */

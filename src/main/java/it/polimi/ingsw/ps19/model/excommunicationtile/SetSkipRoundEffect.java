@@ -4,7 +4,8 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * The Class SetSkipRoundEffect.
+ * If applied to a player, this effect doesn't allow the user to play when it's his turn
+ * 
  *
  * @author Mirko
  */

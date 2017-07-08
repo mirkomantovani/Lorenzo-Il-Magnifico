@@ -5,8 +5,8 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 
 /**
- * The Class BuildingDeck.
-
+ * A deck of building cards
+ * 
 *
 * @author Mirko
 *

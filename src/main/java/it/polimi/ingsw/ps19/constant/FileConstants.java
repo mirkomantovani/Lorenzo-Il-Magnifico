@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.constant;
 
 /**
  * The Class FileConstants.
+ * The constants about the path of the files in the resources folder
  */
 public class FileConstants {
 	

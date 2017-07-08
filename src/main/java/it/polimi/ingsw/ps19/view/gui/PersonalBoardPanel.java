@@ -11,7 +11,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * The Class PersonalBoardPanel.
+ * The panel containing the image of the personal board of the player, it has the layout manager
+ * set to null so that components (Development Cards) can be scaled and positioned in the
+ * correct position based on the screen dimension
  *
  * @author Mirko
  */

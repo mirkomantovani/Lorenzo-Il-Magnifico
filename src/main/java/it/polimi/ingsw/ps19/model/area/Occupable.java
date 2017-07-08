@@ -7,7 +7,8 @@ import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Player;
 
 /**
- * The Interface Occupable.
+ * The Interface Occupable exposes some methods to every object of the game occupable
+ * by a Family Member
  *
  * @author Mirko
  */

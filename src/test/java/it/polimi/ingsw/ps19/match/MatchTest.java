@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.match;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -10,11 +11,16 @@ import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
 import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 /**
  * The Class MatchTest.
+ */
+/**
+ * @author matteo
+ *
  */
 public class MatchTest {
 	
@@ -83,7 +89,7 @@ public class MatchTest {
 	@Test
 	public void distributedResources(){
 		match.distributeTurnResources();
-		assertTrue(match.getPlayers()[0].getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount() == 100);
+		assertTrue(match.getPlayers()[0].getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount() == 3);
 	}
 	
 	/**
@@ -114,6 +120,29 @@ public class MatchTest {
 		assertTrue(!match.getBoard().getFloor(CardType.BUILDING, 0).getActionSpace().isOccupied());
 		assertTrue(!match.getBoard().getProductionArea().getMultipleActionSpace().isOccupied());
 	}
+	
+	@Test
+	public void setNextPlayerTest() throws EveryPlayerDisconnectedException{
+		match.setInitialPlayer();
+		Player current = match.getCurrentPlayer();
+		match.setNextPlayer();
+		assertNotEquals(current,match.getCurrentPlayer());
+	}
+	
+	
+	@Test
+	public void setInitialPlayerTest(){
+		match.setInitialPlayer();
+		assertEquals(match.getCurrentPlayer(),match.getPlayers()[0]);
+	}
+	
+	@Test
+	public void isAnyoneStillPlayingTest(){
+		match.setInitialPlayer();
+		assertTrue(match.isAnyoneStillPlaying());
+	}
+	
+	
 	
 	
 

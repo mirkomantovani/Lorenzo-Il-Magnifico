@@ -4,7 +4,8 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**
- * The Class OpponentStatusChangeCommand.
+ * The command to notify that another player has changed its status, this message
+ * brings only information that every player can see from the game board
  *
  * @author Mirko
  */

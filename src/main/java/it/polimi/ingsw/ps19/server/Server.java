@@ -25,7 +25,7 @@ import it.polimi.ingsw.ps19.server.socket.ServerSocketListener;
 
 /**
  * This is the Server Manager, it handles the Listeners, creates the Matches and starts them.
- *
+ * It also closes the matches when everyone has disconnected from a Match
  * @author Mirko
  */
 public class Server implements Runnable, ServerInterface {

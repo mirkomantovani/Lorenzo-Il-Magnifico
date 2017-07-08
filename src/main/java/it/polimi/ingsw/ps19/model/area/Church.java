@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreator;
 import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
+import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
  * The Class Church.
@@ -31,7 +32,7 @@ public class Church implements Serializable {
 	private ExcommunicationTile excommunicationThird;
 
 	/** The military points. */
-	private MilitaryPoint[] militaryPoints; // Those are the military points
+	private VictoryPoint[] victoryPoints; // Those are the military points
 											// amount related to a specific
 											// amount of faithpoints (this
 											// values are taken from file);
@@ -39,7 +40,8 @@ public class Church implements Serializable {
 	/**
 											 * Instantiates a new church.
 											 */
-											public Church() {
+										
+	public Church() {
 
 		Random rnd = new Random();
 		ExcommunicationTile[] tiles = new ExcommunicationTile[CardConstants.EXCOMMUNICATION_TILES];
@@ -59,9 +61,9 @@ public class Church implements Serializable {
 		// the match
 		tiles = null;
 
-		militaryPoints = new MilitaryPoint[BoardConstants.CHURCHSLOTS];
+		victoryPoints = new VictoryPoint[BoardConstants.CHURCHSLOTS];
 		try {
-			this.militaryPoints = BoardInitializer.churchBonuses();
+			this.victoryPoints = BoardInitializer.churchBonuses();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,15 +115,6 @@ public class Church implements Serializable {
 		
 	}
 
-	/**
-	 * Gets the military points.
-	 *
-	 * @return the military points
-	 */
-	public MilitaryPoint[] getMilitaryPoints() {
-		return militaryPoints;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -135,6 +128,10 @@ public class Church implements Serializable {
 		builder.append(excommunicationThird.toString() + "\n\n");
 		builder.append("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		return builder.toString();
+	}
+
+	public VictoryPoint[] getVictoryPoints() {
+		return victoryPoints;
 	}
 
 }

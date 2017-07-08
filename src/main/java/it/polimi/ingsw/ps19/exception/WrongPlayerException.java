@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.exception;
 
 
 /**
- * The Class WrongPlayerException.
+ * A checked Exception to signal a wrong player to send a command to has been selected
  *
  * @author Mirko
  */

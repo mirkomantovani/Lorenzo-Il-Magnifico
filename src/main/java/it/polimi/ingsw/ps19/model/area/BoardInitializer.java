@@ -18,10 +18,13 @@ import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
+import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 
 /**
  * The Class BoardInitializer.
+ * This class update the board components by taking information in files, to have 
+ * the faculty to change some game details
  *
  * @author matteo
  */
@@ -189,7 +192,7 @@ public class BoardInitializer {
 	 * @throws FileNotFoundException the file not found exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static MilitaryPoint[] churchBonuses() throws FileNotFoundException, IOException{
+	public static VictoryPoint[] churchBonuses() throws FileNotFoundException, IOException{
 		
 		BufferedReader reader = new BufferedReader(new FileReader(FileConstants.CHURCH_BONUSES));
 		
@@ -201,20 +204,20 @@ public class BoardInitializer {
 		
 		while(lineRead !=null){
 			
-			bonuses[i] = Integer.parseInt(reader.readLine());
+			bonuses[i] = Integer.parseInt(lineRead);
 			lineRead = reader.readLine();
 		}
 
 		reader.close();
 
 		
-		MilitaryPoint[] military = new MilitaryPoint[15];
+		VictoryPoint[] victory = new VictoryPoint[15];
 		
 		for(int j = 0; j<bonuses.length; j++){
-			military[j] = new MilitaryPoint(bonuses[j]);
+			victory[j] = new VictoryPoint(bonuses[j]);
 		}
 		
-		return military;
+		return victory;
 
 	}
 	
@@ -235,7 +238,7 @@ public class BoardInitializer {
 		
 		while (lineRead != null){
 			
-			bonusesForTerritory.add(Integer.parseInt(reader.readLine()));
+			bonusesForTerritory.add(Integer.parseInt(lineRead));
 			lineRead = reader.readLine();
 		}
 		reader.close();
@@ -258,7 +261,7 @@ public class BoardInitializer {
 		
 		while (lineRead != null){
 			
-			bonusesForCharacter.add(Integer.parseInt(reader.readLine()));
+			bonusesForCharacter.add(Integer.parseInt(lineRead));
 			lineRead = reader.readLine();
 		}
 		reader.close();

@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The Class ResourceChest.
+ * This class represents a generic resource set, it has a map with key: Resource Type
+ * to get direct access to a resource
  *
  * @author Mirko
  */

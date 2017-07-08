@@ -6,9 +6,8 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 
 /**
- * The Class VentureCard.
- */
-/**
+ * A card of type Venture
+
  * @author Mirko
  *
  */

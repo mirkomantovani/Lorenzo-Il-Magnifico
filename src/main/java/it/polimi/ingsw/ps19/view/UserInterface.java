@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * The Interface UserInterface.
+ * The Interface UserInterface to be implemented by the different type of views
  *
  * @author Mirko
  */
@@ -63,7 +63,7 @@ public interface UserInterface {
 	public void playerMove();
 	
 	/**
-	 * It's <player> turn!.
+	 * It's turn!.
 	 */
 	public void playerTurn();
 	
@@ -176,6 +176,10 @@ public interface UserInterface {
 	 * Notify server closed.
 	 */
 	public void notifyServerClosed();
+
+	public void authenticatedCorrectly(String username);
+
+	public void displayWrongPasswordMessage(String username);
 
 
 }

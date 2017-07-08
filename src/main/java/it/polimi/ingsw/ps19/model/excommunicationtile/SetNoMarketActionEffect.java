@@ -4,7 +4,7 @@ import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * The Class SetNoMarketActionEffect.
+ * If activated, doesn't let the player position a family member into the market anymore
  *
  * @author Mirko
  */

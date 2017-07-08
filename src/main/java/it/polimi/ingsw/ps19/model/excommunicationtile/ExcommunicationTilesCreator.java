@@ -19,7 +19,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
- * The Class ExcommunicationTilesCreator.
+ * The class that creates the excommunication tiles from file
  *
  * @author Mirko
  */

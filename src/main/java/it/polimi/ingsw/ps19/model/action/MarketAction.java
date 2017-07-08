@@ -4,10 +4,15 @@ package it.polimi.ingsw.ps19.model.action;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
+import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * The Class MarketAction.
+ * This class represent the placement in a market slot action
  *
  * @author matteo
  */
@@ -42,16 +47,31 @@ public class MarketAction extends Action{
 		System.out.println("sono nell'azione market");
 	
 		if(isApplicable()){
-			System.out.println("sono entrato in isApplicable");
+			
 			this.marketSpot.getEffect().applyEffect(familyMember.getPlayer());
-			System.out.println("ho applicato l'effetto");
 			this.marketSpot.setFamilyMember(familyMember);
-			System.out.println("setto lo slot a occupato");
 			familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
-			System.out.println("tolgo il family usato");
 			familyMember.getPlayer().getResourceChest().subResource(new Servant(paidServants));
+			for(int i = 0; i<familyMember.getPlayer().getBonuses().getResourceMalus().size();i++){
+				if(familyMember.getPlayer().getBonuses().getResourceMalus().get(i) instanceof Coin
+						&& this.marketSpot.getEffect().equals(new InstantResourcesEffect(new
+								ResourceChest(5,0,0,0,0,0,0)))){
+					familyMember.getPlayer().getResourceChest().subResource(new Coin(1));
+				}
+				if(familyMember.getPlayer().getBonuses().getResourceMalus().get(i) instanceof Coin
+						&& this.marketSpot.getEffect().equals(new InstantResourcesEffect(new
+								ResourceChest(0,0,0,5,0,0,0)))){
+					familyMember.getPlayer().getResourceChest().subResource(new Servant(1));
+				}
+				if(familyMember.getPlayer().getBonuses().getResourceMalus().get(i) instanceof Coin
+						&& this.marketSpot.getEffect().equals(new InstantResourcesEffect(new
+								ResourceChest(2,0,0,0,0,0,3)))){
+					familyMember.getPlayer().getResourceChest().subResource(new Coin(1));
+					familyMember.getPlayer().getResourceChest().subResource(new MilitaryPoint(1));
+				}
+			}
 		} else {
-			System.out.println("sono nella isApplicable false");
+			
 			throw new NotApplicableException("market action non si può fare");
 		}
 		

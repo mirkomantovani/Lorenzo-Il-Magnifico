@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
  * An asynchronous update interface for receiving notifications
  * about ServerToClientCommand information as the ServerToClientCommand is constructed.
  */
+/**
+ * @author matteo
+ *
+ */
 public interface ServerToClientCommandObserver {
 
 	/**

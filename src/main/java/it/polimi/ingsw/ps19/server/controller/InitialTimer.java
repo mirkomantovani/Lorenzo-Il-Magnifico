@@ -3,7 +3,11 @@ package it.polimi.ingsw.ps19.server.controller;
 import it.polimi.ingsw.ps19.server.Server;
 
 /**
- * The Class InitialTimer.
+ * The Timer thread that awaits the creation of a match
+ */
+/**
+ * @author Mirko
+ *
  */
 public class InitialTimer implements Runnable {
 

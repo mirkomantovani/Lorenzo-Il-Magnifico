@@ -22,7 +22,10 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import java.awt.Dimension;
 
 /**
- * The Class PlayerResources.
+ * The panel showing the resources of the player, note that the points aren't shown here
+ * because everyone can see them in the board panel
+ * @author Mirko
+ *
  */
 public class PlayerResources extends JPanel {
 	
@@ -37,6 +40,8 @@ public class PlayerResources extends JPanel {
 	
 	/** The family grid panel. */
 	private JPanel familyGridPanel;
+	
+	private JLabel lblPlayername;
 	
 	
 	/**
@@ -71,7 +76,7 @@ public class PlayerResources extends JPanel {
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		
-		JLabel lblPlayername = new JLabel("PlayerName");
+		lblPlayername = new JLabel("Waiting for Authentication");
 		lblPlayername.setFont(new Font("SansSerif", Font.BOLD, 20));
 		add(lblPlayername);
 		
@@ -179,6 +184,10 @@ public class PlayerResources extends JPanel {
 		 for (;iterator.hasNext();) //ciclo con l'iterator
 		           familyGridPanel.add(familyMembers.get(iterator.next()));
 		      
+	}
+	
+	public void setUsername(String name){
+		lblPlayername.setText(name);
 	}
 	
 	

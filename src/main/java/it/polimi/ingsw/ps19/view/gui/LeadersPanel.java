@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 
 /**
- * The Class LeadersPanel.
+ * The panel that shows the player his leader cards
  *
  * @author Mirko
  */

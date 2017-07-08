@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.effect;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,6 +34,10 @@ import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 /**
  * The Class ExcommunicationEffectTest.
  */
+/**
+ * @author matteo
+ *
+ */
 public class ExcommunicationEffectTest {
 	
 	/** The player. */
@@ -55,7 +60,7 @@ public class ExcommunicationEffectTest {
 		effect.applyEffect(player);
 		for(FamilyMember f : player.getFamilyMembers().values()){
 			if(f.getColor()!= Color.NEUTRAL)
-			assertTrue(player.getFamilyMembers().get(f.getColor()).getActionValueVariation() == 18);
+			assertEquals(player.getFamilyMembers().get(f.getColor()).getActionValueVariation(), 18);
 		}
 	}
 	
@@ -70,7 +75,7 @@ public class ExcommunicationEffectTest {
 				new VictoryPoint(3));
 		effect.applyEffect(player);
 		
-		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount() == 85);
+		assertEquals(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount(),85);
 		
 	}
 	
@@ -95,7 +100,7 @@ public class ExcommunicationEffectTest {
 		}
 		Effect effect = new LosePointsEveryWoodStoneEffect(new VictoryPoint(2), CardType.BUILDING);
 		effect.applyEffect(player);
-		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount() == 100 
+		assertEquals(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount(), 100 
 				-2*(match.getBoard().getFloor(CardType.BUILDING, 0).getCard().getCost().getStoneAmount() + 
 						match.getBoard().getFloor(CardType.BUILDING, 0).getCard().getCost().getWoodAmount()));
 		
@@ -109,8 +114,7 @@ public class ExcommunicationEffectTest {
 		player.addResources(new ResourceChest(2,2,2,2,0,100,0));
 		Effect effect = new LosePointsForEveryResourceEffect(new VictoryPoint(2));
 		effect.applyEffect(player);
-		assertTrue(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount()
-				 == 84);
+		assertEquals(player.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount(), 84);
 	}
 	
 	/**
@@ -123,7 +127,7 @@ public class ExcommunicationEffectTest {
 		
 		Effect effect = new ResourceMalusEffect(resources);
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getResourceMalus().get(0).getAmount() == resources.get(0).getAmount());
+		assertEquals(player.getBonuses().getResourceMalus().get(0).getAmount(), resources.get(0).getAmount());
 	}
 	
 	/**
@@ -153,7 +157,7 @@ public class ExcommunicationEffectTest {
 	public void setServantsDividerEffectTest(){
 		Effect effect = new SetServantsDividerEffect(2);
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getServantsDivider() == 2);
+		assertEquals(player.getBonuses().getServantsDivider(), 2);
 	}
 	
 	/**

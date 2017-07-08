@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.excommunicationtile;
 import java.io.Serializable;
 
 /**
- * The Class ExcommunicationEffect.
+ * The general class excommunication effect
  *
  * @author Mirko
  */

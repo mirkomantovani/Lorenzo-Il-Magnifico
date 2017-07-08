@@ -11,7 +11,8 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 
 /**
- * The Class Bonus.
+ * This class represents the various bonuses that a player has and accumulates over time
+ * during the gameplay
  *
  * @author Mirko
  */

@@ -3,7 +3,11 @@ package it.polimi.ingsw.ps19.model.effect;
 import it.polimi.ingsw.ps19.Player;
 
 /**
- * The Class NoFloorBonusEffect.
+ * The Class NoFloorBonusEffect if applied to a player, the player doesn't get Tower's
+ * floors bonuses when he takes a card
+ * 
+ * @author Mirko
+ *
  */
 public class NoFloorBonusEffect extends Effect{
 

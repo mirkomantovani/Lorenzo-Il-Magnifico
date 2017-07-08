@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.server;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 
 /**
- * The Interface ServerInterface.
+ * A generic server interface to manage basic operations the server has to do
  *
  * @author Mirko
  */

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * The Class ExcommunicationTile.
+ * This class represents an excommunication tile
  *
  * @author Mirko
  */

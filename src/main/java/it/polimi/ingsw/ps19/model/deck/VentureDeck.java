@@ -5,7 +5,7 @@ import java.io.IOException;
 import it.polimi.ingsw.ps19.model.card.VentureCard;
 
 /**
- * The Class VentureDeck.
+ * A deck of venture cards
 
  * @author Mirko
  *

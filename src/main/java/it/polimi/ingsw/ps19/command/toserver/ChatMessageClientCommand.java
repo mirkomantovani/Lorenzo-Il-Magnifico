@@ -4,6 +4,11 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
  * The Class ChatMessageClientCommand.
+ * This class catch the chat message written by a client
+ */
+/**
+ * @author matteo
+ *
  */
 public class ChatMessageClientCommand extends ClientToServerCommand {
 

@@ -6,7 +6,10 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
- * A factory for creating Card objects.
+ * A factory to create development Cards based on the Type
+ * 
+ * @author Mirko
+ *
  */
 public class CardFactory {              
 

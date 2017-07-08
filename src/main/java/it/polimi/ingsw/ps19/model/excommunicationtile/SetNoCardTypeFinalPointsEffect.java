@@ -5,7 +5,8 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
- * The Class SetNoCardTypeFinalPointsEffect.
+ * Excommunication effect: you don't get the final victory points from the "cardType"
+ * Card Type
  *
  * @author Mirko
  */

@@ -14,7 +14,8 @@ import javax.swing.JButton;
 import it.polimi.ingsw.ps19.model.card.CardType;
 
 /**
- * The Class JDevelopmentCard.
+ * This class represents a general development card, it displays it and gives the
+ * functionalities offered by a JButton
  *
  * @author Mirko
  */

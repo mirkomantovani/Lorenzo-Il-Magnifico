@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 
 /**
- * The Class InitialPanel.
+ * The Initial image that the players see while waiting for the game to start
  *
  * @author Mirko
  */

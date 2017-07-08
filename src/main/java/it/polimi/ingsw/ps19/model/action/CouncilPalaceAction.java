@@ -1,14 +1,20 @@
 package it.polimi.ingsw.ps19.model.action;
 
-import java.util.ArrayList;
-
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.CouncilPalace;
+import it.polimi.ingsw.ps19.model.resource.Coin;
+import it.polimi.ingsw.ps19.model.resource.ResourceFactory;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 import it.polimi.ingsw.ps19.model.resource.Servant;
 
 /**
  * The Class CouncilPalaceAction.
+ * This is the action related to familiar placement in the council palace
+ */
+/**
+ * @author matteo
+ *
  */
 public class CouncilPalaceAction extends Action {
 	
@@ -42,6 +48,12 @@ public class CouncilPalaceAction extends Action {
 		councilPalace.getEffect().applyEffect(familyMember.getPlayer());
 		familyMember.getPlayer().removeFamilyMember(familyMember.getColor());
 		familyMember.getPlayer().getResourceChest().subResource(new Servant(paidServants));
+		for(int i = 0; i<familyMember.getPlayer().getBonuses().getResourceMalus().size();i++){
+			if(familyMember.getPlayer().getBonuses().getResourceMalus().get(i) instanceof Coin){
+				familyMember.getPlayer().getResourceChest().subResource(new Coin(1));
+			}
+			
+		}
 		} else throw new NotApplicableException("");
 		
 	}

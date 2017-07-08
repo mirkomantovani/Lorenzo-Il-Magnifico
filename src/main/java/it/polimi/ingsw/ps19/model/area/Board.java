@@ -21,6 +21,13 @@ import it.polimi.ingsw.ps19.model.deck.VentureDeck;
 
 /**
  * The Class Board.
+ * 
+ * This class represents the board with all the areas you can find in the physical board panel.
+ * In its different areas you can place the familiars and also it contains the cards and the excommunication tiles.
+ */
+/**
+ * @author matteo
+ *
  */
 public class Board implements Serializable {
 	
@@ -46,7 +53,7 @@ public class Board implements Serializable {
 	private ProductionArea productionArea;
 	
 	/** The military requirements for territories. */
-	private static List militaryRequirementsForTerritories;
+	private static ArrayList<Integer> militaryRequirementsForTerritories;
 	
 	/** The territory cards. */
 	private Deck<? extends DevelopmentCard> territoryCards;
@@ -244,7 +251,7 @@ public class Board implements Serializable {
 	 *
 	 * @return the military requirements for territories
 	 */
-	public static List getMilitaryRequirementsForTerritories() {
+	public static ArrayList<Integer> getMilitaryRequirementsForTerritories() {
 		return militaryRequirementsForTerritories;
 	}
 	

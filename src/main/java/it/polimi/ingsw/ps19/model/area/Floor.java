@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 
 /**
  * The Class Floor.
+ * This class represents the floors in the towers, the related action spaces have specific bonuses
+ * taken from file and here you can place the familiar
  *
  * @author matteo
  */

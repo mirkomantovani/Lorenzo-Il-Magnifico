@@ -3,7 +3,8 @@ package it.polimi.ingsw.ps19.launchers;
 import it.polimi.ingsw.ps19.server.Server;
 
 /**
- * The Class ServerLauncher.
+ * This class launches an instance of server, it has to be launched only once on a machine
+ * and can handle multiple ((unlimited)) matches
  *
  * @author Mirko
  */

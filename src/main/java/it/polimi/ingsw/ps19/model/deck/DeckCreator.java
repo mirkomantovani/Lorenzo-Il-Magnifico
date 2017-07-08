@@ -53,7 +53,8 @@ import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**
- * The Class DeckCreator.
+ * The Class DeckCreator
+ * 
  */
 /**
  * @author Matteo, Jimmy, Mirko
@@ -145,6 +146,7 @@ public class DeckCreator {
 //			System.out.println("id: "+lineRead);
 			
 		}
+		buffReader.close();
 		return deck;
 	}
 	
@@ -388,6 +390,7 @@ public class DeckCreator {
 			lineRead = buffReader.readLine();
 			cardIndex++;
 		}
+		buffReader.close();
 		return deck;
 	}
 	
@@ -487,6 +490,7 @@ public class DeckCreator {
 		lineRead = buffReader.readLine();   //line 1
 		//System.out.println("id: "+lineRead);
 		}
+		buffReader.close();
 	
 		return deck;
 	}
@@ -675,6 +679,8 @@ public class DeckCreator {
 			lineRead = buffReader.readLine();
 			cardIndex++;
 		}
+		
+		buffReader.close();
 		return deck;
 	}
 	
@@ -815,6 +821,7 @@ public class DeckCreator {
 			lineRead = buffReader.readLine();   //line 1
 	
 		}
+		buffReader.close();
 		return deck;
 		
 	}

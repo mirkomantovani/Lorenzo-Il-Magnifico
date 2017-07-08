@@ -6,6 +6,11 @@ import it.polimi.ingsw.ps19.model.area.Board;
 
 /**
  * The Class InitializeTurnCommand.
+ * The message to notify the client that a turn has been initialized
+ */
+/**
+ * @author matteo
+ *
  */
 public class InitializeTurnCommand extends ServerToClientCommand {
 

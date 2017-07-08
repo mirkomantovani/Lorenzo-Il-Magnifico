@@ -5,6 +5,12 @@ import it.polimi.ingsw.ps19.model.area.Board;
 
 /**
  * The Class RefreshBoardCommand.
+ * 
+ * This is the class to process the board changes by refreshing it
+ */
+/**
+ * @author matteo
+ *
  */
 public class RefreshBoardCommand extends ServerToClientCommand {
 

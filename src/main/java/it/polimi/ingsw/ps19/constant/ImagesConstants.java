@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.constant;
 
 /**
  * The Class ImagesConstants.
+ * The class with the constants of the images used for GUI
  */
 public class ImagesConstants {
 	

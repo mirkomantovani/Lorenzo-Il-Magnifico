@@ -110,6 +110,7 @@ public class FamilyMemberPawn extends JPanel{
 		this.setOpaque(false);
 		this.setBounds(widthRel, heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		setFamilyMember();
+
 	}
 	
 
@@ -137,6 +138,8 @@ public class FamilyMemberPawn extends JPanel{
 		}
 		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT + (3-Floor)*hTOWER_OFFSET*BoardPanel.dimension.getWidth());
 		setFamilyMember();
+		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
+		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
 	}
 	
 	/**
@@ -205,17 +208,17 @@ public class FamilyMemberPawn extends JPanel{
 	 * Place familiar into harvest area.
 	 *
 	 * @param area the area
-	 */
+	 */	
 	public void PlaceFamiliarIntoHarvestArea(String area){
 		if(area == "1"){
 			widthRel = (int)(BoardPanel.dimension.getWidth()*wHarvest);
-			heightRel = (int)(BoardPanel.dimension.getHeight()*hHarvest);
+			heightRel = (int)(BoardPanel.dimension.getHeight()*hProduction);
 			setFamilyMember();
 		} else if(area == "2"){
-			widthRel = (int)(BoardPanel.dimension.getWidth()*wBigHarvest + harvestCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
-			heightRel = (int)(BoardPanel.dimension.getHeight()*hHarvest);
+			widthRel = (int)(BoardPanel.dimension.getWidth()*wBigHarvest + productionCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
+			heightRel = (int)(BoardPanel.dimension.getHeight()*hProduction);
 			setFamilyMember();
-			harvestCounter++;
+			productionCounter++;
 		}
 		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
 		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
@@ -229,13 +232,13 @@ public class FamilyMemberPawn extends JPanel{
 	public void PlaceFamiliarIntoProductionArea(String area){
 		if(area == "1"){
 			widthRel = (int)(BoardPanel.dimension.getWidth()*wHarvest);
-			heightRel = (int)(BoardPanel.dimension.getHeight()*hProduction);
+			heightRel = (int)(BoardPanel.dimension.getHeight()*hHarvest);
 			setFamilyMember();
 		} else if(area == "2"){
-			widthRel = (int)(BoardPanel.dimension.getWidth()*wBigHarvest + productionCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
-			heightRel = (int)(BoardPanel.dimension.getHeight()*hProduction);
+			widthRel = (int)(BoardPanel.dimension.getWidth()*wBigHarvest + harvestCounter*0.5*wDIM_PERC*BoardPanel.dimension.getWidth());
+			heightRel = (int)(BoardPanel.dimension.getHeight()*hHarvest);
 			setFamilyMember();
-			productionCounter++;
+			harvestCounter++;
 		}
 		widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
 		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);

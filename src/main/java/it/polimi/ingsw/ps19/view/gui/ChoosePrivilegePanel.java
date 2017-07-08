@@ -11,7 +11,10 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 /**
- * The Class ChoosePrivilegePanel.
+ * The Panel that lets the player choose the resources given by a council privilege
+ *
+ * @author Mirko
+ *
  */
 public class ChoosePrivilegePanel extends JPanel {
 	

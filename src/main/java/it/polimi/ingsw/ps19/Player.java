@@ -16,6 +16,7 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
 
 /**
  * The Class Player.
+ * This is the player class, everyone in the match is linked with an instance of this class
  *
  * @author matteo
  */
@@ -294,6 +295,10 @@ public class Player implements Serializable {
 		Player maskedPlayer=new Player(this.name, this.color);
 		ResourceChest maskedRC=new ResourceChest();
 		
+		maskedPlayer.setExcommunicatedFirst(this.isExcommunicatedFirst);
+		maskedPlayer.setExcommunicatedSecond(this.isExcommunicatedSecond);
+		maskedPlayer.setExcommunicatedThird(this.isExcommunicatedThird);
+		
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT));
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.FAITHPOINT));
 		maskedRC.addResource(this.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT));
@@ -407,6 +412,7 @@ public class Player implements Serializable {
 	 * @param name the name
 	 */
 	public void activateLeaderCard(String name){
+		this.leaderCards.get(name).setActivationState(true);
 		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);
 		if(observer!=null)
 			this.observer.notifyPlayerStatusChange(this);

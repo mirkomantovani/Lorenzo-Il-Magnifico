@@ -4,6 +4,11 @@ import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 
 /**
  * The Class FinishRoundCommand.
+ * This class alert the server about the end of a turn
+ */
+/**
+ * @author matteo
+ *
  */
 public class FinishRoundCommand extends ClientToServerCommand {
 

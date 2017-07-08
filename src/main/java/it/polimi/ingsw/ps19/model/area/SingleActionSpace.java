@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
  * The Class SingleActionSpace.
+ * This class is the generic single action space that you can find in floors, markets and in small
+ * production and harvest area. This action space can store only one familiar per time. 
+ * 
  */
 public class SingleActionSpace extends ActionSpace{
 	

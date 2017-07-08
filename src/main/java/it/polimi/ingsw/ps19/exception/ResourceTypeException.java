@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.exception;
 
 /**
- * The Class ResourceTypeException.
+ * The unchecked exception thrown when an invalid resource type is passed to the Resource Factory
  *
  * @author Mirko
  */

@@ -24,10 +24,10 @@ public class ExcommCube extends JPanel{
 	private Image img;
 	
 	/** The width rel. */
-	int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+	private int widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 	
 	/** The height rel. */
-	int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
+	private int heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 	
 	/** The Constant WIDTH_PERC. */
 	private static final double WIDTH_PERC = 0.2028503937007874015748031496063;
@@ -61,6 +61,11 @@ public class ExcommCube extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		 widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+		
+		/** The height rel. */
+		 heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 		switch(player){
 		
 		case "yellow" : widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
@@ -82,8 +87,6 @@ public class ExcommCube extends JPanel{
 		this.setOpaque(false);
 		//this.getParent().setComponentZOrder(this, 0);
 		
-		widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
-		heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 		
 	}
 	

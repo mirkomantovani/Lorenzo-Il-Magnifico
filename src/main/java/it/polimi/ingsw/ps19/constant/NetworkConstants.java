@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.constant;
 
 /**
  * The Class NetworkConstants.
+ * This class contains the constants related to the network connections
  */
 public class NetworkConstants {
 

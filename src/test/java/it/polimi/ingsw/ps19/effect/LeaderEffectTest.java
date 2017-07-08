@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.effect;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +21,10 @@ import it.polimi.ingsw.ps19.model.effect.leader.SistoIVEffect;
 
 /**
  * The Class LeaderEffectTest.
+ */
+/**
+ * @author matteo
+ *
  */
 public class LeaderEffectTest {
 	
@@ -55,7 +59,7 @@ public class LeaderEffectTest {
 		Effect effect = new FedericoDaMontefeltroEffect();
 		effect.applyEffect(player);
 		for(FamilyMember f : player.getFamilyMembers().values()){
-			assertTrue(player.getFamilyMembers().get(f.getColor()).getActionValueImposition() == 6);
+			assertEquals(player.getFamilyMembers().get(f.getColor()).getActionValueImposition(), 6);
 		}
 		
 	}
@@ -78,7 +82,7 @@ public class LeaderEffectTest {
 		Effect effect = new LucreziaBorgiaEffect();
 		effect.applyEffect(player);
 		for(FamilyMember f : player.getFamilyMembers().values()){
-			assertTrue(player.getFamilyMembers().get(f.getColor()).getActionValueVariation() == 2);
+			assertEquals(player.getFamilyMembers().get(f.getColor()).getActionValueVariation(), 2);
 		}
 	}
 	
@@ -91,7 +95,7 @@ public class LeaderEffectTest {
 		effect.applyEffect(player);
 		for(FamilyMember f : player.getFamilyMembers().values()){
 			
-			assertTrue(player.getFamilyMembers().get(f.getColor()).getActionValueImposition() == 5);
+			assertEquals(player.getFamilyMembers().get(f.getColor()).getActionValueImposition(), 5);
 		}
 	}
 	
@@ -102,7 +106,7 @@ public class LeaderEffectTest {
 	public void picoDellaMirandolaEffectTest(){
 		Effect effect = new PicoDellaMirandolaEffect();
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getCardCostCoinDiscount() == 3);
+		assertEquals(player.getBonuses().getCardCostCoinDiscount(), 3);
 	}
 	
 	/**
@@ -122,7 +126,7 @@ public class LeaderEffectTest {
 	public void sigismondoMalatestaEffectTest(){
 		Effect effect = new SigismondoMalatestaEffect();
 		effect.applyEffect(player);
-		assertTrue(player.getFamilyMember(Color.NEUTRAL).getActionValueVariation() == 3);
+		assertEquals(player.getFamilyMember(Color.NEUTRAL).getActionValueVariation(), 3);
 	}
 	
 	/**
@@ -132,7 +136,7 @@ public class LeaderEffectTest {
 	public void sistoIVEffectTest(){
 		Effect effect = new SistoIVEffect();
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getChurchSupportBonus() == 5);
+		assertEquals(player.getBonuses().getChurchSupportBonus(), 5);
 	}
 
 }
