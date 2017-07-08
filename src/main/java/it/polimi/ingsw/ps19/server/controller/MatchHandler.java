@@ -1421,6 +1421,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (user.isPresent()) {
 			System.out.println("user was in the list");
 			if (user.get().correctPassword(password)){
+				user.get().incrementMatches();
+				UsersCreator.updateFile(users);
 				userFromColor.put(playerColor,user.get());
 				return true;
 			}
@@ -1429,7 +1431,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("user was not in the list");
 			User newUser=new User(username,password);
 			this.users.add(newUser);
-			userFromColor.put(playerColor,newUser);
+			userFromColor.put(playerColor,newUser);	
 			UsersCreator.updateFile(users);
 			return true;
 		}

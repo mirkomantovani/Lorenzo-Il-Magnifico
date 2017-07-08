@@ -1,23 +1,28 @@
 package it.polimi.ingsw.ps19.view.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
+/**
+ * A panel to request the user to authenticate and notify the gamepanel when he's done that
+ * @author Mirko
+ *
+ */
 public class AskAuthenticationPanel extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
 	
