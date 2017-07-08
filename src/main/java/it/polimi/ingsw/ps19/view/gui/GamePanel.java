@@ -720,7 +720,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			if (actionConstructor.size() == 4) {
 				this.GUI.notifyMarketAction(actionConstructor);
 			} else {
-				System.out.println("gamepanel: market actionconstructor non con 4 elementi");
 			}
 
 		} else if (e.getSource() instanceof CouncilButton) {
@@ -752,9 +751,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			this.GUI.notifyProduction(actionConstructor);
 
 		} else if (e.getSource() instanceof JLeaderCard) {
-			System.out.println("leader card clicked");
+//			System.out.println("leader card clicked");
 			JLeaderCard leader = (JLeaderCard) (e.getSource());
 			this.removeActionPanel();
+			leadersPanel.setVisible(true);
 
 			if (leaderState.equals("draft")) {
 				this.GUI.notifyChosenLeaderInDraft(leader.getLeaderName());
@@ -779,7 +779,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			if (!leadersPanel.isVisible()) {
 				showActionPanel(leadersPanel);
 			} else {
-				System.out.println("panel is visible, backto current");
 				backToCurrentAction();
 			}
 		}
@@ -1136,7 +1135,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		ArrayList<String> playerColor = board.getPlayerOrder();
 		for (int i = 0; i < playerColor.size(); i++) {
 			getOrderFromColor(playerColor.get(i)).setOrderMarkers();
-			System.out.println("gamepanel: update order color: color:adding to board");
 			boardPanel.add(getOrderFromColor(playerColor.get(i)));
 		}
 
@@ -1151,11 +1149,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	private OrderMarkerDisk getOrderFromColor(String color) {
 		for (int i = 0; i < orderMarkers.size(); i++) {
 			if (orderMarkers.get(i).getSrc().equals(color)) {
-				System.out.println("gamepanel: getorderfrom color: color:" + color);
 				return orderMarkers.get(i);
 			}
 		}
-		System.out.println("error, order markers not initialized correctly");
 		return null;
 
 	}
@@ -1171,7 +1167,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 				for (Dice d : Dice.values()) {
 
 					familiars.put(d.getColor().toString() + s, new FamilyMemberPawn(d.getColor().toString(), s));
-					System.out.println("ho creato una pawn " + d.getColor().toString() + s);
 
 				}
 			}
@@ -1241,7 +1236,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		for (FamilyMemberPawn f : familiars.values()) {
 			if (!familiars.isEmpty())
 				boardPanel.remove(f);
-			System.out.println("ho rimosso");
 		}
 	}
 
@@ -1311,7 +1305,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		for (CardButton card : cards) {
 			if (card.getTower() == tower && card.getFloor() == floor) {
 				boardPanel.remove(card);
-				System.out.println("cardremoved");
 			}
 		}
 
@@ -1330,7 +1323,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 * Notify discard click.
 	 */
 	public void notifyDiscardClick() {
-		System.out.println("discard click");
 
 		leaderState = "discard";
 		currentActionPanel = leadersPanel;

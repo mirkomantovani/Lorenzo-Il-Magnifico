@@ -123,11 +123,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private boolean alreadyDoneAction = false;
 
 	private ArrayList<User> users;
-	
-	private HashMap<String,User> userFromColor;
-	
+
+	private HashMap<String, User> userFromColor;
+
 	private int authenticatedCorrectly;
-	
+
 	private long startTime;
 
 	/**
@@ -142,7 +142,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
-		userFromColor=new HashMap<>();
+		userFromColor = new HashMap<>();
 
 		try {
 			users = UsersCreator.getUsersFromFile();
@@ -168,22 +168,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
-		
+
 		commandHandler = new ServerCommandHandler(this, match);
-		
+
 		setPlayers();
 
 		communicateColors();
 
 		match.setInitialPlayer();
-		
+
 	}
-	
-	private void initExistingMatch(int id) throws FileNotFoundException, ClassNotFoundException, IOException{
-		
+
+	private void initExistingMatch(int id) throws FileNotFoundException, ClassNotFoundException, IOException {
+
 		match = MatchSaver.readMatch(id);
-		
-		commandHandler = new ServerCommandHandler(this,match);
+
+		commandHandler = new ServerCommandHandler(this, match);
 	}
 
 	/**
@@ -208,7 +208,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
-
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
 		}
@@ -224,11 +223,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startMatch() {
 		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-		
+
 		sendToAllPlayers(new AskAuthenticationCommand());
-		
-		this.startTime=System.currentTimeMillis();
-		
+
+		this.startTime = System.currentTimeMillis();
+
 	}
 
 	/**
@@ -261,6 +260,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
+		
+		deactivateLeaderCards();
+		
 		try {
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
@@ -426,7 +428,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		roundTimerThread.start();
 	}
 
-
 	/**
 	 * close the match and all its connection with client.
 	 */
@@ -470,15 +471,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
-		
+
 		updateGamePlayTime(clientHandler.getPlayer().getColor());
-		
+
 		try {
 			sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
 		} catch (WrongClientHandlerException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		try {
 			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
 		} catch (MatchFullException e) {
@@ -489,18 +490,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 	}
 
-	
 	/**
 	 * Updates the gameplay time for the disconnected player
-	 * @param color 
+	 * 
+	 * @param color
 	 */
 	private void updateGamePlayTime(String color) {
-		
-		long currentTime=System.currentTimeMillis();
-		int elapsedTime=(int) ((currentTime-startTime)/1000);
-		
+
+		long currentTime = System.currentTimeMillis();
+		int elapsedTime = (int) ((currentTime - startTime) / 1000);
+
 		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
-		
+
 		UsersCreator.updateFile(users);
 	}
 
@@ -578,7 +579,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
-
 
 	/**
 	 * Round timer expired.
@@ -1158,27 +1158,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
 		numPlayersAnsweredExcomm++;
 		if (decision) {
-			System.out.println("Non ho scomunicato il giocatore" + playerColor);
-			this.getPlayerFromColor(playerColor).payFaithPoint();
-			ResourceChest rc = new ResourceChest();
-			rc.addResource(match.getChurchSupportPrizeInPeriod());
-			this.getPlayerFromColor(playerColor).addResources(rc);
-		} else {
-			System.out.println("Scomunico il giocatore" + playerColor);
-			ExcommunicationTile tile;
-			tile = this.getCurrentExcommTile();
-			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
-			System.out.println("Ho scomunicato il giocatore" + playerColor);
 
-			if (match.getPeriod() == Period.FIRST)
-				this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
-			else if (match.getPeriod() == Period.SECOND) {
-				this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
-			} else if (match.getPeriod() == Period.SECOND) {
-				this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
+			if (match.getPeriod().ordinal() + 2 <= getPlayerFromColor(playerColor).getResourceChest()
+					.getResourceInChest(ResourceType.FAITHPOINT).getAmount()) {
+
+				this.getPlayerFromColor(playerColor).payFaithPoint();
+				ResourceChest rc = new ResourceChest();
+				rc.addResource(match.getChurchSupportPrizeInPeriod());
+				this.getPlayerFromColor(playerColor).addResources(rc);
 			}
-
-			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
+			else{
+				excommunicatePlayer(playerColor);
+			}
+			
+		} else {
+			excommunicatePlayer(playerColor);
 		}
 
 		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
@@ -1186,6 +1180,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startTurn();
 		}
 
+	}
+	
+	private void excommunicatePlayer(String playerColor){
+		ExcommunicationTile tile;
+		tile = this.getCurrentExcommTile();
+		tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
+
+		if (match.getPeriod() == Period.FIRST)
+			this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
+		else if (match.getPeriod() == Period.SECOND) {
+			this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
+		} else if (match.getPeriod() == Period.SECOND) {
+			this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
+		}
+
+		this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
 	}
 
 	/**
@@ -1317,46 +1327,47 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleAuthenticationRequest(String username, String password, String playerColor) {
-		if(getUserOrCreateOne(username,password,playerColor)){
+		if (getUserOrCreateOne(username, password, playerColor)) {
 			this.authenticatedCorrectly++;
 			sendToPlayer(new AuthenticatedCorrectlyCommand(username), getPlayerFromColor(playerColor));
-		}
-		else 
+		} else
 			sendToPlayer(new WrongPasswordCommand(username), getPlayerFromColor(playerColor));
-			
-		if(authenticatedCorrectly==this.match.getPlayers().length)
+
+		if (authenticatedCorrectly == this.match.getPlayers().length)
 			startLeaderDiscardPhase();
-		
+
 	}
-	
 
 	/**
 	 * 
-	 * @param username of the player that requested the authentication
-	 * @param password of the player that requested the authentication
+	 * @param username
+	 *            of the player that requested the authentication
+	 * @param password
+	 *            of the player that requested the authentication
 	 * @return true if the password is correct or a new player has been created
 	 *         successfully (and there was no other player with the same
 	 *         username), false otherwise
 	 */
-	private boolean getUserOrCreateOne(String username, String password,String playerColor) {
-		
-		//using functional programming with streams of Users to get the user from the username, if it exists
+	private boolean getUserOrCreateOne(String username, String password, String playerColor) {
+
+		// using functional programming with streams of Users to get the user
+		// from the username, if it exists
 		final Optional<User> user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 
 		if (user.isPresent()) {
 			System.out.println("user was in the list");
-			if (user.get().correctPassword(password)){
+			if (user.get().correctPassword(password)) {
 				user.get().incrementMatches();
 				UsersCreator.updateFile(users);
-				userFromColor.put(playerColor,user.get());
+				userFromColor.put(playerColor, user.get());
 				return true;
-			}
-			else return false;
+			} else
+				return false;
 		} else {
 			System.out.println("user was not in the list");
-			User newUser=new User(username,password);
+			User newUser = new User(username, password);
 			this.users.add(newUser);
-			userFromColor.put(playerColor,newUser);	
+			userFromColor.put(playerColor, newUser);
 			UsersCreator.updateFile(users);
 			return true;
 		}

@@ -234,10 +234,12 @@ public class ServerCommandHandler implements CommandObserver {
 	 */
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) throws NotApplicableException {
 		if(handler.getCurrentPlayer().getLeaderCards().containsKey(activateLeaderCardCommand.getLeaderName())
-				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName()))
+				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName())){
 			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
 		else {
-			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader.rements to activate it!"));
+			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader requirements to activate it!"));
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
 			
