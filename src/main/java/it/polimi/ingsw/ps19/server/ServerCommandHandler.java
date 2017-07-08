@@ -244,7 +244,10 @@ public class ServerCommandHandler implements CommandObserver {
 		if(handler.getCurrentPlayer().getLeaderCards().containsKey(activateLeaderCardCommand.getLeaderName())
 				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName()))
 			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
-		else throw new NotApplicableException("You don't have that leader card or the requirements to activate it!");
+		else {
+			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader card or the requirements to activate it!"));
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
 			
 	}
 
@@ -321,8 +324,8 @@ public class ServerCommandHandler implements CommandObserver {
 	 * @param sendCredentialsCommand the send credentials command
 	 */
 	public void applyCommand(SendCredentialsCommand sendCredentialsCommand) {
-		// TODO Auto-generated method stub
-
+		handler.handleAuthenticationRequest(sendCredentialsCommand.getUsername(),
+				sendCredentialsCommand.getPassword(),sendCredentialsCommand.getPlayerColor());
 	}
 
 	/**

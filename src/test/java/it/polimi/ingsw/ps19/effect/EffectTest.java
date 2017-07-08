@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.effect;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class EffectTest {
 	public void testCouncilPrivilegeEffect(){
 		Effect effect = new CouncilPrivilegeEffect(2);
 		effect.applyEffect(player);
-		assertTrue(player.getCouncilPrivilege() == 2);
+		assertEquals(player.getCouncilPrivilege(), 2);
 	}
 	
 //	@Test 
@@ -74,7 +74,7 @@ public class EffectTest {
 	public void HarvestBonusEffectTest(){
 		Effect effect = new HarvestBonusEffect(34);
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getHarvestVariation() == 34);
+		assertEquals(player.getBonuses().getHarvestVariation(),34);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class EffectTest {
 	public void ProductionBonusEffectTest(){
 		Effect effect = new ProductionBonusEffect(34);
 		effect.applyEffect(player);
-		assertTrue(player.getBonuses().getProductionVariation() == 34);
+		assertEquals(player.getBonuses().getProductionVariation(), 34);
 	}
 	
 	/**

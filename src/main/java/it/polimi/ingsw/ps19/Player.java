@@ -412,6 +412,7 @@ public class Player implements Serializable {
 	 * @param name the name
 	 */
 	public void activateLeaderCard(String name){
+		this.leaderCards.get(name).setActivationState(true);
 		this.leaderCards.get(name).getSpecialEffect().applyEffect(this);
 		if(observer!=null)
 			this.observer.notifyPlayerStatusChange(this);

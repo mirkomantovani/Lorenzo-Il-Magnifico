@@ -528,5 +528,17 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public void notifyServerClosed() {
 print("The server has closed the game");		
 	}
+
+	@Override
+	public void authenticatedCorrectly(String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayWrongPasswordMessage(String username) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

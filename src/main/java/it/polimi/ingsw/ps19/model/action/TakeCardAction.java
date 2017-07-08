@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.model.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Color;
@@ -61,11 +60,11 @@ public class TakeCardAction extends Action {
 		this.paidServants = paidServants;
 		this.floor = floor;
 		
-		System.out.println("takecardaction: prima del calculateactionvaluevariation");
+//		System.out.println("takecardaction: prima del calculateactionvaluevariation");
 		
 		this.actionValueVariation = calculateActionValueVariation();
 		
-		System.out.println("takecardaction: finished constructing action");
+//		System.out.println("takecardaction: finished constructing action");
 
 	}
 
@@ -153,30 +152,12 @@ public class TakeCardAction extends Action {
 				
 				
 				try{
-//				List l=Board.getMilitaryRequirementsForTerritories();
-//				l=new ArrayList<>();
-//				
-//				int a=(int) (Board.getMilitaryRequirementsForTerritories().get(0));
-//				int b=(int) (Board.getMilitaryRequirementsForTerritories().get(1));
-//				int c=(int) (Board.getMilitaryRequirementsForTerritories().get(2));
-//				int d=(int) (Board.getMilitaryRequirementsForTerritories().get(3));
-//				System.out.println(a);
-//				System.out.println(b);
-//				System.out.println(c);
-//				System.out.println(d);
-//				
-//				l.forEach(point -> System.out.println(point));
-				
-//				System.out.println(l.get(0));
-//				System.out.println(l.get(1));
-//				System.out.println(l.get(2));
 				
 				int len=player.getDeckOfType(card.getCardType()).size();
 				
 				System.out.println("player deck length :"+player.getDeckOfType(card.getCardType()).size());
 				
-				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories()
-						.get(len))));
+				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories().get(len))));
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -185,8 +166,8 @@ public class TakeCardAction extends Action {
 				
 				
 				System.out.println("takecard punti del player");
-				if ((int) (Board.getMilitaryRequirementsForTerritories()
-						.get(player.getDeckOfType(card.getCardType()).size() + 1)) > player.getResourceChest()
+				if ((int) (Board.getMilitaryRequirementsForTerritories().get
+						(player.getDeckOfType(card.getCardType()).size())) > player.getResourceChest()
 								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount()){
 					this.notApplicableCode = "you don't have the required military points to take this card";
 				return false;
@@ -290,7 +271,8 @@ public class TakeCardAction extends Action {
 		floors = this.floor.getTower().getFloors();
 		for (Floor fl : floors) {
 			if (fl.getActionSpace().isOccupied() && fl != this.floor
-					&& fl.getActionSpace().getFamilyMember().getPlayer() == player)
+					&& fl.getActionSpace().getFamilyMember().getPlayer() == player 
+					&& !(fl.getActionSpace().getFamilyMember().getColor()==Color.NEUTRAL))
 				return false;
 		}
 

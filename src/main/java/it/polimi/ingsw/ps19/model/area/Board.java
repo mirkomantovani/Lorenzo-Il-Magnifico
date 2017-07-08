@@ -4,13 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -55,7 +53,7 @@ public class Board implements Serializable {
 	private ProductionArea productionArea;
 	
 	/** The military requirements for territories. */
-	private static List militaryRequirementsForTerritories;
+	private static ArrayList<Integer> militaryRequirementsForTerritories;
 	
 	/** The territory cards. */
 	private Deck<? extends DevelopmentCard> territoryCards;
@@ -253,7 +251,7 @@ public class Board implements Serializable {
 	 *
 	 * @return the military requirements for territories
 	 */
-	public static List getMilitaryRequirementsForTerritories() {
+	public static ArrayList<Integer> getMilitaryRequirementsForTerritories() {
 		return militaryRequirementsForTerritories;
 	}
 	

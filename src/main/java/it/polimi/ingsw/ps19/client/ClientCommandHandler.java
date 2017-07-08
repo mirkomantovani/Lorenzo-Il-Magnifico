@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
+import it.polimi.ingsw.ps19.command.toclient.AuthenticatedCorrectlyCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
@@ -24,6 +25,7 @@ import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
+import it.polimi.ingsw.ps19.command.toclient.WrongPasswordCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -274,6 +276,14 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	 */
 	public void applyCommand(InvalidActionCommand command){
 		userInterface.actionCommandNotValid(command.getInvalidCode());
+	}
+
+	public void applyCommand(AuthenticatedCorrectlyCommand authenticatedCorrectlyCommand) {
+		userInterface.authenticatedCorrectly(authenticatedCorrectlyCommand.getUsername());
+	}
+
+	public void applyCommand(WrongPasswordCommand wrongPasswordCommand) {
+		userInterface.displayWrongPasswordMessage(wrongPasswordCommand.getUsername());
 	}
 
 	
