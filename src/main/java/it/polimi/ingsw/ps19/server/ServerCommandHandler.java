@@ -237,7 +237,7 @@ public class ServerCommandHandler implements CommandObserver {
 				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName()))
 			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
 		else {
-			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader card or the requirements to activate it!"));
+			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader.rements to activate it!"));
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
 			
