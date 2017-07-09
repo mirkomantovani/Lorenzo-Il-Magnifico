@@ -137,15 +137,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private long startTime;
 
 	private ArrayList<User> disconnectedUsers;
-	
+
 	/**
 	 * variable that states the presence of the fifth player
 	 */
 	private boolean satanIsPresent;
-	
+
 	private ClientHandler fifthPlayerClient;
-	
-	
 
 	/**
 	 * Instantiates a new match handler.
@@ -156,12 +154,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the server interface
 	 */
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
-		
-		if(clients.size()==5){
-			satanIsPresent=true;
-			this.fifthPlayerClient=clients.remove(clients.size()-1);
+
+		if (clients.size() == 5) {
+			satanIsPresent = true;
+			this.fifthPlayerClient = clients.remove(clients.size() - 1);
 		}
-	
+
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
@@ -193,8 +191,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
-		
-		if(satanIsPresent)
+
+		if (satanIsPresent)
 			match.createSatan();
 
 		commandHandler = new ServerCommandHandler(this, match);
@@ -218,21 +216,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Communicate colors.
 	 */
 	private void communicateColors() {
-		
-		if(satanIsPresent)
+
+		if (satanIsPresent)
 			try {
-				
+
 				fifthPlayerClient.sendCommand(new AssignColorCommand(match.getSatan().getColor()));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		
-		
+
 		for (ClientHandler c : clients) {
 			String color = null;
 			try {
 				color = this.getRightPlayer(c).getColor();
-				System.out.println("player color:"+color);
+				System.out.println("player color:" + color);
 			} catch (WrongClientHandlerException e) {
 				e.printStackTrace();
 			}
@@ -260,7 +257,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 
 	private void startMatch() {
-		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
+
+		if (satanIsPresent)
+			sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length + 1));
+		else
+			sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 
 		sendToAllPlayers(new AskAuthenticationCommand());
@@ -290,8 +291,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			c.addCommandObserver(commandHandler);
 			i++;
 		}
-		
-		if(satanIsPresent){
+
+		if (satanIsPresent) {
 			fifthPlayerClient.addCommandObserver(commandHandler);
 			System.out.println("ho eseguito la add observer");
 			fifthPlayerClient.addObserver(this);
@@ -380,14 +381,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            to be notified
 	 */
 	public void sendToAllPlayers(ServerToClientCommand command) {
-		
-		if(satanIsPresent)
+
+		if (satanIsPresent)
 			try {
 				fifthPlayerClient.sendCommand(command);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		
+
 		for (ClientHandler client : clients) {
 			try {
 				client.sendCommand(command);
@@ -404,14 +405,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the command
 	 */
 	public void sendToAllPlayersExceptCurrent(ServerToClientCommand command) {
-		
-		if(satanIsPresent)
+
+		if (satanIsPresent)
 			try {
 				fifthPlayerClient.sendCommand(command);
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
-		
+
 		ClientHandler dontSendClient;
 		try {
 			dontSendClient = this.getRightClientHandler(match.getCurrentPlayer());
@@ -584,19 +585,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void reconnectClient(ClientHandler clientHandler, User user) {
-		 if(isUserInTheGameAndDisconnected(user))
-		 {
-			 Player p=match.getPlayerFromName(user.getUsername());
-			 
-			 if(p!=null){
-			 disconnectedUsers.remove(user);
-			 closedClients.remove(clientHandler);
-			 clientHandler.addPlayer(p);
-			 this.match.reconnectPlayer(p);
-			 } else {
-				 System.out.println("getplayerfromname returned NULL");
-			 }
-		 }
+		if (isUserInTheGameAndDisconnected(user)) {
+			Player p = match.getPlayerFromName(user.getUsername());
+
+			if (p != null) {
+				disconnectedUsers.remove(user);
+				closedClients.remove(clientHandler);
+				clientHandler.addPlayer(p);
+				this.match.reconnectPlayer(p);
+			} else {
+				System.out.println("getplayerfromname returned NULL");
+			}
+		}
 
 	}
 
@@ -747,11 +747,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Next step.
 	 */
 	private void nextStep() {
-		
-		if(satanIsPresent&&(roundNumber%4==0))
+
+		if (satanIsPresent && (roundNumber % 4 == 0))
 			sendToClientHandler(new AskSatanMoveCommand(), fifthPlayerClient);
-		
-		
+
 		if ((roundNumber == match.getPlayers().length * 4) || currentPlayerWithoutFamilyMembers()) {
 			if (match.getTurn() % 2 == 1) {
 				startTurn();
@@ -956,17 +955,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 		}
-		if(this.satanIsPresent){
-			int satanVictoryPoints = match.getSatan().getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
-			if(calculatePlayerPoints(rank[0]) < satanVictoryPoints){
+		if (this.satanIsPresent) {
+			int satanVictoryPoints = match.getSatan().getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT)
+					.getAmount();
+			if (calculatePlayerPoints(rank[0]) < satanVictoryPoints) {
 				sendToPlayer(new WinCommand(), match.getSatan());
 				for (Player p : rank) {
-						sendToPlayer(new LoseCommand(), p);
-					
+					sendToPlayer(new LoseCommand(), p);
+
 				}
 			} else {
 				sendToPlayer(new WinCommand(), rank[0]);
-				sendToPlayer(new LoseCommand(),match.getSatan());
+				sendToPlayer(new LoseCommand(), match.getSatan());
 				for (Player p : rank) {
 					if (p != rank[0]) {
 						sendToPlayer(new LoseCommand(), p);
@@ -1522,32 +1522,32 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleSatanChoice(String color) {
-		
-		Random r=new Random();
-		int amount=r.nextInt(3)+3;
-//		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
-		
+
+		Random r = new Random();
+		int amount = r.nextInt(3) + 3;
+		// Effect instant=new InstantResourcesEffect(new
+		// ResourceChest(0,0,0,0,0,-amount,0));
+
 		System.out.println(color);
 		System.out.println("\n" + getPlayerFromColor(color).toString());
-		
-		int newRes=
-		getPlayerFromColor(color).getResourceChest().
-		getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
-		
+
+		int newRes = getPlayerFromColor(color).getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT)
+				.getAmount();
+
 		System.out.println(newRes);
-		newRes=newRes-amount;
-		if(newRes<0)newRes=0;
-		
-		getPlayerFromColor(color).getResourceChest().
-		getResourceInChest(ResourceType.VICTORYPOINT).setAmount(newRes);
-		
-//		instant.applyEffect(getPlayerFromColor(color));
-		
-		System.out.println("\nhandling satan choice: chosen player:"+color);
+		newRes = newRes - amount;
+		if (newRes < 0)
+			newRes = 0;
+
+		getPlayerFromColor(color).getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).setAmount(newRes);
+
+		// instant.applyEffect(getPlayerFromColor(color));
+
+		System.out.println("\nhandling satan choice: chosen player:" + color);
 		sendToAllPlayers(new NotifySatanActionCommand(color));
-		
+
 		notifyPlayerStatusChange(getPlayerFromColor(color));
-		
+
 	}
 
 }

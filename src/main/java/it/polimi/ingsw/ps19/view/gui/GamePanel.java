@@ -367,6 +367,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			boardPanel.add(multipleProductionButton);
 		}
 		}
+		
+		
 
 		// ACTION PANELS
 		if(!playerColor.equals("black")){
@@ -417,9 +419,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		askAuthenticationPanel.setVisible(false);
 		}
 		
+		if(playerColor.equals("black")){
 		satanPanel=new SatanPanel(screenDim.width - boardPanel.getPreferredSize().width, this);
 		satanPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		satanPanel.setVisible(false);
+		}
+		
+		this.placeSatanDisc();
 		
 		
 		

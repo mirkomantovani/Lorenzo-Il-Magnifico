@@ -81,8 +81,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		if(!isSatan){
 		this.addListeners();
 		}
-		if(isSatan)
-			frame.getGamePanel().placeSatanDisc();
+		
 		
 		frame.getGamePanel().setObserver(this);
 		frame.pack(); // ?

@@ -46,7 +46,7 @@ public class SatanPanel extends JPanel {
 		blue.setName("Blue");
 		blue.addMouseListener(listener);
 
-		PlayerColor yellow = new PlayerColor("ysellow", resourceWidth);
+		PlayerColor yellow = new PlayerColor("yellow", resourceWidth);
 		add(yellow);
 		yellow.setName("Yellow");
 		yellow.addMouseListener(listener);
