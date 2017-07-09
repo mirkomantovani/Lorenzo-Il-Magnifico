@@ -12,11 +12,12 @@ import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
@@ -49,6 +50,8 @@ public class ClientHandlerSocket extends ClientHandler {
 	
 	/** The match observer. */
 	private MatchHandlerObserver matchObserver;
+	
+	private Server serverListener;
 
 	/**
 	 * Instantiates a new client handler socket.
@@ -163,7 +166,9 @@ public class ClientHandlerSocket extends ClientHandler {
 					command instanceof SatanChoiceCommand){
 				
 				commandHandler.notifyNewCommand(command);
-				System.out.println("command notified");
+			} else if(command instanceof ReconnectionAnswerCommand){
+				
+				serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand)command,this);
 			}
 			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
@@ -198,6 +203,10 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.commandHandler = commandHandler;
+	}
+	
+	public void addCommandObserver(Server s){
+		this.serverListener=s;
 	}
 
 }

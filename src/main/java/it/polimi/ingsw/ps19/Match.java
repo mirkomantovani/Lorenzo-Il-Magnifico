@@ -351,6 +351,10 @@ public class Match implements Serializable{
 			return this.board.getChurch().getVictoryPoints()[BoardConstants.THIRDPERIOD_CHURCHSUPPORTCOST];
 		}
 	}
+	
+	public int getDisconnectedPlayersNum(){
+		return disconnectedPlayers.size();
+	}
 
 	/**
 	 * Gets the period.

@@ -8,13 +8,6 @@ import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 
 
 /**
- * The listener interface for receiving clientSocket events.
- * The class that is interested in processing a clientSocket
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addClientSocketListener</code> method. When
- * the clientSocket event occurs, that object's appropriate
- * method is invoked.
  *
  * @author matteo
  * 

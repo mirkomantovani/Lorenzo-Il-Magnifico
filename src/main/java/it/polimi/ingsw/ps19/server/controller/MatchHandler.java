@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
+import org.hamcrest.core.IsSame;
+
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
@@ -57,8 +59,6 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
-import it.polimi.ingsw.ps19.model.effect.Effect;
-import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -783,7 +783,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		ExcommunicationTile excommTile = getCurrentExcommTile();
 
-		sendToAllPlayers(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
+		if (satanIsPresent)
+			sendToAllPlayersExceptSatan(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
+		else
+			sendToAllPlayers(new AskForExcommunicationPaymentCommand(excommTile.getEffect().toString()));
+	}
+
+	private void sendToAllPlayersExceptSatan(ServerToClientCommand command) {
+		for (ClientHandler client : clients) {
+			try {
+				client.sendCommand(command);
+			} catch (Exception e) {
+				this.removeClient(client);
+			}
+		}
 	}
 
 	/**
@@ -1321,7 +1334,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			excommunicatePlayer(playerColor);
 		}
 
-		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
+		if (numPlayersAnsweredExcomm == this.match.getPlayers().length - this.match.getDisconnectedPlayersNum()) {
 			numPlayersAnsweredExcomm = 0;
 			startTurn();
 		}
@@ -1551,6 +1564,26 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		notifyPlayerStatusChange(getPlayerFromColor(color));
 
+	}
+
+	public boolean hasDisconnectedPlayer() {
+		return disconnectedUsers.size()!=0;
+	}
+
+	public boolean hasDisconnectedUser(User u) {
+		for(User user: disconnectedUsers){
+			if(user.getUsername().equals(u.getUsername()))
+				return true;
+		}
+		return false;
+	}
+	
+	public User getDisconnectedUser(User u) {
+		for(User user: disconnectedUsers){
+			if(user.getUsername().equals(u.getUsername()))
+				return user;
+		}
+		return null;
 	}
 
 }
