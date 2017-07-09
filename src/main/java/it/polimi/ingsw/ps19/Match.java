@@ -164,6 +164,12 @@ public class Match implements Serializable{
 		}
 		
 	}
+	
+	public void reconnectPlayer(){
+		
+		
+		
+	}
 
 	/**
 	 * Checks if is disconnected.

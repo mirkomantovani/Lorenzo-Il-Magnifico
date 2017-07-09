@@ -131,6 +131,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private long startTime;
 
+	private ArrayList<User> disconnectedUsers;
+
 	/**
 	 * Instantiates a new match handler.
 	 *
@@ -144,6 +146,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
 		userFromColor = new HashMap<>();
+
+		disconnectedUsers = new ArrayList<User>();
 
 		try {
 			users = UsersCreator.getUsersFromFile();
@@ -261,9 +265,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
-		
+
 		deactivateLeaderCards();
-		
+
 		try {
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
@@ -276,7 +280,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Start turn.
 	 */
 	private void startTurn() {
-		
+
 		updateGamePlayTimeForEveryone();
 
 		match.handlePeriodsAndTurns();
@@ -383,8 +387,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			client = getRightClientHandler(player);
 		} catch (WrongPlayerException e1) {
-//			System.out.println(e1.getError());
-//			e1.printStackTrace();
+			// System.out.println(e1.getError());
+			// e1.printStackTrace();
 			return;
 		}
 
@@ -475,34 +479,76 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
 
-		updateGamePlayTime(clientHandler.getPlayer().getColor());
-		System.out.println("removing client and updating timeof "+clientHandler.getPlayer().getColor());
+		if (!closedClients.contains(clientHandler)) {
 
-		closedClients.add(clientHandler);
-		
-		try {
-			sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
-		} catch (WrongClientHandlerException e1) {
-			e1.printStackTrace();
-		}
+			updateGamePlayTime(clientHandler.getPlayer().getColor());
+			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
-		try {
-			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
-		} catch (MatchFullException e) {
-//			System.out.println("Disconnected more players than the ones in the game");
-//			e.printStackTrace();
-		} catch (WrongClientHandlerException e) {
-//			e.printStackTrace();
+			closedClients.add(clientHandler);
+
+			try {
+				addDisconnectedUser(getRightPlayer(clientHandler).getName());
+			} catch (WrongClientHandlerException e2) {
+				e2.printStackTrace();
+			}
+
+			try {
+				sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
+			} catch (WrongClientHandlerException e1) {
+				e1.printStackTrace();
+			}
+
+			try {
+				this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
+			} catch (MatchFullException e) {
+				// System.out.println("Disconnected more players than the ones
+				// in the game");
+				// e.printStackTrace();
+			} catch (WrongClientHandlerException e) {
+				// e.printStackTrace();
+			}
+
 		}
 	}
-	
-	public void reconnectClient(ClientHandler clientHandler,User user){
-		
+
+	private void addDisconnectedUser(String userName) {
+		User u = getUserFromName(userName);
+		if (u != null)
+			disconnectedUsers.add(u);
+
 	}
-	
-	private void updateGamePlayTimeForEveryone(){
-		for(int i=0;i<match.getPlayers().length;i++){
-		updateGamePlayTime(match.getPlayers()[i].getColor());
+
+	private User getUserFromName(String name) {
+		for (User u : users) {
+			if (u.getUsername().equals(name))
+				return u;
+		}
+		return null;
+
+	}
+
+	public void reconnectClient(ClientHandler clientHandler, User user) {
+		 if(isUserInTheGameAndDisconnected(user))
+		 {
+			 disconnectedUsers.remove(user);
+			 closedClients.remove(clientHandler);
+//			 this.match.reconnect
+		 }
+
+	}
+
+	private boolean isUserInTheGameAndDisconnected(User user) {
+		if (!users.contains(user))
+			return false;
+		if (!disconnectedUsers.contains(user))
+			return false;
+
+		return true;
+	}
+
+	private void updateGamePlayTimeForEveryone() {
+		for (int i = 0; i < match.getPlayers().length; i++) {
+			updateGamePlayTime(match.getPlayers()[i].getColor());
 		}
 	}
 
@@ -517,26 +563,25 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		int elapsedTime = (int) ((currentTime - startTime) / 1000);
 
 		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
-		
-		
+
 		this.runUpdateFileThread();
-		
+
 	}
-	
-	private void runUpdateFileThread(){
-//		new Thread( new Runnable() {
-//		    @Override
-//		    public void run() {
-//		    }
-//		}).start();
-		
+
+	private void runUpdateFileThread() {
+		// new Thread( new Runnable() {
+		// @Override
+		// public void run() {
+		// }
+		// }).start();
+
 		Executors.newSingleThreadExecutor().execute(new Runnable() {
-		    @Override 
-		    public void run() {
-		    	UsersCreator.updateFile(users);
-		    }
+			@Override
+			public void run() {
+				UsersCreator.updateFile(users);
+			}
 		});
-		
+
 	}
 
 	/**
@@ -619,14 +664,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
-		
+
 		try {
 			this.removeClient(getRightClientHandler(getCurrentPlayer()));
 		} catch (WrongPlayerException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		if (match.isAnyoneStillPlaying()) {
+			System.out.println("qualcuno sta ancora giocando");
 			setNext();
 			nextStep();
 		} else {
@@ -1123,7 +1169,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
 
-
 		ArrayList<Player> councilPlayers = new ArrayList<Player>();
 
 		if (!councilMemberList.isEmpty()) {
@@ -1149,7 +1194,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 			match.setPlayers(newList);
 		}
-
 
 	}
 
@@ -1181,11 +1225,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				ResourceChest rc = new ResourceChest();
 				rc.addResource(match.getChurchSupportPrizeInPeriod());
 				this.getPlayerFromColor(playerColor).addResources(rc);
-			}
-			else{
+			} else {
 				excommunicatePlayer(playerColor);
 			}
-			
+
 		} else {
 			excommunicatePlayer(playerColor);
 		}
@@ -1196,8 +1239,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 
 	}
-	
-	private void excommunicatePlayer(String playerColor){
+
+	private void excommunicatePlayer(String playerColor) {
 		ExcommunicationTile tile;
 		tile = this.getCurrentExcommTile();
 		tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
@@ -1302,12 +1345,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the player color
 	 */
 	public void clientClosedTheGame(String playerColor) {
-			try {
-				this.removeClient(getRightClientHandler(getPlayerFromColor(playerColor)));
-			} catch (WrongPlayerException e) {
-				e.printStackTrace();
-			}
-		
+		try {
+			this.removeClient(getRightClientHandler(getPlayerFromColor(playerColor)));
+		} catch (WrongPlayerException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public boolean isLeaderCardActivable(String leaderName) {
@@ -1373,9 +1416,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (user.isPresent()) {
 			if (user.get().correctPassword(password)) {
 				user.get().incrementMatches();
-				
+
 				this.runUpdateFileThread();
-				
+
 				userFromColor.put(playerColor, user.get());
 				return true;
 			} else
@@ -1384,7 +1427,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			User newUser = new User(username, password);
 			this.users.add(newUser);
 			userFromColor.put(playerColor, newUser);
-			
+
 			return true;
 		}
 
