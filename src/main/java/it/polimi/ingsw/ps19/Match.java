@@ -41,15 +41,16 @@ public class Match implements Serializable{
 	/** The players. */
 	// private List<Player> players;
 	private Player[] players;
-	
-	/** The disconnected players. */
-	private Player[] disconnectedPlayers;
-	
 	/** The added players. */
 	private int addedPlayers;
 	
-	/** The added disconnected players. */
-	private int addedDisconnectedPlayers;
+	
+	
+	private ArrayList<Player> disconnectedPlayers;
+	
+	
+	
+	
 	
 	/** The current player. */
 	private int currentPlayer = 0;
@@ -92,7 +93,7 @@ public class Match implements Serializable{
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-		disconnectedPlayers=new Player[numPlayers];
+		disconnectedPlayers=new ArrayList<Player>();
 //		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
 
 		playercolors = new String[numPlayers];
@@ -155,20 +156,18 @@ public class Match implements Serializable{
 		
 		System.out.println("\nmatch, adddisconnectedPlayer");
 			
-		if (addedDisconnectedPlayers == players.length)
+		if (disconnectedPlayers.size() == players.length)
 			throw new MatchFullException();
 		else {
-			this.disconnectedPlayers[addedDisconnectedPlayers] = p;
-			addedDisconnectedPlayers++;
+			this.disconnectedPlayers.add(p);
 		}
 		}
 		
 	}
 	
-	public void reconnectPlayer(){
-		
-		
-		
+	public void reconnectPlayer(Player p){
+		disconnectedPlayers.remove(p);
+	
 	}
 
 	/**
@@ -178,11 +177,13 @@ public class Match implements Serializable{
 	 * @return true, if is disconnected
 	 */
 	private boolean isDisconnected(Player p) {
-		for(int i=0;i<disconnectedPlayers.length;i++){
-			if(p==disconnectedPlayers[i])
-				return true;
-		}
-		return false;
+		
+		return this.disconnectedPlayers.contains(p);
+//		for(int i=0;i<disconnectedPlayers.length;i++){
+//			if(p==disconnectedPlayers[i])
+//				return true;
+//		}
+//		return false;
 	}
 
 	/**
@@ -455,7 +456,7 @@ public class Match implements Serializable{
 	 */
 	public void setNextPlayer() throws EveryPlayerDisconnectedException {
 		
-		if(players.length==addedDisconnectedPlayers){
+		if(players.length==disconnectedPlayers.size()){
 			matchFinished=true;
 			throw new EveryPlayerDisconnectedException();
 		}
@@ -476,13 +477,15 @@ public class Match implements Serializable{
 	 * @return true, if is disconnected
 	 */
 	private boolean isDisconnected(int currentPlayer) {
-		for(int i=0;i<disconnectedPlayers.length;i++){
-			if(players[currentPlayer]==disconnectedPlayers[i]){
-				System.out.println("MATCH: player is disconnected, setting nextplayer");
-				return true;
-			}
-		}
-		return false;
+		
+		return this.disconnectedPlayers.contains(players[currentPlayer]);
+//		for(int i=0;i<disconnectedPlayers.length;i++){
+//			if(players[currentPlayer]==disconnectedPlayers[i]){
+//				System.out.println("MATCH: player is disconnected, setting nextplayer");
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 
 	/**
@@ -558,5 +561,14 @@ public class Match implements Serializable{
 	public boolean isAnyoneStillPlaying() {
 		return !matchFinished;
 	}
+
+	public Player getPlayerFromName(String name) {
+		for(int i=0;i<players.length;i++){
+			if(players[i].getName().equals(name))
+				return players[i];
+		}
+		return null;
+	}
+	
 
 }
