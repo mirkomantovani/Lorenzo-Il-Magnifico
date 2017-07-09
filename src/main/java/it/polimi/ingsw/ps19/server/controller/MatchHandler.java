@@ -23,6 +23,7 @@ import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskSatanMove;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.AuthenticatedCorrectlyCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
@@ -132,6 +133,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private long startTime;
 
 	private ArrayList<User> disconnectedUsers;
+	
+	/**
+	 * variable that states the precence of the fifth player
+	 */
+	private boolean satanIsPresent;
+	
+	private ClientHandler fifthPlayerClient;
 
 	/**
 	 * Instantiates a new match handler.
@@ -142,6 +150,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the server interface
 	 */
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
+		
+		if(clients.size()==5){
+			satanIsPresent=true;
+			this.fifthPlayerClient=clients.remove(clients.size()-1);
+		}
+	
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
@@ -340,6 +354,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            to be notified
 	 */
 	public void sendToAllPlayers(ServerToClientCommand command) {
+		
+		if(satanIsPresent)
+			try {
+				fifthPlayerClient.sendCommand(command);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		
 		for (ClientHandler client : clients) {
 			try {
 				client.sendCommand(command);
@@ -356,6 +378,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the command
 	 */
 	public void sendToAllPlayersExceptCurrent(ServerToClientCommand command) {
+		
+		if(satanIsPresent)
+			try {
+				fifthPlayerClient.sendCommand(command);
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		
 		ClientHandler dontSendClient;
 		try {
 			dontSendClient = this.getRightClientHandler(match.getCurrentPlayer());
@@ -691,6 +721,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Next step.
 	 */
 	private void nextStep() {
+		
+		if(satanIsPresent&&(roundNumber%4==0))
+			sendToClientHandler(new AskSatanMove(), fifthPlayerClient);
+		
+		
 		if ((roundNumber == match.getPlayers().length * 4) || currentPlayerWithoutFamilyMembers()) {
 			if (match.getTurn() % 2 == 1) {
 				startTurn();
