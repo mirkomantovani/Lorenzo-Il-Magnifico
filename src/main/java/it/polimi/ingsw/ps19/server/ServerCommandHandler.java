@@ -367,7 +367,8 @@ public class ServerCommandHandler implements CommandObserver {
 
 
 	public void applyCommand(SatanChoice satanChoice) {
-		handler.handleSatanChoice(satanChoice.getColor());
+		//TODO
+		
 	}
 
 	

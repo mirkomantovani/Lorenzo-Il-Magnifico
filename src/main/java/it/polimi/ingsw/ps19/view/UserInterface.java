@@ -183,9 +183,9 @@ public interface UserInterface {
 
 	public void displayPlayerDisconnected(String color);
 
-	public void displaySatanAction();
-
 	public void askSatanMove();
+
+	public void displaySatanAction(String color);
 
 
 }

@@ -931,6 +931,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 		}
+		if(this.satanIsPresent){
+			
+		}
 		sendToPlayer(new WinCommand(), rank[0]);
 		for (Player p : rank) {
 			if (p != rank[0]) {

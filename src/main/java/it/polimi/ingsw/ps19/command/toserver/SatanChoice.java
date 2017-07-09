@@ -10,7 +10,7 @@ public class SatanChoice extends ClientToServerCommand{
 	 */
 	private static final long serialVersionUID = 2239627322643830186L;
 	
-	private Color color;
+	private String color;
 
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
@@ -18,16 +18,13 @@ public class SatanChoice extends ClientToServerCommand{
 		
 	}
 	
-	public SatanChoice(Color color){
+	public SatanChoice(String color){
 		this.color = color;
 	}
-
-	public Color getColor() {
+	
+	public String getColor(){
 		return color;
 	}
-	
-	
-	
 	
 
 }

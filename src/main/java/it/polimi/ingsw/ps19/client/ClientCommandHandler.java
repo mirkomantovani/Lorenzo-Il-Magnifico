@@ -294,13 +294,12 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 
 	public void applyCommand(NotifySatanAction notifySatanAction) {
-		userInterface.displaySatanAction();
+		userInterface.displaySatanAction(notifySatanAction.getColor());
 		
 	}
 
 	public void applyCommand(AskSatanMove askSatanMove) {
-		// TODO Auto-generated method stub
-		
+		userInterface.askSatanMove();
 	}
 
 	

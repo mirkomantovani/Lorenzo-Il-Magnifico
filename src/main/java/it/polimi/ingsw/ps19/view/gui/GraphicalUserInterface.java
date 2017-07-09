@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;
@@ -549,8 +550,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	@Override
-	public void displaySatanAction() {
-		// TODO Auto-generated method stub
+	public void displaySatanAction(String color) {
+		writeGameMessage("Satan has punished the " + color + " player!" );
 		
 	}
 

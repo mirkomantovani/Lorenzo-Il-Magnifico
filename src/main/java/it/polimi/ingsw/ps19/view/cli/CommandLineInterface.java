@@ -546,7 +546,7 @@ print("The server has closed the game");
 	}
 
 	@Override
-	public void displaySatanAction() {
+	public void displaySatanAction(String color) {
 		
 		
 	}
