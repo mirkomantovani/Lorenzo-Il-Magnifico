@@ -449,7 +449,8 @@ public class Player implements Serializable {
 		for(FamilyMember mem : this.getFamilyMembers().values()){
 			System.out.println(mem.toString());
 		}
-		this.observer.notifyPlayerStatusChange(this);
+		if(this.observer!=null) //I need this control to let the test run.
+			this.observer.notifyPlayerStatusChange(this);
 	}
 	
 	/**

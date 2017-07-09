@@ -3,11 +3,13 @@ package it.polimi.ingsw.ps19.model.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
 import it.polimi.ingsw.ps19.model.area.MultipleActionSpace;
+import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.ProductionEffect;
@@ -88,9 +90,13 @@ public class IndustrialAction extends Action {
 	 */
 	private boolean canBePlaced() {
 		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
+		//Wow.. such a bad programming, but now it's too late to make things look and work better. I feel so sorry about that
 		if(actionSpace instanceof MultipleActionSpace)
 			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants);
+		else if(actionSpace instanceof SingleActionSpace)
+			return ((SingleActionSpace) actionSpace).isOccupable(familyMember, paidServants);
 		return actionSpace.isOccupable(this.familyMember);
+		//This method almost doesn't make any sense
 	}
 
 	/* (non-Javadoc)
@@ -99,14 +105,24 @@ public class IndustrialAction extends Action {
 	@Override
 	public void apply() throws NotApplicableException {
 		if (canBePlaced()) {
+			System.out.println("Player: " + player.getFamilyMember(Color.ORANGE).toString());
+			System.out.println("1");
 			actionSpace.setFamilyMember(familyMember);
+			System.out.println("2");
 			this.player.removeFamilyMember(familyMember.getColor());
+			System.out.println("3");
 			this.player.getResourceChest().subResource(new Servant(paidServants));
+			System.out.println("4");
 			System.out.println("\nIndustrial action: sto applicando la industrialAction\n");
 			if (actionSpace.getEffect() != null) {
 				System.out.println("\nNon è null quindi è una action space multipla\n");
 				actionSpace.getEffect().applyEffect(player);
 			}
+			System.out.println("5");
+			for (DevelopmentCard card : industrialArea.getPlayerCards(this.player)) {
+				System.out.println("card id: " + card.getId());
+			}
+			System.out.println("6");
 			for (DevelopmentCard card : industrialArea.getPlayerCards(this.player)) {
 				if (isApplicable(card)) {
 					System.out.println("\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n");

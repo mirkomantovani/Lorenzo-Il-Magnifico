@@ -55,7 +55,7 @@ public class MultipleActionSpace extends ActionSpace {
 		for(FamilyMember member : members){
 			//Se esiste un family member dentro members che ha come player lo stesso di quello passato
 			//come parametro, e il cui colore non sia neutral allora non è possibile farlo
-			if(member.getPlayer() == familyMember.getPlayer() && familyMember.getDice().getColor() != Color.NEUTRAL){
+			if(member.getPlayer() == familyMember.getPlayer() && familyMember.getDice().getColor() != Color.NEUTRAL && member.getColor()!=Color.NEUTRAL){
 				available = false;
 				break;  					 //L'ho visto fare da qualche parte nel corso :-)
 			}

@@ -87,6 +87,21 @@ public class SingleActionSpace extends ActionSpace{
 	/* (non-Javadoc)
 	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
 	 */
+	
+	public boolean isOccupable(FamilyMember familyMember, int paidServants) {
+
+		System.out.println("\nsono nella is Occupable\n");
+		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
+		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + (familyMember.getActionValue() + paidServants));
+		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
+		System.out.println("Result:" + (!isOccupied() && familyMember.getActionValue() + paidServants > this.actionValueRequired));
+		return !isOccupied() && familyMember.getActionValue() + paidServants > this.actionValueRequired;
+
+	}
+	
+	/* (non-Javadoc)
+	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
+	 */
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 

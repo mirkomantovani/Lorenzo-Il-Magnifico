@@ -23,7 +23,8 @@ import it.polimi.ingsw.ps19.view.UserInterface;
 public class CommandLineInterface implements UserInterface, InputListener {
 
 	/** The welcome message. */
-	private final String welcomeMessage = "|------------------Welcome to Lorenzo il Magnifico, the board game!----------------|";
+	private final String welcomeMessage = "|------------------------------Welcome to Lorenzo il Magnifico, the board game!----------------------------|";
+
 
 	/** The reader. */
 	private InputReader reader;
@@ -453,6 +454,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	 */
 	@Override
 	public void askNameAndPassword() {
+		actionConstructor.clear();
 		print("Insert your name: ");
 		readerState = ClientConstants.SEND_NAME;
 	}
@@ -526,19 +528,18 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	 */
 	@Override
 	public void notifyServerClosed() {
-print("The server has closed the game");		
+		print("The server has closed the game");		
 	}
 
 	@Override
 	public void authenticatedCorrectly(String username) {
-		// TODO Auto-generated method stub
+		System.out.println("You have been authenticated correctly, get ready to play!");
 		
 	}
 
 	@Override
 	public void displayWrongPasswordMessage(String username) {
-		// TODO Auto-generated method stub
-		
+		print("Wrong password!");
 	}
 	
 }

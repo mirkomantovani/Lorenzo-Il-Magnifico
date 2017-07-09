@@ -1393,13 +1393,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleAuthenticationRequest(String username, String password, String playerColor) {
+
+		
 		if(getUserOrCreateOne(username,password,playerColor)){
 			this.authenticatedCorrectly++;
 			sendToPlayer(new AuthenticatedCorrectlyCommand(username), getPlayerFromColor(playerColor));
 		}
-		else 
+		else{ 
 			sendToPlayer(new WrongPasswordCommand(username), getPlayerFromColor(playerColor));
-			
+			sendToPlayer(new AskAuthenticationCommand(), getPlayerFromColor(playerColor));
+		}	
 		if(authenticatedCorrectly==this.match.getPlayers().length)
 			startLeaderDiscardPhase();
 		
