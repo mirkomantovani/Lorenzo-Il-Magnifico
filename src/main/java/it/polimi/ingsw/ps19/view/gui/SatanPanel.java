@@ -1,18 +1,22 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Font;
+import it.polimi.ingsw.ps19.constant.ImagesConstants;
 
 public class SatanPanel extends JPanel {
 	private JTextField txtChooseThePlayer;
+	private Image img;
 	
 	public SatanPanel(int resourceWidth, GamePanel listener) {
 
@@ -22,6 +26,12 @@ public class SatanPanel extends JPanel {
 		setForeground(UIManager.getColor("ArrowButton.disabledText"));
 
 		setLayout(new FlowLayout(FlowLayout.CENTER, 40, 100));
+		
+		try {
+			img = ImageIO.read(this.getClass().getResource("src/main/resources/satan.jpg"));
+		} catch (IOException e) {
+		}
+		img.getScaledInstance(getWidth(), getHeight(), 0);
 		
 		txtChooseThePlayer = new JTextField();
 		txtChooseThePlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));

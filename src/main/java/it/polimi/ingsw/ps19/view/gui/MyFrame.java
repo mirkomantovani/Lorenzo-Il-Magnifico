@@ -102,6 +102,9 @@ public class MyFrame extends JFrame {
 
 	/**
 	 * Instantiates a new my frame.
+	 * @throws  
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
