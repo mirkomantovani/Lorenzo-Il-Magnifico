@@ -19,7 +19,7 @@ public class NotifySatanActionCommand extends ServerToClientCommand{
 	}
 	
 	public NotifySatanActionCommand(String color){
-		color = this.color;
+		this.color = color;
 	}
 	
 	public String getColor(){

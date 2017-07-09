@@ -8,8 +8,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class SatanPanel extends JPanel {
+	private JTextField txtChooseThePlayer;
 	
 	public SatanPanel(int resourceWidth, GamePanel listener) {
 
@@ -19,6 +22,13 @@ public class SatanPanel extends JPanel {
 		setForeground(UIManager.getColor("ArrowButton.disabledText"));
 
 		setLayout(new FlowLayout(FlowLayout.CENTER, 40, 100));
+		
+		txtChooseThePlayer = new JTextField();
+		txtChooseThePlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtChooseThePlayer.setEditable(false);
+		txtChooseThePlayer.setText("Choose the player:");
+		add(txtChooseThePlayer);
+		txtChooseThePlayer.setColumns(10);
 
 
 		PlayerColor red = new PlayerColor("red", resourceWidth);

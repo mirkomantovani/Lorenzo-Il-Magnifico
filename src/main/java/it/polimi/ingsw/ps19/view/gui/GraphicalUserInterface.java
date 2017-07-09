@@ -40,6 +40,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	
 	/** The excommunication cube needed. */
 	private boolean excommunicationCubeNeeded;
+	
+	private boolean isSatan;
 
 	/**
 	 * Instantiates a new graphical user interface.
@@ -63,8 +65,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 * Adds the listeners.
 	 */
 	public void addListeners() {
+		
 		frame.getGamePanel().getSendChat().addActionListener(this);
 		frame.getGamePanel().getShowPersonalBoard().addActionListener(this);
+		
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +78,12 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeMatch(int numPlayers) {
 		frame.removeInitialImage();
 		frame.initializeGameFrame(numPlayers);
+		if(!isSatan){
 		this.addListeners();
+		}
+		if(isSatan)
+			frame.getGamePanel().placeSatanDisc();
+		
 		frame.getGamePanel().setObserver(this);
 		frame.pack(); // ?
 		frame.repaint(); // ?
@@ -112,6 +121,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void playerStatusChange(Player p) {
+		
 		
 		if(excommunicationCubeNeeded){
 			frame.getGamePanel().addExcommunicationCubes(p);
@@ -309,6 +319,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void assignColor(String color) {
+		if(color.equals("black"))
+			isSatan=true;
+			
 		gameController.setPlayerColor(color);
 		frame.setPlayerColor(color);
 
@@ -343,8 +356,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void askNameAndPassword() {
+		if(!isSatan){
 		writeGameMessage("Insert Name and Password to Login or Signup");
 		frame.getGamePanel().showAskAuthentication();
+		}
 
 	}
 
@@ -558,7 +573,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void askSatanMove() {
 		writeGameMessage("Satan: decide the player you want to punish "
-				+ "subtracting him some victory points, I'll remind you"
+				+ "subtracting him some pseudo-random victory points, I'll remind you"
 				+ " that you should choose the player who's winning in order not to"
 				+ " make him prevail over you");
 		frame.getGamePanel().showSatanPanel();
@@ -566,7 +581,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	public void notifySatanChoice(String playerColor) {
-		System.out.println("GUI: notify satan choice");
 		gameController.notifySatanChoice(playerColor);
 	}
 

@@ -47,11 +47,7 @@ public class Match implements Serializable{
 	private Player satan;
 	
 	
-	
 	private ArrayList<Player> disconnectedPlayers;
-	
-	
-	
 	
 	
 	/** The current player. */
@@ -577,7 +573,8 @@ public class Match implements Serializable{
 	}
 
 	public void createSatan() {
-		this.satan=new Player("Satan","red");
+		this.satan=new Player("Satan","black");
+		satan.getResourceChest().addResource(new VictoryPoint(99));
 		
 	}
 	

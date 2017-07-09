@@ -299,31 +299,26 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// PLAYER RESOURCES PANEL
 
+		if(!playerColor.equals("black")){
 		playerResources = new PlayerResources(screenDim.width - boardPanel.getPreferredSize().width, playerColor);
-		// playerResources.setPreferredSize(new
-		// Dimension(screenDim.width-panel.getPreferredSize().width,400));
-		// playerResources.setMaximumSize(new
-		// Dimension(screenDim.width-panel.getPreferredSize().width,800));
 
 		rightScrollbarContainer.add(playerResources);
+		}
 
 		// ACTIONS INTERNAL FRAME
 
 		JInternalFrame actionsInternalFrame = new JInternalFrame("Game actions");
-		actionsInternalFrame.setMaximizable(true);
+		
+		if(playerColor.equals("black"))
+			actionsInternalFrame.setTitle("Satan panel");
+		if(!playerColor.equals("black"))
 		actionsInternalFrame.getContentPane().setBackground(new Color(160, 82, 45));
+		else 
+		actionsInternalFrame.getContentPane().setBackground(new Color(0, 0, 0));
+		
 		actionsInternalFrame.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		actionsInternalFrame.setResizable(true);
-		// internalFrame_1.setIconifiable(true);
-		// internalFrame_1.setClosable(true);
-		// internalFrame_1.setResizable(true);
-
-		// setBorder(val ? null : border);
-
-		// internalFrame_1.setRootPaneCheckingEnabled(false);
-		// internalFrame_1.getUI().setNorthPane(val ? null : northPane);
-		// internalFrame_1.setRootPaneCheckingEnabled(true);
 		actionsInternalFrame.setBounds(new Rectangle(0, 0, 500, 0));
+		
 		rightScrollbarContainer.add(actionsInternalFrame);
 		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -331,6 +326,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// BUTTONS: Market, council, production and harvest
 
+		if(!playerColor.equals("black")){
 		firstMarket = new MarketButton(1);
 		firstMarket.addActionListener(this);
 		boardPanel.add(firstMarket);
@@ -370,11 +366,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			multipleProductionButton.addActionListener(this);
 			boardPanel.add(multipleProductionButton);
 		}
+		}
 
 		// ACTION PANELS
-
+		if(!playerColor.equals("black")){
 		actionPanel = new ActionPanel(this, playerColor);
+		if(!playerColor.equals("black"))
 		actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		else
+		actionPanel.setBackground(new Color(0,0,0));
 		actionPanel.setVisible(false);
 		// actionContentPane.add(actionPanel);
 
@@ -415,6 +415,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		askAuthenticationPanel=new AskAuthenticationPanel(this);
 		askAuthenticationPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		askAuthenticationPanel.setVisible(false);
+		}
 		
 		satanPanel=new SatanPanel(screenDim.width - boardPanel.getPreferredSize().width, this);
 		satanPanel.setBackground(BACKGROUND_PANELS_COLOR);
@@ -423,11 +424,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		
 		
 		// FINAL BUTTONS PANEL
+		
+		
 
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setBackground(new Color(210, 180, 140));
 		rightScrollbarContainer.add(buttonsPanel);
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		if(!playerColor.equals("black")){
 
 		showLeaderCardsButton = new JButton("Show Leader Cards");
 		showLeaderCardsButton.setFont(buttonsFont);
@@ -451,6 +456,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		strategyEditorButton.addActionListener(this);
 		buttonsPanel.add(strategyEditorButton);
+		}
 
 		quitGameButton = new JButton("Quit Game");
 		quitGameButton.setFont(buttonsFont);
