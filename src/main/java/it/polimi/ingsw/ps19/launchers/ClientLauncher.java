@@ -59,17 +59,7 @@ public class ClientLauncher {
 		controller.setUserInterface(userInterface);
 		controller.setCommandHandler(handler);
 		
-//		System.out.println("Would you join an existing Match? (Y/N)\n");
-//		
-//		String connChoice = i.next();
-//		
-//		if(connChoice.equals("Y")){
-//			System.out.println("Please insert your name: \n");
-//			String name = i.nextLine();
-//			System.out.println("your Password: \n");
-//			String pword = i.nextLine();
-//			ReconnectionManager rm = new ReconnectionManager(handler,name,pword);
-//		}
+
 		
 		try {
 		

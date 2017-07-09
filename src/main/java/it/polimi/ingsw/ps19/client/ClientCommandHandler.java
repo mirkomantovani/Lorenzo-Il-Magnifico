@@ -33,7 +33,6 @@ import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
 import it.polimi.ingsw.ps19.command.toclient.WrongPasswordCommand;
 import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
-import it.polimi.ingsw.ps19.launchers.ReconnectionManager;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
