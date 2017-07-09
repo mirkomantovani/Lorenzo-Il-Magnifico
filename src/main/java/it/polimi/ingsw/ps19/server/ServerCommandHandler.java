@@ -367,8 +367,7 @@ public class ServerCommandHandler implements CommandObserver {
 
 
 	public void applyCommand(SatanChoice satanChoice) {
-		// TODO Auto-generated method stub
-		
+		handler.handleSatanChoice(satanChoice.getColor());
 	}
 
 	

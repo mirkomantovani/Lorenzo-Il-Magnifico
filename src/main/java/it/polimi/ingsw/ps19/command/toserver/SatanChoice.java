@@ -21,6 +21,12 @@ public class SatanChoice extends ClientToServerCommand{
 	public SatanChoice(Color color){
 		this.color = color;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+	
+	
 	
 	
 

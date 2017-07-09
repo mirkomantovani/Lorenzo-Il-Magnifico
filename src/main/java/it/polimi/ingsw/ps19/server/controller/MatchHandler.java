@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
@@ -55,6 +56,8 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -1473,6 +1476,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			return true;
 		}
 
+	}
+
+	public void handleSatanChoice(String color) {
+		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,3,0));
+		instant.applyEffect(getPlayerFromColor(color));
+		
 	}
 
 }
