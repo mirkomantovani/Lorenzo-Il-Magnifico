@@ -181,5 +181,11 @@ public interface UserInterface {
 
 	public void displayWrongPasswordMessage(String username);
 
+	public void displayPlayerDisconnected(String color);
+
+	public void askSatanMove();
+
+	public void displaySatanAction(String color);
+
 
 }

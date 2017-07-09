@@ -61,7 +61,7 @@ public class Server implements Runnable, ServerInterface {
 	private Thread timer;
 	
 	/** The suppress server. */
-	private boolean suppressServer = false;
+	private boolean closeServer = false;
 
 	/**
 	 * Instantiates a new server.
@@ -92,7 +92,6 @@ public class Server implements Runnable, ServerInterface {
 	 */
 	@Override
 	public void run() {
-		System.out.println("Starting the server");
 		startServer();
 
 	}
@@ -109,16 +108,16 @@ public class Server implements Runnable, ServerInterface {
 		executor.submit(socketListener);
 		rmiListener = new ServerRMIListener(this);
 		executor.submit(rmiListener);
-		while (!suppressServer) {
-			String scelta = null;
+		while (!closeServer) {
+			String input = null;
 			try {
-				scelta = inKeyboard.readLine();
+				input = inKeyboard.readLine();
 			} catch (IOException e) {
 			}
 
-			if ("Q".equals(scelta) || "q".equals(scelta)) {
-				suppressServer = true;
-				suppress();
+			if ("M".equals(input) || "m".equals(input)) {
+				closeServer = true;
+				closeServer();
 			}
 		}
 
@@ -206,9 +205,9 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * this method closes everything.
+	 * this method closes the server
 	 */
-	private void suppress() {
+	private void closeServer() {
 		closeWaitingList();
 		if (timer != null && timer.isAlive())
 			timer.interrupt();

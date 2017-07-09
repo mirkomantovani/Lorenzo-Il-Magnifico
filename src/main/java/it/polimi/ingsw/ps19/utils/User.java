@@ -102,6 +102,10 @@ public class User {
 		
 	}
 	
+	public void incrementSecondsPlayed(int seconds){
+		this.secondsPlayed+=seconds;
+	}
+	
 	
 	
 	

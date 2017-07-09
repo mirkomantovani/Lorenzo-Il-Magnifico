@@ -10,10 +10,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
+import it.polimi.ingsw.ps19.MatchSaver;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
@@ -21,6 +24,7 @@ import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskSatanMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.AuthenticatedCorrectlyCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
@@ -30,7 +34,9 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifySatanActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
+import it.polimi.ingsw.ps19.command.toclient.PlayerDisconnectedCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.RefreshBoardCommand;
 import it.polimi.ingsw.ps19.command.toclient.RoundTimerExpiredCommand;
@@ -51,6 +57,8 @@ import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.area.Church;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
+import it.polimi.ingsw.ps19.model.effect.Effect;
+import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
@@ -79,7 +87,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private List<ClientHandler> closedClients;
 
 	/** The command handler. */
-	private ServerCommandHandler commandHandler;
+	private transient ServerCommandHandler commandHandler;
 
 	/** The Server interface. */
 	private ServerInterface ServerInterface;
@@ -121,10 +129,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private boolean alreadyDoneAction = false;
 
 	private ArrayList<User> users;
-	
-	private HashMap<String,User> userFromColor;
-	
+
+	private HashMap<String, User> userFromColor;
+
 	private int authenticatedCorrectly;
+
+	private long startTime;
+
+	private ArrayList<User> disconnectedUsers;
+
+	/**
+	 * variable that states the presence of the fifth player
+	 */
+	private boolean satanIsPresent;
+
+	private ClientHandler fifthPlayerClient;
 
 	/**
 	 * Instantiates a new match handler.
@@ -135,19 +154,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the server interface
 	 */
 	public MatchHandler(List<ClientHandler> clients, ServerInterface ServerInterface) {
+
+		if (clients.size() == 5) {
+			satanIsPresent = true;
+			this.fifthPlayerClient = clients.remove(clients.size() - 1);
+		}
+
 		this.clients = clients;
 		this.ServerInterface = ServerInterface;
 		closedClients = new ArrayList<ClientHandler>();
-		userFromColor=new HashMap<>();
+		userFromColor = new HashMap<>();
+
+		disconnectedUsers = new ArrayList<User>();
 
 		try {
 			users = UsersCreator.getUsersFromFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("match handler: sono stato creato");
-		// leaderSets = match.getLeaderCards()
-		// .getStartingLeaderSets(match.getPlayers().length);
 	}
 
 	/*
@@ -167,39 +191,45 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
-		// match.setNotifier(this);
+
+		if (satanIsPresent)
+			match.createSatan();
+
 		commandHandler = new ServerCommandHandler(this, match);
+
 		setPlayers();
-		// notifyAllStartMatch();
 
 		communicateColors();
 
 		match.setInitialPlayer();
-		
-		
-		
-		
-		
-		// asking credentials to everyone ma se facciamo riconnessione alla
-		// partita deve essere
-		// chiesto ancora prima, dal server
-		// startLeaderDiscardPhase(); // dovrebbe esserci questo
-		// provaPlayer();
-		// match.handlePeriodsAndTurns();
-//		startMatch();
-		// startMatch(); non parte qui ma dopo aver scartato i familiari
 
-		// provaLeaderPlayer();
+	}
+
+	private void initExistingMatch(int id) throws FileNotFoundException, ClassNotFoundException, IOException {
+
+		match = MatchSaver.readMatch(id);
+
+		commandHandler = new ServerCommandHandler(this, match);
 	}
 
 	/**
 	 * Communicate colors.
 	 */
 	private void communicateColors() {
+
+		if (satanIsPresent)
+			try {
+
+				fifthPlayerClient.sendCommand(new AssignColorCommand(match.getSatan().getColor()));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
 		for (ClientHandler c : clients) {
 			String color = null;
 			try {
 				color = this.getRightPlayer(c).getColor();
+				System.out.println("player color:" + color);
 			} catch (WrongClientHandlerException e) {
 				e.printStackTrace();
 			}
@@ -214,13 +244,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void startLeaderDiscardPhase() {
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
-		// System.out.println("matchhandler: lunghezza leadersets" +
-		// leaderSets.size());
-
 		for (int i = 0; i < clients.size(); i++) {
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
-			// System.out.println("matchHH : creato comando da
-			// inv"+leaderSets.get(i).get(0).toString());
 		}
 
 	}
@@ -232,14 +257,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 
 	private void startMatch() {
-		sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
+
+		if (satanIsPresent)
+			sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length + 1));
+		else
+			sendToAllPlayers(new InitializeMatchCommand(match.getPlayers().length));
 		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
-		
+
 		sendToAllPlayers(new AskAuthenticationCommand());
-		
-		// startTurn();
-		// notifyCurrentPlayer(new CommandAskMove());
-		// createTurnTimer();
+
+		this.startTime = System.currentTimeMillis();
+
 	}
 
 	/**
@@ -264,6 +292,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			i++;
 		}
 
+		if (satanIsPresent) {
+			fifthPlayerClient.addCommandObserver(commandHandler);
+			System.out.println("ho eseguito la add observer");
+			fifthPlayerClient.addObserver(this);
+		}
+
 		match.setPlayerOrder();
 	}
 
@@ -272,30 +306,28 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
-		// Map<Player, Boolean> winners = match.checkWinners();
-		// if (winners.isEmpty() && !clients.isEmpty()) {
+
+		deactivateLeaderCards();
+
 		try {
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
 			closeMatch();
 			e.printStackTrace();
 		}
-
-		// } else if (!winners.isEmpty() && !clients.isEmpty())
-		// notifyEndOfGame(winners);
 	}
 
 	/**
 	 * Start turn.
 	 */
 	private void startTurn() {
-		// sendToCurrentPlayer(new StartTurnCommand());
+
+		updateGamePlayTimeForEveryone();
 
 		match.handlePeriodsAndTurns();
 		if (match.getTurn() == 7) {
 			handleEndGame();
 		} else {
-			// match.incrementTurn();
 
 			initTurn();
 
@@ -309,8 +341,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			// resources into
 
 			startRound();
-			// notifyCurrentPlayer(new CommandAskMove());
-			// createTurnTimer();
 		}
 
 	}
@@ -321,7 +351,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initTurn() {
 		refreshPlayerOrder();
 		roundNumber = 0;
-		// System.out.println("rollo i dadi");
 
 		match.clearBoard();
 
@@ -331,7 +360,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		this.match.getBoard().changeCardInTowers();
 
-		// TODO ripulire il board dai family members
 	}
 
 	/**
@@ -353,14 +381,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            to be notified
 	 */
 	public void sendToAllPlayers(ServerToClientCommand command) {
+
+		if (satanIsPresent)
+			try {
+				fifthPlayerClient.sendCommand(command);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
 		for (ClientHandler client : clients) {
 			try {
 				client.sendCommand(command);
 			} catch (Exception e) {
-				closedClients.add(client);
+				this.removeClient(client);
 			}
 		}
-		// checkDisconnection();
 	}
 
 	/**
@@ -370,6 +405,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the command
 	 */
 	public void sendToAllPlayersExceptCurrent(ServerToClientCommand command) {
+
+		if (satanIsPresent)
+			try {
+				fifthPlayerClient.sendCommand(command);
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+
 		ClientHandler dontSendClient;
 		try {
 			dontSendClient = this.getRightClientHandler(match.getCurrentPlayer());
@@ -382,11 +425,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				try {
 					client.sendCommand(command);
 				} catch (Exception e) {
-					closedClients.add(client);
+					this.removeClient(client);
 				}
 			}
 		}
-		// checkDisconnection();
 	}
 
 	/**
@@ -402,8 +444,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		try {
 			client = getRightClientHandler(player);
 		} catch (WrongPlayerException e1) {
-			System.out.println(e1.getError());
-			e1.printStackTrace();
+			// System.out.println(e1.getError());
+			// e1.printStackTrace();
 			return;
 		}
 
@@ -411,10 +453,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			client.sendCommand(command);
 			lastCommandSent = command;
 		} catch (Exception e) {
-			closedClients.add(client);
+			this.removeClient(client);
 		}
 
-		// checkDisconnection();
 	}
 
 	/**
@@ -425,29 +466,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public void sendToCurrentPlayer(ServerToClientCommand command) {
 		sendToPlayer(command, match.getCurrentPlayer());
-		// checkDisconnection();
 	}
 
 	/**
-	 * method invoked by the ping timer to check if the current player is always
-	 * on.
-	 */
-	// @Override
-	// public void turnTimerExpired() {
-	// List<ClientHandler> list = new ArrayList<ClientHandler>(clients);
-	// for (ClientHandler clientHandler : list)
-	// if (clientHandler.getPlayer().equals(getCurrentPlayer())) {
-	// closedClients.add(clientHandler);
-	// try {
-	// clientHandler.sendCommand(new CommandDisconnection());
-	// } catch (Exception e) {
-	// }
-	// }
-	// removeClosedClients();
-	// }
-
-	/**
-	 * method to make the ping timer start
+	 * Starting the round timer thread
 	 */
 	public void startRoundTimer() {
 		BufferedReader reader = null;
@@ -465,28 +487,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("\n\n Marchhandler: new thread for roundtimer\n\n");
+
 		roundTimerThread = new Thread(new RoundTimer(this, timeMillis));
 		roundTimerThread.start();
-	}
-
-	/**
-	 * method to interrupt the turn timer if it is alive.
-	 */
-
-	private void checkDisconnection() {
-		// if (!closedClients.isEmpty())
-		// removeClosedClients();
 	}
 
 	/**
 	 * close the match and all its connection with client.
 	 */
 	public synchronized void closeMatch() {
-		// timerNotNeed();
 		if (!clients.isEmpty()) {
 			for (ClientHandler clientHandler : clients) {
-				// clients.remove(clientHandler);
 				try {
 					clientHandler.closedByServer();
 				} catch (RemoteException e) {
@@ -524,14 +535,116 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
-		try {
-			this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
-		} catch (MatchFullException e) {
-			System.out.println("Disconnected more players than the ones in the game");
-			e.printStackTrace();
-		} catch (WrongClientHandlerException e) {
-			e.printStackTrace();
+
+		if (!closedClients.contains(clientHandler)) {
+
+			updateGamePlayTime(clientHandler.getPlayer().getColor());
+			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
+
+			closedClients.add(clientHandler);
+
+			try {
+				addDisconnectedUser(getRightPlayer(clientHandler).getName());
+			} catch (WrongClientHandlerException e2) {
+				e2.printStackTrace();
+			}
+
+			try {
+				sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
+			} catch (WrongClientHandlerException e1) {
+				e1.printStackTrace();
+			}
+
+			try {
+				this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
+			} catch (MatchFullException e) {
+				// System.out.println("Disconnected more players than the ones
+				// in the game");
+				// e.printStackTrace();
+			} catch (WrongClientHandlerException e) {
+				// e.printStackTrace();
+			}
+
 		}
+	}
+
+	private void addDisconnectedUser(String userName) {
+		User u = getUserFromName(userName);
+		if (u != null)
+			disconnectedUsers.add(u);
+
+	}
+
+	private User getUserFromName(String name) {
+		for (User u : users) {
+			if (u.getUsername().equals(name))
+				return u;
+		}
+		return null;
+
+	}
+
+	public void reconnectClient(ClientHandler clientHandler, User user) {
+		if (isUserInTheGameAndDisconnected(user)) {
+			Player p = match.getPlayerFromName(user.getUsername());
+
+			if (p != null) {
+				disconnectedUsers.remove(user);
+				closedClients.remove(clientHandler);
+				clientHandler.addPlayer(p);
+				this.match.reconnectPlayer(p);
+			} else {
+				System.out.println("getplayerfromname returned NULL");
+			}
+		}
+
+	}
+
+	private boolean isUserInTheGameAndDisconnected(User user) {
+		if (!users.contains(user))
+			return false;
+		if (!disconnectedUsers.contains(user))
+			return false;
+
+		return true;
+	}
+
+	private void updateGamePlayTimeForEveryone() {
+		for (int i = 0; i < match.getPlayers().length; i++) {
+			updateGamePlayTime(match.getPlayers()[i].getColor());
+		}
+	}
+
+	/**
+	 * Updates the gameplay time for the disconnected player
+	 * 
+	 * @param color
+	 */
+	private void updateGamePlayTime(String color) {
+
+		long currentTime = System.currentTimeMillis();
+		int elapsedTime = (int) ((currentTime - startTime) / 1000);
+
+		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
+
+		this.runUpdateFileThread();
+
+	}
+
+	private void runUpdateFileThread() {
+		// new Thread( new Runnable() {
+		// @Override
+		// public void run() {
+		// }
+		// }).start();
+
+		Executors.newSingleThreadExecutor().execute(new Runnable() {
+			@Override
+			public void run() {
+				UsersCreator.updateFile(users);
+			}
+		});
+
 	}
 
 	/**
@@ -575,9 +688,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			sendToCurrentPlayer(new AskFinishRoundOrDiscardCommand());
 		}
 
-		// TODO MANDARE comando per scegliere terminare turno o scartare
-		// leadercards
-
 	}
 
 	/**
@@ -593,18 +703,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void applyAction(List<Integer> choices, IndustrialAction industrialAction) throws NotApplicableException {
 		industrialAction.apply(choices);
 	}
-
-	// @Override
-	// public void notifyPlayerStatusChange(Player player) {
-	// System.out.println("matchhandler: notifyplayer status change");
-	//
-	// Player currentPlayer = match.getCurrentPlayer();
-	// if (player == currentPlayer) {
-	// this.sendToCurrentPlayer(new PlayerStatusChangeCommand(player));
-	// this.sendToAllPlayers(new
-	// OpponentStatusChangeCommand(player.maskedClone()));
-	// }
-	// }
 
 	/*
 	 * (non-Javadoc)
@@ -624,34 +722,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		this.sendToAllPlayers(new OpponentStatusChangeCommand(player.maskedClone()));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * it.polimi.ingsw.ps19.server.observers.MatchObserver#notifyFamilyPlaced()
-	 */
-	@Override
-	public void notifyFamilyPlaced() {
-
-	}
-
 	/**
 	 * Round timer expired.
 	 */
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
+
 		try {
-			closedClients.add(getRightClientHandler(getCurrentPlayer()));
-		} catch (WrongPlayerException e) {
-			System.out.println(e.getError());
-			e.printStackTrace();
+			this.removeClient(getRightClientHandler(getCurrentPlayer()));
+		} catch (WrongPlayerException e1) {
+			e1.printStackTrace();
 		}
-		try {
-			this.match.addDisconnectedPlayer(getCurrentPlayer());
-		} catch (MatchFullException e) {
-			e.printStackTrace();
-		}
+
 		if (match.isAnyoneStillPlaying()) {
+			System.out.println("qualcuno sta ancora giocando");
 			setNext();
 			nextStep();
 		} else {
@@ -663,14 +747,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Next step.
 	 */
 	private void nextStep() {
+
+		if (satanIsPresent && (roundNumber % 4 == 0))
+			sendToClientHandler(new AskSatanMoveCommand(), fifthPlayerClient);
+
 		if ((roundNumber == match.getPlayers().length * 4) || currentPlayerWithoutFamilyMembers()) {
-			System.out.println("roundNumber= " + roundNumber + "\n cambio turno");
 			if (match.getTurn() % 2 == 1) {
-				System.out.println(match.getTurn() + "ho fatto modulo due");
 				startTurn();
 			} else {
 				startExcommunicationPhase();
-				System.out.println("sono nell'else di modulo due, inizia l'excommphase" + match.getTurn());
 			}
 		} else
 			startRound();
@@ -744,7 +829,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			clientHandler.sendCommand(command);
 		} catch (IOException e) {
 			e.printStackTrace();
-			closedClients.add(clientHandler);
+			this.removeClient(clientHandler);
 		}
 	}
 
@@ -776,14 +861,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
-			// System.out.println("matchhandler: getplayerfromcolor: p" +
-			// "layer.getcolor:" + players[i].getColor()
-			// + "playerColor:" + playerColor);
+			System.out.println(playerColor + "/n this is the player" + players[i].getColor());
 			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
-		// System.out.println("matchhandler: getplayerfromcolor: sto ritornando
-		// null");
+		System.out.println("adesso ritorno null porco diiiiii");
 		return null;
 	}
 
@@ -796,13 +878,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the player color
 	 */
 	public void handleLeaderChoice(String name, String playerColor) {
-		System.out.println("matchhandler: sono in handleleaderchoice");
 		leaderResponseCounter++;
 		try {
-			// System.out.println("matchhandler: cerco di aggiungere la carta di
-			// nome:");
-			// System.out.println("matchhandler: handleleaderchoice:
-			// leadername:" + name + "playercolor: " + playerColor);
 
 			this.getPlayerFromColor(playerColor).addLeaderCards(match.getLeaderCards().getCard(name));
 
@@ -810,19 +887,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// System.out.println("matchhandler: leaderresponsecounter=" +
-		// leaderResponseCounter);
-		// System.out.println("matchhandler: giocatori:=" +
-		// match.getPlayers().length);
 		if (leaderResponseCounter == match.getPlayers().length) {
-			// System.out.println("matchhandler: entro nell'if di quando tutti e
-			// quattro hanno scelto");
 
 			leaderResponseCounter = 0;
 			for (int i = 0; i < clients.size(); i++) {
 				if (cycle == 3) {
-					// System.out.println("matchhandler: sono nell'if perchè
-					// cycle ="+cycle);
 					try {
 						this.getRightPlayer(clients.get((i + cycle) % (match.getPlayers().length)))
 								.addLeaderCards(leaderSets.get(i).get(0));
@@ -830,8 +899,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 						e.printStackTrace();
 					}
 				} else {
-					// System.out.println("matchhandler: sono nell'else perchè
-					// cycle ="+cycle);
 					if (i >= match.getPlayers().length - cycle) {
 						sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)),
 								clients.get((i + cycle) % (match.getPlayers().length)));
@@ -842,7 +909,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 			cycle++;
 			if (cycle == 4)
-				// startMatch();
 				startTurn();
 		}
 
@@ -855,7 +921,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the leader card
 	 */
 	private void removeLeaderFromSets(LeaderCard leaderCard) {
-		// System.out.println("matchhandler: sono in remove leadercard");
 		for (ArrayList<LeaderCard> set : leaderSets) {
 			for (LeaderCard card : set) {
 				if (leaderCard == card) {
@@ -890,7 +955,25 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 		}
-		System.out.println(rank.toString());
+		if (this.satanIsPresent) {
+			int satanVictoryPoints = match.getSatan().getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT)
+					.getAmount();
+			if (calculatePlayerPoints(rank[0]) < satanVictoryPoints) {
+				sendToPlayer(new WinCommand(), match.getSatan());
+				for (Player p : rank) {
+					sendToPlayer(new LoseCommand(), p);
+
+				}
+			} else {
+				sendToPlayer(new WinCommand(), rank[0]);
+				sendToPlayer(new LoseCommand(), match.getSatan());
+				for (Player p : rank) {
+					if (p != rank[0]) {
+						sendToPlayer(new LoseCommand(), p);
+					}
+				}
+			}
+		}
 		sendToPlayer(new WinCommand(), rank[0]);
 		for (Player p : rank) {
 			if (p != rank[0]) {
@@ -1174,17 +1257,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		ArrayList<FamilyMember> councilMemberList = match.getBoard().getCouncilPalace().getMembers();
 
-		System.out.println(councilMemberList.toString());
-
 		ArrayList<Player> councilPlayers = new ArrayList<Player>();
-		System.out.println("sono nella refresh player order");
 
 		if (!councilMemberList.isEmpty()) {
-			System.out.println("sono nell if della refresh player");
 			for (int i = 0; i < councilMemberList.size(); i++) {
 				councilPlayers.add(councilMemberList.get(i).getPlayer());
 			}
-			System.out.println("ho ricavato i player che hanno giocato nel council palace");
 			for (int i = 0; i < councilPlayers.size(); i++) {
 				for (int j = 0; j < councilPlayers.size(); j++) {
 					if (i != j && councilPlayers.get(i) == councilPlayers.get(j)) {
@@ -1192,23 +1270,17 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 					}
 				}
 			}
-			System.out.println("ho rimosso i duplicati");
 			for (int i = 0; i < oldList.length; i++) {
 				if (!councilPlayers.contains(oldList[i])) {
 					councilPlayers.add(oldList[i]);
 				}
 			}
-			System.out.println("ho aggiunto chi non ha giocato nel councilPalace");
 			Player[] newList = new Player[oldList.length];
 			for (int i = 0; i < councilPlayers.size(); i++) {
 				newList[i] = councilPlayers.get(i);
 			}
 
 			match.setPlayers(newList);
-
-			System.out.println("questo è il nuovo ordine");
-			for (int i = 0; i < councilPlayers.size(); i++)
-				System.out.println(newList[i].toString() + "\n");
 		}
 
 	}
@@ -1233,28 +1305,20 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void handleChurchSupportDecision(String playerColor, boolean decision) {
 		numPlayersAnsweredExcomm++;
 		if (decision) {
-			System.out.println("Non ho scomunicato il giocatore" + playerColor);
-			this.getPlayerFromColor(playerColor).payFaithPoint();
-			ResourceChest rc = new ResourceChest();
-			rc.addResource(match.getChurchSupportPrizeInPeriod());
-			this.getPlayerFromColor(playerColor).addResources(rc);
-		} else {
-			System.out.println("Scomunico il giocatore" + playerColor);
-			ExcommunicationTile tile;
-			tile = this.getCurrentExcommTile();
-			tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
-			System.out.println("Ho scomunicato il giocatore" + playerColor);
 
-			if (match.getPeriod() == Period.FIRST)
-				this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
-			else if (match.getPeriod() == Period.SECOND) {
-				this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
-			} else if (match.getPeriod() == Period.SECOND) {
-				this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
+			if (match.getPeriod().ordinal() + 2 <= getPlayerFromColor(playerColor).getResourceChest()
+					.getResourceInChest(ResourceType.FAITHPOINT).getAmount()) {
+
+				this.getPlayerFromColor(playerColor).payFaithPoint();
+				ResourceChest rc = new ResourceChest();
+				rc.addResource(match.getChurchSupportPrizeInPeriod());
+				this.getPlayerFromColor(playerColor).addResources(rc);
+			} else {
+				excommunicatePlayer(playerColor);
 			}
 
-			this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
-			System.out.println("matchHandler: excommunicationCommandSent");
+		} else {
+			excommunicatePlayer(playerColor);
 		}
 
 		if (numPlayersAnsweredExcomm == this.match.getPlayers().length) {
@@ -1262,6 +1326,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			startTurn();
 		}
 
+	}
+
+	private void excommunicatePlayer(String playerColor) {
+		ExcommunicationTile tile;
+		tile = this.getCurrentExcommTile();
+		tile.getEffect().applyEffect(getPlayerFromColor(playerColor));
+
+		if (match.getPeriod() == Period.FIRST)
+			this.getPlayerFromColor(playerColor).setExcommunicatedFirst(true);
+		else if (match.getPeriod() == Period.SECOND) {
+			this.getPlayerFromColor(playerColor).setExcommunicatedSecond(true);
+		} else if (match.getPeriod() == Period.SECOND) {
+			this.getPlayerFromColor(playerColor).setExcommunicatedThird(true);
+		}
+
+		this.sendToPlayer(new NotifyExcommunicationCommand(), this.getPlayerFromColor(playerColor));
 	}
 
 	/**
@@ -1354,10 +1434,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public void clientClosedTheGame(String playerColor) {
 		try {
-			match.addDisconnectedPlayer(getPlayerFromColor(playerColor));
-		} catch (MatchFullException e) {
+			this.removeClient(getRightClientHandler(getPlayerFromColor(playerColor)));
+		} catch (WrongPlayerException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public boolean isLeaderCardActivable(String leaderName) {
@@ -1393,7 +1474,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleAuthenticationRequest(String username, String password, String playerColor) {
-
 		
 		if(getUserOrCreateOne(username,password,playerColor)){
 			this.authenticatedCorrectly++;
@@ -1405,39 +1485,71 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}	
 		if(authenticatedCorrectly==this.match.getPlayers().length)
 			startLeaderDiscardPhase();
-		
-		
+
 	}
-	
 
 	/**
 	 * 
-	 * @param username of the player that requested the authentication
-	 * @param password of the player that requested the authentication
+	 * @param username
+	 *            of the player that requested the authentication
+	 * @param password
+	 *            of the player that requested the authentication
 	 * @return true if the password is correct or a new player has been created
 	 *         successfully (and there was no other player with the same
 	 *         username), false otherwise
 	 */
-	private boolean getUserOrCreateOne(String username, String password,String playerColor) {
+	private boolean getUserOrCreateOne(String username, String password, String playerColor) {
+
+		// using functional programming with streams of Users to get the user
+		// from the username, if it exists
 		final Optional<User> user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 
 		if (user.isPresent()) {
-			System.out.println("user was in the list");
-			if (user.get().correctPassword(password)){
+			if (user.get().correctPassword(password)) {
 				user.get().incrementMatches();
-				UsersCreator.updateFile(users);
-				userFromColor.put(playerColor,user.get());
+
+				this.runUpdateFileThread();
+
+				userFromColor.put(playerColor, user.get());
 				return true;
-			}
-			else return false;
+			} else
+				return false;
 		} else {
-			System.out.println("user was not in the list");
-			User newUser=new User(username,password);
+			User newUser = new User(username, password);
 			this.users.add(newUser);
-			userFromColor.put(playerColor,newUser);	
-			UsersCreator.updateFile(users);
+			userFromColor.put(playerColor, newUser);
+
 			return true;
 		}
+
+	}
+
+	public void handleSatanChoice(String color) {
+
+		Random r = new Random();
+		int amount = r.nextInt(3) + 3;
+		// Effect instant=new InstantResourcesEffect(new
+		// ResourceChest(0,0,0,0,0,-amount,0));
+
+		System.out.println(color);
+		System.out.println("\n" + getPlayerFromColor(color).toString());
+
+		int newRes = getPlayerFromColor(color).getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT)
+				.getAmount();
+
+		System.out.println(newRes);
+		newRes = newRes - amount;
+		if (newRes < 0)
+			newRes = 0;
+
+		getPlayerFromColor(color).getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).setAmount(newRes);
+
+		// instant.applyEffect(getPlayerFromColor(color));
+
+		System.out.println("\nhandling satan choice: chosen player:" + color);
+		sendToAllPlayers(new NotifySatanActionCommand(color));
+
+		notifyPlayerStatusChange(getPlayerFromColor(color));
 
 	}
 

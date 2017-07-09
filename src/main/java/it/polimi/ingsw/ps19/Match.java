@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +15,6 @@ import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.LeaderDeck;
-import it.polimi.ingsw.ps19.model.effect.ResourcesExchangeEffect;
-import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
@@ -26,7 +25,12 @@ import it.polimi.ingsw.ps19.server.observers.MatchObserver;
  *
  * @author Mirko
  */
-public class Match {
+public class Match implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4611746373897593079L;
 
 	/** The Constant roundResourceSupply. */
 	private static final ResourceChest roundResourceSupply = new ResourceChest(0, 2, 2, 3, 0, 0, 0);
@@ -37,15 +41,14 @@ public class Match {
 	/** The players. */
 	// private List<Player> players;
 	private Player[] players;
-	
-	/** The disconnected players. */
-	private Player[] disconnectedPlayers;
-	
 	/** The added players. */
 	private int addedPlayers;
 	
-	/** The added disconnected players. */
-	private int addedDisconnectedPlayers;
+	private Player satan;
+	
+	
+	private ArrayList<Player> disconnectedPlayers;
+	
 	
 	/** The current player. */
 	private int currentPlayer = 0;
@@ -54,7 +57,7 @@ public class Match {
 	private boolean matchFinished;
 	
 	/** The observer. */
-	private MatchObserver observer;
+	private transient MatchObserver observer;
 	
 	/** The playercolors. */
 	private String[] playercolors;
@@ -88,7 +91,7 @@ public class Match {
 		}
 		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
-		disconnectedPlayers=new Player[numPlayers];
+		disconnectedPlayers=new ArrayList<Player>();
 //		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
 
 		playercolors = new String[numPlayers];
@@ -151,14 +154,18 @@ public class Match {
 		
 		System.out.println("\nmatch, adddisconnectedPlayer");
 			
-		if (addedDisconnectedPlayers == players.length)
+		if (disconnectedPlayers.size() == players.length)
 			throw new MatchFullException();
 		else {
-			this.disconnectedPlayers[addedDisconnectedPlayers] = p;
-			addedDisconnectedPlayers++;
+			this.disconnectedPlayers.add(p);
 		}
 		}
 		
+	}
+	
+	public void reconnectPlayer(Player p){
+		disconnectedPlayers.remove(p);
+	
 	}
 
 	/**
@@ -168,11 +175,13 @@ public class Match {
 	 * @return true, if is disconnected
 	 */
 	private boolean isDisconnected(Player p) {
-		for(int i=0;i<disconnectedPlayers.length;i++){
-			if(p==disconnectedPlayers[i])
-				return true;
-		}
-		return false;
+		
+		return this.disconnectedPlayers.contains(p);
+//		for(int i=0;i<disconnectedPlayers.length;i++){
+//			if(p==disconnectedPlayers[i])
+//				return true;
+//		}
+//		return false;
 	}
 
 	/**
@@ -445,7 +454,7 @@ public class Match {
 	 */
 	public void setNextPlayer() throws EveryPlayerDisconnectedException {
 		
-		if(players.length==addedDisconnectedPlayers){
+		if(players.length==disconnectedPlayers.size()){
 			matchFinished=true;
 			throw new EveryPlayerDisconnectedException();
 		}
@@ -466,13 +475,19 @@ public class Match {
 	 * @return true, if is disconnected
 	 */
 	private boolean isDisconnected(int currentPlayer) {
-		for(int i=0;i<disconnectedPlayers.length;i++){
-			if(players[currentPlayer]==disconnectedPlayers[i]){
-				System.out.println("MATCH: player is disconnected, setting nextplayer");
-				return true;
-			}
-		}
-		return false;
+		
+		return this.disconnectedPlayers.contains(players[currentPlayer]);
+//		for(int i=0;i<disconnectedPlayers.length;i++){
+//			if(players[currentPlayer]==disconnectedPlayers[i]){
+//				System.out.println("MATCH: player is disconnected, setting nextplayer");
+//				return true;
+//			}
+//		}
+//		return false;
+	}
+	
+	public Player getSatan(){
+		return this.satan;
 	}
 
 	/**
@@ -548,5 +563,20 @@ public class Match {
 	public boolean isAnyoneStillPlaying() {
 		return !matchFinished;
 	}
+
+	public Player getPlayerFromName(String name) {
+		for(int i=0;i<players.length;i++){
+			if(players[i].getName().equals(name))
+				return players[i];
+		}
+		return null;
+	}
+
+	public void createSatan() {
+		this.satan=new Player("Satan","black");
+		satan.getResourceChest().addResource(new VictoryPoint(99));
+		
+	}
+	
 
 }

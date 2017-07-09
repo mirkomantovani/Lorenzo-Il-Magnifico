@@ -16,7 +16,7 @@ public interface MatchHandlerObserver {
 	/**
 	 * this method will check and allow the application of a command sent by a specific player.
 	 *
-	 * @param player            : the player the will use the command
+	 * @param player            : the player who has sent the command
 	 * @return true if it is allowed false otherwise
 	 */
 	boolean isAllowed(Player player);

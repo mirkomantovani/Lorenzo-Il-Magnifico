@@ -186,8 +186,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_NAME:
 			actionConstructor.add(input);
 			print("Insert your password: ");
-			readerState=ClientConstants.SEND_PASSWORD;
-			break;
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:
 			gameController.notifyChosenLeaderCard(input);
 			break;
@@ -540,6 +538,24 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	@Override
 	public void displayWrongPasswordMessage(String username) {
 		print("Wrong password!");
+	}
+
+	@Override
+	public void displayPlayerDisconnected(String color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displaySatanAction(String color) {
+		
+		
+	}
+
+	@Override
+	public void askSatanMove() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

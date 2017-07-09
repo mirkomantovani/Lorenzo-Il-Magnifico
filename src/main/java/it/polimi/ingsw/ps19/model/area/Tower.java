@@ -72,7 +72,6 @@ public class Tower implements Serializable {
  	 * 
  	 */
  	public void changeCards(){
- 		System.out.println("tower: change cards");
  		for(int i=0; i < deck.length()/6; i++){
  			floors.get(i).setCard(deck.getCard(currentCard)); 
  			currentCard++;

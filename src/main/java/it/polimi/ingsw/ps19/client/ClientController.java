@@ -18,6 +18,7 @@ import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.model.card.CardType;
@@ -316,6 +317,10 @@ public class ClientController implements InputObserver {
 	public void notifyAuthenticationRequest(String username, String password) {
 		sendCommand(new SendCredentialsCommand(username, password, playerColor));
 		
+	}
+
+	public void notifySatanChoice(String playerColor) {
+		sendCommand(new SatanChoiceCommand(playerColor));
 	}
 
 }

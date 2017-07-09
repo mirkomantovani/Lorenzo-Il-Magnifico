@@ -23,7 +23,9 @@ import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
@@ -64,14 +66,6 @@ public class ServerCommandHandler implements CommandObserver {
 		System.out.println("Server command handler: sono stato creato");
 	}
 
-	/**
-	 * Gets the current player.
-	 *
-	 * @return the current player
-	 */
-	private Player getCurrentPlayer() {
-		return match.getCurrentPlayer();
-	}
 
 	/**
 	 * Apply command.
@@ -242,10 +236,12 @@ public class ServerCommandHandler implements CommandObserver {
 	 */
 	public void applyCommand(ActivateLeaderCardCommand activateLeaderCardCommand) throws NotApplicableException {
 		if(handler.getCurrentPlayer().getLeaderCards().containsKey(activateLeaderCardCommand.getLeaderName())
-				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName()))
+				&& handler.isLeaderCardActivable(activateLeaderCardCommand.getLeaderName())){
 			handler.getCurrentPlayer().activateLeaderCard(activateLeaderCardCommand.getLeaderName());
+			handler.sendToCurrentPlayer(new AskMoveCommand());
+		}
 		else {
-			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader card or the requirements to activate it!"));
+			handler.sendToCurrentPlayer(new InvalidActionCommand("You don't have that leader requirements to activate it!"));
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
 			
@@ -369,6 +365,23 @@ public class ServerCommandHandler implements CommandObserver {
 		}
 
 	}
+
+
+	public void applyCommand(SatanChoiceCommand satanChoice) {
+		System.out.println("Received satanChoiceCommand pre handle");
+		handler.handleSatanChoice(satanChoice.getColor());
+		System.out.println("Received satanChoiceCommand");
+		
+	}
+
+
+	public void applyCommand(ReconnectionAnswerCommand reconnectionAnswerCommand) {
+		
+		
+	}
+
+
+	
 
 	
 	

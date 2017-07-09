@@ -43,7 +43,7 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 
 					frame.removeInitialImage();
-					GamePanel gameP = new GamePanel("red",2);
+					GamePanel gameP = new GamePanel("black",2);
 					frame.setContentPane(gameP);
 					// frame.getGamePanel().addCard();
 

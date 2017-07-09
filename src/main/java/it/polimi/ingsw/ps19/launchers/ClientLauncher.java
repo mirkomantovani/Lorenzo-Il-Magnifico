@@ -59,17 +59,19 @@ public class ClientLauncher {
 		controller.setUserInterface(userInterface);
 		controller.setCommandHandler(handler);
 		
+
+		
 		try {
-			System.out.println("I'm trying to connect");
+		
 			networkInterface.connect();
-			System.out.println("Client Connected");
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("YOU SHOULD NOT BE HERE");
 			e.printStackTrace();
 		}
 		
-		System.out.println("client: addcommandobserver");
+	
 		networkInterface.addCommandObserver(handler);
 	
 		

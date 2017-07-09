@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;
@@ -39,6 +40,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	
 	/** The excommunication cube needed. */
 	private boolean excommunicationCubeNeeded;
+	
+	private boolean isSatan;
 
 	/**
 	 * Instantiates a new graphical user interface.
@@ -62,8 +65,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 * Adds the listeners.
 	 */
 	public void addListeners() {
+		
 		frame.getGamePanel().getSendChat().addActionListener(this);
 		frame.getGamePanel().getShowPersonalBoard().addActionListener(this);
+		
 	}
 
 	/* (non-Javadoc)
@@ -73,7 +78,11 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeMatch(int numPlayers) {
 		frame.removeInitialImage();
 		frame.initializeGameFrame(numPlayers);
+		if(!isSatan){
 		this.addListeners();
+		}
+		
+		
 		frame.getGamePanel().setObserver(this);
 		frame.pack(); // ?
 		frame.repaint(); // ?
@@ -111,6 +120,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void playerStatusChange(Player p) {
+		
 		
 		if(excommunicationCubeNeeded){
 			frame.getGamePanel().addExcommunicationCubes(p);
@@ -193,9 +203,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		writeGameMessage("A new turn is starting, Period:" + period.toString() + " Turn:" + turn);
 		FamilyMemberPawn.councilCounter = 0;
 		frame.getGamePanel().removeCards();
-		System.out.println("sono in initialize ho azzerato council");
 		frame.getGamePanel().resetFamiliars();
-		System.out.println("ho chiamato la reset da initialize");
 	}
 
 	/* (non-Javadoc)
@@ -263,7 +271,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void opponentStatusChanged(Player maskedPlayer) {
 		frame.getGamePanel().addExcommunicationCubes(maskedPlayer);
 		frame.getGamePanel().setPointsMarkers(maskedPlayer);
-		System.out.println("sono in opponent status change");
 		frame.getGamePanel().repaintBoard();
 
 	}
@@ -311,6 +318,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void assignColor(String color) {
+		if(color.equals("black"))
+			isSatan=true;
+			
 		gameController.setPlayerColor(color);
 		frame.setPlayerColor(color);
 
@@ -337,6 +347,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		writeGameMessage("You have " + numberOfPrivilege + " council privileges to "
 				+ "choose, click on the resource you would like to get");
 		frame.showPrivilegeChoice();
+		frame.getGamePanel().setCurrentNumberOfPrivilege(numberOfPrivilege);
 	}
 
 	/* (non-Javadoc)
@@ -344,8 +355,10 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void askNameAndPassword() {
+		if(!isSatan){
 		writeGameMessage("Insert Name and Password to Login or Signup");
 		frame.getGamePanel().showAskAuthentication();
+		}
 
 	}
 
@@ -389,7 +402,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(" GUI: Sono nell'action performed");
 		if (e.getSource() == frame.getGamePanel().getSendChat()) {
 			String message;
 			message = frame.getGamePanel().getAndDeleteChatInput();
@@ -445,9 +457,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 * @param actionConstructor the action constructor
 	 */
 	public void notifyMarketAction(ArrayList<String> actionConstructor) {
-		System.out.println("\nmarket action: actionconstructor:"+actionConstructor.get(0)+
-				" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
-				" "+actionConstructor.get(3));
 		gameController.notifyMarket(actionConstructor);
 	}
 
@@ -547,6 +556,31 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void displayWrongPasswordMessage(String username) {
 		writeGameMessage("The password you inserted did not correspond to the one of the player: "+username+" , please try again");
 		frame.getGamePanel().showAskAuthentication();
+	}
+
+	@Override
+	public void displayPlayerDisconnected(String color) {
+		writeGameMessage("The "+color+" player has disconnected from the game!");
+	}
+
+	@Override
+	public void displaySatanAction(String color) {
+		writeGameMessage("Satan has punished the " + color + " player!" );
+		
+	}
+
+	@Override
+	public void askSatanMove() {
+		writeGameMessage("Satan: decide the player you want to punish "
+				+ "subtracting him some pseudo-random victory points, I'll remind you"
+				+ " that you should choose the player who's winning in order not to"
+				+ " make him prevail over you");
+		frame.getGamePanel().showSatanPanel();
+		
+	}
+
+	public void notifySatanChoice(String playerColor) {
+		gameController.notifySatanChoice(playerColor);
 	}
 
 }
