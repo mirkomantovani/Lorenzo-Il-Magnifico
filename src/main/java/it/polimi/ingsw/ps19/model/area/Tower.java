@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
+import it.polimi.ingsw.ps19.model.effect.NoEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -71,7 +72,6 @@ public class Tower implements Serializable {
  	 * 
  	 */
  	public void changeCards(){
- 		System.out.println("tower: change cards");
  		for(int i=0; i < deck.length()/6; i++){
  			floors.get(i).setCard(deck.getCard(currentCard)); 
  			currentCard++;
@@ -116,23 +116,66 @@ public class Tower implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+//	@Override
+//	public String toString() {
+//		StringBuilder string = new StringBuilder();
+//		string.append( this.cardType.toString().toUpperCase() + " tower : ");
+//				for(int i = 0; i < floors.size(); i++){
+//					if(this.getFloor(i).getCard() != null){
+//				string.append(" \n" + i + " floor: the Dice value required is " +
+//					this.getFloor(i).getActionSpace().getActionValueRequired()
+//						+ ".\nYou can take the card : "  + 
+//				 this.getFloor(i).getCard().toString());
+//
+//					} else string.append("\n" + i + "floor: ");
+//
+//					
+//
+//				}
+//		return string.toString();
+//	}
+	
+	
 	@Override
 	public String toString() {
-		StringBuilder string = new StringBuilder();
-		string.append( this.cardType.toString().toUpperCase() + " tower : ");
-				for(int i = 0; i < floors.size(); i++){
-					if(this.getFloor(i).getCard() != null){
-				string.append(" \n" + i + " floor: the Dice value required is " +
-					this.getFloor(i).getActionSpace().getActionValueRequired()
-						+ ".\nYou can take the card : "  + 
-				 this.getFloor(i).getCard().toString());
+		StringBuilder builder = new StringBuilder();
+		builder.append(cardType.toString().toUpperCase() + " CARDS:\n");
+		for(int i = 0; i<floors.size(); i++){
+			builder.append("\n********************\n");
+			switch(i){
+			case 0:
+				builder.append("First");
+				break;
+			case 1: 
+				builder.append("Second");
+				break;
+			case 2:
+				builder.append("Third");
+				break;
+			case 3:
+				builder.append("Fourth");
+				break;
+			case 4: 	//This case probably won't be used 
+				builder.append("Fifth");
+				break;
+			default:
+				builder.append("A");
+			}
 
-					} else string.append("\n" + i + "floor: ");
-
-					
-
-				}
-		return string.toString();
+			builder.append(" floor\nAction value required: " + getFloor(i).getActionSpace().getActionValueRequired());
+			if(getFloor(i).getActionSpace().getEffect()!=null);
+				builder.append("\nBonus:\n\t" + getFloor(i).getActionSpace().getEffect().toString());
+			builder.append("\nCard:\n\n");
+			if(getFloor(i).getCard()!=null)
+				builder.append(getFloor(i).getCard().toString());
+			else{
+				if(getFloor(i).getActionSpace().isOccupied())
+					builder.append("\tThis card has already been taken by player with color " + getFloor(i).getActionSpace().getFamilyMember().getPlayer().getColor());	
+			}
+			builder.append("\n********************\n\n");
+		}
+		builder.append("\n\n");
+		return builder.toString();
 	}
  	
 	

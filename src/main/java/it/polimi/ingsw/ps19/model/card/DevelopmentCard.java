@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps19.model.card;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
+import it.polimi.ingsw.ps19.model.resource.VentureCostResourceChest;
 
 /**
  * This class represents the abstract class of a generic Development Card.
@@ -62,8 +63,13 @@ public abstract class DevelopmentCard extends Card {
 	 *
 	 * @return the cost
 	 */
-	public ResourceChest getCost() {
+	public  ResourceChest getCost() {
 		return cost;
+	}
+	
+	public VentureCostResourceChest getVentureCost(){
+		return (VentureCostResourceChest) cost;
+		
 	}
 
 	
@@ -136,8 +142,7 @@ public abstract class DevelopmentCard extends Card {
 		 		string.append(cost.toString());
 		 	string.append("\nImmediate effect: ");
 		 	if(this.immediateEffect!=null)
-		 		string.append(immediateEffect.toString());
-		 		
+		 		string.append(immediateEffect.toString());	
 		 	return string.toString();
 		}
 	 

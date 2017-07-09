@@ -26,10 +26,10 @@ import it.polimi.ingsw.ps19.network.NetworkInterface;
 public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 
 	/** The name. */
-	private String name;
+	private String clientHandlerName;
 	
 	/** The second name. */
-	private String secondName;
+	private String clientName;
 	
 	/** The client handler registry. */
 	private Registry clientHandlerRegistry;
@@ -41,7 +41,7 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 	private ClientHandlerInterface clientHandler;
 	
 	/** The client. */
-	private ClientInterface client;   //to me, useless, but more readable?
+	private ClientInterface client; 
 	
 	/** The observer. */
 	private ServerToClientCommandObserver observer;
@@ -50,9 +50,9 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 	 * Instantiates a new client RMI interface.
 	 */
 	public ClientRMIInterface(){
-		this.name = "ClientHandler";
-		this.secondName = "Client";
-		this.client = this;          //to me, useless
+		this.clientHandlerName = "ClientHandler";
+		this.clientName = "Client";
+		this.client = this;          
 	}
 
 	/* (non-Javadoc)
@@ -65,21 +65,21 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 		clientHandlerRegistry = LocateRegistry
 				.getRegistry(NetworkConstants.RMICLIENTHANDLERPORT);
 //		System.out.println("Registry accessed");
-		clientHandler = (ClientHandlerInterface) clientHandlerRegistry.lookup(name); //Va a recuperare il clientHandler
+		clientHandler = (ClientHandlerInterface) clientHandlerRegistry.lookup(clientHandlerName); //Va a recuperare il clientHandler
 //		System.out.println("Got the remote ClientHandler");
-		ClientInterface stub = (ClientInterface) UnicastRemoteObject		//Esporta l'oggetto
-				.exportObject(client, 0);    //could have passed diectly this
+		ClientInterface clientStub = (ClientInterface) UnicastRemoteObject		//Esporta l'oggetto
+				.exportObject(client, 0);    //could have passed directly this
 //		System.out.println("Got the remote reference");
 
 		try {
 			clientRegistry = LocateRegistry.getRegistry(NetworkConstants.RMICLIENTPORT);
 //			System.out.println("Accessed client registry");
-			clientRegistry.rebind(secondName, stub);
+			clientRegistry.rebind(clientName, clientStub);
 //			System.out.println("Added this in the registry");
 		} catch (Exception e) {              //In questo caso non ci sarà il registro
 //			System.out.println("There is no registry at port: "+ NetworkConstants.RMICLIENTPORT + ", so i'm creating one");
 			clientRegistry = LocateRegistry.createRegistry(NetworkConstants.RMICLIENTPORT);  //Allora crea il registro su cui inserire il riferimento
-			clientRegistry.bind(secondName, stub);
+			clientRegistry.bind(clientName, clientStub);
 //			System.out.println("Created and client stub bound");
 		}
 		// the client handler will add the client to the server
@@ -115,7 +115,7 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 		try {
 			//In order to close the connection we must remove the client from the registry
 			//and free it.
-			clientRegistry.unbind(secondName);
+			clientRegistry.unbind(clientName);
 			clientRegistry = null;
 
 		} catch (NullPointerException | RemoteException | NotBoundException e) {

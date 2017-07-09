@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.polimi.ingsw.ps19.model.effect.CouncilPrivilegeEffect;
@@ -39,7 +39,7 @@ public class Market implements Serializable {
 		ResourceChest resourceSecondMarket = new ResourceChest(0,0,0,5,0,0,0);
 		ResourceChest resourceThirdMarket = new ResourceChest(2,0,0,0,0,0,3);
 		
-		market = new HashMap<String,SingleActionSpace>();
+		market = new LinkedHashMap<String,SingleActionSpace>();
 		
 		market.put("1",new SingleActionSpace(1,new InstantResourcesEffect(resourceFirstMarket)));
 		market.put("2", new SingleActionSpace(1, new InstantResourcesEffect(resourceSecondMarket)));
@@ -68,29 +68,21 @@ public class Market implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---- The Market ---- \n This is the market, by placing into this area you "
-				+ "should have a familar with a value of " + market.get("1").getActionValueRequired() +""
-				+ " and you'll gain "
-				+ "some resources: \n First market slot: ");
-		builder.append(market.get("1").getEffect().toString());
-		if(market.get("1").isOccupied())
-			builder.append(market.get("1").toString());
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°The Market°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		
-		builder.append("\n Second market slot: ");
-		builder.append(market.get("2").getEffect().toString());
-		if(market.get("2").isOccupied())
-			builder.append(market.get("2").toString());
-		if (playersInTheMatch == 4){
-			builder.append("\n Third market slot: ");
-			builder.append(market.get("3").getEffect().toString());
-			if(market.get("3").isOccupied())
-				builder.append(market.get("3").toString());
-			builder.append("\n Fourth market slot: ");
-			builder.append(market.get("4").getEffect().toString());
-			if(market.get("4").isOccupied())
-				builder.append(market.get("4").toString());
+		if(market.get("1")!= null)
+			builder.append("Cost: " + market.get("1").getActionValueRequired() + "\n\n");
+		for(SingleActionSpace marketSlot: market.values()){
+			if(marketSlot != null){
+				if(marketSlot.getEffect()!=null)
+					builder.append(marketSlot.getEffect().toString() + "\n");
+			
+				if(marketSlot.isOccupied())
+					builder.append(marketSlot.toString() + "\n");
+			}
 		}
 		
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		
 		
 		return builder.toString();

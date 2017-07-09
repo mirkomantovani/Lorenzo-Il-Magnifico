@@ -1,5 +1,5 @@
 73
-Ingaggiare Reclute
+Hiring Recruits
 1
 4
 0
@@ -20,7 +20,7 @@ Ingaggiare Reclute
 0
 0
 74
-Riparare la Chiesa
+Repairing the Church
 1
 1
 1
@@ -41,7 +41,7 @@ Riparare la Chiesa
 0
 0
 75
-Costruire le Mura
+Building the Walls
 1
 0
 0
@@ -62,7 +62,7 @@ Costruire le Mura
 0
 0
 76
-Innalzare una Statua
+Raising a Statue
 1
 0
 2
@@ -83,7 +83,7 @@ Innalzare una Statua
 0
 0
 77
-Campagna Militare
+Military Campaign
 1
 0
 0
@@ -104,7 +104,7 @@ Campagna Militare
 0
 0
 78
-Ospitare i Mendicanti
+Hosting Panhandlers
 1
 0
 3
@@ -125,7 +125,7 @@ Ospitare i Mendicanti
 0
 0
 79
-Combattere le Eresie
+Fighting Heresies
 1
 0
 0
@@ -146,7 +146,7 @@ Combattere le Eresie
 0
 0
 80
-Sostegno al Vescovo
+Support to the Bishop
 1
 2
 1
@@ -167,7 +167,7 @@ Sostegno al Vescovo
 0
 0
 81
-Ingaggiare Soldati
+Hiring Soldiers
 2
 6
 0
@@ -188,7 +188,7 @@ Ingaggiare Soldati
 0
 0
 82
-Riparare l'Abbazia
+Repairing the Abbey
 2
 2
 2
@@ -209,7 +209,7 @@ Riparare l'Abbazia
 0
 0
 83
-Costruire i Bastioni
+Building the Bastions
 2
 0
 0
@@ -230,7 +230,7 @@ Costruire i Bastioni
 0
 0
 84
-Supporto al Re
+Support to the King
 2
 0
 0
@@ -251,7 +251,7 @@ Supporto al Re
 0
 0
 85
-Scavare Canalizzazioni
+Improving the Canals
 2
 3
 0
@@ -272,7 +272,7 @@ Scavare Canalizzazioni
 0
 0
 86
-Accogliere gli Stranieri
+Hosting Foreigners
 2
 0
 4
@@ -293,7 +293,7 @@ Accogliere gli Stranieri
 0
 0
 87
-Crociata
+Crusade
 2
 0
 0
@@ -314,7 +314,7 @@ Crociata
 0
 0
 88
-Sostegno al Cardinale
+Support to the Cardinal
 2
 3
 2
@@ -335,7 +335,7 @@ Sostegno al Cardinale
 0
 0
 89
-Ingaggiare Mercenari
+Hiring Mercenaries
 3
 8
 0
@@ -356,7 +356,7 @@ Ingaggiare Mercenari
 0
 0
 90
-Riparare la Cattedrale
+Repairing the Cathedral
 3
 3
 3
@@ -377,7 +377,7 @@ Riparare la Cattedrale
 5
 7
 91
-Costruire le Torri
+Building the Towers
 3
 0
 0
@@ -398,7 +398,7 @@ Costruire le Torri
 0
 0
 92
-Commissionare Arte Sacra
+Promoting Sacred Art
 3
 0
 6
@@ -419,7 +419,7 @@ Commissionare Arte Sacra
 0
 0
 93
-Conquista Militare
+Military Conquest
 3
 0
 0
@@ -440,7 +440,7 @@ Conquista Militare
 0
 0
 94
-Migliorare le Strade
+Improving the Roads
 3
 4
 0
@@ -461,7 +461,7 @@ Migliorare le Strade
 0
 0
 95
-Guerra Santa
+Sacred War
 3
 0
 0
@@ -482,7 +482,7 @@ Guerra Santa
 0
 0
 96
-Sostegno al Papa
+Support to the Pope
 3
 4
 3

@@ -16,8 +16,7 @@ public interface ClientHandlerInterface extends Remote{
 	 * @param port the port
 	 * @throws RemoteException the remote exception
 	 */
-	public void addClient(int port) throws RemoteException;   //Questo metodo prende solo la porta e non il client? perchè dovrebbe prendere solo la porta?
-																			//per come l'hanno impostata così ha senso..
+	public void addClient(int port) throws RemoteException; 
 	/**
 																			 * This method notifies the server if the client sends a command.
 																			 *

@@ -1,5 +1,5 @@
 25
-Zecca
+Mint
 1
 0
 1
@@ -37,7 +37,7 @@ Zecca
 0
 0
 26
-Esattoria
+Tax Office
 1
 0
 3
@@ -75,7 +75,7 @@ Esattoria
 0
 0
 27
-Arco di Trionfo
+Triumphal Arch
 1
 2
 0
@@ -113,7 +113,7 @@ Arco di Trionfo
 0
 0
 28
-Teatro
+Theater
 1
 2
 2
@@ -151,7 +151,7 @@ Teatro
 0
 0
 29
-Falegnameria
+Carpenter's Shop
 1
 1
 2
@@ -189,7 +189,7 @@ Falegnameria
 0
 0
 30
-Tagliapietre
+Stonemason's Shop
 1
 1
 0
@@ -227,7 +227,7 @@ Tagliapietre
 0
 0
 31
-Cappella
+Chapel
 1
 0
 2
@@ -265,7 +265,7 @@ Cappella
 0
 0
 32
-Residenza
+Residence
 1
 0
 0
@@ -303,7 +303,7 @@ Residenza
 0
 0
 33
-Mercato
+Marketplace
 2
 0
 2
@@ -341,7 +341,7 @@ Mercato
 0
 0
 34
-Tesoreria
+Treasury
 2
 0
 3
@@ -379,7 +379,7 @@ Tesoreria
 0
 0
 35
-Gilda dei Pittori
+Painters' Guild
 2
 0
 4
@@ -417,7 +417,7 @@ Gilda dei Pittori
 0
 0
 36
-Gilda degli Scultori
+Sculptors' Guild
 2
 0
 0
@@ -455,7 +455,7 @@ Gilda degli Scultori
 0
 0
 37
-Gilda dei Costruttori
+Stonemasons' Guild
 2
 0
 1
@@ -493,7 +493,7 @@ Gilda dei Costruttori
 0
 0
 38
-Battistero
+Baptistery
 2
 0
 0
@@ -531,7 +531,7 @@ Battistero
 0
 0
 39
-Caserma
+Barracks
 2
 0
 1
@@ -569,7 +569,7 @@ Caserma
 0
 0
 40
-Fortezza
+Stronghold
 2
 2
 2
@@ -607,7 +607,7 @@ Fortezza
 0
 0
 41
-Banca
+Bank
 3
 3
 1
@@ -645,7 +645,7 @@ Banca
 0
 0
 42
-Fiera
+Fair
 3
 4
 3
@@ -683,7 +683,7 @@ Fiera
 0
 0
 43
-Giardino
+Garden
 3
 0
 4
@@ -721,7 +721,7 @@ Giardino
 0
 0
 44
-Castelletto
+Fortress
 3
 2
 2
@@ -759,7 +759,7 @@ Castelletto
 0
 0
 45
-Palazzo
+Palace
 3
 3
 3
@@ -797,7 +797,7 @@ Palazzo
 0
 0
 46
-Basilica
+Church
 3
 0
 1
@@ -835,7 +835,7 @@ Basilica
 0
 0
 47
-Accademia Militare
+Military Academy
 3
 0
 2
@@ -873,7 +873,7 @@ Accademia Militare
 0
 0
 48
-Cattedrale
+Cathedral
 3
 0
 4

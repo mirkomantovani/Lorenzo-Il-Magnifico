@@ -80,7 +80,7 @@ public abstract class IndustrialArea implements Serializable{
 		Set<String> playerColors = new HashSet<String>();
 		
 		
-		string.append("Single action space value required: " + this.getSingleActionSpace().getActionValueRequired());
+		string.append("\nSingle action space value required: " + this.getSingleActionSpace().getActionValueRequired());
 		
 		if(this.getSingleActionSpace().isOccupied() == false)
 			string.append("\nThe single action space is empty");
@@ -101,6 +101,8 @@ public abstract class IndustrialArea implements Serializable{
 		
 		for(String color : playerColors)
 			string.append(color + " ");
+		
+		string.append("\n\n");
 		
 		return 	string.toString();
 		

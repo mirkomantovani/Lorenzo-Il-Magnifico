@@ -245,14 +245,14 @@ public class Player implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append("Player : " + this.getName() + "\n" + "Color : " + this.getColor() +
-						"\n" + "Resources : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\t Territory cards :"
-								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\n\t Character cards : "
-								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\n\t Building cards : " 
-								+ this.getDeckOfType(CardType.BUILDING).toString() + "\n\t Venture cards : " 
+		string.append("PLAYER:\n" + this.getName() + "\n" + "Color : " + this.getColor() +
+						"\n" + "Resources : " + this.getResourceChest().toString() + "\n" + "Cards taken : \n\nTERRITORY CARDS:\n"
+								+ this.getDeckOfType(CardType.TERRITORY).toString() + "\nCHARACTER CARDS:\n"
+								+ this.getDeckOfType(CardType.CHARACTER).toString() + "\nBUILDING CARDS:\n" 
+								+ this.getDeckOfType(CardType.BUILDING).toString() + "\nVENTURE CARDS:\n" 
 								+ this.getDeckOfType(CardType.VENTURE).toString() );
 
-		string.append("\nFamily members:\n");
+		string.append("\n\nFamily members:\n");
 		for(FamilyMember mem : this.getFamilyMembers().values()){
 			string.append(mem.toString() + "\n");
 		}
@@ -449,7 +449,8 @@ public class Player implements Serializable {
 		for(FamilyMember mem : this.getFamilyMembers().values()){
 			System.out.println(mem.toString());
 		}
-		this.observer.notifyPlayerStatusChange(this);
+		if(this.observer!=null) //I need this control to let the test run.
+			this.observer.notifyPlayerStatusChange(this);
 	}
 	
 	/**

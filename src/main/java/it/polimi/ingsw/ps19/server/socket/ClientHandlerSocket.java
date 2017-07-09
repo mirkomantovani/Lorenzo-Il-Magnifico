@@ -12,17 +12,19 @@ import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.ServerInterface;
 import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
- * The Class that handles the communication between client and server, server-side
+ * The Class that handles the communication between client and server, server-side, via socket
  *
  * @author Mirko
  */
@@ -48,6 +50,8 @@ public class ClientHandlerSocket extends ClientHandler {
 	
 	/** The match observer. */
 	private MatchHandlerObserver matchObserver;
+	
+	private Server serverListener;
 
 	/**
 	 * Instantiates a new client handler socket.
@@ -149,11 +153,23 @@ public class ClientHandlerSocket extends ClientHandler {
 			
 			//commands that can be sent in an asyncronous way from the clients and are always valid
 			//and managed by the ServerCommandHandler
+			if(command instanceof SatanChoiceCommand)
+				System.out.println("\n\nSatan choice command arrived to server\n\n");
+				if(commandHandler == null){
+					System.out.println("commHandler null");
+				}
+			
 			else if(command instanceof SendCredentialsCommand || 
 					command instanceof ChosenLeaderCardCommand ||
 					command instanceof ChatMessageClientCommand ||
-					command instanceof ChurchSupportCommand)
+					command instanceof ChurchSupportCommand ||
+					command instanceof SatanChoiceCommand){
+				
 				commandHandler.notifyNewCommand(command);
+			} else if(command instanceof ReconnectionAnswerCommand){
+				
+				serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand)command,this);
+			}
 			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
 
@@ -187,6 +203,10 @@ public class ClientHandlerSocket extends ClientHandler {
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.commandHandler = commandHandler;
+	}
+	
+	public void addCommandObserver(Server s){
+		this.serverListener=s;
 	}
 
 }

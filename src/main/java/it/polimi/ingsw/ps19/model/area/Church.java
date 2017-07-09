@@ -121,12 +121,12 @@ public class Church implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---- The Church ---- \n The church contains these Excommunication tiles:\n ");
-		builder.append(excommunicationFirst.toString());
-		builder.append(", \n instead in the second period you ");
-		builder.append(excommunicationSecond.toString());
-		builder.append(", \n finally in the third period you ");
-		builder.append(excommunicationThird.toString());
+		builder.append("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°The Church°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+		builder.append("The church contains the following Excommunication tiles:\n\n");
+		builder.append(excommunicationFirst.toString() + "\n");
+		builder.append(excommunicationSecond.toString() + "\n");
+		builder.append(excommunicationThird.toString() + "\n\n");
+		builder.append("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		return builder.toString();
 	}
 

@@ -16,16 +16,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import it.polimi.ingsw.ps19.command.toclient.AskForReconnectionCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.constant.FileConstants;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.controller.InitialTimer;
 import it.polimi.ingsw.ps19.server.controller.MatchHandler;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 import it.polimi.ingsw.ps19.server.socket.ServerSocketListener;
+import it.polimi.ingsw.ps19.utils.User;
+import it.polimi.ingsw.ps19.utils.UsersCreator;
 
 /**
- * This is the Server Manager, it handles the Listeners, creates the Matches and starts them.
- * It also closes the matches when everyone has disconnected from a Match
+ * This is the Server Manager, it handles the Listeners, creates the Matches and
+ * starts them. It also closes the matches when everyone has disconnected from a
+ * Match
+ * 
  * @author Mirko
  */
 public class Server implements Runnable, ServerInterface {
@@ -35,9 +41,13 @@ public class Server implements Runnable, ServerInterface {
 
 	/** List of matches created. */
 	private Deque<MatchHandler> createdMatches;
-	
-	/** A map that stores the futures associated to the execution with ExecutionService of MatchHandler threads, needed in order to stop the thread. */
-	private Map<MatchHandler,Future> futures;
+
+	/**
+	 * A map that stores the futures associated to the execution with
+	 * ExecutionService of MatchHandler threads, needed in order to stop the
+	 * thread.
+	 */
+	private Map<MatchHandler, Future> futures;
 
 	/** The socket listener. */
 	private ServerSocketListener socketListener;
@@ -50,30 +60,30 @@ public class Server implements Runnable, ServerInterface {
 
 	/** The in keyboard. */
 	private BufferedReader inKeyboard;
-	
+
 	/** The port. */
 	private int port;
-	
+
 	/** The instance. */
 	private static Server instance;
-	
+
 	/** The timer. */
 	private Thread timer;
-	
+
 	/** The suppress server. */
-	private boolean suppressServer = false;
+	private boolean closeServer = false;
 
 	/**
 	 * Instantiates a new server.
 	 *
-	 * @param port the port
+	 * @param port
+	 *            the port
 	 */
 	private Server(int port) {
 		this.port = port;
 		inKeyboard = new BufferedReader(new InputStreamReader(System.in));
-		futures=new HashMap<MatchHandler,Future>();
+		futures = new HashMap<MatchHandler, Future>();
 	}
-
 
 	/**
 	 * Gets the single instance of Server.
@@ -87,16 +97,16 @@ public class Server implements Runnable, ServerInterface {
 			return instance;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
 	public void run() {
-		System.out.println("Starting the server");
 		startServer();
 
 	}
-
 
 	/**
 	 * Start server.
@@ -109,45 +119,69 @@ public class Server implements Runnable, ServerInterface {
 		executor.submit(socketListener);
 		rmiListener = new ServerRMIListener(this);
 		executor.submit(rmiListener);
-		while (!suppressServer) {
-			String scelta = null;
+		while (!closeServer) {
+			String input = null;
 			try {
-				scelta = inKeyboard.readLine();
+				input = inKeyboard.readLine();
 			} catch (IOException e) {
 			}
 
-			if ("Q".equals(scelta) || "q".equals(scelta)) {
-				suppressServer = true;
-				suppress();
+			if ("M".equals(input) || "m".equals(input)) {
+				closeServer = true;
+				closeServer();
 			}
 		}
 
 	}
 
 	/**
-	 * adds a new client handler to the list of waiting clients and if the timer has
-	 * expired or the queue has reached the max number of players for a match, starts
-	 * a new match.
+	 * adds a new client handler to the list of waiting clients and if the timer
+	 * has expired or the queue has reached the max number of players for a
+	 * match, starts a new match.
 	 *
-	 * @param clientHandler            :the client handler that has to be added
+	 * @param clientHandler
+	 *            :the client handler that has to be added
 	 */
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
-		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
-			startInitialTimer();
-		waitingClients.add(clientHandler);
-		executor.submit(clientHandler); // useless
-		System.out.println("Waiting clients: " + waitingClients.size());
-		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
-			timer.interrupt();
 
-			createMatch();
+		if (!disconnectedClientInMatch()) {
+
+			if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
+				startInitialTimer();
+			waitingClients.add(clientHandler);
+			executor.submit(clientHandler); // useless
+			System.out.println("Waiting clients: " + waitingClients.size());
+			if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
+				timer.interrupt();
+
+				createMatch();
+			}
+
+		} else {
+			try {
+				clientHandler.sendCommand(new AskForReconnectionCommand());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
-		System.out.println("Client Successfully added, dajeeee");
+	}
+
+	private boolean disconnectedClientInMatch() {
+		for (MatchHandler match : createdMatches) {
+			if (match.hasDisconnectedPlayer()){
+				System.out.println("Server: has disconnected users");
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
-	 * this method check if there's the minimum number of waiting client to start a match.
+	 * this method check if there's the minimum number of waiting client to
+	 * start a match.
 	 *
 	 * @return true if there are at least 2 players
 	 */
@@ -197,18 +231,18 @@ public class Server implements Runnable, ServerInterface {
 			list.add(c);
 
 		MatchHandler matchH = new MatchHandler(list, this);
-		
+
 		futures.put(matchH, executor.submit(matchH));
-								
+
 		createdMatches.add(matchH);
 		waitingClients = new ConcurrentLinkedDeque<ClientHandler>();
 
 	}
 
 	/**
-	 * this method closes everything.
+	 * this method closes the server
 	 */
-	private void suppress() {
+	private void closeServer() {
 		closeWaitingList();
 		if (timer != null && timer.isAlive())
 			timer.interrupt();
@@ -227,8 +261,8 @@ public class Server implements Runnable, ServerInterface {
 	}
 
 	/**
-	 * method called when the server is shutting down itself and than notifies the
-	 * closing connection to all waiting clients.
+	 * method called when the server is shutting down itself and than notifies
+	 * the closing connection to all waiting clients.
 	 */
 	private void closeWaitingList() {
 		if (!waitingClients.isEmpty())
@@ -252,24 +286,31 @@ public class Server implements Runnable, ServerInterface {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.server.ServerInterface#closeMatch(it.polimi.ingsw.ps19.server.controller.MatchHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * it.polimi.ingsw.ps19.server.ServerInterface#closeMatch(it.polimi.ingsw.
+	 * ps19.server.controller.MatchHandler)
 	 */
 	@Override
 	public synchronized void closeMatch(MatchHandler mh) {
-		
+
 		futures.get(mh).cancel(true);
-			
-			
+
 		createdMatches.remove(mh);
-		mh=null;
+		mh = null;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.server.ServerInterface#removeClient(it.polimi.ingsw.ps19.server.ClientHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * it.polimi.ingsw.ps19.server.ServerInterface#removeClient(it.polimi.ingsw.
+	 * ps19.server.ClientHandler)
 	 */
-	/* 
+	/*
 	 * This method removes the clientHandler from the waitingList
 	 */
 	@Override
@@ -278,4 +319,69 @@ public class Server implements Runnable, ServerInterface {
 		if (!checkWaitingList() && timer != null)
 			timer.interrupt();
 	}
+
+	public void notifyReconnectionAnswer(ReconnectionAnswerCommand command, ClientHandler clientHandler) {
+
+		String answer = command.getAnswer();
+
+		if (answer.equals("y")) {
+			String username = command.getUsername();
+			String password = command.getPassword();
+			ArrayList<MatchHandler> possibleMatches = getMatchesWithDisconnectedUsers();
+			ArrayList<User> users = null;
+			try {
+				users = UsersCreator.getUsersFromFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			User u = hasUserSignedUpCorrectly(username, password, users);
+
+			if (u != null) {
+
+				for (MatchHandler match : possibleMatches) {
+					if(match.hasDisconnectedUser(u)){
+						
+						match.reconnectClient(clientHandler, match.getDisconnectedUser(u));
+						break;
+					}
+				}
+			}
+
+		} else {
+			this.addClientToWaiting(clientHandler);
+		}
+
+	}
+
+	private void addClientToWaiting(ClientHandler clientHandler) {
+		if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
+			startInitialTimer();
+		waitingClients.add(clientHandler);
+		executor.submit(clientHandler); // useless
+		System.out.println("Waiting clients: " + waitingClients.size());
+		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
+			timer.interrupt();
+
+			createMatch();
+		}
+	}
+
+	private User hasUserSignedUpCorrectly(String username, String password, ArrayList<User> users) {
+		for (User u : users) {
+			if (u.getUsername().equals(username) && u.correctPassword(password))
+				return u;
+		}
+		return null;
+	}
+
+	private ArrayList<MatchHandler> getMatchesWithDisconnectedUsers() {
+		ArrayList<MatchHandler> matches = new ArrayList<>();
+		for (MatchHandler match : createdMatches) {
+			if (match.hasDisconnectedPlayer())
+				matches.add(match);
+		}
+		return matches;
+	}
+
 }

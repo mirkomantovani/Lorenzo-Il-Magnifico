@@ -6,8 +6,19 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Map;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.spi.AudioFileReader;
+import javax.sound.sampled.spi.FormatConversionProvider;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -43,9 +54,10 @@ public class MyFrame extends JFrame {
 					frame.setVisible(true);
 
 					frame.removeInitialImage();
-					GamePanel gameP = new GamePanel("red",2);
+					GamePanel gameP = new GamePanel("black",2);
 					frame.setContentPane(gameP);
 					// frame.getGamePanel().addCard();
+					MyFrame.music();
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,6 +102,9 @@ public class MyFrame extends JFrame {
 
 	/**
 	 * Instantiates a new my frame.
+	 * @throws  
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
 	public MyFrame() {
 		super("Lorenzo Il Magnifico");
@@ -124,6 +139,16 @@ public class MyFrame extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		
+		try {
+			MyFrame.music();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -307,5 +332,13 @@ public class MyFrame extends JFrame {
 		gamePanel.refreshLeaders(leaderCards);
 	}
 	
+	public static void music() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+	{
+
+		AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/main/resources/song.wav"));
+				Clip clip = AudioSystem.getClip();
+				clip.open(audio);
+				clip.loop(1);
+	}
 
 }
