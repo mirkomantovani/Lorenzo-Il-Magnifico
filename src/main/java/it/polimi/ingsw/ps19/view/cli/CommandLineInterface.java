@@ -544,5 +544,17 @@ print("The server has closed the game");
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void displaySatanAction() {
+		
+		
+	}
+
+	@Override
+	public void askSatanMove() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

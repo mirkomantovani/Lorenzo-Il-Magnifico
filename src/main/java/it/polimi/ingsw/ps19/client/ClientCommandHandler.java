@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskSatanMove;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.AuthenticatedCorrectlyCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
@@ -18,6 +19,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifySatanAction;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerDisconnectedCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
@@ -290,6 +292,18 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	public void applyCommand(PlayerDisconnectedCommand playerDisconnectedCommand) {
 		userInterface.displayPlayerDisconnected(playerDisconnectedCommand.getColor());
 	}
+
+	public void applyCommand(NotifySatanAction notifySatanAction) {
+		userInterface.displaySatanAction();
+		
+	}
+
+	public void applyCommand(AskSatanMove askSatanMove) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 	
 	//TODO the applyCommand() for each Command from Server to Client we define	

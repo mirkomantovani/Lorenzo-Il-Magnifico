@@ -548,4 +548,16 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		writeGameMessage("The "+color+" player has disconnected from the game!");
 	}
 
+	@Override
+	public void displaySatanAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void askSatanMove() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

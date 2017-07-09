@@ -24,6 +24,7 @@ import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SatanChoice;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
@@ -362,6 +363,12 @@ public class ServerCommandHandler implements CommandObserver {
 			handler.sendToCurrentPlayer(new AskMoveCommand());
 		}
 
+	}
+
+
+	public void applyCommand(SatanChoice satanChoice) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
