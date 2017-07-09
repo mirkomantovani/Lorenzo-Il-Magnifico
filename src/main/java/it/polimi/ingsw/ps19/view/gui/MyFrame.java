@@ -136,6 +136,16 @@ public class MyFrame extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		
+		try {
+			MyFrame.music();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

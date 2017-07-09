@@ -535,6 +535,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
+		
+		System.out.println("MH: removeclient");
 
 		if (!closedClients.contains(clientHandler)) {
 
@@ -542,12 +544,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
+			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
 				addDisconnectedUser(getRightPlayer(clientHandler).getName());
 			} catch (WrongClientHandlerException e2) {
 				e2.printStackTrace();
 			}
+			
+			System.out.println("MH: removeclient size"+disconnectedUsers.size());
 
 			try {
 				sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
@@ -569,9 +574,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void addDisconnectedUser(String userName) {
+		
+		System.out.println("MH: adddisconnecteduser");
 		User u = getUserFromName(userName);
 		if (u != null)
 			disconnectedUsers.add(u);
+		
+		System.out.println("MH: adddisconnecteduser: size:"+disconnectedUsers.size());
 
 	}
 
@@ -1567,6 +1576,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public boolean hasDisconnectedPlayer() {
+		System.out.println("MH: hasdisconnectedPlayer: size;"+disconnectedUsers.size());
+		
 		return disconnectedUsers.size()!=0;
 	}
 

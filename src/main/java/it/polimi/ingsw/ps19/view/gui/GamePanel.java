@@ -425,6 +425,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		satanPanel.setVisible(false);
 		}
 		
+		if(numPlayers==5)
 		this.placeSatanDisc();
 		
 		

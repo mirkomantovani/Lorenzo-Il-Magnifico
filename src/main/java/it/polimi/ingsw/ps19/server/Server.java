@@ -170,8 +170,10 @@ public class Server implements Runnable, ServerInterface {
 
 	private boolean disconnectedClientInMatch() {
 		for (MatchHandler match : createdMatches) {
-			if (match.hasDisconnectedPlayer())
+			if (match.hasDisconnectedPlayer()){
+				System.out.println("Server: has disconnected users");
 				return true;
+			}
 		}
 
 		return false;
