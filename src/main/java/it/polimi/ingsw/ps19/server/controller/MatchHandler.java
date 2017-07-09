@@ -530,9 +530,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void reconnectClient(ClientHandler clientHandler, User user) {
 		 if(isUserInTheGameAndDisconnected(user))
 		 {
+			 Player p=match.getPlayerFromName(user.getUsername());
+			 
+			 if(p!=null){
 			 disconnectedUsers.remove(user);
 			 closedClients.remove(clientHandler);
-//			 this.match.reconnect
+			 clientHandler.addPlayer(p);
+			 this.match.reconnectPlayer(p);
+			 } else {
+				 System.out.println("getplayerfromname returned NULL");
+			 }
 		 }
 
 	}
