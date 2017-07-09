@@ -61,8 +61,11 @@ public abstract class Resource implements Serializable {
 	 *
 	 * @param amount the amount
 	 */
-	public void add(int amount){	
+	public void add(int amount){
+		
 		this.amount = this.amount + amount;	
+		if(this.amount<0)
+			this.amount=0;
 	}
 	
 	/**

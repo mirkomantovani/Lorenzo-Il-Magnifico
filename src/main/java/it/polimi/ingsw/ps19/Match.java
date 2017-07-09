@@ -44,6 +44,8 @@ public class Match implements Serializable{
 	/** The added players. */
 	private int addedPlayers;
 	
+	private Player satan;
+	
 	
 	
 	private ArrayList<Player> disconnectedPlayers;
@@ -487,6 +489,10 @@ public class Match implements Serializable{
 //		}
 //		return false;
 	}
+	
+	public Player getSatan(){
+		return this.satan;
+	}
 
 	/**
 	 * Sets the player order.
@@ -568,6 +574,11 @@ public class Match implements Serializable{
 				return players[i];
 		}
 		return null;
+	}
+
+	public void createSatan() {
+		this.satan=new Player("Satan","red");
+		
 	}
 	
 

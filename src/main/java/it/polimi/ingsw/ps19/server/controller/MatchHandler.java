@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.concurrent.Executors;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
@@ -138,11 +138,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private ArrayList<User> disconnectedUsers;
 	
 	/**
-	 * variable that states the precence of the fifth player
+	 * variable that states the presence of the fifth player
 	 */
 	private boolean satanIsPresent;
 	
 	private ClientHandler fifthPlayerClient;
+	
+	
 
 	/**
 	 * Instantiates a new match handler.
@@ -190,6 +192,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void initMatch() {
 
 		match = new Match(clients.size(), this);
+		
+		if(satanIsPresent)
+			match.createSatan();
 
 		commandHandler = new ServerCommandHandler(this, match);
 
@@ -212,10 +217,21 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * Communicate colors.
 	 */
 	private void communicateColors() {
+		
+		if(satanIsPresent)
+			try {
+				
+				fifthPlayerClient.sendCommand(new AssignColorCommand(match.getSatan().getColor()));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		
+		
 		for (ClientHandler c : clients) {
 			String color = null;
 			try {
 				color = this.getRightPlayer(c).getColor();
+				System.out.println("player color:"+color);
 			} catch (WrongClientHandlerException e) {
 				e.printStackTrace();
 			}
@@ -1482,8 +1498,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void handleSatanChoice(String color) {
-		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,3,0));
+		
+		Random r=new Random();
+		int amount=r.nextInt(3)+3;
+		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
 		instant.applyEffect(getPlayerFromColor(color));
+		
+		notifyPlayerStatusChange(getPlayerFromColor(color));
 		
 	}
 

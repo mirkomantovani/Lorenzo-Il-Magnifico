@@ -557,8 +557,16 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	@Override
 	public void askSatanMove() {
-		// TODO Auto-generated method stub
+		writeGameMessage("Satan: decide the player you want to punish "
+				+ "subtracting him some victory points, I'll remind you"
+				+ " that you should choose the player who's winning in order not to"
+				+ " make him prevail over you");
+		frame.getGamePanel().showSatanPanel();
 		
+	}
+
+	public void notifySatanChoice(String playerColor) {
+		gameController.notifySatanChoice(playerColor);
 	}
 
 }

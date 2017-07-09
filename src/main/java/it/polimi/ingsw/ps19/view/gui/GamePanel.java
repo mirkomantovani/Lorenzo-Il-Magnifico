@@ -156,6 +156,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	
 	/** The choose excommunication panel. */
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
+	
+	private SatanPanel satanPanel;
 
 	/** The draft panel. */
 	private LeadersPanel draftPanel;
@@ -413,7 +415,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		askAuthenticationPanel=new AskAuthenticationPanel(this);
 		askAuthenticationPanel.setBackground(BACKGROUND_PANELS_COLOR);
 		askAuthenticationPanel.setVisible(false);
-
+		
+		satanPanel=new SatanPanel(screenDim.width - boardPanel.getPreferredSize().width, this);
+		satanPanel.setBackground(BACKGROUND_PANELS_COLOR);
+		satanPanel.setVisible(false);
+		
+		
+		
 		// FINAL BUTTONS PANEL
 
 		JPanel buttonsPanel = new JPanel();
@@ -924,6 +932,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			this.GUI.notifyChosenPrivilege(chosenP);
 			chosenPrivileges.clear();
 		}
+		} else if(e.getSource() instanceof PlayerColor){
+			String playerColor = ((PlayerColor) e.getSource()).getName();
+			this.GUI.notifySatanChoice(playerColor);
 		}
 	}
 
@@ -1444,5 +1455,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	public void setCurrentNumberOfPrivilege(int numberOfPrivilege) {
 		currentNumberOfPrivilege=numberOfPrivilege;
+	}
+
+	public void showSatanPanel() {
+		// TODO Auto-generated method stub
+		
 	}
 }

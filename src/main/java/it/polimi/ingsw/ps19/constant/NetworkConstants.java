@@ -26,13 +26,13 @@ public static final int RMICLIENTPORT = 1234;
 	public static final int RMICLIENTHANDLERPORT = 4321;
 	
 	/** The Constant MAXPLAYERS. */
-	public static final int MAXPLAYERS = 2;    //deve essere 4
+	public static final int MAXPLAYERS = 5;    //deve essere 4
 	
 	/** The Constant MINPLAYERS. */
 	public static final int MINPLAYERS = 2;
 	
 	/** The Constant SERVER_IP_ADDRESS. */
-	public static final String SERVER_IP_ADDRESS = "127.0.0.1";
+	public static final String SERVER_IP_ADDRESS = "87.5.153.173";
 			//"87.5.153.173";  
 	
 	
