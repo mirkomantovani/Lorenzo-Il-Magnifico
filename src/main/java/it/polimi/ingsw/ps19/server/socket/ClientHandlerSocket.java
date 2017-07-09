@@ -150,6 +150,9 @@ public class ClientHandlerSocket extends ClientHandler {
 			
 			//commands that can be sent in an asyncronous way from the clients and are always valid
 			//and managed by the ServerCommandHandler
+			if(command instanceof SatanChoiceCommand)
+				System.out.println("\n\nSatan choice command arrived to server\n\n");
+			
 			else if(command instanceof SendCredentialsCommand || 
 					command instanceof ChosenLeaderCardCommand ||
 					command instanceof ChatMessageClientCommand ||
