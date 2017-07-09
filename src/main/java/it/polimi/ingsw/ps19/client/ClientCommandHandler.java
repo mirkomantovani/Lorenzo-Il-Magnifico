@@ -1,9 +1,12 @@
 package it.polimi.ingsw.ps19.client;
 
 
+import java.util.Scanner;
+
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
+import it.polimi.ingsw.ps19.command.toclient.AskForReconnectionCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskSatanMoveCommand;
@@ -29,6 +32,8 @@ import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
 import it.polimi.ingsw.ps19.command.toclient.StartTurnCommand;
 import it.polimi.ingsw.ps19.command.toclient.WinCommand;
 import it.polimi.ingsw.ps19.command.toclient.WrongPasswordCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
+import it.polimi.ingsw.ps19.launchers.ReconnectionManager;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
 
@@ -301,9 +306,22 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	public void applyCommand(AskSatanMoveCommand askSatanMove) {
 		userInterface.askSatanMove();
 	}
-
 	
+	public void applyCommand(AskForReconnectionCommand askForReconnectionCommand) throws Exception{
+		Scanner i=new Scanner(System.in);
+		System.out.println("Would you join an existing Match? (y/n)\n");
+		
+		String connChoice = i.next();
+		
+		if(connChoice.equals("y")){
+			System.out.println("Please insert your name: \n");
+			String name = i.nextLine();
+			System.out.println("your Password: \n");
+			String pword = i.nextLine();
+			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,name,pword));
+		} else 
+			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,null,null));
+		
+	}
 
-	
-	//TODO the applyCommand() for each Command from Server to Client we define	
 }

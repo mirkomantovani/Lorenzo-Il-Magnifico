@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.launchers;
 
 import java.util.Scanner;
 
-import it.polimi.ingsw.ps19.ReconnectionManager;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
