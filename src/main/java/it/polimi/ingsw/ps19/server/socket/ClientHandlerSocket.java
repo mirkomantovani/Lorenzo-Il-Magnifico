@@ -14,6 +14,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
+import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
@@ -152,7 +153,8 @@ public class ClientHandlerSocket extends ClientHandler {
 			else if(command instanceof SendCredentialsCommand || 
 					command instanceof ChosenLeaderCardCommand ||
 					command instanceof ChatMessageClientCommand ||
-					command instanceof ChurchSupportCommand)
+					command instanceof ChurchSupportCommand ||
+					command instanceof SatanChoiceCommand)
 				commandHandler.notifyNewCommand(command);
 			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {

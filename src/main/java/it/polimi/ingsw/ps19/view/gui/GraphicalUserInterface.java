@@ -566,6 +566,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	public void notifySatanChoice(String playerColor) {
+		System.out.println("GUI: notify satan choice");
 		gameController.notifySatanChoice(playerColor);
 	}
 

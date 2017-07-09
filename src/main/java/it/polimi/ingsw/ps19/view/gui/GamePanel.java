@@ -933,8 +933,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			chosenPrivileges.clear();
 		}
 		} else if(e.getSource() instanceof PlayerColor){
+			
 			this.removeActionPanel();
 			String playerColor = ((PlayerColor) e.getSource()).getName();
+			System.out.println("Game panel gui notifysatan");
 			this.GUI.notifySatanChoice(playerColor);
 		}
 	}
@@ -1470,9 +1472,4 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		
 	}
 	
-	public void placeSatanDisc(){ 
-	    VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black"); 
-	    boardPanel.add(blackDisk); 
-	    blackDisk.setVictoryPointsAmount(99); 
-	}
 }
