@@ -933,6 +933,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			chosenPrivileges.clear();
 		}
 		} else if(e.getSource() instanceof PlayerColor){
+			this.removeActionPanel();
 			String playerColor = ((PlayerColor) e.getSource()).getName();
 			this.GUI.notifySatanChoice(playerColor);
 		}
@@ -1456,17 +1457,22 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void setCurrentNumberOfPrivilege(int numberOfPrivilege) {
 		currentNumberOfPrivilege=numberOfPrivilege;
 	}
-<<<<<<< Updated upstream
+
 
 	public void showSatanPanel() {
-		// TODO Auto-generated method stub
-=======
+		showActionPanel(satanPanel);
+	}
 	
 	public void placeSatanDisc(){
 		VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black");
 		boardPanel.add(blackDisk);
 		blackDisk.setVictoryPointsAmount(99);
->>>>>>> Stashed changes
 		
+	}
+	
+	public void placeSatanDisc(){ 
+	    VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black"); 
+	    boardPanel.add(blackDisk); 
+	    blackDisk.setVictoryPointsAmount(99); 
 	}
 }

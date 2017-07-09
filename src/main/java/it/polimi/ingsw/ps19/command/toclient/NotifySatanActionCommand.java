@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.command.toclient;
 import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
-public class NotifySatanAction extends ServerToClientCommand{
+public class NotifySatanActionCommand extends ServerToClientCommand{
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class NotifySatanAction extends ServerToClientCommand{
 		
 	}
 	
-	public NotifySatanAction(String color){
+	public NotifySatanActionCommand(String color){
 		color = this.color;
 	}
 	

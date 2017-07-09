@@ -24,7 +24,7 @@ import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskPrivilegeChoiceCommand;
-import it.polimi.ingsw.ps19.command.toclient.AskSatanMove;
+import it.polimi.ingsw.ps19.command.toclient.AskSatanMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.AssignColorCommand;
 import it.polimi.ingsw.ps19.command.toclient.AuthenticatedCorrectlyCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseLeaderCardCommand;
@@ -34,6 +34,7 @@ import it.polimi.ingsw.ps19.command.toclient.InvalidActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.InvalidCommand;
 import it.polimi.ingsw.ps19.command.toclient.LoseCommand;
 import it.polimi.ingsw.ps19.command.toclient.NotifyExcommunicationCommand;
+import it.polimi.ingsw.ps19.command.toclient.NotifySatanActionCommand;
 import it.polimi.ingsw.ps19.command.toclient.OpponentStatusChangeCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerDisconnectedCommand;
 import it.polimi.ingsw.ps19.command.toclient.PlayerStatusChangeCommand;
@@ -742,7 +743,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private void nextStep() {
 		
 		if(satanIsPresent&&(roundNumber%4==0))
-			sendToClientHandler(new AskSatanMove(), fifthPlayerClient);
+			sendToClientHandler(new AskSatanMoveCommand(), fifthPlayerClient);
 		
 		
 		if ((roundNumber == match.getPlayers().length * 4) || currentPlayerWithoutFamilyMembers()) {
@@ -1518,6 +1519,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		int amount=r.nextInt(3)+3;
 		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
 		instant.applyEffect(getPlayerFromColor(color));
+		
+		System.out.println("\nhandling satan choice: chosen player:"+color);
+		sendToAllPlayers(new NotifySatanActionCommand(color));
 		
 		notifyPlayerStatusChange(getPlayerFromColor(color));
 		
