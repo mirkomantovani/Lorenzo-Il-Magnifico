@@ -585,6 +585,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private User getUserFromName(String name) {
+		
+		System.out.println("MH: getusersfromname: users size:"+users.size());
+		System.out.println("MH: user 1:"+users.get(0).getUsername());
+		System.out.println("MH: user 1:"+users.get(1).getUsername());
 		for (User u : users) {
 			if (u.getUsername().equals(name))
 				return u;
