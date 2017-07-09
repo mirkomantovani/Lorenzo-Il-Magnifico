@@ -586,6 +586,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private User getUserFromName(String name) {
 		
+		
 		System.out.println("MH: getusersfromname: users size:"+users.size());
 		System.out.println("MH: user 1:"+users.get(0).getUsername());
 		System.out.println("MH: user 1:"+users.get(1).getUsername());
@@ -1536,7 +1537,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 				this.runUpdateFileThread();
 				
-				this.users.add(user.get());
+				setNameToPlayer(playerColor,username);
 
 				userFromColor.put(playerColor, user.get());
 				return true;
@@ -1546,10 +1547,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			User newUser = new User(username, password);
 			this.users.add(newUser);
 			userFromColor.put(playerColor, newUser);
+			setNameToPlayer(playerColor,username);
 
 			return true;
 		}
 
+	}
+
+	private void setNameToPlayer(String playerColor, String username) {
+		getPlayerFromColor(playerColor).setName(username);
 	}
 
 	public void handleSatanChoice(String color) {
