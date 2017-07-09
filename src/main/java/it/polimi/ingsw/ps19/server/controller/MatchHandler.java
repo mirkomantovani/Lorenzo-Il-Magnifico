@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
@@ -339,7 +340,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			try {
 				client.sendCommand(command);
 			} catch (Exception e) {
-				closedClients.add(client);
+				this.removeClient(client);
 			}
 		}
 	}
@@ -363,7 +364,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				try {
 					client.sendCommand(command);
 				} catch (Exception e) {
-					closedClients.add(client);
+					this.removeClient(client);
 				}
 			}
 		}
@@ -391,7 +392,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			client.sendCommand(command);
 			lastCommandSent = command;
 		} catch (Exception e) {
-			closedClients.add(client);
+			this.removeClient(client);
 		}
 
 	}
@@ -475,7 +476,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	public void removeClient(ClientHandler clientHandler) {
 
 		updateGamePlayTime(clientHandler.getPlayer().getColor());
+		System.out.println("removing client and updating timeof "+clientHandler.getPlayer().getColor());
 
+		closedClients.add(clientHandler);
+		
 		try {
 			sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
 		} catch (WrongClientHandlerException e1) {
@@ -490,6 +494,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		} catch (WrongClientHandlerException e) {
 //			e.printStackTrace();
 		}
+	}
+	
+	public void reconnectClient(ClientHandler clientHandler,User user){
+		
 	}
 	
 	private void updateGamePlayTimeForEveryone(){
@@ -510,7 +518,24 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		userFromColor.get(color).incrementSecondsPlayed(elapsedTime);
 		
-		UsersCreator.updateFile(users);
+		
+		this.runUpdateFileThread();
+		
+	}
+	
+	private void runUpdateFileThread(){
+//		new Thread( new Runnable() {
+//		    @Override
+//		    public void run() {
+//		    }
+//		}).start();
+		
+		Executors.newSingleThreadExecutor().execute(new Runnable() {
+		    @Override 
+		    public void run() {
+		    	UsersCreator.updateFile(users);
+		    }
+		});
 		
 	}
 
@@ -594,16 +619,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	public void roundTimerExpired() {
 		sendToCurrentPlayer(new RoundTimerExpiredCommand());
+		
 		try {
-			closedClients.add(getRightClientHandler(getCurrentPlayer()));
-		} catch (WrongPlayerException e) {
-//			e.printStackTrace();
+			this.removeClient(getRightClientHandler(getCurrentPlayer()));
+		} catch (WrongPlayerException e1) {
+			e1.printStackTrace();
 		}
-		try {
-			this.match.addDisconnectedPlayer(getCurrentPlayer());
-		} catch (MatchFullException e) {
-//			e.printStackTrace();
-		}
+		
 		if (match.isAnyoneStillPlaying()) {
 			setNext();
 			nextStep();
@@ -694,7 +716,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			clientHandler.sendCommand(command);
 		} catch (IOException e) {
 			e.printStackTrace();
-			closedClients.add(clientHandler);
+			this.removeClient(clientHandler);
 		}
 	}
 
@@ -1126,9 +1148,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 
 			match.setPlayers(newList);
-
-			for (int i = 0; i < councilPlayers.size(); i++)
 		}
+
 
 	}
 
@@ -1281,11 +1302,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 *            the player color
 	 */
 	public void clientClosedTheGame(String playerColor) {
-		try {
-			match.addDisconnectedPlayer(getPlayerFromColor(playerColor));
-		} catch (MatchFullException e) {
-			e.printStackTrace();
-		}
+			try {
+				this.removeClient(getRightClientHandler(getPlayerFromColor(playerColor)));
+			} catch (WrongPlayerException e) {
+				e.printStackTrace();
+			}
+		
 	}
 
 	public boolean isLeaderCardActivable(String leaderName) {
@@ -1351,7 +1373,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		if (user.isPresent()) {
 			if (user.get().correctPassword(password)) {
 				user.get().incrementMatches();
-				UsersCreator.updateFile(users);
+				
+				this.runUpdateFileThread();
+				
 				userFromColor.put(playerColor, user.get());
 				return true;
 			} else
@@ -1360,7 +1384,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			User newUser = new User(username, password);
 			this.users.add(newUser);
 			userFromColor.put(playerColor, newUser);
-			UsersCreator.updateFile(users);
+			
 			return true;
 		}
 
