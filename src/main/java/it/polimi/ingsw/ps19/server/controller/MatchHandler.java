@@ -862,9 +862,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
+			System.out.println(playerColor + "/n this is the player" + players[i].getColor());
 			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
+		System.out.println("adesso ritorno null porco diiiiii");
 		return null;
 	}
 
@@ -1525,10 +1527,14 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		int amount=r.nextInt(3)+3;
 //		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
 		
+		System.out.println(color);
+		System.out.println("\n" + getPlayerFromColor(color).toString());
+		
 		int newRes=
 		getPlayerFromColor(color).getResourceChest().
 		getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
 		
+		System.out.println(newRes);
 		newRes=newRes-amount;
 		if(newRes<0)newRes=0;
 		

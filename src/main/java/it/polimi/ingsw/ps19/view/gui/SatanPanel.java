@@ -22,23 +22,23 @@ public class SatanPanel extends JPanel {
 
 
 		PlayerColor red = new PlayerColor("red", resourceWidth);
-		red.setName("red");
+		red.setName("Red");
 		add(red);
 		red.addMouseListener(listener);
 
 		PlayerColor green = new PlayerColor("green", resourceWidth);
 		add(green);
-		green.setName("green");
+		green.setName("Green");
 		green.addMouseListener(listener);
 
 		PlayerColor blue = new PlayerColor("blue", resourceWidth);
 		add(blue);
-		blue.setName("blue");
+		blue.setName("Blue");
 		blue.addMouseListener(listener);
 
 		PlayerColor yellow = new PlayerColor("yellow", resourceWidth);
 		add(yellow);
-		yellow.setName("yellow");
+		yellow.setName("Yellow");
 		yellow.addMouseListener(listener);
 
 	}
