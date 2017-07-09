@@ -1531,6 +1531,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				user.get().incrementMatches();
 
 				this.runUpdateFileThread();
+				
+				this.users.add(user.get());
 
 				userFromColor.put(playerColor, user.get());
 				return true;
