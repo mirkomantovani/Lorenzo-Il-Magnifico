@@ -1523,8 +1523,19 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		
 		Random r=new Random();
 		int amount=r.nextInt(3)+3;
-		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
-		instant.applyEffect(getPlayerFromColor(color));
+//		Effect instant=new InstantResourcesEffect(new ResourceChest(0,0,0,0,0,-amount,0));
+		
+		int newRes=
+		getPlayerFromColor(color).getResourceChest().
+		getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
+		
+		newRes=newRes-amount;
+		if(newRes<0)newRes=0;
+		
+		getPlayerFromColor(color).getResourceChest().
+		getResourceInChest(ResourceType.VICTORYPOINT).setAmount(newRes);
+		
+//		instant.applyEffect(getPlayerFromColor(color));
 		
 		System.out.println("\nhandling satan choice: chosen player:"+color);
 		sendToAllPlayers(new NotifySatanActionCommand(color));
