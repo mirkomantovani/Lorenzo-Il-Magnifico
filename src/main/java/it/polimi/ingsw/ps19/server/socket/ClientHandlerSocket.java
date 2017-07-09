@@ -152,13 +152,19 @@ public class ClientHandlerSocket extends ClientHandler {
 			//and managed by the ServerCommandHandler
 			if(command instanceof SatanChoiceCommand)
 				System.out.println("\n\nSatan choice command arrived to server\n\n");
+				if(commandHandler == null){
+					System.out.println("commHandler null");
+				}
 			
 			else if(command instanceof SendCredentialsCommand || 
 					command instanceof ChosenLeaderCardCommand ||
 					command instanceof ChatMessageClientCommand ||
 					command instanceof ChurchSupportCommand ||
-					command instanceof SatanChoiceCommand)
+					command instanceof SatanChoiceCommand){
+				
 				commandHandler.notifyNewCommand(command);
+				System.out.println("command notified");
+			}
 			//commands that need a check, if they are from the current player they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
 

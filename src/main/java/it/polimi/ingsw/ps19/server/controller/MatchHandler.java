@@ -291,8 +291,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			i++;
 		}
 		
-		if(satanIsPresent)
+		if(satanIsPresent){
 			fifthPlayerClient.addCommandObserver(commandHandler);
+			System.out.println("ho eseguito la add observer");
+			fifthPlayerClient.addObserver(this);
+		}
 
 		match.setPlayerOrder();
 	}

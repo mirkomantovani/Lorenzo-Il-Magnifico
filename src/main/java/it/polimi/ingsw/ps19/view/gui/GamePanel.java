@@ -1469,6 +1469,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black");
 		boardPanel.add(blackDisk);
 		blackDisk.setVictoryPointsAmount(99);
+
 		
 	}
 	
