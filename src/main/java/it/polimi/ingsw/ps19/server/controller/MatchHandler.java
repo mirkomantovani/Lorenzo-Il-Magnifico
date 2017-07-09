@@ -948,7 +948,22 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		}
 		if(this.satanIsPresent){
-			
+			int satanVictoryPoints = match.getSatan().getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount();
+			if(calculatePlayerPoints(rank[0]) < satanVictoryPoints){
+				sendToPlayer(new WinCommand(), match.getSatan());
+				for (Player p : rank) {
+						sendToPlayer(new LoseCommand(), p);
+					
+				}
+			} else {
+				sendToPlayer(new WinCommand(), rank[0]);
+				sendToPlayer(new LoseCommand(),match.getSatan());
+				for (Player p : rank) {
+					if (p != rank[0]) {
+						sendToPlayer(new LoseCommand(), p);
+					}
+				}
+			}
 		}
 		sendToPlayer(new WinCommand(), rank[0]);
 		for (Player p : rank) {

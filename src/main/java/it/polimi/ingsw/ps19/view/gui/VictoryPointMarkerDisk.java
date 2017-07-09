@@ -101,8 +101,7 @@ public class VictoryPointMarkerDisk extends JPanel{
 		this.setBounds(widthRel , heightRel, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));
 		this.setVisible(true);
 		this.setOpaque(false);
-		wCount = wCount ;
-		
+	
 	}
 	
 	/**

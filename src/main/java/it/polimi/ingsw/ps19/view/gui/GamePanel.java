@@ -1456,9 +1456,17 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	public void setCurrentNumberOfPrivilege(int numberOfPrivilege) {
 		currentNumberOfPrivilege=numberOfPrivilege;
 	}
+<<<<<<< Updated upstream
 
 	public void showSatanPanel() {
 		// TODO Auto-generated method stub
+=======
+	
+	public void placeSatanDisc(){
+		VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black");
+		boardPanel.add(blackDisk);
+		blackDisk.setVictoryPointsAmount(99);
+>>>>>>> Stashed changes
 		
 	}
 }

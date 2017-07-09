@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps19.launchers;
 
 import java.util.Scanner;
 
+import it.polimi.ingsw.ps19.ReconnectionManager;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
@@ -59,17 +60,29 @@ public class ClientLauncher {
 		controller.setUserInterface(userInterface);
 		controller.setCommandHandler(handler);
 		
+//		System.out.println("Would you join an existing Match? (Y/N)\n");
+//		
+//		String connChoice = i.next();
+//		
+//		if(connChoice.equals("Y")){
+//			System.out.println("Please insert your name: \n");
+//			String name = i.nextLine();
+//			System.out.println("your Password: \n");
+//			String pword = i.nextLine();
+//			ReconnectionManager rm = new ReconnectionManager(handler,name,pword);
+//		}
+		
 		try {
-			System.out.println("I'm trying to connect");
+		
 			networkInterface.connect();
-			System.out.println("Client Connected");
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("YOU SHOULD NOT BE HERE");
 			e.printStackTrace();
 		}
 		
-		System.out.println("client: addcommandobserver");
+	
 		networkInterface.addCommandObserver(handler);
 	
 		
