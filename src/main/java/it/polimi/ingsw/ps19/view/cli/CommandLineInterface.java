@@ -185,6 +185,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_NAME:
 			actionConstructor.add(input);
 			print("Insert your password: ");
+			readerState = ClientConstants.SEND_PASSWORD;
+			break;
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:
 			gameController.notifyChosenLeaderCard(input);
 			break;
