@@ -11,7 +11,12 @@ public class AskForReconnectionCommand extends ServerToClientCommand{
 
 	@Override
 	public void processCommand(ClientCommandHandler clientCommandHandler) {
-		// TODO Auto-generated method stub
+		try {
+			clientCommandHandler.applyCommand(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

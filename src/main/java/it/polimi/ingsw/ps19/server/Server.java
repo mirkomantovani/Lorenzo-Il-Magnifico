@@ -323,8 +323,10 @@ public class Server implements Runnable, ServerInterface {
 	public void notifyReconnectionAnswer(ReconnectionAnswerCommand command, ClientHandler clientHandler) {
 
 		String answer = command.getAnswer();
+		System.out.println(answer);
 
 		if (answer.equals("y")) {
+			System.out.println("S: sono nell if con equals");
 			String username = command.getUsername();
 			String password = command.getPassword();
 			ArrayList<MatchHandler> possibleMatches = getMatchesWithDisconnectedUsers();
@@ -335,10 +337,11 @@ public class Server implements Runnable, ServerInterface {
 				e.printStackTrace();
 			}
 
+			System.out.println("sono prima di u");
 			User u = hasUserSignedUpCorrectly(username, password, users);
 
 			if (u != null) {
-
+				System.out.println("sono nell' if u diverso da null");
 				for (MatchHandler match : possibleMatches) {
 					if(match.hasDisconnectedUser(u)){
 						

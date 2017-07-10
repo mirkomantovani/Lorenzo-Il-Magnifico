@@ -586,7 +586,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private User getUserFromName(String name) {
 		
-		
+		System.out.println("Name : "+ name);
 		System.out.println("MH: getusersfromname: users size:"+users.size());
 		System.out.println("MH: user 1:"+users.get(0).getUsername());
 		System.out.println("MH: user 1:"+users.get(1).getUsername());
@@ -871,8 +871,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
 		for (ClientHandler c : clients) {
-			if (c == clientHandler)
+			if (c == clientHandler){
+				System.out.println("nomini dei clientHandler" + c.getPlayer().getName());
 				return c.getPlayer();
+			}
 		}
 		throw new WrongClientHandlerException();
 

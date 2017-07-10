@@ -143,6 +143,7 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
+				System.out.println("arrivato comando");
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
@@ -167,7 +168,7 @@ public class ClientHandlerSocket extends ClientHandler {
 				
 				commandHandler.notifyNewCommand(command);
 			} else if(command instanceof ReconnectionAnswerCommand){
-				
+				System.out.println("CHS sono dove ce istanceof");
 				serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand)command,this);
 			}
 			//commands that need a check, if they are from the current player they are allowed
