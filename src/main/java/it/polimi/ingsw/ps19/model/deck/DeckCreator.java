@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import it.polimi.ingsw.ps19.LeaderCardRequirement;
-import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.model.LeaderCardRequirement;
+import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.CharacterCard;

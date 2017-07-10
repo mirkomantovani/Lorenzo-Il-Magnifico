@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command.toclient;
 
-import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 /**

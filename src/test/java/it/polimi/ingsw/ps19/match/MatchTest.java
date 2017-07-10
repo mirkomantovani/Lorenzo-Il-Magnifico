@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.MatchFullException;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.MatchFullException;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 

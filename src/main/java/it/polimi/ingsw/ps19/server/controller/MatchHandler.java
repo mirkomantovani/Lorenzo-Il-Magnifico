@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.server.controller;
 
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,12 +14,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.MatchFullException;
-import it.polimi.ingsw.ps19.MatchSaver;
-import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
@@ -51,6 +46,12 @@ import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.MatchFullException;
+import it.polimi.ingsw.ps19.model.MatchSaver;
+import it.polimi.ingsw.ps19.model.Period;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;

@@ -1,0 +1,1697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="68e2d366-8a8c-4379-96fb-4a913d059dbe" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/IndustrialActionTest.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Bonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Bonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Color.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Color.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Dice.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Dice.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/FamilyMember.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/FamilyMember.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/LeaderCardRequirement.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/LeaderCardRequirement.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Match.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Match.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/MatchFullException.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/MatchFullException.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/MatchSaver.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/MatchSaver.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Period.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Period.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/PersonalBonusTile.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/PersonalBonusTile.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/Player.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/InitializeTurnCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/InitializeTurnCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/NotifySatanActionCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/NotifySatanActionCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/OpponentStatusChangeCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/OpponentStatusChangeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/PlayerStatusChangeCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toclient/PlayerStatusChangeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toserver/ActivateLeaderCardCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toserver/ActivateLeaderCardCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toserver/SatanChoiceCommand.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/command/toserver/SatanChoiceCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/Action.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/Action.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/CouncilPalaceAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/CouncilPalaceAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/IndustrialAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/IndustrialAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/MarketAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/MarketAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/TakeCardAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/action/TakeCardAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/ActionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/ActionSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Board.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Board.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/BoardInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/BoardInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Church.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Church.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/CouncilPalace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/CouncilPalace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/HarvestArea.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/HarvestArea.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/IndustrialArea.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/IndustrialArea.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/MultipleActionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/MultipleActionSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Occupable.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/Occupable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/ProductionArea.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/ProductionArea.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/SingleActionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/area/SingleActionSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/BuildingCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/BuildingCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/Card.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/Card.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/CardFactory.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/CardFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/CharacterCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/CharacterCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/DevelopmentCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/DevelopmentCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/LeaderCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/LeaderCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/TerritoryCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/TerritoryCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/VentureCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/card/VentureCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/deck/Deck.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/deck/Deck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/deck/DeckCreator.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/deck/DeckCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/AtomicExchangeEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/AtomicExchangeEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/CharacterImmediateEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/CharacterImmediateEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/CouncilPrivilegeEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/CouncilPrivilegeEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/Effect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/Effect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ForEachResourceTypeEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ForEachResourceTypeEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ForEachTypeCardEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ForEachTypeCardEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/HarvestBonusEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/HarvestBonusEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/HarvestEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/HarvestEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantHarvestActionEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantHarvestActionEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantProductionActionEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantProductionActionEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantResourcesEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/InstantResourcesEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/MultipleEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/MultipleEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/NoEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/NoEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/NoFloorBonusEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/NoFloorBonusEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ProductionBonusEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ProductionBonusEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ProductionEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ProductionEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/RaiseValueWithDiscountEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/RaiseValueWithDiscountEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ResourcesExchangeEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/ResourcesExchangeEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/TakeCardEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/TakeCardEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/CesareBorgiaEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/CesareBorgiaEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/Disapplyable.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/Disapplyable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/FedericoDaMontefeltroEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/FedericoDaMontefeltroEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/FilippoBrunelleschiEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/FilippoBrunelleschiEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LorenzoDeMediciEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LorenzoDeMediciEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LucreziaBorgiaEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LucreziaBorgiaEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LudovicoAriostoEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LudovicoAriostoEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LudovicoIlMoroEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/LudovicoIlMoroEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/PicoDellaMirandolaEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/PicoDellaMirandolaEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SantaRitaEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SantaRitaEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SigismondoMalatestaEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SigismondoMalatestaEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SistoIVEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/effect/leader/SistoIVEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ColoredFamiliarsVariationEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ColoredFamiliarsVariationEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ExcommunicationTile.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ExcommunicationTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ExcommunicationTilesCreator.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ExcommunicationTilesCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsBasedOnResourcesEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsBasedOnResourcesEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsEveryWoodStoneEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsEveryWoodStoneEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsForEveryResourceEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/LosePointsForEveryResourceEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ResourceMalusEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/ResourceMalusEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetNoCardTypeFinalPointsEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetNoCardTypeFinalPointsEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetNoMarketActionEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetNoMarketActionEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetServantsDividerEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetServantsDividerEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetSkipRoundEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model/excommunicationtile/SetSkipRoundEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/ClientHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/ClientHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/ServerCommandHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/ServerCommandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/controller/MatchHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/controller/MatchHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/controller/MatchHandlerObserver.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/controller/MatchHandlerObserver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/observers/MatchObserver.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/observers/MatchObserver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/socket/ClientHandlerSocket.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/server/socket/ClientHandlerSocket.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/UserInterface.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/UserInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/cli/CommandLineInterface.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/cli/CommandLineInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/BoardPanel.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/BoardPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/GamePanel.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/GamePanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/GraphicalUserInterface.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/GraphicalUserInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/MyFrame.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/MyFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/PlayerResources.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/view/gui/PlayerResources.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/files/users.txt" afterPath="$PROJECT_DIR$/src/main/resources/files/users.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/action/ActionTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/action/ActionTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/EffectTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/EffectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/ExcommunicationEffectTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/ExcommunicationEffectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/LeaderEffectTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/effect/LeaderEffectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/match/MatchHandlerTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/match/MatchHandlerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/match/MatchTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps19/match/MatchTest.java" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="JAVA/it.polimi.ingsw.ps19.view" pinned="false" current-in-tab="true">
+        <entry file="uml://JAVA/it.polimi.ingsw.ps19.view">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>it.polimi.ingsw.ps19.view</OriginalElement>
+              <nodes>
+                <node x="254.5" y="441.0">it.polimi.ingsw.ps19.view.cli</node>
+                <node x="485.9583592777085" y="274.0">it.polimi.ingsw.ps19.client</node>
+                <node x="1662.9750847516254" y="822.0">it.polimi.ingsw.ps19.server.socket</node>
+                <node x="1339.7408589317836" y="274.0">it.polimi.ingsw.ps19.server.controller</node>
+                <node x="623.8750259443752" y="588.0">it.polimi.ingsw.ps19.network.NetworkInterfaceFactory</node>
+                <node x="1723.366751418292" y="107.0">it.polimi.ingsw.ps19.server.ServerInterface</node>
+                <node x="50.5" y="441.0">it.polimi.ingsw.ps19.view.gui</node>
+                <node x="1333.6625847516254" y="107.0">it.polimi.ingsw.ps19.utils</node>
+                <node x="385.66258475162545" y="107.0">it.polimi.ingsw.ps19.view.InputObserver</node>
+                <node x="161.21055590148035" y="107.0">it.polimi.ingsw.ps19.view.UserInterface</node>
+                <node x="795.6625847516254" y="107.0">it.polimi.ingsw.ps19.network.NetworkInterface</node>
+                <node x="963.6625847516254" y="441.0">it.polimi.ingsw.ps19.network.rmi</node>
+                <node x="1396.4583592777085" y="0.0">it.polimi.ingsw.ps19.command.toclient</node>
+                <node x="1736.9589992389647" y="685.0">it.polimi.ingsw.ps19.server.Server</node>
+                <node x="1524.366751418292" y="107.0">it.polimi.ingsw.ps19.server.ClientHandler</node>
+                <node x="1024.6625847516254" y="107.0">it.polimi.ingsw.ps19.server.ServerCommandHandler</node>
+                <node x="539.5833333333335" y="441.0">it.polimi.ingsw.ps19.network.ClientSocketInterface</node>
+                <node x="1522.2667773626672" y="588.0">it.polimi.ingsw.ps19.server.rmi</node>
+                <node x="592.6625847516254" y="107.0">it.polimi.ingsw.ps19.command.toserver</node>
+                <node x="977.9583592777085" y="0.0">it.polimi.ingsw.ps19.server.observers</node>
+                <node x="131.3084440293337" y="588.0">it.polimi.ingsw.ps19.view.UserInterfaceFactory</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.ClientHandler">
+                  <point x="27.111111111111086" y="-23.5" />
+                  <point x="1825.0701103500755" y="655.0" />
+                  <point x="1814.0376106960005" y="655.0" />
+                  <point x="1814.0376106960005" y="234.0" />
+                  <point x="1649.666751418292" y="234.0" />
+                  <point x="35.80000000000001" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.UserInterfaceFactory" target="it.polimi.ingsw.ps19.view.gui">
+                  <point x="-58.5" y="-23.5" />
+                  <point x="189.8084440293337" y="568.0" />
+                  <point x="176.5" y="568.0" />
+                  <point x="54.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ServerCommandHandler">
+                  <point x="-88.18181818181813" y="-23.5" />
+                  <point x="1348.5590407499653" y="254.0" />
+                  <point x="1125.1625847516254" y="254.0" />
+                  <point x="-33.5" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.socket">
+                  <point x="0.0" y="23.5" />
+                  <point x="1747.9750847516254" y="889.0" />
+                  <point x="1642.9750847516254" y="889.0" />
+                  <point x="1642.9750847516254" y="845.5" />
+                  <point x="-85.0" y="-0.0" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.ClientSocketInterface" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+                  <point x="79.33333333333337" y="-23.5" />
+                  <point x="737.9166666666669" y="421.0" />
+                  <point x="912.4103881278535" y="421.0" />
+                  <point x="912.4103881278535" y="254.0" />
+                  <point x="899.6625847516254" y="254.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.NetworkInterfaceFactory" target="it.polimi.ingsw.ps19.network.ClientSocketInterface">
+                  <point x="-66.5" y="-23.5" />
+                  <point x="690.3750259443752" y="568.0" />
+                  <point x="658.5833333333335" y="568.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.controller">
+                  <point x="-60.625" y="23.5" />
+                  <point x="1376.1158589317836" y="351.0" />
+                  <point x="1309.7408589317836" y="351.0" />
+                  <point x="1309.7408589317836" y="285.75" />
+                  <point x="-97.0" y="-11.75" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.observers">
+                  <point x="-35.27272727272725" y="-23.5" />
+                  <point x="1401.4681316590563" y="224.0" />
+                  <point x="1303.1625847516254" y="224.0" />
+                  <point x="1303.1625847516254" y="67.0" />
+                  <point x="1141.2916926110418" y="67.0" />
+                  <point x="65.33333333333331" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.command.toserver">
+                  <point x="20.0" y="-23.5" />
+                  <point x="585.9583592777085" y="244.0" />
+                  <point x="684.1625847516254" y="244.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.Server">
+                  <point x="-31.875" y="-23.5" />
+                  <point x="1716.1000847516254" y="752.0" />
+                  <point x="1757.292332572298" y="752.0" />
+                  <point x="-40.666666666666686" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.ClientHandler">
+                  <point x="31.875" y="-23.5" />
+                  <point x="1779.8500847516254" y="782.0" />
+                  <point x="1934.866751418292" y="782.0" />
+                  <point x="1934.866751418292" y="224.0" />
+                  <point x="1685.466751418292" y="224.0" />
+                  <point x="71.60000000000002" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.socket">
+                  <point x="0.0" y="23.5" />
+                  <point x="1797.9589992389647" y="762.0" />
+                  <point x="1737.3500847516254" y="762.0" />
+                  <point x="-10.625" y="-23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ServerInterface">
+                  <point x="88.18181818181819" y="-23.5" />
+                  <point x="1524.9226771136016" y="244.0" />
+                  <point x="1747.116751418292" y="244.0" />
+                  <point x="-71.25" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.client">
+                  <point x="-60.416666666666686" y="-23.5" />
+                  <point x="975.7459180849588" y="411.0" />
+                  <point x="632.6250259443752" y="411.0" />
+                  <point x="66.66666666666674" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.view.cli">
+                  <point x="-50.625" y="23.5" />
+                  <point x="271.375" y="508.0" />
+                  <point x="234.5" y="508.0" />
+                  <point x="234.5" y="480.1666666666667" />
+                  <point x="-67.5" y="15.666666666666686" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.server.controller">
+                  <point x="100.5" y="23.5" />
+                  <point x="1259.1625847516254" y="234.0" />
+                  <point x="1383.8317680226926" y="234.0" />
+                  <point x="-52.90909090909088" y="-23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.Server">
+                  <point x="36.375" y="23.5" />
+                  <point x="1473.1158589317836" y="391.0" />
+                  <point x="1781.0376106960005" y="391.0" />
+                  <point x="1781.0376106960005" y="665.0" />
+                  <point x="1784.403443683409" y="665.0" />
+                  <point x="-13.555555555555543" y="-23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.rmi">
+                  <point x="58.0" y="23.5" />
+                  <point x="1094.1625847516254" y="548.0" />
+                  <point x="1612.8917773626672" y="548.0" />
+                  <point x="18.125" y="-23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.network.rmi">
+                  <point x="-58.0" y="23.5" />
+                  <point x="978.1625847516254" y="508.0" />
+                  <point x="943.6625847516254" y="508.0" />
+                  <point x="943.6625847516254" y="464.5" />
+                  <point x="-72.5" y="-0.0" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.UserInterfaceFactory" target="it.polimi.ingsw.ps19.view.cli">
+                  <point x="58.5" y="-23.5" />
+                  <point x="306.8084440293337" y="568.0" />
+                  <point x="372.625" y="568.0" />
+                  <point x="50.625" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.view.UserInterface">
+                  <point x="-60.0" y="-23.5" />
+                  <point x="505.9583592777085" y="254.0" />
+                  <point x="307.877222568147" y="254.0" />
+                  <point x="58.66666666666666" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.view.InputObserver">
+                  <point x="-20.0" y="-23.5" />
+                  <point x="545.9583592777085" y="244.0" />
+                  <point x="479.16258475162545" y="244.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.controller">
+                  <point x="-53.125" y="-23.5" />
+                  <point x="1694.8500847516254" y="792.0" />
+                  <point x="1447.3709180849587" y="792.0" />
+                  <point x="1447.3709180849587" y="411.0" />
+                  <point x="1424.6158589317836" y="411.0" />
+                  <point x="-12.125" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.view.UserInterface">
+                  <point x="-36.0" y="-23.5" />
+                  <point x="86.5" y="254.0" />
+                  <point x="190.5438892348136" y="254.0" />
+                  <point x="-58.66666666666674" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.client">
+                  <point x="36.0" y="-23.5" />
+                  <point x="158.5" y="411.0" />
+                  <point x="525.9583592777085" y="411.0" />
+                  <point x="-40.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.controller">
+                  <point x="13.555555555555543" y="-23.5" />
+                  <point x="1811.51455479452" y="665.0" />
+                  <point x="1803.0376106960005" y="665.0" />
+                  <point x="1803.0376106960005" y="371.0" />
+                  <point x="1521.6158589317836" y="371.0" />
+                  <point x="84.875" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.ServerInterface">
+                  <point x="53.125" y="-23.5" />
+                  <point x="1801.1000847516254" y="792.0" />
+                  <point x="1945.866751418292" y="792.0" />
+                  <point x="1945.866751418292" y="214.0" />
+                  <point x="1889.616751418292" y="214.0" />
+                  <point x="71.25" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.view.gui">
+                  <point x="18.0" y="23.5" />
+                  <point x="140.5" y="528.0" />
+                  <point x="10.5" y="528.0" />
+                  <point x="10.5" y="448.8333333333333" />
+                  <point x="-72.0" y="-15.666666666666686" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.controller">
+                  <point x="36.25" y="-23.5" />
+                  <point x="1072.4125847516254" y="411.0" />
+                  <point x="1400.3658589317836" y="411.0" />
+                  <point x="-36.375" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.rmi" target="it.polimi.ingsw.ps19.network.rmi">
+                  <point x="-18.125" y="-23.5" />
+                  <point x="1576.6417773626672" y="558.0" />
+                  <point x="1065.1625847516254" y="558.0" />
+                  <point x="29.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.command.toclient">
+                  <point x="67.0" y="-23.5" />
+                  <point x="1225.6625847516254" y="87.0" />
+                  <point x="1440.7083592777085" y="87.0" />
+                  <point x="-44.25" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.command.toclient">
+                  <point x="74.375" y="-23.5" />
+                  <point x="1822.3500847516254" y="802.0" />
+                  <point x="1956.866751418292" y="802.0" />
+                  <point x="1956.866751418292" y="77.0" />
+                  <point x="1558.7083592777085" y="77.0" />
+                  <point x="73.75" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.ServerInterface">
+                  <point x="40.666666666666686" y="-23.5" />
+                  <point x="1838.6256659056312" y="655.0" />
+                  <point x="1851.366751418292" y="655.0" />
+                  <point x="1851.366751418292" y="254.0" />
+                  <point x="1842.116751418292" y="254.0" />
+                  <point x="23.75" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+                  <point x="-36.25" y="-23.5" />
+                  <point x="999.9125847516254" y="401.0" />
+                  <point x="941.2083592777085" y="401.0" />
+                  <point x="941.2083592777085" y="254.0" />
+                  <point x="968.9959180849587" y="254.0" />
+                  <point x="69.33333333333331" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.view.UserInterface">
+                  <point x="-33.75" y="-23.5" />
+                  <point x="288.25" y="254.0" />
+                  <point x="249.21055590148035" y="254.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+                  <point x="60.0" y="-23.5" />
+                  <point x="625.9583592777085" y="254.0" />
+                  <point x="830.3292514182922" y="254.0" />
+                  <point x="-69.33333333333331" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.ClientSocketInterface" target="it.polimi.ingsw.ps19.client">
+                  <point x="-79.33333333333331" y="-23.5" />
+                  <point x="13.333333333333371" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ClientHandler">
+                  <point x="70.54545454545456" y="-23.5" />
+                  <point x="1507.286313477238" y="234.0" />
+                  <point x="1578.0667514182921" y="234.0" />
+                  <point x="-35.8" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.observers">
+                  <point x="-74.375" y="-23.5" />
+                  <point x="1673.6000847516254" y="802.0" />
+                  <point x="0.0" y="802.0" />
+                  <point x="0.0" y="67.0" />
+                  <point x="1010.6250259443752" y="67.0" />
+                  <point x="-65.33333333333331" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.ClientHandler">
+                  <point x="60.416666666666686" y="-23.5" />
+                  <point x="1096.5792514182922" y="421.0" />
+                  <point x="1598.7667514182922" y="421.0" />
+                  <point x="1598.7667514182922" y="234.0" />
+                  <point x="1613.866751418292" y="234.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.command.toclient">
+                  <point x="17.636363636363626" y="-23.5" />
+                  <point x="1454.377222568147" y="204.0" />
+                  <point x="1502.866751418292" y="204.0" />
+                  <point x="1502.866751418292" y="87.0" />
+                  <point x="1470.2083592777085" y="87.0" />
+                  <point x="-14.75" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.client">
+                  <point x="-66.66666666666663" y="23.5" />
+                  <point x="499.29169261104187" y="341.0" />
+                  <point x="465.9583592777085" y="341.0" />
+                  <point x="465.9583592777085" y="297.5" />
+                  <point x="-80.0" y="-0.0" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.command.toclient">
+                  <point x="-12.083333333333314" y="-23.5" />
+                  <point x="1024.0792514182922" y="421.0" />
+                  <point x="1014.1625847516254" y="421.0" />
+                  <point x="1014.1625847516254" y="77.0" />
+                  <point x="1411.2083592777085" y="77.0" />
+                  <point x="-73.75" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.utils" target="it.polimi.ingsw.ps19.utils">
+                  <point x="-50.333333333333336" y="23.5" />
+                  <point x="1358.8292514182922" y="174.0" />
+                  <point x="1313.6625847516254" y="174.0" />
+                  <point x="1313.6625847516254" y="130.5" />
+                  <point x="-75.5" y="-0.0" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.rmi">
+                  <point x="-54.22222222222223" y="-23.5" />
+                  <point x="1743.7367770167423" y="665.0" />
+                  <point x="1558.5167773626672" y="665.0" />
+                  <point x="-36.25" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.rmi" target="it.polimi.ingsw.ps19.server.ServerInterface">
+                  <point x="54.375" y="-23.5" />
+                  <point x="1649.1417773626672" y="568.0" />
+                  <point x="1750.2251106960005" y="568.0" />
+                  <point x="1750.2251106960005" y="254.0" />
+                  <point x="1794.616751418292" y="254.0" />
+                  <point x="-23.75" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.NetworkInterfaceFactory" target="it.polimi.ingsw.ps19.network.rmi">
+                  <point x="66.5" y="-23.5" />
+                  <point x="823.3750259443752" y="568.0" />
+                  <point x="1007.1625847516254" y="568.0" />
+                  <point x="-29.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.utils">
+                  <point x="-17.636363636363626" y="-23.5" />
+                  <point x="1419.1044952954198" y="254.0" />
+                  <point x="1409.1625847516254" y="254.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.command.toclient">
+                  <point x="54.222222222222285" y="-23.5" />
+                  <point x="1852.1812214611869" y="665.0" />
+                  <point x="1923.866751418292" y="665.0" />
+                  <point x="1923.866751418292" y="87.0" />
+                  <point x="1529.2083592777085" y="87.0" />
+                  <point x="44.25" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.server.observers">
+                  <point x="-67.0" y="-23.5" />
+                  <point x="1091.6625847516254" y="67.0" />
+                  <point x="1075.9583592777085" y="67.0" />
+                  <point x="0.0" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.ServerCommandHandler">
+                  <point x="12.083333333333314" y="-23.5" />
+                  <point x="1048.2459180849587" y="421.0" />
+                  <point x="1058.1625847516254" y="421.0" />
+                  <point x="-100.5" y="23.5" />
+                </edge>
+                <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.client">
+                  <point x="33.75" y="-23.5" />
+                  <point x="355.75" y="421.0" />
+                  <point x="552.6250259443751" y="421.0" />
+                  <point x="-13.333333333333371" y="23.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.7868197703444832" x="991.5" y="449.5" />
+              <SelectedNodes />
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1942" />
+    <option name="height" value="1042" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectMJM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjectMJM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps19" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Pictures" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="main" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68e2d366-8a8c-4379-96fb-4a913d059dbe" name="Default" comment="" />
+      <created>1499679076461</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1499679076461</updated>
+      <workItem from="1499679079639" duration="3456000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3456000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">META-INF</node>
+            <node x="" y="">com</node>
+            <node x="" y="">jdk</node>
+            <node x="" y="">netscape</node>
+            <node x="" y="">oracle</node>
+            <node x="" y="">java</node>
+            <node x="" y="">javax</node>
+            <node x="" y="">org</node>
+            <node x="" y="">it</node>
+            <node x="" y="">javafx</node>
+            <node x="" y="">sun</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="216.5" y="253.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram/C:/Users/matteo/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/model</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="517.0" y="369.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/it.polimi.ingsw.ps19.model">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>it.polimi.ingsw.ps19.model</OriginalElement>
+          <nodes>
+            <node x="" y="">it.polimi.ingsw.ps19.model.deck</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.card</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.effect</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.action</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.area</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.excommunicationtile</node>
+            <node x="" y="">it.polimi.ingsw.ps19.model.resource</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="199.0" y="210.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>public</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MODULES/mdl-main">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement>mdl-main</OriginalElement>
+          <nodes>
+            <node x="" y="">mdl-main</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="81.0" y="23.5" />
+          <SelectedNodes />
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps19/IndustrialActionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/it.polimi.ingsw.ps19">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>it.polimi.ingsw.ps19</OriginalElement>
+          <nodes>
+            <node x="182.625" y="476.9130859375">it.polimi.ingsw.ps19.client</node>
+            <node x="0.0" y="359.9130859375">it.polimi.ingsw.ps19.view</node>
+            <node x="0.0" y="665.9130859375">it.polimi.ingsw.ps19.command</node>
+            <node x="206.0" y="244.0">it.polimi.ingsw.ps19.action</node>
+            <node x="206.125" y="573.9130859375">it.polimi.ingsw.ps19.launchers</node>
+            <node x="194.0" y="359.9130859375">it.polimi.ingsw.ps19.network</node>
+            <node x="148.94642857142856" y="0.0">it.polimi.ingsw.ps19.exception</node>
+            <node x="464.125" y="359.9130859375">it.polimi.ingsw.ps19.utils</node>
+            <node x="393.0" y="244.0">it.polimi.ingsw.ps19.match</node>
+            <node x="20.0" y="244.0">it.polimi.ingsw.ps19.server</node>
+            <node x="324.5" y="97.0">it.polimi.ingsw.ps19.model</node>
+            <node x="581.0" y="244.0">it.polimi.ingsw.ps19.effect</node>
+            <node x="245.0" y="665.9130859375">it.polimi.ingsw.ps19.constant</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="it.polimi.ingsw.ps19.model" target="it.polimi.ingsw.ps19.model">
+              <point x="-76.5" y="23.5" />
+              <point x="333.0" y="164.0" />
+              <point x="304.5" y="164.0" />
+              <point x="304.5" y="136.16666666666666" />
+              <point x="-85.0" y="15.666666666666657" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server" target="it.polimi.ingsw.ps19.server">
+              <point x="0.0" y="23.5" />
+              <point x="103.0" y="311.0" />
+              <point x="0.0" y="311.0" />
+              <point x="0.0" y="267.5" />
+              <point x="-83.0" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.network">
+              <point x="0.0" y="-23.5" />
+              <point x="-22.875" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server" target="it.polimi.ingsw.ps19.exception">
+              <point x="-41.5" y="-23.5" />
+              <point x="61.5" y="72.0" />
+              <point x="197.69642857142856" y="72.0" />
+              <point x="-48.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.effect" target="it.polimi.ingsw.ps19.model">
+              <point x="-40.75" y="-23.5" />
+              <point x="621.75" y="214.0" />
+              <point x="469.0" y="214.0" />
+              <point x="59.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.view">
+              <point x="-64.0" y="-23.5" />
+              <point x="198.625" y="456.9130859375" />
+              <point x="38.5" y="456.9130859375" />
+              <point x="-38.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.match" target="it.polimi.ingsw.ps19.model">
+              <point x="-42.0" y="-23.5" />
+              <point x="25.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.action" target="it.polimi.ingsw.ps19.model">
+              <point x="-41.74999999999994" y="-23.5" />
+              <point x="247.75000000000006" y="214.0" />
+              <point x="401.0" y="214.0" />
+              <point x="-8.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.client">
+              <point x="-40.0" y="23.5" />
+              <point x="222.625" y="543.9130859375" />
+              <point x="162.625" y="543.9130859375" />
+              <point x="162.625" y="500.4130859375" />
+              <point x="-80.0" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.utils" target="it.polimi.ingsw.ps19.utils">
+              <point x="0.0" y="23.5" />
+              <point x="539.625" y="426.9130859375" />
+              <point x="444.125" y="426.9130859375" />
+              <point x="444.125" y="383.4130859375" />
+              <point x="-75.5" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.launchers" target="it.polimi.ingsw.ps19.client">
+              <point x="0.0" y="-23.5" />
+              <point x="40.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.model" target="it.polimi.ingsw.ps19.exception">
+              <point x="0.0" y="-23.5" />
+              <point x="409.5" y="72.0" />
+              <point x="295.19642857142856" y="72.0" />
+              <point x="48.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network" target="it.polimi.ingsw.ps19.client">
+              <point x="22.875" y="23.5" />
+              <point x="308.375" y="456.9130859375" />
+              <point x="294.625" y="456.9130859375" />
+              <point x="32.0" y="-23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server" target="it.polimi.ingsw.ps19.model">
+              <point x="41.5" y="-23.5" />
+              <point x="144.5" y="204.0" />
+              <point x="384.0" y="204.0" />
+              <point x="-25.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network" target="it.polimi.ingsw.ps19.network">
+              <point x="-68.625" y="23.5" />
+              <point x="216.875" y="426.9130859375" />
+              <point x="174.0" y="426.9130859375" />
+              <point x="174.0" y="383.4130859375" />
+              <point x="-91.5" y="-0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.6920415224913494" x="611.5" y="568.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>public</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/it.polimi.ingsw.ps19.command">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>it.polimi.ingsw.ps19.command</OriginalElement>
+          <nodes>
+            <node x="" y="">it.polimi.ingsw.ps19.view.cli</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.controller</node>
+            <node x="" y="">it.polimi.ingsw.ps19.view.InputObserver</node>
+            <node x="" y="">it.polimi.ingsw.ps19.view.UserInterface</node>
+            <node x="" y="">it.polimi.ingsw.ps19.network.rmi</node>
+            <node x="" y="">it.polimi.ingsw.ps19.client.ClientCommandHandler</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.Server</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.ClientHandler</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.observers.MatchObserver</node>
+            <node x="" y="">it.polimi.ingsw.ps19.network.ClientSocketInterface</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.rmi</node>
+            <node x="" y="">it.polimi.ingsw.ps19.command.toserver</node>
+            <node x="" y="">it.polimi.ingsw.ps19.view.UserInterfaceFactory</node>
+            <node x="" y="">it.polimi.ingsw.ps19.client.ClientSocketListener</node>
+            <node x="" y="">it.polimi.ingsw.ps19.client.ClientController</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.socket</node>
+            <node x="" y="">it.polimi.ingsw.ps19.view.gui</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.ServerInterface</node>
+            <node x="" y="">it.polimi.ingsw.ps19.network.NetworkInterfaceFactory</node>
+            <node x="" y="">it.polimi.ingsw.ps19.utils</node>
+            <node x="" y="">it.polimi.ingsw.ps19.network.NetworkInterface</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.observers.CommandObserver</node>
+            <node x="" y="">it.polimi.ingsw.ps19.client.ServerToClientCommandObserver</node>
+            <node x="" y="">it.polimi.ingsw.ps19.command.toclient</node>
+            <node x="" y="">it.polimi.ingsw.ps19.server.ServerCommandHandler</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6383151073309032" x="1224.5" y="454.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>public</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/it.polimi.ingsw.ps19.view">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>it.polimi.ingsw.ps19.view</OriginalElement>
+          <nodes>
+            <node x="254.5" y="441.0">it.polimi.ingsw.ps19.view.cli</node>
+            <node x="485.9583592777085" y="274.0">it.polimi.ingsw.ps19.client</node>
+            <node x="1662.9750847516254" y="822.0">it.polimi.ingsw.ps19.server.socket</node>
+            <node x="1339.7408589317836" y="274.0">it.polimi.ingsw.ps19.server.controller</node>
+            <node x="623.8750259443752" y="588.0">it.polimi.ingsw.ps19.network.NetworkInterfaceFactory</node>
+            <node x="1723.366751418292" y="107.0">it.polimi.ingsw.ps19.server.ServerInterface</node>
+            <node x="50.5" y="441.0">it.polimi.ingsw.ps19.view.gui</node>
+            <node x="1333.6625847516254" y="107.0">it.polimi.ingsw.ps19.utils</node>
+            <node x="385.66258475162545" y="107.0">it.polimi.ingsw.ps19.view.InputObserver</node>
+            <node x="161.21055590148035" y="107.0">it.polimi.ingsw.ps19.view.UserInterface</node>
+            <node x="795.6625847516254" y="107.0">it.polimi.ingsw.ps19.network.NetworkInterface</node>
+            <node x="963.6625847516254" y="441.0">it.polimi.ingsw.ps19.network.rmi</node>
+            <node x="1396.4583592777085" y="0.0">it.polimi.ingsw.ps19.command.toclient</node>
+            <node x="1736.9589992389647" y="685.0">it.polimi.ingsw.ps19.server.Server</node>
+            <node x="1524.366751418292" y="107.0">it.polimi.ingsw.ps19.server.ClientHandler</node>
+            <node x="1024.6625847516254" y="107.0">it.polimi.ingsw.ps19.server.ServerCommandHandler</node>
+            <node x="539.5833333333335" y="441.0">it.polimi.ingsw.ps19.network.ClientSocketInterface</node>
+            <node x="1522.2667773626672" y="588.0">it.polimi.ingsw.ps19.server.rmi</node>
+            <node x="592.6625847516254" y="107.0">it.polimi.ingsw.ps19.command.toserver</node>
+            <node x="977.9583592777085" y="0.0">it.polimi.ingsw.ps19.server.observers</node>
+            <node x="131.3084440293337" y="588.0">it.polimi.ingsw.ps19.view.UserInterfaceFactory</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.ClientHandler">
+              <point x="27.111111111111086" y="-23.5" />
+              <point x="1825.0701103500755" y="655.0" />
+              <point x="1814.0376106960005" y="655.0" />
+              <point x="1814.0376106960005" y="234.0" />
+              <point x="1649.666751418292" y="234.0" />
+              <point x="35.80000000000001" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.UserInterfaceFactory" target="it.polimi.ingsw.ps19.view.gui">
+              <point x="-58.5" y="-23.5" />
+              <point x="189.8084440293337" y="568.0" />
+              <point x="176.5" y="568.0" />
+              <point x="54.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ServerCommandHandler">
+              <point x="-88.18181818181813" y="-23.5" />
+              <point x="1348.5590407499653" y="254.0" />
+              <point x="1125.1625847516254" y="254.0" />
+              <point x="-33.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.socket">
+              <point x="0.0" y="23.5" />
+              <point x="1747.9750847516254" y="889.0" />
+              <point x="1642.9750847516254" y="889.0" />
+              <point x="1642.9750847516254" y="845.5" />
+              <point x="-85.0" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.ClientSocketInterface" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+              <point x="79.33333333333337" y="-23.5" />
+              <point x="737.9166666666669" y="421.0" />
+              <point x="912.4103881278535" y="421.0" />
+              <point x="912.4103881278535" y="254.0" />
+              <point x="899.6625847516254" y="254.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.NetworkInterfaceFactory" target="it.polimi.ingsw.ps19.network.ClientSocketInterface">
+              <point x="-66.5" y="-23.5" />
+              <point x="690.3750259443752" y="568.0" />
+              <point x="658.5833333333335" y="568.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.controller">
+              <point x="-60.625" y="23.5" />
+              <point x="1376.1158589317836" y="351.0" />
+              <point x="1309.7408589317836" y="351.0" />
+              <point x="1309.7408589317836" y="285.75" />
+              <point x="-97.0" y="-11.75" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.observers">
+              <point x="-35.27272727272725" y="-23.5" />
+              <point x="1401.4681316590563" y="224.0" />
+              <point x="1303.1625847516254" y="224.0" />
+              <point x="1303.1625847516254" y="67.0" />
+              <point x="1141.2916926110418" y="67.0" />
+              <point x="65.33333333333331" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.command.toserver">
+              <point x="20.0" y="-23.5" />
+              <point x="585.9583592777085" y="244.0" />
+              <point x="684.1625847516254" y="244.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.Server">
+              <point x="-31.875" y="-23.5" />
+              <point x="1716.1000847516254" y="752.0" />
+              <point x="1757.292332572298" y="752.0" />
+              <point x="-40.666666666666686" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.ClientHandler">
+              <point x="31.875" y="-23.5" />
+              <point x="1779.8500847516254" y="782.0" />
+              <point x="1934.866751418292" y="782.0" />
+              <point x="1934.866751418292" y="224.0" />
+              <point x="1685.466751418292" y="224.0" />
+              <point x="71.60000000000002" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.socket">
+              <point x="0.0" y="23.5" />
+              <point x="1797.9589992389647" y="762.0" />
+              <point x="1737.3500847516254" y="762.0" />
+              <point x="-10.625" y="-23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ServerInterface">
+              <point x="88.18181818181819" y="-23.5" />
+              <point x="1524.9226771136016" y="244.0" />
+              <point x="1747.116751418292" y="244.0" />
+              <point x="-71.25" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.client">
+              <point x="-60.416666666666686" y="-23.5" />
+              <point x="975.7459180849588" y="411.0" />
+              <point x="632.6250259443752" y="411.0" />
+              <point x="66.66666666666674" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.view.cli">
+              <point x="-50.625" y="23.5" />
+              <point x="271.375" y="508.0" />
+              <point x="234.5" y="508.0" />
+              <point x="234.5" y="480.1666666666667" />
+              <point x="-67.5" y="15.666666666666686" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.server.controller">
+              <point x="100.5" y="23.5" />
+              <point x="1259.1625847516254" y="234.0" />
+              <point x="1383.8317680226926" y="234.0" />
+              <point x="-52.90909090909088" y="-23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.Server">
+              <point x="36.375" y="23.5" />
+              <point x="1473.1158589317836" y="391.0" />
+              <point x="1781.0376106960005" y="391.0" />
+              <point x="1781.0376106960005" y="665.0" />
+              <point x="1784.403443683409" y="665.0" />
+              <point x="-13.555555555555543" y="-23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.rmi">
+              <point x="58.0" y="23.5" />
+              <point x="1094.1625847516254" y="548.0" />
+              <point x="1612.8917773626672" y="548.0" />
+              <point x="18.125" y="-23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.network.rmi">
+              <point x="-58.0" y="23.5" />
+              <point x="978.1625847516254" y="508.0" />
+              <point x="943.6625847516254" y="508.0" />
+              <point x="943.6625847516254" y="464.5" />
+              <point x="-72.5" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.UserInterfaceFactory" target="it.polimi.ingsw.ps19.view.cli">
+              <point x="58.5" y="-23.5" />
+              <point x="306.8084440293337" y="568.0" />
+              <point x="372.625" y="568.0" />
+              <point x="50.625" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.view.UserInterface">
+              <point x="-60.0" y="-23.5" />
+              <point x="505.9583592777085" y="254.0" />
+              <point x="307.877222568147" y="254.0" />
+              <point x="58.66666666666666" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.view.InputObserver">
+              <point x="-20.0" y="-23.5" />
+              <point x="545.9583592777085" y="244.0" />
+              <point x="479.16258475162545" y="244.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.controller">
+              <point x="-53.125" y="-23.5" />
+              <point x="1694.8500847516254" y="792.0" />
+              <point x="1447.3709180849587" y="792.0" />
+              <point x="1447.3709180849587" y="411.0" />
+              <point x="1424.6158589317836" y="411.0" />
+              <point x="-12.125" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.view.UserInterface">
+              <point x="-36.0" y="-23.5" />
+              <point x="86.5" y="254.0" />
+              <point x="190.5438892348136" y="254.0" />
+              <point x="-58.66666666666674" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.client">
+              <point x="36.0" y="-23.5" />
+              <point x="158.5" y="411.0" />
+              <point x="525.9583592777085" y="411.0" />
+              <point x="-40.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.controller">
+              <point x="13.555555555555543" y="-23.5" />
+              <point x="1811.51455479452" y="665.0" />
+              <point x="1803.0376106960005" y="665.0" />
+              <point x="1803.0376106960005" y="371.0" />
+              <point x="1521.6158589317836" y="371.0" />
+              <point x="84.875" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.ServerInterface">
+              <point x="53.125" y="-23.5" />
+              <point x="1801.1000847516254" y="792.0" />
+              <point x="1945.866751418292" y="792.0" />
+              <point x="1945.866751418292" y="214.0" />
+              <point x="1889.616751418292" y="214.0" />
+              <point x="71.25" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.gui" target="it.polimi.ingsw.ps19.view.gui">
+              <point x="18.0" y="23.5" />
+              <point x="140.5" y="528.0" />
+              <point x="10.5" y="528.0" />
+              <point x="10.5" y="448.8333333333333" />
+              <point x="-72.0" y="-15.666666666666686" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.controller">
+              <point x="36.25" y="-23.5" />
+              <point x="1072.4125847516254" y="411.0" />
+              <point x="1400.3658589317836" y="411.0" />
+              <point x="-36.375" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.rmi" target="it.polimi.ingsw.ps19.network.rmi">
+              <point x="-18.125" y="-23.5" />
+              <point x="1576.6417773626672" y="558.0" />
+              <point x="1065.1625847516254" y="558.0" />
+              <point x="29.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.command.toclient">
+              <point x="67.0" y="-23.5" />
+              <point x="1225.6625847516254" y="87.0" />
+              <point x="1440.7083592777085" y="87.0" />
+              <point x="-44.25" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.command.toclient">
+              <point x="74.375" y="-23.5" />
+              <point x="1822.3500847516254" y="802.0" />
+              <point x="1956.866751418292" y="802.0" />
+              <point x="1956.866751418292" y="77.0" />
+              <point x="1558.7083592777085" y="77.0" />
+              <point x="73.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.ServerInterface">
+              <point x="40.666666666666686" y="-23.5" />
+              <point x="1838.6256659056312" y="655.0" />
+              <point x="1851.366751418292" y="655.0" />
+              <point x="1851.366751418292" y="254.0" />
+              <point x="1842.116751418292" y="254.0" />
+              <point x="23.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+              <point x="-36.25" y="-23.5" />
+              <point x="999.9125847516254" y="401.0" />
+              <point x="941.2083592777085" y="401.0" />
+              <point x="941.2083592777085" y="254.0" />
+              <point x="968.9959180849587" y="254.0" />
+              <point x="69.33333333333331" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.view.UserInterface">
+              <point x="-33.75" y="-23.5" />
+              <point x="288.25" y="254.0" />
+              <point x="249.21055590148035" y="254.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.network.NetworkInterface">
+              <point x="60.0" y="-23.5" />
+              <point x="625.9583592777085" y="254.0" />
+              <point x="830.3292514182922" y="254.0" />
+              <point x="-69.33333333333331" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.ClientSocketInterface" target="it.polimi.ingsw.ps19.client">
+              <point x="-79.33333333333331" y="-23.5" />
+              <point x="13.333333333333371" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.server.ClientHandler">
+              <point x="70.54545454545456" y="-23.5" />
+              <point x="1507.286313477238" y="234.0" />
+              <point x="1578.0667514182921" y="234.0" />
+              <point x="-35.8" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.socket" target="it.polimi.ingsw.ps19.server.observers">
+              <point x="-74.375" y="-23.5" />
+              <point x="1673.6000847516254" y="802.0" />
+              <point x="0.0" y="802.0" />
+              <point x="0.0" y="67.0" />
+              <point x="1010.6250259443752" y="67.0" />
+              <point x="-65.33333333333331" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.ClientHandler">
+              <point x="60.416666666666686" y="-23.5" />
+              <point x="1096.5792514182922" y="421.0" />
+              <point x="1598.7667514182922" y="421.0" />
+              <point x="1598.7667514182922" y="234.0" />
+              <point x="1613.866751418292" y="234.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.command.toclient">
+              <point x="17.636363636363626" y="-23.5" />
+              <point x="1454.377222568147" y="204.0" />
+              <point x="1502.866751418292" y="204.0" />
+              <point x="1502.866751418292" y="87.0" />
+              <point x="1470.2083592777085" y="87.0" />
+              <point x="-14.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.client" target="it.polimi.ingsw.ps19.client">
+              <point x="-66.66666666666663" y="23.5" />
+              <point x="499.29169261104187" y="341.0" />
+              <point x="465.9583592777085" y="341.0" />
+              <point x="465.9583592777085" y="297.5" />
+              <point x="-80.0" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.command.toclient">
+              <point x="-12.083333333333314" y="-23.5" />
+              <point x="1024.0792514182922" y="421.0" />
+              <point x="1014.1625847516254" y="421.0" />
+              <point x="1014.1625847516254" y="77.0" />
+              <point x="1411.2083592777085" y="77.0" />
+              <point x="-73.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.utils" target="it.polimi.ingsw.ps19.utils">
+              <point x="-50.333333333333336" y="23.5" />
+              <point x="1358.8292514182922" y="174.0" />
+              <point x="1313.6625847516254" y="174.0" />
+              <point x="1313.6625847516254" y="130.5" />
+              <point x="-75.5" y="-0.0" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.server.rmi">
+              <point x="-54.22222222222223" y="-23.5" />
+              <point x="1743.7367770167423" y="665.0" />
+              <point x="1558.5167773626672" y="665.0" />
+              <point x="-36.25" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.rmi" target="it.polimi.ingsw.ps19.server.ServerInterface">
+              <point x="54.375" y="-23.5" />
+              <point x="1649.1417773626672" y="568.0" />
+              <point x="1750.2251106960005" y="568.0" />
+              <point x="1750.2251106960005" y="254.0" />
+              <point x="1794.616751418292" y="254.0" />
+              <point x="-23.75" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.NetworkInterfaceFactory" target="it.polimi.ingsw.ps19.network.rmi">
+              <point x="66.5" y="-23.5" />
+              <point x="823.3750259443752" y="568.0" />
+              <point x="1007.1625847516254" y="568.0" />
+              <point x="-29.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.controller" target="it.polimi.ingsw.ps19.utils">
+              <point x="-17.636363636363626" y="-23.5" />
+              <point x="1419.1044952954198" y="254.0" />
+              <point x="1409.1625847516254" y="254.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.Server" target="it.polimi.ingsw.ps19.command.toclient">
+              <point x="54.222222222222285" y="-23.5" />
+              <point x="1852.1812214611869" y="665.0" />
+              <point x="1923.866751418292" y="665.0" />
+              <point x="1923.866751418292" y="87.0" />
+              <point x="1529.2083592777085" y="87.0" />
+              <point x="44.25" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.server.ServerCommandHandler" target="it.polimi.ingsw.ps19.server.observers">
+              <point x="-67.0" y="-23.5" />
+              <point x="1091.6625847516254" y="67.0" />
+              <point x="1075.9583592777085" y="67.0" />
+              <point x="0.0" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.network.rmi" target="it.polimi.ingsw.ps19.server.ServerCommandHandler">
+              <point x="12.083333333333314" y="-23.5" />
+              <point x="1048.2459180849587" y="421.0" />
+              <point x="1058.1625847516254" y="421.0" />
+              <point x="-100.5" y="23.5" />
+            </edge>
+            <edge source="it.polimi.ingsw.ps19.view.cli" target="it.polimi.ingsw.ps19.client">
+              <point x="33.75" y="-23.5" />
+              <point x="355.75" y="421.0" />
+              <point x="552.6250259443751" y="421.0" />
+              <point x="-13.333333333333371" y="23.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.7868197703444832" x="991.5" y="449.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

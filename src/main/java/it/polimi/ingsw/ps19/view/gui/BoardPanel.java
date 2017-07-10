@@ -12,6 +12,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
+import it.polimi.ingsw.ps19.model.Player;
+import it.polimi.ingsw.ps19.model.area.Board;
+import it.polimi.ingsw.ps19.model.card.CardType;
+import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 
 /**

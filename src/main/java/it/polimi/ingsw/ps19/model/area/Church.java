@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Random;
 
-import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreator;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;

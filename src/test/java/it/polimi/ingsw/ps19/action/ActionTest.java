@@ -8,12 +8,12 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.MatchFullException;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.MatchFullException;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;

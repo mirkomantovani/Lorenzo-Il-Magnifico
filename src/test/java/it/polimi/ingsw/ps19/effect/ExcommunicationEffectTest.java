@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ColoredFamiliarsVariationEffect;

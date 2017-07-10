@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.effect.leader.CesareBorgiaEffect;
 import it.polimi.ingsw.ps19.model.effect.leader.FedericoDaMontefeltroEffect;

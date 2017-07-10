@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.server.controller;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.server.ClientHandler;
 
 /**

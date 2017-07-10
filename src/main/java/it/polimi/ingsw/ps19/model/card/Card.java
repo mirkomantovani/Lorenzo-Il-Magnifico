@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.card;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 
 /**
  * The Class Card.

@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 import java.util.List;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.ProductionBonusEffect;

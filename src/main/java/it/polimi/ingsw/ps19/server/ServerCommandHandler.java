@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps19.server;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskMoveCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChatMessageServerCommand;
 import it.polimi.ingsw.ps19.command.toclient.ChooseProductionExchangeEffectsCommand;
@@ -29,6 +26,9 @@ import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.command.toserver.TakeCardCommand;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.CouncilPalaceAction;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;

@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.deck;
 import java.io.Serializable;
 import java.util.Random;
 
-import it.polimi.ingsw.ps19.Period;
+import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 
 /**

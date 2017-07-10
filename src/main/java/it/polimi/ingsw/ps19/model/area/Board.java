@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.ingsw.ps19.Dice;
 import it.polimi.ingsw.ps19.constant.CardConstants;
+import it.polimi.ingsw.ps19.model.Dice;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.BuildingDeck;

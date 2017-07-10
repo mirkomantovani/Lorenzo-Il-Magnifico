@@ -68,7 +68,7 @@ public class Bonus implements Serializable {
 		/** Can only be for territory, venture or character, if you have this boolean set to true you don't get the final victory points for that specific card type Controlled in controller-Final Points Count?. */
 		private Map<CardType,Boolean> noCardTypeFinalPoints;
 		
-		/** 13th excommunication tile, the effect sets the divider to be different than 1 (the original excomm tile would set it to 2 but can be customize TODO problem: if servantsDivider is not equal to 1 the player should onyl be allowed to choose a multiple of servantsDivider (it wouldn't have sense to waste servants). */
+		/** 13th excommunication tile, the effect sets the divider to be different than 1 (the original excomm tile would set it to 2 but can be customize */
 		private int servantsDivider;
 		 
 		 

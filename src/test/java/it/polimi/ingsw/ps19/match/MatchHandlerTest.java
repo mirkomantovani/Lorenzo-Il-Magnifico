@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.MatchFullException;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.FileConstants;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.MatchFullException;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;

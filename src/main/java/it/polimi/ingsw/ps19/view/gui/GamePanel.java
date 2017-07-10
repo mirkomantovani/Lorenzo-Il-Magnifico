@@ -38,9 +38,9 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import it.polimi.ingsw.ps19.Dice;
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Dice;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
@@ -611,7 +611,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 *
 	 * @param familyMembers the family members
 	 */
-	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> familyMembers) {
+	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.model.Color, FamilyMember> familyMembers) {
 		playerResources.refreshFamilyMembers(familyMembers);
 	}
 
