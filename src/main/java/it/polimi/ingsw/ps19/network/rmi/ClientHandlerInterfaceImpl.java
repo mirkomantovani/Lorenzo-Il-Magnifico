@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps19.command.toserver.ChatMessageClientCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.server.ClientHandler;
@@ -35,6 +36,8 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	
 	/** The server command handler. */
 	private ServerCommandHandler serverCommandHandler;
+	
+	private Server serverListener;
 
 	/**
 	 * Instantiates a new client handler interface impl.
@@ -63,6 +66,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	public void notifyServer(ClientToServerCommand command) throws RemoteException {
 		if (command instanceof RequestClosureCommand)
 			closedByClient();
+//		else if (command instanceof ReconnectionAnswerCommand) {
+//			serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand) command, this);
+//		}
 
 		else if (command instanceof SendCredentialsCommand || command instanceof ChosenLeaderCardCommand
 				|| command instanceof ChatMessageClientCommand || command instanceof ChurchSupportCommand)
@@ -170,7 +176,7 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 
 	@Override
 	public void addCommandObserver(Server server) {
-		
+		this.serverListener=server;
 	}
 
 }
