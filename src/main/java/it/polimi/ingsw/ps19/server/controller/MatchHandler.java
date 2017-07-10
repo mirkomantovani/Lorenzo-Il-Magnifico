@@ -616,6 +616,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				clientHandler.addCommandObserver(commandHandler);
 				clientHandler.addObserver(this);
 				
+				
 				try {
 					boolean removed=clients.remove(getRightClientHandler(p));
 					System.out.println("MHHH removed disconnected client returned"+removed);
@@ -1455,6 +1456,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 		}
 
+		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		if (match.getCurrentPlayer().getCouncilPrivilege() != 0) {
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
 

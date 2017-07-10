@@ -3,8 +3,12 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.polimi.ingsw.ps19.client.ClientController;
 import it.polimi.ingsw.ps19.model.Period;
@@ -77,6 +81,17 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeMatch(int numPlayers) {
 		frame.removeInitialImage();
 		frame.initializeGameFrame(numPlayers);
+		
+		try {
+			MyFrame.music();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
+		
 		if(!isSatan){
 		this.addListeners();
 		}

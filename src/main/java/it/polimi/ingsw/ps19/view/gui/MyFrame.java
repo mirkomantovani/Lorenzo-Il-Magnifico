@@ -335,7 +335,7 @@ public class MyFrame extends JFrame {
 				Clip clip = AudioSystem.getClip();
 				clip.open(audio);
 				clip.loop(1);
-				clip.stop();
+//				clip.stop();
 	}
 
 }
