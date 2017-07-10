@@ -37,7 +37,7 @@ public class MyFrame extends JFrame {
 	/** The player color. */
 	private String playerColor;
 	
-	private static Clip clip;
+
 
 	/**
 	 * The main method.
@@ -136,9 +136,8 @@ public class MyFrame extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
-		
 	}
+		
 
 	/**
 	 * Adds the initial panel.
@@ -187,11 +186,18 @@ public class MyFrame extends JFrame {
 	 *
 	 * @param numPlayers the num players
 	 */
-	public void initializeGameFrame(int numPlayers) {
-		gamePanel = new GamePanel(playerColor,numPlayers);
-		setContentPane(gamePanel);
+	public void initializeGameFrame(int numPlayers){
+		
+			try {
+				gamePanel = new GamePanel(playerColor,numPlayers);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			setContentPane(gamePanel);
 
 	}
+	
 
 	/**
 	 * Refresh board.
@@ -321,18 +327,6 @@ public class MyFrame extends JFrame {
 		gamePanel.refreshLeaders(leaderCards);
 	}
 	
-	public static void startMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
-	{
 
-		AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/main/resources/song.wav"));
-				clip = AudioSystem.getClip();
-				clip.open(audio);
-				clip.loop(1);
-
-	}
-	
-	public static void stopMusic(){
-		        clip.stop();
-	}
 
 }

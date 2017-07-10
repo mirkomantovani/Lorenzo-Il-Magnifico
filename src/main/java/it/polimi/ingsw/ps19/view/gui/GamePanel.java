@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
@@ -67,6 +71,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	/** The Constant CHAT_BACKGROUND_COLOR. */
 	private static final Color CHAT_BACKGROUND_COLOR = new Color(245, 200, 86);
+	
+	private Clip clip;
 
 	/** The Constant BACKGROUND_PANELS_COLOR. */
 	private static final Color BACKGROUND_PANELS_COLOR = new Color(204, 153, 51);
@@ -216,7 +222,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 * @param numPlayers
 	 *            the num players
 	 */
-	public GamePanel(String playerColor, int numPlayers) {
+	public GamePanel(String playerColor, int numPlayers) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
 		chosenPrivileges = new ArrayList<String>();
 
@@ -472,6 +478,18 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			buttonsPanel.add(strategyEditorButton);
 			
 		}
+		
+		try {
+			AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/main/resources/song.wav"));
+			clip = AudioSystem.getClip();
+			this.clip.open(audio);
+		} catch (UnsupportedAudioFileException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		musicToggle = new JToggleButton("Start music");
 		musicToggle.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -483,24 +501,25 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 			public void stateChanged(ChangeEvent event) {
 				if (musicToggle.isSelected()) {
 					musicToggle.setText("Stop music");
-					
-						MyFrame.stopMusic();
+					this.startMusic();
+						
 					
 				} else {
 					musicToggle.setText("Start music");
-					try {
-						MyFrame.startMusic();
-					} catch (UnsupportedAudioFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (LineUnavailableException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					this.stopMusic();
+						
+					
 				}
+			}
+
+			private void stopMusic() {
+				clip.stop();
+				
+			}
+
+			private void startMusic() {
+				clip.loop(1);
+				
 			}
 		});
 		buttonsPanel.add(musicToggle);
@@ -530,7 +549,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		familiars = new HashMap<String, FamilyMemberPawn>();
 		dices = new HashMap<String, DicePanel>();
 		createDices();
+		
+	
+		
 	}
+	
+
+
+
 
 	/**
 	 * Adds the card.
@@ -1571,5 +1597,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		blackDisk.setVictoryPointsAmount(99);
 
 	}
-
+	
+	
 }
