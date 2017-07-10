@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;

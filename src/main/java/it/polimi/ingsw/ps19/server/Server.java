@@ -41,6 +41,8 @@ public class Server implements Runnable, ServerInterface {
 
 	/** List of matches created. */
 	private Deque<MatchHandler> createdMatches;
+	
+	private ClientHandler provaReconnectingHandler;
 
 	/**
 	 * A map that stores the futures associated to the execution with
@@ -145,6 +147,8 @@ public class Server implements Runnable, ServerInterface {
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
 
+	
+		
 		if (!disconnectedClientInMatch()) {
 
 			if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
@@ -160,6 +164,8 @@ public class Server implements Runnable, ServerInterface {
 
 		} else {
 			try {
+				executor.submit(clientHandler);
+				clientHandler.addCommandObserver(this);
 				clientHandler.sendCommand(new AskForReconnectionCommand());
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -323,8 +329,10 @@ public class Server implements Runnable, ServerInterface {
 	public void notifyReconnectionAnswer(ReconnectionAnswerCommand command, ClientHandler clientHandler) {
 
 		String answer = command.getAnswer();
+		System.out.println(answer);
 
 		if (answer.equals("y")) {
+			System.out.println("S: sono nell if con equals");
 			String username = command.getUsername();
 			String password = command.getPassword();
 			ArrayList<MatchHandler> possibleMatches = getMatchesWithDisconnectedUsers();
@@ -335,10 +343,11 @@ public class Server implements Runnable, ServerInterface {
 				e.printStackTrace();
 			}
 
+			System.out.println("sono prima di u");
 			User u = hasUserSignedUpCorrectly(username, password, users);
 
 			if (u != null) {
-
+				System.out.println("sono nell' if u diverso da null");
 				for (MatchHandler match : possibleMatches) {
 					if(match.hasDisconnectedUser(u)){
 						

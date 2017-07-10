@@ -314,10 +314,11 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 		
 		if(connChoice.equals("y")){
 			System.out.println("Please insert your name: \n");
-			String name = i.nextLine();
+			String name = i.next();
 			System.out.println("your Password: \n");
-			String pword = i.nextLine();
+			String pword = i.next();
 			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,name,pword));
+			System.out.println("clientcommhandler reconnection command sent");
 		} else 
 			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,null,null));
 		

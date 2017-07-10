@@ -12,8 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
-import it.polimi.ingsw.ps19.constant.ImagesConstants;
-
 public class SatanPanel extends JPanel {
 	private JTextField txtChooseThePlayer;
 	private Image img;

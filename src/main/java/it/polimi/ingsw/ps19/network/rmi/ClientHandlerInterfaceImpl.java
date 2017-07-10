@@ -13,11 +13,10 @@ import it.polimi.ingsw.ps19.command.toserver.ChurchSupportCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
-import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.server.ClientHandler;
+import it.polimi.ingsw.ps19.server.Server;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
-import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 import it.polimi.ingsw.ps19.server.rmi.ServerRMIListener;
 
 /**
@@ -167,6 +166,11 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.serverCommandHandler = commandHandler;
+	}
+
+	@Override
+	public void addCommandObserver(Server server) {
+		
 	}
 
 }

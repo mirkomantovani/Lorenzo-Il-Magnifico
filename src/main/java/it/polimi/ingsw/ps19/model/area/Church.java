@@ -9,7 +9,6 @@ import it.polimi.ingsw.ps19.constant.BoardConstants;
 import it.polimi.ingsw.ps19.constant.CardConstants;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTile;
 import it.polimi.ingsw.ps19.model.excommunicationtile.ExcommunicationTilesCreator;
-import it.polimi.ingsw.ps19.model.resource.MilitaryPoint;
 import it.polimi.ingsw.ps19.model.resource.VictoryPoint;
 
 /**

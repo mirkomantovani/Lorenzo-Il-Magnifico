@@ -13,8 +13,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-import org.hamcrest.core.IsSame;
-
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.Match;
 import it.polimi.ingsw.ps19.MatchFullException;
@@ -585,6 +583,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private User getUserFromName(String name) {
+		
+		System.out.println("Name : "+ name);
+		System.out.println("MH: getusersfromname: users size:"+users.size());
+		System.out.println("MH: user 1:"+users.get(0).getUsername());
+		System.out.println("MH: user 1:"+users.get(1).getUsername());
 		for (User u : users) {
 			if (u.getUsername().equals(name))
 				return u;
@@ -866,8 +869,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 */
 	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
 		for (ClientHandler c : clients) {
-			if (c == clientHandler)
+			if (c == clientHandler){
+				System.out.println("nomini dei clientHandler" + c.getPlayer().getName());
 				return c.getPlayer();
+			}
 		}
 		throw new WrongClientHandlerException();
 
@@ -1532,7 +1537,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 				this.runUpdateFileThread();
 				
-				this.users.add(user.get());
+				setNameToPlayer(playerColor,username);
 
 				userFromColor.put(playerColor, user.get());
 				return true;
@@ -1542,10 +1547,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			User newUser = new User(username, password);
 			this.users.add(newUser);
 			userFromColor.put(playerColor, newUser);
+			setNameToPlayer(playerColor,username);
 
 			return true;
 		}
 
+	}
+
+	private void setNameToPlayer(String playerColor, String username) {
+		getPlayerFromColor(playerColor).setName(username);
 	}
 
 	public void handleSatanChoice(String color) {

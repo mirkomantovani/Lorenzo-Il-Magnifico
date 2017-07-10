@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
-import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 
 
 /**

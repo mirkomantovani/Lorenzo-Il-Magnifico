@@ -1,17 +1,15 @@
 package it.polimi.ingsw.ps19.network.rmi;
 
 import java.rmi.NotBoundException;
-
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-
-import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
-import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 import it.polimi.ingsw.ps19.client.ServerToClientCommandObserver;
+import it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand;
+import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
 import it.polimi.ingsw.ps19.constant.NetworkConstants;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 

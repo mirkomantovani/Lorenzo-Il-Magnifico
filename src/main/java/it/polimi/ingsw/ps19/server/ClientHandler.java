@@ -92,6 +92,8 @@ public abstract void closedByServer() throws RemoteException;
 	 */
 	public abstract void addCommandObserver(ServerCommandHandler commandHandler);
 
+	public abstract void addCommandObserver(Server server);
+
 
 	
 }

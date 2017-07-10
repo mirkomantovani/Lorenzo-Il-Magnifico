@@ -1,8 +1,9 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.Cursor;
+
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
-import java.awt.Cursor;
 
 /**
  * The Class CouncilButton.

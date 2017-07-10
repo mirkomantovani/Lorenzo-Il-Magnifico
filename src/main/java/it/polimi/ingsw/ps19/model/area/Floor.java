@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.model.area;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;

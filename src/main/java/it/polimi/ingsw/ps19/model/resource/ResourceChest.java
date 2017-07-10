@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps19.model.resource;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents a generic resource set, it has a map with key: Resource Type

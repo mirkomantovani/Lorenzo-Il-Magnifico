@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
-import java.awt.LayoutManager;
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.Period;

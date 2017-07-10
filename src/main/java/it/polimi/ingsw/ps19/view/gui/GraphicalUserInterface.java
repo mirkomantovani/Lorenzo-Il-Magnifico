@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.Period;
 import it.polimi.ingsw.ps19.PersonalBonusTile;
 import it.polimi.ingsw.ps19.Player;

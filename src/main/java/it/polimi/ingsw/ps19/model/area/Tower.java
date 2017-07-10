@@ -9,7 +9,6 @@ import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.deck.Deck;
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
-import it.polimi.ingsw.ps19.model.effect.NoEffect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 

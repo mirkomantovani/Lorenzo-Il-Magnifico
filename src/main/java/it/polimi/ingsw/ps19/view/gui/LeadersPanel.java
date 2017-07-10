@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.view.gui;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
