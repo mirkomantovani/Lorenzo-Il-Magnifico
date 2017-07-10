@@ -455,6 +455,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			client.sendCommand(command);
 			lastCommandSent = command;
 		} catch (Exception e) {
+			
 			this.removeClient(client);
 			e.printStackTrace();
 		}
@@ -547,6 +548,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
+			clients.remove(clientHandler);
 			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
