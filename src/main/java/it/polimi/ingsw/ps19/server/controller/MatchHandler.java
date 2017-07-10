@@ -606,15 +606,11 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				disconnectedUsers.remove(user);
 				closedClients.remove(clientHandler);
 				clientHandler.addPlayer(p);
+				clients.add(clientHandler);
 				this.match.reconnectPlayer(p);
 				
 				String color = null;
-				try {
-					color = this.getRightPlayer(clientHandler).getColor();
-				} catch (WrongClientHandlerException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				color=p.getColor();
 			
 			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
 				

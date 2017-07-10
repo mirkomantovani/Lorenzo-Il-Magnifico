@@ -32,7 +32,7 @@ public class NetworkConstants {
 	public static final int MINPLAYERS = 2;
 	
 	/** The Constant SERVER_IP_ADDRESS. */
-	public static final String SERVER_IP_ADDRESS = "127.0.0.1";
+	public static final String SERVER_IP_ADDRESS = "87.5.153.173";
 			//"87.5.153.173";  
 	
 	
