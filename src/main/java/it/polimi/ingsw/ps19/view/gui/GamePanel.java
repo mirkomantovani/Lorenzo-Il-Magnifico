@@ -1123,6 +1123,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 
 		for (int i = 1; i <= board.getPlayerOrder().size(); i++) {
+			if(board.getPlayerOrder().size()==3&&i==3)
+				break;
+			
 			if (board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember() != null) {
 
 				boardPanel.add(this.familiars.get(
@@ -1354,6 +1357,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 */
 	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
 
+		System.out.println("Gamepanel: show choose leader draft");
 		draftPanel.addLeaderCardsWithListener(leaderCards, this);
 		showActionPanel(draftPanel);
 		this.currentActionPanel = draftPanel;
