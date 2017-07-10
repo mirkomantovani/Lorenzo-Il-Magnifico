@@ -613,7 +613,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				color=p.getColor();
 			
 			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
-				
+				sendToClientHandler(new RefreshBoardCommand(this.match.getBoard()), clientHandler);
 				sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
 			} else {
 				System.out.println("getplayerfromname returned NULL");
