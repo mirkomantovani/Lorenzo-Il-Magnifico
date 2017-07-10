@@ -24,7 +24,8 @@ import it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver;
 import it.polimi.ingsw.ps19.server.observers.CommandObserver;
 
 /**
- * The Class that handles the communication between client and server, server-side, via socket
+ * The Class that handles the communication between client and server,
+ * server-side, via socket
  *
  * @author Mirko
  */
@@ -32,33 +33,36 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	/** The socket. */
 	private Socket socket;
-	
+
 	/** The in socket. */
 	private ObjectInputStream inSocket;
-	
+
 	/** The out socket. */
 	private ObjectOutputStream outSocket;
-	
+
 	/** The client number. */
 	private int clientNumber;
-	
+
 	/** The command handler. */
 	private CommandObserver commandHandler;
-	
+
 	/** The creator. */
 	private ServerInterface creator;
-	
+
 	/** The match observer. */
 	private MatchHandlerObserver matchObserver;
-	
+
 	private Server serverListener;
 
 	/**
 	 * Instantiates a new client handler socket.
 	 *
-	 * @param socket the socket
-	 * @param number the number
-	 * @param serverStarter the server starter
+	 * @param socket
+	 *            the socket
+	 * @param number
+	 *            the number
+	 * @param serverStarter
+	 *            the server starter
 	 */
 	public ClientHandlerSocket(Socket socket, int number, ServerInterface serverStarter) {
 		clientNumber = number;
@@ -75,8 +79,12 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.server.ClientHandler#sendCommand(it.polimi.ingsw.ps19.command.toclient.ServerToClientCommand)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * it.polimi.ingsw.ps19.server.ClientHandler#sendCommand(it.polimi.ingsw.
+	 * ps19.command.toclient.ServerToClientCommand)
 	 */
 	@Override
 	public void sendCommand(ServerToClientCommand command) throws IOException {
@@ -85,7 +93,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		outSocket.reset();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByServer()
 	 */
 	@Override
@@ -97,7 +107,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		close();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.polimi.ingsw.ps19.server.ClientHandler#closedByClient()
 	 */
 	@Override
@@ -109,7 +121,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		close();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see it.polimi.ingsw.ps19.server.ClientHandler#isClosed()
 	 */
 	@Override
@@ -132,7 +146,9 @@ public class ClientHandlerSocket extends ClientHandler {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
@@ -144,6 +160,13 @@ public class ClientHandlerSocket extends ClientHandler {
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
 				System.out.println("arrivato comando");
+				
+				if (command instanceof ReconnectionAnswerCommand) {
+					System.out.println("CHS sono dove ce istanceof");
+					serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand) command, this);
+				}
+
+//				System.out.println(command.getClass().getName());
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
@@ -151,31 +174,28 @@ public class ClientHandlerSocket extends ClientHandler {
 			}
 			if (command instanceof RequestClosureCommand)
 				closedByClient();
-			
-			//commands that can be sent in an asyncronous way from the clients and are always valid
-			//and managed by the ServerCommandHandler
-			if(command instanceof SatanChoiceCommand)
+
+			// commands that can be sent in an asyncronous way from the clients
+			// and are always valid
+			// and managed by the ServerCommandHandler
+			if (command instanceof SatanChoiceCommand)
 				System.out.println("\n\nSatan choice command arrived to server\n\n");
-				if(commandHandler == null){
-					System.out.println("commHandler null");
-				}
-			
-			else if(command instanceof SendCredentialsCommand || 
-					command instanceof ChosenLeaderCardCommand ||
-					command instanceof ChatMessageClientCommand ||
-					command instanceof ChurchSupportCommand ||
-					command instanceof SatanChoiceCommand){
-				
-				commandHandler.notifyNewCommand(command);
-			} else if(command instanceof ReconnectionAnswerCommand){
-				System.out.println("CHS sono dove ce istanceof");
-				serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand)command,this);
+			if (commandHandler == null) {
+				System.out.println("commHandler null");
 			}
-			//commands that need a check, if they are from the current player they are allowed
+
+			else if (command instanceof SendCredentialsCommand || command instanceof ChosenLeaderCardCommand
+					|| command instanceof ChatMessageClientCommand || command instanceof ChurchSupportCommand
+					|| command instanceof SatanChoiceCommand) {
+
+				commandHandler.notifyNewCommand(command);
+			} 
+			// commands that need a check, if they are from the current player
+			// they are allowed
 			else if (matchObserver != null && matchObserver.isAllowed(player)) {
 
 				commandHandler.notifyNewCommand(command);
-//				notifyCommand(command);
+				// notifyCommand(command);
 
 			} else if (!matchObserver.isAllowed(player) || matchObserver == null) {
 				try {
@@ -188,26 +208,35 @@ public class ClientHandlerSocket extends ClientHandler {
 
 	}
 
-
-
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addObserver(it.polimi.ingsw.ps19.server.controller.MatchHandlerObserver)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * it.polimi.ingsw.ps19.server.ClientHandler#addObserver(it.polimi.ingsw.
+	 * ps19.server.controller.MatchHandlerObserver)
 	 */
 	@Override
 	public void addObserver(MatchHandlerObserver matchObserver) {
 		this.matchObserver = matchObserver;
 	}
 
-	/* (non-Javadoc)
-	 * @see it.polimi.ingsw.ps19.server.ClientHandler#addCommandObserver(it.polimi.ingsw.ps19.server.ServerCommandHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * it.polimi.ingsw.ps19.server.ClientHandler#addCommandObserver(it.polimi.
+	 * ingsw.ps19.server.ServerCommandHandler)
 	 */
 	@Override
 	public void addCommandObserver(ServerCommandHandler commandHandler) {
 		this.commandHandler = commandHandler;
 	}
-	
-	public void addCommandObserver(Server s){
-		this.serverListener=s;
+
+	@Override
+	public void addCommandObserver(Server server) {
+		this.serverListener=server;
 	}
+
+	
 
 }

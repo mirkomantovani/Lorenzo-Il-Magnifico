@@ -318,6 +318,7 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 			System.out.println("your Password: \n");
 			String pword = i.next();
 			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,name,pword));
+			System.out.println("clientcommhandler reconnection command sent");
 		} else 
 			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,null,null));
 		

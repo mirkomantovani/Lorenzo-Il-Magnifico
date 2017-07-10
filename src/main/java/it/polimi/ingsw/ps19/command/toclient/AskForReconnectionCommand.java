@@ -14,10 +14,8 @@ public class AskForReconnectionCommand extends ServerToClientCommand{
 		try {
 			clientCommandHandler.applyCommand(this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

@@ -41,6 +41,8 @@ public class Server implements Runnable, ServerInterface {
 
 	/** List of matches created. */
 	private Deque<MatchHandler> createdMatches;
+	
+	private ClientHandler provaReconnectingHandler;
 
 	/**
 	 * A map that stores the futures associated to the execution with
@@ -145,6 +147,8 @@ public class Server implements Runnable, ServerInterface {
 	@Override
 	public synchronized void addClient(ClientHandler clientHandler) {
 
+	
+		
 		if (!disconnectedClientInMatch()) {
 
 			if (waitingClients.size() == NetworkConstants.MINPLAYERS - 1)
@@ -160,6 +164,8 @@ public class Server implements Runnable, ServerInterface {
 
 		} else {
 			try {
+				executor.submit(clientHandler);
+				clientHandler.addCommandObserver(this);
 				clientHandler.sendCommand(new AskForReconnectionCommand());
 			} catch (IOException e) {
 				e.printStackTrace();
