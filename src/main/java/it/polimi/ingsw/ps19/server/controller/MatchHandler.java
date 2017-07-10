@@ -548,7 +548,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
-//			clients.remove(clientHandler);
+			//clients.remove(clientHandler);
 			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
