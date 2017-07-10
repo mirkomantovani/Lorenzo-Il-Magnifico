@@ -8,6 +8,10 @@ package it.polimi.ingsw.ps19.exception;
 public class ResourceTypeException extends RuntimeException {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The error. */
 	private final String error = "Resource id is not valid";
 	

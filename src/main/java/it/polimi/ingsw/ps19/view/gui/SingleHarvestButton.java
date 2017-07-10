@@ -12,6 +12,11 @@ import javax.swing.JButton;
  */
 public class SingleHarvestButton extends JButton {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant wDIM_PERC. */
 	private final static double wDIM_PERC = 0.07874015748031496062992125984252;
 	

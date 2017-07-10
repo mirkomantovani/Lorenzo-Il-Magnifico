@@ -24,14 +24,16 @@ import javax.swing.JSlider;
  */
 public class ActionPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The family group. */
 	private ButtonGroup familyGroup;
 
 	/** The radio buttons. */
 	private List<JRadioButton> radioButtons;
-
-	/** The game panel. */
-	private GamePanel gamePanel;
 	
 	/** The slider. */
 	JSlider slider;
@@ -45,8 +47,6 @@ public class ActionPanel extends JPanel {
 	public ActionPanel(GamePanel gamePanel,String playerColor) {
 
 		radioButtons = new ArrayList<JRadioButton>();
-
-		this.gamePanel = gamePanel;
 
 		setBackground(new Color(222, 184, 135));
 		familyGroup = new ButtonGroup();

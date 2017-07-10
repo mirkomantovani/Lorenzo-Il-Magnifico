@@ -5,4 +5,9 @@ package it.polimi.ingsw.ps19.exception;
  */
 public class WrongClientHandlerException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

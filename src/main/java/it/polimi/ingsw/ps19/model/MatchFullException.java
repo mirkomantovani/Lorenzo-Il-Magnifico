@@ -5,4 +5,9 @@ package it.polimi.ingsw.ps19.model;
  */
 public class MatchFullException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

@@ -40,9 +40,6 @@ public class ClientHandlerSocket extends ClientHandler {
 	/** The out socket. */
 	private ObjectOutputStream outSocket;
 
-	/** The client number. */
-	private int clientNumber;
-
 	/** The command handler. */
 	private CommandObserver commandHandler;
 
@@ -65,7 +62,6 @@ public class ClientHandlerSocket extends ClientHandler {
 	 *            the server starter
 	 */
 	public ClientHandlerSocket(Socket socket, int number, ServerInterface serverStarter) {
-		clientNumber = number;
 		this.socket = socket;
 		creator = serverStarter;
 		closed = false;

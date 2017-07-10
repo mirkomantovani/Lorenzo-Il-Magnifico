@@ -23,8 +23,6 @@ public class OrderMarkerDisk extends JPanel{
 	/** The src. */
 	private String src; //red,blue,green,yellow
 	
-	/** The Constant ORDER_DISC_DIAM. */
-	private final static int ORDER_DISC_DIAM = 36;
 	
 	/** The img. */
 	private Image img;
@@ -79,7 +77,7 @@ public class OrderMarkerDisk extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		// Disegno l'immagine sul pannello alle coordinate (0,0)
+
 		g.drawImage(img.getScaledInstance((int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()), 0), 0, 0, this);
 		}
 	
@@ -96,7 +94,7 @@ public class OrderMarkerDisk extends JPanel{
 			this.img = ImageIO.read(getClass().getResource("/"+src+"Disc.png"));
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		this.setBounds(widthRel, heightRel + delta*Ordercounter, (int) (wDIM_PERC*BoardPanel.dimension.getWidth()),(int) (hDIM_PERC*BoardPanel.dimension.getHeight()));

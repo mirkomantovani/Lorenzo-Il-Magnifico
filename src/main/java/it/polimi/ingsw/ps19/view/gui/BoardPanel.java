@@ -75,7 +75,6 @@ public class BoardPanel extends JPanel {
 		System.out.println(dimension.width+" e "+ dimension.height);
 		imgHeight=img.getHeight(null);
 		imgWidth=img.getWidth(null);
-		float ratio=imgWidth/imgHeight;
 		System.out.println(imgHeight+" e "+ imgWidth);
 		img = img.getScaledInstance(dimension.height*imgWidth/imgHeight, dimension.height,
 				Image.SCALE_SMOOTH);

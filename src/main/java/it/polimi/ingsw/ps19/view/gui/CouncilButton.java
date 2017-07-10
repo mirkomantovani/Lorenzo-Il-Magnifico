@@ -13,6 +13,11 @@ import javax.swing.border.BevelBorder;
  */
 public class CouncilButton extends JButton {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant wCOUNCIL. */
 	private final static double wCOUNCIL =0.46281102362204724409448818897638;
 	

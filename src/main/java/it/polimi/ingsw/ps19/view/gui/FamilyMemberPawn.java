@@ -24,9 +24,6 @@ public class FamilyMemberPawn extends JPanel{
 	/** The color. */
 	private String color ;//white,black,neutral,orange
 	
-	/** The Constant DISC_DIAM. */
-	private final static int DISC_DIAM = 36;
-	
 	/** The img. */
 	private Image img;
 	
@@ -102,7 +99,7 @@ public class FamilyMemberPawn extends JPanel{
 			this.img = ImageIO.read(getClass().getResource("/"+player+color+"Familiar.png"));
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		this.setVisible(true);
@@ -243,14 +240,7 @@ public class FamilyMemberPawn extends JPanel{
 		heightRel = (int) (BoardPanel.dimension.getHeight()*hFIRST_SLOT);
 	}
 	
-	/**
-	 * Reset all counters.
-	 */
-	public void ResetAllCounters(){
-		this.productionCounter = 0;
-		this.harvestCounter = 0;
-		this.councilCounter = 0;
-	}
+
 
 
 

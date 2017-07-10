@@ -15,6 +15,11 @@ import javax.swing.SwingConstants;
  */
 public class JResource extends JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The amount. */
 	private int amount;
 	

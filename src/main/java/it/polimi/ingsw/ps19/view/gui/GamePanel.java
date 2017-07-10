@@ -54,6 +54,11 @@ import it.polimi.ingsw.ps19.model.resource.ResourceType;
  */
 public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant CHAT_BACKGROUND_COLOR. */
 	private static final Color CHAT_BACKGROUND_COLOR = new Color(245, 200, 86);
 
