@@ -20,6 +20,11 @@ import javax.swing.JPanel;
 public class EndOrDiscardPanel extends JPanel implements ActionListener {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The end. */
 	private JButton end;
 	

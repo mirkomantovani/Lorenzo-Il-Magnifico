@@ -33,13 +33,6 @@ public class CouncilPalace extends MultipleActionSpace implements Serializable {
 	}
 
 	
-	/**
-	 * Reset palace.
-	 */
-	private void resetPalace(){	
-		this.members.removeAll(members);
-		
-	}
 
 
 	/* (non-Javadoc)

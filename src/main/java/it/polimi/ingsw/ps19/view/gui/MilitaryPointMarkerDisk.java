@@ -18,11 +18,13 @@ import javax.swing.JPanel;
 public class MilitaryPointMarkerDisk extends JPanel{
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The src. */
 	private String src; //red,blue,green,yellow
-	
-	/** The Constant ORDER_DISC_DIAM. */
-	private final static int ORDER_DISC_DIAM = 36;
 	
 	/** The img. */
 	private Image img;

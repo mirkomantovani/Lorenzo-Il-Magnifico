@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Graphics;
+
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.Random;
 
@@ -23,14 +23,8 @@ public class FaithPointMarkerDisk extends JPanel{
 	/** The src. */
 	private String src; //red,blue,green,yellow
 	
-	/** The Constant ORDER_DISC_DIAM. */
-	private final static int ORDER_DISC_DIAM = 36;
-	
 	/** The img. */
 	private Image img;
-	
-	/** The tool. */
-	private transient Toolkit tool = Toolkit.getDefaultToolkit();
 	
 	/** The w count. */
 	static int wCount = 0;
@@ -55,9 +49,6 @@ public class FaithPointMarkerDisk extends JPanel{
 	
 	/** The Constant slotRelDim. */
 	private final static double slotRelDim = 0.03937007874015748031496062992126;
-	
-	/** The Constant offset. */
-	private final static double offset = 0.00065616797900262467191601049868766;
 	
 	/**
 	 * Instantiates a new faith point marker disk.

@@ -18,6 +18,11 @@ import javax.swing.JPanel;
  */
 public class ChooseAction extends JPanel implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The action. */
 	private JButton action;
 	

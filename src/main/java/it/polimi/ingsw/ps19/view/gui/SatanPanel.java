@@ -13,6 +13,10 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 public class SatanPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtChooseThePlayer;
 	private Image img;
 	

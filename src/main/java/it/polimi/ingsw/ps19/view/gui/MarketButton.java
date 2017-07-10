@@ -13,6 +13,11 @@ import javax.swing.JButton;
  */
 public class MarketButton extends JButton {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The width rel. */
 	private int widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
 	
@@ -37,8 +42,6 @@ public class MarketButton extends JButton {
 	/** The Constant hFirstMarket. */
 	private final static double hFirstMarket = 0.79166666666666666666666666666667;
 	
-	/** The tool. */
-	private transient Toolkit tool = Toolkit.getDefaultToolkit();
 	
 	/**
 	 * Instantiates a new market button.

@@ -15,6 +15,10 @@ import it.polimi.ingsw.ps19.model.card.LeaderCard;
  */
 public class LeadersPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The leaders. */
 	private List<JLeaderCard> leaders;
 	
