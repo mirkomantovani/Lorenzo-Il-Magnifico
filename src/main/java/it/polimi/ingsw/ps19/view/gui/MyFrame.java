@@ -36,6 +36,8 @@ public class MyFrame extends JFrame {
 
 	/** The player color. */
 	private String playerColor;
+	
+	private static Clip clip;
 
 	/**
 	 * The main method.
@@ -53,7 +55,6 @@ public class MyFrame extends JFrame {
 					GamePanel gameP = new GamePanel("black",2);
 					frame.setContentPane(gameP);
 					// frame.getGamePanel().addCard();
-					MyFrame.music();
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -137,7 +138,7 @@ public class MyFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		try {
-			MyFrame.music();
+			MyFrame.startMusic();
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -328,14 +329,18 @@ public class MyFrame extends JFrame {
 		gamePanel.refreshLeaders(leaderCards);
 	}
 	
-	public static void music() throws UnsupportedAudioFileException, IOException, LineUnavailableException
+	public static void startMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
 
 		AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/main/resources/song.wav"));
-				Clip clip = AudioSystem.getClip();
+				clip = AudioSystem.getClip();
 				clip.open(audio);
 				clip.loop(1);
-//				clip.stop();
+
+	}
+	
+	public static void stopMusic(){
+		        clip.stop();
 	}
 
 }
