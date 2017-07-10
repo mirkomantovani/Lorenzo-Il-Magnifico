@@ -2,11 +2,9 @@ package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps19.model.card.CardType;
 

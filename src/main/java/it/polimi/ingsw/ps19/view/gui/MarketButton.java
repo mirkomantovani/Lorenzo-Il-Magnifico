@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
 
 /**
  * The Class MarketButton.

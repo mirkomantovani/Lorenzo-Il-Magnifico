@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps19.server.observers;
 
-import it.polimi.ingsw.ps19.command.toserver.ChosenLeaderCardCommand;
 import it.polimi.ingsw.ps19.command.toserver.ClientToServerCommand;
-import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
-import it.polimi.ingsw.ps19.server.ClientHandler;
 
 /**
  * This interface is implemented by ServerCommandHandler, an instance of the

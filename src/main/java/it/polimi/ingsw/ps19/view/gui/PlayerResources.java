@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -19,7 +20,6 @@ import javax.swing.text.html.StyleSheet;
 import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
-import java.awt.Dimension;
 
 /**
  * The panel showing the resources of the player, note that the points aren't shown here

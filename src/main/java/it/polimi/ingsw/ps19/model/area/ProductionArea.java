@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.model.area;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.Player;
