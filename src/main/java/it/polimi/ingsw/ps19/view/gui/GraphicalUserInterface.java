@@ -82,15 +82,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 		frame.removeInitialImage();
 		frame.initializeGameFrame(numPlayers);
 		
-		try {
-			MyFrame.music();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
 		
 		if(!isSatan){
 		this.addListeners();

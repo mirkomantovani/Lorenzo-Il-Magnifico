@@ -137,15 +137,7 @@ public class MyFrame extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
-		try {
-			MyFrame.startMusic();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	/**

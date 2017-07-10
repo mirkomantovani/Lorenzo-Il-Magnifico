@@ -16,12 +16,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,12 +34,15 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import it.polimi.ingsw.ps19.model.Dice;
 import it.polimi.ingsw.ps19.model.FamilyMember;
@@ -73,62 +79,63 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
-	
+
 	/** The text field. */
 	private JTextField textField;
-	
+
 	/** The board panel. */
 	private BoardPanel boardPanel;
 
 	/** The send chat. */
 	private JButton sendChat;
-	
+
 	/** The show personal board. */
 	private JButton showPersonalBoard;
-	
+
 	/** The strategy editor button. */
 	private JButton strategyEditorButton;
-	
+
 	/** The quit game button. */
 	private JButton quitGameButton;
-	
+
 	/** The show leader cards button. */
 	private JButton showLeaderCardsButton;
 
 	/** The first market. */
 	private MarketButton firstMarket;
-	
+
 	/** The second market. */
 	private MarketButton secondMarket;
-	
+
 	/** The third market. */
 	private MarketButton thirdMarket;
-	
+
 	/** The fourth market. */
 	private MarketButton fourthMarket;
-	
+
 	/** The council button. */
 	private CouncilButton councilButton;
-	
+
 	/** The single harvest button. */
 	private SingleHarvestButton singleHarvestButton;
-	
+
 	/** The single production button. */
 	private SingleProductionButton singleProductionButton;
-	
+
 	/** The multiple harvest button. */
 	private MultipleHarvestButton multipleHarvestButton;
-	
+
 	/** The multiple production button. */
 	private MultipleProductionButton multipleProductionButton;
-	
+
+	private JToggleButton musicToggle;
 
 	/** The text area. */
 	private JTextArea textArea;
-	
+
 	/** The player resources. */
 	private PlayerResources playerResources;
-	
+
 	/** The buttons font. */
 	private final Font buttonsFont = new Font("SansSerif", Font.BOLD, 16);
 
@@ -140,33 +147,33 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	/** The action panel. */
 	private ActionPanel actionPanel;
-	
+
 	/** The choose action. */
 	private ChooseAction chooseAction;
-	
+
 	/** The leaders panel. */
 	private LeadersPanel leadersPanel;
-	
+
 	/** The strategy editor. */
 	private StrategyEditor strategyEditor;
-	
+
 	/** The production choices. */
 	private ProductionChoices productionChoices;
-	
+
 	/** The end or discard panel. */
 	private EndOrDiscardPanel endOrDiscardPanel;
-	
+
 	/** The choose privilege panel. */
 	private ChoosePrivilegePanel choosePrivilegePanel;
-	
+
 	/** The choose excommunication panel. */
 	private ChooseExcommunicationPanel chooseExcommunicationPanel;
-	
+
 	private SatanPanel satanPanel;
 
 	/** The draft panel. */
 	private LeadersPanel draftPanel;
-	
+
 	private AskAuthenticationPanel askAuthenticationPanel;
 
 	/** The action constructor. */
@@ -180,36 +187,38 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	/** The order markers. */
 	private List<OrderMarkerDisk> orderMarkers;
-	
+
 	/** The victory markers. */
 	private Map<String, VictoryPointMarkerDisk> victoryMarkers;
-	
+
 	/** The military markers. */
 	private Map<String, MilitaryPointMarkerDisk> militaryMarkers;
-	
+
 	/** The faith markers. */
 	private Map<String, FaithPointMarkerDisk> faithMarkers;
-	
+
 	/** The familiars. */
 	private Map<String, FamilyMemberPawn> familiars; // the key is
-														
-														/** The dices. */
-														// diceColor+playerColor
+
+	/** The dices. */
+	// diceColor+playerColor
 	private Map<String, DicePanel> dices; // (String) diceValue + diceColor
-	
+
 	private int currentNumberOfPrivilege;
-	
+
 	private ArrayList<String> chosenPrivileges;
 
 	/**
 	 * Instantiates a new game panel.
 	 *
-	 * @param playerColor the player color
-	 * @param numPlayers the num players
+	 * @param playerColor
+	 *            the player color
+	 * @param numPlayers
+	 *            the num players
 	 */
 	public GamePanel(String playerColor, int numPlayers) {
-		
-		chosenPrivileges=new ArrayList<String>();
+
+		chosenPrivileges = new ArrayList<String>();
 
 		cards = new ArrayList<CardButton>();
 
@@ -223,8 +232,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		add(boardPanel, BorderLayout.WEST);
 		boardPanel.setLayout(null);
 
-
-		
 		// RIGHT SCROLLBAR
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -304,26 +311,26 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// PLAYER RESOURCES PANEL
 
-		if(!playerColor.equals("black")){
-		playerResources = new PlayerResources(screenDim.width - boardPanel.getPreferredSize().width, playerColor);
+		if (!playerColor.equals("black")) {
+			playerResources = new PlayerResources(screenDim.width - boardPanel.getPreferredSize().width, playerColor);
 
-		rightScrollbarContainer.add(playerResources);
+			rightScrollbarContainer.add(playerResources);
 		}
 
 		// ACTIONS INTERNAL FRAME
 
 		JInternalFrame actionsInternalFrame = new JInternalFrame("Game actions");
-		
-		if(playerColor.equals("black"))
+
+		if (playerColor.equals("black"))
 			actionsInternalFrame.setTitle("Satan panel");
-		if(!playerColor.equals("black"))
-		actionsInternalFrame.getContentPane().setBackground(new Color(160, 82, 45));
-		else 
-		actionsInternalFrame.getContentPane().setBackground(new Color(0, 0, 0));
-		
+		if (!playerColor.equals("black"))
+			actionsInternalFrame.getContentPane().setBackground(new Color(160, 82, 45));
+		else
+			actionsInternalFrame.getContentPane().setBackground(new Color(0, 0, 0));
+
 		actionsInternalFrame.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		actionsInternalFrame.setBounds(new Rectangle(0, 0, 500, 0));
-		
+
 		rightScrollbarContainer.add(actionsInternalFrame);
 		actionsInternalFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -331,144 +338,173 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 		// BUTTONS: Market, council, production and harvest
 
-		if(!playerColor.equals("black")){
-		firstMarket = new MarketButton(1);
-		firstMarket.addActionListener(this);
-		boardPanel.add(firstMarket);
+		if (!playerColor.equals("black")) {
+			firstMarket = new MarketButton(1);
+			firstMarket.addActionListener(this);
+			boardPanel.add(firstMarket);
 
-		secondMarket = new MarketButton(2);
-		secondMarket.addActionListener(this);
-		boardPanel.add(secondMarket);
+			secondMarket = new MarketButton(2);
+			secondMarket.addActionListener(this);
+			boardPanel.add(secondMarket);
 
-		if (numPlayers > 3) {
-			thirdMarket = new MarketButton(3);
-			thirdMarket.addActionListener(this);
-			boardPanel.add(thirdMarket);
+			if (numPlayers > 3) {
+				thirdMarket = new MarketButton(3);
+				thirdMarket.addActionListener(this);
+				boardPanel.add(thirdMarket);
 
-			fourthMarket = new MarketButton(4);
-			fourthMarket.addActionListener(this);
-			boardPanel.add(fourthMarket);
+				fourthMarket = new MarketButton(4);
+				fourthMarket.addActionListener(this);
+				boardPanel.add(fourthMarket);
+			}
+
+			councilButton = new CouncilButton();
+			councilButton.addActionListener(this);
+			boardPanel.add(councilButton);
+
+			singleHarvestButton = new SingleHarvestButton();
+			singleHarvestButton.addActionListener(this);
+			boardPanel.add(singleHarvestButton);
+
+			singleProductionButton = new SingleProductionButton();
+			singleProductionButton.addActionListener(this);
+			boardPanel.add(singleProductionButton);
+
+			if (numPlayers > 2) {
+				multipleHarvestButton = new MultipleHarvestButton();
+				multipleHarvestButton.addActionListener(this);
+				boardPanel.add(multipleHarvestButton);
+
+				multipleProductionButton = new MultipleProductionButton();
+				multipleProductionButton.addActionListener(this);
+				boardPanel.add(multipleProductionButton);
+			}
 		}
-
-		councilButton = new CouncilButton();
-		councilButton.addActionListener(this);
-		boardPanel.add(councilButton);
-
-		singleHarvestButton = new SingleHarvestButton();
-		singleHarvestButton.addActionListener(this);
-		boardPanel.add(singleHarvestButton);
-
-		singleProductionButton = new SingleProductionButton();
-		singleProductionButton.addActionListener(this);
-		boardPanel.add(singleProductionButton);
-
-		if (numPlayers > 2) {
-			multipleHarvestButton = new MultipleHarvestButton();
-			multipleHarvestButton.addActionListener(this);
-			boardPanel.add(multipleHarvestButton);
-
-			multipleProductionButton = new MultipleProductionButton();
-			multipleProductionButton.addActionListener(this);
-			boardPanel.add(multipleProductionButton);
-		}
-		}
-		
-		
 
 		// ACTION PANELS
-		if(!playerColor.equals("black")){
-		actionPanel = new ActionPanel(this, playerColor);
-		if(!playerColor.equals("black"))
-		actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		else
-		actionPanel.setBackground(new Color(0,0,0));
-		actionPanel.setVisible(false);
-		// actionContentPane.add(actionPanel);
+		if (!playerColor.equals("black")) {
+			actionPanel = new ActionPanel(this, playerColor);
+			if (!playerColor.equals("black"))
+				actionPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			else
+				actionPanel.setBackground(new Color(0, 0, 0));
+			actionPanel.setVisible(false);
+			// actionContentPane.add(actionPanel);
 
-		chooseAction = new ChooseAction(this);
-		chooseAction.setBackground(BACKGROUND_PANELS_COLOR);
-		chooseAction.setVisible(false);
-		// actionContentPane.add(chooseAction);
-		// actionsInternalFrame.getContentPane().add(actionPanel);
+			chooseAction = new ChooseAction(this);
+			chooseAction.setBackground(BACKGROUND_PANELS_COLOR);
+			chooseAction.setVisible(false);
+			// actionContentPane.add(chooseAction);
+			// actionsInternalFrame.getContentPane().add(actionPanel);
 
-		strategyEditor = new StrategyEditor();
-		strategyEditor.setVisible(false);
-		// actionContentPane.add(strategyEditor);
+			strategyEditor = new StrategyEditor();
+			strategyEditor.setVisible(false);
+			// actionContentPane.add(strategyEditor);
 
-		endOrDiscardPanel = new EndOrDiscardPanel(this);
-		endOrDiscardPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		endOrDiscardPanel.setVisible(false);
+			endOrDiscardPanel = new EndOrDiscardPanel(this);
+			endOrDiscardPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			endOrDiscardPanel.setVisible(false);
 
-		choosePrivilegePanel = new ChoosePrivilegePanel(screenDim.width - boardPanel.getPreferredSize().width, this);
-		choosePrivilegePanel.setBackground(BACKGROUND_PANELS_COLOR);
-		choosePrivilegePanel.setVisible(false);
+			choosePrivilegePanel = new ChoosePrivilegePanel(screenDim.width - boardPanel.getPreferredSize().width,
+					this);
+			choosePrivilegePanel.setBackground(BACKGROUND_PANELS_COLOR);
+			choosePrivilegePanel.setVisible(false);
 
-		chooseExcommunicationPanel = new ChooseExcommunicationPanel(this);
-		chooseExcommunicationPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		chooseExcommunicationPanel.setVisible(false);
+			chooseExcommunicationPanel = new ChooseExcommunicationPanel(this);
+			chooseExcommunicationPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			chooseExcommunicationPanel.setVisible(false);
 
-		leadersPanel = new LeadersPanel();
-		leadersPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		leadersPanel.setVisible(false);
+			leadersPanel = new LeadersPanel();
+			leadersPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			leadersPanel.setVisible(false);
 
-		draftPanel = new LeadersPanel();
-		draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		draftPanel.setVisible(false);
-		
-		productionChoices=new ProductionChoices(this);
-		productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
-		productionChoices.setVisible(false);
-		
-		askAuthenticationPanel=new AskAuthenticationPanel(this);
-		askAuthenticationPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		askAuthenticationPanel.setVisible(false);
+			draftPanel = new LeadersPanel();
+			draftPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			draftPanel.setVisible(false);
+
+			productionChoices = new ProductionChoices(this);
+			productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
+			productionChoices.setVisible(false);
+
+			askAuthenticationPanel = new AskAuthenticationPanel(this);
+			askAuthenticationPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			askAuthenticationPanel.setVisible(false);
 		}
-		
-		if(playerColor.equals("black")){
-		satanPanel=new SatanPanel(screenDim.width - boardPanel.getPreferredSize().width, this);
-		satanPanel.setBackground(BACKGROUND_PANELS_COLOR);
-		satanPanel.setVisible(false);
+
+		if (playerColor.equals("black")) {
+			satanPanel = new SatanPanel(screenDim.width - boardPanel.getPreferredSize().width, this);
+			satanPanel.setBackground(BACKGROUND_PANELS_COLOR);
+			satanPanel.setVisible(false);
 		}
-		
-		if(numPlayers==5)
-		this.placeSatanDisc();
-		
-		
-		
+
+		if (numPlayers == 5)
+			this.placeSatanDisc();
+
 		// FINAL BUTTONS PANEL
-		
-		
 
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setBackground(new Color(210, 180, 140));
 		rightScrollbarContainer.add(buttonsPanel);
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		if(!playerColor.equals("black")){
 
-		showLeaderCardsButton = new JButton("Show Leader Cards");
-		showLeaderCardsButton.setFont(buttonsFont);
-		showLeaderCardsButton.setForeground(new Color(255, 255, 255));
-		showLeaderCardsButton.setBackground(new Color(102, 51, 51));
-		showLeaderCardsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		showLeaderCardsButton.addActionListener(this);
-		buttonsPanel.add(showLeaderCardsButton);
+		if (!playerColor.equals("black")) {
 
-		showPersonalBoard = new JButton("Show Personal Board");
-		showPersonalBoard.setFont(buttonsFont);
-		showPersonalBoard.setBackground(new Color(102, 51, 51));
-		showPersonalBoard.setForeground(new Color(255, 255, 255));
-		showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonsPanel.add(showPersonalBoard);
+			showLeaderCardsButton = new JButton("Show Leader Cards");
+			showLeaderCardsButton.setFont(buttonsFont);
+			showLeaderCardsButton.setForeground(new Color(255, 255, 255));
+			showLeaderCardsButton.setBackground(new Color(102, 51, 51));
+			showLeaderCardsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			showLeaderCardsButton.addActionListener(this);
+			buttonsPanel.add(showLeaderCardsButton);
 
-		strategyEditorButton = new JButton("Strategy editor");
-		strategyEditorButton.setFont(buttonsFont);
-		strategyEditorButton.setBackground(new Color(102, 51, 51));
-		strategyEditorButton.setForeground(new Color(255, 255, 255));
-		strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		strategyEditorButton.addActionListener(this);
-		buttonsPanel.add(strategyEditorButton);
+			showPersonalBoard = new JButton("Show Personal Board");
+			showPersonalBoard.setFont(buttonsFont);
+			showPersonalBoard.setBackground(new Color(102, 51, 51));
+			showPersonalBoard.setForeground(new Color(255, 255, 255));
+			showPersonalBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			buttonsPanel.add(showPersonalBoard);
+
+			strategyEditorButton = new JButton("Strategy editor");
+			strategyEditorButton.setFont(buttonsFont);
+			strategyEditorButton.setBackground(new Color(102, 51, 51));
+			strategyEditorButton.setForeground(new Color(255, 255, 255));
+			strategyEditorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			strategyEditorButton.addActionListener(this);
+			buttonsPanel.add(strategyEditorButton);
+			
 		}
+
+		musicToggle = new JToggleButton("Start music");
+		musicToggle.setFont(new Font("SansSerif", Font.BOLD, 16));
+		musicToggle.setBackground(new Color(102, 51, 51));
+		musicToggle.setForeground(new Color(255, 255, 255));
+		musicToggle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		musicToggle.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				if (musicToggle.isSelected()) {
+					musicToggle.setText("Stop music");
+					
+						MyFrame.stopMusic();
+					
+				} else {
+					musicToggle.setText("Start music");
+					try {
+						MyFrame.startMusic();
+					} catch (UnsupportedAudioFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		buttonsPanel.add(musicToggle);
+		
 
 		quitGameButton = new JButton("Quit Game");
 		quitGameButton.setFont(buttonsFont);
@@ -499,10 +535,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Adds the card.
 	 *
-	 * @param tower the tower
-	 * @param floor the floor
-	 * @param id the id
-	 * @param descr the descr
+	 * @param tower
+	 *            the tower
+	 * @param floor
+	 *            the floor
+	 * @param id
+	 *            the id
+	 * @param descr
+	 *            the descr
 	 */
 	public void addCard(int tower, int floor, int id, String descr) {
 		if (tower == 1)
@@ -551,7 +591,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Adds the message to console.
 	 *
-	 * @param message the message
+	 * @param message
+	 *            the message
 	 */
 	public void addMessageToConsole(String message) {
 		message = "\n" + message;
@@ -562,7 +603,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Write game message.
 	 *
-	 * @param string the string
+	 * @param string
+	 *            the string
 	 */
 	private void writeGameMessage(String string) {
 		addMessageToConsole("\n<-GAME-> " + string + "\n");
@@ -571,7 +613,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the marker order.
 	 *
-	 * @param markers the new marker order
+	 * @param markers
+	 *            the new marker order
 	 */
 	public void setMarkerOrder(ArrayList<OrderMarkerDisk> markers) {
 		for (OrderMarkerDisk m : markers) {
@@ -605,7 +648,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Adds the resource to player status.
 	 *
-	 * @param resourceInChest the resource in chest
+	 * @param resourceInChest
+	 *            the resource in chest
 	 */
 	public void addResourceToPlayerStatus(Resource resourceInChest) {
 		playerResources.refreshResource(resourceInChest);
@@ -614,7 +658,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Adds the family members to player status.
 	 *
-	 * @param familyMembers the family members
+	 * @param familyMembers
+	 *            the family members
 	 */
 	public void addFamilyMembersToPlayerStatus(HashMap<it.polimi.ingsw.ps19.model.Color, FamilyMember> familyMembers) {
 		playerResources.refreshFamilyMembers(familyMembers);
@@ -640,7 +685,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Show action panel.
 	 *
-	 * @param panel the panel
+	 * @param panel
+	 *            the panel
 	 */
 	private void showActionPanel(Component panel) {
 		// rimuovo tutti gli altri panels
@@ -656,7 +702,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the everyone invisible.
 	 *
-	 * @param components the new everyone invisible
+	 * @param components
+	 *            the new everyone invisible
 	 */
 	private void setEveryoneInvisible(Component[] components) {
 		for (int i = 0; i < components.length; i++)
@@ -683,7 +730,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the observer.
 	 *
-	 * @param GUI the new observer
+	 * @param GUI
+	 *            the new observer
 	 */
 	public void setObserver(GraphicalUserInterface GUI) {
 		this.GUI = GUI;
@@ -700,8 +748,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		this.showActionPanel(actionPanel);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -814,7 +865,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Construct action.
 	 *
-	 * @param market the market
+	 * @param market
+	 *            the market
 	 */
 	private void constructAction(String market) {
 		actionConstructor = new ArrayList<String>();
@@ -861,7 +913,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Construct action.
 	 *
-	 * @param card the card
+	 * @param card
+	 *            the card
 	 */
 	private void constructAction(CardButton card) {
 		// order; 0-member, 1-servants, 2-unused, 3-cardtype,4-floor
@@ -892,7 +945,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		servants = actionPanel.getServants();
 		cardType = "" + tower; // scambio 2 torri centrali
 
-
 		actionConstructor.add(familyMember);
 		actionConstructor.add(servants);
 		actionConstructor.add("takecard");
@@ -903,7 +955,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Invalid input message.
 	 *
-	 * @param string the string
+	 * @param string
+	 *            the string
 	 */
 	private void invalidInputMessage(String string) {
 		this.addMessageToConsole("--INVALID INPUT--: " + string);
@@ -936,7 +989,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		this.showActionPanel(choosePrivilegePanel);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -944,14 +999,14 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		if (e.getSource() instanceof JResource) {
 			String chosenP = ((JResource) e.getSource()).getName();
 			chosenPrivileges.add(chosenP);
-			if(currentNumberOfPrivilege==chosenPrivileges.size()){
-			this.removeActionPanel();
-			
-			this.GUI.notifyChosenPrivilege(chosenP);
-			chosenPrivileges.clear();
-		}
-		} else if(e.getSource() instanceof PlayerColor){
-			
+			if (currentNumberOfPrivilege == chosenPrivileges.size()) {
+				this.removeActionPanel();
+
+				this.GUI.notifyChosenPrivilege(chosenP);
+				chosenPrivileges.clear();
+			}
+		} else if (e.getSource() instanceof PlayerColor) {
+
 			this.removeActionPanel();
 			String playerColor = ((PlayerColor) e.getSource()).getName();
 			System.out.println("Game panel gui notifysatan");
@@ -959,7 +1014,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -967,7 +1024,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -975,7 +1034,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -983,8 +1044,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -994,8 +1058,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Creates the markers.
 	 *
-	 * @param board  This class creates the marker for the order and this should be done only one time at the 
-	 *  beggining of the match
+	 * @param board
+	 *            This class creates the marker for the order and this should be
+	 *            done only one time at the beggining of the match
 	 */
 	public void createMarkers(Board board) {
 		if (orderMarkers.isEmpty()) {
@@ -1018,7 +1083,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Place familiars.
 	 *
-	 * @param board the board
+	 * @param board
+	 *            the board
 	 */
 	public void PlaceFamiliars(Board board) {
 
@@ -1111,7 +1177,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the points markers.
 	 *
-	 * @param p the new points markers
+	 * @param p
+	 *            the new points markers
 	 */
 	public void setPointsMarkers(Player p) {
 
@@ -1126,7 +1193,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Update order.
 	 *
-	 * @param board the board
+	 * @param board
+	 *            the board
 	 */
 	public void updateOrder(Board board) {
 
@@ -1141,7 +1209,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Gets the order from color.
 	 *
-	 * @param color the color
+	 * @param color
+	 *            the color
 	 * @return the order from color
 	 */
 	private OrderMarkerDisk getOrderFromColor(String color) {
@@ -1157,7 +1226,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Populate familiars.
 	 *
-	 * @param board the board
+	 * @param board
+	 *            the board
 	 */
 	public void populateFamiliars(Board board) {
 		if (familiars.isEmpty()) {
@@ -1210,11 +1280,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Show support.
 	 *
-	 * @param showSupportDecision the show support decision
+	 * @param showSupportDecision
+	 *            the show support decision
 	 */
 	public void showSupport(boolean showSupportDecision) {
 		this.GUI.notifyExcommunicationChoice(showSupportDecision);
-		currentActionPanel=null;
+		currentActionPanel = null;
 		this.removeActionPanel();
 
 	}
@@ -1240,7 +1311,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Refresh leaders.
 	 *
-	 * @param leaderCards the leader cards
+	 * @param leaderCards
+	 *            the leader cards
 	 */
 	public void refreshLeaders(Map<String, LeaderCard> leaderCards) {
 		if (!leadersPanel.areLeaderCards(leaderCards.size())) {
@@ -1251,7 +1323,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Show choose leader draft.
 	 *
-	 * @param leaderCards the leader cards
+	 * @param leaderCards
+	 *            the leader cards
 	 */
 	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
 
@@ -1277,7 +1350,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Checks if is contained.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return true if the card with the specified id is contained in the board
 	 */
 	public boolean isContained(int id) {
@@ -1291,8 +1365,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Removes the card.
 	 *
-	 * @param tower the tower
-	 * @param floor the floor
+	 * @param tower
+	 *            the tower
+	 * @param floor
+	 *            the floor
 	 */
 	public void removeCard(int tower, int floor) {
 		if (tower == 1)
@@ -1330,7 +1406,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the leader state.
 	 *
-	 * @param string the new leader state
+	 * @param string
+	 *            the new leader state
 	 */
 	public void setLeaderState(String string) {
 		leaderState = string;
@@ -1339,7 +1416,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the excomm tiles.
 	 *
-	 * @param board the new excomm tiles
+	 * @param board
+	 *            the new excomm tiles
 	 */
 	public void setExcommTiles(Board board) {
 		if (familiars.isEmpty()) {
@@ -1357,7 +1435,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Adds the excommunication cubes.
 	 *
-	 * @param p the p
+	 * @param p
+	 *            the p
 	 */
 	public void addExcommunicationCubes(Player p) {
 		if (p.isExcommunicatedFirst()) {
@@ -1403,7 +1482,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Sets the dices.
 	 *
-	 * @param board the new dices
+	 * @param board
+	 *            the new dices
 	 */
 	public void setDices(Board board) {
 		if (board.getDices().get(Dice.BLACK_DICE) != 0 && board.getDices().get(Dice.WHITE_DICE) != 0
@@ -1437,11 +1517,12 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Notify activate production.
 	 *
-	 * @param choices the choices
+	 * @param choices
+	 *            the choices
 	 */
 	public void notifyActivateProduction(ArrayList<Integer> choices) {
 		this.GUI.notifyActivateProduction(choices);
-		productionChoices=new ProductionChoices(this);
+		productionChoices = new ProductionChoices(this);
 		productionChoices.setBackground(BACKGROUND_PANELS_COLOR);
 		productionChoices.setVisible(false);
 	}
@@ -1449,46 +1530,46 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Show choose production effects.
 	 *
-	 * @param cardsIds the cards ids
+	 * @param cardsIds
+	 *            the cards ids
 	 */
 	public void showChooseProductionEffects(ArrayList<Integer> cardsIds) {
 		productionChoices.addCards(cardsIds);
-		currentActionPanel=productionChoices;
+		currentActionPanel = productionChoices;
 		this.showActionPanel(productionChoices);
-		
+
 	}
 
 	public void showAskAuthentication() {
-		currentActionPanel=askAuthenticationPanel;
+		currentActionPanel = askAuthenticationPanel;
 		this.showActionPanel(askAuthenticationPanel);
 	}
 
 	public void notifyAuthenticateClick(String username, String password) {
-		this.GUI.notifyAuthenticationRequest(username,password);
-		this.currentActionPanel=null;
+		this.GUI.notifyAuthenticationRequest(username, password);
+		this.currentActionPanel = null;
 		this.removeActionPanel();
 	}
 
 	public void setUsername(String username) {
-		this.askAuthenticationPanel=null; //freeing up memory by "invoking" garbage collector
+		this.askAuthenticationPanel = null; // freeing up memory by "invoking"
+											// garbage collector
 		playerResources.setUsername(username);
 	}
 
 	public void setCurrentNumberOfPrivilege(int numberOfPrivilege) {
-		currentNumberOfPrivilege=numberOfPrivilege;
+		currentNumberOfPrivilege = numberOfPrivilege;
 	}
-
 
 	public void showSatanPanel() {
 		showActionPanel(satanPanel);
 	}
-	
-	public void placeSatanDisc(){
+
+	public void placeSatanDisc() {
 		VictoryPointMarkerDisk blackDisk = new VictoryPointMarkerDisk("black");
 		boardPanel.add(blackDisk);
 		blackDisk.setVictoryPointsAmount(99);
 
-		
 	}
-	
+
 }
