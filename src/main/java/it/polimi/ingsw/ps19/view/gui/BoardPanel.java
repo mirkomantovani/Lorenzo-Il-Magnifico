@@ -7,20 +7,11 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.constant.ImagesConstants;
-import it.polimi.ingsw.ps19.model.area.Board;
-import it.polimi.ingsw.ps19.model.card.CardType;
-import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
 
 /**

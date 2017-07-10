@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 

@@ -6,11 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.PersonalBonusTile;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.client.ClientController;
+import it.polimi.ingsw.ps19.model.Period;
+import it.polimi.ingsw.ps19.model.PersonalBonusTile;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;

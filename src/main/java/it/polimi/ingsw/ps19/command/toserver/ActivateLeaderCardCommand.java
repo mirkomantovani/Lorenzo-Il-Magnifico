@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command.toserver;
 
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.server.ServerCommandHandler;
 

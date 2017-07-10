@@ -1,10 +1,8 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import it.polimi.ingsw.ps19.model.card.CardType;

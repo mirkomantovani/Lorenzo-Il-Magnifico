@@ -3,8 +3,8 @@ package it.polimi.ingsw.ps19.model.area;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 
 /**
  * The Interface Occupable exposes some methods to every object of the game occupable

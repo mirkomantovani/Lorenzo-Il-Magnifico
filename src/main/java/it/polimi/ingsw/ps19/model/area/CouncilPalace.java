@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.model.FamilyMember;
 
 /**
  * The Class CouncilPalace.

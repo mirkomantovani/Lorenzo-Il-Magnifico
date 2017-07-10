@@ -1,9 +1,8 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model;
 
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps19.model.effect.InstantResourcesEffect;
-import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
 /**
  * The Class PersonalBonusTile.

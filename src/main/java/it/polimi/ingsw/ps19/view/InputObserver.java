@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.view;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An asynchronous update interface for receiving notifications

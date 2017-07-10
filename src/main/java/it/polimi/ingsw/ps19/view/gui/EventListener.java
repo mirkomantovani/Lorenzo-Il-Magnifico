@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * The listener interface for receiving event events.

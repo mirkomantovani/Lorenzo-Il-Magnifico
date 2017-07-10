@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 
 /**
  * The Class NoEffect was needed in order not to check if a card's effect is null

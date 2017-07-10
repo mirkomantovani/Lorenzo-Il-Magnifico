@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;

@@ -1,8 +1,6 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model;
 
 import it.polimi.ingsw.ps19.constant.CardConstants;
-import it.polimi.ingsw.ps19.exception.NotApplicableException;
-import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.area.HarvestArea;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
 import it.polimi.ingsw.ps19.model.area.ProductionArea;

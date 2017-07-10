@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.excommunicationtile;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;

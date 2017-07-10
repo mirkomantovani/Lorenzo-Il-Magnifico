@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps19.model.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
 import it.polimi.ingsw.ps19.model.area.MultipleActionSpace;

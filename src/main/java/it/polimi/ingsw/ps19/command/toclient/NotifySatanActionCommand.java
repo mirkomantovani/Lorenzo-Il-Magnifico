@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps19.command.toclient;
 
-import it.polimi.ingsw.ps19.Color;
 import it.polimi.ingsw.ps19.client.ClientCommandHandler;
 
 public class NotifySatanActionCommand extends ServerToClientCommand{
