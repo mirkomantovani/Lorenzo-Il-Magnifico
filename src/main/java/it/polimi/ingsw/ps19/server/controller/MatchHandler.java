@@ -597,6 +597,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void reconnectClient(ClientHandler clientHandler, User user) {
+		
+		System.out.println("\nMH reconnecting client");
 		if (isUserInTheGameAndDisconnected(user)) {
 			Player p = match.getPlayerFromName(user.getUsername());
 
@@ -605,6 +607,18 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				closedClients.remove(clientHandler);
 				clientHandler.addPlayer(p);
 				this.match.reconnectPlayer(p);
+				
+				String color = null;
+				try {
+					color = this.getRightPlayer(clientHandler).getColor();
+				} catch (WrongClientHandlerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
+				
+				sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
 			} else {
 				System.out.println("getplayerfromname returned NULL");
 			}
