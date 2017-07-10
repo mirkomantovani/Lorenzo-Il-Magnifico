@@ -613,6 +613,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				disconnectedUsers.remove(user);
 				closedClients.remove(clientHandler);
 				clientHandler.addPlayer(p);
+				clientHandler.addCommandObserver(commandHandler);
+				clientHandler.addObserver(this);
 				
 				try {
 					boolean removed=clients.remove(getRightClientHandler(p));
