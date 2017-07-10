@@ -548,7 +548,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
-			clients.remove(clientHandler);
+//			clients.remove(clientHandler);
 			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
@@ -613,7 +613,16 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				disconnectedUsers.remove(user);
 				closedClients.remove(clientHandler);
 				clientHandler.addPlayer(p);
+				
+				try {
+					boolean removed=clients.remove(getRightClientHandler(p));
+					System.out.println("MHHH removed disconnected client returned"+removed);
+				} catch (WrongPlayerException e) {
+					e.printStackTrace();
+				}
+				
 				clients.add(clientHandler);
+				
 				this.match.reconnectPlayer(p);
 				
 				String color = null;
