@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps19.model;
 
 import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -468,8 +469,13 @@ public class Match implements Serializable{
 		else
 			this.currentPlayer++;
 		
-		if(isDisconnected(currentPlayer))
+		System.out.println("matchhhhh "+players[currentPlayer].getName());
+		if(isDisconnected(currentPlayer)){
+			System.out.println("MATCH");
+			System.out.println(players[currentPlayer].getName());
 			this.setNextPlayer();
+		
+		}
 	}
 
 	/**

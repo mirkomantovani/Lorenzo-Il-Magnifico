@@ -304,10 +304,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
+		System.out.println("setnnnnnext");
 
 		deactivateLeaderCards();
 
 		try {
+			System.out.println("setnnnextinthatry");
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
 			closeMatch();
@@ -368,6 +370,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		stopTimerIfAlive();
 
 		roundNumber++;
+		System.out.println("mando askMove");
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
 	}
@@ -441,6 +444,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ClientHandler client;
 		try {
 			client = getRightClientHandler(player);
+			System.out.println(player.getName());
 		} catch (WrongPlayerException e1) {
 			// System.out.println(e1.getError());
 			// e1.printStackTrace();
@@ -452,6 +456,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			lastCommandSent = command;
 		} catch (Exception e) {
 			this.removeClient(client);
+			e.printStackTrace();
 		}
 
 	}
@@ -613,8 +618,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				color=p.getColor();
 			
 			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
+			    sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
 				sendToClientHandler(new RefreshBoardCommand(this.match.getBoard()), clientHandler);
-				sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
+				
 			} else {
 				System.out.println("getplayerfromname returned NULL");
 			}

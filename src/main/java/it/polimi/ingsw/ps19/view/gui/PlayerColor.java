@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class PlayerColor extends JLabel {
+
 	
 	/**
 	 * 
