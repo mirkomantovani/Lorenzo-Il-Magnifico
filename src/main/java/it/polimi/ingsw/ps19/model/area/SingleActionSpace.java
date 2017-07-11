@@ -94,8 +94,9 @@ public class SingleActionSpace extends ActionSpace{
 		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
 		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + (familyMember.getActionValue() + paidServants));
 		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
+		System.out.println("Final action value " + familyMember.getActionValue() + paidServants + industrialValueVariation);
 		System.out.println("Result:" + (!isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation > this.actionValueRequired));
-		return !isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation> this.actionValueRequired;
+		return !isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation>= this.actionValueRequired;
 
 	}
 	

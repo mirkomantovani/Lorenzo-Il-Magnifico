@@ -72,9 +72,13 @@ public class MultipleActionSpace extends ActionSpace {
 	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialActionVariation) {
 		if(!checkAvailability(familyMember))
 			System.out.println("Non occupabile");
+		System.out.println("Mi devi già far sfasare?");
 		System.out.println("Family member action value: " + familyMember.getActionValue());
 		System.out.println("Action value required " + this.actionValueRequired);
+		System.out.println("Paid servants: " + paidServants);
+		System.out.println("Industrial Action Variation: " + industrialActionVariation);
 		System.out.println("Checkavailabity " + checkAvailability(familyMember));
+		System.out.println("Valore famigliare: " + familyMember.getActionValue() + paidServants + industrialActionVariation);
 		return familyMember.getActionValue() + paidServants + industrialActionVariation> this.actionValueRequired && checkAvailability(familyMember);
 	}
 	

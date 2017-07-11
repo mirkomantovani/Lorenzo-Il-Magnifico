@@ -347,8 +347,8 @@ public class ServerCommandHandler implements CommandObserver {
 				handler.applyAction(new IndustrialAction(member, match.getBoard().getHarvestArea(),
 						match.getBoard().getHarvestArea().getSingleActionSpace(), harvestCommand.getPaidServants()));
 			} catch (NotApplicableException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
+				handler.sendToCurrentPlayer(new AskMoveCommand());
 			}
 		} else {
 			try {
