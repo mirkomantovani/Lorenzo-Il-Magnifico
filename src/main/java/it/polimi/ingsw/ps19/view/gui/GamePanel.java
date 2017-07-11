@@ -1357,6 +1357,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 */
 	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
 
+		System.out.println("Gamepanel: show choose leader draft");
 		draftPanel.addLeaderCardsWithListener(leaderCards, this);
 		showActionPanel(draftPanel);
 		this.currentActionPanel = draftPanel;

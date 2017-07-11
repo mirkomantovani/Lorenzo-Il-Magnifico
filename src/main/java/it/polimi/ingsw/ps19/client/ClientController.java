@@ -65,7 +65,7 @@ public class ClientController implements InputObserver {
 		try {
 			networkInterface.sendCommand(command);
 
-			System.out.println("clientcontro: invio comando al server");
+			System.out.println("clientcontroller: invio"+command.getClass().getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -336,6 +336,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
+		
 		if(leaderCards.size()==4)
 			writeGameMessage("The Leader Draft phase has started!");
 	

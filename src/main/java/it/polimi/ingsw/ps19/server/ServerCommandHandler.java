@@ -377,14 +377,7 @@ public class ServerCommandHandler implements CommandObserver {
 
 	public void applyCommand(ReconnectionAnswerCommand reconnectionAnswerCommand) {
 		
-		
 	}
-
-
-	
-
-	
-	
 	
 	
 	// Others apply overloaded methods

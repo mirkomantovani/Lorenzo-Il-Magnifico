@@ -92,6 +92,7 @@ public class ClientRMIInterface implements ClientInterface, NetworkInterface{
 	@Override
 	public void sendCommand(ClientToServerCommand command) throws Exception {
 		clientHandler.notifyServer(command);
+		
 	}
 
 
