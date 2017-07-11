@@ -203,12 +203,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	}
 
-	private void initExistingMatch(int id) throws FileNotFoundException, ClassNotFoundException, IOException {
-
-		match = MatchSaver.readMatch(id);
-
-		commandHandler = new ServerCommandHandler(this, match);
-	}
+	
 
 	/**
 	 * Communicate colors.
