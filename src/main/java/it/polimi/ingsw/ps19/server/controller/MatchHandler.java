@@ -227,7 +227,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			String color = null;
 			try {
 				color = this.getRightPlayer(c).getColor();
-				System.out.println("player color:" + color);
 			} catch (WrongClientHandlerException e) {
 				e.printStackTrace();
 			}
@@ -294,7 +293,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		if (satanIsPresent) {
 			fifthPlayerClient.addCommandObserver(commandHandler);
-			System.out.println("ho eseguito la add observer");
 			fifthPlayerClient.addObserver(this);
 		}
 
@@ -306,12 +304,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
-		System.out.println("setnnnnnext");
 
 		deactivateLeaderCards();
 
 		try {
-			System.out.println("setnnnextinthatry");
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
 			closeMatch();
@@ -372,7 +368,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		stopTimerIfAlive();
 
 		roundNumber++;
-		System.out.println("mando askMove");
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
 	}
@@ -446,7 +441,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ClientHandler client;
 		try {
 			client = getRightClientHandler(player);
-			System.out.println(player.getName());
 		} catch (WrongPlayerException e1) {
 			// System.out.println(e1.getError());
 			// e1.printStackTrace();
@@ -542,16 +536,13 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	@Override
 	public void removeClient(ClientHandler clientHandler) {
 		
-		System.out.println("MH: removeclient");
 
 		if (!closedClients.contains(clientHandler)) {
 
 			updateGamePlayTime(clientHandler.getPlayer().getColor());
-			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
 			//clients.remove(clientHandler);
-			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
 				addDisconnectedUser(getRightPlayer(clientHandler).getName());
@@ -559,7 +550,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				e2.printStackTrace();
 			}
 			
-			System.out.println("MH: removeclient size"+disconnectedUsers.size());
 
 			try {
 				sendToAllPlayers(new PlayerDisconnectedCommand(getRightPlayer(clientHandler).getColor()));
@@ -570,11 +560,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			try {
 				this.match.addDisconnectedPlayer(getRightPlayer(clientHandler));
 			} catch (MatchFullException e) {
-				// System.out.println("Disconnected more players than the ones
-				// in the game");
-				// e.printStackTrace();
 			} catch (WrongClientHandlerException e) {
-				// e.printStackTrace();
 			}
 
 		}
@@ -582,21 +568,15 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	private void addDisconnectedUser(String userName) {
 		
-		System.out.println("MH: adddisconnecteduser");
 		User u = getUserFromName(userName);
 		if (u != null)
 			disconnectedUsers.add(u);
 		
-		System.out.println("MH: adddisconnecteduser: size:"+disconnectedUsers.size());
 
 	}
 
 	private User getUserFromName(String name) {
 		
-		System.out.println("Name : "+ name);
-		System.out.println("MH: getusersfromname: users size:"+users.size());
-		System.out.println("MH: user 1:"+users.get(0).getUsername());
-		System.out.println("MH: user 1:"+users.get(1).getUsername());
 		for (User u : users) {
 			if (u.getUsername().equals(name))
 				return u;
@@ -607,7 +587,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 	public void reconnectClient(ClientHandler clientHandler, User user) {
 		
-		System.out.println("\nMH reconnecting client");
 		if (isUserInTheGameAndDisconnected(user)) {
 			Player p = match.getPlayerFromName(user.getUsername());
 
@@ -621,7 +600,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				
 				try {
 					boolean removed=clients.remove(getRightClientHandler(p));
-					System.out.println("MHHH removed disconnected client returned"+removed);
 				} catch (WrongPlayerException e) {
 					e.printStackTrace();
 				}
@@ -776,7 +754,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		}
 
 		if (match.isAnyoneStillPlaying()) {
-			System.out.println("qualcuno sta ancora giocando");
 			setNext();
 			nextStep();
 		} else {
@@ -899,7 +876,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getRightPlayer(ClientHandler clientHandler) throws WrongClientHandlerException {
 		for (ClientHandler c : clients) {
 			if (c == clientHandler){
-				System.out.println("nomini dei clientHandler" + c.getPlayer().getName());
 				return c.getPlayer();
 			}
 		}
@@ -917,11 +893,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	private Player getPlayerFromColor(String playerColor) {
 		Player[] players = this.match.getPlayers();
 		for (int i = 0; i < players.length; i++) {
-			System.out.println(playerColor + "/n this is the player" + players[i].getColor());
 			if (players[i].getColor().equals(playerColor))
 				return players[i];
 		}
-		System.out.println("adesso ritorno null porco diiiiii");
 		return null;
 	}
 
@@ -1603,13 +1577,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		// Effect instant=new InstantResourcesEffect(new
 		// ResourceChest(0,0,0,0,0,-amount,0));
 
-		System.out.println(color);
-		System.out.println("\n" + getPlayerFromColor(color).toString());
 
 		int newRes = getPlayerFromColor(color).getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT)
 				.getAmount();
 
-		System.out.println(newRes);
 		newRes = newRes - amount;
 		if (newRes < 0)
 			newRes = 0;
@@ -1618,7 +1589,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 
 		// instant.applyEffect(getPlayerFromColor(color));
 
-		System.out.println("\nhandling satan choice: chosen player:" + color);
 		sendToAllPlayers(new NotifySatanActionCommand(color));
 
 		notifyPlayerStatusChange(getPlayerFromColor(color));
@@ -1626,7 +1596,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public boolean hasDisconnectedPlayer() {
-		System.out.println("MH: hasdisconnectedPlayer: size;"+disconnectedUsers.size());
 		
 		return disconnectedUsers.size()!=0;
 	}

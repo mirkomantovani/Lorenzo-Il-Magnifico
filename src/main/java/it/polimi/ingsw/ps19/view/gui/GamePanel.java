@@ -1050,7 +1050,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 
 			this.removeActionPanel();
 			String playerColor = ((PlayerColor) e.getSource()).getName();
-			System.out.println("Game panel gui notifysatan");
 			this.GUI.notifySatanChoice(playerColor);
 		}
 	}

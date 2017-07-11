@@ -125,15 +125,11 @@ private int tower;
 		cardWidth=newW;
 		cardHeight=newH;
 
-		// System.out.println((int)(ratio*boardPanelPrefSize.height)+"
-		// "+(int)(ratio*1017));
 		img = zoomedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
 
 		setIcon(new ImageIcon(img));
 		
 		
-//		System.out.println("setting bounds: "+applicationPointX+" "+applicationPointY);
-//		setBounds(applicationPointX, applicationPointY, newW, newH);
 
 		this.addMouseListener(this);
 		

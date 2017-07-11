@@ -30,7 +30,6 @@ public class LeaderDeck implements Serializable  {
 	 */
 	public LeaderDeck() throws IOException{
 		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
-		System.out.println("leaderdeck: creato deck tramite deck creator");
 	}
 	
 	/**

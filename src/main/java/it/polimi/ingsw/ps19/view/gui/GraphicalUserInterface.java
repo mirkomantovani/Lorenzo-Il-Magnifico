@@ -585,7 +585,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void authenticatedCorrectly(String username) {
 		writeGameMessage(username+" your authentication was successful");
-		System.out.println("authenticated correctly command arrived");
 		frame.getGamePanel().setUsername(username);
 		frame.getGamePanel().removeActionPanel();
 		

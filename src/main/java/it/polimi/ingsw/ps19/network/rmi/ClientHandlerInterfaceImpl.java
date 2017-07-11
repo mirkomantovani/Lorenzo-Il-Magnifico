@@ -105,13 +105,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 		System.out.println("In ClientHandlerInterfaceImpl addClient function");
 
 		try {
-//			System.out.println("Starting to add the client");
 			Registry registry = LocateRegistry.getRegistry(port);
-//			System.out.println("Accessed the registry at port: " + NetworkConstants.RMICLIENTPORT);
 			client = (ClientInterface) registry.lookup("Client");
-//			System.out.println("Read from the registry");
 			server.addClient(this);
-//			System.out.println("Client has been successfully enqueued"); // Non
 																			// sono
 																			// proprio
 																			// così

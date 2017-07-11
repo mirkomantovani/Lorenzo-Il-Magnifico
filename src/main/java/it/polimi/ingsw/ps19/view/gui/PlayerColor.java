@@ -33,10 +33,6 @@ public class PlayerColor extends JLabel {
 		double w = image.getWidth(null);
 		double h = image.getHeight(null);
 		double ratio = w / h;
-		// System.out.println("wi:"+w+" he:"+h);
-		// System.out.println(""+ratio);
-		// System.out.println("w:"+(int)(rightPanelWidth/9)+"
-		// h:"+(int)(rightPanelWidth/9/ratio));
 
 		Image newimg = image.getScaledInstance((int) (rightPanelWidth / 14), (int) (rightPanelWidth / 14 / ratio),
 				java.awt.Image.SCALE_SMOOTH); // scale it the smooth way

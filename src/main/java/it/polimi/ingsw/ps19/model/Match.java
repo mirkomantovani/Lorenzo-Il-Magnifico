@@ -90,10 +90,8 @@ public class Match implements Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// players = new ArrayList<Player>();
 		players = new Player[numPlayers];
 		disconnectedPlayers=new ArrayList<Player>();
-//		System.out.println("Match: sono stato creato e ho" + numPlayers + " giocatori");
 
 		playercolors = new String[numPlayers];
 
@@ -102,7 +100,6 @@ public class Match implements Serializable{
 		try {
 			leaderCards = new LeaderDeck();
 
-			System.out.println("match: creato oggetto leaderdeck");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,7 +150,6 @@ public class Match implements Serializable{
 	public void addDisconnectedPlayer(Player p) throws MatchFullException{
 		if(!isDisconnected(p)){
 		
-		System.out.println("\nmatch, adddisconnectedPlayer");
 			
 		if (disconnectedPlayers.size() == players.length)
 			throw new MatchFullException();
@@ -311,13 +307,6 @@ public class Match implements Serializable{
 	 * @return true, if is applicable
 	 */
 	public boolean isApplicable(DevelopmentCard card, FamilyMember fm, Player player, int paidServants) {
-		// System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO
-		// CONTROLLANDO LA CARTA: !" + card.toString());
-		// System.out.println("action value fm: " + fm.getActionValue());
-		// System.out.println("players bonuses: " +
-		// player.getBonuses().getActivationVariation(card.getCardType()));
-		// System.out.println("card activation cost" +
-		// card.getActivationCost());
 		return (fm.getActionValue() + player.getBonuses().getActivationVariation(card.getCardType())
 				+ paidServants >= card.getActivationCost());
 	}
@@ -430,9 +419,7 @@ public class Match implements Serializable{
 	 * Handle periods and turns.
 	 */
 	public void handlePeriodsAndTurns() {
-		System.out.println("MATCH: SONO IN HANDLEPERIODSANDTURN");
 		incrementTurn();
-		System.out.println("turno incrementato :" + this.turn);
 		if (this.turn == 1)
 			this.period = Period.FIRST;
 		else if (this.turn == 3)
@@ -469,10 +456,7 @@ public class Match implements Serializable{
 		else
 			this.currentPlayer++;
 		
-		System.out.println("matchhhhh "+players[currentPlayer].getName());
 		if(isDisconnected(currentPlayer)){
-			System.out.println("MATCH");
-			System.out.println(players[currentPlayer].getName());
 			this.setNextPlayer();
 		
 		}
@@ -487,13 +471,6 @@ public class Match implements Serializable{
 	private boolean isDisconnected(int currentPlayer) {
 		
 		return this.disconnectedPlayers.contains(players[currentPlayer]);
-//		for(int i=0;i<disconnectedPlayers.length;i++){
-//			if(players[currentPlayer]==disconnectedPlayers[i]){
-//				System.out.println("MATCH: player is disconnected, setting nextplayer");
-//				return true;
-//			}
-//		}
-//		return false;
 	}
 	
 	public Player getSatan(){

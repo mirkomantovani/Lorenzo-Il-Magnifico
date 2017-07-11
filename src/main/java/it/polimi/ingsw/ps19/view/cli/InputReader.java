@@ -41,7 +41,6 @@ public class InputReader implements Runnable{
 		while(true){
 			try {
 				input = reader.readLine();
-				System.out.println("InputReader: ho letto input: "+ input);
 				notifyListeners(input);	
 			} catch (IOException e) {
 				System.out.println("Unable to read the input");

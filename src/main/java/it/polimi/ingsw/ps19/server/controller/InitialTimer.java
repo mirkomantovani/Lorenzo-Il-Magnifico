@@ -38,7 +38,6 @@ public class InitialTimer implements Runnable {
 		try {
 			Thread.sleep(this.millis);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		creator.timerExpired();
 

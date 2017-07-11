@@ -110,7 +110,6 @@ public class MilitaryPointMarkerDisk extends JPanel{
 	public void setMilitaryPointsAmount(int amount){
 		Random random = new Random();
 		int n = random.nextInt(30);
-		System.out.println("military amount:" + amount);
 		if(amount>25){
 			amount = 25;
 		}

@@ -68,7 +68,6 @@ public class ClientSocketInterface implements NetworkInterface {
 	@Override
 	public void sendCommand(ClientToServerCommand command) {
 		
-		System.out.println("clisocket: invio comando");
 		try {
 			outSocket.writeObject(command); 
 			outSocket.flush();
