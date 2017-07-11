@@ -7,8 +7,10 @@ import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.model.Color;
 import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
+import it.polimi.ingsw.ps19.model.area.HarvestArea;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
 import it.polimi.ingsw.ps19.model.area.MultipleActionSpace;
+import it.polimi.ingsw.ps19.model.area.ProductionArea;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -92,9 +94,9 @@ public class IndustrialAction extends Action {
 		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
 		//Wow.. such a bad programming, but now it's too late to make things look and work better. I feel so sorry about that
 		if(actionSpace instanceof MultipleActionSpace)
-			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants);
+			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
 		else if(actionSpace instanceof SingleActionSpace)
-			return ((SingleActionSpace) actionSpace).isOccupable(familyMember, paidServants);
+			return ((SingleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
 		return actionSpace.isOccupable(this.familyMember);
 		//This method almost doesn't make any sense
 	}

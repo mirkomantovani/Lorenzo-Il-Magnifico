@@ -56,4 +56,9 @@ public class HarvestArea extends IndustrialArea{
 		
 	}
 
+	@Override
+	public CardType getAssociatedCardType() {
+		return CardType.TERRITORY;
+	}
+
 }

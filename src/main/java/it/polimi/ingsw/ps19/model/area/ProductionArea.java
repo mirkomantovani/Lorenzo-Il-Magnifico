@@ -46,5 +46,10 @@ public class ProductionArea extends IndustrialArea{
 		
 		return builder.toString();
 	}
+
+	@Override
+	public CardType getAssociatedCardType() {
+		return CardType.BUILDING;
+	}
 	
 }

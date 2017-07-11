@@ -7,11 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.polimi.ingsw.ps19.client.ClientController;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.PersonalBonusTile;
 import it.polimi.ingsw.ps19.model.Player;
@@ -617,6 +619,25 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifySatanChoice(String playerColor) {
 		gameController.notifySatanChoice(playerColor);
+	}
+
+	@Override
+	public void requestReconnection() {
+		Scanner i=new Scanner(System.in);
+		System.out.println("Would you join an existing Match? (y/n)\n");
+
+		String connChoice = i.next();
+
+		if(connChoice.equals("y")){
+			System.out.println("Please insert your name: \n");
+			String name = i.next();
+			System.out.println("your Password: \n");
+			String pword = i.next();
+			gameController.notifyReconnectionRequest(connChoice,name,pword);
+			System.out.println("clientcommhandler reconnection command sent");
+		} else 
+			gameController.notifyReconnectionRequest(connChoice,null,null);
+
 	}
 
 }

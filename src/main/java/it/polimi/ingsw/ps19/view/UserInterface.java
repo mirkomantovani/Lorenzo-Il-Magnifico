@@ -16,7 +16,7 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * @author Mirko
  */
 public interface UserInterface {
-
+	
 	
 	/**
 	 * Start draft.
@@ -186,6 +186,8 @@ public interface UserInterface {
 	public void askSatanMove();
 
 	public void displaySatanAction(String color);
+	
+	public void requestReconnection();
 
 
 }

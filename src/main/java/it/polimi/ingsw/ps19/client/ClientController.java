@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps19.command.toserver.PlaceIntoMarketCommand;
 import it.polimi.ingsw.ps19.command.toserver.PlayerMoveCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionActivationCommand;
 import it.polimi.ingsw.ps19.command.toserver.ProductionCommand;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.command.toserver.RequestClosureCommand;
 import it.polimi.ingsw.ps19.command.toserver.SatanChoiceCommand;
 import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
@@ -321,6 +322,11 @@ public class ClientController implements InputObserver {
 
 	public void notifySatanChoice(String playerColor) {
 		sendCommand(new SatanChoiceCommand(playerColor));
+	}
+	
+	@Override
+	public void notifyReconnectionRequest(String response, String username, String password){
+		sendCommand(new ReconnectionAnswerCommand(response, username, password));
 	}
 
 }

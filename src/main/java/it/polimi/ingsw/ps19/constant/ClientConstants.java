@@ -62,12 +62,25 @@ public class ClientConstants {
 	/** The Constant SEND_ACTIVATED_LEADER_CARD. */
 	public static final int SEND_ACTIVATED_LEADER_CARD = 17;
 
+	/** The Constant SEND_PUNISHED_PLAYER. */
+	public static final int SEND_PUNISHED_PLAYER = 18;
+
+	/** The Constant SEND_REQUEST_RECONNECTION. */
+	public static final int SEND_REQUEST_RECONNECTION = 19;
+
+	/** The Constant SEND_RECONNECTION_NAME. */
+	public static final int SEND_RECONNECTION_NAME = 20;
+
+	/** The Constant SEND_RECONNECTION_PASSWORD. */
+	public static final int SEND_RECONNECTION_PASSWORD = 21;
+
 
 
 
 	
 	/**
-	 * Instantiates a new client constants.
+	 * Instantiates a new client constants, we only need its static attributes.
+	 * so its private not to let this class to be instantiated
 	 */
 	private ClientConstants(){
 	}
