@@ -66,9 +66,9 @@ public class ClientHandlerInterfaceImpl extends ClientHandler implements ClientH
 	public void notifyServer(ClientToServerCommand command) throws RemoteException {
 		if (command instanceof RequestClosureCommand)
 			closedByClient();
-//		else if (command instanceof ReconnectionAnswerCommand) {
-//			serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand) command, this);
-//		}
+		else if (command instanceof ReconnectionAnswerCommand) {
+			serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand) command, this);
+		}
 
 		else if (command instanceof SendCredentialsCommand || command instanceof ChosenLeaderCardCommand
 				|| command instanceof ChatMessageClientCommand || command instanceof ChurchSupportCommand)

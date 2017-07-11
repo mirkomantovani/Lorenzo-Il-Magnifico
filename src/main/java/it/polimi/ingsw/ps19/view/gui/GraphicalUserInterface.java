@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -244,19 +245,38 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void refreshBoard(Board board) {
-		
-		frame.refreshBoard(board);
-		// frame.pack();
-		 OrderMarkerDisk.Ordercounter = 0;
-		frame.getGamePanel().setExcommTiles(board);
-		frame.getGamePanel().populateFamiliars(board);
-		frame.getGamePanel().createMarkers(board);
-		frame.getGamePanel().removeDicesAndMarkers();
-		frame.getGamePanel().updateOrder(board);
-		frame.getGamePanel().PlaceFamiliars(board);
-		frame.getGamePanel().setDices(board);
-		
-		frame.getGamePanel().repaintBoard();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.refreshBoard(board);
+					// frame.pack();
+					 OrderMarkerDisk.Ordercounter = 0;
+					frame.getGamePanel().setExcommTiles(board);
+					frame.getGamePanel().populateFamiliars(board);
+					frame.getGamePanel().createMarkers(board);
+					frame.getGamePanel().removeDicesAndMarkers();
+					frame.getGamePanel().updateOrder(board);
+					frame.getGamePanel().PlaceFamiliars(board);
+					frame.getGamePanel().setDices(board);
+					
+					frame.getGamePanel().repaintBoard();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		frame.refreshBoard(board);
+//		// frame.pack();
+//		 OrderMarkerDisk.Ordercounter = 0;
+//		frame.getGamePanel().setExcommTiles(board);
+//		frame.getGamePanel().populateFamiliars(board);
+//		frame.getGamePanel().createMarkers(board);
+//		frame.getGamePanel().removeDicesAndMarkers();
+//		frame.getGamePanel().updateOrder(board);
+//		frame.getGamePanel().PlaceFamiliars(board);
+//		frame.getGamePanel().setDices(board);
+//		
+//		frame.getGamePanel().repaintBoard();
 
 	}
 
@@ -342,7 +362,16 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	
 		writeGameMessage("Choose the leader card you want and pass the other 3 to"
 				+ "the player at your right");
-		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.getGamePanel().showChooseLeaderDraft(leaderCards);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
 	}
 
 	/* (non-Javadoc)
@@ -554,7 +583,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void authenticatedCorrectly(String username) {
 		writeGameMessage(username+" your authentication was successful");
+		System.out.println("authenticated correctly command arrived");
 		frame.getGamePanel().setUsername(username);
+		frame.getGamePanel().removeActionPanel();
 		
 	}
 
@@ -572,7 +603,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void displaySatanAction(String color) {
 		writeGameMessage("Satan has punished the " + color + " player!" );
-		
 	}
 
 	@Override

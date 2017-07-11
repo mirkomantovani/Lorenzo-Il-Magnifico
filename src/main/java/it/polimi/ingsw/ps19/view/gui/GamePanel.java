@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
@@ -718,11 +719,25 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		// rimuovo tutti gli altri panels
 		// chooseAction.setVisible(false);
 		// actionContentPane.remove(chooseAction);
-		setEveryoneInvisible(this.actionContentPane.getComponents());
-		this.actionContentPane.removeAll();
-		this.actionContentPane.add(panel);
-		this.actionContentPane.repaint();
-		panel.setVisible(true);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					setEveryoneInvisible(actionContentPane.getComponents());
+				    actionContentPane.removeAll();
+					actionContentPane.add(panel);
+					actionContentPane.repaint();
+					panel.setVisible(true);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		setEveryoneInvisible(this.actionContentPane.getComponents());
+//		this.actionContentPane.removeAll();
+//		this.actionContentPane.add(panel);
+//		this.actionContentPane.repaint();
+//		panel.setVisible(true);
 	}
 
 	/**
@@ -739,7 +754,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * Removes the action panel.
 	 */
-	private void removeActionPanel() {
+	public void removeActionPanel() {
 		this.actionContentPane.removeAll();
 		actionContentPane.repaint();
 	}
@@ -1356,8 +1371,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 	 *            the leader cards
 	 */
 	public void showChooseLeaderDraft(ArrayList<LeaderCard> leaderCards) {
-
-		System.out.println("Gamepanel: show choose leader draft");
+		
+		this.removeActionPanel();
 		draftPanel.addLeaderCardsWithListener(leaderCards, this);
 		showActionPanel(draftPanel);
 		this.currentActionPanel = draftPanel;

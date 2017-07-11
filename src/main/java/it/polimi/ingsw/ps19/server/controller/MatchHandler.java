@@ -243,6 +243,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
 		for (int i = 0; i < clients.size(); i++) {
+			
+
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
 		}
 
@@ -634,6 +636,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
 			    sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
 				sendToClientHandler(new RefreshBoardCommand(this.match.getBoard()), clientHandler);
+				sendToClientHandler(new PlayerStatusChangeCommand(p), clientHandler);
 				
 			} else {
 				System.out.println("getplayerfromname returned NULL");
@@ -1540,7 +1543,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		else{ 
 			sendToPlayer(new WrongPasswordCommand(username), getPlayerFromColor(playerColor));
 			sendToPlayer(new AskAuthenticationCommand(), getPlayerFromColor(playerColor));
-		}	
+		}
+		
+		
 		if(authenticatedCorrectly==this.match.getPlayers().length)
 			startLeaderDiscardPhase();
 
