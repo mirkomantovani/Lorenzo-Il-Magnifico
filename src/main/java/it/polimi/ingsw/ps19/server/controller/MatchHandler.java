@@ -615,7 +615,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
 			    sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
 				sendToClientHandler(new RefreshBoardCommand(this.match.getBoard()), clientHandler);
-				sendToClientHandler(new PlayerStatusChangeCommand(p), clientHandler);
+//				sendToClientHandler(new PlayerStatusChangeCommand(p), clientHandler);
+				sendToClientHandler(new AuthenticatedCorrectlyCommand(user.getUsername()), clientHandler);
 				
 			} 
 		}
@@ -654,11 +655,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void runUpdateFileThread() {
-		// new Thread( new Runnable() {
-		// @Override
-		// public void run() {
-		// }
-		// }).start();
 
 		Executors.newSingleThreadExecutor().execute(new Runnable() {
 			@Override
@@ -994,6 +990,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new WinCommand(), match.getSatan());
 				for (Player p : rank) {
 					sendToPlayer(new LoseCommand(), p);
+					getUserFromName(p.getName()).incrementLostMathces();
 
 				}
 			} else {
@@ -1001,7 +998,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new LoseCommand(), match.getSatan());
 				for (Player p : rank) {
 					if (p != rank[0]) {
+						
 						sendToPlayer(new LoseCommand(), p);
+						getUserFromName(p.getName()).incrementWonMathces();
+						
 					}
 				}
 			}
@@ -1012,6 +1012,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new LoseCommand(), p);
 			}
 		}
+		
+		runUpdateFileThread();
 
 	}
 

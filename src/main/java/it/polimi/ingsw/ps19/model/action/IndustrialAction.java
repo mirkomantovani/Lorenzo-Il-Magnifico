@@ -86,8 +86,11 @@ public class IndustrialAction extends Action {
 	private boolean canBePlaced() {
 		if(actionSpace instanceof MultipleActionSpace)
 			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
-		else if(actionSpace instanceof SingleActionSpace)
+		}
+		else if(actionSpace instanceof SingleActionSpace){
+			System.out.println("industrial action: instance of Single action space");
 			return ((SingleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
+		}
 		return actionSpace.isOccupable(this.familyMember);
 	}
 
@@ -96,6 +99,12 @@ public class IndustrialAction extends Action {
 	 */
 	@Override
 	public void apply() throws NotApplicableException {
+		if (actionSpace.getEffect() != null) {
+			System.out.println("Action Space Effect: " + actionSpace.getEffect().toString());
+			System.out.println("\nNon è null quindi è una action space multipla\n");
+			actionSpace.getEffect().applyEffect(player);
+		}
+		
 		if (canBePlaced()) {
 			actionSpace.setFamilyMember(familyMember);
 			this.player.removeFamilyMember(familyMember.getColor());

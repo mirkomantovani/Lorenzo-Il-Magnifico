@@ -61,12 +61,12 @@ public class ClientLauncher {
 		
 
 		
+		
 		try {
-		
-			networkInterface.connect();
-		
+			
+				networkInterface.connect();
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.err.println("YOU SHOULD NOT BE HERE");
 			e.printStackTrace();
 		}
