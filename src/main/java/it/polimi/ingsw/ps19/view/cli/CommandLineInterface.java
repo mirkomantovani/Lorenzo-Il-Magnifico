@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.client.ClientController;
-import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.constant.ClientConstants;
 import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.PersonalBonusTile;

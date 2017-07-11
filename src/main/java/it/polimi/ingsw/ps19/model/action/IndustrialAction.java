@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
-import it.polimi.ingsw.ps19.model.Color;
 import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.ActionSpace;
-import it.polimi.ingsw.ps19.model.area.HarvestArea;
 import it.polimi.ingsw.ps19.model.area.IndustrialArea;
 import it.polimi.ingsw.ps19.model.area.MultipleActionSpace;
-import it.polimi.ingsw.ps19.model.area.ProductionArea;
 import it.polimi.ingsw.ps19.model.area.SingleActionSpace;
 import it.polimi.ingsw.ps19.model.card.BuildingCard;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;

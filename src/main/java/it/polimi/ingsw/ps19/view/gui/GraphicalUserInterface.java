@@ -4,16 +4,11 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import it.polimi.ingsw.ps19.client.ClientController;
-import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.model.Period;
 import it.polimi.ingsw.ps19.model.PersonalBonusTile;
 import it.polimi.ingsw.ps19.model.Player;
@@ -633,7 +628,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 			System.out.println("your Password: \n");
 			String pword = i.next();
 			gameController.notifyReconnectionRequest(connChoice,name,pword);
-			System.out.println("clientcommhandler reconnection command sent");
 		} else 
 			gameController.notifyReconnectionRequest(connChoice,null,null);
 

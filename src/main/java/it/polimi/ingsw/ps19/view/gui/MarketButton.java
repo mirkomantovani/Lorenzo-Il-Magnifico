@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps19.view.gui;
 
 import java.awt.Cursor;
-import java.awt.Toolkit;
 
 import javax.swing.JButton;
 
