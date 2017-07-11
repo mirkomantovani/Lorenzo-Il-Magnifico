@@ -1123,8 +1123,11 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener {
 		}
 
 		for (int i = 1; i <= board.getPlayerOrder().size(); i++) {
+			if(board.getPlayerOrder().size() == 3 && i==3){
+					break;
+			}
 			if (board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember() != null) {
-
+			 
 				boardPanel.add(this.familiars.get(
 						board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getColor().toString()
 								+ board.getMarket().getMarktActionSpace(String.valueOf(i)).getFamilyMember().getPlayer()
