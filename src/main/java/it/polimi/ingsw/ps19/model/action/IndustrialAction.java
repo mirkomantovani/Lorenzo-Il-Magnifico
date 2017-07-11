@@ -56,7 +56,6 @@ public class IndustrialAction extends Action {
 		super(familyMember);
 		this.industrialArea = industrialArea;
 		this.actionSpace = actionSpace;
-		System.out.println("Industrial action: " + this.player.getName());
 		this.paidServants = paidServants;
 	}
 
@@ -75,11 +74,6 @@ public class IndustrialAction extends Action {
 	 * @return true, if is applicable
 	 */
 	public boolean isApplicable(DevelopmentCard card) {
-		System.out.println("Industrial Action: SONO NELLA APPLICABLE E STO CONTROLLANDO LA CARTA: !" + card.toString());
-		System.out.println("action value fm: " + this.familyMember.getActionValue());
-		System.out.println(
-				"players bonuses: " + this.getPlayer().getBonuses().getActivationVariation(card.getCardType()));
-		System.out.println("card activation cost" + card.getActivationCost());
 		return (this.familyMember.getActionValue()
 				+ this.getPlayer().getBonuses().getActivationVariation(card.getCardType())
 				+ paidServants >= card.getActivationCost());
@@ -91,14 +85,11 @@ public class IndustrialAction extends Action {
 	 * @return true, if successful
 	 */
 	private boolean canBePlaced() {
-		System.out.println("\nINDUSTRIAL ACTION: Sono nella canBePlaced\n");
 		//Wow.. such a bad programming, but now it's too late to make things look and work better. I feel so sorry about that
 		if(actionSpace instanceof MultipleActionSpace){
-			System.out.println("industrial action: instance of Multiple action space");
 			return ((MultipleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
 		}
 		else if(actionSpace instanceof SingleActionSpace){
-			System.out.println("industrial action: instance of Single action space");
 			return ((SingleActionSpace) actionSpace).isOccupable(familyMember, paidServants, player.getBonuses().getActivationVariation(industrialArea.getAssociatedCardType()));
 		}
 		return actionSpace.isOccupable(this.familyMember);
@@ -111,36 +102,23 @@ public class IndustrialAction extends Action {
 	@Override
 	public void apply() throws NotApplicableException {
 		if (actionSpace.getEffect() != null) {
-			System.out.println("Action Space Effect: " + actionSpace.getEffect().toString());
-			System.out.println("\nNon è null quindi è una action space multipla\n");
 			actionSpace.getEffect().applyEffect(player);
 		}
 		
 		if (canBePlaced()) {
 			//System.out.println("Player: " + player.getFamilyMember(Color.ORANGE).toString());
-			System.out.println("1");
 			actionSpace.setFamilyMember(familyMember);
-			System.out.println("2");
 			this.player.removeFamilyMember(familyMember.getColor());
-			System.out.println("3");
 			this.player.getResourceChest().subResource(new Servant(paidServants));
-			System.out.println("4");
-			System.out.println("\nIndustrial action: sto applicando la industrialAction\n");
-			System.out.println("5");
 			for (DevelopmentCard card : industrialArea.getPlayerCards(this.player)) {
-				System.out.println("card id: " + card.getId());
 			}
-			System.out.println("6");
 			for (DevelopmentCard card : industrialArea.getPlayerCards(this.player)) {
 				if (isApplicable(card)) {
-					System.out.println("\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n");
 					card.getPermanentEffect().applyEffect(this.player);
-					System.out.println("\nINDUSTRIAL ACTION: STO ATTIVANDO LA CARTA: " + card.toString() + "\n");
 				} else
 					System.out.println("CannotActivate card effect");
 			}
 		} else {
-			System.out.println("You cannot put your member here");
 			throw new NotApplicableException("You cannot put your member here!");
 		}
 	}
@@ -157,17 +135,13 @@ public class IndustrialAction extends Action {
 			actionSpace.setFamilyMember(familyMember);
 			this.player.removeFamilyMember(familyMember.getColor());
 			this.player.getResourceChest().subResource(new Servant(paidServants));
-			System.out.println("\nIndustrial action CON SCELTA: sto applicando la industrialAction con scelta\n");
 			if (actionSpace.getEffect() != null) {
-				System.out.println("\nNon è null quindi è una action space multipla\n");
 				actionSpace.getEffect().applyEffect(player);
 			}
 			for (DevelopmentCard card : industrialArea.getPlayerCards(this.player)) {
 				if (isApplicable(card)) {
 					if ((card instanceof BuildingCard) && ((BuildingCard) card).hasProductionChoice()) { // Se
 
-						System.out.println("IndustrialAction: la carta è una building card e ha una scelta");
-						System.out.println("choices: " + choices.get(index));
 						if (card.getPermanentEffect() instanceof ResourcesExchangeEffect)
 							System.out.println("permanenteffect è un resourceexchangeeffect");
 
@@ -180,16 +154,13 @@ public class IndustrialAction extends Action {
 						}
 
 					} else {
-						System.out.println("\nIndustrial action: LA CARTA DI PUO' ATTIVARE!\n");
 						card.getPermanentEffect().applyEffect(this.player); // attivo
 																			// l'effetto
-						System.out.println("\nINDUSTRIAL ACTION: STO ATTIVANDO LA CARTA: " + card.toString() + "\n");
 					}
 				} else
 					System.out.println("CannotActivate card effect");
 			}
 		} else {
-			System.out.println("You cannot put your member here");
 			throw new NotApplicableException("You cannot put your member here!");
 		}
 	}

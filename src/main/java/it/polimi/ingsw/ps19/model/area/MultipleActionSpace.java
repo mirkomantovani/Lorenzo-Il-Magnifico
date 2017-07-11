@@ -50,7 +50,6 @@ public class MultipleActionSpace extends ActionSpace {
 	private boolean checkAvailability(FamilyMember familyMember){
 		
 		boolean available = true;
-		System.out.println("\n\nFamily member color's " + familyMember.getColor().toString() + "\n\n");
 		
 		for(FamilyMember member : members){
 			//Se esiste un family member dentro members che ha come player lo stesso di quello passato
@@ -60,7 +59,6 @@ public class MultipleActionSpace extends ActionSpace {
 				break;  					 //L'ho visto fare da qualche parte nel corso :-)
 			}
 		}
-		System.out.println("available: " + available + "\n\n");
 		return available || familyMember.getDice().getColor() == Color.NEUTRAL;
 	}
 	
@@ -70,15 +68,6 @@ public class MultipleActionSpace extends ActionSpace {
 	 */
 	
 	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialActionVariation) {
-		if(!checkAvailability(familyMember))
-			System.out.println("Non occupabile");
-		System.out.println("Mi devi già far sfasare?");
-		System.out.println("Family member action value: " + familyMember.getActionValue());
-		System.out.println("Action value required " + this.actionValueRequired);
-		System.out.println("Paid servants: " + paidServants);
-		System.out.println("Industrial Action Variation: " + industrialActionVariation);
-		System.out.println("Checkavailabity " + checkAvailability(familyMember));
-		System.out.println("Valore famigliare: " + familyMember.getActionValue() + paidServants + industrialActionVariation);
 		return familyMember.getActionValue() + paidServants + industrialActionVariation> this.actionValueRequired && checkAvailability(familyMember);
 	}
 	

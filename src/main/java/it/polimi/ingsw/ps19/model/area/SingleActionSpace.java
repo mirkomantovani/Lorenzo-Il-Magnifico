@@ -90,12 +90,6 @@ public class SingleActionSpace extends ActionSpace{
 	
 	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialValueVariation) {
 
-		System.out.println("\nsono nella is Occupable\n");
-		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
-		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + (familyMember.getActionValue() + paidServants));
-		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
-		System.out.println("Final action value " + familyMember.getActionValue() + paidServants + industrialValueVariation);
-		System.out.println("Result:" + (!isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation > this.actionValueRequired));
 		return !isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation>= this.actionValueRequired;
 
 	}
@@ -106,12 +100,6 @@ public class SingleActionSpace extends ActionSpace{
 	@Override
 	public boolean isOccupable(FamilyMember familyMember) {
 
-		
-
-		System.out.println("\nsono nella is Occupable\n");
-		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
-		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + familyMember.getActionValue());
-		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
 
 		return !isOccupied();
 

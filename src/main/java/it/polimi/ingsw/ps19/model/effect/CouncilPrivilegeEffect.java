@@ -32,9 +32,7 @@ public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect(it.polimi.ingsw.ps19.Player)
 	 */
 	public void applyEffect(Player p){
-		System.out.println("applying privilege");
 		p.setCouncilPrivilege(privilegeAmount);
-		System.out.println("privilege applied");
 	}
 	
 

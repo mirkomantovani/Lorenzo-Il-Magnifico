@@ -77,9 +77,6 @@ public class ServerCommandHandler implements CommandObserver {
 			FamilyMember familyMember;
 			familyMember = handler.getCurrentPlayer().getFamilyMember(placeIntoMarketCommand.getFamilyMember());
 
-			// System.out.println("questo è il familyMember che deve fare
-			// l'azione" + familyMember.toString());
-
 			try {
 				if (familyMember == null) {
 					throw new NotApplicableException("You had alredy Used this family member");
@@ -128,16 +125,13 @@ public class ServerCommandHandler implements CommandObserver {
 	 * @param takeCardCommand the take card command
 	 */
 	public void applyCommand(TakeCardCommand takeCardCommand) {
-		// System.out.println("servercommandhandler: apply takecardcommand");
 		try {
 			try {
 				Action action = calculateTakeCardAction(takeCardCommand);
-				System.out.println("servercommandhandler: take card action calculated");
 				handler.applyAction(action);
 
 			} catch (NotApplicableException e) {
 
-				System.out.println("takecard not applicable");
 				handler.sendToCurrentPlayer(new InvalidActionCommand(e.getNotApplicableCode()));
 				handler.sendToCurrentPlayer(new AskMoveCommand());
 				return;
@@ -174,15 +168,12 @@ public class ServerCommandHandler implements CommandObserver {
 	 * @throws NotApplicableException the not applicable exception
 	 */
 	private Action calculateTakeCardAction(TakeCardCommand takeCardCommand) throws NotApplicableException {
-		System.out.println("calculating takecardaction");
 		Player player = match.getCurrentPlayer();
 		FamilyMember familyMember = player.getFamilyMember(takeCardCommand.getFamilyMember());
-		System.out.println("serverCommandHandler, ritornato da getfamilymember");
 		if (familyMember == null) {
 			throw new NotApplicableException("you don't have that family member");
 		} else {
 			Floor floor = match.getFloor(takeCardCommand.getCardType(), takeCardCommand.getFloor());
-			System.out.println("creating new take card action");
 
 			return new TakeCardAction(familyMember, floor, new Servant(takeCardCommand.getPaidServants()));
 		}
@@ -367,9 +358,7 @@ public class ServerCommandHandler implements CommandObserver {
 
 
 	public void applyCommand(SatanChoiceCommand satanChoice) {
-		System.out.println("Received satanChoiceCommand pre handle");
 		handler.handleSatanChoice(satanChoice.getColor());
-		System.out.println("Received satanChoiceCommand");
 		
 	}
 
