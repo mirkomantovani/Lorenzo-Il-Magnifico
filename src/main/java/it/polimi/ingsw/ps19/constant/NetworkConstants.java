@@ -26,7 +26,7 @@ public class NetworkConstants {
 	public static final int RMICLIENTHANDLERPORT = 4321;
 	
 	/** The Constant MAXPLAYERS. */
-	public static final int MAXPLAYERS = 3;    
+	public static final int MAXPLAYERS = 2;    
 	
 	/** The Constant MINPLAYERS. */
 	public static final int MINPLAYERS = 2;

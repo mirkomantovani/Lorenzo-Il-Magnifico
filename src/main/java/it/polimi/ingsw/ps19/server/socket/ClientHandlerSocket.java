@@ -155,11 +155,14 @@ public class ClientHandlerSocket extends ClientHandler {
 			command = null;
 			try {
 				command = (ClientToServerCommand) inSocket.readObject();
+				System.out.println("arrivato comando");
 				
 				if (command instanceof ReconnectionAnswerCommand) {
+					System.out.println("CHS sono dove ce istanceof");
 					serverListener.notifyReconnectionAnswer((ReconnectionAnswerCommand) command, this);
 				}
 
+//				System.out.println(command.getClass().getName());
 
 			} catch (ClassNotFoundException | IOException e) {
 				close();
@@ -172,7 +175,9 @@ public class ClientHandlerSocket extends ClientHandler {
 			// and are always valid
 			// and managed by the ServerCommandHandler
 			if (command instanceof SatanChoiceCommand)
+				System.out.println("\n\nSatan choice command arrived to server\n\n");
 			if (commandHandler == null) {
+				System.out.println("commHandler null");
 			}
 
 			else if (command instanceof SendCredentialsCommand || command instanceof ChosenLeaderCardCommand

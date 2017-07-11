@@ -576,6 +576,7 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	}
 
 	public void notifyAuthenticationRequest(String username, String password) {
+		System.out.println("GUI notifyauthe");
 		gameController.notifyAuthenticationRequest(username,password);
 	}
 

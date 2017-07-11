@@ -65,6 +65,7 @@ public class ClientController implements InputObserver {
 	private void sendCommand(ClientToServerCommand command) {
 		try {
 			networkInterface.sendCommand(command);
+			System.out.println("clientcontro");
 
 
 		} catch (Exception e) {

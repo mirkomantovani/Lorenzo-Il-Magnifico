@@ -87,6 +87,7 @@ public class AskAuthenticationPanel extends JPanel implements ActionListener {
 		username=textField.getText();
 		password=passwordField.getText();
 		listener.notifyAuthenticateClick(username,password);
+		System.out.println("ask auth panel click");
 		
 	}
 }
