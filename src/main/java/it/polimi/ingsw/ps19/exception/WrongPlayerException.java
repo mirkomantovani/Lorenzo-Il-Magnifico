@@ -9,6 +9,10 @@ package it.polimi.ingsw.ps19.exception;
  */
 public class WrongPlayerException extends Exception {
 	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 /** The error. */
 private final String error = "The clientHandler associated to the player the server is "
 		+ "trying to send a command to is not in the list of clientHandlers";

@@ -3,8 +3,8 @@ package it.polimi.ingsw.ps19.model.area;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
@@ -88,14 +88,15 @@ public class SingleActionSpace extends ActionSpace{
 	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
 	 */
 	
-	public boolean isOccupable(FamilyMember familyMember, int paidServants) {
+	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialValueVariation) {
 
 		System.out.println("\nsono nella is Occupable\n");
 		System.out.println("\nSINGLE ACTION SPACE è occupato?: " + isOccupied());
 		System.out.println("\nSINGLE ACTION SPACE: FamilyMember action value: " + (familyMember.getActionValue() + paidServants));
 		System.out.println("\nSINGLE ACTION SPACE: action value required: " + actionValueRequired);
-		System.out.println("Result:" + (!isOccupied() && familyMember.getActionValue() + paidServants > this.actionValueRequired));
-		return !isOccupied() && familyMember.getActionValue() + paidServants > this.actionValueRequired;
+		System.out.println("Final action value " + familyMember.getActionValue() + paidServants + industrialValueVariation);
+		System.out.println("Result:" + (!isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation > this.actionValueRequired));
+		return !isOccupied() && familyMember.getActionValue() + paidServants + industrialValueVariation>= this.actionValueRequired;
 
 	}
 	

@@ -3,11 +3,12 @@ package it.polimi.ingsw.ps19.view.cli;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.PersonalBonusTile;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.client.ClientController;
+import it.polimi.ingsw.ps19.command.toserver.SendCredentialsCommand;
 import it.polimi.ingsw.ps19.constant.ClientConstants;
+import it.polimi.ingsw.ps19.model.Period;
+import it.polimi.ingsw.ps19.model.PersonalBonusTile;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.LeaderCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
@@ -17,6 +18,14 @@ import it.polimi.ingsw.ps19.view.UserInterface;
  * Command Line Interface play mode.
  * 
  * @author Jimmy
+ *
+ */
+/**
+ * @author Pc-Acer
+ *
+ */
+/**
+ * @author Pc-Acer
  *
  */
 public class CommandLineInterface implements UserInterface, InputListener {
@@ -45,6 +54,16 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	
 	/** The action constructor. */
 	private ArrayList<String> actionConstructor;
+	
+	/** A copy of the leader cards needed to check the input */
+	private ArrayList<LeaderCard> leaderCardsLocalCopy;
+	
+	/** All possible moves*/
+	private ArrayList<String> possibleMoves;
+	
+	private ArrayList<String> possiblePlayerColors;
+	
+
 
 	/**
 	 * Instantiates a new command line interface.
@@ -54,11 +73,38 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	public CommandLineInterface(ClientController clientController) {
 		this.gameController = clientController;
 		actionConstructor=new ArrayList<String>();
+		leaderCardsLocalCopy = new ArrayList<LeaderCard>();
 		reader = new InputReader();
 		inputReaderThread = new Thread(reader);
 		inputReaderThread.start();
 		reader.addListener(this);
 		print(welcomeMessage);
+		initializePossibleMoves();
+		initializePossibleColors();
+		
+	}
+
+	
+	/**
+	 * This method add all the colors in order to allow a faster control at this level
+	 */
+	private void initializePossibleColors() {
+		possiblePlayerColors = new ArrayList<String>();
+		possiblePlayerColors.add("yellow");
+		possiblePlayerColors.add("green");
+		possiblePlayerColors.add("blue");
+		possiblePlayerColors.add("red");
+	}
+
+
+	/**
+	 * This method adds all the actions in order to allow a faster control at this level
+	 */
+	private void initializePossibleMoves() {
+		possibleMoves = new ArrayList<String>();
+		possibleMoves.add("action");
+		possibleMoves.add("discard");
+		possibleMoves.add("activate");
 	}
 
 	/* (non-Javadoc)
@@ -175,6 +221,22 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 		readerState = ClientConstants.SEND_PRIVILEGE_CHOICES;
 	}
+	
+	/**
+	 * this method checks if the leader card name written by the player is correct
+	 * 
+	 * @param input
+	 * @param leaderCards
+	 * @return boolean
+	 */
+	private boolean checkLeaderCardInput(String input, ArrayList<LeaderCard> leaderCards){
+		for(LeaderCard card : leaderCards){
+			if(input.equals(card.getName()))
+				return true;
+		}
+		return false;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see it.polimi.ingsw.ps19.view.cli.InputListener#notify(java.lang.String)
@@ -185,21 +247,29 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_NAME:
 			actionConstructor.add(input);
 			print("Insert your password: ");
+			readerState = ClientConstants.SEND_PASSWORD;
+			break;
 		case ClientConstants.SEND_CHOSEN_LEADERCARD:
-			gameController.notifyChosenLeaderCard(input);
+			if(checkLeaderCardInput(input, leaderCardsLocalCopy))
+				gameController.notifyChosenLeaderCard(input);
+			else{
+				print("Wrong input!");
+				print("Please insert the name again: ");
+				readerState = ClientConstants.SEND_CHOSEN_LEADERCARD; //This may be redundant but to be sure i'm going to have it
+			}
 			break;
 		case ClientConstants.SEND_MOVE:
-			if(input.toLowerCase().equals("discard")){
-				print("Select a leader card to discard (insert its name): ");
-				readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
-			} else if(input.toLowerCase().equals("end")){
-				gameController.notifyFinishRound();
-			} else if(input.toLowerCase().equals("activate")){
-				print("Select the leader card you own by typing its name");
-				readerState = ClientConstants.SEND_ACTIVATED_LEADER_CARD;
-			}
-			else
-				moveHandler(input);
+				if(input.toLowerCase().equals("discard")){
+					print("Select a leader card to discard (insert its name): ");
+					readerState = ClientConstants.SEND_DISCARDED_LEADER_CARD;
+				} else if(input.toLowerCase().equals("end")){
+					gameController.notifyFinishRound();
+				} else if(input.toLowerCase().equals("activate")){
+					print("Select the leader card you own by typing its name");
+					readerState = ClientConstants.SEND_ACTIVATED_LEADER_CARD;
+				}
+				else
+					moveHandler(input);
 			break;
 		case ClientConstants.SEND_PASSWORD:
 			actionConstructor.add(input);
@@ -234,7 +304,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			else if (input.equals("2"))
 				gameController.notifyExcommunicationEffectChoice(false);
 			else{
-				gameController.notifyExcommunicationEffectChoice(false);  //TODO questo è solo provvisorio
+				gameController.notifyExcommunicationEffectChoice(false);  //Default choice: false
 			}
 			break;
 		case ClientConstants.SEND_PRODUCTION_CHOICES:
@@ -242,11 +312,59 @@ public class CommandLineInterface implements UserInterface, InputListener {
 			break;
 		case ClientConstants.SEND_ACTIVATED_LEADER_CARD:
 			gameController.notifyLeaderEffectActivation(input);
+		case ClientConstants.SEND_PUNISHED_PLAYER:
+			if(checkColorInput(input, possiblePlayerColors)){
+				gameController.notifySatanChoice(input);
+			}else{
+				print("Wrong input!");
+				print("Type it again: ");
+				readerState = ClientConstants.SEND_PUNISHED_PLAYER; 
+			}
+			break;
+		case ClientConstants.SEND_REQUEST_RECONNECTION:
+			if(input.equals("y")){
+				actionConstructor.add(input);
+				print("Insert your name: ");
+				readerState = ClientConstants.SEND_RECONNECTION_NAME;
+			}else if(input.equals("n")){
+				gameController.notifyReconnectionRequest(input, null, null);
+			}else{
+				print("Wrong input!");
+				print("Would you join an existing Match? (y/n)\n");
+				readerState = ClientConstants.SEND_PUNISHED_PLAYER; //This may be useless, but to avoid any mistake i prefer to have it
+			}
+			break;
+		case ClientConstants.SEND_RECONNECTION_NAME:
+			actionConstructor.add(input);
+			print("Insert your password: ");
+			readerState = ClientConstants.SEND_RECONNECTION_PASSWORD;
+			break;
+		case ClientConstants.SEND_RECONNECTION_PASSWORD:
+			actionConstructor.add(input);
+			gameController.notifyReconnectionRequest(actionConstructor.get(0), actionConstructor.get(1), actionConstructor.get(2)); //Instead of "actionConstructor.get("2")"
+																															        //I could have passed directly input
 			break;
 		default:
 			print("Command not recognized");
 			break;
 		}
+	}
+
+	
+	
+	/**
+	 * This method checks if the input corresponds to one of the available color 
+	 * 
+	 * @param input
+	 * @param possibleColors
+	 * @return boolean
+	 */
+	private boolean checkColorInput(String input, ArrayList<String> possibleColors) {  
+		for(String color : possibleColors){
+			if(input.equals(color))
+				return true;
+		}
+		return false;	
 	}
 
 
@@ -255,6 +373,8 @@ public class CommandLineInterface implements UserInterface, InputListener {
 	 */
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
+		leaderCardsLocalCopy.clear();
+		leaderCardsLocalCopy = leaderCards;
 		print("Select a leader card from the following: ");
 		if (leaderCards.size() == 0)
 			System.out.println("leader cards è 0");
@@ -530,7 +650,7 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void authenticatedCorrectly(String username) {
-		System.out.println("You have been authenticated correctly, get ready to play!");
+		print("You have been authenticated correctly, get ready to play!");
 		
 	}
 
@@ -541,20 +661,24 @@ public class CommandLineInterface implements UserInterface, InputListener {
 
 	@Override
 	public void displayPlayerDisconnected(String color) {
-		// TODO Auto-generated method stub
-		
+		printImp(color + "player has disconnected");
 	}
 
 	@Override
 	public void displaySatanAction(String color) {
-		
+		printImp("Satan has chosen the " + color + "player to punish");
 		
 	}
 
 	@Override
 	public void askSatanMove() {
-		// TODO Auto-generated method stub
-		
+		print("Choose a player to punish by typing his color: ");
+		readerState = ClientConstants.SEND_PUNISHED_PLAYER;
+	}
+	
+	public void requestReconnection(){
+		print("Would you join an existing Match? (y/n)\n");
+		readerState = ClientConstants.SEND_REQUEST_RECONNECTION;
 	}
 	
 }

@@ -17,7 +17,7 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.text.html.StyleSheet;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.resource.Resource;
 import it.polimi.ingsw.ps19.model.resource.ResourceType;
 
@@ -36,7 +36,7 @@ public class PlayerResources extends JPanel {
 	private Map<ResourceType,JResource> resources;
 	
 	/** The family members. */
-	private Map<it.polimi.ingsw.ps19.Color,JLabel> familyMembers;
+	private Map<it.polimi.ingsw.ps19.model.Color,JLabel> familyMembers;
 	
 	/** The family grid panel. */
 	private JPanel familyGridPanel;
@@ -56,7 +56,7 @@ public class PlayerResources extends JPanel {
 		setSize(new Dimension(resourceWidth, 1000));
 		setMaximumSize(new Dimension(resourceWidth, 32767));
 		
-		familyMembers=new HashMap<it.polimi.ingsw.ps19.Color,JLabel>();
+		familyMembers=new HashMap<it.polimi.ingsw.ps19.model.Color,JLabel>();
 		
 		setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setForeground(UIManager.getColor("ArrowButton.disabledText"));
@@ -109,7 +109,7 @@ public class PlayerResources extends JPanel {
 		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
 		neutral = new ImageIcon(img);
 		neutralFam.setIcon(neutral);
-		familyMembers.put(it.polimi.ingsw.ps19.Color.NEUTRAL,neutralFam);
+		familyMembers.put(it.polimi.ingsw.ps19.model.Color.NEUTRAL,neutralFam);
 		
 		JLabel whiteFam = new JLabel("");
 		ImageIcon white = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"whiteFamiliar.png"));
@@ -117,7 +117,7 @@ public class PlayerResources extends JPanel {
 		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
 		white = new ImageIcon(img);
 		whiteFam.setIcon(white);
-		familyMembers.put(it.polimi.ingsw.ps19.Color.WHITE,whiteFam);
+		familyMembers.put(it.polimi.ingsw.ps19.model.Color.WHITE,whiteFam);
 		
 		JLabel orangeFam = new JLabel("");
 		ImageIcon orange = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"orangeFamiliar.png"));
@@ -125,7 +125,7 @@ public class PlayerResources extends JPanel {
 		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
 		orange = new ImageIcon(img);
 		orangeFam.setIcon(orange);
-		familyMembers.put(it.polimi.ingsw.ps19.Color.ORANGE,orangeFam);
+		familyMembers.put(it.polimi.ingsw.ps19.model.Color.ORANGE,orangeFam);
 		
 		JLabel blackFam = new JLabel("");
 		ImageIcon black = new ImageIcon(ActionPanel.class.getResource("/"+playerColor.toLowerCase()+"blackFamiliar.png"));
@@ -133,7 +133,7 @@ public class PlayerResources extends JPanel {
 		img = img.getScaledInstance(img.getWidth(null) / 4, img.getHeight(null) / 4, java.awt.Image.SCALE_SMOOTH);
 		black = new ImageIcon(img);
 		blackFam.setIcon(black);
-		familyMembers.put(it.polimi.ingsw.ps19.Color.BLACK,blackFam);
+		familyMembers.put(it.polimi.ingsw.ps19.model.Color.BLACK,blackFam);
 		
 		addAllFamilyMembers();
 	}
@@ -161,8 +161,8 @@ public class PlayerResources extends JPanel {
 	 */
 	public void addAllFamilyMembers(){
 		
-		for(int i=0;i<it.polimi.ingsw.ps19.Color.values().length;i++)
-		familyGridPanel.add(familyMembers.get(it.polimi.ingsw.ps19.Color.values()[i]));
+		for(int i=0;i<it.polimi.ingsw.ps19.model.Color.values().length;i++)
+		familyGridPanel.add(familyMembers.get(it.polimi.ingsw.ps19.model.Color.values()[i]));
 	}
 
 
@@ -172,14 +172,14 @@ public class PlayerResources extends JPanel {
 	 *
 	 * @param families the families
 	 */
-	public void refreshFamilyMembers(HashMap<it.polimi.ingsw.ps19.Color, FamilyMember> families) {
+	public void refreshFamilyMembers(HashMap<it.polimi.ingsw.ps19.model.Color, FamilyMember> families) {
 		this.removeAllFamilyMembers();
 //		for(FamilyMember mem : families.values()){
 //			familyGridPanel.add(familyMembers.get(mem.getColor()));
 //		}
 		
 		
-		 Iterator<it.polimi.ingsw.ps19.Color> iterator = families.keySet().iterator(); //ottengo l'iterator tipizzato delle chiavi
+		 Iterator<it.polimi.ingsw.ps19.model.Color> iterator = families.keySet().iterator(); //ottengo l'iterator tipizzato delle chiavi
 		         
 		 for (;iterator.hasNext();) //ciclo con l'iterator
 		           familyGridPanel.add(familyMembers.get(iterator.next()));

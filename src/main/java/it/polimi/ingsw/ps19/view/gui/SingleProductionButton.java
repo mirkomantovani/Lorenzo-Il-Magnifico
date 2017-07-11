@@ -12,6 +12,11 @@ import javax.swing.JButton;
  */
 public class SingleProductionButton extends JButton {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The width rel. */
 	private int widthRel = (int) (BoardPanel.dimension.getWidth()*wFIRST_SLOT);
 	

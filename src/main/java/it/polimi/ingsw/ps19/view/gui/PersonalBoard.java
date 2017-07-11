@@ -16,6 +16,11 @@ import it.polimi.ingsw.ps19.model.card.CardType;
  */
 public class PersonalBoard extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The num building. */
 	private int numBuilding;
 	

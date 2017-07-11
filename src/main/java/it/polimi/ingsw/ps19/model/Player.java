@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps19;
+package it.polimi.ingsw.ps19.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

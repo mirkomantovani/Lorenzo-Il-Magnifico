@@ -1,6 +1,6 @@
 	package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**
@@ -13,23 +13,6 @@ public class CouncilPrivilegeEffect extends Effect implements Disapplyable{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2209211330966096453L;
 	
-	/** The privilege coin. */
-	private final int PRIVILEGE_COIN = 2;
-	
-	/** The privilege wood. */
-	private final int PRIVILEGE_WOOD = 1;
-	
-	/** The privilege stone. */
-	private final int PRIVILEGE_STONE = 1;
-	
-	/** The privilege faithpoint. */
-	private final int PRIVILEGE_FAITHPOINT = 1;
-	
-	/** The privilege servant. */
-	private final int PRIVILEGE_SERVANT = 2;
-	
-	/** The privilege militarypoint. */
-	private final int PRIVILEGE_MILITARYPOINT = 2;
 	
 	/** The privilege amount. */
 	int privilegeAmount;

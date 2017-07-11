@@ -14,6 +14,11 @@ import javax.swing.JPanel;
  */
 public class ExcommCube extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The period. */
 	private int period;
 	
@@ -68,13 +73,13 @@ public class ExcommCube extends JPanel{
 		 heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC);
 		switch(player){
 		
-		case "yellow" : widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
+		case "Yellow" : widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC);
 						break;
-		case "red" : widthRel =(int) (BoardPanel.dimension.getWidth()*WIDTH_PERC*1.1);
+		case "Red" : widthRel =(int) (BoardPanel.dimension.getWidth()*WIDTH_PERC*1.1);
 						break;
-		case "blue" : heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC*1.03);
+		case "Blue" : heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC*1.03);
 						break;
-		case "green" : heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC*1.03);
+		case "Green" : heightRel = (int) (BoardPanel.dimension.getHeight()*HEIGHT_PERC*1.03);
 						widthRel = (int) (BoardPanel.dimension.getWidth()*WIDTH_PERC*1.1);
 						break;
 		default : 

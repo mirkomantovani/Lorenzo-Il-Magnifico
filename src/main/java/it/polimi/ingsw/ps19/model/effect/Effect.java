@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps19.model.effect;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 
 /**
  * The abstract class Effect, it only has one method: applyEffect

@@ -14,6 +14,7 @@ public class ServerLauncher {
 	 * Instantiates a new server launcher.
 	 */
 	private ServerLauncher() {
+		
 	}
 
 	/**

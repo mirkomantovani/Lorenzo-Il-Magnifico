@@ -101,6 +101,14 @@ public class User {
 	public void incrementSecondsPlayed(int seconds){
 		this.secondsPlayed+=seconds;
 	}
+
+	public void incrementLostMathces() {
+		this.lostMatches++;
+	}
+
+	public void incrementWonMathces() {
+		this.wonMatches++;
+	}
 	
 	
 	

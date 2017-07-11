@@ -63,9 +63,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 	/** The screen dimension. */
 	private Dimension screenDimension;
 
-	/** The ratio. */
-	private final double ratio = 0.11875;
-	
 	/** The ratio high border. */
 	private final double ratioHighBorder=0.025;
 	
@@ -78,17 +75,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 	/** The ratio second left border. */
 	private final double ratioSecondLeftBorder=0.505;
 	
-	/** The north border. */
-	private final double northBorder = 0.052083333;
-	
-	/** The left border. */
-	private final double leftBorder = 0.069813176;
-	
-	/** The floor space. */
-	private final double floorSpace = 0.006944444;
-	
-	/** The tower space. */
-	private final double towerSpace = 0.089529007;
 
 	/** The icon. */
 	ImageIcon icon;
@@ -96,8 +82,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 	/** The path. */
 	private String path;
 	
-	/** The card to string. */
-	private String cardToString;
 
 	/** The zoomed image. */
 	private Image zoomedImage;
@@ -216,6 +200,10 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		case CHARACTER:
 			applicationPointX=(int)(ratioSecondLeftBorder*personalW);
 			applicationPointY=(int)(ratioSecondHighBorder*personalH);
+			break;
+		default:
+			applicationPointX=(int)(ratioLeftBorder*personalW);
+			applicationPointY=(int)(ratioHighBorder*personalH);
 			break;
 		}
 	}

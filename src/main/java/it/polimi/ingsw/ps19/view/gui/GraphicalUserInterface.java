@@ -1,15 +1,22 @@
 package it.polimi.ingsw.ps19.view.gui;
 
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.PersonalBonusTile;
-import it.polimi.ingsw.ps19.Player;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import it.polimi.ingsw.ps19.client.ClientController;
+import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
+import it.polimi.ingsw.ps19.model.Period;
+import it.polimi.ingsw.ps19.model.PersonalBonusTile;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.area.Board;
 import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
@@ -77,6 +84,8 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	public void initializeMatch(int numPlayers) {
 		frame.removeInitialImage();
 		frame.initializeGameFrame(numPlayers);
+		
+		
 		if(!isSatan){
 		this.addListeners();
 		}
@@ -238,19 +247,38 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void refreshBoard(Board board) {
-		
-		frame.refreshBoard(board);
-		// frame.pack();
-		 OrderMarkerDisk.Ordercounter = 0;
-		frame.getGamePanel().setExcommTiles(board);
-		frame.getGamePanel().populateFamiliars(board);
-		frame.getGamePanel().createMarkers(board);
-		frame.getGamePanel().removeDicesAndMarkers();
-		frame.getGamePanel().updateOrder(board);
-		frame.getGamePanel().PlaceFamiliars(board);
-		frame.getGamePanel().setDices(board);
-		
-		frame.getGamePanel().repaintBoard();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.refreshBoard(board);
+					// frame.pack();
+					 OrderMarkerDisk.Ordercounter = 0;
+					frame.getGamePanel().setExcommTiles(board);
+					frame.getGamePanel().populateFamiliars(board);
+					frame.getGamePanel().createMarkers(board);
+					frame.getGamePanel().removeDicesAndMarkers();
+					frame.getGamePanel().updateOrder(board);
+					frame.getGamePanel().PlaceFamiliars(board);
+					frame.getGamePanel().setDices(board);
+					
+					frame.getGamePanel().repaintBoard();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		frame.refreshBoard(board);
+//		// frame.pack();
+//		 OrderMarkerDisk.Ordercounter = 0;
+//		frame.getGamePanel().setExcommTiles(board);
+//		frame.getGamePanel().populateFamiliars(board);
+//		frame.getGamePanel().createMarkers(board);
+//		frame.getGamePanel().removeDicesAndMarkers();
+//		frame.getGamePanel().updateOrder(board);
+//		frame.getGamePanel().PlaceFamiliars(board);
+//		frame.getGamePanel().setDices(board);
+//		
+//		frame.getGamePanel().repaintBoard();
 
 	}
 
@@ -330,12 +358,22 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	 */
 	@Override
 	public void startDraft(ArrayList<LeaderCard> leaderCards) {
+		
 		if(leaderCards.size()==4)
 			writeGameMessage("The Leader Draft phase has started!");
 	
 		writeGameMessage("Choose the leader card you want and pass the other 3 to"
 				+ "the player at your right");
-		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.getGamePanel().showChooseLeaderDraft(leaderCards);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		frame.getGamePanel().showChooseLeaderDraft(leaderCards);
 	}
 
 	/* (non-Javadoc)
@@ -547,7 +585,9 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void authenticatedCorrectly(String username) {
 		writeGameMessage(username+" your authentication was successful");
+		System.out.println("authenticated correctly command arrived");
 		frame.getGamePanel().setUsername(username);
+		frame.getGamePanel().removeActionPanel();
 		
 	}
 
@@ -565,7 +605,6 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 	@Override
 	public void displaySatanAction(String color) {
 		writeGameMessage("Satan has punished the " + color + " player!" );
-		
 	}
 
 	@Override
@@ -580,6 +619,25 @@ public class GraphicalUserInterface implements UserInterface, ActionListener {
 
 	public void notifySatanChoice(String playerColor) {
 		gameController.notifySatanChoice(playerColor);
+	}
+
+	@Override
+	public void requestReconnection() {
+		Scanner i=new Scanner(System.in);
+		System.out.println("Would you join an existing Match? (y/n)\n");
+
+		String connChoice = i.next();
+
+		if(connChoice.equals("y")){
+			System.out.println("Please insert your name: \n");
+			String name = i.next();
+			System.out.println("your Password: \n");
+			String pword = i.next();
+			gameController.notifyReconnectionRequest(connChoice,name,pword);
+			System.out.println("clientcommhandler reconnection command sent");
+		} else 
+			gameController.notifyReconnectionRequest(connChoice,null,null);
+
 	}
 
 }

@@ -35,6 +35,8 @@ import it.polimi.ingsw.ps19.command.toclient.WrongPasswordCommand;
 import it.polimi.ingsw.ps19.command.toserver.ReconnectionAnswerCommand;
 import it.polimi.ingsw.ps19.network.NetworkInterface;
 import it.polimi.ingsw.ps19.view.UserInterface;
+import it.polimi.ingsw.ps19.view.cli.CommandLineInterface;
+import it.polimi.ingsw.ps19.view.gui.GraphicalUserInterface;
 
 /**
  * The Class ClientCommandHandler.
@@ -307,20 +309,26 @@ public class ClientCommandHandler implements ServerToClientCommandObserver{
 	}
 	
 	public void applyCommand(AskForReconnectionCommand askForReconnectionCommand) throws Exception{
-		Scanner i=new Scanner(System.in);
-		System.out.println("Would you join an existing Match? (y/n)\n");
-		
-		String connChoice = i.next();
-		
-		if(connChoice.equals("y")){
-			System.out.println("Please insert your name: \n");
-			String name = i.next();
-			System.out.println("your Password: \n");
-			String pword = i.next();
-			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,name,pword));
-			System.out.println("clientcommhandler reconnection command sent");
-		} else 
-			networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,null,null));
+//		if(userInterface instanceof GraphicalUserInterface){
+//			Scanner i=new Scanner(System.in);
+//			System.out.println("Would you join an existing Match? (y/n)\n");
+//
+//			String connChoice = i.next();
+//
+//			if(connChoice.equals("y")){
+//				System.out.println("Please insert your name: \n");
+//				String name = i.next();
+//				System.out.println("your Password: \n");
+//				String pword = i.next();
+//				networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,name,pword));
+//				System.out.println("clientcommhandler reconnection command sent");
+//			} else 
+//				networkInterface.sendCommand(new ReconnectionAnswerCommand(connChoice,null,null));
+//		}else if(userInterface instanceof CommandLineInterface){
+//			((CommandLineInterface) userInterface).requestReconnection();
+//		}
+//									
+		userInterface.requestReconnection();
 		
 	}
 

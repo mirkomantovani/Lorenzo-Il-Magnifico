@@ -147,4 +147,15 @@ public interface InputObserver {
 	 * @param message the message
 	 */
 	public void notifyChatMessage(String message);
+	
+	
+	/**
+	 * This method is called when a client requests to be disconnected
+	 * 
+	 * @param response
+	 * @param username
+	 * @param password
+	 */
+	public void notifyReconnectionRequest(String response, String username, String password);
+
 }

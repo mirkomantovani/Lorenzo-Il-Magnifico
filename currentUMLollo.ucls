@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="2" language="java" name="it.polimi.ingsw.ps19.Color" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Color.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="2" language="java" name="it.polimi.ingsw.ps19.model.Color" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/Color.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4430" y="2228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="3" language="java" name="it.polimi.ingsw.ps19.Dice" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Dice.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="3" language="java" name="it.polimi.ingsw.ps19.model.Dice" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/Dice.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4469" y="1864"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -136,8 +136,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="it.polimi.ingsw.ps19.FamilyMember" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/FamilyMember.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="16" language="java" name="it.polimi.ingsw.ps19.model.FamilyMember" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/FamilyMember.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4458" y="1400"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -336,8 +336,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="it.polimi.ingsw.ps19.PersonalBonusTile" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/PersonalBonusTile.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="37" language="java" name="it.polimi.ingsw.ps19.model.PersonalBonusTile" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/PersonalBonusTile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="711" y="2140"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -389,8 +390,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="43" language="java" name="it.polimi.ingsw.ps19.Player" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="43" language="java" name="it.polimi.ingsw.ps19.model.Player" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4421" y="657"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -408,8 +409,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="45" language="java" name="it.polimi.ingsw.ps19.Period" project="ProjectMJM" 
-    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/Period.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="45" language="java" name="it.polimi.ingsw.ps19.model.Period" project="ProjectMJM" 
+    file="/ProjectMJM/src/main/java/it/polimi/ingsw/ps19/model/Period.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1943" y="1181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -481,259 +482,247 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="53">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="54" name="dice">        
+  <generalization id="53">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <association id="54">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="55" name="normalExchangeEffect">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="55" minimum="0" maximum="1">        
+      <multiplicity id="56" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
   <association id="57">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="58" name="alternativeExchangeEffect">        
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="58" name="period">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="59" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="35" navigable="true"/>    
+    <end type="TARGET" refId="45" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="60">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="61" name="period">        
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="61" name="typeCard">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="62" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="45" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="63">    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="64" name="cards">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="66">    
-    <end type="SOURCE" refId="38" navigable="false">      
-      <attribute id="67" name="cardType">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="69">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <generalization id="70">    
-    <end type="SOURCE" refId="51"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <association id="71">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="72" name="typeCard">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="74">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <generalization id="75">    
+  <generalization id="63">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <association id="76">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="77" name="color">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="78" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="79">    
-    <end type="SOURCE" refId="46"/>    
-    <end type="TARGET" refId="17"/>  
-  </generalization>  
-  <generalization id="80">    
-    <end type="SOURCE" refId="39"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <generalization id="81">    
-    <end type="SOURCE" refId="48"/>    
-    <end type="TARGET" refId="17"/>  
-  </generalization>  
-  <association id="82">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="83" name="card">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="84" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="85">    
+  <association id="64">    
     <bendpoint x="4309" y="1134"/>    
     <bendpoint x="4332" y="1510"/>    
     <bendpoint x="4332" y="1726"/>    
     <bendpoint x="4332" y="2042"/>    
     <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="86" name="resources">        
+      <attribute id="65" name="resources">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="87" minimum="0" maximum="1">        
+      <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="88">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="89" name="tower">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="90" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="91">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="92" name="effectResourceChest">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="93" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="94">    
+  <generalization id="67">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <generalization id="95">    
-    <end type="SOURCE" refId="47"/>    
+  <generalization id="68">    
+    <end type="SOURCE" refId="51"/>    
     <end type="TARGET" refId="29"/>  
   </generalization>  
-  <association id="96">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="97" name="normalExchangeEffect">        
+  <generalization id="69">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <association id="70">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="71" name="effectResourceChest">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="98" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="35" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="99">    
-    <bendpoint x="2458" y="1510"/>    
-    <bendpoint x="2458" y="1726"/>    
-    <bendpoint x="2458" y="2042"/>    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="100" name="cost">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="101" minimum="0" maximum="1">        
+      <multiplicity id="72" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="102">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <generalization id="103">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <generalization id="104">    
-    <end type="SOURCE" refId="40"/>    
+  <generalization id="73">    
+    <end type="SOURCE" refId="44"/>    
     <end type="TARGET" refId="17"/>  
   </generalization>  
-  <generalization id="105">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <association id="106">    
-    <bendpoint x="4414" y="1134"/>    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="107" name="player">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="108" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="109">    
+  <realization id="74">    
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <association id="110">    
+  <association id="75">    
     <bendpoint x="1455" y="2042"/>    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="111" name="resource">        
+      <attribute id="76" name="resource">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="112" minimum="0" maximum="1">        
+      <multiplicity id="77" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="29" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="113">    
-    <end type="SOURCE" refId="44"/>    
+  <generalization id="78">    
+    <end type="SOURCE" refId="40"/>    
     <end type="TARGET" refId="17"/>  
   </generalization>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <association id="81">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="82" name="cardType">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="85" name="alternativeExchangeEffect">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="86" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="87">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="88">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="90">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="91" name="color">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="92" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="93">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <association id="94">    
+    <bendpoint x="2458" y="1510"/>    
+    <bendpoint x="2458" y="1726"/>    
+    <bendpoint x="2458" y="2042"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="95" name="cost">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="98" name="card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="101" name="cards">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="104">    
+    <bendpoint x="4414" y="1134"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="105" name="player">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="107">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <association id="108">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="109" name="tower">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="110" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

@@ -3,7 +3,9 @@ package it.polimi.ingsw.ps19.view.gui;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -13,23 +15,33 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 public class SatanPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtChooseThePlayer;
 	private Image img;
+	private int resourceWidth;
 	
 	public SatanPanel(int resourceWidth, GamePanel listener) {
+		
+		this.resourceWidth = resourceWidth;
 
 		setMaximumSize(new Dimension(resourceWidth, 32767));
 
 		setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setForeground(UIManager.getColor("ArrowButton.disabledText"));
 
-		setLayout(new FlowLayout(FlowLayout.CENTER, 40, 100));
+		
+		LayoutManager lay = new FlowLayout(FlowLayout.CENTER, 40, 100);
+		setLayout(lay);
 		
 		try {
-			img = ImageIO.read(this.getClass().getResource("src/main/resources/satan.jpg"));
+			img = ImageIO.read(this.getClass().getResource("/satan.jpg"));
 		} catch (IOException e) {
+			
 		}
-		img.getScaledInstance(getWidth(), getHeight(), 0);
+		
 		
 		txtChooseThePlayer = new JTextField();
 		txtChooseThePlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -59,6 +71,11 @@ public class SatanPanel extends JPanel {
 		yellow.setName("Yellow");
 		yellow.addMouseListener(listener);
 
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(img.getScaledInstance(resourceWidth, 32767, 0), 0, 0, this);
 	}
 
 }

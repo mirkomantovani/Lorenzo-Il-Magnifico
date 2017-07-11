@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.effect;
 
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.exception.NotAnExchangeEffectException;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.leader.Disapplyable;
 
 /**

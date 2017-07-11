@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps19.model.area;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import it.polimi.ingsw.ps19.Color;
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Color;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
@@ -69,13 +69,17 @@ public class MultipleActionSpace extends ActionSpace {
 	 * @see it.polimi.ingsw.ps19.model.area.Occupable#isOccupable(it.polimi.ingsw.ps19.FamilyMember)
 	 */
 	
-	public boolean isOccupable(FamilyMember familyMember, int paidServants) {
+	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialActionVariation) {
 		if(!checkAvailability(familyMember))
 			System.out.println("Non occupabile");
+		System.out.println("Mi devi già far sfasare?");
 		System.out.println("Family member action value: " + familyMember.getActionValue());
 		System.out.println("Action value required " + this.actionValueRequired);
+		System.out.println("Paid servants: " + paidServants);
+		System.out.println("Industrial Action Variation: " + industrialActionVariation);
 		System.out.println("Checkavailabity " + checkAvailability(familyMember));
-		return familyMember.getActionValue() + paidServants > this.actionValueRequired && checkAvailability(familyMember);
+		System.out.println("Valore famigliare: " + familyMember.getActionValue() + paidServants + industrialActionVariation);
+		return familyMember.getActionValue() + paidServants + industrialActionVariation> this.actionValueRequired && checkAvailability(familyMember);
 	}
 	
 	/* (non-Javadoc)

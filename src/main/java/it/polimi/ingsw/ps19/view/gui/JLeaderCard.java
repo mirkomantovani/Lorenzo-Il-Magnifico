@@ -19,6 +19,11 @@ import javax.swing.JButton;
  */
 public class JLeaderCard extends JButton implements MouseListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The toolkit. */
 	private transient Toolkit toolkit = Toolkit.getDefaultToolkit();
 	
@@ -37,11 +42,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 	/** The zoomed image. */
 	private Image zoomedImage;
 	
-	/** The h. */
-	private int h;
-	
-	/** The w. */
-	private int w;
 	
 	/** The img. */
 	private Image img;
@@ -77,8 +77,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 		
 		zoomedImage = zoomedImage.getScaledInstance(screenDimension.width/8,screenDimension.width/8*500/300, Image.SCALE_SMOOTH);
 
-		h = zoomedImage.getHeight(null);
-		w = zoomedImage.getWidth(null);
 
 //		int newW = (int) (ratioCardW * screenDimension.width);
 //		int newH = newW * h / w;

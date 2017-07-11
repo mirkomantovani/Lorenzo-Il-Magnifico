@@ -8,7 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class PlayerColor extends JLabel {
+
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String color;
 
 	

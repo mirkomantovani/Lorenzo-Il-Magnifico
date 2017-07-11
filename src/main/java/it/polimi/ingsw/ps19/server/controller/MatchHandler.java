@@ -13,12 +13,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Match;
-import it.polimi.ingsw.ps19.MatchFullException;
-import it.polimi.ingsw.ps19.MatchSaver;
-import it.polimi.ingsw.ps19.Period;
-import it.polimi.ingsw.ps19.Player;
 import it.polimi.ingsw.ps19.command.toclient.AskAuthenticationCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskFinishRoundOrDiscardCommand;
 import it.polimi.ingsw.ps19.command.toclient.AskForExcommunicationPaymentCommand;
@@ -51,6 +45,12 @@ import it.polimi.ingsw.ps19.exception.EveryPlayerDisconnectedException;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
 import it.polimi.ingsw.ps19.exception.WrongClientHandlerException;
 import it.polimi.ingsw.ps19.exception.WrongPlayerException;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Match;
+import it.polimi.ingsw.ps19.model.MatchFullException;
+import it.polimi.ingsw.ps19.model.MatchSaver;
+import it.polimi.ingsw.ps19.model.Period;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.action.Action;
 import it.polimi.ingsw.ps19.model.action.IndustrialAction;
 import it.polimi.ingsw.ps19.model.area.BoardInitializer;
@@ -243,6 +243,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		leaderSets = match.getLeaderCards().getStartingLeaderSets(match.getPlayers().length);
 
 		for (int i = 0; i < clients.size(); i++) {
+			
+
 			sendToClientHandler(new ChooseLeaderCardCommand(leaderSets.get(i)), clients.get(i));
 		}
 
@@ -304,10 +306,12 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	 * the next player.
 	 */
 	public void setNext() {
+		System.out.println("setnnnnnext");
 
 		deactivateLeaderCards();
 
 		try {
+			System.out.println("setnnnextinthatry");
 			match.setNextPlayer();
 		} catch (EveryPlayerDisconnectedException e) {
 			closeMatch();
@@ -368,6 +372,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		stopTimerIfAlive();
 
 		roundNumber++;
+		System.out.println("mando askMove");
 		sendToCurrentPlayer(new AskMoveCommand());
 		startRoundTimer();
 	}
@@ -441,6 +446,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		ClientHandler client;
 		try {
 			client = getRightClientHandler(player);
+			System.out.println(player.getName());
 		} catch (WrongPlayerException e1) {
 			// System.out.println(e1.getError());
 			// e1.printStackTrace();
@@ -451,7 +457,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			client.sendCommand(command);
 			lastCommandSent = command;
 		} catch (Exception e) {
+			
 			this.removeClient(client);
+			e.printStackTrace();
 		}
 
 	}
@@ -542,6 +550,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			System.out.println("removing client and updating timeof " + clientHandler.getPlayer().getColor());
 
 			closedClients.add(clientHandler);
+			//clients.remove(clientHandler);
 			System.out.println("MH: removeclient size"+closedClients.size());
 
 			try {
@@ -597,6 +606,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	public void reconnectClient(ClientHandler clientHandler, User user) {
+		
+		System.out.println("\nMH reconnecting client");
 		if (isUserInTheGameAndDisconnected(user)) {
 			Player p = match.getPlayerFromName(user.getUsername());
 
@@ -604,7 +615,30 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				disconnectedUsers.remove(user);
 				closedClients.remove(clientHandler);
 				clientHandler.addPlayer(p);
+				clientHandler.addCommandObserver(commandHandler);
+				clientHandler.addObserver(this);
+				
+				
+				try {
+					boolean removed=clients.remove(getRightClientHandler(p));
+					System.out.println("MHHH removed disconnected client returned"+removed);
+				} catch (WrongPlayerException e) {
+					e.printStackTrace();
+				}
+				
+				clients.add(clientHandler);
+				
 				this.match.reconnectPlayer(p);
+				
+				String color = null;
+				color=p.getColor();
+			
+			    sendToClientHandler(new AssignColorCommand(color), clientHandler);
+			    sendToClientHandler(new InitializeMatchCommand(match.getPlayers().length), clientHandler);
+				sendToClientHandler(new RefreshBoardCommand(this.match.getBoard()), clientHandler);
+//				sendToClientHandler(new PlayerStatusChangeCommand(p), clientHandler);
+				sendToClientHandler(new AuthenticatedCorrectlyCommand(user.getUsername()), clientHandler);
+				
 			} else {
 				System.out.println("getplayerfromname returned NULL");
 			}
@@ -644,11 +678,6 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 	}
 
 	private void runUpdateFileThread() {
-		// new Thread( new Runnable() {
-		// @Override
-		// public void run() {
-		// }
-		// }).start();
 
 		Executors.newSingleThreadExecutor().execute(new Runnable() {
 			@Override
@@ -989,6 +1018,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new WinCommand(), match.getSatan());
 				for (Player p : rank) {
 					sendToPlayer(new LoseCommand(), p);
+					getUserFromName(p.getName()).incrementLostMathces();
 
 				}
 			} else {
@@ -996,7 +1026,10 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new LoseCommand(), match.getSatan());
 				for (Player p : rank) {
 					if (p != rank[0]) {
+						
 						sendToPlayer(new LoseCommand(), p);
+						getUserFromName(p.getName()).incrementWonMathces();
+						
 					}
 				}
 			}
@@ -1007,6 +1040,8 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 				sendToPlayer(new LoseCommand(), p);
 			}
 		}
+		
+		runUpdateFileThread();
 
 	}
 
@@ -1426,6 +1461,7 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 			}
 		}
 
+		sendToAllPlayers(new RefreshBoardCommand(match.getBoard()));
 		if (match.getCurrentPlayer().getCouncilPrivilege() != 0) {
 			sendPrivilegeToCurrentPlayer(match.getCurrentPlayer().getCouncilPrivilege());
 
@@ -1509,7 +1545,9 @@ public class MatchHandler implements Runnable, MatchHandlerObserver, MatchObserv
 		else{ 
 			sendToPlayer(new WrongPasswordCommand(username), getPlayerFromColor(playerColor));
 			sendToPlayer(new AskAuthenticationCommand(), getPlayerFromColor(playerColor));
-		}	
+		}
+		
+		
 		if(authenticatedCorrectly==this.match.getPlayers().length)
 			startLeaderDiscardPhase();
 

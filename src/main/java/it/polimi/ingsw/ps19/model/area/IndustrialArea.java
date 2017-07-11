@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
+import it.polimi.ingsw.ps19.model.card.CardType;
 import it.polimi.ingsw.ps19.model.card.DevelopmentCard;
 import it.polimi.ingsw.ps19.model.resource.ResourceChest;
 
@@ -15,6 +16,18 @@ import it.polimi.ingsw.ps19.model.resource.ResourceChest;
  * by the heirs classes.
  *
  * @author Jimmy
+ */
+/**
+ * @author Pc-Acer
+ *
+ */
+/**
+ * @author Pc-Acer
+ *
+ */
+/**
+ * @author Pc-Acer
+ *
  */
 public abstract class IndustrialArea implements Serializable{
 	
@@ -52,6 +65,14 @@ public abstract class IndustrialArea implements Serializable{
 	 * @return the player cards
 	 */
 	public abstract List<DevelopmentCard> getPlayerCards(Player player);
+	
+	
+	/**
+	 * This method is needed to get the right bonus based on the area too
+	 * 
+	 * @return the associated card type: harvest -> territory, production -> building
+	 */
+	public abstract CardType getAssociatedCardType();
 
 	/**
 	 * Gets the single action space.

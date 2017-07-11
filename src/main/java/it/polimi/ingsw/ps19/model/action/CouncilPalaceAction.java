@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps19.model.action;
 
-import it.polimi.ingsw.ps19.FamilyMember;
 import it.polimi.ingsw.ps19.exception.NotApplicableException;
+import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.area.CouncilPalace;
 import it.polimi.ingsw.ps19.model.resource.Coin;
 import it.polimi.ingsw.ps19.model.resource.Servant;

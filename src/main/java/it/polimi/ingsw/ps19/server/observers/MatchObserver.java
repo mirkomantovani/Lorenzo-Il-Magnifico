@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps19.server.observers;
 
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Player;
 
 /**
  * This interface is implemented by the 

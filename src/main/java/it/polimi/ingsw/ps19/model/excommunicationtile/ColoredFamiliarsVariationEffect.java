@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps19.model.excommunicationtile;
 
-import it.polimi.ingsw.ps19.Dice;
-import it.polimi.ingsw.ps19.FamilyMember;
-import it.polimi.ingsw.ps19.Player;
+import it.polimi.ingsw.ps19.model.Dice;
+import it.polimi.ingsw.ps19.model.FamilyMember;
+import it.polimi.ingsw.ps19.model.Player;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**

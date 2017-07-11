@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps19.model.area;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.ps19.FamilyMember;
+import it.polimi.ingsw.ps19.model.FamilyMember;
 import it.polimi.ingsw.ps19.model.effect.Effect;
 
 /**
