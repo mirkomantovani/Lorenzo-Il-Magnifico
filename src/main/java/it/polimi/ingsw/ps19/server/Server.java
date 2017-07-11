@@ -155,7 +155,6 @@ public class Server implements Runnable, ServerInterface {
 				startInitialTimer();
 			waitingClients.add(clientHandler);
 			executor.submit(clientHandler); // useless
-			System.out.println("Waiting clients: " + waitingClients.size());
 			if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 				timer.interrupt();
 
@@ -177,7 +176,6 @@ public class Server implements Runnable, ServerInterface {
 	private boolean disconnectedClientInMatch() {
 		for (MatchHandler match : createdMatches) {
 			if (match.hasDisconnectedPlayer()){
-				System.out.println("Server: has disconnected users");
 				return true;
 			}
 		}
@@ -329,10 +327,8 @@ public class Server implements Runnable, ServerInterface {
 	public void notifyReconnectionAnswer(ReconnectionAnswerCommand command, ClientHandler clientHandler) {
 
 		String answer = command.getAnswer();
-		System.out.println(answer);
 
 		if (answer.equals("y")) {
-			System.out.println("S: sono nell if con equals");
 			String username = command.getUsername();
 			String password = command.getPassword();
 			ArrayList<MatchHandler> possibleMatches = getMatchesWithDisconnectedUsers();
@@ -343,11 +339,9 @@ public class Server implements Runnable, ServerInterface {
 				e.printStackTrace();
 			}
 
-			System.out.println("sono prima di u");
 			User u = hasUserSignedUpCorrectly(username, password, users);
 
 			if (u != null) {
-				System.out.println("sono nell' if u diverso da null");
 				for (MatchHandler match : possibleMatches) {
 					if(match.hasDisconnectedUser(u)){
 						
@@ -368,7 +362,6 @@ public class Server implements Runnable, ServerInterface {
 			startInitialTimer();
 		waitingClients.add(clientHandler);
 		executor.submit(clientHandler); // useless
-		System.out.println("Waiting clients: " + waitingClients.size());
 		if (waitingClients.size() == NetworkConstants.MAXPLAYERS) {
 			timer.interrupt();
 

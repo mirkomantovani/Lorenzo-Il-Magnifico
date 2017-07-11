@@ -98,8 +98,6 @@ public class FaithPointMarkerDisk extends JPanel{
 	 * @param val the new faith points amount
 	 */
 	public void setFaithPointsAmount(double val){
-		System.out.println("faith amount:" + val);
-		System.out.println("old width" + widthRel);
 		
 		Random random = new Random();
 		int n = random.nextInt(50) + 100;

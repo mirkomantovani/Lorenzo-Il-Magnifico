@@ -357,23 +357,5 @@ public class BoardInitializer {
 		return privilegeResources;
 	}
 	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args){
-		ResourceChest[] rc = null;
-		try {
-			rc = BoardInitializer.createPrivilegeResources(CardConstants.PRIVILEGE_RESOURCES);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		for(int i = 0; i< rc.length; i++){
-			System.out.println(rc[i]);
-		}
-	}
 	
 }

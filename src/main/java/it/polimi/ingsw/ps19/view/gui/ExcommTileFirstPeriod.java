@@ -53,7 +53,6 @@ public class ExcommTileFirstPeriod extends JPanel{
 	 */
 	public ExcommTileFirstPeriod(int id, String effect){
 		this.id = id;
-		System.out.println("Excomm id:"+id);
 		try {
 			this.img = ImageIO.read(getClass().getResource("/"+id+".png"));
 			

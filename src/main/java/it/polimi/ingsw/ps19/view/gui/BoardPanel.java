@@ -72,10 +72,8 @@ public class BoardPanel extends JPanel {
 			img = ImageIO.read(this.getClass().getResource(ImagesConstants.BOARD));
 		} catch (IOException e) {
 		}
-		System.out.println(dimension.width+" e "+ dimension.height);
 		imgHeight=img.getHeight(null);
 		imgWidth=img.getWidth(null);
-		System.out.println(imgHeight+" e "+ imgWidth);
 		img = img.getScaledInstance(dimension.height*imgWidth/imgHeight, dimension.height,
 				Image.SCALE_SMOOTH);
 		dimension.setSize(dimension.height*imgWidth/imgHeight, dimension.height);

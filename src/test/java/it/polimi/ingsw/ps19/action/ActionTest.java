@@ -170,8 +170,6 @@ public class ActionTest {
 	public void SingleHarvestActionTest() throws NotApplicableException {
 		Action harvestAction = new IndustrialAction(coolPlayer.getFamilyMember(Color.ORANGE), match.getBoard().getHarvestArea(), match.getBoard().getHarvestArea().getSingleActionSpace(), 10);
 		coolPlayer.addResources(new ResourceChest(0,0,0,10,0,0,0));
-		System.out.println("\n\n\n\n\nOrange family member : " + (coolPlayer.getFamilyMember(Color.ORANGE).getActionValue() + 10));
-		System.out.println("Jimmy's resources: " + coolPlayer.getResourceChest().toString());
 
 		try{
 			harvestAction.apply();
@@ -179,7 +177,6 @@ public class ActionTest {
 
 		}
 		
-		System.out.println("Jimmy's resources: " + coolPlayer.getResourceChest().toString());
 		assertTrue(!coolPlayer.getFamilyMembers().containsKey(Color.ORANGE));
 		assertEquals(coolPlayer.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount(), 2);
 		assertEquals(coolPlayer.getResourceChest().getResourceInChest(ResourceType.WOOD).getAmount(), 1);
@@ -192,8 +189,6 @@ public class ActionTest {
 	public void SingleProductionActionTest() throws NotApplicableException {
 		Action productionAction = new IndustrialAction(anotherPlayer.getFamilyMember(Color.ORANGE), match.getBoard().getProductionArea(), match.getBoard().getHarvestArea().getSingleActionSpace(), 10);
 		anotherPlayer.addResources(new ResourceChest(0,0,0,10,0,0,0));
-		System.out.println("\n\n\n\n\nOrange family member : " + (anotherPlayer.getFamilyMember(Color.ORANGE).getActionValue() + 10));
-		System.out.println("Mirko's resources: " + anotherPlayer.getResourceChest().toString());
 
 		try{
 			productionAction.apply();
@@ -201,7 +196,6 @@ public class ActionTest {
 
 		}
 		
-		System.out.println("Mirko's resources: " + anotherPlayer.getResourceChest().toString());
 		assertTrue(!anotherPlayer.getFamilyMembers().containsKey(Color.ORANGE));
 		assertEquals(anotherPlayer.getResourceChest().getResourceInChest(ResourceType.COIN).getAmount(), 5);
 		assertEquals(anotherPlayer.getResourceChest().getResourceInChest(ResourceType.VICTORYPOINT).getAmount(), 2);	
@@ -230,8 +224,6 @@ public class ActionTest {
 		}
 		
 		//the player should have: 4 military 3 servants 1 coin 1 faith point 4 vp 1 stone 
-		System.out.println("MisterX's resources: " + playerX.getResourceChest().toString());
-		System.out.println(match.getBoard().getHarvestArea().getMultipleActionSpace().toString());
 		assertTrue(!playerX.getFamilyMembers().containsKey(Color.NEUTRAL));
 		assertEquals(playerX.getResourceChest().getResourceInChest(ResourceType.MILITARYPOINT).getAmount(), 4);
 		assertEquals(playerX.getResourceChest().getResourceInChest(ResourceType.SERVANT).getAmount(), 3);

@@ -40,7 +40,6 @@ public class MultipleEffect extends Effect {
 	public void applyEffect(Player p) {
 		firstEffect.applyEffect(p);
 		secondEffect.applyEffect(p);
-		System.out.println("multiple, effetto applicato");
 	}
 	
 	

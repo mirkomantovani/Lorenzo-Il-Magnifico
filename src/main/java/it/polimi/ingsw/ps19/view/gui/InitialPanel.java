@@ -47,7 +47,6 @@ public class InitialPanel extends JPanel {
 			img = ImageIO.read(this.getClass().getResource(image));
 		} catch (IOException e) {
 		}
-		System.out.println(screenDimension.width+" e "+ screenDimension.height);
 		img = img.getScaledInstance(screenDimension.width, screenDimension.height,
 				Image.SCALE_SMOOTH);
 		screenDimension.setSize(screenDimension.width, screenDimension.height);

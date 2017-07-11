@@ -29,8 +29,7 @@ public class ChooseLeaderCardCommand extends ServerToClientCommand {
 		
 		
 		if(possibleChoices.size()==0)
-		System.out.println("size è a 0");
-//		System.out.println("chooseleadercardcommand: creato comando da inviare"+possibleChoices.get(0).toString());
+		
 		
 		this.possibleChoices = possibleChoices;
 	}

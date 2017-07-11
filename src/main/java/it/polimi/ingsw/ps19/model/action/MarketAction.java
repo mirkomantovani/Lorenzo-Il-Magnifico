@@ -44,7 +44,6 @@ public class MarketAction extends Action{
 	 */
 	@Override
 	public void apply() throws NotApplicableException {
-		System.out.println("sono nell'azione market");
 	
 		if(isApplicable()){
 			
@@ -82,12 +81,9 @@ public class MarketAction extends Action{
 	 */
 	@Override
 	public boolean isApplicable() {
-		System.out.println("sono dentro a isApplicable");
 		if(!this.canBePlaced() || player.getBonuses().isNoMarketActionActive()) {
-			System.out.println("azione non applicabile");
 			return false;
 		}
-		System.out.println("isApplicable market action");
 		return true;
 	}
 	
@@ -98,12 +94,9 @@ public class MarketAction extends Action{
 	 * @return true, if successful
 	 */
 	private boolean canBePlaced(){
-		System.out.println("sono dentro a can be placed");
 		if(!marketSpot.isOccupable(familyMember) || (familyMember.getActionValue() + paidServants)< this.marketSpot.getActionValueRequired()){
-			System.out.println("family memeber can't be placed");
 			return false;
 		}
-		System.out.println("familymember can be placed");
 		return true;
 		
 		

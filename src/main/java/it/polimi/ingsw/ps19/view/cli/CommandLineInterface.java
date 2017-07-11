@@ -284,9 +284,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		case ClientConstants.SEND_MARKET_SLOT:
 			actionConstructor.add(input);
 			
-//			System.out.println("\nCLI:market action: actionconstructor:"+actionConstructor.get(0)+
-//					" "+actionConstructor.get(1)+" "+actionConstructor.get(2)+ " "+
-//					" "+actionConstructor.get(3));
 			
 			gameController.notifyMarket(actionConstructor);
 			break;
@@ -377,7 +374,6 @@ public class CommandLineInterface implements UserInterface, InputListener {
 		leaderCardsLocalCopy = leaderCards;
 		print("Select a leader card from the following: ");
 		if (leaderCards.size() == 0)
-			System.out.println("leader cards è 0");
 		for (int i = 0; i < leaderCards.size(); i++) {
 			print("Number " + i + ":\n" + leaderCards.get(i).toString());
 		}

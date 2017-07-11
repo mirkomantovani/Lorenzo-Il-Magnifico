@@ -39,7 +39,6 @@ public class PlayerMoveCommand extends ClientToServerCommand {
 	 */
 	@Override
 	public void processCommand(ServerCommandHandler serverHandlerCommand) {
-		System.out.println("PlayerMoveCommand: you should not be here");
 		
 	}
 	

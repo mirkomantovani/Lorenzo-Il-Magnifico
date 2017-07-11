@@ -60,7 +60,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 //		personalW=screenDimension.width;
 //		personalH=(int)(personalW/personalRatio);
 		
-//		System.out.println("personal W e H: "+personalW+"  "+personalH);
 
 		img = null;
 	
@@ -72,7 +71,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 			zoomedImage = ImageIO.read(getClass().getResource(path));
 
 		} catch (Exception ex) {
-			System.out.println(ex);
 		}
 		
 		zoomedImage = zoomedImage.getScaledInstance(screenDimension.width/8,screenDimension.width/8*500/300, Image.SCALE_SMOOTH);
@@ -84,7 +82,6 @@ public class JLeaderCard extends JButton implements MouseListener {
 //		cardWidth=newW;
 //		cardHeight=newH;
 
-		// System.out.println((int)(ratio*boardPanelPrefSize.height)+"
 		// "+(int)(ratio*1017));
 		//300,500
 //		img = zoomedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);

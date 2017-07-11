@@ -47,9 +47,7 @@ public class InstantResourcesEffect extends Effect implements Disapplyable{
 	 * @see it.polimi.ingsw.ps19.model.effect.Effect#applyEffect()
 	 */
 	public void applyEffect(Player p) {
-		System.out.println("instantres: applyingeffect");
 		p.addResources(effectResourceChest);
-		System.out.println("instantres: applied effect");
 		if(councilPrivilegeEffect!=null){
 			councilPrivilegeEffect.applyEffect(p);
 		}

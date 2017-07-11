@@ -51,8 +51,6 @@ public class MatchHandlerTest {
 			}
 			
 		}
-		System.out.println(calculatePlayerPoints(match.getPlayers()[0]));
-		System.out.println(calculatePlayerPoints(match.getPlayers()[1]));
 		assertEquals(rank[0], player2);
 		assertEquals(rank[1], player1);
 		assertEquals(calculatePlayerPoints(player1),92);
@@ -71,8 +69,6 @@ public class MatchHandlerTest {
 				try {
 					points = points + calculatePointsForMilitaryPoints(player);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 			
@@ -111,11 +107,7 @@ public class MatchHandlerTest {
 		try {
 			territoryBonuses = BoardInitializer.playerBoardBonusesForTerritory();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		for (int i = 0; i < p.getDeckOfType(CardType.TERRITORY).size(); i++) {
 			points = points + territoryBonuses.get(i);
@@ -136,11 +128,7 @@ public class MatchHandlerTest {
 		try {
 			characterBonuses = BoardInitializer.playerBoardBonusesForCharacter();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		for (int i = 0; i < p.getDeckOfType(CardType.CHARACTER).size(); i++) {
 			points = points + characterBonuses.get(i);

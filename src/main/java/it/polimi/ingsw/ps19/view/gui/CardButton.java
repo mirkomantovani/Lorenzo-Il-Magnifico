@@ -113,7 +113,6 @@ private int tower;
 			zoomedImage = ImageIO.read(getClass().getResource(path));
 
 		} catch (Exception ex) {
-			System.out.println(ex);
 		}
 
 		h = zoomedImage.getHeight(null);
@@ -125,14 +124,12 @@ private int tower;
 		cardWidth=newW;
 		cardHeight=newH;
 
-		// System.out.println((int)(ratio*boardPanelPrefSize.height)+"
 		// "+(int)(ratio*1017));
 		img = zoomedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
 
 		setIcon(new ImageIcon(img));
 		
 		
-//		System.out.println("setting bounds: "+applicationPointX+" "+applicationPointY);
 //		setBounds(applicationPointX, applicationPointY, newW, newH);
 
 		this.addMouseListener(this);
@@ -167,7 +164,6 @@ private int tower;
 		calculateApplicationPoint();
 		
 //		setBounds(72, 72, 105, 176);
-//		System.out.println((int)(leftBorder*boardPanelPrefSize.width)+" "+
 //				(int)(northBorder*boardPanelPrefSize.height)+" "+cardWidth+" "+cardHeigth);
 		setBounds(applicationPointX,applicationPointY, cardWidth, cardHeight);
 		
@@ -175,21 +171,16 @@ private int tower;
 		path=path+id;
 		path=path+".png";
 		
-//		System.out.println(path);
 //		
-//		System.out.println(getClass().getResource("/").getPath());
-//		System.out.println(getClass().getProtectionDomain().getCodeSource().getLocation().toString());
 		
 		try {
 		    zoomedImage = ImageIO.read(getClass().getResource(path));
 		    
 		  } catch (Exception ex) {
-		    System.out.println(ex);
 		  }
 		
 	    h=zoomedImage.getHeight(null);
 	    w=zoomedImage.getWidth(null);
-//		System.out.println((int)(ratio*boardPanelPrefSize.height)+"  "+(int)(ratio*1017));
 		img = zoomedImage.getScaledInstance((int)(ratio*boardPanelPrefSize.width),(int)(ratio*boardPanelPrefSize.height),
 				Image.SCALE_SMOOTH);
 		
@@ -211,7 +202,6 @@ private int tower;
 				leftBorder*boardPanelPrefSize.width+this.tower*cardWidth);
 		applicationPointY=(int)(revertFloor*floorSpace*boardPanelPrefSize.height+
 				northBorder*boardPanelPrefSize.height+revertFloor*cardHeight);
-//		System.out.println("appl point:"+applicationPointX+ " "+applicationPointY);
 		
 		
 		

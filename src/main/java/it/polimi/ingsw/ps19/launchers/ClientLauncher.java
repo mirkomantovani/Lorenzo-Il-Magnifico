@@ -75,25 +75,7 @@ public class ClientLauncher {
 		networkInterface.addCommandObserver(handler);
 	
 		
-		
-		//TODO we should istantiate a client controller to manage the view interactions
-		
-		
-		
-		
-
-//		int num=i.nextInt();
-//		if(num==1){
-//		try {
-//			client.sendCommand(new ProvaCommand(serv));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		System.out.println("ho inviato il comando sullo stream");
-//		}
-		
+	
 	}
 
 	

@@ -36,7 +36,6 @@ public class User {
 	public static void main(String[] args) throws IOException {
 //		String s="";
 //		int hash=s.hashCode();
-//		System.out.println(hash);
 		ArrayList<User> users = null;
 		
 		
@@ -47,7 +46,6 @@ public class User {
 			e.printStackTrace();
 		}
 		
-		users.forEach(u->System.out.println(u));
 		
 //		users.get(0).incrementMatches();
 //		

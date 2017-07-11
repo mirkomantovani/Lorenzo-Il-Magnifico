@@ -30,7 +30,6 @@ public class LeaderDeck implements Serializable  {
 	 */
 	public LeaderDeck() throws IOException{
 		cards = DeckCreator.createLeaderCardDeck(FileConstants.LEADERCARDS, CardConstants.LEADER_DECK_LENGTH);
-		System.out.println("leaderdeck: creato deck tramite deck creator");
 	}
 	
 	/**
@@ -83,7 +82,6 @@ public class LeaderDeck implements Serializable  {
 	 * @return LeaderCard
 	 */
 	public LeaderCard getCard(int i) {  
-//		System.out.println(this.cards[i]);
 //		this.cards[i];
 		return this.cards[i];
 	}
@@ -95,9 +93,7 @@ public class LeaderDeck implements Serializable  {
 	 * @return the card
 	 */
 	public LeaderCard getCard(String name){
-		System.out.println("leaderdeck: getcard");
 		for(LeaderCard c : this.cards){
-			System.out.println("leaderdeck: cardname: "+c.getName()+"card nel deck:"+name);
 			if(c.getName().equals(name)){
 				return c;
 			}
@@ -126,7 +122,6 @@ public class LeaderDeck implements Serializable  {
 			a++;
 		}
 		
-		System.out.println("dio caneeeee"+box.get(0).get(0).toString());
 		
 		return (ArrayList<ArrayList<LeaderCard>>) box;
 	}

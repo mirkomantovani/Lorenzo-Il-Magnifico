@@ -50,17 +50,13 @@ public class MultipleActionSpace extends ActionSpace {
 	private boolean checkAvailability(FamilyMember familyMember){
 		
 		boolean available = true;
-		System.out.println("\n\nFamily member color's " + familyMember.getColor().toString() + "\n\n");
 		
 		for(FamilyMember member : members){
-			//Se esiste un family member dentro members che ha come player lo stesso di quello passato
-			//come parametro, e il cui colore non sia neutral allora non è possibile farlo
 			if(member.getPlayer() == familyMember.getPlayer() && familyMember.getDice().getColor() != Color.NEUTRAL && member.getColor()!=Color.NEUTRAL){
 				available = false;
 				break;  					 //L'ho visto fare da qualche parte nel corso :-)
 			}
 		}
-		System.out.println("available: " + available + "\n\n");
 		return available || familyMember.getDice().getColor() == Color.NEUTRAL;
 	}
 	
@@ -70,11 +66,7 @@ public class MultipleActionSpace extends ActionSpace {
 	 */
 	
 	public boolean isOccupable(FamilyMember familyMember, int paidServants, int industrialActionVariation) {
-		if(!checkAvailability(familyMember))
-			System.out.println("Non occupabile");
-		System.out.println("Family member action value: " + familyMember.getActionValue());
-		System.out.println("Action value required " + this.actionValueRequired);
-		System.out.println("Checkavailabity " + checkAvailability(familyMember));
+		
 		return familyMember.getActionValue() + paidServants + industrialActionVariation> this.actionValueRequired && checkAvailability(familyMember);
 	}
 	
@@ -105,9 +97,7 @@ public class MultipleActionSpace extends ActionSpace {
 	 */
 	@Override
 	public void setFamilyMember(FamilyMember familyMember) {
-//		if(isOccupable(familyMember)){
 			this.members.add(familyMember);
-//			System.out.println("Successfully added");
 			
 //		}
 	}

@@ -66,7 +66,7 @@ public class ClientController implements InputObserver {
 		try {
 			networkInterface.sendCommand(command);
 
-			System.out.println("clientcontroller: invio"+command.getClass().getName());
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class ClientController implements InputObserver {
 	 */
 	@Override
 	public void notifyChosenPrivileges(String choices) {
-		System.out.println("\nCLIENTCONTROLLER: before check and send\n");
+		
 		ArrayList<Integer> commandConstructor = parseString(choices);
 		if (commandConstructor.size() != 0)
 			sendCommand(new ChosenPrivilegeCommand(commandConstructor));
@@ -102,7 +102,7 @@ public class ClientController implements InputObserver {
 			userInterface.invalidInput();
 			notifyInvalidInput();
 		}
-		System.out.println("\nCLIENTCONTROLLER: after check and send\n");
+	
 	}
 
 	/**
@@ -151,7 +151,6 @@ public class ClientController implements InputObserver {
 					CardType.values()[Integer.parseInt(actionConstructor.get(3)) - 1]);
 			sendCommand(takeCardCommand);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("action constructor non riempito");
 		}
 	}
 
@@ -165,7 +164,7 @@ public class ClientController implements InputObserver {
 					actionConstructor.get(3), Integer.parseInt(actionConstructor.get(1)));
 			sendCommand(placeIntoMarketCommand);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("action constructor non riempito");
+			
 		}
 	}
 
@@ -179,7 +178,7 @@ public class ClientController implements InputObserver {
 					Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 			sendCommand(harvestCommand);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("action constructor non riempito");
+			
 		}
 	}
 
@@ -193,7 +192,7 @@ public class ClientController implements InputObserver {
 					Integer.parseInt(actionConstructor.get(1)), Integer.parseInt(actionConstructor.get(3)));
 			sendCommand(productionCommand);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("action constructor non riempito");
+			
 		}
 	}
 
@@ -271,10 +270,10 @@ public class ClientController implements InputObserver {
 	 * @return the array list
 	 */
 	private ArrayList<Integer> parseString(String choices) {
-		System.out.println("\n\n sono nella parseStirng" + choices + "\n\n");
+		
 		char[] charArray = choices.toCharArray();
 		for (int i = 0; i < choices.length(); i++) {
-			System.out.println("\n\n" + charArray[i] + "\n\n");
+			
 		}
 		ArrayList<Integer> commandConstructor = new ArrayList<Integer>();
 		for (int i = 0; i < charArray.length; i += 2) {

@@ -143,7 +143,6 @@ public class DeckCreator {
 			
 			
 			lineRead = buffReader.readLine();   //line 1
-//			System.out.println("id: "+lineRead);
 			
 		}
 		buffReader.close();
@@ -484,11 +483,9 @@ public class DeckCreator {
 		permanentEffect = new InstantResourcesEffect(victoryPointsChest);
 		
 		deck[index] = new VentureCard(id,name,period,cost,immediateEffect,permanentEffect);
-		//System.out.println(deck[index].toString());
 		index++;
 		
 		lineRead = buffReader.readLine();   //line 1
-		//System.out.println("id: "+lineRead);
 		}
 		buffReader.close();
 	
@@ -814,7 +811,6 @@ public class DeckCreator {
 			
 			deck[index] = new LeaderCard(name,totalRequirements,specialEffect);
 			
-			//System.out.println(deck[index].toString());
 			
 			index++;
 

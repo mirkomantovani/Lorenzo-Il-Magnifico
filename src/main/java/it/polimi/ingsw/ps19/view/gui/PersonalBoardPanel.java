@@ -47,7 +47,6 @@ dimension = toolkit.getScreenSize();
 		int imgHeight=img.getHeight(null);
 		int imgWidth=img.getWidth(null);
 //		float ratio=imgWidth/imgHeight;
-//		System.out.println(imgHeight+" e "+ imgWidth);
 		img = img.getScaledInstance(dimension.width, dimension.width*imgHeight/imgWidth,
 				Image.SCALE_SMOOTH);
 //		dimension.setSize(1000, 600);

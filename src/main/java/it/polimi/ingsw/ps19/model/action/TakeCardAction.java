@@ -55,17 +55,14 @@ public class TakeCardAction extends Action {
 	public TakeCardAction(FamilyMember familyMember, Floor floor, Servant paidServants) {
 		super(familyMember);
 
-		System.out.println("takecardaction: costruttore");
 
 		this.card = floor.getCard();
 		this.paidServants = paidServants;
 		this.floor = floor;
 		
-//		System.out.println("takecardaction: prima del calculateactionvaluevariation");
 		
 		this.actionValueVariation = calculateActionValueVariation();
 		
-//		System.out.println("takecardaction: finished constructing action");
 
 	}
 
@@ -87,7 +84,6 @@ public class TakeCardAction extends Action {
 	public void apply() throws NotApplicableException {
 		if (this.isApplicable()) {
 
-			System.out.println("takecardaction: IS APPLICABLE and i'm applying");
 
 			player.addCard(card);
 			floor.setCard(null); // set to null when the player buys the card
@@ -95,7 +91,6 @@ public class TakeCardAction extends Action {
 			player.removeFamilyMember(familyMember.getColor());
 			
 			
-			System.out.println("TakeCard calculating realcost");
 			
 			ResourceChest realCost;
 			realCost = card.getCost().cloneChest();
@@ -108,15 +103,12 @@ public class TakeCardAction extends Action {
 			
 			realCost.addResource(paidServants);
 			
-			System.out.println("TakeCard sub resources");
 			
 			player.subResources(realCost);
 			
-			System.out.println("TakeCard beforeapplyingimmediate");
 			
 			card.getImmediateEffect().applyEffect(familyMember.getPlayer());
 			
-			System.out.println("takecard before isdoubleresourcefromcards");
 			
 			if (player.getBonuses().isDoubleResourcesFromCards())
 				card.getImmediateEffect().applyEffect(familyMember.getPlayer());
@@ -128,7 +120,6 @@ public class TakeCardAction extends Action {
 			}
 				
 			
-			System.out.println("TakeCard after applyingimmediate");
 
 			this.floor.getActionSpace().setFamilyMember(familyMember);
 
@@ -149,16 +140,13 @@ public class TakeCardAction extends Action {
 			return false;
 		if (this.card.getCardType() == CardType.TERRITORY) {
 			if (!player.getBonuses().isNoMilitaryPointsRequiredForTerritories()) {
-				System.out.println("takecardaction sono nella isnomilitarypoints");
 				
 				
 				try{
 				
 				int len=player.getDeckOfType(card.getCardType()).size();
 				
-				System.out.println("player deck length :"+player.getDeckOfType(card.getCardType()).size());
 				
-				System.out.println("takecard i punti richiesti sono:"+((int) (Board.getMilitaryRequirementsForTerritories().get(len))));
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -166,7 +154,6 @@ public class TakeCardAction extends Action {
 				
 				
 				
-				System.out.println("takecard punti del player");
 				if ((int) (Board.getMilitaryRequirementsForTerritories().get
 						(player.getDeckOfType(card.getCardType()).size())) > player.getResourceChest()
 								.getResourceInChest(ResourceType.MILITARYPOINT).getAmount()){
@@ -176,7 +163,6 @@ public class TakeCardAction extends Action {
 			}
 		}
 			
-			System.out.println("takecardaction params valid");
 			
 		
 		// leader card discount (coin)
@@ -224,7 +210,6 @@ public class TakeCardAction extends Action {
 		}
 		
 	
-		System.out.println("let's control if can be placed");
 		return this.canBePlaced();
 
 		

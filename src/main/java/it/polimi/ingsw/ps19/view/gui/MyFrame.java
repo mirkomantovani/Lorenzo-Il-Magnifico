@@ -33,32 +33,6 @@ public class MyFrame extends JFrame {
 
 	/** The player color. */
 	private String playerColor;
-	
-
-
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MyFrame frame = new MyFrame();
-					frame.setVisible(true);
-
-					frame.removeInitialImage();
-					GamePanel gameP = new GamePanel("black",2);
-					frame.setContentPane(gameP);
-					// frame.getGamePanel().addCard();
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -153,22 +127,7 @@ public class MyFrame extends JFrame {
 
 		content.add(initialPanel, BorderLayout.CENTER);
 		initialPanel.setLayout(null);
-		// initialPanel.setSize(new Dimension(imageWidth, imgHeight));
-		// initialPanel.setPreferredSize(new Dimension(imageWidth, imgHeight));
-		// content.add(initialPanel);
-		// pack();
-		// setVisible(true);
-		// setResizable(false);
-		// setLocationRelativeTo(null);
-		//
-		// Runnable repaintFrame = new Runnable() {
-		// @Override
-		// public void run(){
-		// content.repaint();
-		// }
-		// };
-		//
-		// SwingUtilities.invokeLater(repaintFrame);
+
 	}
 
 	/**
@@ -212,7 +171,6 @@ public class MyFrame extends JFrame {
 	 * @param board the board
 	 */
 	private void addCards(Board board) {
-		System.out.println("adding cards");
 
 		for (int j = 0; j < CardType.values().length; j++) {
 			CardType c = CardType.values()[j];
@@ -226,7 +184,6 @@ public class MyFrame extends JFrame {
 //						if(!gamePanel.isContained(id))
 						gamePanel.addCard(j, i, id, descr);
 					} else{
-						System.out.println("removing card: tower"+j+" floor:"+i);
 						gamePanel.removeCard(j,i);
 						
 					}

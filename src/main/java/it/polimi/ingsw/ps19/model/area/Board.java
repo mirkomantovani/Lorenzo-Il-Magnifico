@@ -147,7 +147,6 @@ public class Board implements Serializable {
 	 * Change card in towers.
 	 */
 	public void changeCardInTowers(){
-		System.out.println("board: change cards in towers");
 		for(int i=0;i<CardType.values().length-1;i++){
 			this.getTower(CardType.values()[i]).changeCards();
 		}

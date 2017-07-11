@@ -212,7 +212,7 @@ public class Player implements Serializable {
 	 * @return the family member
 	 */
 	public FamilyMember getFamilyMember(String color){
-		System.out.println("player: getfamilymember, prendo dalla mappa");
+		
 		return this.familyMembers.get(Color.valueOf(Color.class, color.toUpperCase()));
 	}
 	
@@ -325,7 +325,7 @@ public class Player implements Serializable {
 	public void addResources(ResourceChest resourceChest){
 		this.resources.addChest(resourceChest);
 		
-//		System.out.println("aggiunte risorse, nuovo status player:"+this.toString());
+
 		if(observer!=null)
 		this.observer.notifyPlayerStatusChange(this);
 	}
@@ -395,12 +395,11 @@ public class Player implements Serializable {
 	 */
 	public void addLeaderCards(LeaderCard leaderCard){
 	
-//		System.out.println("player: aggiungo leadercard");
+
 		
 		this.leaderCards.put(leaderCard.getName(), leaderCard);
 		if(observer!=null)
-//			System.out.println("player: aggiunta leader, notifico cambio stato");
-//			System.out.println(this.toString());
+
      		this.observer.notifyPlayerStatusChange(this);
 	}
 	
@@ -441,11 +440,11 @@ public class Player implements Serializable {
 	 * @param color the color
 	 */
 	public void removeFamilyMember(Color color){
-		System.out.println("colore family member da eliminare:"+color.toString());
+	
 		this.familyMembers.remove(color);
-		System.out.println("rimosso family member");
+		
 		for(FamilyMember mem : this.getFamilyMembers().values()){
-			System.out.println(mem.toString());
+		
 		}
 		if(this.observer!=null) //I need this control to let the test run.
 			this.observer.notifyPlayerStatusChange(this);

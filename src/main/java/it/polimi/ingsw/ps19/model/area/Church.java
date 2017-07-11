@@ -47,8 +47,6 @@ public class Church implements Serializable {
 		try {
 			tiles = ExcommunicationTilesCreator.createExcommunicationTiles(CardConstants.EXCOMMUNICATION_TILES);
 		} catch (IOException e) {
-			System.out.println("Error in retrieving excommunication tiles from file");
-			e.printStackTrace();
 		}
 
 		this.excommunicationFirst = tiles[rnd.nextInt(CardConstants.EXCOMMUNICATION_TILES / Period.values().length)];

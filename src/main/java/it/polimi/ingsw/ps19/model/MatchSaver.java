@@ -53,7 +53,6 @@ public class MatchSaver {
 		match.addPlayer(new Player("matteo","red"));
 		MatchSaver.saveMatch(match, 0);
 		Match match2 = MatchSaver.readMatch(0);
-		System.out.println(match2.getPlayers()[0].getName());
 			
 		
 	}

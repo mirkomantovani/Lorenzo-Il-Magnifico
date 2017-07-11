@@ -113,7 +113,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		personalW=screenDimension.width;
 		personalH=(int)(personalW/personalRatio);
 		
-//		System.out.println("personal W e H: "+personalW+"  "+personalH);
 
 		img = null;
 		this.cardType = cardType;
@@ -123,7 +122,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		
 
 		// setBounds(72, 72, 105, 176);
-		// System.out.println((int)(leftBorder*boardPanelPrefSize.width)+" "+
 		// (int)(northBorder*boardPanelPrefSize.height)+" "+cardWidth+"
 		// "+cardHeigth);
 
@@ -131,16 +129,12 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		path = path + id;
 		path = path + ".png";
 
-		// System.out.println(path);
 		//
-		// System.out.println(getClass().getResource("/").getPath());
-		// System.out.println(getClass().getProtectionDomain().getCodeSource().getLocation().toString());
 
 		try {
 			zoomedImage = ImageIO.read(getClass().getResource(path));
 
 		} catch (Exception ex) {
-			System.out.println(ex);
 		}
 
 		h = zoomedImage.getHeight(null);
@@ -152,7 +146,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		cardWidth=newW;
 		cardHeight=newH;
 
-		// System.out.println((int)(ratio*boardPanelPrefSize.height)+"
 		// "+(int)(ratio*1017));
 		img = zoomedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
 
@@ -161,7 +154,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 		calculateApplicationPoint();
 
 		
-		System.out.println("setting bounds: "+applicationPointX+" "+applicationPointY);
 		setBounds(applicationPointX, applicationPointY, newW, newH);
 
 		this.addMouseListener(this);
@@ -175,7 +167,6 @@ public class JDevelopmentCard extends JButton implements MouseListener {
 	 */
 	private void calculateApplicationPoint() {
 		setInitialApplicationPoint();
-//		System.out.println("InitialapplicationPoint: x: "+applicationPointX+"  y: "+applicationPointY);
 		applicationPointX+=cardNumber*(cardWidth+ratioSpaceW*personalW);
 
 	}

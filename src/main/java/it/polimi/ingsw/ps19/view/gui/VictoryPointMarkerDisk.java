@@ -111,7 +111,6 @@ public class VictoryPointMarkerDisk extends JPanel{
 		Random random = new Random();
 		int n = random.nextInt(50) + 100;
 		
-		System.out.println("victory amount:" + amount);
 		amount = amount%100;
 		widthRel = (int) ((BoardPanel.dimension.getWidth() + n)*WIDTH_PERC);
 		if(amount<=20){
