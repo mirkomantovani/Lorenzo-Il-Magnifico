@@ -95,9 +95,7 @@ public class LeaderDeck implements Serializable  {
 	 * @return the card
 	 */
 	public LeaderCard getCard(String name){
-		System.out.println("leaderdeck: getcard");
 		for(LeaderCard c : this.cards){
-			System.out.println("leaderdeck: cardname: "+c.getName()+"card nel deck:"+name);
 			if(c.getName().equals(name)){
 				return c;
 			}
@@ -126,7 +124,6 @@ public class LeaderDeck implements Serializable  {
 			a++;
 		}
 		
-		System.out.println("dio caneeeee"+box.get(0).get(0).toString());
 		
 		return (ArrayList<ArrayList<LeaderCard>>) box;
 	}
