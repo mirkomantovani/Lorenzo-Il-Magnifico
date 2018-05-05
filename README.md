@@ -9,6 +9,10 @@ In this wiki you will be able to find some general information and requirements 
 5. [Server Implementation](#server-implementation)
 
 
+# High level UML
+
+![useful image]({{ site.url }}/assets/viewNetworkingPackagesFinalUML.png)
+
 ## How to start our application:
    In order to start our application you should follow these few upcoming steps:
 * At first you should find the `it.polimi.ingsw.ps19.launchers` package where the launchers are stored
