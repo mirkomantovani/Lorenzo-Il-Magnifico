@@ -11,7 +11,8 @@ In this wiki you will be able to find some general information and requirements 
 
 # High level UML
 
-![useful image]({{ site.url }}/assets/viewNetworkingPackagesFinalUML.png)
+![Image]({{site.url}}{{site.baseurl}}/assets/viewNetworkingPackagesFinalUML.png)
+
 
 ## How to start our application:
    In order to start our application you should follow these few upcoming steps:
