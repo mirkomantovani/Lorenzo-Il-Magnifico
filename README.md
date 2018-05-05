@@ -2,7 +2,7 @@ Welcome to the `Lorenzo il Magnifico` game by _**MJM**_ wiki!
 In this wiki you will be able to find some general information and requirements for our project.
 
 ## INDEX
-1. [Specifications Covered](https://github.com/mirkomantovani/ProjectMJM/wiki/SpecificationsCovered)
+1. [Specifications Covered](Board customizability)
 2. [Game Customizability](https://github.com/mirkomantovani/ProjectMJM/wiki/Customizability)
 3. [UML](https://github.com/mirkomantovani/ProjectMJM/wiki/UMLComplete)
 
