@@ -1,3 +1,3 @@
-theme: jekyll-theme-prologue
+remote_theme: mmistakes/minimal-mistakes
 baseurl: "/ProjectMJM"
 url: "https://mirkomantovani.github.io" 
