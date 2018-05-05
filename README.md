@@ -2,7 +2,7 @@ Welcome to the `Lorenzo il Magnifico` game by _**MJM**_ wiki!
 In this wiki you will be able to find some general information and requirements for our project.
 
 ## INDEX
-1. [Specifications Covered](#Board customizability)
+1. [Specifications Covered](#specifications-covered)
 2. [Game Customizability](https://github.com/mirkomantovani/ProjectMJM/wiki/Customizability)
 3. [UML](https://github.com/mirkomantovani/ProjectMJM/wiki/UMLComplete)
 
@@ -131,6 +131,23 @@ In our game, development cards have a limited customizability range based on the
    and fetch all the data about Development Cards, Excomunication Cards, Action Space Bonuses, and all the other board 
    (except for the market) elements and moreover we take from file the timeout called for accessing a new 
    game or for finishing your turn too.
+   
+# Specifications covered
+
+***
+## Game specific requirements:
+   We implemented the complete set of rules, including the advanced rules. Then we tried out our personal idea of a fifth 
+   player and implemented it. So generally we should have covered all the game specific requirements.
+
+## Game agnostic requirements:
+   We used the MVC pattern to make a neater distributed system structure with one **server** handling many **clients**, 
+   implementing both socket and rmi and being able to manage these two different technologies at the same time exploiting 
+   Java functionalities. We then implemented the CLI and GUI in order to interact with the user, and this again is 
+   completely transparent to the user who can freely choose one from the other before starting to play. About the optional 
+   game-agnostic requirements we implemented the login based section, but unfortunately we didn't have the opportunity to 
+   finish the part regarding the statistics so we didn't add this functionality.
+
+
 
 
 
